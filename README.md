@@ -75,3 +75,10 @@ Archetype was originally written by [Eugene O'Neill](http://www.linkedin.com/in/
 - [LinkedIn](http://www.linkedin.com/)
 - [Compass](http://compass-style.org/)
 - [Sass](http://sass-lang.com/)
+
+## Credits
+
+This project couldn't have been made possible without the amazing work by the following heros
+
+- Dave Gandy for his awesome work on [FontAwesome](http://fortawesome.github.com/Font-Awesome/)
+- Chris Eppstein and other contributors of [Compass](http://compass-style.org/) for some great scaffolding code we've _borrowed_
