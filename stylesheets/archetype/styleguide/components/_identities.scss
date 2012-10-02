@@ -1,0 +1,25 @@
+// ==========
+// IDENTITIES
+// ==========
+$STYLEGUIDE_IDENTITY_ID: identity !default;
+$STYLEGUIDE_IDENTITY: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_IDENTITY_ID, $STYLEGUIDE_IDENTITY, (
+  (default, (
+    color                   nth($CONFIG_COLOR_BRAND, 1),
+    text-decoration         none,
+    font-weight             bold
+  )),
+  (in-dark, (
+    color                   nth-cyclic($CONFIG_COLOR_BRAND, 2),
+    nil
+  )),
+  (in-punchcut, (
+    inherit (in-dark),
+    nil
+  )),
+  (in-bristol, (
+    inherit (in-dark),
+    nil
+  ))
+), $CONFIG_THEME);

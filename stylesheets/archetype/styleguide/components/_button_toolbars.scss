@@ -1,0 +1,15 @@
+// ==========
+// BUTTON TOOLBAR
+// ==========
+$STYLEGUIDE_BUTTON_TOOLBARS_ID: button-toolbar !default;
+$STYLEGUIDE_BUTTON_TOOLBARS: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTON_TOOLBARS_ID, $STYLEGUIDE_BUTTON_TOOLBARS, (
+  (default, (
+    line-height         1,
+    inline-block        true,
+    vertical-align      middle,
+    clearfix            legacy-pie-clearfix
+  )),
+  nil
+), $CONFIG_THEME);

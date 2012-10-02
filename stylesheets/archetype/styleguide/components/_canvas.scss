@@ -1,0 +1,13 @@
+// ==========
+// CANVAS
+// ==========
+$STYLEGUIDE_CANVAS_ID: canvas !default;
+$STYLEGUIDE_CANVAS: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_CANVAS_ID, $STYLEGUIDE_CANVAS, (
+  (default, (
+    background  nth($CONFIG_TEXTURE_CANVAS, 1),
+    nil
+  )),
+  nil
+), $CONFIG_THEME);

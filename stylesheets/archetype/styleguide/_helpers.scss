@@ -1,0 +1,198 @@
+// @category  styleguide
+
+// helper function to get the height of a button
+// @function  _styleguideGetButtonHeight
+// @private
+// @param     $size {String} the size of the button to calculate
+// @return    {Number} the height of the button
+@function _styleguideGetButtonHeight($size: medium) {
+  $sizes: (
+    (small,   $CONFIG_FONT_BUTTON_SMALL),
+    (medium,  $CONFIG_FONT_BUTTON_MEDIUM),
+    (large,   $CONFIG_FONT_BUTTON_LARGE)
+  );
+  $size: associative($sizes, $size);
+  // font size + top/bottom padding
+  @return nth($size, 1) + (2 * nth($size, 2));
+}
+
+// helper function to get the padding of a button
+// @function  _styleguideGetButtonPadding
+// @private
+// @param     $size {String} the size of the button to calculate
+// @param     $narrow {Bool} is the button narrow or not
+// @return    {Number} the padding on the button
+@function _styleguideGetButtonPadding($size: medium, $narrow: false) {
+  $sizes: (
+    (small,   $CONFIG_FONT_BUTTON_SMALL),
+    (medium,  $CONFIG_FONT_BUTTON_MEDIUM),
+    (large,   $CONFIG_FONT_BUTTON_LARGE)
+  );
+  $size: nth(associative($sizes, $size), 3);
+  $size: floor(if($narrow, $size * 0.75, $size));
+  @return (0 $size);
+}
+
+// helper function to get the size of the caret
+// @function  _styleguideCaretSize
+// @private
+// @param     $size {String} the size of the caret to calculate
+// @param     $direction {String} the direction the caret is facing [up|down]
+// @return    {List} the border widths needed to generate the caret
+@function _styleguideCaretSize($size: medium, $direction: south) {
+  $caret: associative((
+    (small      $CONFIG_FONT_CARET_SMALL),
+    (medium     $CONFIG_FONT_CARET_MEDIUM),
+    (large      $CONFIG_FONT_CARET_LARGE),
+    (tooltip    $CONFIG_DIM_TOOLTIP_TIP)
+  ), $size);
+  @return associative((
+    (default    ($caret $caret 0)),
+    (north      (0 $caret $caret)),
+    (east       ($caret 0 $caret $caret)),
+    (west       ($caret $caret $caret 0))
+  ), $direction);
+}
+
+@function _styleguideGetAlertBG($type: notice) {
+  $gradient: associative((
+    notice        $CONFIG_GRADIENT_ALERT_NOTIFY,
+    success       $CONFIG_GRADIENT_ALERT_SUCCESS,
+    error         $CONFIG_GRADIENT_ALERT_ERROR,
+    yield         $CONFIG_GRADIENT_ALERT_YIELD
+  ), $type);
+  @if not styleguide-check-sprite($CONFIG_SPRITE_ALERTS) {
+    @return $gradient;
+  }
+  $sprite: associative((
+    notice        $CONFIG_ICON_ALERTS_NOTICE,
+    success       $CONFIG_ICON_ALERTS_SUCCESS,
+    error         $CONFIG_ICON_ALERTS_ERROR,
+    yield         $CONFIG_ICON_ALERTS_YIELD
+  ), $type);
+  @return (sprite($CONFIG_SPRITE_ALERTS, $sprite, $offset-x: nth($CONFIG_SPRITE_ALERTS_OFFSET, 1), $offset-y: nth-cyclic($CONFIG_SPRITE_ALERTS_OFFSET, 2)) no-repeat, $gradient)
+}
+
+// helper function to return the list of shadows for the alert
+// alerts have two shadows, one thats shared and ones that unique
+// @function  _styleguideGetAlertShadow
+// @private
+// @param     $type {String} the type of alert [success|notice|yield|error]
+// @return    {List} the shadows on the alert
+@function _styleguideGetAlertShadow($type: notice) {
+  $color: associative((
+    (notice     $CONFIG_COLOR_BORDER_ALERT_NOTIFY),
+    (success    $CONFIG_COLOR_BORDER_ALERT_SUCCESS),
+    (error      $CONFIG_COLOR_BORDER_ALERT_ERROR),
+    (yield      $CONFIG_COLOR_BORDER_ALERT_YIELD)
+  ), $type);
+  @if($color != nil and $CONFIG_DIM_GENERIC_BORDER != nil) {
+    @return ((0 0 0 $CONFIG_DIM_GENERIC_BORDER $color), $CONFIG_SHADOW_ALERT);
+  }
+  @else {
+    @return $CONFIG_SHADOW_ALERT;
+  }
+}
+
+// helper function to get the color of a context
+// @function  _styleguideGetContextColor
+// @private
+// @param     $texture {List|String} a list or string for a background texture
+// @return    {Color} the color in the list
+@function _styleguideGetContextColor($texture: $CONFIG_TEXTURE_CONTAINER) {
+  $texture: -compass-list(first-value-of($texture)); // cast a string into a list
+  @return first-value-of($texture); // pull off the first value in the string/list
+}
+
+// helper function to get background position for the tooltip sprite
+// @function  _styleguideGetTooltipTipBG
+// @private
+// @param     $direction {String} the direction the tip is pointing [north|south|east|west]
+// @param     $type {String} the type of the tip [hovercard|tooltip]
+// @return    {List} the background position offsets
+@function _styleguideGetTooltipTipBG($direction: south, $type: hovercard) {
+  $dim: associative((
+    hovercard       $CONFIG_DIM_HOVERCARD_TIP,
+    nil
+  ), $type);
+  $a: nth($dim, 1);
+  $b: nth-cyclic($dim, 2);
+  // TODO - RTL support
+  @return associative((
+    north         (-$b 0),
+    south         ((-$b) (-($a+$b))),
+    east          ((-($a+$b)) (-$b)),
+    west          (0 (-$b))
+  ), $direction);
+}
+
+// helper function to get the position of the loading spinner
+// @function  _styleguideGetLoaderPosition
+// @private
+// @param     $size {String} the size of the loading spinner e.g. [small|medium|large]
+// @param     $type {String} the type of the loading spinner e.g. [static|dynamic]
+// @param     $context {Number} the index for the context type
+// @return    {List} background position of the image or nil
+@function _styleguideGetLoaderPosition($size: medium, $type: static, $context: 1) {
+  $img: nth-cyclic(associative(associative($CONFIG_LOADERS, $size), $type), $context);
+  @return styleguide-sprite-position($CONFIG_SPRITE_LOADERS, $img);
+}
+
+// helper function to get the dimensions of the loading spinner
+// @function  _styleguideGetLoaderDimension
+// @private
+// @param     $size {String} the size of the loading spinner e.g. [small|medium|large]
+// @param     $type {String} the type of the loading spinner e.g. [static|dynamic]
+// @param     $dim {String} the dimension to return [width|height]
+// @param     $context {Number} the index for the context type
+// @return    {Number} the width/height of the loading spinner
+@function _styleguideGetLoaderDimension($size: medium, $type: static, $dim: width, $context: 1) {
+  $img: nth-cyclic(associative(associative($CONFIG_LOADERS, $size), $type), $context);
+  $sprite-file: styleguide-sprite-file($CONFIG_SPRITE_LOADERS, $img);
+  @if $dim == width {
+    @return styleguide-image-width($sprite-file);
+  }
+  @else {
+    @return styleguide-image-height($sprite-file);
+  }
+  @return 0;
+}
+
+// helper function to get the animation routine of the loading spinner
+// @function  _styleguideGetLoaderAnimation
+// @private
+// @param     $size {String} the size of the loading spinner e.g. [small|medium|large]
+// @param     $context {Number} the index for the context type
+// @return    {String} the animation value
+@function _styleguideGetLoaderAnimation($size: medium, $context: 1) {
+  $values: associative($CONFIG_LOADERS, $size);
+  $anim: ($CONFIG_KEYFRAME_LOADERS);
+  $duration:    nth-cyclic(associative($values, duration, $strict: true), $context);
+  $delay:       nth-cyclic(associative($values, delay, $strict: true), $context);
+  $steps:       nth-cyclic(associative($values, steps, $strict: true), $context);
+  $iterations:  nth-cyclic(associative($values, iterations, $strict: true), $context);
+  @if $duration != nil   { $anim: append($anim, $duration); }
+  @if $delay != nil      { $anim: append($anim, $delay); }
+  @if $steps != nil      { $anim: append($anim, steps($steps, end)); }
+  @if $iterations != nil { $anim: append($anim, $iterations); }
+  $position-keyframe-name: #{$CONFIG_KEYFRAME_LOADERS}-position-#{$size}-#{$context};
+  $anim: unquote("#{$anim}, #{$position-keyframe-name} 0.1ms step-end infinite");
+  @return $anim;
+}
+
+// helper function to get the CSS expression of the loading spinner (for IE6/7 support)
+// @function  _styleguideGetLoaderExpression
+// @private
+// @param     $size {String} the size of the loading spinner e.g. [small|medium|large]
+// @param     $context {Number} the index for the context type
+// @return    {String} the CSS expression styles
+@function _styleguideGetLoaderExpression($size: medium, $context: 1) {
+  $img: nth-cyclic(associative(associative($CONFIG_LOADERS, $size), static), $context);
+  $bg: styleguide-sprite($CONFIG_SPRITE_LOADERS, $img) no-repeat;
+  $bg: if($bg == nil, none, $bg);
+  $width: _styleguideGetLoaderDimension($size, static, width, $context);
+  $height: _styleguideGetLoaderDimension($size, static, height, $context);
+  $margin-top: $height / -2;
+  $margin-left: $width / -2;
+  @return "position:absolute;top:50%;left:50%;background:#{$bg};width:#{$width};height:#{$height};margin-left:#{$margin-left};margin-top:#{$margin-top};";
+}

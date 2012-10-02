@@ -1,0 +1,11 @@
+a {
+  -webkit-filter: Shadow(Strength=2, Direction=135, Color="#CCCCCC");
+  -moz-filter: Shadow(Strength=2, Direction=135, Color="#CCCCCC");
+  filter: Shadow(Strength=2, Direction=135, Color="#CCCCCC");
+}
+
+b {
+  -webkit-filter: gradient(enabled=false);
+  -moz-filter: gradient(enabled=false);
+  filter: gradient(enabled=false);
+}

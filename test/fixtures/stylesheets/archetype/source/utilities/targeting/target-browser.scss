@@ -1,0 +1,70 @@
+@import "archetype";
+
+.target-ie-6 {
+  @include target-browser(ie 6, vertical-align, -5px);
+  @include target-browser(ie 6, background-position, 6px -2170px);
+  @include target-browser(ie 6,overflow,hidden);
+}
+
+.target-ie-lte-7 {
+  @include target-browser(ie lte 7, margin-top, 1px);
+  @include target-browser(ie lte 7, padding, 0);
+  @include target-browser(ie lte 7, width, 195px);
+  @include target-browser(ie lte 7, font-size, .01em);
+  @include target-browser(ie lte 7, height, 18px);
+}
+
+.target-ie-6-7 {
+  @include target-browser(ie 6 7, display, inline);
+  @include target-browser(ie 6 7, zoom, 1);
+  @include target-browser(ie 6 7, margin-left, 0);
+}
+
+.target-ie-7 {
+  @include target-browser(ie 7, vertical-align, -5px);
+  @include target-browser(ie 7, background-position, 6px -2170px);
+  @include target-browser(ie 7,overflow,hidden);
+}
+
+.target-ie-7-8 {
+  @include target-browser(ie 7 8, min-height, 250px !important);
+}
+
+.target-ie-lte-8 {
+  @include target-browser(ie lte 8, filter, BasicImage(rotation=3));
+  @include target-browser(ie lte 8, padding-bottom, 8px);
+  @include target-browser(ie lte 8, line-height, 1.6);
+}
+
+.target-ie-8 {
+  @include target-browser(ie 8, margin-top, 2px);
+  @include target-browser(ie 8, min-height, 170px);
+}
+
+.target-ie-lte-9 {
+  @include target-browser(ie lte 9, border-color, #111);
+  @include target-browser(ie lte 9, background, #2c2c2b); 
+}
+
+.target-ie-7-8-9 {
+  @include target-browser(ie 7 8 9, width, 250px);
+}
+
+.target-ie-9 {
+  @include target-browser(ie 9, right, -83px);
+  @include target-browser(ie 9,top, 17px);
+}
+
+.target-webkit {
+  @include target-browser(webkit, line-height, 16px);
+  @include target-browser(webkit, padding-top, 10px);
+  @include target-browser(webkit, width, 151px);
+}
+
+.target-firefox {
+  @include target-browser(firefox, margin-top, 16px);
+}
+
+.target-opera {
+  @include target-browser(opera, width, 82%);
+}

@@ -1,0 +1,289 @@
+// @category   ui
+@import "hacks";
+@import "compass/layout/stretching";
+
+// computes the border position to use
+// @function  _getTriangleBorderDirection
+// @private
+// @param     $direction {String} the direction the arrow is pointing (top, left, top left, etc)
+// @return    {List} the computed border position (e.g. top, left, bottom)
+@function _getTriangleBorderDirection($direction) {
+  @if(length($direction) == 1) {
+    @return opposite-position($direction);
+  }
+  @return if(index($direction, top), bottom, top);
+}
+
+// computes the border width for the triangle
+// @function  _getTriangleBorderWidth
+// @private
+// @param     $width {Number} the width of the arrow
+// @param     $height {Number} the height of the arrow
+// @param     $direction {String} the direction the arrow is pointing (top, left, top left, etc)
+// @return    {List} the computed border widths
+@function _getTriangleBorderWidth($width, $height, $direction) {
+  @if(length($direction) == 1) {
+    // TOP
+    @if($direction == top) {
+      @return 0 ($width/2) $height;
+    }
+    // BOTTOM
+    @else if($direction == bottom) {
+      @return $height ($width/2) 0;
+    }
+    // LEFT
+    @else if($direction == left) {
+      @return ($height/2) $width ($height/2) 0;
+    }
+    // RIGHT
+    @else if($direction == right) {
+      @return ($height/2) 0 ($height/2) $width;
+    }
+  }
+  @else if(index($direction, top)) {
+    // TOP LEFT
+    @if(index($direction, left)) {
+      @return 0 $width $height 0;
+    }
+    // TOP RIGHT
+    @else {
+      @return 0 0 $height $width;
+    }
+  }
+  @else if(index($direction, bottom)) {
+    // BOTTOM LEFT
+    @if(index($direction, left)) {
+      @return $height $width 0 0;
+    }
+    // BOTTOM RIGHT
+    @else {
+      @return $height 0 0 $width;
+    }
+  }
+  @return 0;
+}
+
+// generates a cross-browser triangle using borders
+// @mixin     triangle
+// @param     $direction {String} the direction the arrow is pointing (top, left, top left, etc)
+// @param     $width {Number} the width of the arrow
+// @param     $height {Number} the height of the arrow
+// @param     $color {Color} the color of the arrow
+@mixin triangle($direction: bottom, $width: 1em, $height: false, $color: #aaa) {
+  $direction: rtl($direction);
+  // if no height was specified, assume it's identitcal to width
+  @if(not $height) {
+    $height: $width;
+  }
+  // zero out it's content
+  height: 0;
+  width : 0;
+  // IE6 needs some extra love
+  @include target-browser(ie 6, font-size, 0);
+  @include target-browser(ie 6, line-height, 0);
+  border: {
+    // for IE6, transparent borders are simulated using `dashed` styles instead of a chroma filter
+    // IE won't render a `dashed` border-style unless (width * 5) >= border-width
+    // since width is always 0, dashed borders aren't rendered
+    // @link http://hedgerwow.appspot.com/demo/arrows
+    style: dashed;
+    // transparent for all other browsers
+    color: transparent;
+    width: _getTriangleBorderWidth($width, $height, $direction);
+    #{_getTriangleBorderDirection($direction)}: {
+      color: $color;
+      style: solid;
+    }
+  }
+}
+
+// makes your element centered vertically and horizontally in a parent element
+// @mixin   centered-box
+@mixin centered-box() {
+  @include stretch();
+  margin:   auto;
+}
+
+// hide element visibly but preserve screen-reader support
+// @mixin     hide-element
+// @credit    Jonathan Snook
+// @link      http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+@mixin hide-element() {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  @include target-browser(ie lte 7, clip, rect(1px 1px 1px 1px));
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+// mixin for generating a fade box which fades from transparent to white
+// @mixin     fade-box
+// @param     $width {String} the width of the overlay
+// @param     $height {String} the height of the overlay
+// @param     $direction {String} top=vertical left=horizontal
+@mixin fade-box($width: 100%, $height: 100%, $direction: top) {
+  $direction: rtl($direction);
+  // TODO - update this when Compass supports IE alpha channels 
+  @if $direction == left {
+    @include ie-filter(gradient(startColorstr='#00ffffff', endColorstr='#ffffff', GradientType=1));
+  }
+  @else {
+    @include ie-filter(gradient(startColorstr='#00ffffff', endColorstr='#ffffff'));
+  }
+  @include background-image(linear-gradient($direction, rgba(255,255,255,0.4), rgba(255,255,255,1)) );
+  @include pseudo-element($width: $width, $height: $height, $position: absolute);
+  text-align: center;
+  bottom: 0;
+  #{if($direction == left), right, left}: 0;
+}
+
+// create a stroke line around text (or font icon)
+// @mixin     stroke
+// @param     $width {Number} the width of the stroke
+// @param     $color {Color} the color of the stroke
+// @param     $shadow {List} an additional drop shadow to attach
+@mixin stroke($width: 1px, $color: black, $shadow: false) {
+  @include box-shadow(compact(0 $width 0 $color, 0 -1*$width 0 $color, $width 0 0 $color, -1*$width 0 0 $color, $shadow));
+}
+
+// create a glyph icon
+// @mixin     glyph-icon
+// @param     $icon {String} the icon name
+// @param     $size {Number} the size of the icon
+// @param     $color {Color} the color of the font
+// @param     $ie-styles {String} styles to apply to IE6/7 (this is needed because the faux :before isn't extensible)
+@mixin glyph-icon($icon, $size: 100%, $color: inherit, $ie-styles: false) {
+  $char-code: associative($CONFIG_GLYPHS_MAPPINGS, $icon, $strict: true);
+  @if $char-code == nil {
+    @warn "could not find character mapping for `#{icon}`";
+  }
+  @else {
+    // if the size is under a given threshold, use a halfling, if available
+    $char-code: nth-cyclic(-compass-list($char-code), if(comparable($CONFIG_GLYPHS_THRESHOLD, $size) and $size <= $CONFIG_GLYPHS_THRESHOLD, 2, 1));
+    &:before {
+      font-family: $CONFIG_GLYPHS_NAME, a;
+      font-weight: $CONFIG_GLYPHS_WEIGHT;
+      font-style: $CONFIG_GLYPHS_STYLE;
+      text-decoration: inherit;
+      font-size: $size;
+      color: $color;
+      content: $char-code;
+    }
+    // support for IE6/7
+    @if($ie-styles) {
+      $styles: $styles + $ie-styles;
+    }
+    @include ie-pseudo-before($styles: "font-family:#{$CONFIG_GLYPHS_NAME},a;font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;font-size:#{$size};color:#{$color};", $content: $char-code);
+  }
+}
+
+// generate rotational and position keyframes for loading spinners
+// @mixin     generate-loader-keyframes
+@mixin generate-loader-keyframes() {
+  @if not $CONFIG_DISABLE_STYLEGUIDE_SPRITES {
+    // generate rotating keyframes
+    @include -generate-loader-keyframes-360();
+    // generate specific keyframes
+    @each $size in $CONFIG_LOADERS {
+      @if $size != nil {
+        $values: nth($size, 2);
+        $size: nth($size, 1);
+        @each $context in (1 2) {
+          $name: unquote('#{$size}-#{$context}');
+          $icon: nth-cyclic(associative($values, default), $context);
+          $position: styleguide-sprite-position($CONFIG_SPRITE_LOADERS, $icon);
+          $sprite-file: styleguide-sprite-file($CONFIG_SPRITE_LOADERS, $icon);
+          $width: styleguide-image-width($sprite-file);
+          $height: styleguide-image-height($sprite-file);
+          @include -generate-loader-keyframes-position($name, $position, $width, $height);
+        }
+      }
+    }
+  }
+}
+
+// generate rotational keyframes for loading spinners
+// @mixin     -generate-loader-keyframes-360
+// @private
+@mixin -generate-loader-keyframes-360() {
+  @if do-once("archetype/ui/generate-keyframe/#{$CONFIG_KEYFRAME_LOADERS}") {
+    @if archetype-version('compass >= 0.13') {
+      @include keyframes($CONFIG_KEYFRAME_LOADERS) {
+        from { @include rotate(0deg); }
+        to { @include rotate(360deg); }
+      }
+    }
+    @else {
+      @-webkit-keyframes #{$CONFIG_KEYFRAME_LOADERS} {
+        from { -webkit-transform: rotate(0deg); }
+        to { -webkit-transform: rotate(360deg); }
+      }
+      @-moz-keyframes #{$CONFIG_KEYFRAME_LOADERS} {
+        from { -moz-transform: rotate(0deg); }
+        to { -moz-transform: rotate(360deg); }
+      }
+      @-ms-keyframes #{$CONFIG_KEYFRAME_LOADERS} {
+        from { -ms-transform: rotate(0deg); }
+        to { -ms-transform: rotate(360deg); }
+      }
+      @-o-keyframes #{$CONFIG_KEYFRAME_LOADERS} {
+        from { -o-transform: rotate(0deg); }
+        to { -o-transform: rotate(360deg); }
+      }
+      @keyframes #{$CONFIG_KEYFRAME_LOADERS} {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+      }
+    }
+  }
+}
+
+// generate position keyframes for loading spinners
+// @mixin     -generate-loader-keyframes-position
+// @private
+// @param     $name {String} the name for this keyframe
+// @param     $position {List} the background-position of the spinner image
+// @param     $width {Number} the width of the spinner image
+// @param     $height {Number} the height of the spinner image
+@mixin -generate-loader-keyframes-position($name, $position, $width, $height) {
+  $name: unquote('#{$CONFIG_KEYFRAME_LOADERS}-position-#{$name}');
+  @if do-once("archetype/ui/generate-keyframe/#{$name}") {
+    @if archetype-version('compass >= 0.13') {
+      @include keyframes($name) {
+        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
+      }
+    }
+    @else {
+      @-webkit-keyframes #{$name} {
+        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
+      }
+      @-moz-keyframes #{$name} {
+        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
+      }
+      @-ms-keyframes #{$name} {
+        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
+      }
+      @-o-keyframes #{$name} {
+        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
+      }
+      @keyframes #{$name} {
+        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
+      }
+    }
+  }
+}
+
+// a helper to generate the required CSS for the position keyframe
+// @mixin     -generate-loader-keyframes-position-css
+// @private
+// @param     $position {List} the background-position of the spinner image
+// @param     $width {Number} the width of the spinner image
+// @param     $height {Number} the height of the spinner image
+@mixin -generate-loader-keyframes-position-css($position, $width, $height) {
+  background-position: $position;
+  width: $width;
+  height: $height;
+  margin-left: $width / -2;
+  margin-top: $height / -2;
+}

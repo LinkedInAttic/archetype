@@ -1,0 +1,125 @@
+// environment
+$CONFIG_ENV:                      archetype-env() !default;                                         // detect the environment
+$CONFIG_DEBUG_ENVS:               (dev development);                                                // environments to allow debug in
+$CONFIG_DEBUG:                    (index($CONFIG_DEBUG_ENVS, $CONFIG_ENV) != false) !default;       // global debugging mode (enabled by default in $CONFIG_DEBUG_ENVS)
+
+// theme
+$CONFIG_THEME:                    archetype !default;                                                 // the theme name
+
+// units
+$CONFIG_UNIT_FORCE_INT:           true !default;                                                    // force units to be whole integers. if set to strict, $abuse flags won't work [false|true|strict]
+
+// spacing
+$CONFIG_HORIZONTAL_SPACING:       20px !default;                                                    // horizontal spacing
+$CONFIG_VERTICAL_SPACING:         10px !default;                                                    // veritcal spacing
+$CONFIG_SPACING_METHOD:           padding !default;                                                 // method for providing spacing [padding|margin]
+
+// resets
+$CONFIG_RESET_METHOD:             hybrid !default;                                                  // reset method [reset|normalize|hybrid]
+$CONFIG_RESET_AUTO:               false !default;                                                   // if true, importing `archetype` will invoke the reset
+$CONFIG_RESET_EXCLUDES:           () !default;                                                      // list of things to exclude from the reset
+
+// states used when printing out styles
+$CONFIG_STATE_PREFIX:             '' !default;                                                      // prefix state classnames @see to-style()
+$CONFIG_STATES_PSEUDO:            (hover active visited focus) !default;                            // pseudo-classes :hover, :active, etc
+$CONFIG_STATES_ATTRIBUTE:         (disabled) !default;                                              // attributes [disabled], etc
+$CONFIG_STATES_SPECIAL:           (-moz-focus-inner) !default;                                      // special cases ::-moz-focus-inner
+$CONFIG_STATES_NO_PREFIX:         () !default;                                                      // states to never apply prefix to
+
+// misc
+$CONFIG_DISABLED_CSS:             () !default;                                                      // a list of CSS3 features to always disable when using output-style()
+$CONFIG_Z_INDEX_BASE:             0 !default;                                                       // the default starting layer for z-index calculations
+$CONTENT_PLACEHOLDER:             "\0020" !default;                                                 // content placeholder (ensures block elements display correctly even if they're empty)
+$CONFIG_GENERATED_TAG_NAME:       archetype !default;                                               // the tag name to create when using ie-pseudo method
+$CONFIG_GENERATED_TAG_CSS:        false !default;                                                   // styles to apply to the generated tag when using ie-pseudo method (use this as a way to reset styles on these tags)
+
+// z-layers
+$CONFIG_Z_LAYERS_OFFSET:          100 !default;                                                     // the offset between z-layers
+$CONFIG_Z_LAYERS:                 (default dialog navigation) !default;                             // the orders for the z-layers
+
+// compass 
+$COMPASS_RTL_SUPPORT:             false !default;                                                   // does your Compass version support RTL? set to true if Compass mixins support RTL
+
+// sprites
+$CONFIG_DISABLE_STYLEGUIDE_SPRITES: false !default;                                                 // disable all sprite generation in styleguide
+
+// keyframe animations
+$CONFIG_KEYFRAMES_AUTO:           $CONFIG_RESET_AUTO !default;                                      // whether or not to auto generate the keyframe animations
+$CONFIG_KEYFRAME_LOADERS:         archetype-loader !default;                                        // loading spinner keyframe name
+
+// glyphs
+$CONFIG_GLYPHS_NAME:              ArchetypeGlyphs !default;                                         // name for the font-face
+$CONFIG_GLYPHS_EOT:               "lib/archetype/fontawesome-webfont.eot" !default;                 // default eot path
+$CONFIG_GLYPHS_FILES:             font-files("lib/archetype/fontawesome-webfont.ttf", "lib/archetype/fontawesome-webfont.woff", "lib/archetype/fontawesome-webfont.svg");
+$CONFIG_GLYPHS_WEIGHT:            normal !default;                                                  // font-weight for glyphs
+$CONFIG_GLYPHS_STYLE:             normal !default;                                                  // font-style for glyphs
+$CONFIG_GLYPHS_THRESHOLD:         16px !default;                                                    // the threshold to switch to halfling characters, if available
+$CONFIG_GLYPHS_AUTO:              $CONFIG_RESET_AUTO !default;                                      // whether or not to auto generate the font-face definition for the glyph font
+$CORE_GLYPHS_MAPPINGS: (
+  caret-down       "\f0d7",
+  caret-up         "\f0d8",
+  caret-left       "\f0d9",
+  caret-right      "\f0da"
+);
+$CONFIG_GLYPHS_MAPPINGS: () !default;
+$CONFIG_GLYPHS_MAPPINGS: associative-merge($CORE_GLYPHS_MAPPINGS, $CONFIG_GLYPHS_MAPPINGS);
+
+// browser targeting
+$CONFIG_BROWSER_VENDORS_CLASS:    (ie) !default;                                                    // a list of browsers to support via class targeting
+$CONFIG_BROWSER_ALLOW_HACKS:      true !default;                                                    // if set to true, allow browser targeting hacks
+$CONFIG_BROWSER_WARN_ON_HACK:     false !default;                                                   // if hacks are used, throw a warning
+// this is an associative list for various hacks
+$CONFIG_BROWSER_VENDORS_HACK: (
+  (webkit-all, safari webkit chrome),
+  (gecko-all,  firefox gecko mozilla),
+  (opera-all,  opera)
+) !default;
+
+// os targeting
+$CONFIG_OS_VENDORS_CLASS: (
+  (os-win,   windows win winxp win7),
+  (os-mac,   apple mac osx),
+  (os-linux, linux),
+  (os-other, other misc unknown)
+) !default;
+
+// os/language safe font stacks
+// these are core font definitions, these will be extended with whatever is in $CONFIG_SAFE_FONTS
+$CORE_SAFE_FONTS: (
+  (sans-serif, (
+    (default, (
+      (default          (sans-serif)),
+      (ko_KR            ("Malgun Gothic", default))
+    )),
+    (win, (
+      (default          (Arial, sans-serif)),
+      (ja_JP            (メイリオ, Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", default)),
+      (ko_KR            nil)
+    )),
+    (mac, (
+      (default          (Helvetica, Arial, sans-serif)),
+      (ja_JP            ("Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", "ＭＳ Ｐゴシック", "MS PGothic", default)),
+      (ko_KR            nil)
+    )),
+    (linux, (
+      (default          (Helvetica, FreeSans, "Liberation Sans", Helmet, Arial, sans-serif)),
+      (CJK              nil)
+    ))
+  )),
+  (serif, (
+    (default, (
+      (default          (Georgia, serif)),
+      (CJK              nil)  // dont use any serif fonts in CJK langs
+    )),
+    nil
+  )),
+  (monospace, (
+    (default, (
+      (default          (Menlo, Monaco, Consolas, "Courier New", monospace)),
+      nil
+    )),
+    nil
+  ))
+); // note that this declaration isn't a `default`, but rather is enforced everytime. this can be modified (via extending $CONFIG_SAFE_FONTS)
+$CONFIG_SAFE_FONTS: () !default;
+$CONFIG_SAFE_FONTS: associative-merge($CORE_SAFE_FONTS, $CONFIG_SAFE_FONTS);

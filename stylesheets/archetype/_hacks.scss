@@ -1,0 +1,70 @@
+// @category  hacks
+@import "util";
+
+// hack to support negative margins in legacy IE
+// @mixin     hack-negative-margin
+@mixin hack-negative-margin() {
+  @if($legacy-support-for-ie6 or $legacy-support-for-ie7) {
+    @include has-layout();
+    position: relative;
+  }
+}
+
+// max-height hack
+// @mixin     max-height
+// @param     $value {String} the height
+@mixin max-height($value) {
+  @include hacked-maximum(height, $value);
+}
+
+// max-width hack
+// @mixin     max-width
+// @param     $value {String} the width
+@mixin max-width($value) {
+  @include hacked-maximum(width, $value);
+}
+
+// generic max-* hack wrapper
+// @mixin     hacked-maximum
+// @param     $property {String} property [height|width]
+// @param     $value {String} the value
+@mixin hacked-maximum($property, $value) {
+  max-#{$property}: $value;
+  @include bang-hack($property, auto, $value);
+}
+
+// proxy for ie-pseudo
+// @mixin    ie-pseudo-before
+// @param    $styles {String} the styles to apply to the pseudo-element
+// @param    $content {String} the content to insert into the element (similar to css `content` attribute)
+@mixin ie-pseudo-before($styles: false, $content: false) {
+  @include ie-pseudo($styles, $content, before);
+}
+
+// proxy for ie-pseudo
+// @mixin    ie-pseudo-after
+// @param    $styles {String} the styles to apply to the pseudo-element
+// @param    $content {String} the content to insert into the element (similar to css `content` attribute)
+@mixin ie-pseudo-after($styles: false, $content: false) {
+  @include ie-pseudo($styles, $content, after);
+}
+
+// this creates a one-type executing expression that inserts an element relative to `this` element.
+// this allows some level of support for :before/:after in IE6/7
+// inspired by: http://nicolasgallagher.com/better-float-containment-in-ie/
+// @mixin    ie-pseudo
+// @param    $styles {String} the styles to apply to the pseudo-element
+// @param    $content {String} the content to insert into the element (similar to css `content` attribute)
+// @param    $placement {String} [before|after] simulate :before or :after behavior
+@mixin ie-pseudo($styles: false, $content: false, $placement: before) {
+  @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+    $method: if($placement == before, insertBefore, appendChild);
+    $content: if($content and $content != nil, 'this.el.innerHTML="#{-ie-pseudo-content($content)}",', '');
+    @if $CONFIG_GENERATED_TAG_CSS {
+      $styles: if($styles and $styles != nil, #{$CONFIG_GENERATED_TAG_CSS}#{$styles}, $CONFIG_GENERATED_TAG_CSS);
+    }
+    $styles: if($styles and $styles != nil, 'this.el.style.cssText="#{$styles}",', '');
+    *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("#{$CONFIG_GENERATED_TAG_NAME}"),#{$content}#{$styles}this.#{$method}(this.el));
+    *zoom: 1;
+  }
+}

@@ -1,0 +1,15 @@
+// @category  base
+@import "normalize";
+@import "reset";
+
+// hybrid method for reset using both a global reset as well as some normalize features
+// @mixin     base-hybrid
+// @param     $exclude {List} the list of features to exclude from the reset [text-adjust|links|typography|images]
+@mixin base-hybrid($exclude: ()) {
+  $exclude: -compass-list($exclude);
+  // start with a reset
+  @include base-reset($exclude: $exclude);
+
+  // add in some good stuff from normalize
+  @include base-normalize($exclude: join(html5 page typography quotes lists embeds figures tables ime, $exclude));
+}

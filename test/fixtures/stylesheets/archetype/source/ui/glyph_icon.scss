@@ -1,0 +1,5 @@
+@import "archetype";
+
+.simple {
+  @include glyph-icon(caret-down);
+}

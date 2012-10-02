@@ -1,0 +1,198 @@
+// @category  utilities/targeting
+
+
+@function _isLegacySupported($vendor, $comparator, $version) {
+  // we currently only check for legacy IE support
+  @if $vendor != ie { @return true; }
+  $compass-not-legacy-ie-version: 9;  // the version if IE that Compass starts considering `legacy`
+  $min-ie-legacy-support: 999;
+  $supported-legacy-ie: ();
+  @if($legacy-support-for-ie8) { $min-ie-legacy-support: 8; $supported-legacy-ie: append($supported-legacy-ie, 8); }
+  @if($legacy-support-for-ie7) { $min-ie-legacy-support: 7; $supported-legacy-ie: append($supported-legacy-ie, 7); }
+  @if($legacy-support-for-ie6) { $min-ie-legacy-support: 6; $supported-legacy-ie: append($supported-legacy-ie, 6); }
+  @return if($comparator == lte, $version >= $min-ie-legacy-support, index($supported-legacy-ie, $version));
+}
+// given a list of browsers and versions, this will consolidate them into a
+// normalized list of targetted browsers
+// @function  _getTargetedBrowsers
+// @private
+// @param     $browsers {List} the browsers/versions to target
+// @param     $using {String} an optional string to append to the end of each item
+// @param     $vendors {List} the list of supported vendors for class targeting
+// @return    $list {List} the normalized list of targeted browsers
+// @usage:
+// _getTargetedBrowsers(ie) => (.ie)
+// _getTargetedBrowsers(ie lte 7) => (.ie.lte7)
+// _getTargetedBrowsers(ie 6 7) => (.ie.ie6, .ie.ie7)
+// _getTargetedBrowsers(ie 10 lt 9) => (.ie.ie10, .ie.lte8)
+// _getTargetedBrowsers(ie 6, $using: '&') => (.ie.ie6&) // e.g. for merging with other selectors
+@function _getTargetedBrowsers($browsers, $using: '', $vendors: $CONFIG_BROWSER_VENDORS_CLASS) {
+  $browsers: -compass-list($browsers);
+  $vendors: -compass-list($vendors);
+  $comparators: (eq lt lte);
+  $comparator: false;
+  $vendor: false;
+  $list: ();
+  $unversioned: ();
+  $version-adjust: 0;
+  @each $item in $browsers {
+    // if it's a comparator, update it
+    @if(index($comparators, $item)) {
+      // since we don't support, lt on class names, we augment the version number and use lte
+      @if($item == lt) {
+        $version-adjust: -1;
+        $item: lte;
+      }
+      $comparator: $item;
+    }
+    // otherwise check if it's a browser vendor
+    @else if(index(-compass-list($vendors), $item)) {
+      $vendor: $item;
+      // keep track of unversioned vendors
+      $unversioned: append($unversioned, unquote('.#{$vendor}#{$using}'), comma);
+    }
+    // otherwise assume it's a version
+    @else if(type-of($item) == number) {
+      $tmp: $item;
+      // if it's equalitative, prefix the vendor onto the version
+      @if(not $comparator or $comparator == eq) {
+        $item: #{$vendor}#{$item};
+      }
+      // otherwise use the comparator as the prefix
+      @else {
+        $item: #{$comparator}#{($item + $version-adjust)};
+      }
+      @if($vendor and _isLegacySupported($vendor, $comparator, $tmp)) {
+        $item: '.#{$vendor}.#{$item}#{$using}';
+        $list: append($list, unquote($item), comma);
+        $unversioned: list-remove($unversioned, index($unversioned, '.#{$vendor}#{$using}'));
+      }
+      // restore temps
+      $version-adjust: 0;
+      $comparator: false;
+    }
+  }
+  // take any unused vendors and stick them back onto the list
+  @if(length($unversioned)) {
+    $list: join($list, $unversioned, comma);
+  }
+  @return $list;
+}
+
+// mixin to target a specific browser using either class names or hacks
+// @mixin     target-browser
+// @param     $browsers {List} the List of browsers to target
+// @param     $property {String} the CSS property
+// @param     $value {*} the CSS value
+// @param     $merge {Bool} should the class name be merged e.g. `.ie8.example` vs `.ie8 .example`
+// @param     $inline {Bool} if set to false, don't use inline hacks even if available
+// @usage:
+// =target-browser(ie 8, border, 10px);
+// =target-browser(ie lte 7, padding, 0);
+@mixin target-browser($browsers, $property: nil, $value: nil, $merge: false, $inline: true) {
+  @if($CONFIG_BROWSER_ALLOW_HACKS) {
+    // target webkit, Safari3+, Chrome1+
+    @if(index2($browsers, associative($CONFIG_BROWSER_VENDORS_HACK, webkit-all) )) {
+      @if $CONFIG_BROWSER_WARN_ON_HACK {
+        @warn "using hack for webkit-all";
+      }
+      // @link http://paulirish.com/2009/browser-specific-css-hacks/
+      @media screen and (-webkit-min-device-pixel-ratio:0) {
+        & {
+          @include output-style($property, $value);
+          @if archetype-version('sass >= 3.2') {
+            @content;
+          }
+        }
+      }
+    }
+    // target gecko
+    @if(index2($browsers, associative($CONFIG_BROWSER_VENDORS_HACK, gecko-all) )) {
+      @if $CONFIG_BROWSER_WARN_ON_HACK {
+        @warn "using hack for gecko-all";
+      }
+      // @link http://paulirish.com/2009/browser-specific-css-hacks/
+      &, x:-moz-any-link {
+        @include output-style($property, $value);
+        @if archetype-version('sass >= 3.2') {
+          @content;
+        }
+      }
+    }
+    // target opera
+    @if(index2($browsers, associative($CONFIG_BROWSER_VENDORS_HACK, opera-all) )) {
+      @if $CONFIG_BROWSER_WARN_ON_HACK {
+        @warn "using hack for opera-all";
+      }
+      // @link http://paulirish.com/2009/browser-specific-css-hacks/
+      &, x:-o-prefocus {
+        @include output-style($property, $value);
+        @if archetype-version('sass >= 3.2') {
+          @content;
+        }
+      }
+    }
+    // if there's only one target browser and it's IE6 or IE lte 7, we can use an inline hack
+    @if($inline) {
+      $tmp: _getTargetedBrowsers($browsers);
+      @if(length($tmp) == 1) {
+        $support: ();
+        @if($legacy-support-for-ie6) { $support: append($support, '.ie.ie6'); }
+        @if($legacy-support-for-ie6 or $legacy-support-for-ie7) { $support: append($support, '.ie.lte7'); }
+        $idx: index2($support, $tmp);
+        @if($idx) {
+          $prefix: nth(('_', '*'), $idx);
+          $value: if(index($CORE_CSS_RTL_VALUE_SUPPORT, $property), rtl($value, $property), $value);
+          // NOTE: RTL support on properties like `border-left-width` won't fully work until Compass/Sass support string replace methods
+          @include output-style(#{$prefix}#{rtl($property)}, $value);
+          $value: nil;
+        }
+      }
+    }
+  }
+  // target via class names
+  $classes: _getTargetedBrowsers($browsers, $using: if($merge, '&', ' &'));
+  @if(length($classes) > 0) {
+    #{$classes} {
+      @include output-style($property, $value);
+      @if archetype-version('sass >= 3.2') {
+        @content;
+      }
+    }
+  }
+}
+
+// target specific operating systems based on a class name
+// @mixin     target-os
+// @param     $os {List} the List of operating systems to target
+// @param     $property {String} the CSS property
+// @param     $value {*} the CSS value
+// @param     $merge {Bool} should the class name be merged e.g. `.os-win.example` vs `.os-win .example`
+@mixin target-os($os: (), $property: nil, $value: nil, $merge: false) {
+  $os: -compass-list($os);
+  $using: if($merge, '&', ' &');
+  $classes: ();
+  // if `default` is in the list of OS's, then output without a prefix
+  @if(index($os, default)) {
+    $classes: append($classes, unquote('&'), comma);
+  }
+  // step through the list of vendor OS's
+  @each $vendor in $CONFIG_OS_VENDORS_CLASS {
+    // if it matches the requested os
+    @if index2(nth($vendor, 2), $os) {
+      $item: unquote('.#{nth($vendor, 1)}#{$using}');
+      // if it's not already on the stack, push it
+      @if(not index($classes, $item)) {
+        $classes: append($classes, $item, comma);
+      }
+    }
+  }
+  @if(length($classes) > 0) {
+    #{$classes} {
+      @include output-style($property, $value);
+      @if archetype-version('sass >= 3.2') {
+        @content;
+      }
+    }
+  }
+}

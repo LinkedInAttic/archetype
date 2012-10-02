@@ -1,0 +1,102 @@
+$CONFIG_RESET_AUTO: true;
+@import "archetype";
+
+// scaffolding
+body {
+  @include styleguide(medium copy, canvas);
+  @include font-family(sans-serif);
+  @include vertical-spacing(2);
+}
+
+.row {
+  @include grid-row();
+}
+
+#canvas {
+  @include grid-canvas();
+}
+
+#main {
+  @include grid(2/3, $first: true, $indent: grid-indent(1));
+  @include vertical-spacing(2);
+  @include styleguide(container);
+}
+
+#sidebar {
+  @include grid(1/3, $indent: grid-indent(1));
+  @include vertical-spacing(2);
+  @include styleguide(container);
+}
+
+// the magic
+.download {
+  @include styleguide(large spotlight button);
+  #sidebar & {
+    @include styleguide(small secondary button);
+  }
+}
+
+#welcome {
+  @include styleguide(notice alert);
+  @include vertical-spacing($bottom: 1, $method: margin);
+  a {
+    @include styleguide(link in a notice alert);
+  }
+  i {
+    @include styleguide(icon in a notice alert);
+  }
+}
+
+.dialog {
+  @include vertical-spacing($top: 1, $method: margin);
+  @include styleguide(container);
+  .title {
+    @include styleguide(bristol, medium muted headline in a bristol);
+    position: relative;
+    padding: 5px 10px;
+  }
+  .dismiss {
+    @include styleguide(close);
+  }
+  .content {
+    padding: 10px;
+  }
+  .actions {
+    @include styleguide(module);
+    padding: 5px;
+  }
+  .accept {
+    @include styleguide(small button);
+  }
+  .cancel {
+    @include styleguide(small secondary button);
+  }
+}
+
+.hint {
+  position: relative;
+  @include styleguide(link);
+  span {
+    @include styleguide(small copy in a tooltip, tooltip);
+    &:after {
+      @include styleguide(south caret on a tooltip);
+    }
+    // sans js
+    display: none;
+    bottom: 100%; margin-bottom: 4px; left: 50%; margin-left: -58px; min-width: 105px;
+  }
+  &:hover {
+    span {
+      display: block;
+    }
+  }
+}
+
+
+.loading {
+  height: 200px;
+  position: relative;
+}
+.spinner {
+  @include styleguide(larger loader);
+}

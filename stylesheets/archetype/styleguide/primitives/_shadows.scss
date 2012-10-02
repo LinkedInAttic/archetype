@@ -1,0 +1,23 @@
+// ==========
+// SHADOWS
+// ==========
+
+// containers
+$CONFIG_SHADOW_FLYOUT:                          (1px 1px 3px rgba(0,0,0, .25)) !default;
+$CONFIG_SHADOW_CONTAINER:                       (0 2px 2px rgba(0,0,0, 0.25)) !default;
+$CONFIG_SHADOW_CONTAINER_ALT:                   (ie lte 8, border-bottom, 2px solid #CCCCCC) !default;
+$CONFIG_SHADOW_TOOLTIP:                         (0 1px 2px rgba(0,0,0, 0.1)) !default;
+$CONFIG_SHADOW_HOVERCARD:                       (0 1px 2px rgba(0,0,0, 0.2)) !default;
+$CONFIG_SHADOW_PUNCHCUT_INSET:                  (0 0 43px rgba(0,0,0, .75) inset) !default;
+$CONFIG_SHADOW_ALERT:                           (0 1px 2px rgba(0,0,0, .45)) !default;
+
+// text
+$CONFIG_SHADOW_COPY:                            (nil (1px 1px 1px rgba(0,0,0, .75))) !default;
+$CONFIG_SHADOW_CLOSES:                          (1px 1px 1px rgba(0,0,0, .35)) !default;
+$CONFIG_SHADOW_BREADCRUMB:                      (1px 1px 1px rgba(255, 255, 255, .5)) !default;
+
+// buttons
+$CONFIG_SHADOW_BUTTON_TEXT:                     (0 -1px 0 rgba(0,0,0, 0.25)) !default;
+$CONFIG_SHADOW_BUTTON_TEXT_INVERTED:            (0 -1px 0 rgba(255,255,255, 0.25)) !default;
+$CONFIG_SHADOW_BUTTON_HOVER:                    (0 0 8px rgba(0,0,0, 0.15)) !default;
+$CONFIG_SHADOW_BUTTON_ACTIVE:                   (0 1px 3px rgba(0,0,0, .25) inset) !default;

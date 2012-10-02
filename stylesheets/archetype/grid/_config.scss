@@ -1,0 +1,13 @@
+@import "../config";
+
+// grids
+$CONFIG_GRID_COLUMN:              31px !default;                                                    // column width
+$CONFIG_GRID_GUTTER:              10px !default;                                                    // gutter width (margin)
+$CONFIG_GRID_MAX_COLUMNS:         24 !default;                                                      // max number of columns on the grid
+$CONFIG_GRID_MIN_THRESHOLD:       1.0 !default;                                                     // minimum threshold for fractional columns
+$CONFIG_GRID_ALLOWED_DIVISORS:    (3) !default;                                                     // allowed list of divisors e.g. (3, 4, 5) => (1/3, 2/3, 1/4, 2/4, 3/4, 1/5, 2/5, 3/5, 4/5)
+$CONFIG_GRID_ALLOWED_DIVISABLE:   (8, 10, 12, 14, 16, 18, 20, $CONFIG_GRID_MAX_COLUMNS) !default;   // list of specific column widths
+$CONFIG_GRID_OFFSET_METHOD:       margin !default;                                                  // offset method to use [padding|margin|position]
+$CONFIG_GRID_ALIGN_METHOD:        float !default;                                                   // alignment method [float|inline-block|table-cell] (NOTE: table-cell doesn't work in all cases
+$CONFIG_GRID_DIRECTION:           reading-direction() !default;                               // direction of grid
+$CONFIG_GRID_DEBUG:               false !default;                                                   // debugging mode

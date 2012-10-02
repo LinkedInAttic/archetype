@@ -1,0 +1,14 @@
+.before {
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("archetype"),this.el.style.cssText="color: red; background: green;",this.insertBefore(this.el));
+  *zoom: 1;
+}
+
+.after-content {
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("archetype"),this.el.innerHTML="&#x27BD;",this.appendChild(this.el));
+  *zoom: 1;
+}
+
+.before-style-content {
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("archetype"),this.el.innerHTML="testing &#x27BD;if this works",this.el.style.cssText="color: red; background: green;",this.insertBefore(this.el));
+  *zoom: 1;
+}

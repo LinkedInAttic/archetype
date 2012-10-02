@@ -1,0 +1,13 @@
+@import "archetype";
+
+.before {
+  @include ie-pseudo-before('color: red; background: green;');
+}
+
+.after-content {
+  @include ie-pseudo-after($content: "\27BD");
+}
+
+.before-style-content {
+  @include ie-pseudo-before($styles: 'color: red; background: green;', $content: "testing \27BD if this works");
+}

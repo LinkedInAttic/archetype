@@ -1,0 +1,31 @@
+// ==========
+// HEADINGS
+// ==========
+$STYLEGUIDE_HEADINGS_ID: heading !default;
+$STYLEGUIDE_HEADINGS: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_HEADINGS_ID, $STYLEGUIDE_HEADINGS, (
+  (default, (
+    nil
+  )),
+  (in-flyout in-in-button-group, (
+    margin                $CONFIG_DIM_HEADING_SPACING_OUTER,
+    padding               $CONFIG_DIM_HEADING_SPACING,
+    background-color      $CONFIG_TEXTURE_HEADING,
+    border                ($CONFIG_DIM_GENERIC_BORDER solid nth($CONFIG_COLOR_BORDER_SECTION,1)),
+    border-width          ($CONFIG_DIM_GENERIC_BORDER 0),
+    color                 nth($CONFIG_COLOR_COPY_MUTED, 1)
+  )),
+  (first in-flyout in-in-button-group, (
+    margin-top            0,
+    border-top-width      0
+  )),
+  (in-flyout in-in-button, (
+    inherit (in-flyout in-in-button-group),
+    nil
+  )),
+  (first in-flyout in-in-button, (
+    inherit (first in-flyout in-in-button-group),
+    nil
+  ))
+), $CONFIG_THEME);

@@ -1,0 +1,9 @@
+@import "archetype";
+
+a {
+  @include font-family(serif);
+}
+
+b {
+  @include font-family(sans-serif);
+}

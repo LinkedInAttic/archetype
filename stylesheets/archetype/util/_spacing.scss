@@ -1,0 +1,78 @@
+// @category  utilities/spacing
+
+// abstract spacing calculations
+// @function  _spacing
+// @private
+// @param     $unit {Number} unit of measurement
+// @param     $direction {String} [horizontal|vertical] spacing
+// @param     $abuse {Bool} @see _getUnit
+// @return    {String} the calculated spacing
+@function _spacing($unit: nil, $direction: horizontal, $abuse: false) {
+  @if $unit == nil {
+    @return nil;
+  }
+  $unit: _getUnit($unit, $abuse);
+  $spacing: if($direction == vertical, $CONFIG_VERTICAL_SPACING, $CONFIG_HORIZONTAL_SPACING);
+  @return ($unit * $spacing);
+}
+
+// horizonatl spacing calculations
+// @function  horizontal-spacing
+// @param     $unit {Number} unit of measurement
+// @param     $abuse {Bool} @see _getUnit
+// @return    {String} the calculated horizontal spacing
+@function horizontal-spacing($unit, $abuse: false) {
+  @return _spacing($unit, $abuse: $abuse);
+}
+
+// vertical spacing calculations
+// @function  vertical-spacing
+// @param     $unit {Number} unit of measurement
+// @param     $abuse {Bool} @see _getUnit
+// @return    {String} the calculated vertical spacing
+@function vertical-spacing($unit, $abuse: false) {
+  @return _spacing($unit, $direction: vertical, $abuse: $abuse);
+}
+
+// generate the vertical spacing offset
+// @mixin     vertical-spacing
+// @param     $list {List} the list of units e.g. (1) => $top:1 $bottom:1; (1 0) => $top:1 $bottom:0;
+// @param     $top {Number} the units to offset from the top
+// @param     $bottom {Number} the units to offset from the bottom
+// @param     $method {String} [margin|padding] offset method
+// @param     $abuse {Bool} @see _getUnit
+@mixin vertical-spacing($list: false, $top: nil, $bottom: nil, $method: false, $abuse: false) {
+  $list: get-collection($list, ($top $bottom), $min: 2);
+  @include _spacing($list, vertical, $method: $method, $abuse: $abuse);
+}
+// generate the horizontal spacing offset
+// @mixin     horizontal-spacing
+// @param     $list {List} the list of units e.g. (1) => $left:1 $right:1; (1 0) => $left:1 $right:0;
+// @param     $left {Number} the units to offset from the left
+// @param     $right {Number} the units to offset from the right
+// @param     $method {String} [margin|padding] offset method
+// @param     $abuse {Bool} @see _getUnit
+@mixin horizontal-spacing($list: false, $left: nil, $right: nil, $method: false, $abuse: false) {
+  $list: get-collection($list, ($left $right), $min: 2);
+  @include _spacing($list, $method: $method, $abuse: $abuse);
+}
+
+// generate the spacing output
+// @mixin     spacing
+// @private
+// @param     $units {List} the list of units e.g. (1) => $left:1 $right:1; (1 0) => $left:1 $right:0;
+// @param     $method {String} [margin|padding] offset method
+// @param     $abuse {Bool} @see _getUnit
+@mixin _spacing($units, $direction: horizontal, $method: false, $abuse: false) {
+  @if(not $method) {
+    $method: $CONFIG_SPACING_METHOD;
+  }
+  @if($direction == vertical) {
+    @include if-set(#{$method}-top,    vertical-spacing(nth($units,1), $abuse: $abuse), $ignore: nil);
+    @include if-set(#{$method}-bottom, vertical-spacing(nth($units,2), $abuse: $abuse), $ignore: nil);
+  }
+  @else {
+    @include if-set(#{$method}-#{rtl(left)},   horizontal-spacing(nth($units,1), $abuse: $abuse), $ignore: nil);
+    @include if-set(#{$method}-#{rtl(right)},  horizontal-spacing(nth($units,2), $abuse: $abuse), $ignore: nil);
+  }
+}

@@ -1,0 +1,279 @@
+// @category utilities/rtl
+
+// augment the direction
+// @function  rtl
+// @param     $value {List|String} [*|left|right] the value to augment
+// @param     $method {String} [border-radius|background]
+// @param     $force {String} [ltr|rtl] allows you to ignore reading-direction()
+// @return    {Bool|List|String} the augmented value
+@function rtl($value: false, $method: false, $force: false) {
+  $dir: if($force, $force, reading-direction());
+  @if($value == false) {
+    @return $dir == rtl;
+  }
+  @if($value == nil) {
+    @return nil;
+  }
+  @if $dir == rtl {
+    // if it's a left/right value, flip it (all cases)
+    $value: -compass-list($value);
+    @for $idx from 1 through length($value) {
+      $item: nth($value, $idx);
+      @if(index(left right, $item)) {
+        $value: list-replace($value, $idx, opposite-position($item), space);
+      }
+    }
+    // if it's shorthand, swap 2nd with 4th (all cases except `border-radius`)
+    @if($method != border-radius and length($value) >= 4) {
+      @return nth($value, 1) nth($value, 4) nth($value, 3) nth($value, 2);
+    }
+    // if it's border-radius, do some magic (if Compass doesn't support RLT yet)
+    @if($method == border-radius and not $COMPASS_RTL_SUPPORT) {
+      // swap 1st with 2nd, 3rd with 4th
+      @if(length($value) >= 4) {
+        @return nth($value, 2) nth($value, 1) nth($value, 4) nth($value, 3);
+      }
+      // swap 1st with 2nd, append 2nd to end
+      @else if(length($value) == 3) {
+        @return nth($value, 2) nth($value, 1) nth($value, 3) nth($value, 2);
+      }
+      // swap 1st with 2nd
+      @else if(length($value) == 2) {
+        @return nth($value, 2) nth($value, 1);
+      }
+    }
+    // invert percentage background positions
+    @else if($method == background-position) {
+      $first: first-value-of($value);
+      @if type-of($first) == number and (unit($first == "%") or strip-units($first) == 0) {
+        @return list-replace($value, 1, (100% - $first), space);
+      }
+    }
+  }
+  @if(length($value) == 1) {
+    $value: first-value-of($value);
+  }
+  // if we get here, just return
+  @return $value;
+}
+
+
+$CORE_CSS_RTL_VALUE_SUPPORT: (margin padding border-width border-color border-style clear float text-align background-position);
+// convenience wrapper for RTL support
+// @mixin    wrapper-rtl
+// @param    $value {String|Number|List} the value to augment
+// @param    $method {String} the method (property) to use
+// @param    $direction {String} the direction to apply
+@mixin wrapper-rtl($value, $method: margin, $direction: false) {
+  @if($direction) {
+    #{$method}-#{rtl($direction)}: $value;
+  }
+  @else {
+    #{$method}: rtl($value);
+  }
+}
+
+// RTL wrapper for `margin`
+// @mixin    margin
+// @param    $value {List} margin
+// @param    $direction {String} the direction to apply
+@mixin margin($value, $direction: false) {
+  @include wrapper-rtl($value, margin, $direction);
+}
+// RTL wrapper for `margin-left`
+// @mixin    margin-left
+// @param    $value {Number} margin
+@mixin margin-left($value) {
+  @include margin($value, left);
+}
+// RTL wrapper for `margin-right`
+// @mixin    margin-right
+// @param    $value {Number} margin
+@mixin margin-right($value) {
+  @include margin($value, right);
+}
+// RTL wrapper for `margin-top` (not necessary but here for consistency)
+// @mixin    margin-top
+// @param    $value {Number} margin
+@mixin margin-top($value) {
+  @include margin($value, top);
+}
+// RTL wrapper for `margin-bottom` (not necessary but here for consistency)
+// @mixin    margin-bottom
+// @param    $value {Number} margin
+@mixin margin-bottom($value) {
+  @include margin($value, bottom);
+}
+
+// RTL wrapper for `padding`
+// @mixin    padding
+// @param    $value {List} padding
+// @param    $direction {String} the direction to apply
+@mixin padding($value, $direction: false) {
+  @include wrapper-rtl($value, padding, $direction);
+}
+// RTL wrapper for `padding-left`
+// @mixin    padding-left
+// @param    $value {Number} padding
+@mixin padding-left($value) {
+  @include padding($value, left);
+}
+// RTL wrapper for `padding-right`
+// @mixin    padding-right
+// @param    $value {Number} padding
+@mixin padding-right($value) {
+  @include padding($value, right);
+}
+// RTL wrapper for `padding-top` (not necessary but here for consistency)
+// @mixin    padding-top
+// @param    $value {Number} padding
+@mixin padding-top($value) {
+  @include padding($value, top);
+}
+// RTL wrapper for `padding-bottom` (not necessary but here for consistency)
+// @mixin    padding-bottom
+// @param    $value {Number} padding
+@mixin padding-bottom($value) {
+  @include padding($value, bottom);
+}
+
+// RTL wrapper for `border-width`
+// @mixin    border-width
+// @param    $value {List} width
+// @param    $direction {String} the direction to apply
+@mixin border-width($value, $direction: false) {
+  $direction: if($direction, rtl($direction) + '-', '');
+  @include wrapper-rtl($value, border-#{$direction}width);
+}
+// RTL wrapper for `border-left-width`
+// @mixin    border-left-width
+// @param    $value {List} width
+@mixin border-left-width($value) {
+  @include border-width($value, left);
+}
+// RTL wrapper for `border-right-width`
+// @mixin    border-right-width
+// @param    $value {List} width
+@mixin border-right-width($value) {
+  @include border-width($value, right);
+}
+// RTL wrapper for `border-top-width` (not necessary but here for consistency)
+// @mixin    border-top-width
+// @param    $value {List} width
+@mixin border-top-width($value) {
+  @include border-width($value, top);
+}
+// RTL wrapper for `border-bottom-width` (not necessary but here for consistency)
+// @mixin    border-bottom-width
+// @param    $value {List} width
+@mixin border-bottom-width($value) {
+  @include border-width($value, bottom);
+}
+
+// RTL wrapper for `border-color`
+// @mixin    border-color
+// @param    $value {List} color
+// @param    $direction {String} the direction to apply
+@mixin border-color($value, $direction: false) {
+  $direction: if($direction, rtl($direction) + '-', '');
+  @include wrapper-rtl($value, border-#{$direction}color);
+}
+// RTL wrapper for `border-left-color`
+// @mixin    border-left-color
+// @param    $value {List} color
+@mixin border-left-color($value) {
+  @include border-color($value, left);
+}
+// RTL wrapper for `border-right-color`
+// @mixin    border-right-color
+// @param    $value {List} color
+@mixin border-right-color($value) {
+  @include border-color($value, right);
+}
+// RTL wrapper for `border-top-color` (not necessary but here for consistency)
+// @mixin    border-top-color
+// @param    $value {List} color
+@mixin border-top-color($value) {
+  @include border-color($value, top);
+}
+// RTL wrapper for `border-bottom-color` (not necessary but here for consistency)
+// @mixin    border-bottom-color
+// @param    $value {List} color
+@mixin border-bottom-color($value) {
+  @include border-color($value, bottom);
+}
+
+// RTL wrapper for `border-style`
+// @mixin    border-style
+// @param    $value {List} style
+// @param    $direction {String} the direction to apply
+@mixin border-style($value, $direction: false) {
+  $direction: if($direction, rtl($direction) + '-', '');
+  @include wrapper-rtl($value, border-#{$direction}style);
+}
+// RTL wrapper for `border-left-style`
+// @mixin    border-left-style
+// @param    $value {List} style
+@mixin border-left-style($value) {
+  @include border-style($value, left);
+}
+// RTL wrapper for `border-right-style`
+// @mixin    border-right-style
+// @param    $value {List} style
+@mixin border-right-style($value) {
+  @include border-style($value, right);
+}
+// RTL wrapper for `border-top-style` (not necessary but here for consistency)
+// @mixin    border-top-style
+// @param    $value {List} style
+@mixin border-top-style($value) {
+  @include border-style($value, top);
+}
+// RTL wrapper for `border-bottom-style` (not necessary but here for consistency)
+// @mixin    border-bottom-style
+// @param    $value {List} style
+@mixin border-bottom-style($value) {
+  @include border-style($value, bottom);
+}
+
+// an RTL wrapper for `clear`
+// @mixin    float
+// @param    $value {String} the direction to clear
+@mixin clear($value: left) {
+  clear: rtl($value);
+}
+
+// an RTL wrapper for `float`
+// @mixin    float
+// @param    $value {String} the float direction
+@mixin float($value: left) {
+  float: rtl($value);
+}
+
+// an RTL wrapper for `text-align`
+// @mixin    text-align
+// @param    $value {String} the alignment
+@mixin text-align($value: left) {
+  text-align: rtl($value);
+}
+
+// an RTL wrapper for `left`
+// @mixin    left
+// @param    $value {Number} the position
+@mixin left($value: auto) {
+  #{rtl(left)}: $value;
+}
+
+// an RTL wrapper for `right`
+// @mixin    right
+// @param    $value {Number} the position
+@mixin right($value: auto) {
+  #{rtl(right)}: $value;
+}
+
+// an RTL wrapper for `background-position`
+// @mixin    background-position
+// @param    $value {List} the background position coordinates
+@mixin background-position($value) {
+  background-position: rtl($value, background-position);
+}

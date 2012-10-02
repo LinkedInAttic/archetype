@@ -1,0 +1,18 @@
+// @category  utilities/units
+
+// abstract factor of measurement
+// @function  _getUnit
+// @private
+// @param     $number {Number} unit of measurement
+// @param     $abuse {Bool} if `false`, $number cannot be a fraction
+// @return    $number {Number} normalized number of measurement
+@function _getUnit($number, $abuse: false) {
+  @if(not unitless($number)) {
+    @warn "#{$number} is not unitless";
+    $number: strip-units($number);
+  }
+  @if($CONFIG_UNIT_FORCE_INT and ($CONFIG_UNIT_FORCE_INT == strict or not $abuse)) {
+    @return ceil($number);
+  }
+  @return $number;
+}

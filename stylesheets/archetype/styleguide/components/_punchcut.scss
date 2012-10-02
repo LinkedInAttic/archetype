@@ -1,0 +1,16 @@
+// ==========
+// PUNCHCUT
+// ==========
+$STYLEGUIDE_PUNCHCUTS_ID: punchcut !default;
+$STYLEGUIDE_PUNCHCUTS: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_PUNCHCUTS_ID, $STYLEGUIDE_PUNCHCUTS, (
+  (default, (
+    background  nth($CONFIG_TEXTURE_PUNCHCUT, 1),
+    box-shadow  $CONFIG_SHADOW_PUNCHCUT_INSET
+  )),
+  (without-inner-shadow, (
+    box-shadow  nil,
+    nil
+  ))
+), $CONFIG_THEME);

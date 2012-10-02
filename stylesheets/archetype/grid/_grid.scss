@@ -1,0 +1,391 @@
+// this is the grid framework
+// @category  grid
+@import "config";
+@import "compass";
+@import "../util";
+
+// calculate the width of a grid block
+// @function  _getGridWidth
+// @private
+// @param     $columns {Number} the number or fraction of columns to span, if fraction, must specify $of
+// @param     $of {Number} the total number of columns spanned, only use with fractional $columns
+// @param     $indent {List} total indent for both left and right sides (needed to adjust for box-model padding)
+// @return    $width {Number} calculated width
+// @usage:
+// _getGridWidth(5) => width of 5 columns
+// _getGridWidth(1/3, $of: 8) => splits an 8 column grid into 1/3
+// _getGridWidth(5, $indent: (10px 0px)) => subtracts the $indent from the total width
+@function _getGridWidth($columns, $of: false, $indent: false) {
+  $width: 0;
+  // if we're doing 1/3, 2/3, etc...
+  @if($of or $columns < 1) {
+    @if(type-of($of) != number) {
+      $of: $CONFIG_GRID_MAX_COLUMNS;
+    }
+
+    // check if the divisors conform to our restrictions
+    @if($CONFIG_GRID_ALLOWED_DIVISORS) {
+      $allowed-column-factors: ();
+      @each $divisor in $CONFIG_GRID_ALLOWED_DIVISORS {
+        $numerator: $divisor;
+        @while($numerator > 0) {
+          $numerator: ($numerator - 1);
+          $allowed-column-factors: append($allowed-column-factors, ($numerator / $divisor));
+        }
+      }
+      @if(not index($allowed-column-factors, $columns)) {
+        @warn "you can't divide a block into #{columns}";
+        $columns: 1;
+      }
+    }
+    // check if the specified columns are valid
+    @if($CONFIG_GRID_ALLOWED_DIVISABLE) {
+      @if(not index($CONFIG_GRID_ALLOWED_DIVISABLE, $of)) {
+        @warn "you can't divide #{of} columns";
+        $of: $CONFIG_GRID_MAX_COLUMNS;
+      }
+    }
+
+    $columns: ($columns * $of);
+    @if($columns < $CONFIG_GRID_MIN_THRESHOLD and $columns > 0) {
+      @warn "#{$columns} of #{$of} columns is too small. Use a larger column size";
+      $columns: $CONFIG_GRID_MIN_THRESHOLD;
+    }
+  }
+  // calculate
+  $width: ($columns * $CONFIG_GRID_COLUMN) + (($columns - 1) * $CONFIG_GRID_GUTTER);
+
+  @if(length($indent) == 2) {
+    $width: ($width - nth($indent,1) - nth($indent,2));
+  }
+  @return $width;
+}
+
+// abstract function to indent or outdent a grid block
+// @function  _gridDent
+// @private
+// @param     $list {List} list of dents
+// @param     $left {Number} the number of units to dent left
+// @param     $right {Number} the number of units to dent right
+// @param     $direction {String} [in|out] the direction to dent
+// @param     $abuse {Bool} @see _getUnit
+// @return    $dent {List} list of dents
+@function _gridDent($list: false, $left: 0, $right: 0, $direction: in, $abuse: false) {
+  $factor: if($direction == out, -1, 1);
+  $dent: ();
+  $list: get-collection($list, ($left $right), $min: 2);
+
+  @each $unit in $list {
+    $unit: ($factor * $unit);
+    $dent: append($dent, horizontal-spacing($unit, $abuse: $abuse), space);
+  }
+
+  @if(length($dent) == 1) {
+    $dent: append($dent, $dent);
+  }
+
+  @return $dent;
+}
+
+// calculate indents on a grid block
+// @function  grid-indent
+// @param     $list {List} list of indents
+// @param     $left {Number} the number of units to indent left
+// @param     $right {Number} the number of units to indent right
+// @param     $abuse {Bool} @see _getUnit
+// @return    {List} list of indents
+@function grid-indent($list: false, $left: 0, $right: 0, $abuse: false) {
+  @return _gridDent($list, $left, $right, $direction: in, $abuse: $abuse);
+}
+
+// calculate outdents on a grid block
+// @function  grid-outdent
+// @param     $list {List} list of outdents
+// @param     $left {Number} the number of units to outdent left
+// @param     $right {Number} the number of units to outdent right
+// @param     $abuse {Bool} @see _getUnit
+// @return    {List} list of outdents
+@function grid-outdent($list: false, $left: 0, $right: 0, $abuse: false) {
+  @return _gridDent($list, $left, $right, $direction: out, $abuse: $abuse);
+}
+
+// generate the negative margins needed for a grid-outdent
+// @mixin     grid-outdent
+// @param     $list {List} list of outdents
+// @param     $left {Number} the number of units to outdent left
+// @param     $right {Number} the number of units to outdent right
+@mixin grid-outdent($list: false, $left: 0, $right: 0) {
+  $outdent: grid-outdent($list, $left, $right);
+  @include grid-output-left-right(margin, $outdent);
+  @include hack-negative-margin();
+}
+
+// calculate offsets for a grid block
+// @function  grid-offset
+// @param     $list {List} list of offsets
+// @param     $left {Number} the number of columns to offset left
+// @param     $right {Number} the number of columns to offset right
+// @param     $of {Number} the total number of columns, used if $left/$right are fractional
+// @return    {List} list of offsets
+@function grid-offset($list: false, $left: 0, $right: 0, $of: false) {
+  $list: get-collection($list, ($left, $right), $min: 2);
+  $left: nth($list,1);
+  $left: if($left > 0, _getGridWidth($columns: $left, $of: $of) + $CONFIG_GRID_GUTTER, 0);
+  $right: nth($list,2);
+  $right: if($right > 0, _getGridWidth($columns: $right, $of: $of) + $CONFIG_GRID_GUTTER, 0);
+  @return ($left, $right);
+}
+// convenience mixin for grid-offset
+@mixin grid-offset($list: false, $left: 0, $right: 0, $of: false, $first: false, $method: $CONFIG_GRID_OFFSET_METHOD) {
+  $offset: grid-offset($list: $list, $left: $left, $right: $right, $of: $of);
+  @if($method == position) {
+    @include grid-offset-position($offset: $offset);
+  }
+  @else {
+    @include grid-offset-margin($offset: $offset, $first: $first);
+  }
+}
+// convenience method for using the position offset method
+@mixin grid-offset-position($offset) {
+  position: relative;
+  @include grid-output-left-right($values: $offset);
+}
+// convenience method for using the margin offset method
+@mixin grid-offset-margin($offset, $first: false, $outdent: false) {
+  $outdent: get-collection($outdent, 0, $min: 2);
+  $gutter: if($first, 0, $CONFIG_GRID_GUTTER);
+  @include grid-output-left-right(margin, list-add($outdent, list-add($offset, ($gutter $gutter))), $ignore: ($gutter));
+  @include hack-negative-margin();
+}
+
+// calculate push (offset) for a grid block
+// @function  grid-push
+// @param     $columns {List} the number of columns to offset left
+// @param     $of {Number} the total number of columns, used if $left is fractional
+// @return    {List} list of pushes
+@function grid-push($columns: 0, $of: false) {
+  @return grid-offset($left: $columns, $of: $of);
+}
+// convenience mixin for grid-push
+@mixin grid-push($columns:0, $of: false, $first: false, $method: position) {
+  @include grid-offset($left: $columns, $of: $of, $first: false, $method: $method);
+}
+
+// calculate pull (offset) for a grid block
+// @function  grid-pull
+// @param     $columns {List} the number of columns to offset right
+// @param     $of {Number} the total number of columns, used if $right is fractional
+// @return    {List} list of pulls
+@function grid-pull($columns: 0, $of: false) {
+  @return grid-offset($right: $columns, $of: $of);
+}
+// convenience mixin for grid-push
+@mixin grid-pull($columns: 0, $of: false, $first: false, $method: position) {
+  @include grid-offset($right: $columns, $of: $of, $first: false, $method: $method);
+}
+
+// this makes it possible to undo $first: true
+// @mixin     grid-not-first
+@mixin grid-not-first() {
+  margin-#{rtl(left, $CONFIG_GRID_DIRECTION)}: $CONFIG_GRID_GUTTER;
+}
+
+// this makes it possible to force a non first-column to behave as a first-column
+// @mixin     grid-is-first
+@mixin grid-is-first() {
+  margin-#{rtl(left, $CONFIG_GRID_DIRECTION)}: 0;
+}
+
+// given a set of values, output the left and right properties
+// @mixin     grid-output-left-right
+// @param     $property {String} prefix [margin|padding|border|etc] if false, no prefix is used
+// @param     $values {List} the list of values to output e.g. (10px 5px). if only one value (10px), it's used for both left and right
+// @param     $ignore {List} list of values to ignore, @see if-set
+@mixin grid-output-left-right($property: false, $values: false, $ignore: false) {
+  $property: if($property, unquote('#{$property}-'), unquote(''));
+  $left: 0;
+  @if(length($values) > 0) {
+    $left: nth($values,1);
+  }
+  $right: 0;
+  @if(length($values) > 1) {
+    $right: nth($values,2);
+  }
+  @include if-set(#{$property}#{rtl(left, $CONFIG_GRID_DIRECTION)}, $left, $ignore: $ignore);
+  @include if-set(#{$property}#{rtl(right, $CONFIG_GRID_DIRECTION)}, $right, $ignore: $ignore);
+}
+
+// this lets rows clear the floated containers
+// @mixin     grid-row
+// @param     $debug {Bool} use debug stylings
+@mixin grid-row($debug: false) {
+  @include grid-block(true);
+  @include debug-hover-box(rgb(255, 0, 255), $if: ($debug or $CONFIG_GRID_DEBUG));
+}
+
+// output the block methods
+// @mixin     grid-block
+// @param     $row {Bool} is this block a row
+@mixin grid-block($row: false) {
+  // FLOAT
+  @if($CONFIG_GRID_ALIGN_METHOD == float){
+    @if($row) {
+      @include legacy-pie-clearfix();
+    }
+    @else {
+      // make it a floater
+      float: #{rtl(left, $CONFIG_GRID_DIRECTION)};
+    }
+  }
+  // INLINE-BLOCK
+  @else if($CONFIG_GRID_ALIGN_METHOD == inline-block) {
+    @if($row) {
+      // if the reading direction is different from the grid direction,
+      // we have to switch the direction of the individual rows
+      @if(reading-direction() != $CONFIG_GRID_DIRECTION) {
+        direction: $CONFIG_GRID_DIRECTION;
+      }
+      // fix to collapse white space between inline-block elements
+      letter-spacing: -0.313em; // webkit
+      @if($legacy-support-for-ie6 or $legacy-support-for-ie7) {
+        *letter-spacing: normal;  // restore for IE6/7
+      }
+      word-spacing: -0.438em;   // IE/firefox
+      // other methods: no browsers support this yet
+      // http://dev.w3.org/csswg/css3-text/#white-space-collapsing
+      //white-space-collapse: discard;
+      //text-space-collapse: collapse;
+    }
+    @else {
+      // if reading direction is differernt from the grid direction,
+      // reset the reading direction of the inner container
+      @if(reading-direction() != $CONFIG_GRID_DIRECTION) {
+        direction: reading-direction();
+      }
+      @include inline-block();
+      vertical-align: top;
+      // restore spacing @see grid-row
+      letter-spacing: normal;
+      word-spacing:   normal;
+    }
+  }
+  // TABLE-CELL (doesn't work well)
+  @else if($CONFIG_GRID_ALIGN_METHOD == table-cell) {
+    @warn "table-cell method doesn't work yet!";
+    @if($row) {
+      // if the reading direction is different from the grid direction,
+      // we have to switch the direction of the individual rows
+      @if(reading-direction() != $CONFIG_GRID_DIRECTION) {
+        direction: $CONFIG_GRID_DIRECTION;
+      }
+      display: table;
+      // table cells don't respect margin, so we have to use border-spacing
+      border-spacing: $CONFIG_GRID_GUTTER 0;
+    }
+    @else {
+      // if reading direction is differernt from the grid direction,
+      // reset the reading direction of the inner container
+      @if(reading-direction() != $CONFIG_GRID_DIRECTION) {
+        direction: reading-direction();
+      }
+      @if($legacy-support-for-ie6 or $legacy-support-for-ie7) {
+        *display:       inline;
+      }
+      display:        table-cell;
+      vertical-align: top;
+      @include has-layout();
+    }
+  }
+}
+
+// convenience method for creating a grid canvas, @see grid
+// @mixin     grid-canvas
+// @param     $columns {Number} the number or fraction of columns to span, if fraction, must specify $of
+// @param     $of {Number} the total number of columns spanned, only use with fractional $columns
+// @param     $debug {Bool} use debug stylings
+@mixin grid-canvas($columns: false, $of: false, $debug: false) {
+  @include grid($columns: $columns, $of: $of, $debug: $debug, $canvas: true);
+}
+
+// the main grid mixin
+// @mixin     grid
+// @param     $columns {Number} the number or fraction of columns to span, if fraction, must specify $of
+// @param     $first {Bool} is this the first grid block of a row
+// @param     $of {Number} the total number of columns spanned, only use with fractional $columns
+// @param     $indent {List} the grid indents @see grid-indent
+// @param     $outdent {List} the grid outdents @see grid-outdent
+// @param     $offset {List} the grid offsets @see grid-offset, grid-push, grid-pull
+// @param     $canvas {Bool} treat this grid block as a canvas; a canvas is a non-floated, centered grid-block
+// @param     $row {Bool} @see grid-row
+// @param     $center {Bool} whether or not to center the grid block
+// @param     $debug {Bool} use debug stylings
+@mixin grid($columns: false, $first: false, $of: false, $indent: false, $outdent: false, $offset: false, $offset-method: $CONFIG_GRID_OFFSET_METHOD, $canvas: false, $row: false, $center: false, $debug: false) {
+  @if($row) {
+    @include grid-row($debug: $debug);
+  }
+  @else {
+    @if(not $columns) {
+      $columns: $CONFIG_GRID_MAX_COLUMNS;
+    }
+
+    $width: _getGridWidth($columns, $of, $indent);
+
+    // margin
+    @if(not ($first or $canvas or $center)) {
+      @include grid-not-first();
+    }
+
+    @if($canvas or $center) {
+      // center it
+      margin-left:  auto;
+      margin-right: auto;
+
+      // debug
+      @if(is-debug-enabled($debug or $CONFIG_GRID_DEBUG)) {
+        @include column-grid-background($CONFIG_GRID_MAX_COLUMNS, $CONFIG_GRID_COLUMN, $CONFIG_GRID_GUTTER);
+      }
+
+      @if($CONFIG_GRID_ALIGN_METHOD == inline-block) {
+        // the inline-block method needs to use horizontal overflow on the canvas to prevent an unwanted scrollbar
+        //overflow-x: hidden;
+      }
+    }
+    @else {
+      // align the block
+      @include grid-block();
+      // debug
+      @include debug-hover-box($if: ($debug or $CONFIG_GRID_DEBUG));
+    }
+
+    // offset (push, pull)
+    @if($offset) {
+      // ... with positioning
+      @if($offset-method == position) {
+        @include grid-offset-position($offset);
+      }
+      // ... with margin (adjust outdent)
+      @else if($offset-method == margin) {
+        @include grid-offset-margin($offset: $offset, $first: $first, $outdent: $outdent);
+        $outdent: false;
+      }
+      // ... with padding (adjust indent)
+      @else {
+        $indent: list-add(get-collection($indent, 0, $min: 2), $offset);
+      }
+    }
+
+    // indent
+    @if($indent) {
+      @include grid-output-left-right(padding, $indent);
+    }
+
+    // outdent
+    @if($outdent) {
+      @include grid-output-left-right(margin, $outdent);
+      @include hack-negative-margin();
+    }
+
+    // width
+    width: $width;
+  }
+}

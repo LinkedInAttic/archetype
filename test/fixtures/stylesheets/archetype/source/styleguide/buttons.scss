@@ -1,0 +1,14 @@
+@import "archetype"; 
+
+@each $context in container, bristol, punchcut {
+  .#{$context} {
+    @each $size in large, medium, small {
+      @each $type in primary, secondary, spotlight {
+        // normal buttons
+        .button.#{$size}.#{$type} {
+          @include styleguide($size $type button in a $context);
+        }
+      }
+    }
+  }
+}

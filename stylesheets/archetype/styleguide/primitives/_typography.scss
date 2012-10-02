@@ -1,0 +1,56 @@
+// ==========
+// TYPOGRAPHY
+// ==========
+
+// HEADLINES
+$CONFIG_FONT_HEADLINE_XXLARGE:    (24px	26px) !default;                                             // XXLarge headline
+$CONFIG_FONT_HEADLINE_XLARGE:     (22px 24px) !default;                                             // XLarge headline
+$CONFIG_FONT_HEADLINE_LARGE:      (18px 22px) !default;                                             // Large headline
+$CONFIG_FONT_HEADLINE_MEDIUM:     (16px 18px) !default;                                             // Medium headline
+$CONFIG_FONT_HEADLINE_SMALL:      (14px 16px) !default;                                             // Small headline
+$CONFIG_FONT_HEADLINE_XSMALL:     (13px 17px) !default;                                             // XSmall headline
+
+// GENERIC COPY
+$CONFIG_FONT_COPY_LARGE:          (16px 20px) !default;                                             // Large copy
+$CONFIG_FONT_COPY_MEDIUM:         (13px 17px) !default;                                             // Medium copy
+$CONFIG_FONT_COPY_SMALL:          (12px 14px) !default;                                             // Small copy
+// unused
+$CONFIG_FONT_COPY_XSMALL:         $CONFIG_FONT_COPY_SMALL !default;                                 // XSmall copy
+$CONFIG_FONT_COPY_XLARGE:         $CONFIG_FONT_COPY_LARGE !default;                                 // XLarge copy
+$CONFIG_FONT_COPY_XXLARGE:        $CONFIG_FONT_COPY_XLARGE !default;                                // XXLarge copy
+
+// NOTICE COPY
+$CONFIG_FONT_NOTICE:              (15px 20px) !default;                                             // notice copy
+
+// PULLQUOTES
+$CONFIG_FONT_PULLQUOTE_MEDIUM:    (22px 24px) !default;                                             // Medium pullquote
+// unused
+$CONFIG_FONT_PULLQUOTE_SMALL:     $CONFIG_FONT_PULLQUOTE_MEDIUM !default;                           // Small pullquote
+$CONFIG_FONT_PULLQUOTE_XSMALL:    $CONFIG_FONT_PULLQUOTE_SMALL !default;                            // XSmall pullquote
+$CONFIG_FONT_PULLQUOTE_LARGE:     $CONFIG_FONT_PULLQUOTE_MEDIUM !default;                           // Large pullquote
+$CONFIG_FONT_PULLQUOTE_XLARGE:    $CONFIG_FONT_PULLQUOTE_LARGE !default;                            // XLarge pullquote
+$CONFIG_FONT_PULLQUOTE_XXLARGE:   $CONFIG_FONT_PULLQUOTE_XLARGE !default;                           // XXLarge pullquote
+
+// ANNOTATIONS
+$CONFIG_FONT_ANNOTATION_MEDIUM:   (12px 14px) !default;                                            // Medium annotation
+// unused
+$CONFIG_FONT_ANNOTATION_SMALL:    $CONFIG_FONT_ANNOTATION_MEDIUM !default;                         // Sall annotation
+$CONFIG_FONT_ANNOTATION_XSMALL:   $CONFIG_FONT_ANNOTATION_SMALL !default;                          // XSmall annotation
+$CONFIG_FONT_ANNOTATION_LARGE:    $CONFIG_FONT_ANNOTATION_MEDIUM !default;                         // Large annotation
+$CONFIG_FONT_ANNOTATION_XLARGE:   $CONFIG_FONT_ANNOTATION_LARGE !default;                          // XLarge annotation
+$CONFIG_FONT_ANNOTATION_XXLARGE:  $CONFIG_FONT_ANNOTATION_XLARGE !default;                         // XXLarge annotation
+
+// BUTTONS
+// (font-size, vertical-padding, horizontal-padding)
+$CONFIG_FONT_BUTTON_LARGE:        (16px vertical-spacing(0.9, $abuse: true) horizontal-spacing(0.75, $abuse: true)) !default;
+$CONFIG_FONT_BUTTON_MEDIUM:       (13px vertical-spacing(0.8, $abuse: true) horizontal-spacing(0.65, $abuse: true)) !default;
+$CONFIG_FONT_BUTTON_SMALL:        (12px vertical-spacing(0.6, $abuse: true) horizontal-spacing(0.5, $abuse: true)) !default;
+
+// CARETS
+$CONFIG_FONT_CARET_LARGE:         6px !default;
+$CONFIG_FONT_CARET_MEDIUM:        5px !default;
+$CONFIG_FONT_CARET_SMALL:         4px !default;
+
+// BREADCRUMBS
+$CONFIG_FONT_BREADCRUMB:          13px !default;
+$CONFIG_FONT_WEIGHT_BREADCRUMB:   bold !default;

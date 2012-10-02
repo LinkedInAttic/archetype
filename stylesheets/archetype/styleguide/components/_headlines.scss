@@ -1,0 +1,61 @@
+// ==========
+// HEADLINES
+// ==========
+$STYLEGUIDE_HEADLINES_ID: headline !default;
+$STYLEGUIDE_HEADLINES: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_HEADLINES_ID, $STYLEGUIDE_HEADLINES, (
+  (default, (
+    font-size           nth($CONFIG_FONT_HEADLINE_LARGE, 1),
+    font-weight         bold,
+    line-height         nth-cyclic($CONFIG_FONT_HEADLINE_LARGE, 2),
+    color               nth($CONFIG_COLOR_STRONG, 1)
+  )),
+  (muted, (
+    font-weight         normal,
+    nil
+  )),
+  (xlarge, (
+    font-size           nth($CONFIG_FONT_HEADLINE_XLARGE, 1),
+    line-height         nth-cyclic($CONFIG_FONT_HEADLINE_XLARGE, 2)
+  )),
+  (xxlarge, (
+    font-size           nth($CONFIG_FONT_HEADLINE_XXLARGE, 1),
+    line-height         nth-cyclic($CONFIG_FONT_HEADLINE_XXLARGE, 2)
+  )),
+  (large, (
+    nil
+  )),
+  (medium, (
+    font-size           nth($CONFIG_FONT_HEADLINE_MEDIUM, 1),
+    line-height         nth-cyclic($CONFIG_FONT_HEADLINE_MEDIUM, 2)
+  )),
+  (small, (
+    font-size           nth($CONFIG_FONT_HEADLINE_SMALL, 1),
+    line-height         nth-cyclic($CONFIG_FONT_HEADLINE_SMALL, 2)
+  )),
+  (xsmall, (
+    font-size           nth($CONFIG_FONT_HEADLINE_XSMALL, 1),
+    line-height         nth-cyclic($CONFIG_FONT_HEADLINE_XSMALL, 2)
+  )),
+  (in-dark, (
+    color               nth-cyclic($CONFIG_COLOR_STRONG, 2),
+    nil
+  )),
+  (in-bristol, (
+    inherit (in-dark),
+    nil
+  )),
+  (in-tooltip, (
+    inherit (in-dark),
+    nil
+  )),
+  (in-alert, (
+    inherit (in-dark),
+    nil
+  )),
+  (in-punchcut, (
+    inherit (in-dark),
+    text-shadow         nth-cyclic($CONFIG_SHADOW_COPY, 2)
+  ))
+), $CONFIG_THEME);

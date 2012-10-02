@@ -1,0 +1,35 @@
+.a {
+  height: 0;
+  width: 0;
+  _font-size: 0;
+  _line-height: 0;
+  border-style: dashed;
+  border-color: transparent;
+  border-width: 1em 0.5em 0;
+  border-top-color: #aaaaaa;
+  border-top-style: solid;
+}
+
+.b {
+  height: 0;
+  width: 0;
+  _font-size: 0;
+  _line-height: 0;
+  border-style: dashed;
+  border-color: transparent;
+  border-width: 0 5px 5px;
+  border-bottom-color: black;
+  border-bottom-style: solid;
+}
+
+.c {
+  height: 0;
+  width: 0;
+  _font-size: 0;
+  _line-height: 0;
+  border-style: dashed;
+  border-color: transparent;
+  border-width: 0 10px 5px 0;
+  border-bottom-color: black;
+  border-bottom-style: solid;
+}

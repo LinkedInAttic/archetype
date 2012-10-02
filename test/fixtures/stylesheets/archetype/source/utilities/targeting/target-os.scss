@@ -1,0 +1,42 @@
+@import "archetype";
+
+.target-linux {
+  @include target-os(linux, top, -3px);
+  @include target-os(linux, width, 300px);
+}
+
+.target-apple {
+  @include target-os(apple, top, -3px);
+  @include target-os(apple, width, 300px);
+}
+
+.target-mac {
+  @include target-os(mac, top, -3px);
+  @include target-os(mac, width, 300px);
+}
+
+.target-osx {
+  @include target-os(osx, top, -3px);
+  @include target-os(osx, width, 300px);
+}
+
+.target-windows {
+  @include target-os(windows, top, -3px);
+  @include target-os(windows, width, 300px);
+}
+
+.target-win {
+  @include target-os(win, top, -3px);
+  @include target-os(win, width, 300px);
+}
+
+.target-winxp {
+  @include target-os(winxp, top, -3px);
+  @include target-os(winxp, width, 300px);
+}
+
+.target-win7 {
+  @include target-os(win7, top, -3px);
+  @include target-os(win7, width, 300px);
+}
+

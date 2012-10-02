@@ -1,0 +1,64 @@
+// ==========
+// LINKS
+// ==========
+$STYLEGUIDE_LINKS_ID: link !default;
+$STYLEGUIDE_LINKS: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_LINKS_ID, $STYLEGUIDE_LINKS, (
+  (default, (
+    color                   nth($CONFIG_COLOR_BRAND, 1),
+    text-decoration         nth($CONFIG_DECORATION_LINK, 1),
+    (states, (
+      (hover, (
+        text-decoration     nth-cyclic($CONFIG_DECORATION_LINK, 2),
+        nil
+      )),
+      nil
+    ))
+  )),
+  (without-underline, (
+    (states, (
+      (hover, (
+        text-decoration     none,
+        nil
+      )),
+      nil
+    )),
+    nil
+  )),
+  (in-dark, (
+    color                   nth-cyclic($CONFIG_COLOR_BRAND, 2),
+    nil
+  )),
+  (in-punchcut, (
+    inherit (in-dark),
+    nil
+  )),
+  (in-bristol, (
+    inherit (in-dark),
+    nil
+  )),
+  (in-alert, (
+    color                   nth-cyclic($CONFIG_COLOR_COPY, 2),
+    font-weight             bold,
+    (states, (
+      (hover, (
+        color               nil,
+        nil
+      )),
+      nil
+    ))
+  )),
+  (muted, (
+    // de-emphasized links have no color until you hover over them
+    color                   nil,
+    (states, (
+      (hover, (
+        color               nth($CONFIG_COLOR_BRAND, 1),
+        text-decoration     none
+      )),
+      nil
+    ))
+  )),
+  nil
+), $CONFIG_THEME);

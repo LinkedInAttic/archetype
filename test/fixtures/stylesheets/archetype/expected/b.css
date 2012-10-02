@@ -1,0 +1,14 @@
+a {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 22px;
+  color: black;
+}
+
+b {
+  font-size: 24px;
+  font-weight: normal;
+  line-height: 26px;
+  color: white;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
+}

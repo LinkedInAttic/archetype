@@ -1,0 +1,13 @@
+// ==========
+// MODULE
+// ==========
+$STYLEGUIDE_MODULES_ID: module !default;
+$STYLEGUIDE_MODULES: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_MODULES_ID, $STYLEGUIDE_MODULES, (
+  (default, (
+    background  nth($CONFIG_TEXTURE_MODULE, 1),
+    nil
+  )),
+  nil
+), $CONFIG_THEME);

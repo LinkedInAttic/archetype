@@ -1,0 +1,77 @@
+# Archetype
+
+Archetype is a UI pattern and component library for quickly iterating on and maintaining scalable web interfaces.
+
+## Resources
+
+- [Archetype Homepage](http://www.archetypecss.com/)
+- [Documentation](http://www.archetypecss.com/documentation.html)
+- [Components](http://www.archetypecss.com/components.html)
+- [Tutorials](http://www.archetypecss.com/tutorials.html)
+- [Blog](http://www.archetypecss.com/blog.html)
+- [Add-ons](http://www.archetypecss.com/addons.html)
+- [Discussion](https://github.com/eoneill/archetype/issues)
+- [Archetype configuration](http://www.archetypecss.com/documentation/configuration.html)
+
+## Installation
+
+### Install the gem
+
+```sh
+[sudo] gem install archetype
+```
+
+Instead of installing the gem directly via the command line, we recommend using [Bundler](http://gembundler.com/) to manage your gem dependencies.
+
+### Creating a new project with Archetype
+
+```sh
+compass create ~/workspace/your-project -r archetype --using archetype
+```
+
+### Adding Archetype to an existing Compass project
+
+In your `config.rb`, add
+
+```ruby
+require "archetype"
+```
+
+### Import Archetype into your Sass file
+
+```sass
+@import "archetype";
+```
+
+Learn more about [Archetype configuration](http://www.archetypecss.com/documentation/configuration.html).
+
+## Author
+
+Archetype was originally written by [Eugene O'Neill](http://www.linkedin.com/in/eugeneoneill).
+
+## Core Developers
+
+- [Bikramjit Singh](http://www.linkedin.com/in/biksingh)
+
+## Inspiration
+
+- [Styleguides for the Web](http://paulrobertlloyd.com/2010/12/styleguides_for_the_web/)
+- [BBC Global Experience Language](http://www.bbc.co.uk/gel)
+- [Our Living Style Guide (Writing maintainable HTML/CSS)](http://blog.rjmetrics.com/our-living-style-guide-writing-maintainable-htmlcss/)
+- [The Fight for a Living Style Guide](http://www.mapletonhillmedia.com/the-fight-for-a-living-style-guide/)
+- [Anchoring Your Design Language in a Live Style Guide ](http://uxmag.com/articles/anchoring-your-design-language-in-a-live-style-guide)
+- [Unifying Agile and UX with Live Style Guides](https://speakerdeck.com/u/thoughtmerchant/p/unifying-agile-and-ux-with-live-style-guides)
+- [Twitter Bootstrap](http://twitter.github.com/bootstrap/)
+- [ZURB Foundation](http://foundation.zurb.com/)
+- [Semantic Grid System](http://semantic.gs/) \(published after we built our grid, but great minds think alike\)
+
+### Special Thanks
+
+- [Jakob Heuser](http://www.felocity.com/)
+- [David Delo](http://www.linkedin.com/in/daviddelo)
+- [Robert Martone](www.linkedin.com/in/robertmartone)
+- [Sean Sands](http://www.linkedin.com/in/snds117)
+- [Chris Eppstein](http://chriseppstein.github.com/)
+- [LinkedIn](http://www.linkedin.com/)
+- [Compass](http://compass-style.org/)
+- [Sass](http://sass-lang.com/)

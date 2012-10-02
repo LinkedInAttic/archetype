@@ -1,0 +1,65 @@
+// ==========
+// SPRITE MAPS and ICON names
+// ==========
+
+// ALERTS
+$CONFIG_SPRITE_ALERTS:            false !default;
+@if _shouldSetSprite($CONFIG_SPRITE_ALERTS) {
+  $CONFIG_SPRITE_ALERTS:          sprite-map("lib/archetype/icons/alert/*.png", $spacing: 100);
+}
+$CONFIG_ICON_ALERTS_NOTICE:       notice !default;
+$CONFIG_ICON_ALERTS_YIELD:        yield !default;
+$CONFIG_ICON_ALERTS_ERROR:        error !default;
+$CONFIG_ICON_ALERTS_SUCCESS:      success !default;
+$CONFIG_SPRITE_ALERTS_OFFSET:     (((nth-cyclic($CONFIG_DIM_ALERTS_SPACING, 4) - styleguide-image-width(styleguide-sprite-file($CONFIG_SPRITE_ALERTS, $CONFIG_ICON_ALERTS_NOTICE)))/2) (nth($CONFIG_DIM_ALERTS_SPACING, 1)/2)) !default;
+
+// CLOSES
+$CONFIG_SPRITE_CLOSES:            false !default;
+@if _shouldSetSprite($CONFIG_SPRITE_CLOSES) {
+  $CONFIG_SPRITE_CLOSES:          sprite-map("lib/archetype/icons/close/*.png");
+}
+$CONFIG_ICON_CLOSE_SMALL:         close_small !default;
+$CONFIG_ICON_CLOSE_SMALL_HOVER:   close_small_hover !default;
+
+// LOADERS
+$CONFIG_SPRITE_LOADERS:          false !default;
+@if _shouldSetSprite($CONFIG_SPRITE_LOADERS) {
+  $CONFIG_SPRITE_LOADERS:        sprite-map("lib/archetype/animations/loaders/**/*.png");
+}
+$CONFIG_ICON_LOADERS_SMALL:         (small small_dark) !default;
+$CONFIG_ICON_LOADERS_SMALL_STATIC:  (small_static small_dark_static) !default;
+$CONFIG_ICON_LOADERS_MEDIUM:        (medium medium_dark) !default;
+$CONFIG_ICON_LOADERS_MEDIUM_STATIC: (medium_static medium_dark_static) !default;
+$CONFIG_ICON_LOADERS_LARGE:         (large large_dark) !default;
+$CONFIG_ICON_LOADERS_LARGE_STATIC:  (large_static large_dark_static) !default;
+$CONFIG_LOADERS: (
+  (medium, (
+    default       $CONFIG_ICON_LOADERS_MEDIUM,
+    static        $CONFIG_ICON_LOADERS_MEDIUM_STATIC,
+    steps         $CONFIG_ANIM_LOADERS_MEDIUM_STEP,
+    delay         $CONFIG_ANIM_LOADERS_MEDIUM_DELAY,
+    iterations    $CONFIG_ANIM_LOADERS_MEDIUM_ITERATIONS,
+    duration      $CONFIG_ANIM_LOADERS_MEDIUM_DURATION
+  )),
+  (small, (
+    default       $CONFIG_ICON_LOADERS_SMALL,
+    static        $CONFIG_ICON_LOADERS_SMALL_STATIC,
+    steps         $CONFIG_ANIM_LOADERS_SMALL_STEP,
+    delay         $CONFIG_ANIM_LOADERS_SMALL_DELAY,
+    iterations    $CONFIG_ANIM_LOADERS_SMALL_ITERATIONS,
+    duration      $CONFIG_ANIM_LOADERS_SMALL_DURATION
+  )),
+  (large, (
+    default       $CONFIG_ICON_LOADERS_LARGE,
+    static        $CONFIG_ICON_LOADERS_LARGE_STATIC,
+    steps         $CONFIG_ANIM_LOADERS_LARGE_STEP,
+    delay         $CONFIG_ANIM_LOADERS_LARGE_DELAY,
+    iterations    $CONFIG_ANIM_LOADERS_LARGE_ITERATIONS,
+    duration      $CONFIG_ANIM_LOADERS_LARGE_DURATION
+  )),
+  
+  nil
+) !default;
+@if $CONFIG_KEYFRAMES_AUTO {
+  @include generate-loader-keyframes();
+}

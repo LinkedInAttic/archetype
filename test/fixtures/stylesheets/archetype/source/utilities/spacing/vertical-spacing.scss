@@ -1,0 +1,26 @@
+@import "archetype";
+
+a {
+  @include vertical-spacing(1);
+  @include vertical-spacing(1, $method: margin);
+}
+
+b {
+  @include vertical-spacing(nil 1);
+  @include vertical-spacing(nil 1, $method: margin);
+}
+
+c {
+  @include vertical-spacing(1 nil);
+  @include vertical-spacing(1 nil, $method: margin);
+}
+
+d {
+  @include vertical-spacing(nil 0.5, $abuse: true);
+  @include vertical-spacing(nil 0.5, $abuse: true, $method: margin);
+}
+
+e {
+  @include vertical-spacing($top: 0, $bottom: 0);
+  @include vertical-spacing($top: 0, $bottom: 0, $method: margin);
+}

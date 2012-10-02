@@ -1,0 +1,33 @@
+// ==========
+// MENU ITEMS
+// ==========
+$STYLEGUIDE_MENU_ITEMS_ID: menu-item !default;
+$STYLEGUIDE_MENU_ITEMS: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_MENU_ITEMS_ID, $STYLEGUIDE_MENU_ITEMS, (
+  (default, (
+    nil
+  )),
+  (in-flyout, (
+    padding                   $CONFIG_DIM_MENU_ITEM_SPACING,
+    text-decoration           none,
+    display                   block,
+    (states, (
+      (hover, (
+        color                 nth-cyclic($CONFIG_COLOR_COPY, 2),
+        background-color      $CONFIG_COLOR_BG_BUTTON_PRIMARY,
+        filter-gradient       $CONFIG_GRADIENT_BUTTON_PRIMARY_IE,
+        background-image      $CONFIG_GRADIENT_BUTTON_PRIMARY,
+        nil
+      )),
+      (focus, (
+        inherit (hover),
+        nil
+      )),
+      (active, (
+        inherit (hover),
+        nil
+      ))
+    ))
+  ))
+), $CONFIG_THEME);

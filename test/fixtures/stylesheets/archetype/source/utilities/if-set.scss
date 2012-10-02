@@ -1,0 +1,16 @@
+@import "archetype";
+
+a {
+  @include if-set(margin, 5px);
+  @include if-set(border, 1px solid #ccc);
+}
+
+b {
+  @include if-set(margin, 5px, $ignore: (10px 20px));
+  @include if-set(border, 1px solid #ccc, $ignore: (1px solid #ddd, 1px solid #eee));
+}
+
+c {
+  @include if-set(margin, 5px, $ignore: (5px 10px 20px));
+  @include if-set(border, 1px solid #ccc, $ignore: (1px solid #ccc, 1px solid #ddd, 1px solid #eee));
+}

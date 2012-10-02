@@ -1,0 +1,4 @@
+= Archetype UI pattern and component library
+
+Archetype is a feature rich, front-end development framework built
+on top of Compass and Sass.

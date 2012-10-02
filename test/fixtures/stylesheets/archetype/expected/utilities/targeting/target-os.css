@@ -1,0 +1,55 @@
+.os-linux .target-linux {
+  top: -3px;
+}
+.os-linux .target-linux {
+  width: 300px;
+}
+
+.os-mac .target-apple {
+  top: -3px;
+}
+.os-mac .target-apple {
+  width: 300px;
+}
+
+.os-mac .target-mac {
+  top: -3px;
+}
+.os-mac .target-mac {
+  width: 300px;
+}
+
+.os-mac .target-osx {
+  top: -3px;
+}
+.os-mac .target-osx {
+  width: 300px;
+}
+
+.os-win .target-windows {
+  top: -3px;
+}
+.os-win .target-windows {
+  width: 300px;
+}
+
+.os-win .target-win {
+  top: -3px;
+}
+.os-win .target-win {
+  width: 300px;
+}
+
+.os-win .target-winxp {
+  top: -3px;
+}
+.os-win .target-winxp {
+  width: 300px;
+}
+
+.os-win .target-win7 {
+  top: -3px;
+}
+.os-win .target-win7 {
+  width: 300px;
+}

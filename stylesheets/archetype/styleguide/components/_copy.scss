@@ -1,0 +1,74 @@
+// ==========
+// COPY
+// ==========
+$STYLEGUIDE_COPY_ID: copy !default;
+$STYLEGUIDE_COPY: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_COPY_ID, $STYLEGUIDE_COPY, (
+  (default, (
+    font-size           nth($CONFIG_FONT_COPY_MEDIUM, 1),
+    line-height         nth-cyclic($CONFIG_FONT_COPY_MEDIUM, 2),
+    color               nth($CONFIG_COLOR_COPY, 1)
+  )),
+  // sizes
+  (medium, (
+    nil
+  )),
+  (large, (
+    font-size           nth($CONFIG_FONT_COPY_LARGE, 1),
+    line-height         nth-cyclic($CONFIG_FONT_COPY_LARGE, 2)
+  )),
+  (small, (
+    font-size           nth($CONFIG_FONT_COPY_SMALL, 1),
+    line-height         nth-cyclic($CONFIG_FONT_COPY_SMALL, 2)
+  )),
+  // contexts
+  (in-dark, (
+    color               nth-cyclic($CONFIG_COLOR_COPY, 2),
+    nil
+  )),
+  (in-module, (
+    color               nth($CONFIG_COLOR_COPY, 1),
+    nil
+  )),
+  (in-bristol, (
+    inherit (in-dark),
+    nil
+  )),
+  (in-tooltip, (
+    inherit (in-dark),
+    nil
+  )),
+  (in-alert, (
+    inherit (in-dark),
+    nil
+  )),
+  (in-punchcut, (
+    inherit (in-dark),
+    text-shadow         nth-cyclic($CONFIG_SHADOW_COPY, 2),
+    nil
+  )),
+  (breadcrumb, (
+    color               nth($CONFIG_COLOR_BREADCRUMB, 1),
+    font-size           nth($CONFIG_FONT_BREADCRUMB, 1),
+    font-weight         $CONFIG_FONT_WEIGHT_BREADCRUMB,
+    text-decoration     nth($CONFIG_DECORATION_LINK, 1),
+    text-shadow         $CONFIG_SHADOW_BREADCRUMB,
+    nil
+  )),
+  (active breadcrumb, (
+    color               nth($CONFIG_COLOR_BREADCRUMB_ACTIVE, 1),
+    font-size           nth($CONFIG_FONT_BREADCRUMB, 1),
+    font-weight         $CONFIG_FONT_WEIGHT_BREADCRUMB,
+    text-shadow         $CONFIG_SHADOW_BREADCRUMB,
+    border-left         ($CONFIG_DIM_GENERIC_BORDER solid $CONFIG_COLOR_BREADCRUMB),
+    margin              $CONFIG_DIM_BREADCRUMB_SPACING_OUTER,
+    padding             $CONFIG_DIM_BREADCRUMB_SPACING,
+    nil
+  )),
+  // muted colors
+  (muted, (
+    color               nth($CONFIG_COLOR_COPY_MUTED, 1),
+    nil
+  ))
+), $CONFIG_THEME);

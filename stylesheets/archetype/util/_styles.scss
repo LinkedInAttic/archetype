@@ -1,0 +1,417 @@
+@import "compass/layout/stretching";
+
+// @category  utilities/styles
+
+// this is a proxy for output-style
+// we need this to prevent Sass from throwing an error as you currently can't use recursive mixins :/
+// @mixin     _outputStyle
+// @private
+// @param     $property {String} the CSS property to output
+// @param     $value {*} the CSS value to output
+@mixin _outputStyle($property, $value: nil) {
+  @if($value != nil) {
+    @if($property == target-browser) {
+      @include target-browser(nth($value,1), nth($value,2), nth($value,3));
+    }
+    @else if($property == font-family) {
+      @include font-family($value);
+    }
+    @else if($property == font-style) {
+      @include font-style($value);
+    }
+    @else {
+      @include output-style($property, $value);
+    }
+  }
+}
+
+// output a property or augment it to use a mixin
+// @mixin     output-style
+// @param     $property {String} the CSS property to output
+// @param     $value {*} the CSS value to output
+@mixin output-style($property, $value: nil) {
+  @if($property != nil and nth(-compass-list($value), 1) != nil and not index($CONFIG_DISABLED_CSS, $property)) {
+    // for mixins, we need to do some custom work
+    // border-radius
+    @if($property == border-radius)             { @include border-radius(rtl($value, border-radius)); }
+    // box-sizing
+    @else if($property == box-sizing)           { @include box-sizing($value); }
+    // box-shadow
+    @else if($property == box-shadow)           { @include box-shadow($value); }
+    // text-shadow
+    @else if($property == text-shadow)          { @include text-shadow($value); }
+    // filter-gradient
+    @else if($property == filter-gradient)      { @include filter-gradient(nth($value,1), nth($value,2), nth($value,3)); }
+    // background
+    @else if($property == background)           { @include background($value); }
+    // background-image
+    @else if($property == background-image or $property == gradient) { @include background-image($value); }
+    // background-clip
+    @else if($property == background-clip)      { @include background-clip($value); }
+    // IE filters
+    @else if($property == ie-filter)            { @include ie-filter($value); }
+    // hide-text
+    @else if($property == hide-text)            { @include hide-text($direction: if($value == true, $hide-text-direction, $value)); }
+    // inline-block
+    @else if($property == inline-block)         { @include inline-block(); }
+    // opacity
+    @else if($property == opacity)              { @include opacity($value); }
+    // min-width
+    @else if($property == min-width)            { @include min-width($value); }
+    // min-height
+    @else if($property == min-height)           { @include min-height($value); }
+    // max-width
+    @else if($property == max-width)            { @include max-width($value); }
+    // max-height
+    @else if($property == max-height)           { @include max-height($value); }
+    // stretch
+    @else if($property == stretch)              { @include stretch(); }
+    // bunch of RTL support
+    @else if($property == margin)               { @include margin($value); }
+    @else if($property == margin-left)          { @include margin-left($value); }
+    @else if($property == margin-right)         { @include margin-right($value); }
+    @else if($property == padding)              { @include padding($value); }
+    @else if($property == padding-left)         { @include padding-left($value); }
+    @else if($property == padding-right)        { @include padding-right($value); }
+    @else if($property == border-width)         { @include border-width($value); }
+    @else if($property == border-left-width)    { @include border-left-width($value); }
+    @else if($property == border-right-width)   { @include border-right-width($value); }
+    @else if($property == border-color)         { @include border-color($value); }
+    @else if($property == border-left-color)    { @include border-left-color($value); }
+    @else if($property == border-right-color)   { @include border-right-color($value); }
+    @else if($property == border-style)         { @include border-style($value); }
+    @else if($property == border-left-style)    { @include border-left-style($value); }
+    @else if($property == border-right-style)   { @include border-right-style($value); }
+    @else if($property == clear)                { @include clear($value); }
+    @else if($property == float)                { @include float($value); }
+    @else if($property == text-align)           { @include text-align($value); }
+    @else if($property == background-position)  { @include background-position($value); }
+    @else if($property == left)                 { @include left($value); }
+    @else if($property == right)                { @include right($value); }
+    // animations
+    @else if($property == animation) {
+      @if archetype-version('compass >= 0.13') {
+        @include animation($value);
+      }
+      @else {
+        -webkit-animation: $value;
+        -moz-animation: $value;
+        -ms-animation: $value;
+        -o-animation: $value;
+        animation: $value;
+      }
+    }
+    // hasLayout
+    @else if($property == has-layout) {
+      // if value is true, don't pass it along
+      @if($value == true) {
+        @include has-layout();
+      }
+      @else {
+        @include has-layout($value);
+      }
+    }
+    // clearfix
+    @else if($property == clearfix) {
+      @if($value == legacy-pie-clearfix) {
+        @include legacy-pie-clearfix();
+      }
+      @else if($value == pie-clearfix) {
+        @include pie-clearfix();
+      }
+      @else {
+        @include clearfix();
+      }
+    }
+    // z-index
+    @else if($property == z-index) {
+      $value: -compass-list($value);
+      @if(length($value) > 1) { @include z-index(nth($value, 1), nth($value, 2)); }
+      @else { @include z-index($value); }
+    }
+    // make sure content is always quoted
+    @else if($property == content) { #{$property}: quote($value); }
+    // some things can accept multiple values for fallback e.g. background-color: (#ccc, rgba(0,0,0, 0.2))
+    // TODO - other things support fallback values as well, like border, but these are currently harder to implement
+    @else if(index(background-color color, $property)) {
+      $value: -compass-list($value);
+      @each $tmp in $value {
+        #{$property}: $tmp;
+      }
+    }
+    // :before/:after
+    @else if($property == ie-pseudo-before) {
+      $value: compact($value, nil);
+      @include ie-pseudo-before(nth($value, 1), nth($value, 2));
+    }
+    @else if($property == ie-pseudo-after) {
+      $value: compact($value, nil);
+      @include ie-pseudo-after(nth($value, 1), nth($value, 2));
+    }
+    // otherwise just use a key-value pair
+    @else { #{$property}: $value; }
+  }
+}
+
+// convert a list of key-value pairs into CSS rules
+// @mixin     to-styles
+// @param     $list {List} a key-value paired list of ($property $value)
+// @param     $states {Bool|List} if true, output all states; if false, output no states; if a list, output only the states in the list
+// @param     $exclude {List} a list of styles to exclude from output
+@mixin to-styles($list: (), $states: true, $selectors: true, $exclude: ()) {
+  $exclude: compact($exclude, nil);
+  $states-data: ();
+  $selectors-data: ();
+  @each $item in $list {
+    @if(length($item) > 1) {
+      $property: nth($item, 1);
+      $value: nth($item, 2);
+      @if(not index($exclude, $property)) {
+        @if($property == states and $states != false) {
+          $states-data: $value;
+        }
+        @else if($property == selectors and $selectors != false) {
+          $selectors-data: $value;
+        }
+        @else if($selectors == true and $states == true) {
+          @include _outputStyle($property, unquote($value));
+        }
+      }
+    }
+  }
+  // deal with the states
+  @if length($states-data) {
+    @each $state in $states-data {
+      $value: nth($state, 2);
+      $state: first-value-of($state);
+      @if(index(-compass-list($states), $state) or $states == true) {
+        #{_getStateSelector($state)} {
+          @include to-styles2($value, $exclude);
+        }
+      }
+    }
+  }
+  // deal with the nested selectors
+  @if length($selectors-data) {
+    @each $selector in $selectors-data {
+      @if(index(-compass-list($selectors), $selector) or $selectors == true) {
+        #{first-value-of($selector)} {
+          @include to-styles2(nth($selector, 2), $exclude);
+        }
+      }
+    }
+  }
+}
+
+// this is identical to to-styles, but we need to avoid Sass' recursion check :(
+// this means states can't have nested selectors and selectors can't have nested states
+@mixin to-styles2($list: (), $exclude: ()) {
+  $exclude: -compass-list($exclude);
+  @each $item in $list {
+    @if(length($item) > 1) {
+      $property: nth($item, 1);
+      $value: nth($item, 2);
+      @if(not index($exclude, $property)) {
+        @include _outputStyle($property, unquote($value));
+      }
+    }
+  }
+}
+
+
+// helper function to compute the selector for various states
+// @function  _getStateSelector
+// @private
+// @param     $state {String} the state to select
+// @param     $prefix {String} the prefix to append to the state (for class names only)
+@function _getStateSelector($state, $prefix: $CONFIG_STATE_PREFIX) {
+  @if index(-compass-list($CONFIG_STATES_NO_PREFIX), $state) {
+    $prefix: '';
+  }
+  // default class state
+  $selector: '&.#{$prefix}#{$state}';
+  // attach special states
+  @if index(-compass-list($CONFIG_STATES_PSEUDO), $state) {
+    $selector: '#{$selector}, &:#{$state}';
+  }
+  @if index(-compass-list($CONFIG_STATES_ATTRIBUTE), $state) {
+    $selector: '#{$selector}, &[#{$state}]';
+  }
+  @if index(-compass-list($CONFIG_STATES_SPECIAL), $state) {
+    // for special cases, we don't want any other selectors, so assign instead of append
+    $selector: '&::#{$state}';
+  }
+  @return $selector;
+}
+
+// mixin for outputting filters in legacy IE
+// @mixin     ie-filter
+// @param     $value {String|List} a set of filters to output, sans `progid:DXImageTransform.Microsoft` prefix
+@mixin ie-filter($value) {
+  $out: false;
+  $value: -compass-list($value);
+  $ms-filter-prefix: 'progid:DXImageTransform.Microsoft.';
+  @each $item in $value {
+    @if($item != none) {
+      $item: #{$ms-filter-prefix}#{$item};
+    }
+    $out: if($out, '#{$out},#{$item}', '#{$item}');
+  }
+  @if($out) {
+    @if($legacy-support-for-ie6 or $legacy-support-for-ie7) {
+      filter: unquote($out);
+    }
+    -ms-filter: quote($out);
+  }
+}
+
+// mixin for generating a pseudo-element
+// Note IE7/6 doesn't understand pseudo element as ::before and ::after
+// IE8 need to have :before and not ::before
+// @mixin     pseudo-element
+// @param     $width {String} width (default 0 for positioning in FF3)
+// @param     $height {String} height
+// @param     $content {String} content (this should be quoted)
+// @param     $display {String} display [block|inline|etc]
+// @param     $position {String} positioning [absolute|relative|etc]
+@mixin pseudo-element($width: 0, $height: auto, $content: $CONTENT_PLACEHOLDER, $display: block, $position: false) {
+  @include if-set(content, quote($content));
+  @include if-set(display, $display);
+  @include if-set(width, $width);
+  @include if-set(height, $height);
+  @include if-set(position, $position);
+}
+
+// this is a helper for simple gradients when a direction is desired in degrees,
+// but we still want to support old webkit browsers
+// @mixin     gradient-with-deg
+// @param     $deg {Number} the direction degree
+// @param     $start {Color} the start color
+// @param     $end {Color} the end color
+@mixin gradient-with-deg($deg, $start, $end) {
+  // make sure it's a deg
+  $deg: if(unitless($deg), $deg * 1deg, $deg);
+  // we'll divide the circle into sections
+  $sector: (360deg / 8);
+  // offset it for calculations
+  $tmp: $deg - ($sector / 2);
+  $map: (
+    (right top),
+    (right),
+    (right bottom),
+    (bottom),
+    (left bottom),
+    (left),
+    (left top),
+    (top)
+  );
+  // compute the region it falls in
+  $region: nth($map, ceil(if($tmp < 0deg, 360 - $tmp, $tmp) / $sector));
+  // NOTE: we temporarily disable old webkit gradients as they don't support degrees
+  // this is a fallback for old webkit
+  @if($support-for-original-webkit-gradients) {
+    background-image: -owg(linear-gradient($region, $start, $end));
+  }
+  $tmp: $support-for-original-webkit-gradients;
+  $support-for-original-webkit-gradients: false;
+  // now the others
+  @include background-image(linear-gradient($deg, $start, $end));
+  // restore the old webkit value
+  $support-for-original-webkit-gradients: $tmp;
+}
+
+// abstract common issues and generate safe styles
+@mixin safe($property: nil, $value: nil) {
+  @if($property != nil and $value != nil) {
+    // os friendly font stacks
+    @if($property == font-family) {
+      $stack: associative($CONFIG_SAFE_FONTS, $value, $strict: true);
+      @if($stack != nil and length($stack)) {
+        // first, step through the list of os safe fonts
+        @each $collection in $stack {
+          @if(length($collection) > 1) {
+            $default: nil;
+            $os: nth($collection, 1);
+            $fonts: nth($collection, 2);
+            $family: nil;
+            // next, step through the list of lang safe fonts
+            @each $item in $fonts {
+              @if($item != nil) {
+                $lang: nth($item, 1);
+                $font: nth($item, 2);
+                // check if the language matches or it's the default
+                @if($lang == default or lang($lang)) {
+                  $family: $font;
+                }
+                // if it's the default, keep track of it
+                @if($lang == default) {
+                  $default: $font;
+                }
+                // if the keyword `default` is in the font-stack, substitute it with the default font-stack
+                $family: list-replace($family, index(-compass-list($family), default), $default, comma);
+              }
+            }
+            @include target-os($os, font-family, $family);
+          }
+        }
+        $value: nil;
+      }
+    }
+    // text-transform: uppercase isn't friendly to turkish
+    @else if($property == text-transform and $value == uppercase and lang(tr_TR)) {
+      // TODO - more investigation, this may affect other locales as well
+      // @link http://www.w3.org/International/tests/html-css/text-transform/results-text-transform
+      // @link https://developer.mozilla.org/en/CSS/text-transform
+      $value: nil;
+    }
+    @else if($property == font-variant and $value == small-caps and lang(tr_TR)) {
+      // TODO - more investigation, this may affect other locales as well
+      // @link https://developer.mozilla.org/en/CSS/font-variant
+      $value: nil;
+    }
+    // italics aren't pretty in CJK
+    @else if($property == font-style and $value == italic and lang(CJK)) {
+      $value: nil;
+    }
+    // if $value was set to `nil`, this does nothing
+    @include output-style($property, $value);
+  }
+}
+
+// web-safe font stacks, if no safe fonts are found, use the raw `$family` as output
+// @mixin     font-family
+// @param     $family {String} the font stack to output
+@mixin font-family($family: nil) {
+  @include safe(font-family, $family);
+}
+
+// safely use text-transform:uppercase without localization issues
+// @mixin     uppercase
+@mixin uppercase() {
+  @include safe(text-transform, uppercase);
+}
+
+// safely use font-variant:small-caps without localization issues
+// @mixin     small-caps
+@mixin small-caps() {
+  @include safe(font-variant, small-caps);
+}
+
+// safely use font-style without localization issues
+// @mixin     font-style
+// @param     $style {String} the style
+@mixin font-style($style: nil) {
+  @include safe(font-style, $style);
+}
+
+// a method for maintaining z-index order
+// @mixin    z-index
+// @param    $value {Number} the z-index offset
+// @param    $layer {String|Number} the initial z-index layer to start from
+@mixin z-index($value: 0, $layer: 0) {
+  @if(type-of($layer) == string) {
+    $layer: index($CONFIG_Z_LAYERS, $layer);
+    $layer: if($layer, $layer - 1, 0) * $CONFIG_Z_LAYERS_OFFSET;
+  }
+  z-index: ($value + $layer);
+}

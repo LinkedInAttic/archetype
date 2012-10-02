@@ -1,0 +1,23 @@
+// ==========
+// PULLQUOTES
+// ==========
+$STYLEGUIDE_PULLQUOTES_ID: pullquote !default;
+$STYLEGUIDE_PULLQUOTES: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_PULLQUOTES_ID, $STYLEGUIDE_PULLQUOTES, (
+  (default, (
+    font-size           nth($CONFIG_FONT_PULLQUOTE_MEDIUM, 1),
+    line-height         nth-cyclic($CONFIG_FONT_PULLQUOTE_MEDIUM, 2),
+    color               nth($CONFIG_COLOR_STRONG, 1),
+    font-family         serif,
+    font-style          italic
+  )),
+  (in-dark, (
+    color               nth-cyclic($CONFIG_COLOR_STRONG, 2),
+    text-shadow         nth-cyclic($CONFIG_SHADOW_COPY, 2)
+  )),
+  (in-punchcut, (
+    inherit (in-dark),
+    nil
+  ))
+), $CONFIG_THEME);

@@ -1,0 +1,13 @@
+@import "archetype";
+
+.stroke {
+  @include stroke();
+}
+
+.stroke-fat {
+  @include stroke(10px);
+}
+
+.stroke-colorful {
+  @include stroke(10px, red);
+}

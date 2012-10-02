@@ -1,0 +1,18 @@
+@import "archetype";
+
+a {
+  @include z-index(-1);
+
+}
+
+b {
+  @include z-index(1, default);
+}
+
+c {
+  @include z-index(1, dialog);
+}
+
+d {
+  @include z-index(20, 10001);
+}

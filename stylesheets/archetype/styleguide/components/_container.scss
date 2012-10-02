@@ -1,0 +1,25 @@
+// ==========
+// CONTAINER
+// ==========
+$STYLEGUIDE_CONTAINERS_ID: container !default;
+$STYLEGUIDE_CONTAINERS: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_CONTAINERS_ID, $STYLEGUIDE_CONTAINERS, (
+  (default, (
+    background        nth($CONFIG_TEXTURE_CONTAINER, 1),
+    box-shadow        $CONFIG_SHADOW_CONTAINER,
+    target-browser    $CONFIG_SHADOW_CONTAINER_ALT   // simulate the shadow in IE<9
+  )),
+  (light, (
+    nil
+  )),
+  (dark, (
+    background        nth($CONFIG_TEXTURE_CONTAINER, 2),
+    nil
+  )),
+  (without-shadow, (
+    box-shadow        nil,
+    target-browser    nil,
+    nil
+  ))
+), $CONFIG_THEME);

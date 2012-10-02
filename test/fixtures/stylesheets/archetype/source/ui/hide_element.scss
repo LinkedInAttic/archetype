@@ -1,0 +1,5 @@
+@import "archetype";
+
+.hide-element {
+  @include hide-element();
+}

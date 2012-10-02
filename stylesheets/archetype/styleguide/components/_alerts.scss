@@ -1,0 +1,48 @@
+// ==========
+// ALERTS
+// ==========
+$STYLEGUIDE_ALERTS_ID: alert !default;
+$STYLEGUIDE_ALERTS: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_ALERTS_ID, $STYLEGUIDE_ALERTS, (
+  (default, (
+    // fallback background
+    background-color      $CONFIG_COLOR_BG_ALERT_NOTIFY,
+    background-position   styleguide-sprite-position($CONFIG_SPRITE_ALERTS, $CONFIG_ICON_ALERTS_NOTICE, $offset-x: nth($CONFIG_SPRITE_ALERTS_OFFSET, 1), $offset-y: nth-cyclic($CONFIG_SPRITE_ALERTS_OFFSET, 2)),
+    background-image      styleguide-sprite-url($CONFIG_SPRITE_ALERTS),
+    background-repeat     no-repeat,
+    // gradient background
+    background            _styleguideGetAlertBG(notice),
+    box-shadow            _styleguideGetAlertShadow(notice),
+    // common
+    display               block,
+    color                 nth-cyclic($CONFIG_COLOR_COPY, 2),
+    font-size             nth($CONFIG_FONT_NOTICE, 1),
+    line-height           nth-cyclic($CONFIG_FONT_NOTICE, 2),
+    position              relative,
+    padding               $CONFIG_DIM_ALERTS_SPACING,
+    nil
+  )),
+  (notice, (
+    // notice - default
+    nil
+  )),
+  (success, (
+    background-color      $CONFIG_COLOR_BG_ALERT_SUCCESS,
+    background-position   styleguide-sprite-position($CONFIG_SPRITE_ALERTS, $CONFIG_ICON_ALERTS_SUCCESS, $offset-x: nth($CONFIG_SPRITE_ALERTS_OFFSET, 1), $offset-y: nth-cyclic($CONFIG_SPRITE_ALERTS_OFFSET, 2)),
+    background            _styleguideGetAlertBG(success),
+    box-shadow            _styleguideGetAlertShadow(success)
+  )),
+  (error, (
+    background-color      $CONFIG_COLOR_BG_ALERT_ERROR,
+    background-position   styleguide-sprite-position($CONFIG_SPRITE_ALERTS, $CONFIG_ICON_ALERTS_ERROR, $offset-x: nth($CONFIG_SPRITE_ALERTS_OFFSET, 1), $offset-y: nth-cyclic($CONFIG_SPRITE_ALERTS_OFFSET, 2)),
+    background            _styleguideGetAlertBG(error),
+    box-shadow            _styleguideGetAlertShadow(error)
+  )),
+  (yield, (
+    background-color      $CONFIG_COLOR_BG_ALERT_YIELD,
+    background-position   styleguide-sprite-position($CONFIG_SPRITE_ALERTS, $CONFIG_ICON_ALERTS_YIELD, $offset-x: nth($CONFIG_SPRITE_ALERTS_OFFSET, 1), $offset-y: nth-cyclic($CONFIG_SPRITE_ALERTS_OFFSET, 2)),
+    background            _styleguideGetAlertBG(yield),
+    box-shadow            _styleguideGetAlertShadow(yield)
+  ))
+), $CONFIG_THEME);

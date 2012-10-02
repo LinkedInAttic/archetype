@@ -1,0 +1,13 @@
+// ==========
+// BRISTOL
+// ==========
+$STYLEGUIDE_BRISTOLS_ID: bristol !default;
+$STYLEGUIDE_BRISTOLS: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_BRISTOLS_ID, $STYLEGUIDE_BRISTOLS, (
+  (default, (
+    background  nth($CONFIG_TEXTURE_BRISTOL, 1),
+    nil
+  )),
+  nil
+), $CONFIG_THEME);

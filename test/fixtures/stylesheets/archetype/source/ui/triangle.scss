@@ -1,0 +1,13 @@
+@import "archetype";
+
+.a {
+  @include triangle();
+}
+
+.b {
+  @include triangle(top, 10px, 5px, black);
+}
+
+.c {
+  @include triangle(left top, 10px, 5px, black);
+}

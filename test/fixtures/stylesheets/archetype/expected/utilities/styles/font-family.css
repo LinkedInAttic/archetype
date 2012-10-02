@@ -1,0 +1,16 @@
+a {
+  font-family: Georgia, serif;
+}
+
+b {
+  font-family: sans-serif;
+}
+.os-win b {
+  font-family: Arial, sans-serif;
+}
+.os-mac b {
+  font-family: Helvetica, Arial, sans-serif;
+}
+.os-linux b {
+  font-family: Helvetica, FreeSans, "Liberation Sans", Helmet, Arial, sans-serif;
+}

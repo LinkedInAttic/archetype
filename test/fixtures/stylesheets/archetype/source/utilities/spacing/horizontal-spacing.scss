@@ -1,0 +1,26 @@
+@import "archetype";
+
+a {
+  @include horizontal-spacing(1);
+  @include horizontal-spacing(1, $method: margin);
+}
+
+b {
+  @include horizontal-spacing(nil 1);
+  @include horizontal-spacing(nil 1, $method: margin);
+}
+
+c {
+  @include horizontal-spacing(1 nil);
+  @include horizontal-spacing(1 nil, $method: margin);
+}
+
+d {
+  @include horizontal-spacing(nil 0.5, $abuse: true);
+  @include horizontal-spacing(nil 0.5, $abuse: true, $method: margin);
+}
+
+e {
+  @include horizontal-spacing($left: 0, $right: 0);
+  @include horizontal-spacing($left: 0, $right: 0, $method: margin);
+}

@@ -1,0 +1,50 @@
+// ==========
+// FLYOUT MENUS
+// ==========
+$STYLEGUIDE_FLYOUTS_ID: flyout !default;
+$STYLEGUIDE_FLYOUTS: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_FLYOUTS_ID, $STYLEGUIDE_FLYOUTS, (
+  (default, (
+    display               none,                         // hidden by default (use `visible flyout` if you want it shown by default)
+    position              absolute,                     // position!
+    top                   100%,                         // align it to the bottom of the context
+    left                  0,                            // align left
+    z-index               1,
+    border                ($CONFIG_DIM_GENERIC_BORDER solid nth($CONFIG_COLOR_BORDER_FLYOUT,1)),
+    background            nth($CONFIG_TEXTURE_CONTAINER, 1),
+    box-shadow            $CONFIG_SHADOW_FLYOUT,
+    padding               $CONFIG_DIM_FLYOUT_SPACING,
+    min-width             $CONFIG_DIM_FLYOUT_MIN_WIDTH,
+    cursor                default,
+    float                 left,
+    list-style            none                          // just incase its a list
+  )),
+  (visible, (
+    display               block,
+    nil
+  )),
+  (in-button, (
+    // restore some things used for buttons
+    font-weight           normal,
+    white-space           normal,
+    text-shadow           none,
+    // no box-shadow
+    box-shadow            nil,
+    // thick borders!
+    border-width          $CONFIG_DIM_GENERIC_BORDER_THICK,
+    border-radius         $CONFIG_DIM_FLYOUT_RADIUS
+  )),
+  (in-button-group, (
+    inherit (in-button),
+    nil
+  )),
+  (upward, (
+    top                   nil,
+    bottom                100%
+  )),
+  (right aligned, (
+    left                  nil,
+    right                 0
+  ))
+), $CONFIG_THEME);
