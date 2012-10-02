@@ -1,0 +1,87 @@
+<ul class="toggles">
+  <li><a href="#toggle:minimal" class="label minimal">minimal view</a></li>
+</ul>
+<ul class="methods">
+  {#methods}
+    <li id="{name}" class="well is-method is-source-{source_clean} is-category-{category_clean}{?private} is-private{/private}{?mixin} is-mixin{/mixin}{?function} is-function{/function}">
+      <h2 class="method-name"><a href="#method:{name}" class="method">{name}</a><span class="signature">( {signature} )</span>{?deprecated}&nbsp;<span class="badge badge-error">deprecated</span>{/deprecated}</h2>
+      {?overview}
+        <p class="overview">
+          {#overview}
+            {.}<br/>
+          {/overview}
+        </p>
+      {/overview}
+      <span class="toggles"><a href="#toggle:unminimize" class="unminimized label label-success">more details</a></span>
+      <div class="minimize">
+        {?param}
+          <h3>Parameters</h3>
+          <ul class="params">
+          {#param}
+            <li>
+              <span class="param badge badge-info" title="parameter name">{name}</span>
+              {?type}
+                &nbsp;<span class="type badge" title="parameter type">{type}</span>
+              {/type}
+              {?acceptable}
+                &nbsp;<span class="acceptable badge badge-success" title="acceptable values for {name}">{acceptable}</span>
+              {/acceptable}
+              {?optional}
+                &nbsp;<span class="optional badge badge-warning" title="{name} is optional">Optional</span>
+              {/optional}
+              <span class="description">{description|s}</span>
+            </li>
+          {/param}
+          </ul>
+        {/param}
+        {#return}
+          <h3>Returns</h3>
+          <div class="returns">
+            {?type}
+              <span class="type badge" title="return type">{type}</span>
+              <span class="description">{description|s}</span>
+            {:else}
+              <span class="description">{.|s}</span>
+            {/type}
+          </div>
+        {/return}
+        {?usage}
+          <h3>Example Usage</h3>
+          <pre class="examples prettyprint linenums">
+            <ol class="linenums">
+            {#usage}
+              <li>{.}</li>
+            {/usage}
+            </ol>
+          </pre>
+        {/usage}
+        {?hasReferences}
+          <h3>References</h3>
+          <ol class="references">
+          {#link}
+            <li><a href="{.}" target="_blank">{.}</a></li>
+          {/link}
+          {#see}
+            <li>see <a href="#method:{.}">{.}()</a></li>
+          {/see}
+          </ol>
+        {/hasReferences}
+        <div class="tags">
+          <a href="#category:{category_clean}" class="category label label-info" title="see other methods in {category}">{category}</a>
+          <a href="#source:{source_clean}{?linenum}:{linenum}{/linenum}" class="source label label-info" title="view source">{source}{?linenum}:{linenum}{/linenum}</a>
+          {?mixin}<span class="label" title="{name}() is a mixin">mixin</span>{/mixin}
+          {?function}<span class="label" title="{name}() is a function">function</span>{/function}
+          {?private}<span class="label" title="{name}() is private">private</span>{/private}
+          {#tags}<span class="label" title="{name}() is {.}">{.}</span>{/tags}
+        </div>
+      </div>
+    </li>
+  {/methods}
+</ul>
+<div class="index hero-unit">
+  <h1>Archetype APIs</h1>
+  <p>
+    Use the filters and navigation to explore the various mixins and functions available.
+  </p>
+</div>
+<div class="source-viewer"></div>

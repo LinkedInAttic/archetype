@@ -1,0 +1,15 @@
+_site/*
+_theme_packages/*
+
+Gemfile.lock
+.sass-cache
+*.DS_Store
+*.lock
+Icon
+._*
+tmp/*
+.sass-cache
+
+!.gitkeep
+.rbenv-version
+.rvmrc

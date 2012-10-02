@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>module Archetype::SassExtensions::Lists - Archetype v0.0.1.pre.2 Documentation</title>
+
+<link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../../";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="../../js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="../../index.html">Home</a>
+    <a href="../../table_of_contents.html#classes">Classes</a>
+    <a href="../../table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/archetype/sass_extensions/functions/lists.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-i-associative">#associative</a>
+    
+    <li><a href="#method-i-associative_merge">#associative_merge</a>
+    
+    <li><a href="#method-i-index2">#index2</a>
+    
+    <li><a href="#method-i-list_add">#list_add</a>
+    
+    <li><a href="#method-i-list_divide">#list_divide</a>
+    
+    <li><a href="#method-i-list_insert">#list_insert</a>
+    
+    <li><a href="#method-i-list_mod">#list_mod</a>
+    
+    <li><a href="#method-i-list_multiply">#list_multiply</a>
+    
+    <li><a href="#method-i-list_remove">#list_remove</a>
+    
+    <li><a href="#method-i-list_replace">#list_replace</a>
+    
+    <li><a href="#method-i-list_subtract">#list_subtract</a>
+    
+    <li><a href="#method-i-nth_cyclic">#nth_cyclic</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="../../lib/README_rdoc.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="../../Archetype.html">Archetype</a>
+  
+    <li><a href="../../Archetype/Functions.html">Archetype::Functions</a>
+  
+    <li><a href="../../Archetype/Functions/Hash.html">Archetype::Functions::Hash</a>
+  
+    <li><a href="../../Archetype/Functions/Helpers.html">Archetype::Functions::Helpers</a>
+  
+    <li><a href="../../Archetype/Functions/StyleguideMemoizer.html">Archetype::Functions::StyleguideMemoizer</a>
+  
+    <li><a href="../../Archetype/SassExtensions.html">Archetype::SassExtensions</a>
+  
+    <li><a href="../../Archetype/SassExtensions/Environment.html">Archetype::SassExtensions::Environment</a>
+  
+    <li><a href="../../Archetype/SassExtensions/Lists.html">Archetype::SassExtensions::Lists</a>
+  
+    <li><a href="../../Archetype/SassExtensions/Locale.html">Archetype::SassExtensions::Locale</a>
+  
+    <li><a href="../../Archetype/SassExtensions/Numbers.html">Archetype::SassExtensions::Numbers</a>
+  
+    <li><a href="../../Archetype/SassExtensions/Styleguide.html">Archetype::SassExtensions::Styleguide</a>
+  
+    <li><a href="../../Archetype/SassExtensions/UI.html">Archetype::SassExtensions::UI</a>
+  
+    <li><a href="../../Archetype/SassExtensions/Version.html">Archetype::SassExtensions::Version</a>
+  
+    <li><a href="../../Archetype/Version.html">Archetype::Version</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module Archetype::SassExtensions::Lists</h1>
+
+  <div id="description" class="description">
+    
+<p>This module provides a set of Sass functions for working with Sass::List</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Instance Methods</h3>
+
+    
+      <div id="method-i-associative" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">associative</span><span
+            class="method-args">(list, key, strict = false)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>find a key within a nested list of ordered pairs</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the list to search in</p>
+</li><li>
+<p><code>$key</code> {String} the key identifier (name)</p>
+</li><li>
+<p><code>$strict</code> {Bool} if true, does a strict match against the key</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p>{*} the data associated with $key</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="associative-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 217</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">associative</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">key</span>, <span class="ruby-identifier">strict</span> = <span class="ruby-keyword">false</span>)
+  <span class="ruby-identifier">separator</span> = <span class="ruby-identifier">list</span>.<span class="ruby-identifier">separator</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>)
+  <span class="ruby-identifier">list</span> = <span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">list_to_hash</span>(<span class="ruby-identifier">list</span>)
+  <span class="ruby-identifier">item</span> = <span class="ruby-identifier">list</span>[<span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">to_str</span>(<span class="ruby-identifier">key</span>)]
+  <span class="ruby-identifier">item</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">first</span>[<span class="ruby-value">1</span>] <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">strict</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">new</span>([], <span class="ruby-identifier">separator</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">hash_to_list</span>(<span class="ruby-identifier">item</span>, <span class="ruby-value">0</span>, <span class="ruby-identifier">separator</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Array</span>) <span class="ruby-keyword">or</span> <span class="ruby-identifier">item</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Hash</span>)
+  <span class="ruby-comment"># no conversion needed, so just return</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">item</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- associative-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- associative-method -->
+
+    
+      <div id="method-i-associative_merge" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">associative_merge</span><span
+            class="method-args">(list, extender, kwargs = {})</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>extend a key-value paired list with another</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the list to extend to</p>
+</li><li>
+<p><code>$extender</code> {List} the list to extend with</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the extended list</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="associative_merge-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 239</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">associative_merge</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">extender</span>, <span class="ruby-identifier">kwargs</span> = {})
+  <span class="ruby-identifier">separator</span> = <span class="ruby-identifier">list</span>.<span class="ruby-identifier">separator</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>)
+  <span class="ruby-identifier">list</span> = <span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">list_to_hash</span>(<span class="ruby-identifier">list</span>)
+  <span class="ruby-identifier">extender</span> = <span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">list_to_hash</span>(<span class="ruby-identifier">extender</span>)
+  <span class="ruby-identifier">list</span> = <span class="ruby-identifier">list</span>.<span class="ruby-identifier">rmerge</span>(<span class="ruby-identifier">extender</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">hash_to_list</span>(<span class="ruby-identifier">list</span>, <span class="ruby-value">0</span>, <span class="ruby-identifier">separator</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- associative_merge-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- associative_merge-method -->
+
+    
+      <div id="method-i-index2" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index2</span><span
+            class="method-args">(haystack, needle)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>find if any set of values is in a list this is similar to `index()`, but
+allows $values to contain multiple values to test against</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$haystack</code> {List} input list</p>
+</li><li>
+<p><code>$needle</code> {List} the value(s) to search for</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p>{Number|Bool} if an item is found, returns the index, otherwise returns
+false</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="index2-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 181</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index2</span>(<span class="ruby-identifier">haystack</span>, <span class="ruby-identifier">needle</span>)
+  <span class="ruby-identifier">haystack</span> = <span class="ruby-identifier">haystack</span>.<span class="ruby-identifier">to_a</span>
+  <span class="ruby-identifier">needle</span> = <span class="ruby-identifier">needle</span>.<span class="ruby-identifier">to_a</span>
+  <span class="ruby-identifier">index</span> = <span class="ruby-identifier">haystack</span>.<span class="ruby-identifier">index</span>(<span class="ruby-identifier">haystack</span>.<span class="ruby-identifier">detect</span> { <span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span> <span class="ruby-identifier">needle</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">i</span>) })
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">index</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">Number</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">index</span> <span class="ruby-operator">+</span> <span class="ruby-value">1</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">Bool</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">false</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- index2-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- index2-method -->
+
+    
+      <div id="method-i-list_add" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_add</span><span
+            class="method-args">(list, values)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>add values(s) to a list</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the list operate on</p>
+</li><li>
+<p><code>$values</code> {List|Number|String} the value(s) to add to the list</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p>{List} the final list</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="list_add-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 115</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">list_add</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">values</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">list_math</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">values</span>, <span class="ruby-value">:plus</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- list_add-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- list_add-method -->
+
+    
+      <div id="method-i-list_divide" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_divide</span><span
+            class="method-args">(list, values)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>divide values(s) into a list</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the list operate on</p>
+</li><li>
+<p><code>$values</code> {List|Number|String} the value(s) to divide into the
+list</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p>{List} the final list</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="list_divide-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 154</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">list_divide</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">values</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">list_math</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">values</span>, <span class="ruby-value">:div</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- list_divide-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- list_divide-method -->
+
+    
+      <div id="method-i-list_insert" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_insert</span><span
+            class="method-args">(list, idx = false, value = nil, separator = nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>insert an item into a list</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the list to insert into</p>
+</li><li>
+<p><code>$idx</code> {Number} the index to insert at</p>
+</li><li>
+<p><code>$value</code> {*} the value to insert</p>
+</li><li>
+<p><code>$separator</code> {String} the separator to use [auto|comma|space]</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p>{List} the list with inserted value</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="list_insert-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 64</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">list_insert</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">idx</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">separator</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">'nil'</span>)
+  <span class="ruby-comment"># return early if the index is invalid (no operation) or $value is `nil`</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">list</span> <span class="ruby-keyword">if</span> (<span class="ruby-keyword">not</span> <span class="ruby-identifier">idx</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">idx</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">Bool</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">false</span>)) <span class="ruby-keyword">or</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">list_replace</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">idx</span>, <span class="ruby-identifier">value</span>, <span class="ruby-identifier">separator</span>, <span class="ruby-value">-1</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- list_insert-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- list_insert-method -->
+
+    
+      <div id="method-i-list_mod" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_mod</span><span
+            class="method-args">(list, values)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>list modulus value(s)</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the list operate on</p>
+</li><li>
+<p><code>$values</code> {List|Number|String} the value(s) to modulus into the
+list</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p>{List} the final list</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="list_mod-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">list_mod</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">values</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">list_math</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">values</span>, <span class="ruby-value">:mod</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- list_mod-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- list_mod-method -->
+
+    
+      <div id="method-i-list_multiply" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_multiply</span><span
+            class="method-args">(list, values)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>multiply values(s) into a list</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the list operate on</p>
+</li><li>
+<p><code>$values</code> {List|Number|String} the value(s) to multiply into the
+list</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p>{List} the final list</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="list_multiply-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">list_multiply</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">values</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">list_math</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">values</span>, <span class="ruby-value">:times</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- list_multiply-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- list_multiply-method -->
+
+    
+      <div id="method-i-list_remove" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_remove</span><span
+            class="method-args">(list, idx = false, separator = nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>remove an index from a list</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the list to remove from</p>
+</li><li>
+<p><code>$idx</code> {Number} the index to remove</p>
+</li><li>
+<p><code>$separator</code> {String} the separator to use [auto|comma|space]</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p>{List} the list with removed index</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="list_remove-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 47</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">list_remove</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">idx</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">separator</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">list_replace</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">idx</span>, <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">separator</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- list_remove-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- list_remove-method -->
+
+    
+      <div id="method-i-list_replace" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_replace</span><span
+            class="method-args">(list, idx = false, value = nil, separator = nil)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>replace an index in a list</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the list to replace from</p>
+</li><li>
+<p><code>$value</code> {*} the value to replace (if nil, it's a removal)</p>
+</li><li>
+<p><code>$idx</code> {Number} the index to replace</p>
+</li><li>
+<p><code>$separator</code> {String} the separator to use [auto|comma|space]</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p>{List} the list with replaced index</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="list_replace-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">list_replace</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">idx</span> = <span class="ruby-keyword">false</span>, <span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span>, <span class="ruby-identifier">separator</span> = <span class="ruby-keyword">nil</span>)
+  <span class="ruby-comment"># return early if the index is invalid (no operation)</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">list</span> <span class="ruby-keyword">if</span> (<span class="ruby-keyword">not</span> <span class="ruby-identifier">idx</span> <span class="ruby-keyword">or</span> <span class="ruby-identifier">idx</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">Bool</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">false</span>))
+  <span class="ruby-identifier">separator</span> <span class="ruby-operator">||=</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">separator</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>)
+  <span class="ruby-comment"># if $value is `nil`, make sure we can use it</span>
+  <span class="ruby-identifier">value</span> = <span class="ruby-keyword">nil</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">'nil'</span>)
+  <span class="ruby-comment"># cast and zero-index $idx</span>
+  <span class="ruby-identifier">idx</span> = (<span class="ruby-identifier">idx</span>.<span class="ruby-identifier">value</span>) <span class="ruby-operator">-</span> <span class="ruby-value">1</span>
+  <span class="ruby-comment"># cast list to a ruby array</span>
+  <span class="ruby-identifier">list</span> = <span class="ruby-identifier">list</span>.<span class="ruby-identifier">to_a</span>
+  <span class="ruby-comment"># remove or replace the given value</span>
+  <span class="ruby-identifier">list</span>.<span class="ruby-identifier">delete_at</span>(<span class="ruby-identifier">idx</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-identifier">list</span>[<span class="ruby-identifier">idx</span>,<span class="ruby-value">1</span>] = <span class="ruby-identifier">value</span> <span class="ruby-keyword">if</span> <span class="ruby-keyword">not</span> <span class="ruby-identifier">value</span>.<span class="ruby-identifier">nil?</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">List</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">separator</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- list_replace-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- list_replace-method -->
+
+    
+      <div id="method-i-list_subtract" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">list_subtract</span><span
+            class="method-args">(list, values)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>subtract values(s) from a list</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the list operate on</p>
+</li><li>
+<p><code>$values</code> {List|Number|String} the value(s) to subtract from the
+list</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p>{List} the final list</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="list_subtract-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 128</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">list_subtract</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">values</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">list_math</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">values</span>, <span class="ruby-value">:minus</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- list_subtract-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- list_subtract-method -->
+
+    
+      <div id="method-i-nth_cyclic" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">nth_cyclic</span><span
+            class="method-args">(list, n = 1)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>treats a list cyclically (never out of bounds, just wraps around)</p>
+
+<p><strong>Parameters</strong>:</p>
+<ul><li>
+<p><code>$list</code> {List} the list</p>
+</li><li>
+<p><code>$idx</code> {Number} the index</p>
+</li></ul>
+
+<p><strong>Returns</strong>:</p>
+<ul><li>
+<p>{*} the nth item in the List</p>
+</li></ul>
+          
+
+          
+          <div class="method-source-code" id="nth_cyclic-source">
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/lists.rb, line 201</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">nth_cyclic</span>(<span class="ruby-identifier">list</span>, <span class="ruby-identifier">n</span> = <span class="ruby-value">1</span>)
+  <span class="ruby-identifier">n</span> = <span class="ruby-identifier">n</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">n</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">Number</span>)
+  <span class="ruby-identifier">list</span> = <span class="ruby-identifier">list</span>.<span class="ruby-identifier">to_a</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">list</span>[(<span class="ruby-identifier">n</span> <span class="ruby-operator">-</span> <span class="ruby-value">1</span>) <span class="ruby-operator">%</span> <span class="ruby-identifier">list</span>.<span class="ruby-identifier">size</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- nth_cyclic-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- nth_cyclic-method -->
+
+    
+    </section><!-- public-instance-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

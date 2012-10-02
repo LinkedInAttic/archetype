@@ -1,0 +1,17 @@
+<div class="navbar navbar-fixed-top">
+  <div class="navbar-inner">
+    <div class="container-fluid">
+      <div class="nav-collapse">
+        <ul class="nav">
+          <li class="category"><a href="#all" class="category all">ALL</a></li>
+          <li class="divider-vertical"></li>
+          {#toc}
+            <li class="category"><a href="#category:{category_clean}" class="category {category_clean}">{category}</a></li>
+          {/toc}
+        </ul>
+      </div>
+      <span class="toggles description-search"><a href="#toggle:search" class="label label-info search" title="search description as well as the method names">include description</a></span>
+      <input type="text" id="method-search" placeholder="search..."/>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+@import "themes/rustic";
+
+#main #livefyre {
+  // custom action bar
+  .lf_action_bar {
+    @include styleguide(module);
+  }
+  // custom buttons
+  .lf_comment_container .lf_button,
+  .lf_post {
+    @include styleguide(small secondary button, $exclude: margin);
+    // some extra overrides
+    @include box-shadow(none);
+    @include font-family(sans-serif);
+  }
+  .mceEditor {
+    background-color: transparent !important;
+  }
+  .defaultSkin table.mceLayout {
+    @include styleguide(container without a shadow);
+    // some more overrides
+    border: 1px solid #BEC3C5 !important;
+    @include border-top-radius(0);
+  }
+  .mention_notice {
+    display: none !important;
+  }
+}

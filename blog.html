@@ -1,0 +1,10 @@
+---
+layout  : page
+title   : Blog
+header  : Announcements, discussions, and musings
+group   : navigation
+---
+{% include JB/setup %}
+
+{% assign articles_list = site.categories['blog'] %}
+{% include modules/articles_list %}

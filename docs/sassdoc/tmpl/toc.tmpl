@@ -1,0 +1,13 @@
+<ul class="toc nav nav-list">
+  <li class="category"><a href="#all" class="nav-header category all">ALL</a></li>
+  {#toc}
+    <li class="category">
+      <a href="#category:{category_clean}" class="nav-header category {category_clean}">{category}</a>
+      {?methods}
+        {#methods}
+          <li class="method is-category-{category_clean} {#private} is-private{/private}{#mixin} is-mixin{/mixin}{#function} is-function{/function}"><a href="#method:{name}" class="method">{name}</a></li>
+        {/methods}
+      {/methods}
+    </li>
+  {/toc}
+</ul>

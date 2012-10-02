@@ -1,0 +1,4 @@
+{% if site.assets.scripts.jQuery != false %}
+<script src="//ajax.googleapis.com/ajax/libs/jquery/{{ site.assets.scripts.jQuery.version }}/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="{{ ASSET_PATH }}/scripts/lib/{{ site.assets.scripts.jQuery.version }}/jquery.min.js"><\/script>')</script>
+{% endif %}
