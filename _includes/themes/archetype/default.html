@@ -16,7 +16,7 @@
       <ul>
         {% assign pages_list = site.pages %}
         {% assign group = 'navigation' %}
-        {% include JB/pages_list %}
+        {% include modules/weighted_pages_list %}
         <li><a href="{{ GIT_PATH }}issues">Discussion</a></li>
       </ul>
     </nav>
@@ -37,7 +37,7 @@
       {% endfor %}
       {% assign pages_list = site.pages %}
       {% assign group = 'secondary-navigation' %}
-      {% include JB/pages_list %}
+      {% include modules/weighted_pages_list %}
       </ul>
     {% endunless %}
     <p class="social-actions">

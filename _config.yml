@@ -31,7 +31,7 @@ lang      : en
 stylesheets :
   - main
 # base path to git repository
-GIT_PATH : https://github.com/linkedin/archetype/
+GIT_PATH : https://github.com/eoneill/archetype/
 # footer
 footer :
   links : 
