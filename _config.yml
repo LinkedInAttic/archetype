@@ -24,7 +24,7 @@ copyright :
   year    : 2012
 # asset management
 assets :
-  cacheBurst : 3
+  cacheBurst : true
   scripts :
     jQuery :
       version : 1.8.2

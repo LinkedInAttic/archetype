@@ -4,7 +4,7 @@
 -->
 {% capture PERMALINK %}{{site.production_url}}{{ page.url }}{% endcapture %}
 
-{% capture CACHE_BURST %}{% if site.assets.cacheBurst %}?cacheBurst={{ site.assets.cacheBurst }}{% endif %}{% endcapture %}
+{% capture CACHE_BURST %}{% if site.assets.cacheBurst %}?{{ site.time | date_to_xmlschema | replace : '-', '' | replace : ':', '' | cgi_escape }}{% endif %}{% endcapture %}
 
 {% if site.safe and site.BASE_PATH and site.BASE_PATH != '' %}
   {% assign BASE_PATH = site.BASE_PATH %}
