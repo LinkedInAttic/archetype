@@ -2,7 +2,7 @@
 task :deploy => :build do
   message = ENV['message'] || 'updating site'
   puts "deploying to GitHub..."
-  sh "git add . && git commit -am \"#{message}\" && git push origin master:gh-pages"
+  sh "git add . && git commit -am \"#{message}\" && git push origin gh-pages"
   puts "all done!"
 end
 
