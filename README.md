@@ -5,11 +5,11 @@ Archetype is a UI pattern and component library for quickly iterating on and mai
 ## Resources
 
 - [Archetype Homepage](http://www.archetypecss.com/)
-- [Documentation](http://www.archetypecss.com/documentation.html)
-- [Components](http://www.archetypecss.com/components.html)
-- [Tutorials](http://www.archetypecss.com/tutorials.html)
-- [Blog](http://www.archetypecss.com/blog.html)
-- [Add-ons](http://www.archetypecss.com/addons.html)
+- [Documentation](http://www.archetypecss.com/documentation/)
+- [Components](http://www.archetypecss.com/components/)
+- [Tutorials](http://www.archetypecss.com/tutorials/)
+- [Blog](http://www.archetypecss.com/blog/)
+- [Add-ons](http://www.archetypecss.com/addons/)
 - [Discussion](https://github.com/eoneill/archetype/issues)
 - [Archetype configuration](http://www.archetypecss.com/documentation/configuration.html)
 
