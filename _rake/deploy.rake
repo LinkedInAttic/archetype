@@ -1,4 +1,4 @@
-@assets_path = 'assets/themes/archetype/'
+@assets_path = 'assets/'
 task :deploy => :build do
   message = ENV['message'] || 'updating site'
   puts "deploying to GitHub..."

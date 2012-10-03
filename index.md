@@ -2,7 +2,7 @@
 layout  : page
 title   : Welcome to Archetype
 ---
-{% include JB/setup %}
+{% include config %}
 
 {% highlight css linenos %}
 @include "archetype";

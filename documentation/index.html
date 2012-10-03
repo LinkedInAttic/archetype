@@ -1,0 +1,17 @@
+---
+layout  : page
+title   : Documentation
+group   : navigation
+weight  : 4
+api_docs :
+  - {title: 'Module Methods', url: 'documentation/sassdoc/', summary : 'Explore the documentation for mixins and other module methods.' }
+  - {title: 'Native Methods', url: 'documentation/rdoc/', summary : 'Learn about the native methods provided through the Sass function API.' }
+---
+{% include config %}
+
+{% assign articles_list = site.categories['documentation'] %}
+{% include partials/lists/articles_list %}
+
+<h2>API Documentation</h2>
+{% assign articles_list = page.api_docs %}
+{% include partials/lists/articles_list %}

@@ -1,0 +1,25 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width">
+<title>{{ page.title }} | {{ site.title }}</title>
+{% if page.description %}<meta name="description" content="{{ page.description }}"/>{% endif %}
+{% if site.author.name %}<meta name="author" content="{{ site.author.name }}"/>{% endif %}
+{% include partials/scripts/html5shim %}
+{% for stylesheet in site.stylesheets %}
+  <link href="{{ ASSET_PATH }}/css/{{ stylesheet }}.css{{ CACHE_BURST }}" rel="stylesheet" type="text/css" media="all"/>
+{% endfor %}
+{% for stylesheet in page.stylesheets %}
+  <link href="{{ ASSET_PATH }}/css/{{ stylesheet }}.css{{ CACHE_BURST }}" rel="stylesheet" type="text/css" media="all"/>
+{% endfor %}
+<link rel="icon" type="image/x-icon" href="{{ BASE_PATH }}/favicon.ico" />
+<link rel="canonical" href="{{ PERMALINK }}" />
+<meta property="og:site_name" content="{{ site.title }}"/>
+<meta property="og:title" content="{{ page.title }}"/>
+<meta property="og:type" content="article"/>
+<meta property="og:url" content="{{ PERMALINK }}"/>
+{% if site.meta.image or page.meta.image %}
+<meta property="og:image" content="{% if page.meta.image %}{{ page.meta.image }}{% else %}{{ site.meta.image }}{% endif %}"/>
+{% endif %}
+{% if page.description or site.description %}
+<meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}"/>
+<meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
+{% endif %}

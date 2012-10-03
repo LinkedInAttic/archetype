@@ -3,11 +3,11 @@ layout  : page
 title   : Tags
 header  : Posts By Tag
 ---
-{% include JB/setup %}
+{% include config %}
 
 <ul class="tag_box inline">
   {% assign tags_list = site.tags %}  
-  {% include JB/tags_list %}
+  {% include partials/lists/tags_list %}
 </ul>
 
 
@@ -15,6 +15,6 @@ header  : Posts By Tag
   <h2 id="{{ tag[0] }}-ref">{{ tag[0] }}</h2>
   <ul>
     {% assign pages_list = tag[1] %}  
-    {% include JB/pages_list %}
+    {% include partials/lists/pages_list %}
   </ul>
 {% endfor %}

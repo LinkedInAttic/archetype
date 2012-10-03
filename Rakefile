@@ -66,7 +66,7 @@ task :post do
     post.puts "category: "
     post.puts "tags: []"
     post.puts "---"
-    post.puts "{% include JB/setup %}"
+    post.puts "{% include config %}"
   end
 end # task :post
 
@@ -91,7 +91,7 @@ task :page do
     post.puts "title: \"#{title}\""
     post.puts 'description: ""'
     post.puts "---"
-    post.puts "{% include JB/setup %}"
+    post.puts "{% include config %}"
   end
 end # task :page
 

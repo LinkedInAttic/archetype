@@ -2,5 +2,8 @@
 layout: default
 type  : page
 ---
-{% include JB/setup %}
-{% include themes/archetype/page.html %}
+{% include config %}
+<article>
+{% include partials/headline %}
+{{ content }}
+</article>

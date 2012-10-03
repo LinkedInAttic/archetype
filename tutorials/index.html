@@ -1,0 +1,11 @@
+---
+layout  : page
+title   : Tutorials
+header  : Tutorials and Examples
+group   : navigation
+weight  : 3
+---
+{% include config %}
+
+{% assign articles_list = site.categories['tutorials'] %}
+{% include partials/lists/articles_list %}

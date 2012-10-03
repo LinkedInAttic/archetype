@@ -1,0 +1,15 @@
+{% if articles_list %}
+<ul class="articles-list">
+{% for node in articles_list %}
+  <li>
+    <a href="{{ BASE_PATH }}{{ node.url }}">
+      <h3>{{ node.title }}{% if node.date %} <small>{{ node.date | date_to_string }}</small>{% endif %}</h3>
+      {% if node.summary %}<p class="summary">{{ node.summary }}</p>{% endif %}
+    </a>
+  </li>
+{% endfor %}
+</ul>
+{% else %}
+<p>There currently aren't any articles in this section. Stay tuned for some awesomeness!</p>
+{% endif %}
+{% assign articles_list = nil %}

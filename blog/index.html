@@ -1,0 +1,11 @@
+---
+layout  : page
+title   : Blog
+header  : Announcements, discussions, and musings
+group   : navigation
+weight  : 5
+---
+{% include config %}
+
+{% assign articles_list = site.categories['blog'] %}
+{% include partials/lists/articles_list %}
