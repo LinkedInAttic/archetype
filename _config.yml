@@ -11,7 +11,7 @@ tagline   : UI pattern and component library...
 permalink : /:categories/:title
 # author
 author :
-  name    : Eugene ONeill
+  name    : LinkedIn
   github  : eoneill
   twitter : ArchetypeCSS
 # The production_url is only used when full-domain names are needed such as sitemap.txt 
@@ -25,15 +25,15 @@ copyright :
 # asset management
 assets :
   cacheBurst : true
-  scripts :
-    jQuery :
-      version : 1.8.2
+  stylesheets :
+    - { name: main }
+  vendor :
+    scripts :
+      jQuery :
+        version : 1.8.2
 archetype :
   version : 0.0.1.pre.2
 lang      : en
-# global stylesheets
-stylesheets :
-  - main
 # git info
 git :
   account : eoneill

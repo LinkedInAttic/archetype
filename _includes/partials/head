@@ -2,14 +2,8 @@
 <meta name="viewport" content="width=device-width">
 <title>{{ page.title }} | {{ site.title }}</title>
 {% if page.description %}<meta name="description" content="{{ page.description }}"/>{% endif %}
-{% if site.author.name %}<meta name="author" content="{{ site.author.name }}"/>{% endif %}
-{% include partials/scripts/html5shim %}
-{% for stylesheet in site.stylesheets %}
-  <link href="{{ ASSET_PATH }}/css/{{ stylesheet }}.css{{ CACHE_BURST }}" rel="stylesheet" type="text/css" media="all"/>
-{% endfor %}
-{% for stylesheet in page.stylesheets %}
-  <link href="{{ ASSET_PATH }}/css/{{ stylesheet }}.css{{ CACHE_BURST }}" rel="stylesheet" type="text/css" media="all"/>
-{% endfor %}
+{% if page.author.name or site.author.name %}<meta name="author" content="{% if page.author.name  %}{{ page.author.name }}{% else %}{{ site.author.name }}{% endif %}"/>{% endif %}
+{% include partials/stylesheets %}
 <link rel="icon" type="image/x-icon" href="{{ BASE_PATH }}/favicon.ico" />
 <link rel="canonical" href="{{ PERMALINK }}" />
 <meta property="og:site_name" content="{{ site.title }}"/>
@@ -23,3 +17,4 @@
 <meta property="og:description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}"/>
 <meta name="description" content="{% if page.description %}{{ page.description }}{% else %}{{ site.description }}{% endif %}" />
 {% endif %}
+{% include partials/scripts/html5shim %}
