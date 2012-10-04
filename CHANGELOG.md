@@ -15,6 +15,7 @@
 - added `ie-pseudo()` methods to support dynamically generating pseudo :before and :after elements (using expressions)
 - added `stroke()` mixin to create a stroke line around text (or font icon)
 - added `hide-element()` mixin to hide elements from screen but keep them screen-reader accessible
+- added basic support for fallback CSS values (e.g. border: red; border: rgba(255,0,0, 0.8);)
 
 ### Major Changes:
 

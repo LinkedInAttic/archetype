@@ -3,11 +3,6 @@
 #
 module Archetype::Functions::Helpers
 private
-  # :stopdoc:
-  # when these keys are found, instead of replacing the value,
-  # we join them with any previous definitions in the same list
-  ADDITIVE = %w(inherit styleguide)
-  # :startdoc:
 
   #
   # provides a convenience interface to the Compass::Logger
@@ -22,17 +17,23 @@ private
   # *Parameters*:
   # - <tt>hsh</tt> {Hash} the hash to convert
   # - <tt>depth</tt> {Integer} the depth to walk down into the hash
+  # - <tt>reductives</tt> {Array} a list of keys to split
   # - <tt>separator</tt> {Symbol} the separator to use for the Sass::List
   # *Returns*:
   # - {Sass::List} the converted list
   #
-  def self.hash_to_list(hsh, depth = 0, separator = :comma)
-    if hsh.is_a? Hash 
+  def self.hash_to_list(hsh, depth = 0, reductives = [], separator = :comma)
+    if hsh.is_a? Hash
       list = []
       hsh.each do |item|
         # if its a hash, convert it to a List
-        item = Sass::Script::List.new([Sass::Script::String.new(item[0]), hash_to_list(item[1], depth + 1)], separator) if item.is_a? Hash or item.is_a? Array
-        list.push(item)
+        if item.is_a? Hash or item.is_a? Array
+          tmp = []
+          item[1] = [item[1]] if not item[1].is_a? Array
+          item[1].each do |i|
+            list.push Sass::Script::List.new([Sass::Script::String.new(item[0]), hash_to_list(i, depth + 1, reductives)], separator)
+          end
+        end
       end
       return Sass::Script::List.new(list, separator)
     end
@@ -52,7 +53,7 @@ private
   # *Returns*:
   # - {Hash} the converted hash
   #
-  def self.list_to_hash(list, depth = 0, nest = [])
+  def self.list_to_hash(list, depth = 0, nest = [], additives = [])
     list = list.to_a
     hsh = {}
     list.each do |item|
@@ -65,18 +66,17 @@ private
         nested = nest.include?(key)
         # if it's nested or we haven't reached out depth, recurse
         if nested or depth > 0
-          value = list_to_hash(value, nested ? depth + 1 : depth - 1, nest)
+          value = list_to_hash(value, nested ? depth + 1 : depth - 1, nest, additives)
         end
         # update the hash key
         if not is_value(value, :blank)
-          if ADDITIVE.include?(key)
+          if additives.include?(key)
             hsh[key] ||= []
             hsh[key].push(value)
           else
             hsh[key] = value
           end
         end
-        
       end
     end
     return hsh

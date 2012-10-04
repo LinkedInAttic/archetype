@@ -10,10 +10,14 @@ module Archetype::SassExtensions::Styleguide
   # :stopdoc:
   INHERIT     = 'inherit'
   STYLEGUIDE  = 'styleguide'
+  DROP        = 'drop'
   DEFAULT     = 'default'
   REGEX       = 'regex'
-  DROP        = 'drop'
   SPECIAL     = %w(states selectors)
+  # these are unique CSS keys that can be exploited to provide fallback functionality by providing a second value
+  # e.g color: red; color: rgba(255,0,0, 0.8);
+  FALLBACKS   = %w(background background-image background-color border border-bottom border-bottom-color border-color border-left border-left-color border-right border-right-color border-top border-top-color clip color layer-background-color outline outline-color)
+  ADDITIVES   = FALLBACKS + [DROP, INHERIT, STYLEGUIDE]
   # :startdoc:
 
   #
@@ -37,7 +41,7 @@ module Archetype::SassExtensions::Styleguide
     # if we already have the component, don't create it again
     return Sass::Script::Bool.new(false) if components[id] and not force and not Compass.configuration.environment.to_s.include?('dev')
     # otherwise add it
-    components[id] = helpers.list_to_hash(default, 1, SPECIAL).merge(helpers.list_to_hash(data, 1, SPECIAL))
+    components[id] = helpers.list_to_hash(default, 1, SPECIAL, ADDITIVES).merge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
     return Sass::Script::Bool.new(true)
   end
   Sass::Script::Functions.declare :styleguide_add_component, [:id, :data]
@@ -67,7 +71,7 @@ module Archetype::SassExtensions::Styleguide
     extensions = theme[:extensions]
     return Sass::Script::Bool.new(false) if extensions.include?(extension) and not force and not Compass.configuration.environment.to_s.include?('dev')
     extensions.push(extension)
-    components[id] = (components[id] ||= {}).rmerge(helpers.list_to_hash(data, 1, SPECIAL))
+    components[id] = (components[id] ||= {}).rmerge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
     return Sass::Script::Bool.new(true)
   end
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data]
@@ -85,7 +89,7 @@ module Archetype::SassExtensions::Styleguide
   #
   def styleguide(description, theme = nil)
     # convert it back to a Sass:List and carry on
-    return helpers.hash_to_list(get_styles(description, theme))
+    return helpers.hash_to_list(get_styles(description, theme), 0, FALLBACKS)
   end
 
   #
@@ -102,7 +106,7 @@ module Archetype::SassExtensions::Styleguide
     original = get_styles(original, theme)
     other = get_styles(other, theme)
     diff = original.diff(other)
-    return helpers.hash_to_list(diff)
+    return helpers.hash_to_list(diff, 0, FALLBACKS)
   end
 
 private
@@ -214,10 +218,12 @@ private
     # recompose the special keys and extract any nested/inherited styles
     # this lets us define special states and elements
     SPECIAL.each do |special_key|
-      special = out[special_key]
-      tmp = {}
-      (special || {}).each { |key, value| tmp[key] = extract_styles(key, key, true, theme[:name], special) }
-      out[special_key] = tmp if not tmp.empty?
+      if out.is_a? Hash
+        special = out[special_key]
+        tmp = {}
+        (special || {}).each { |key, value| tmp[key] = extract_styles(key, key, true, theme[:name], special) }
+        out[special_key] = tmp if not tmp.empty?
+      end
     end
     return out
   end
