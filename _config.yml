@@ -76,5 +76,9 @@ comments :
 analytics :
   provider : google 
   google : 
-      tracking_id : 'UA-1545927-5'
+    tracking_id : 'UA-1545927-5'
 
+search :
+  provider : tapir
+  tapir :
+    token : 506beaeb3f61b03a8b000229
