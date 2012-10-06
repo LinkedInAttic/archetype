@@ -269,6 +269,7 @@
             $view = $('#tmpl-view'),
             $nav = $('#tmpl-nav'),
             $body = $('body'),
+            $main = $('#main'),
             $win = $(window),
             $revealed = $();
 
@@ -431,7 +432,7 @@
         }
 
         // delegate all the link clicks
-        $body.delegate('a', 'click', function(e) {
+        $main.delegate('a', 'click', function(e) {
           parseTarget($(this).attr('href'), this, e);
         })
         .delegate('.filters a, .toggles a', 'click', function(e) {
@@ -439,7 +440,7 @@
         });
 
         // dirty search
-        $body.delegate('#method-search', 'keyup', function() {
+        $main.delegate('#method-search', 'keyup', function() {
           parseTarget('search:'+$(this).val().replace(':',' '));
         });
 
