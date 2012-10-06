@@ -58,6 +58,9 @@
             docs: query('docs')
           });
         break;
+        case 'hashchange':
+          parseTarget(window.location.hash.replace('#', ''), 'hashchange');
+        break;
         case 'target':
         default:
           parseTarget(window.location.hash.replace('#', ''));
@@ -307,7 +310,7 @@
                 $body.addClass('hide-all-sources');
                 $revealed = $('.is-source-'+what).addClass('reveal');
               }
-              if(settings.ext_source_viewer && (/^(http(s?)):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/i).test(settings.ext_source_viewer)) {
+              if(source !== 'hashchange' && settings.ext_source_viewer && (/^(http(s?)):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/i).test(settings.ext_source_viewer)) {
                 window.open(settings.ext_source_viewer.replace(/\{FILE\}/gi, sources[what]).replace(/\{LINE\}/gi, other), '_blank');
               }
             break;
@@ -443,7 +446,10 @@
         function whenReady() {
           setTimeout(function() {
             if(isRenderDone()) {
-              parseURL();
+              parseURL('hashchange');
+              $(window).on('hashchange', function() {
+                parseURL('hashchange');
+              });
             }
             else {
               whenReady();
