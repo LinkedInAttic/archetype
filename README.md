@@ -11,13 +11,13 @@ Archetype is a UI pattern and component library for quickly iterating on and mai
 - [Blog](http://www.archetypecss.com/blog/)
 - [Add-ons](http://www.archetypecss.com/addons/)
 - [Discussion](https://github.com/eoneill/archetype/issues)
-- [Archetype configuration](http://www.archetypecss.com/documentation/configuration.html)
+- [Archetype configuration](http://www.archetypecss.com/documentation/configuration/)
 
 ## Installation
 
 ### Install the gem
 
-```sh
+```bash
 [sudo] gem install archetype
 ```
 
@@ -25,7 +25,7 @@ Instead of installing the gem directly via the command line, we recommend using 
 
 ### Creating a new project with Archetype
 
-```sh
+```bash
 compass create ~/workspace/your-project -r archetype --using archetype
 ```
 
@@ -43,7 +43,7 @@ require "archetype"
 @import "archetype";
 ```
 
-Learn more about [Archetype configuration](http://www.archetypecss.com/documentation/configuration.html).
+Learn more about [Archetype configuration](http://www.archetypecss.com/documentation/configuration/).
 
 ## Author
 
