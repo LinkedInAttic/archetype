@@ -1,0 +1,38 @@
+---
+layout  : post
+title   : Module Method APIs
+group   : documentation
+key     : doc-module
+no_format : true
+classname : 'hide-privates show-index toggle-search'
+assets :
+  stylesheets :
+    - {name: sassdoc}
+---
+{% include config %}
+
+<script src="js/lib/dust.js{{ CACHE_BURST }}"></script>
+<script src="js/lib/jquery.scrollto.js{{ CACHE_BURST }}"></script>
+<script src="js/lib/sassdoc.js{{ CACHE_BURST }}"></script>
+<script>
+  window.Sassdoc.settings = {'docs':'sassdoc.json'{% if GIT_PATH %}, 'ext_source_viewer': '{{ GIT_PATH }}blob/master/stylesheets/{FILE}#L{LINE}'{% endif %}};
+  window.Sassdoc.init();
+</script>
+
+<article>
+  {% include partials/headline %}
+  <div id="tmpl-view">
+    <img class="spinner" src="img/spinner.gif" alt="loading"/>
+  </div>
+</article>
+
+<aside>
+  <ul class="filters">
+    <li><a href="#filter:mixins" class="label label-info mixins">Mixins</a></li>
+    <li><a href="#filter:functions" class="label label-info functions">Functions</a></li>
+    <li><a href="#filter:privates" class="label privates">Privates</a></li>
+  </ul>
+  <div id="tmpl-toc">
+    <img class="spinner" src="img/spinner.gif" alt="loading"/>
+  </div>
+</aside>

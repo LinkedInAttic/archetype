@@ -3,7 +3,12 @@ layout: default
 type  : page
 ---
 {% include config %}
+
+{% if page.no_format == true %}
+  {{ content }}
+{% else %}
 <article>
 {% include partials/headline %}
 {{ content }}
 </article>
+{% endif %}

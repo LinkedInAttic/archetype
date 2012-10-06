@@ -6,8 +6,9 @@
 <!--[if gt IE 9]><!--><html class="no-js" lang="{{ site.lang }}"><!--<![endif]-->
 <head>
 {% include partials/head %}
+{% include partials/scripts/jquery %}
 </head>
-<body class="{% if page.type %}layout-{{ page.type }}{% endif %}" id="{% if page.key %}page-{{ page.key }}{% elsif page.id %}{{ page.id }}{% else %}homepage{% endif %}">
+<body class="{% if page.type %}layout-{{ page.type }}{% endif %}{% if page.classname %} {{ page.classname }}{% endif %}" id="{% if page.key %}page-{{ page.key }}{% elsif page.id %}{{ page.id }}{% else %}homepage{% endif %}">
 {% include partials/scripts/classnames %}
 <header id="global-header">
   <div>
@@ -47,6 +48,5 @@
   </div>
 </footer>
 {% include partials/analytics %}
-{% include partials/scripts/jquery %}
 </body>
 </html>{% endcapture %}{%include post_process %}

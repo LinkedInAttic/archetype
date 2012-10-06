@@ -3,14 +3,21 @@ layout: default
 type  : post
 ---
 {% include config %}
+
+{% if page.no_format == true %}
+  {{ content }}
+{% else %}
 <article>
   {% include partials/headline %}
   {{ content }}
   {% include partials/lists/pagination %}
   {% include partials/comments %}
 </article>
-  
+
 <aside>
+{% if page.category == 'documentation' %}
+  documentation sidebar
+{% else %}
   <h4>Published</h4>
   <div class="date"><span>{{ page.date | date_to_long_string }}</span></div>
   {% unless page.tags == empty %}
@@ -20,4 +27,6 @@ type  : post
       {% include partials/lists/tags_list %}
     </ul>
   {% endunless %}
+{% endif %}
 </aside>
+{% endif %}

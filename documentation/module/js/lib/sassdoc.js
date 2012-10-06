@@ -298,7 +298,7 @@
                 $win.resize(function() {
                   var h = $win.height() - 81;
                   $('iframe', '.source-viewer').attr('height', h).css('height', h+'px');
-                })
+                });
                 $('.source-viewer').html($iframe);
                 showIndex('viewer');
                 return;
@@ -306,6 +306,9 @@
               else {
                 $body.addClass('hide-all-sources');
                 $revealed = $('.is-source-'+what).addClass('reveal');
+              }
+              if(settings.ext_source_viewer && (/^(http(s?)):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/i).test(settings.ext_source_viewer)) {
+                window.open(settings.ext_source_viewer.replace(/\{FILE\}/gi, sources[what]).replace(/\{LINE\}/gi, other), '_blank');
               }
             break;
             case 'filter':
