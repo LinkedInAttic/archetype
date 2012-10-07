@@ -4,6 +4,8 @@ title     : An Introduction to styleguide()
 category  : tutorials
 tags      : [intro, styleguide]
 summary   : Learn how Archetype and styleguide() will transform the way designers and developers build complex, scalable, web sites.
+description : SUMMARY
+author    : eoneill
 published : false
 ---
 {% include config %}

@@ -14,6 +14,11 @@ author :
   name    : LinkedIn
   github  : eoneill
   twitter : ArchetypeCSS
+authors :
+  eoneill :
+    name  : Eugene O'Neill
+    gplus : https://plus.google.com/109292640596869651573
+    href  : http://www.linkedin.com/in/eugeneoneill
 # The production_url is only used when full-domain names are needed such as sitemap.txt 
 production_url : http://www.archetypecss.com
 
@@ -26,11 +31,13 @@ copyright :
 assets :
   cacheBurst : true
   stylesheets :
-    - { name: main }
+    - main
   vendor :
     scripts :
       jQuery :
         version : 1.8.2
+meta :
+  image : 'ASSET_PATH/images/logos/archetype_mini_logo.png'
 archetype :
   version : 0.0.1.pre.2
 lang      : en
@@ -41,10 +48,10 @@ git :
 # footer
 footer :
   links : 
-    - {title : GitHub, git : true, url : '' }
-    - {title : Issue Tracker, git : true, url : 'issues?state=open' }
-    - {title : CHANGELOG, git : true, url : 'blob/master/CHANGELOG.md' }
-    - {title : Contributing, git : true, url : 'blob/master/CONTRIBUTING.md' }
+    - {title : GitHub, url : 'GIT_PATH' }
+    - {title : Issue Tracker, url : 'GIT_PATH/issues?state=open' }
+    - {title : CHANGELOG, url : 'GIT_PATH/blob/master/CHANGELOG.md' }
+    - {title : Contributing, url : 'GIT_PATH/blob/master/CONTRIBUTING.md' }
 
 # all links will be namespaced by BASE_PATH if defined
 BASE_PATH : false

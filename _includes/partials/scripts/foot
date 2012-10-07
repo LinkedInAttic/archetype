@@ -7,3 +7,4 @@
 {% for script in page.assets.scripts %}
   <script src="{{ ASSET_PATH }}/scripts/{{ script }}.js{{ CACHE_BURST }}""></script>
 {% endfor %}
+{% include partials/analytics %}

@@ -1,6 +1,7 @@
 ---
 layout: default
 type  : post
+sidebar : true
 ---
 {% include config %}
 
@@ -13,20 +14,22 @@ type  : post
   {% include partials/lists/pagination %}
   {% include partials/comments %}
 </article>
-
+{% unless page.sidebar == false %}
+{% assign articles_list = site.categories[page.category] %}
+{% assign minimal = true %}
 <aside>
 {% if page.category == 'documentation' %}
-  documentation sidebar
-{% else %}
-  <h4>Published</h4>
-  <div class="date"><span>{{ page.date | date_to_long_string }}</span></div>
-  {% unless page.tags == empty %}
-    <h4>Tags</h4>
-    <ul class="tag_box">
-      {% assign tags_list = page.tags %}
-      {% include partials/lists/tags_list %}
-    </ul>
-  {% endunless %}
+  <h3>Documentation</h3>
+{% elsif page.category == 'tutorials' %}
+  <h3>Tutorials</h3>
+{% elsif page.category == 'components' %}
+  <h3>Components</h3>
+{% elsif page.category == 'addons' %}
+  <h3>Add-ons</h3>
+{% elsif page.category == 'blog' %}
+  <h3>Blog Posts</h3>
 {% endif %}
+{% include partials/lists/reverse_articles_list %}
 </aside>
+{% endunless %}
 {% endif %}

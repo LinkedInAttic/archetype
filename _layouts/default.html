@@ -8,7 +8,9 @@
 {% include partials/head %}
 {% include partials/scripts/jquery %}
 </head>
-<body class="{% if page.type %}layout-{{ page.type }}{% endif %}{% if page.classname %} {{ page.classname }}{% endif %}" id="{% if page.key %}page-{{ page.key }}{% elsif page.id %}{{ page.id }}{% else %}homepage{% endif %}">
+{% capture page_classes %}{% if page.type %}layout-{{ page.type }}{% endif %}{% if page.sidebar or (page.type == 'post' and page.sidebar != false) %} has-aside{% endif %}{% if page.classname %} {{ page.classname }}{% endif %}{% endcapture %}
+{% capture page_id %}{% if page.key %}page-{{ page.key }}{% elsif page.id %}{{ page.id }}{% else %}homepage{% endif %}{% endcapture %}
+<body class="{{ page_classes }}" id="{{ page_id | replace : '/' , '__' }}">
 {% include partials/scripts/classnames %}
 <header id="global-header">
   <div>
@@ -18,7 +20,7 @@
         {% assign pages_list = site.pages %}
         {% assign group = 'navigation' %}
         {% include partials/lists/weighted_pages_list %}
-        <li><a href="{{ GIT_PATH }}issues">Discussion</a></li>
+        {% if GIT_PATH %}<li><a href="{{ GIT_PATH }}/issues">Discussion</a></li>{% endif %}
       </ul>
     </nav>
   </div>
@@ -34,7 +36,7 @@
     {% unless site.footer.links == false %}
       <ul>
       {% for link in site.footer.links %}
-        <li><a href="{% if link.git %}{{ GIT_PATH }}{% elsif link.relative %}{{ BASE_PATH }}{% endif %}{{ link.url }}">{{ link.title }}</a></li>
+        <li><a href="{% if GIT_PATH %}{{ link.url | replace : 'GIT_PATH', GIT_PATH }}{% else %}{{ link.url }}{% endif %}">{{ link.title }}</a></li>
       {% endfor %}
       {% assign pages_list = site.pages %}
       {% assign group = 'secondary-navigation' %}
@@ -42,11 +44,13 @@
       </ul>
     {% endunless %}
     <p class="social-actions">
+      {% if site.git %}
       <iframe width="112px" scrolling="0" height="20px" frameborder="0" allowtransparency="true" src="http://ghbtns.com/github-btn.html?user={{ site.git.account }}&amp;repo={{ site.git.repo }}&amp;type=watch&amp;count=true"></iframe>
       <iframe width="98px" scrolling="0" height="20px" frameborder="0" allowtransparency="true" src="http://ghbtns.com/github-btn.html?user={{ site.git.account }}&amp;repo={{ site.git.repo }}&amp;type=fork&amp;count=true"></iframe>
+      {% endif %}
     </p>
   </div>
 </footer>
-{% include partials/analytics %}
+{% include partials/scripts/foot %}
 </body>
 </html>{% endcapture %}{%include post_process %}

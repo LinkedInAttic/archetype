@@ -27,7 +27,7 @@
 
     function parseTarget(target, source, e) {
       var invoked = [];
-      target = target.replace('#','').split(',');
+      target = target.replace(/^https?\:\/\/.*\#/, '').replace('#','').split(',');
       for(var i=target.length; i--; ) {
         var action, what, other, t = target[i].split(':');
         if(t.length > 1) {
@@ -307,12 +307,14 @@
                 showIndex('viewer');
                 return;
               }
+              else if(source !== 'hashchange' && settings.ext_source_viewer && (/^(http(s?)):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/i).test(settings.ext_source_viewer)) {
+                window.open(settings.ext_source_viewer.replace(/\{FILE\}/gi, sources[what]).replace(/\{LINE\}/gi, other), '_blank');
+                $revealed.addClass('reveal');
+                e.preventDefault();
+              }
               else {
                 $body.addClass('hide-all-sources');
                 $revealed = $('.is-source-'+what).addClass('reveal');
-              }
-              if(source !== 'hashchange' && settings.ext_source_viewer && (/^(http(s?)):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/i).test(settings.ext_source_viewer)) {
-                window.open(settings.ext_source_viewer.replace(/\{FILE\}/gi, sources[what]).replace(/\{LINE\}/gi, other), '_blank');
               }
             break;
             case 'filter':

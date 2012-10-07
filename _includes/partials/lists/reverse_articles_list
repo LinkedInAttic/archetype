@@ -1,6 +1,6 @@
 {% if articles_list %}
 <ul class="articles-list">
-{% for node in articles_list %}
+{% for node in articles_list reversed %}
   <li>
     <a href="{{ BASE_PATH }}{{ node.url }}"{% if node.url == page.url %} class="page-current"{% endif %}>
       {% if minimal != true %}<h3>{% endif %}{{ node.title }}{% if node.date and minimal != true %} <small>{{ node.date | date_to_string }}</small>{% endif %}{% if minimal != true %}</h3>{% endif %}

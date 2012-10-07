@@ -1,2 +1,3 @@
 <h1>{% if page.header %}{{ page.header }}{% else %}{{ page.title }}{% endif %} {% if page.tagline %}<small>{{ page.tagline }}</small>{% endif %}</h1>
 <hr>
+{% include partials/post_details %}

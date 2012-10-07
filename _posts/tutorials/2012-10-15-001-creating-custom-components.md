@@ -2,15 +2,17 @@
 layout    : post
 title     : Creating Custom Components
 category  : tutorials
-tags      : [intro, styleguide]
-summary   : Learn how Archetype and styleguide() will transform the way designers and developers build complex, scalable, web sites.
+tags      : [intro, styleguide, components, extend, ]
+summary   : In this guide, we'll cover creating 
+description : SUMMARY
+author    : eoneill
 published : false
 ---
 {% include config %}
 
 ## The inner workings
 
-The [styleguide system](/tutorials/introduction-styleguide/) uses a combination of primitives and components to define a set of robust, reusable styles.
+The [styleguide system](/tutorials/000-introduction-styleguide/) uses a combination of primitives and components to define a set of robust, reusable styles.
 
 ### Primitives
 
@@ -182,6 +184,8 @@ $a-blackhole: styleguide-extend-component($STYLEGUIDE_COPY_ID, (
 {% endhighlight %}
 
 You've now extended the existing copy styles to support something like <br/> `@include styleguide(copy in an example);`.
+
+We'll talk more about this in a follow up article, so stay tuned.
 
 ## Conclusion
 

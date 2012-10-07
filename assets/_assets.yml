@@ -1,0 +1,9 @@
+javascript_compressor: uglifier
+
+javascripts:
+  sassdoc:
+    - assets/vendor/sassdoc/js/lib/dust.js
+    - assets/vendor/sassdoc/js/lib/jquery.scrollto.js
+    - assets/vendor/sassdoc/js/lib/sassdoc.js
+  jquery:
+    - assets/vendor/jquery/1.8.2/jquery.min.js
