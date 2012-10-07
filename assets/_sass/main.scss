@@ -25,7 +25,7 @@ hr {
 
 #global-header,
 #global-footer {
-  & > div {
+  div {
     @include grid-canvas();
   }
 }
@@ -34,7 +34,7 @@ hr {
   @include vertical-spacing($top: 1);
   @include styleguide(navigation);
   height: $main-header-height;
-  & > div {
+  div {
     position: relative;
     height: $main-header-height;
   }
@@ -42,6 +42,7 @@ hr {
     display: block;
     @include hide-text();
     background: image-url($main-logo) no-repeat;
+    @include target-browser(ie lte 6, background-image, image-url('logos/logo_ie6.png'));
     width: image-width($main-logo);
     height: $main-logo-height;
   }
@@ -72,20 +73,20 @@ hr {
 #main {
   @include grid-canvas();
   padding-top: $main-header-height + vertical-spacing(1) + 5px;
-  & > article {
+  article {
     @include grid($center: true, $indent: grid-indent(1));
   }
   // side-by-side layout
   .has-aside & {
-    & > article {
+    article {
       @include grid(17, $first: true, $indent: grid-indent(1));
     }
-    & > aside {
+    aside {
       @include grid(7, $indent: grid-indent(1));
     }
   }
-  & > article,
-  & > aside {
+  article,
+  aside {
     @include vertical-spacing(2);
     @include vertical-spacing(1, $method: margin);
     @include styleguide(container);
@@ -128,7 +129,7 @@ hr {
       }
     }
   }
-  & > aside {
+  aside {
     .articles-list a.page-current {
       font-weight: bold;
       @include styleguide(module);
