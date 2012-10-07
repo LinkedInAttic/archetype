@@ -42,7 +42,7 @@ hr {
     display: block;
     @include hide-text();
     background: image-url($main-logo) no-repeat;
-    @include target-browser(ie lte 6, background-image, image-url('logos/logo_ie6.png'));
+    @include target-browser(ie 6, background-image, image-url('logos/logo_ie6.png'));
     width: image-width($main-logo);
     height: $main-logo-height;
   }
