@@ -73,6 +73,8 @@ hr {
 #main {
   @include grid-canvas();
   padding-top: $main-header-height + vertical-spacing(1) + 5px;
+  // IE6 treats position:fixed differently, so we need to NOT offset the main content
+  @include target-browser(ie 6, padding-top, vertical-spacing(1));
   article {
     @include grid($center: true, $indent: grid-indent(1));
   }
