@@ -1,12 +1,13 @@
 ---
 layout    : post
-title     : Overloading Archetype
+title     : ':before and :after... when IE still matters'
 category  : tutorials
-tags      : [archetype, structure, extend]
+tags      : [hacks, browsers, IE]
 summary   : 
 description : SUMMARY
 author    : eoneill
 published : false
+weight    : 9
 ---
 {% include config %}
 

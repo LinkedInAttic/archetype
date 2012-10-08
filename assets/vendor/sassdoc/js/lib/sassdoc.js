@@ -1,6 +1,6 @@
 (function(window, document, $, undefined) {
   window.Sassdoc || (window.Sassdoc = {});
-  window.Sassdoc.init = function() {
+  window.Sassdoc.init = function(settings) {
     var sassdoc,
         rendered = 0,
         templates = ['nav', 'toc', 'view'],
@@ -9,12 +9,11 @@
           'mixins'    : 1,
           'privates'  : -1
         },
-        settings = $.extend(window.Sassdoc.settings, {
-          docs: 'sassdoc.json'
-        }),
         sources = {},
         showIt;
-
+    settings = $.extend(settings, {
+      docs: 'sassdoc.json'
+    });
     Array.prototype.remove = function(from, to) {
       var rest = this.slice((to || from) + 1 || this.length);
       this.length = from < 0 ? this.length + from : from;

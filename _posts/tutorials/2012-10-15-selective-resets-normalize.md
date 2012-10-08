@@ -1,11 +1,13 @@
 ---
 layout    : post
-title     : Extending Core Components
+title     : Selective Resets and Normalize.css
 category  : tutorials
-tags      : [styleguide, components, core, extend]
+tags      : [browsers, reset, base, normalize]
 summary   : 
 description : SUMMARY
 author    : eoneill
 published : false
+weight    : 10
 ---
 {% include config %}
+

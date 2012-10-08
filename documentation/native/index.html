@@ -9,7 +9,12 @@ key     : doc-native
 <script>
 (function($) {
 $(function() {
-  var $docFrame = $('#{{ page.key }}-frame');
+  var $docFrame = $('#{{ page.key }}-frame'),
+      target = window.location.hash.replace('#', '');
+  // if there's a target on the hash, update the src
+  if(target) {
+    $docFrame.attr('src', 'rdoc/' + target);
+  }
   function resizeFrame() {
     $docFrame.height($docFrame.contents().find("html").height());
   }

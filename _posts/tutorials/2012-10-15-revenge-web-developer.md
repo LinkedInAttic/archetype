@@ -1,12 +1,13 @@
 ---
 layout    : post
-title     : Can I Use...?
+title     : Revenge of a Web Developer
 category  : tutorials
-tags      : [compass, sass, advanced]
+tags      : [browsers, hacks, targeting]
 summary   : 
 description : SUMMARY
 author    : eoneill
 published : false
+weight    : 12
 ---
 {% include config %}
 

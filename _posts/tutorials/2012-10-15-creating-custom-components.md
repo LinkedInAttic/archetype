@@ -3,16 +3,17 @@ layout    : post
 title     : Creating Custom Components
 category  : tutorials
 tags      : [intro, styleguide, components, extend, ]
-summary   : In this guide, we'll cover creating 
+summary   : In this guide, we'll cover how components work and an introduce you to creating your own reusable components.
 description : SUMMARY
 author    : eoneill
 published : false
+weight    : 2
 ---
 {% include config %}
 
 ## The inner workings
 
-The [styleguide system](/tutorials/000-introduction-styleguide/) uses a combination of primitives and components to define a set of robust, reusable styles.
+The [styleguide system](/tutorials/introduction-styleguide/) uses a combination of primitives and components to define a set of robust, reusable styles.
 
 ### Primitives
 
@@ -24,7 +25,7 @@ Components define the sets of styles to be applied to identifiers. Identifiers h
 
 Components start off something like this:
 
-`[scss/themes/my_custom_theme/components/_examples.scss]`
+<span class="note">`[scss/themes/my_custom_theme/components/_examples.scss]`</span>
 {% highlight css %}
 $STYLEGUIDE_EXAMPLES_ID: example !default;
 $STYLEGUIDE_EXAMPLES: () !default;
@@ -43,7 +44,7 @@ When this component is invoked via it's identifier, `@include styleguide(example
 
 The default set of styles can be extended with modifiers and contexts:
 
-`[scss/themes/my_custom_theme/components/_example.scss]`
+<span class="note">`[scss/themes/my_custom_theme/components/_example.scss]`</span>
 {% highlight css %}
 $STYLEGUIDE_EXAMPLES_ID: example !default;
 $STYLEGUIDE_EXAMPLES: () !default;
@@ -66,13 +67,13 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_EXAMPLES_ID, $STYLEGUIDE_EXAM
 
 Now when we invoke `@include styleguide(awesome example)`, we'll get a new set of styles.
 
-NOTE: you can remove previously defined styles by setting them to nil, like the background example above.
+<span class="note">NOTE: you can remove previously defined styles by setting them to nil, like the background example above.</span>
 
-GOTCHA: a caveat with the data structure is that if you're defining only a single key-value pair, you'll need to specify an extra empty placeholder `nil` (don't ask why, just do it).
+<span class="note">GOTCHA: a caveat with the data structure is that if you're defining only a single key-value pair, you'll need to specify an extra empty placeholder `nil` (don't ask why, just do it).</span>
 
 You can also define multiple combinations of variants and contexts:
 
-`[scss/themes/my_custom_theme/components/_example.scss]`
+`<span class="note">`[scss/themes/my_custom_theme/components/_example.scss]`</span>`
 {% highlight css %}
 $STYLEGUIDE_EXAMPLES_ID: example !default;
 $STYLEGUIDE_EXAMPLES: () !default;
@@ -120,7 +121,7 @@ font-size:    20px;
 
 We can take this one step further and inherit between different modifiers/contexts:
 
-[scss/themes/my_custom_theme/components/_example.scss]
+<span class="note">`[scss/themes/my_custom_theme/components/_example.scss]`</span>
 {% highlight css %}
 $STYLEGUIDE_EXAMPLES_ID: example !default;
 $STYLEGUIDE_EXAMPLES: () !default;
@@ -137,8 +138,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_EXAMPLES_ID, $STYLEGUIDE_EXAM
   (cool, (
     inherit (awesome),
     nil
-  ))
-  ,
+  )),
   (in-punchcut, (
     color        white,
     background   nil
@@ -156,13 +156,13 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_EXAMPLES_ID, $STYLEGUIDE_EXAM
 
 In this example, cool and awesome can now be used interchangeably.
 
-NOTE: you can only inherit within the same identifier (file).
+<span class="note">NOTE: you can only inherit within the same identifier. To inherit another identifier, use the `styleguide` keyword.</span>
 
 #### Plugging it in
 
 Now that we have a new identifier file, let's wire it into the global styleguide:
 
-[scss/themes/my_custom_theme/_components.scss]
+<span class="note">`[scss/themes/my_custom_theme/_components.scss]`</span>
 {% highlight css %}
 ...
 @import "examples";
@@ -185,7 +185,7 @@ $a-blackhole: styleguide-extend-component($STYLEGUIDE_COPY_ID, (
 
 You've now extended the existing copy styles to support something like <br/> `@include styleguide(copy in an example);`.
 
-We'll talk more about this in a follow up article, so stay tuned.
+We'll talk more about this in a [follow up article](/tutorials/extending-core-componets/), so stay tuned.
 
 ## Conclusion
 

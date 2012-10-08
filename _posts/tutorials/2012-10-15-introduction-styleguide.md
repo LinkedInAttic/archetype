@@ -7,6 +7,7 @@ summary   : Learn how Archetype and styleguide() will transform the way designer
 description : SUMMARY
 author    : eoneill
 published : false
+weight    : 1
 ---
 {% include config %}
 

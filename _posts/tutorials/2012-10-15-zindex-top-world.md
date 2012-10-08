@@ -1,12 +1,13 @@
 ---
 layout    : post
-title     : Beautiful Typography Everywhere
+title     : z-index - On Top of the World
 category  : tutorials
-tags      : [fonts, targeting, browsers]
+tags      : [zindex, advanced]
 summary   : 
 description : SUMMARY
 author    : eoneill
 published : false
+weight    : 13
 ---
 {% include config %}
 

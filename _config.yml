@@ -52,6 +52,13 @@ footer :
     - {title : Issue Tracker, url : 'GIT_PATH/issues?state=open' }
     - {title : CHANGELOG, url : 'GIT_PATH/blob/master/CHANGELOG.md' }
     - {title : Contributing, url : 'GIT_PATH/blob/master/CONTRIBUTING.md' }
+# pagination
+pagination : false
+
+# API docs
+api_docs :
+  - {title: 'Module Methods', url: '/documentation/module/', summary : 'Explore the documentation for mixins and other module methods.' }
+  - {title: 'Native Methods', url: '/documentation/native/', summary : 'Learn about the native methods provided through the Sass function API.' }
 
 # all links will be namespaced by BASE_PATH if defined
 BASE_PATH : false

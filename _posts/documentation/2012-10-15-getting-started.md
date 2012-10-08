@@ -6,6 +6,9 @@ tags      : [intro, install]
 summary   : ...
 description : SUMMARY
 published : false
+weight    : 1
+meta :
+  date : false
 ---
 {% include config %}
 

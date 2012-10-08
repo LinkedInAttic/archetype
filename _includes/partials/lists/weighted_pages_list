@@ -1,4 +1,4 @@
-{% if max_width == null %}
+{% if max_weight == null %}
   {% assign max_weight = pages_list.size %}
 {% endif %}
 {% for weight in (1..max_weight) %}

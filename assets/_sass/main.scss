@@ -77,6 +77,9 @@ hr {
   @include target-browser(ie 6, padding-top, vertical-spacing(1));
   article {
     @include grid($center: true, $indent: grid-indent(1));
+    .note {
+      @include styleguide(small muted copy);
+    }
   }
   // side-by-side layout
   .has-aside & {
@@ -136,6 +139,12 @@ hr {
       font-weight: bold;
       @include styleguide(module);
     }
+  }
+  em {
+    @include font-style(italic);
+  }
+  strong {
+    font-weight: bold;
   }
 }
 

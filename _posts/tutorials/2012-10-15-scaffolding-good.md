@@ -1,12 +1,13 @@
 ---
 layout    : post
-title     : z-index - On Top of the World
+title     : Scaffolding Can Be Good
 category  : tutorials
-tags      : [zindex, advanced]
+tags      : [scaffolds, base]
 summary   : 
 description : SUMMARY
 author    : eoneill
 published : false
+weight    : 7
 ---
 {% include config %}
 

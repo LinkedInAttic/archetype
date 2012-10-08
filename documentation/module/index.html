@@ -35,8 +35,7 @@ assets :
 <script>
 (function($) {
 $(function() {
-  window.Sassdoc.settings = {'docs':'sassdoc.json'{% if GIT_PATH %}, 'ext_source_viewer': '{{ GIT_PATH }}/blob/master/stylesheets/{FILE}#L{LINE}'{% endif %}};
-  window.Sassdoc.init();
+  window.Sassdoc.init({'docs':'sassdoc.json'{% if GIT_PATH %}, 'ext_source_viewer': '{{ GIT_PATH }}/blob/master/stylesheets/{FILE}#L{LINE}'{% endif %}});
 });
 })(jQuery);
 </script>
