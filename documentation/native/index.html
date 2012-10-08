@@ -9,15 +9,14 @@ key     : doc-native
 <script>
 (function($) {
 $(function() {
-  console.log('ready')
   var $docFrame = $('#{{ page.key }}-frame');
   function resizeFrame() {
     $docFrame.height($docFrame.contents().find("html").height());
   }
-  $docFrame.on('load', resizeFrame);
-  $docFrame.on('resize', resizeFrame);
+  // resize the iframe and adjust the scrolling behavior
+  $docFrame.on('load', resizeFrame).on('resize', resizeFrame).css('overflow', 'hidden').attr('scrolling', 'no');
 });
 })(jQuery);
 </script>
 
-<iframe src="rdoc/" width="100%" scrolling="auto" height="100%" frameborder="0" allowtransparency="true" id="{{ page.key }}-frame" style="overflow:hidden;"></iframe>
+<iframe src="rdoc/" width="100%" scrolling="auto" height="500px" frameborder="0" allowtransparency="true" id="{{ page.key }}-frame"></iframe>
