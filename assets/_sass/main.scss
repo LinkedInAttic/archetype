@@ -146,6 +146,9 @@ hr {
   strong {
     font-weight: bold;
   }
+  blockquote {
+    @include styleguide(pullquote);
+  }
 }
 
 // post details

@@ -3,7 +3,7 @@ layout    : post
 title     : Beautiful Typography Everywhere
 category  : tutorials
 tags      : [fonts, targeting, browsers]
-summary   : 
+summary   : Helvetica, Arial, sans-serif? Fun with font stacks in the 21st century.
 description : SUMMARY
 author    : eoneill
 published : false
