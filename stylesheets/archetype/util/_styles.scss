@@ -247,7 +247,7 @@
 // mixin for outputting filters in legacy IE
 // @mixin     ie-filter
 // @param     $value {String|List} a set of filters to output, sans `progid:DXImageTransform.Microsoft` prefix
-@mixin ie-filter($value) {
+@mixin ie-filter($value, $use-prefix: false) {
   $out: false;
   $value: -compass-list($value);
   $ms-filter-prefix: 'progid:DXImageTransform.Microsoft.';
@@ -258,10 +258,12 @@
     $out: if($out, '#{$out},#{$item}', '#{$item}');
   }
   @if($out) {
-    @if($legacy-support-for-ie6 or $legacy-support-for-ie7) {
+    @if $use-prefix != only {
       filter: unquote($out);
     }
-    -ms-filter: quote($out);
+    @if $use-prefix {
+      -ms-filter: quote($out);
+    }
   }
 }
 

@@ -45,7 +45,7 @@
     // invert percentage background positions
     @else if($method == background-position) {
       $first: first-value-of($value);
-      @if type-of($first) == number and (unit($first == "%") or strip-units($first) == 0) {
+      @if type-of($first) == number and (unit($first) == "%" or strip-units($first) == 0) {
         @return list-replace($value, 1, (100% - $first), space);
       }
     }
