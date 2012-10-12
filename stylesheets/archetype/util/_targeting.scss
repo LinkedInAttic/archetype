@@ -99,10 +99,12 @@
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       @media screen and (-webkit-min-device-pixel-ratio:0) {
         & {
+          @include debug-message("[archetype:target-browser:begin] --- webkit ---");
           @include output-style($property, $value);
           @if archetype-version('sass >= 3.2') {
             @content;
           }
+          @include debug-message("[archetype:target-browser:end]   --- webkit ---");
         }
       }
     }
@@ -113,10 +115,12 @@
       }
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       &, x:-moz-any-link {
+        @include debug-message("[archetype:target-browser:begin] --- gecko ---");
         @include output-style($property, $value);
         @if archetype-version('sass >= 3.2') {
           @content;
         }
+        @include debug-message("[archetype:target-browser:end]   --- gecko ---");
       }
     }
     // target opera
@@ -126,10 +130,12 @@
       }
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       &, x:-o-prefocus {
+        @include debug-message("[archetype:target-browser:begin] --- opera ---");
         @include output-style($property, $value);
         @if archetype-version('sass >= 3.2') {
           @content;
         }
+        @include debug-message("[archetype:target-browser:end]   --- opera ---");
       }
     }
     // if there's only one target browser and it's IE6 or IE lte 7, we can use an inline hack
@@ -144,7 +150,9 @@
           $prefix: nth(('_', '*'), $idx);
           $value: if(index($CORE_CSS_RTL_VALUE_SUPPORT, $property), rtl($value, $property), $value);
           // NOTE: RTL support on properties like `border-left-width` won't fully work until Compass/Sass support string replace methods
+          @include debug-message("[archetype:target-browser:being] --- #{$browsers} ---");
           @include output-style(#{$prefix}#{rtl($property)}, $value);
+          @include debug-message("[archetype:target-browser:end]   --- #{$browsers} ---");
           $value: nil;
         }
       }
@@ -154,10 +162,12 @@
   $classes: _getTargetedBrowsers($browsers, $using: if($merge, '&', ' &'));
   @if(length($classes) > 0) {
     #{$classes} {
+      @include debug-message("[archetype:target-browser:begin] --- #{$browsers} ---");
       @include output-style($property, $value);
       @if archetype-version('sass >= 3.2') {
         @content;
       }
+      @include debug-message("[archetype:target-browser:end]   --- #{$browsers} ---");
     }
   }
 }
@@ -189,10 +199,12 @@
   }
   @if(length($classes) > 0) {
     #{$classes} {
+      @include debug-message("[archetype:target-os:begin] --- #{$os} ---");
       @include output-style($property, $value);
       @if archetype-version('sass >= 3.2') {
         @content;
       }
+      @include debug-message("[archetype:target-os:end]   --- #{$os} ---");
     }
   }
 }

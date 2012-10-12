@@ -1,23 +1,2 @@
-// include configs
-@import "archetype/config";
-
-// include Compass mixins
-@import "compass";
-
-// utility mixins and helper functions
-@import "archetype/util";
-
-// custom hacks
-@import "archetype/hacks";
-
-// ui
-@import "archetype/ui";
-
-// grids
-@import "archetype/grid";
-
-// styleguide
-@import "archetype/styleguide";
-
-// base
-@import "archetype/base";
+// initialize
+@import "archetype/init";
