@@ -99,5 +99,4 @@ body {
 }
 .spinner {
   @include styleguide(larger loader);
-  @include target-browser(ie 8, padding, 10px);
 }
