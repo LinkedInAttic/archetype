@@ -87,9 +87,9 @@ module Archetype::SassExtensions::Styleguide
   # *Returns*:
   # - {List} a key-value paired list of styles
   #
-  def styleguide(description, theme = nil)
+  def styleguide(description, state = false, theme = nil)
     # convert it back to a Sass:List and carry on
-    return helpers.hash_to_list(get_styles(description, theme), 0, FALLBACKS)
+    return helpers.hash_to_list(get_styles(description, theme, state), 0, FALLBACKS)
   end
 
   #
@@ -121,12 +121,13 @@ private
   # given a sentence, deconstruct it into it's identifier and verbages
   #
   # *Parameters*:
-  # - <tt>sentence</tt> {String|List} the sentence describing of the component
+  # - <tt>sentence</tt> {String|List} the sentence describing the component
   # - <tt>theme</tt> {String} the theme to use
+  # - <tt>state</tt> {String} the name of a state to return
   # *Returns*:
   # - {Array} an array containing the identifer, modifiers, and a token
   #
-  def grammar(sentence, theme = nil)
+  def grammar(sentence, theme = nil, state = false)
     theme = get_theme(theme)
     components = theme[:components]
     # get a list of valid ids
@@ -171,7 +172,7 @@ private
     # i can't think of a case where we wouldn't want to remove dups
     # maybe in the case where we're looking for strict keys on the lookup?
     modifiers = modifiers.uniq
-    token = memoizer.tokenize(theme[:name], extensions, id, modifiers)
+    token = memoizer.tokenize(theme[:name], extensions, id, modifiers, state)
     return id, modifiers, token
   end
 
@@ -309,15 +310,17 @@ private
   # *Parameters*:
   # - <tt>description</tt> {String|List} the description of the component
   # - <tt>theme</tt> {String} the theme to use
+  # - <tt>state</tt> {String} the name of a state to return
   # *Returns*:
   # - {Hash} the styles
   #
-  def get_styles(description, theme = nil)
+  def get_styles(description, theme = nil, state = false)
+    state = helpers.to_str(state)
     description = description.to_a
     styles = {}
     description.each do |sentence|
       # get the grammar from the sentence
-      id, modifiers, token = grammar(sentence, theme)
+      id, modifiers, token = grammar(sentence, theme, state)
       if id
         # check memoizer
         memoized = memoizer.fetch(theme, token)
@@ -334,6 +337,15 @@ private
       elsif not helpers.is_value(sentence, :nil)
         helpers.logger.record(:warning, "[archetype:styleguide:missing_identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. please specify one of: #{modifiers.sort.join(', ')}")
       end
+    end
+    # now that we've collected all of our styles, if we requested a single state, merge that state upstream
+    if state != 'false' and styles['states']
+      state = styles['states'][state]
+      # remove any nested/special keys
+      SPECIAL.each do |special|
+        styles.delete(special)
+      end
+      styles = styles.merge(state) if not (state.nil? or state.empty?)
     end
     return styles
   end

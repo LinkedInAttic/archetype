@@ -14,12 +14,13 @@ private
   # - <tt>extensions</tt> {Array} the list of currently installed extensions
   # - <tt>id</tt> {String} the component identifier
   # - <tt>modifiers</tt> {Array} the list of modifiers
+  # - <tt>state</tt> {String} the name of the state
   # *Returns*:
   # - {Fixnum} whether or not the value is nil/blank
   #
-  def self.tokenize(theme, extensions, id, modifiers)
+  def self.tokenize(theme, extensions, id, modifiers, state)
     return nil if extensions.nil? or id.nil?
-    return "#{id}::#{(modifiers.to_a.sort + extensions).join('$')}".hash
+    return "#{id}::#{(modifiers.to_a.sort + extensions).join('$')}::#{state}".hash
   end
 
   #

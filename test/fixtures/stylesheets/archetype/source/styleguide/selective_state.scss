@@ -1,0 +1,22 @@
+@import "archetype"; 
+
+.simple-button {
+  &.disabled {
+    @include styleguide(small primary button, $state: disabled);
+  }
+  &.my-custom-hover {
+    @include styleguide(small primary button, $state: hover);
+  }
+  &.normal {
+    @include styleguide(small primary button, $state: false);
+  }
+}
+
+.anchor {
+  &.missing {
+    @include styleguide(link, $state: missing);
+  }
+  &.my-custom-hover {
+    @include styleguide(link, $state: hover);
+  }
+}

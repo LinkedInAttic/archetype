@@ -8,6 +8,7 @@
 
 ### New Features:
 
+- added support for selective states in `styleguide` calls (e.g. styleguide(large primary button, $state: disabled))
 - added support for `drop` and `styleguide` keywords in components
   - `drop` allows you to drop previously defined styles within a component definition (e.g. if you need to remove defaults)
   - `styleguide` in a component definition will insert the derived styles from a styleguide() call. this allows you to share styles between components
