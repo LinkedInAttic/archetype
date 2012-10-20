@@ -87,7 +87,7 @@ module Archetype::SassExtensions::Styleguide
   # *Returns*:
   # - {List} a key-value paired list of styles
   #
-  def styleguide(description, state = false, theme = nil)
+  def styleguide(description, state = 'false', theme = nil)
     # convert it back to a Sass:List and carry on
     return helpers.hash_to_list(get_styles(description, theme, state), 0, FALLBACKS)
   end
@@ -127,7 +127,7 @@ private
   # *Returns*:
   # - {Array} an array containing the identifer, modifiers, and a token
   #
-  def grammar(sentence, theme = nil, state = false)
+  def grammar(sentence, theme = nil, state = 'false')
     theme = get_theme(theme)
     components = theme[:components]
     # get a list of valid ids
@@ -226,6 +226,13 @@ private
         out[special_key] = tmp if not tmp.empty?
       end
     end
+    # check for nested styleguides
+    styleguide = out[STYLEGUIDE]
+    if styleguide and not styleguide.empty?
+      styles = get_styles(styleguide, theme[:name])
+      out.delete(STYLEGUIDE)
+      out = styles.rmerge(out)
+    end
     return out
   end
 
@@ -273,14 +280,6 @@ private
         value.delete(INHERIT)
         value = tmp.rmerge(value)
       end
-      # check for nested styleguides
-      styleguide = value[STYLEGUIDE]
-      if styleguide and not styleguide.empty?
-        styles = get_styles(styleguide, theme)
-        value = value.clone
-        value.delete(STYLEGUIDE)
-        value = styles.rmerge(value)
-      end
     end
     # return whatever we got
     return value
@@ -314,7 +313,7 @@ private
   # *Returns*:
   # - {Hash} the styles
   #
-  def get_styles(description, theme = nil, state = false)
+  def get_styles(description, theme = nil, state = 'false')
     state = helpers.to_str(state)
     description = description.to_a
     styles = {}

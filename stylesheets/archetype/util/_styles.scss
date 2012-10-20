@@ -190,7 +190,7 @@
       $state: first-value-of($state);
       @if(index(-compass-list($states), $state) or $states == true) {
         #{_getStateSelector($state)} {
-          @include to-styles2($value, $exclude);
+          @include _toStyles2($value, true, true, $exclude);
         }
       }
     }
@@ -200,7 +200,7 @@
     @each $selector in $selectors-data {
       @if(index(-compass-list($selectors), $selector) or $selectors == true) {
         #{first-value-of($selector)} {
-          @include to-styles2(nth($selector, 2), $exclude);
+          @include _toStyles2(nth($selector, 2), true, true, $exclude);
         }
       }
     }
@@ -208,8 +208,52 @@
 }
 
 // this is identical to to-styles, but we need to avoid Sass' recursion check :(
-// this means states can't have nested selectors and selectors can't have nested states
-@mixin to-styles2($list: (), $exclude: ()) {
+@mixin _toStyles2($list: (), $states: true, $selectors: true, $exclude: ()) {
+  $exclude: compact($exclude, nil);
+  $states-data: ();
+  $selectors-data: ();
+  @each $item in $list {
+    @if(length($item) > 1) {
+      $property: nth($item, 1);
+      $value: nth($item, 2);
+      @if(not index($exclude, $property)) {
+        @if($property == states and $states != false) {
+          $states-data: $value;
+        }
+        @else if($property == selectors and $selectors != false) {
+          $selectors-data: $value;
+        }
+        @else if($selectors == true and $states == true) {
+          @include _outputStyle($property, unquote($value));
+        }
+      }
+    }
+  }
+  // deal with the states
+  @if length($states-data) {
+    @each $state in $states-data {
+      $value: nth($state, 2);
+      $state: first-value-of($state);
+      @if(index(-compass-list($states), $state) or $states == true) {
+        #{_getStateSelector($state)} {
+          @include _toStyles_final($value, $exclude);
+        }
+      }
+    }
+  }
+  // deal with the nested selectors
+  @if length($selectors-data) {
+    @each $selector in $selectors-data {
+      @if(index(-compass-list($selectors), $selector) or $selectors == true) {
+        #{first-value-of($selector)} {
+          @include _toStyles_final(nth($selector, 2), $exclude);
+        }
+      }
+    }
+  }
+}
+// this is a dumbed down version of to-styles. this is the final step and won't go any deeper
+@mixin _toStyles_final($list: (), $exclude: ()) {
   $exclude: -compass-list($exclude);
   @each $item in $list {
     @if(length($item) > 1) {
@@ -221,7 +265,6 @@
     }
   }
 }
-
 
 // helper function to compute the selector for various states
 // @function  _getStateSelector
