@@ -48,6 +48,10 @@
     @else if($property == background-image or $property == gradient) { @include background-image($value); }
     // background-clip
     @else if($property == background-clip)      { @include background-clip($value); }
+    // background-size
+    @else if($property == background-size)      { @include background-size($value); }
+    // background-origin
+    @else if($property == background-origin)      { @include background-origin($value); }
     // IE filters
     @else if($property == ie-filter)            { @include ie-filter($value); }
     // hide-text
