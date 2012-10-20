@@ -1,0 +1,39 @@
+// this case will test a couple of things, including
+// - nested `styleguide` calls
+// - nested selectors
+// - nested `styleguide` calls in nested selectors
+
+@import "archetype"; 
+
+$a-blackhole: styleguide-add-component(nested-styleguide-test, (), (
+  (default, (
+    display         block,
+    color           red,
+    styleguide      (muted link without an underline),
+    background      green,
+    (states, (
+      (hover, (
+        styleguide  module,
+        nil
+      )),
+      nil
+    )),
+    (selectors, (
+      ('h3', (
+        styleguide  (large headline),
+        styleguide  (link without an underline),
+        nil
+      )),
+      ('&:after', (
+        color       red,
+        nil
+      ))
+    )),
+    nil
+  )),
+  nil
+), $CONFIG_THEME);
+
+.nested-styleguide-test {
+  @include styleguide(nested-styleguide-test);
+}

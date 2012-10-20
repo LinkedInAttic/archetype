@@ -1,0 +1,24 @@
+.nested-styleguide-test {
+  text-decoration: none;
+  display: block;
+  color: red;
+  background: green;
+}
+.nested-styleguide-test.hover, .nested-styleguide-test:hover {
+  text-decoration: none;
+  color: #0088cc;
+  background: #eeeeee;
+}
+.nested-styleguide-test h3 {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 22px;
+  color: #0088cc;
+  text-decoration: none;
+}
+.nested-styleguide-test h3.hover, .nested-styleguide-test h3:hover {
+  text-decoration: none;
+}
+.nested-styleguide-test:after {
+  color: red;
+}
