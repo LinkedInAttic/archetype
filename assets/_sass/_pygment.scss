@@ -1,7 +1,3 @@
-code {
-  // smaller font for code
-  font-size: 12px;
-}
 .highlight {
   @include styleguide(module);
   @include vertical-spacing(1, $method: margin);

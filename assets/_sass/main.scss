@@ -1,5 +1,5 @@
 $CONFIG_RESET_AUTO: true;
-@import "themes/rustic";
+@import "themes/aspirational";
 
 $main-logo: 'logos/logo.png';
 $main-logo-height: image-height($main-logo);
@@ -42,7 +42,6 @@ hr {
     display: block;
     @include hide-text();
     background: image-url($main-logo) no-repeat;
-    @include target-browser(ie 6, background-image, image-url('logos/logo_ie6.png'));
     width: image-width($main-logo);
     height: $main-logo-height;
   }
@@ -197,6 +196,14 @@ hr {
     &:last-child {
       padding-#{rtl(right)}: 0;
       border: 0;
+    }
+  }
+  .notice {
+    @include styleguide(small muted copy);
+    float: right;
+    @include vertical-spacing($top: -2, $method: margin);
+    a {
+      @include styleguide(small muted copy, muted link);
     }
   }
 }

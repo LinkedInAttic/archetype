@@ -1,0 +1,8 @@
+// ==========
+// TEXTURES
+// ==========
+
+$CONFIG_TEXTURE_CONTAINER:        (#fff #000) !default;
+$CONFIG_TEXTURE_BRISTOL:          (nth($CONFIG_COLOR_BRAND, 1)) !default;
+$CONFIG_TEXTURE_CANVAS:           ("#eaf1e6 #{image-url('textures/forest.jpg')} 50% 0 repeat-x") !default;
+$CONFIG_TEXTURE_NAV:              (#fff);
