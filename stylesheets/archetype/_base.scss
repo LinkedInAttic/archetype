@@ -8,6 +8,8 @@
 // protect against multiple resets
 $RESET_INIT: false !default;
 
+// @category  base
+
 // sets the base styles for the page (e.g. reset or normalize)
 // @mixin     base
 // @param     $exclude {List} the list of styles to exclude @see _normalize.scss and _reset.scss
