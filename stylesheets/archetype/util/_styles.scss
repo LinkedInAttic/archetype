@@ -315,8 +315,6 @@
 }
 
 // mixin for generating a pseudo-element
-// Note IE7/6 doesn't understand pseudo element as ::before and ::after
-// IE8 need to have :before and not ::before
 // @mixin     pseudo-element
 // @param     $width {String} width (default 0 for positioning in FF3)
 // @param     $height {String} height
