@@ -15,8 +15,8 @@ task :release do
   if (($stdin.gets.chomp)[0] == 'y')
     Rake::Task['git:revert'].invoke if not clean
     Rake::Task['gem:build'].invoke
-    #sh "git tag -a v#{version} -m \"version #{version}\" && git push --tags" if official
-    #sh "gem push #{@spec.name}-#{version}.gem"
+    sh "git tag -a v#{version} -m \"version #{version}\" && git push --tags" if official
+    sh "gem push #{@spec.name}-#{version}.gem"
     puts "Successfully released v#{version}!".colorize(:green)
   else
     puts "Release aborted!".colorize(:red)
