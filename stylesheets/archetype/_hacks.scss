@@ -51,7 +51,7 @@
 
 // this creates a one-type executing expression that inserts an element relative to `this` element.
 // this allows some level of support for :before/:after in IE6/7
-// inspired by: http://nicolasgallagher.com/better-float-containment-in-ie/
+// inspired by http://nicolasgallagher.com/better-float-containment-in-ie/
 // @mixin    ie-pseudo
 // @param    $styles {String} the styles to apply to the pseudo-element
 // @param    $content {String} the content to insert into the element (similar to css `content` attribute)

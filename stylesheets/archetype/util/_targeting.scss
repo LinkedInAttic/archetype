@@ -1,6 +1,5 @@
 // @category  utilities/targeting
 
-
 @function _isLegacySupported($vendor, $comparator, $version) {
   // we currently only check for legacy IE support
   @if $vendor != ie { @return true; }
@@ -12,8 +11,9 @@
   @if($legacy-support-for-ie6) { $min-ie-legacy-support: 6; $supported-legacy-ie: append($supported-legacy-ie, 6); }
   @return if($comparator == lte, $version >= $min-ie-legacy-support, index($supported-legacy-ie, $version));
 }
+
 // given a list of browsers and versions, this will consolidate them into a
-// normalized list of targetted browsers
+// normalized list of targeted browsers
 // @function  _getTargetedBrowsers
 // @private
 // @param     $browsers {List} the browsers/versions to target

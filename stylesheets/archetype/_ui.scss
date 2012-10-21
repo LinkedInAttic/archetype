@@ -101,7 +101,7 @@
 // @mixin   centered-box
 @mixin centered-box() {
   @include stretch();
-  margin:   auto;
+  margin: auto;
 }
 
 // hide element visibly but preserve screen-reader support
