@@ -17,6 +17,7 @@
 - added `stroke()` mixin to create a stroke line around text (or font icon)
 - added `hide-element()` mixin to hide elements from screen but keep them screen-reader accessible
 - added basic support for fallback CSS values (e.g. border: red; border: rgba(255,0,0, 0.8);)
+- added `$CONFIG_STATE_MAPPINGS` to simplify the mapping between state names and selectors
 
 ### Major Changes:
 

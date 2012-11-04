@@ -11,3 +11,4 @@ $CONFIG_GRID_OFFSET_METHOD:       margin !default;                              
 $CONFIG_GRID_ALIGN_METHOD:        float !default;                                                   // alignment method [float|inline-block|table-cell] (NOTE: table-cell doesn't work in all cases
 $CONFIG_GRID_DIRECTION:           reading-direction() !default;                                     // direction of grid
 $CONFIG_GRID_DEBUG:               false !default;                                                   // debugging mode
+$CONFIG_GRID_SPACING_FACTOR:      4 !default;                                                       // the factor to use when converting grid indents/outdents to horizontal units

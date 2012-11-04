@@ -8,19 +8,28 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_ALERTS_ID, $STYLEGUIDE_ALERTS
   (default, (
     // fallback background
     background-color      $CONFIG_COLOR_BG_ALERT_NOTIFY,
-    background-position   styleguide-sprite-position($CONFIG_SPRITE_ALERTS, $CONFIG_ICON_ALERTS_NOTICE, $offset-x: nth($CONFIG_SPRITE_ALERTS_OFFSET, 1), $offset-y: nth-cyclic($CONFIG_SPRITE_ALERTS_OFFSET, 2)),
-    background-image      styleguide-sprite-url($CONFIG_SPRITE_ALERTS),
     background-repeat     no-repeat,
     // gradient background
-    background            _styleguideGetAlertBG(notice),
+    background            $CONFIG_GRADIENT_ALERT_NOTIFY,
     box-shadow            _styleguideGetAlertShadow(notice),
     // common
+    overflow              hidden,
     display               block,
     color                 nth-cyclic($CONFIG_COLOR_COPY, 2),
     font-size             nth($CONFIG_FONT_NOTICE, 1),
     line-height           nth-cyclic($CONFIG_FONT_NOTICE, 2),
     position              relative,
     padding               $CONFIG_DIM_ALERTS_SPACING,
+    glyph-icon            _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_NOTIFY),
+    (selectors, (
+      ('&:before', (
+        position          absolute,
+        top               nth(_styleguideGetAlertGlyphOffset($CONFIG_GLYPH_ALERT_NOTIFY), 1),
+        left              nth(_styleguideGetAlertGlyphOffset($CONFIG_GLYPH_ALERT_NOTIFY), 2),
+        line-height       1
+      )),
+      nil
+    )),
     nil
   )),
   (notice, (
@@ -29,20 +38,20 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_ALERTS_ID, $STYLEGUIDE_ALERTS
   )),
   (success, (
     background-color      $CONFIG_COLOR_BG_ALERT_SUCCESS,
-    background-position   styleguide-sprite-position($CONFIG_SPRITE_ALERTS, $CONFIG_ICON_ALERTS_SUCCESS, $offset-x: nth($CONFIG_SPRITE_ALERTS_OFFSET, 1), $offset-y: nth-cyclic($CONFIG_SPRITE_ALERTS_OFFSET, 2)),
-    background            _styleguideGetAlertBG(success),
+    background            $CONFIG_GRADIENT_ALERT_SUCCESS,
+    glyph-icon            _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_SUCCESS),
     box-shadow            _styleguideGetAlertShadow(success)
   )),
   (error, (
     background-color      $CONFIG_COLOR_BG_ALERT_ERROR,
-    background-position   styleguide-sprite-position($CONFIG_SPRITE_ALERTS, $CONFIG_ICON_ALERTS_ERROR, $offset-x: nth($CONFIG_SPRITE_ALERTS_OFFSET, 1), $offset-y: nth-cyclic($CONFIG_SPRITE_ALERTS_OFFSET, 2)),
-    background            _styleguideGetAlertBG(error),
+    background            $CONFIG_GRADIENT_ALERT_ERROR,
+    glyph-icon            _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_ERROR),
     box-shadow            _styleguideGetAlertShadow(error)
   )),
   (yield, (
     background-color      $CONFIG_COLOR_BG_ALERT_YIELD,
-    background-position   styleguide-sprite-position($CONFIG_SPRITE_ALERTS, $CONFIG_ICON_ALERTS_YIELD, $offset-x: nth($CONFIG_SPRITE_ALERTS_OFFSET, 1), $offset-y: nth-cyclic($CONFIG_SPRITE_ALERTS_OFFSET, 2)),
-    background            _styleguideGetAlertBG(yield),
+    background            $CONFIG_GRADIENT_ALERT_YIELD,
+    glyph-icon            _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_YIELD),
     box-shadow            _styleguideGetAlertShadow(yield)
   ))
 ), $CONFIG_THEME);

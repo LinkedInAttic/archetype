@@ -143,7 +143,7 @@
 // @param     $width {Number} the width of the stroke
 // @param     $color {Color} the color of the stroke
 // @param     $shadow {List} an additional drop shadow to attach
-@mixin stroke($width: 1px, $color: black, $shadow: false) {
+@mixin glyph-stroke($width: 1px, $color: black, $shadow: false) {
   @include box-shadow(compact(0 $width 0 $color, 0 -1*$width 0 $color, $width 0 0 $color, -1*$width 0 0 $color, $shadow));
 }
 
@@ -166,15 +166,22 @@
       font-weight: $CONFIG_GLYPHS_WEIGHT;
       font-style: $CONFIG_GLYPHS_STYLE;
       text-decoration: inherit;
-      font-size: $size;
-      color: $color;
+      @include if-set(font-size, $size);
+      @include if-set(color, $color);
       content: $char-code;
     }
     // support for IE6/7
+    $styles: "font-family:#{$CONFIG_GLYPHS_NAME},a;font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;";
+    @if($size != nil) {
+      $styles: $styles + "font-size:#{$size};"
+    }
+    @if($color != nil) {
+      $styles: $styles + "color:#{$color};"
+    }
     @if($ie-styles) {
       $styles: $styles + $ie-styles;
     }
-    @include ie-pseudo-before($styles: "font-family:#{$CONFIG_GLYPHS_NAME},a;font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;font-size:#{$size};color:#{$color};", $content: $char-code);
+    @include ie-pseudo-before($styles: $styles, $content: $char-code);
   }
 }
 

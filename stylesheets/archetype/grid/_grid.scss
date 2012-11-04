@@ -71,7 +71,7 @@
 // @param     $abuse {Bool} @see _getUnit
 // @return    $dent {List} list of dents
 @function _gridDent($list: false, $left: 0, $right: 0, $direction: in, $abuse: false) {
-  $factor: if($direction == out, -1, 1);
+  $factor: if($direction == out, -1, 1) * $CONFIG_GRID_SPACING_FACTOR;
   $dent: ();
   $list: get-collection($list, ($left $right), $min: 2);
 

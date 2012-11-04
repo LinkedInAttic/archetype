@@ -178,7 +178,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_CARETS_ID, $STYLEGUIDE_CARETS
     width               nth($CONFIG_DIM_HOVERCARD_TIP, 1),
     height              nth-cyclic($CONFIG_DIM_HOVERCARD_TIP, 2),
     margin-left         -1/2*nth($CONFIG_DIM_HOVERCARD_TIP, 1),
-    background          (transparent image-url($CONFIG_ICON_HOVERCARD_TIP) _styleguideGetTooltipTipBG(south) no-repeat),
+    background          (transparent image-url($CONFIG_IMG_HOVERCARD_TIP) _styleguideGetTooltipTipBG(south) no-repeat),
     top                 100%,
     left                50%
   )),

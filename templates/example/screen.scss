@@ -5,7 +5,7 @@ $CONFIG_RESET_AUTO: true;
 body {
   @include styleguide(medium copy, canvas);
   @include font-family(sans-serif);
-  @include vertical-spacing(2);
+  @include vertical-spacing(4);
 }
 
 .row {
@@ -18,13 +18,13 @@ body {
 
 #main {
   @include grid(2/3, $first: true, $indent: grid-indent(1));
-  @include vertical-spacing(2);
+  @include vertical-spacing(4);
   @include styleguide(container);
 }
 
 #sidebar {
   @include grid(1/3, $indent: grid-indent(1));
-  @include vertical-spacing(2);
+  @include vertical-spacing(4);
   @include styleguide(container);
 }
 
@@ -38,17 +38,14 @@ body {
 
 #welcome {
   @include styleguide(notice alert);
-  @include vertical-spacing($bottom: 1, $method: margin);
+  @include vertical-spacing($bottom: 2, $method: margin);
   a {
     @include styleguide(link in a notice alert);
-  }
-  i {
-    @include styleguide(icon in a notice alert);
   }
 }
 
 .dialog {
-  @include vertical-spacing($top: 1, $method: margin);
+  @include vertical-spacing($top: 2, $method: margin);
   @include styleguide(container);
   .title {
     @include styleguide(bristol, medium muted headline in a bristol);

@@ -54,24 +54,29 @@
   ), $direction);
 }
 
-@function _styleguideGetAlertBG($type: notice) {
-  $gradient: associative((
-    notice        $CONFIG_GRADIENT_ALERT_NOTIFY,
-    success       $CONFIG_GRADIENT_ALERT_SUCCESS,
-    error         $CONFIG_GRADIENT_ALERT_ERROR,
-    yield         $CONFIG_GRADIENT_ALERT_YIELD
-  ), $type);
-  @if not styleguide-check-sprite($CONFIG_SPRITE_ALERTS) {
-    @return $gradient;
-  }
-  $sprite: associative((
-    notice        $CONFIG_ICON_ALERTS_NOTICE,
-    success       $CONFIG_ICON_ALERTS_SUCCESS,
-    error         $CONFIG_ICON_ALERTS_ERROR,
-    yield         $CONFIG_ICON_ALERTS_YIELD
-  ), $type);
-  @return (sprite($CONFIG_SPRITE_ALERTS, $sprite, $offset-x: nth($CONFIG_SPRITE_ALERTS_OFFSET, 1), $offset-y: nth-cyclic($CONFIG_SPRITE_ALERTS_OFFSET, 2)) no-repeat, $gradient)
+// helper function to get the alert icon offset
+// @function  _styleguideGetAlertGlyphOffset
+// @private
+// @param     $type {List} the glpyh data
+// @return    {List} the top and left offsets for the glyph
+@function _styleguideGetAlertGlyphOffset($type: $CONFIG_GLYPH_ALERT_NOTIFY) {
+  $top: (nth-cyclic($CONFIG_DIM_ALERTS_SPACING, 1) + nth-cyclic($CONFIG_DIM_ALERTS_SPACING, 3) + nth-cyclic($CONFIG_FONT_NOTICE, 2) - nth($type, 4)) / 2;
+  $left: ((nth-cyclic($CONFIG_DIM_ALERTS_SPACING, 4) - nth($type, 4))/2);
+  @return ($top $left);
 }
+
+// helper function to extract the glyhp styles for an alert icon
+// @function  _styleguideGetAlertGlyph
+// @private
+// @param     $type {List} the glpyh data
+// @return    {List} the parameters needed for glyph-icon()
+@function _styleguideGetAlertGlyph($type: $CONFIG_GLYPH_ALERT_NOTIFY) {
+  $offset: _styleguideGetAlertGlyphOffset($type);
+  $top: nth($offset, 1);
+  $left: nth($offset, 2);
+  @return (nth($type, 1), nth($type, 2), nth($type, 3), 'position:absolute;line-height:1;top:#{$top};left:#{$left};')
+}
+
 
 // helper function to return the list of shadows for the alert
 // alerts have two shadows, one thats shared and ones that unique

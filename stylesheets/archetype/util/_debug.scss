@@ -7,7 +7,7 @@
 @function is-debug-enabled($if: nil) {
   // debug is only available in DEV environments, so check that first
   // then check if the debug flag/override is truthy
-  @return (index($CONFIG_DEBUG_ENVS, $CONFIG_ENV) and if($if == nil, $CONFIG_DEBUG, $if));
+  @return (index($CONFIG_DEBUG_ENVS, archetype-env()) and if($if == nil, $CONFIG_DEBUG, $if));
 }
 
 // a debug helper, print out a message

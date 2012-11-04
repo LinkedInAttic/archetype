@@ -12,14 +12,14 @@ $CONFIG_DIM_BUTTON_SPACING_OUTER_NARROW:        7px !default;
 // tooltips
 $CONFIG_DIM_TOOLTIP_RADIUS:                     5px !default;
 $CONFIG_DIM_TOOLTIP_MAX_WIDTH:                  300px !default;
-$CONFIG_DIM_TOOLTIP_SPACING:                    (vertical-spacing(0.5, $abuse: true) horizontal-spacing(0.25, $abuse: true)) !default;
+$CONFIG_DIM_TOOLTIP_SPACING:                    (vertical-spacing(1) horizontal-spacing(1)) !default;
 $CONFIG_DIM_TOOLTIP_TIP:                        7px !default;
 $CONFIG_DIM_TOOLTIP_TIP_OFFSET:                 5px !default;
 
 // hovercards
 $CONFIG_DIM_HOVERCARD_RADIUS:                   $CONFIG_DIM_TOOLTIP_RADIUS !default;
 $CONFIG_DIM_HOVERCARD_MAX_WIDTH:                $CONFIG_DIM_TOOLTIP_MAX_WIDTH !default;
-$CONFIG_DIM_HOVERCARD_SPACING:                  (vertical-spacing(2) horizontal-spacing(1)) !default;
+$CONFIG_DIM_HOVERCARD_SPACING:                  (vertical-spacing(4) horizontal-spacing(4)) !default;
 $CONFIG_DIM_HOVERCARD_TIP:                      (24px 15px) !default;
 $CONFIG_DIM_HOVERCARD_TIP_OFFSET:               10px !default;
 
@@ -28,24 +28,23 @@ $CONFIG_DIM_GENERIC_BORDER:                     1px !default;
 $CONFIG_DIM_GENERIC_BORDER_THICK:               3px !default;
 
 // menu items
-$CONFIG_DIM_MENU_ITEM_SPACING:                  (vertical-spacing(0.6, $abuse: true) horizontal-spacing(1) vertical-spacing(0.6, $abuse: true) horizontal-spacing(1.5, $abuse: true)) !default;
+$CONFIG_DIM_MENU_ITEM_SPACING:                  (vertical-spacing(1.2) horizontal-spacing(4) vertical-spacing(1.2, $abuse: true) horizontal-spacing(6)) !default;
 
 // flyouts
-$CONFIG_DIM_FLYOUT_SPACING:                     (0 0 vertical-spacing(0.7, $abuse: true)) !default;
+$CONFIG_DIM_FLYOUT_SPACING:                     (0 0 vertical-spacing(1.4, $abuse: true)) !default;
 $CONFIG_DIM_FLYOUT_MIN_WIDTH:                   _getGridWidth(4) !default;
 $CONFIG_DIM_FLYOUT_RADIUS:                      1px !default;
 
 // headings
-$CONFIG_DIM_HEADING_SPACING_OUTER:              (vertical-spacing(0.7, $abuse: true) 0) !default;
-$CONFIG_DIM_HEADING_SPACING:                    (vertical-spacing(1.2, $abuse: true) horizontal-spacing(1.5, $abuse: true)) !default;
+$CONFIG_DIM_HEADING_SPACING_OUTER:              (vertical-spacing(1.4, $abuse: true) 0) !default;
+$CONFIG_DIM_HEADING_SPACING:                    (vertical-spacing(2.4, $abuse: true) horizontal-spacing(6)) !default;
 
 // breadcrumbs
-$CONFIG_DIM_BREADCRUMB_SPACING_OUTER:           (0 0 vertical-spacing(1.5, $abuse: true) horizontal-spacing(0.25, $abuse: true)) !default;
-$CONFIG_DIM_BREADCRUMB_SPACING:                 (0 0 0 horizontal-spacing(0.35, $abuse: true)) !default;
+$CONFIG_DIM_BREADCRUMB_SPACING_OUTER:           (0 0 vertical-spacing(3) horizontal-spacing(1)) !default;
+$CONFIG_DIM_BREADCRUMB_SPACING:                 (0 0 0 horizontal-spacing(1.4, $abuse: true)) !default;
 
 // alerts
-$CONFIG_DIM_ALERTS_SPACING:                     (vertical-spacing(1) horizontal-spacing(1) vertical-spacing(1) horizontal-spacing(2.5, $abuse: true)) !default;
+$CONFIG_DIM_ALERTS_SPACING:                     (vertical-spacing(2) horizontal-spacing(4) vertical-spacing(2) horizontal-spacing(10)) !default;
 
 // closes
 $CONFIG_DIM_CLOSES:                             (11px) !default;
-

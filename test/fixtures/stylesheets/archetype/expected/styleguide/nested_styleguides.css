@@ -4,7 +4,7 @@
   color: red;
   background: green;
 }
-.nested-styleguide-test.hover, .nested-styleguide-test:hover {
+.nested-styleguide-test.hover, .nested-styleguide-test:hover, .nested-styleguide-test.focus, .nested-styleguide-test:focus {
   text-decoration: none;
   color: #0088cc;
   background: #eeeeee;
@@ -16,7 +16,7 @@
   color: #0088cc;
   text-decoration: none;
 }
-.nested-styleguide-test h3.hover, .nested-styleguide-test h3:hover {
+.nested-styleguide-test h3.hover, .nested-styleguide-test h3:hover, .nested-styleguide-test h3.focus, .nested-styleguide-test h3:focus {
   text-decoration: none;
 }
 .nested-styleguide-test:after {

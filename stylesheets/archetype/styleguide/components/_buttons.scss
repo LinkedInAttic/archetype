@@ -43,10 +43,6 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID, $STYLEGUIDE_BUTTO
         background-image    $CONFIG_GRADIENT_BUTTON_PRIMARY_HOVER,
         box-shadow          $CONFIG_SHADOW_BUTTON_HOVER
       )),
-      (focus, (
-        inherit (hover),
-        nil
-      )),
       (active, (
         box-shadow          $CONFIG_SHADOW_BUTTON_ACTIVE,
         nil
@@ -79,10 +75,6 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID, $STYLEGUIDE_BUTTO
         filter-gradient     $CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER_IE,
         background-image    $CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER
       )),
-      (focus, (
-        inherit (hover),
-        nil
-      )),
       (disabled, (
         background-color    $CONFIG_COLOR_BG_BUTTON_SECONDARY_HOVER,
         filter-gradient     $CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER_IE,
@@ -102,10 +94,6 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID, $STYLEGUIDE_BUTTO
         background-color    $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT_HOVER,
         filter-gradient     $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_HOVER_IE,
         background-image    $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_HOVER
-      )),
-      (focus, (
-        inherit (hover),
-        nil
       )),
       (disabled, (
         background-color    $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT_HOVER,
@@ -316,7 +304,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID, $STYLEGUIDE_BUTTO
     line-height             0,
     overflow                hidden,
     padding                 0, // override browser defaults,
-    margin                  (0 horizontal-spacing(0.1, $abuse: true)),
+    margin                  (0 horizontal-spacing(0.4, $abuse: true)),
     text-shadow             nil,
     border-radius           $CONFIG_DIM_BUTTON_INDICATOR_SMALL_RADIUS,
     background-color        $CONFIG_COLOR_BUTTON_INDICATOR,
@@ -328,10 +316,6 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID, $STYLEGUIDE_BUTTO
         filter-gradient     nil,
         background-image    nil,
         box-shadow          nil
-      )),
-      (focus, (
-        inherit (hover),
-        nil
       )),
       (active, (
         inherit (hover),

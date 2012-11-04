@@ -20,10 +20,6 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_MENU_ITEMS_ID, $STYLEGUIDE_ME
         background-image      $CONFIG_GRADIENT_BUTTON_PRIMARY,
         nil
       )),
-      (focus, (
-        inherit (hover),
-        nil
-      )),
       (active, (
         inherit (hover),
         nil

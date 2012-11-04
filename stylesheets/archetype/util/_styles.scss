@@ -92,6 +92,7 @@
     @else if($property == background-position)  { @include background-position($value); }
     @else if($property == left)                 { @include left($value); }
     @else if($property == right)                { @include right($value); }
+    @else if($property == glyph-icon)           { @include glyph-icon(nth($value, 1), nth($value, 2), nth($value, 3), nth($value, 4)); }
     // animations
     @else if($property == animation) {
       @if archetype-version('compass >= 0.13') {
@@ -272,21 +273,9 @@
 // @param     $state {String} the state to select
 // @param     $prefix {String} the prefix to append to the state (for class names only)
 @function _getStateSelector($state, $prefix: $CONFIG_STATE_PREFIX) {
-  @if index(-compass-list($CONFIG_STATES_NO_PREFIX), $state) {
-    $prefix: '';
-  }
-  // default class state
-  $selector: '&.#{$prefix}#{$state}';
-  // attach special states
-  @if index(-compass-list($CONFIG_STATES_PSEUDO), $state) {
-    $selector: '#{$selector}, &:#{$state}';
-  }
-  @if index(-compass-list($CONFIG_STATES_ATTRIBUTE), $state) {
-    $selector: '#{$selector}, &[#{$state}]';
-  }
-  @if index(-compass-list($CONFIG_STATES_SPECIAL), $state) {
-    // for special cases, we don't want any other selectors, so assign instead of append
-    $selector: '&::#{$state}';
+  $selector: associative($CONFIG_STATE_MAPPINGS, $state, $strict: true);
+  @if $selector == nil {
+    $selector: '&.#{if(index(-compass-list($CONFIG_STATE_NO_PREFIX), $state), $prefix, "")}#{$state}';
   }
   @return $selector;
 }

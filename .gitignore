@@ -15,4 +15,4 @@ test/fixtures/stylesheets/*/tmp
 test/fixtures/stylesheets/*/saved
 test/fixtures/stylesheets/empty
 test/fixtures/stylesheets/*/sass/.sass-cache
-test/fixtures/stylesheets/archetype/images/lib/archetype/**/*-*.png
+test/fixtures/stylesheets/archetype/images/vendor/archetype/**/*-*.png
