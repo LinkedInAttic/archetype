@@ -8,6 +8,7 @@
 
 ### New Features:
 
+- updated normalize to 2.0.1
 - added support for selective states in `styleguide` calls (e.g. styleguide(large primary button, $state: disabled))
 - added support for `drop` and `styleguide` keywords in components
   - `drop` allows you to drop previously defined styles within a component definition (e.g. if you need to remove defaults)

@@ -63,7 +63,6 @@ Archetype was originally written by [Eugene O'Neill](http://www.linkedin.com/in/
 - [Unifying Agile and UX with Live Style Guides](https://speakerdeck.com/u/thoughtmerchant/p/unifying-agile-and-ux-with-live-style-guides)
 - [Twitter Bootstrap](http://twitter.github.com/bootstrap/)
 - [ZURB Foundation](http://foundation.zurb.com/)
-- [Semantic Grid System](http://semantic.gs/) \(published after we built our grid, but great minds think alike\)
 
 ### Special Thanks
 
