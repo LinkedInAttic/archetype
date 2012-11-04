@@ -30,10 +30,14 @@ $RESET_INIT: false !default;
     }
   }
   @if $CONFIG_GLYPHS_AUTO {
-    // the font-face mixin will likely change in a future version, keep an eye on this
-    // https://github.com/chriseppstein/compass/issues/867
-    @include font-face($CONFIG_GLYPHS_NAME, $CONFIG_GLYPHS_FILES, $CONFIG_GLYPHS_EOT, $CONFIG_GLYPHS_WEIGHT, $CONFIG_GLYPHS_STYLE);
+    @include base-glyph();
   }
+}
+
+@mixin base-glyph() {
+  // the font-face mixin will likely change in a future version, keep an eye on this
+  // https://github.com/chriseppstein/compass/issues/867
+  @include font-face($CONFIG_GLYPHS_NAME, $CONFIG_GLYPHS_FILES, $CONFIG_GLYPHS_EOT, $CONFIG_GLYPHS_WEIGHT, $CONFIG_GLYPHS_STYLE);
 }
 
 // auto invoke base reset

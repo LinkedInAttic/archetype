@@ -1,6 +1,7 @@
 // @category  base
 @import "normalize";
 @import "reset";
+@import "h5bp";
 
 // hybrid method for reset using both a global reset as well as some normalize features
 // @mixin     base-hybrid
@@ -8,8 +9,17 @@
 @mixin base-hybrid($exclude: ()) {
   $exclude: -compass-list($exclude);
   // start with a reset
-  @include base-reset($exclude: $exclude);
+  @if not index($exclude, reset) {
+    @include base-reset($exclude: $exclude);
+  }
 
   // add in some good stuff from normalize
-  @include base-normalize($exclude: join(normalize-html5 normalize-page normalize-typography normalize-quotes normalize-lists normalize-embeds normalize-figures normalize-tables normalize-ime, $exclude));
+  @if not index($exclude, normalize) {
+    @include base-normalize($exclude: join(normalize-html5 normalize-page normalize-typography normalize-quotes normalize-lists normalize-embeds normalize-figures normalize-tables normalize-ime, $exclude));
+  }
+
+  // and some boilerplate
+  @if not index($exclude, h5bp) {
+    @include base-h5bp($exclude: $exclude);
+  }
 }

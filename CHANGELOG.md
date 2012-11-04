@@ -8,6 +8,7 @@
 
 ### New Features:
 
+- added HTML5 Boilerplate reset
 - updated normalize to 2.0.1
 - added support for selective states in `styleguide` calls (e.g. styleguide(large primary button, $state: disabled))
 - added support for `drop` and `styleguide` keywords in components
