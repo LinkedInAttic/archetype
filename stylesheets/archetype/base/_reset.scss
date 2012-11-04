@@ -20,28 +20,28 @@
   menu, nav, output, ruby, section, summary,
   time, mark, audio, video {
     // PAGE
-    @if(not index($exclude, page)) {
+    @if(not index($exclude, reset-page)) {
       @include reset-box-model();
     }
     // TYPOGRAPHY
-    @if(not index($exclude, typography)) {
+    @if(not index($exclude, reset-typography)) {
       @include reset-font();
     }
   }
   // PAGE
-  @if(not index($exclude, page)) {
+  @if(not index($exclude, reset-page)) {
     body {
       @include reset-body();
     }
   }
   // LISTS
-  @if(not index($exclude, lists)) {
+  @if(not index($exclude, reset-lists)) {
     ol, ul {
       @include reset-list-style();
     }
   }
   // TABLES
-  @if(not index($exclude, tables)) {
+  @if(not index($exclude, reset-tables)) {
     table {
       @include reset-table();
     }
@@ -50,23 +50,23 @@
     }
   }
   // QUOTES
-  @if(not index($exclude, quotes)) {
+  @if(not index($exclude, reset-quotes)) {
     q, blockquote {
       @include reset-quotation();
     }
   }
   // EMBEDS
-  @if(not index($exclude, embeds)) {
+  @if(not index($exclude, reset-embeds)) {
     a img {
       @include reset-image-anchor-border();
     }
   }
   // HTML5
-  @if(not index($exclude, html5)) {
+  @if(not index($exclude, reset-html5)) {
     @include reset-html5();
   }
   // IME
-  @if(not index($exclude, ime)) {
+  @if(not index($exclude, reset-ime)) {
     @include base-normalize-ime();
   }
 }
