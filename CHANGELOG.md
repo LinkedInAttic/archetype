@@ -24,6 +24,7 @@
 ### Major Changes:
 
 - loading spinners now use CSS3 animations and require some integration work
+- updated default vertical/horizontal spacing to 5px
 - `list-extend()` is now `associative-merge()`
 
 ### Resolved Issues:
