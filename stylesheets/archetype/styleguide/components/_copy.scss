@@ -8,7 +8,8 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_COPY_ID, $STYLEGUIDE_COPY, (
   (default, (
     font-size           nth($CONFIG_FONT_COPY_MEDIUM, 1),
     line-height         nth-cyclic($CONFIG_FONT_COPY_MEDIUM, 2),
-    color               nth($CONFIG_COLOR_COPY, 1)
+    color               nth($CONFIG_COLOR_COPY, 1),
+    font-weight         normal
   )),
   // sizes
   (medium, (
@@ -64,6 +65,14 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_COPY_ID, $STYLEGUIDE_COPY, (
     border-left         ($CONFIG_DIM_GENERIC_BORDER solid $CONFIG_COLOR_BREADCRUMB),
     margin              $CONFIG_DIM_BREADCRUMB_SPACING_OUTER,
     padding             $CONFIG_DIM_BREADCRUMB_SPACING,
+    nil
+  )),
+  (emphasized, (
+    font-style          italic,
+    nil
+  )),
+  (strong, (
+    font-weight         bold,
     nil
   )),
   // muted colors
