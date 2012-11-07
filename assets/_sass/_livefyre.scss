@@ -1,6 +1,7 @@
 @import "themes/aspirational";
 
 #main #livefyre {
+  min-height: 0;
   // custom action bar
   .lf_action_bar {
     @include styleguide(module);

@@ -1,8 +1,8 @@
 .highlight {
   @include styleguide(module);
-  @include vertical-spacing(1, $method: margin);
-  @include vertical-spacing(1);
-  @include horizontal-spacing(1);
+  @include vertical-spacing(2, $method: margin);
+  @include vertical-spacing(2);
+  @include horizontal-spacing(4);
 }
 .highlight {
   .hll { background-color: #ffffcc }

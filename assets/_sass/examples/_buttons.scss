@@ -1,0 +1,14 @@
+#__components__buttons .example .preview {
+  $button-sizes: (small medium large);
+  $button-types: (primary secondary spotlight);
+  // button scaffolding
+  .simple-button {
+    @each $size in $button-sizes {
+      @each $type in $button-types {
+        &.#{$size}.#{$type} {
+          @include styleguide($size $type button);
+        }
+      }
+    }
+  }
+}

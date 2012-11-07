@@ -1,4 +1,4 @@
-<script type="text/javascript">
+<script>
     var mpq = [];
     mpq.push(["init", "{{ site.analytics.mixpanel.token}}"]);
     (function(){var b,a,e,d,c;b=document.createElement("script");b.type="text/javascript";

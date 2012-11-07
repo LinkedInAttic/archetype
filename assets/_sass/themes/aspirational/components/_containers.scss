@@ -10,10 +10,3 @@ $a-blackhole: styleguide-extend-component($STYLEGUIDE_CONTAINERS_ID, (
   nil
 ), $CONFIG_THEME);
 
-$a-blackhole: styleguide-extend-component($STYLEGUIDE_CANVAS_ID, (
-  (default, (
-    background-size   (100% auto),
-    nil
-  )),
-  nil
-), $CONFIG_THEME);

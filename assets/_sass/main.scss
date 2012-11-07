@@ -3,10 +3,15 @@ $CONFIG_RESET_AUTO: true;
 
 $main-logo: 'logos/logo.png';
 $main-logo-height: image-height($main-logo);
-$main-header-height: $main-logo-height + 6px;
+$main-header-height: $main-logo-height;
+
+// GENERAL BODY SETUP
+body, button, input, textarea {
+  // make sure everyone is using the sans-serif stack by default
+  @include font-family(sans-serif);
+}
 
 body {
-  @include font-family(sans-serif);
   @include styleguide(canvas, copy);
 }
 
@@ -30,8 +35,9 @@ hr {
   }
 }
 
+// HEADER
 #global-header {
-  @include vertical-spacing($top: 1);
+  @include vertical-spacing($top: 2);
   @include styleguide(navigation);
   height: $main-header-height;
   div {
@@ -55,8 +61,8 @@ hr {
     li {
       @include inline-block();
       @include uppercase();
-      @include horizontal-spacing(0.5, $abuse: true);
-      height: vertical-spacing(2);
+      @include horizontal-spacing(2);
+      height: vertical-spacing(4);
       border-#{rtl(right)}: 1px solid nth-cyclic($CONFIG_COLOR_BRAND_NAV, 2);
       &:last-child {
         padding-#{rtl(right)}: 0;
@@ -69,11 +75,12 @@ hr {
   }
 }
 
+// MAIN BODY
 #main {
   @include grid-canvas();
-  padding-top: $main-header-height + vertical-spacing(1) + 5px;
+  padding-top: $main-header-height + vertical-spacing(2) + 5px;
   // IE6 treats position:fixed differently, so we need to NOT offset the main content
-  @include target-browser(ie 6, padding-top, vertical-spacing(1));
+  @include target-browser(ie 6, padding-top, vertical-spacing(2));
   article {
     @include grid($center: true, $indent: grid-indent(1));
     .note {
@@ -91,8 +98,8 @@ hr {
   }
   article,
   aside {
-    @include vertical-spacing(2);
-    @include vertical-spacing(1, $method: margin);
+    @include vertical-spacing(4);
+    @include vertical-spacing(2, $method: margin);
     @include styleguide(container);
   }
   h1 {
@@ -108,30 +115,19 @@ hr {
     @include styleguide(medium muted headline);
   }
   p {
-    @include vertical-spacing(1, $method: margin);
+    @include vertical-spacing(2, $method: margin);
   }
-  // article lists
+
+  // article list
   .articles-list {
     a {
-      display: block;
-      @include horizontal-spacing(1);
-      @include vertical-spacing(1);
-      @include styleguide(muted link without an underline);
-      &:hover {
-        @include styleguide(module);
-      }
-      h3 {
-        @include styleguide(large headline, link without an underline);
-      }
-      small {
-        @include styleguide(muted copy);
-        font-weight: normal;
-      }
-      .summary {
-        @include styleguide(muted copy);
-        margin-bottom: 0;
-      }
+      @include styleguide(article-list);
     }
+  }
+
+  // gallery list
+  .gallery-list {
+    @include styleguide(gallery-list);
   }
   aside {
     .articles-list a.page-current {
@@ -180,8 +176,30 @@ hr {
   }
 }
 
+// components
+.semantics-notice {
+  @include styleguide(notice alert);
+  @include vertical-spacing($top: 2, $method: margin);
+  a {
+    @include styleguide(link in a notice alert);
+  }
+  .dismiss {
+    @include styleguide(close in a notice alert);
+    .no-js & {
+      display: none;
+    }
+  }
+}
+
+
+// FOOTER
 #global-footer {
-  @include vertical-spacing(1, $method: margin);
+  @include styleguide(copy in a punchcut, punchcut);
+  @include vertical-spacing($top: 2, $method: margin);
+  @include vertical-spacing(4);
+  a {
+    @include styleguide(link in a punchcut);
+  }
   ul {
     display: inline;
     @include float(right);
@@ -191,19 +209,19 @@ hr {
     display: inline;
   }
   li {
-    @include horizontal-spacing(0.5, $abuse: true);
-    border-#{rtl(right)}: 1px solid nth($CONFIG_COLOR_BRAND, 1);
+    @include horizontal-spacing(2, $abuse: true);
+    border-#{rtl(right)}: 1px solid nth-cyclic($CONFIG_COLOR_BRAND, 2);
     &:last-child {
       padding-#{rtl(right)}: 0;
       border: 0;
     }
   }
   .notice {
-    @include styleguide(small muted copy);
+    @include styleguide(small muted copy in a punchcut);
     float: right;
-    @include vertical-spacing($top: -2, $method: margin);
+    @include vertical-spacing($top: -4, $method: margin);
     a {
-      @include styleguide(small muted copy, muted link);
+      @include styleguide(small muted copy in a punchcut, muted link in a punchcut);
     }
   }
 }

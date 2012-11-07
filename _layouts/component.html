@@ -1,0 +1,22 @@
+---
+layout: default
+type  : component
+sidebar: true
+generic :
+  assets :
+    stylesheets :
+      - examples
+---
+{% include config %}
+
+{% include partials/components_notice %}
+
+{% if page.no_format == true %}
+  {{ content }}
+{% else %}
+<article>
+{% include partials/headline %}
+{{ content }}
+</article>
+{% include partials/sidebar %}
+{% endif %}

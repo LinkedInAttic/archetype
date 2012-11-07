@@ -73,7 +73,7 @@ Now when we invoke `@include styleguide(awesome example)`, we'll get a new set o
 
 You can also define multiple combinations of variants and contexts:
 
-`<span class="note">`[scss/themes/my_custom_theme/components/_example.scss]`</span>`
+<span class="note">[scss/themes/my_custom_theme/components/_example.scss]</span>
 {% highlight css %}
 $STYLEGUIDE_EXAMPLES_ID: example !default;
 $STYLEGUIDE_EXAMPLES: () !default;
@@ -185,7 +185,7 @@ $a-blackhole: styleguide-extend-component($STYLEGUIDE_COPY_ID, (
 
 You've now extended the existing copy styles to support something like <br/> `@include styleguide(copy in an example);`.
 
-We'll talk more about this in a [follow up article](/tutorials/extending-core-componets/), so stay tuned.
+We'll talk more about this in a [follow up article](/tutorials/extending-core-components/), so stay tuned.
 
 ## Conclusion
 

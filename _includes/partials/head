@@ -10,7 +10,7 @@
 <meta property="og:type" content="{% if page.meta.type %}{{ page.meta.type }}{% else %}article{% endif %}"/>
 <meta property="og:url" content="{{ PERMALINK }}"/>
 {% if site.meta.image or page.meta.image %}
-<meta property="og:image" content="{% if page.meta.image %}{{ page.meta.image | replace : 'ASSET_PATH', ASSET_PATH }}{% else %}{{ site.meta.image | replace : 'ASSET_PATH', ASSET_PATH }}{% endif %}"/>
+<meta property="og:image" content="{% if page.meta.image %}{{ page.meta.image | replace : 'PREVIEW', page.preview | replace : 'ASSET_PATH', ASSET_PATH }}{% else %}{{ site.meta.image | replace : 'ASSET_PATH', ASSET_PATH }}{% endif %}"/>
 {% endif %}
 {% if page.description or site.description %}
 <meta property="og:description" content="{% if page.description %}{{ page.description | replace : 'SUMMARY', page.summary }}{% else %}{{ site.description }}{% endif %}"/>

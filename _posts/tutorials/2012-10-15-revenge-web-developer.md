@@ -75,4 +75,4 @@ These should be used only when other suitable workarounds aren't available. This
 
 Also be aware that currently targeting Opera, Webkit, or Firefox is all-or-nothing (including mobile), so be cautious. IE targeting gives more granularity allowing you to target specific versions.
 
-Now go forth and wield your new sword wisely with ninja like precision (or with [Berserker Rage](http://www.youtube.com/watch?v=YAnjfIMAl20), it's up to you).
+Now go forth and wield your new sword wisely with ninja like precision (or with Berserker Rage, it's up to you).

@@ -11,7 +11,7 @@ weight    : 3
 ---
 {% include config %}
 
-In our last tutorial, we covered how to [create new, reusable components](/tutorials/creating-custom-components/). In this guide, we'll cover extending existing components to introduce new functionality or behave the way you want them to.
+In our last tutorial, we covered how to [create new, reusable components](/tutorials/creating-custom-components/). In this guide, we'll cover extending existing components to introduce new functionality or tweak them to behave the way you want them to.
 
 Last time we left off with this example:
 

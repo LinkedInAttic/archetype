@@ -31,7 +31,7 @@ To help ensure you get the best font everywhere, this guide will show you how to
 
 ## Pre-requisite
 
-For this to work, we rely on a classname attached to the `<hml>` element to help us target specific operating systems. Here's an example using simple User Agent sniffing in JavaScript (used on this site):
+For this to work, we rely on a classname attached to the `<html>` element to help us target specific operating systems. Here's an example using simple User Agent sniffing in JavaScript (used on this site):
 
 {% highlight javascript %}
 (function() {var p = {
@@ -161,7 +161,7 @@ Italics make it hard to read Asiatic characters, forcing character case in Turki
 
 ## Conclusion
 
-Typography is awesome. I hope this helps you create gorgeous cross-browser, cross-platform, cross-locale font stacks for even sharer looking websites.
+Typography is awesome. I hope this helps you create gorgeous cross-browser, cross-platform, cross-locale font stacks for even sharper looking websites.
 
 ## References
 

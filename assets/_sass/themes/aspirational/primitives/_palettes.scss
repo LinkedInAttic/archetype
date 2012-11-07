@@ -3,8 +3,14 @@
 // ==========
 
 // fonts
-$CONFIG_COLOR_BRAND:                                    (#005f70  #ffffff) !default;
-$CONFIG_COLOR_BRAND_NAV:                                (#555555  #94ce9b) !default;
+$CONFIG_COLOR_BRAND:                                    (#0175b0  #ffffff) !default;
+$CONFIG_COLOR_BRAND_NAV:                                (#555555  #2e88b1) !default;
+
+// alerts
+$CONFIG_COLOR_BG_ALERT_NOTIFY:                          #2e88b1 !default;
+$CONFIG_GRADIENT_ALERT_NOTIFY:                          linear-gradient(top, #2e88b1, #0073AD) !default;
+$CONFIG_GRADIENT_ALERT_NOTIFY_IE:                       (#2e88b1, #0073AD, vertical) !default;
+$CONFIG_COLOR_BORDER_ALERT_NOTIFY:                      #0073AD !default;
 
 
 
@@ -71,10 +77,7 @@ $CONFIG_COLOR_BUTTON_INDICATOR:                         #BBBBBB !default;
 $CONFIG_COLOR_BUTTON_INDICATOR_INVERSE:                 #FFFFFF !default;
 
 // alerts
-$CONFIG_COLOR_BG_ALERT_NOTIFY:                          #49AFCD !default;
-$CONFIG_GRADIENT_ALERT_NOTIFY:                          linear-gradient(top, #5BC0DE, #2F96B4) !default;
-$CONFIG_GRADIENT_ALERT_NOTIFY_IE:                       (#5BC0DE, #2F96B4, vertical) !default;
-$CONFIG_COLOR_BORDER_ALERT_NOTIFY:                      #2F96B4 !default;
+
 
 $CONFIG_COLOR_BG_ALERT_YIELD:                           #FAA732 !default;
 $CONFIG_GRADIENT_ALERT_YIELD:                           linear-gradient(top, #FBB450, #F89406) !default;

@@ -1,0 +1,25 @@
+---
+layout: default
+type  : gallery
+assets :
+  scripts :
+    - masonry
+---
+{% include config %}
+
+{% if page.no_format == true %}
+  {{ content }}
+{% else %}
+<article>
+{% include partials/headline %}
+{{ content }}
+</article>
+{% endif %}
+
+<script>
+(function($) {
+$(function() {
+  $('.gallery-list').masonry({  itemSelector: 'li'});
+});
+})(jQuery);
+</script>
