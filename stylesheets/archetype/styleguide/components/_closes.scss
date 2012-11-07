@@ -17,7 +17,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_CLOSES_ID, $STYLEGUIDE_CLOSES
     top                 vertical-spacing(2),
     right               horizontal-spacing(2),
     width               nth($CONFIG_GLYPH_CLOSE, 4),
-    height              nth($CONFIG_GLYPH_CLOSE, 4),
+    height              0,
     overflow            hidden,
     text-indent         1px,
     glyph-icon          (nth($CONFIG_GLYPH_CLOSE, 1), nth($CONFIG_GLYPH_CLOSE, 2), nth($CONFIG_GLYPH_CLOSE, 3), 'vertical-align:top;line-height:1;position:absolute;top:0;right:0;'),
