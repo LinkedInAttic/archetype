@@ -1,4 +1,5 @@
 @assets_path = 'assets/'
+desc "Deploy to GitHub"
 task :deploy => :build do
   message = ENV['message'] || 'updating site'
   puts "deploying to GitHub..."
@@ -6,6 +7,7 @@ task :deploy => :build do
   puts "all done!"
 end
 
+desc "Build asset packages"
 task :build do
   Rake::Task["build:css"].invoke
   Rake::Task["build:js"].invoke
