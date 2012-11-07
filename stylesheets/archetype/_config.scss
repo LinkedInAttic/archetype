@@ -59,7 +59,7 @@ $CONFIG_KEYFRAME_LOADERS:         archetype-loader !default;                    
 // glyphs
 $CONFIG_GLYPHS_NAME:              ArchetypeGlyphs !default;                                         // name for the font-face
 $CONFIG_GLYPHS_EOT:               "vendor/archetype/fontawesome-webfont.eot" !default;                 // default eot path
-$CONFIG_GLYPHS_FILES:             font-files("vendor/archetype/fontawesome-webfont.ttf", "vendor/archetype/fontawesome-webfont.woff", "vendor/archetype/fontawesome-webfont.svg");
+$CONFIG_GLYPHS_FILES:             font-files("vendor/archetype/fontawesome-webfont.ttf", "vendor/archetype/fontawesome-webfont.woff", "vendor/archetype/fontawesome-webfont.svg") !default;
 $CONFIG_GLYPHS_WEIGHT:            normal !default;                                                  // font-weight for glyphs
 $CONFIG_GLYPHS_STYLE:             normal !default;                                                  // font-style for glyphs
 $CONFIG_GLYPHS_THRESHOLD:         16px !default;                                                    // the threshold to switch to halfling characters, if available
