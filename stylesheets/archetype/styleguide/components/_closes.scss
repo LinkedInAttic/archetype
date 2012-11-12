@@ -20,7 +20,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_CLOSES_ID, $STYLEGUIDE_CLOSES
     height              0,
     overflow            hidden,
     text-indent         1px,
-    glyph-icon          (nth($CONFIG_GLYPH_CLOSE, 1), nth($CONFIG_GLYPH_CLOSE, 2), nth($CONFIG_GLYPH_CLOSE, 3), 'vertical-align:top;line-height:1;position:absolute;top:0;right:0;'),
+    glyph-icon          (nth($CONFIG_GLYPH_CLOSE, 1), nth($CONFIG_GLYPH_CLOSE, 2), nth($CONFIG_GLYPH_CLOSE, 3), before, 'vertical-align:top;line-height:1;position:absolute;top:0;right:0;'),
     (selectors, (
       ('&:before', (
         vertical-align  top,

@@ -152,36 +152,42 @@
 // @param     $icon {String} the icon name
 // @param     $size {Number} the size of the icon
 // @param     $color {Color} the color of the font
+// @param     $placement {String} where to place the icon [before|after|inline]
 // @param     $ie-styles {String} styles to apply to IE6/7 (this is needed because the faux :before isn't extensible)
-@mixin glyph-icon($icon, $size: 100%, $color: inherit, $ie-styles: false) {
+@mixin glyph-icon($icon, $size: 100%, $color: inherit, $placement: before, $ie-styles: false) {
   $char-code: associative($CONFIG_GLYPHS_MAPPINGS, $icon, $strict: true);
-  @if $char-code == nil {
+  @if $char-code == nil and $icon != false {
     @warn "could not find character mapping for `#{icon}`";
   }
   @else {
     // if the size is under a given threshold, use a halfling, if available
     $char-code: nth-cyclic(-compass-list($char-code), if(comparable($CONFIG_GLYPHS_THRESHOLD, $size) and $size <= $CONFIG_GLYPHS_THRESHOLD, 2, 1));
-    &:before {
-      font-family: $CONFIG_GLYPHS_NAME, a;
+    $selector: if(index(before after, $placement), '&:#{$placement}', '&');
+    #{$selector} {
+      font-family: $CONFIG_GLYPHS_NAME;
       font-weight: $CONFIG_GLYPHS_WEIGHT;
       font-style: $CONFIG_GLYPHS_STYLE;
       text-decoration: inherit;
       @include if-set(font-size, $size);
       @include if-set(color, $color);
-      content: $char-code;
+      @if $icon {
+        content: $char-code;
+      }
     }
-    // support for IE6/7
-    $styles: "font-family:#{$CONFIG_GLYPHS_NAME},a;font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;";
-    @if($size != nil) {
-      $styles: $styles + "font-size:#{$size};"
+    @if($selector != '&') {
+      // support for IE6/7
+      $styles: "font-family:#{$CONFIG_GLYPHS_NAME},a;font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;";
+      @if($size != nil) {
+        $styles: $styles + "font-size:#{$size};"
+      }
+      @if($color != nil) {
+        $styles: $styles + "color:#{$color};"
+      }
+      @if($ie-styles) {
+        $styles: $styles + $ie-styles;
+      }
+      @include ie-pseudo($styles: $styles, $content: $char-code, $placement: $placement);
     }
-    @if($color != nil) {
-      $styles: $styles + "color:#{$color};"
-    }
-    @if($ie-styles) {
-      $styles: $styles + $ie-styles;
-    }
-    @include ie-pseudo-before($styles: $styles, $content: $char-code);
   }
 }
 

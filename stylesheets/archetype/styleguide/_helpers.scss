@@ -74,7 +74,7 @@
   $offset: _styleguideGetAlertGlyphOffset($type);
   $top: nth($offset, 1);
   $left: nth($offset, 2);
-  @return (nth($type, 1), nth($type, 2), nth($type, 3), 'position:absolute;line-height:1;top:#{$top};left:#{$left};')
+  @return (nth($type, 1), nth($type, 2), nth($type, 3), before, 'position:absolute;line-height:1;top:#{$top};left:#{$left};')
 }
 
 

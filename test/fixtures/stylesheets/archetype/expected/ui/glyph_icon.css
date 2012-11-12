@@ -2,7 +2,7 @@
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("archetype"),this.el.innerHTML="&#xf0d7;",this.el.style.cssText="font-family:ArchetypeGlyphs,a;font-weight:normal;font-style:normal;text-decoration:inherit;font-size:100%;color:inherit;",this.insertBefore(this.el));
 }
 .simple:before {
-  font-family: ArchetypeGlyphs, a;
+  font-family: ArchetypeGlyphs;
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
