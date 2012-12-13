@@ -173,6 +173,7 @@
       font-weight: $CONFIG_GLYPHS_WEIGHT;
       font-style: $CONFIG_GLYPHS_STYLE;
       text-decoration: inherit;
+      speak: none;
       @include if-set(font-size, $size);
       @include if-set(color, $color);
       @if $icon {
