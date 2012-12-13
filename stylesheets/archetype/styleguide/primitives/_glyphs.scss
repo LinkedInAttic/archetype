@@ -1,11 +1,11 @@
 // ==========
 // GLYPHS
 // ==========
-$CONFIG_IMG_HOVERCARD_TIP:       ("vendor/archetype/sprites/hovercard_tip.png") !default;
+$CONFIG_IMG_HOVERCARD_TIP:        ("vendor/archetype/sprites/hovercard_tip.png") !default;
 
-$CONFIG_GLYPH_ALERT_NOTIFY:       (info-sign 36px inherit 28px);
-$CONFIG_GLYPH_ALERT_ERROR:        (remove-sign 36px inherit 28px);
-$CONFIG_GLYPH_ALERT_SUCCESS:      (ok-sign 36px inherit 28px);
-$CONFIG_GLYPH_ALERT_YIELD:        (warning-sign 36px inherit 28px);
+$CONFIG_GLYPH_ALERT_NOTIFY:       (info-sign 36px inherit 28px) !default;
+$CONFIG_GLYPH_ALERT_ERROR:        (remove-sign 36px inherit 28px) !default;
+$CONFIG_GLYPH_ALERT_SUCCESS:      (ok-sign 36px inherit 28px) !default;
+$CONFIG_GLYPH_ALERT_YIELD:        (warning-sign 36px inherit 28px) !default;
 
-$CONFIG_GLYPH_CLOSE:              (remove 11px inherit 11px);
+$CONFIG_GLYPH_CLOSE:              (remove 11px inherit 11px) !default;
