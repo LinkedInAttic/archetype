@@ -145,13 +145,22 @@
       }
     }
     // :before/:after
-    @else if($property == ie-pseudo-before) {
-      $value: compact($value, nil);
-      @include ie-pseudo-before(nth($value, 1), nth($value, 2));
-    }
-    @else if($property == ie-pseudo-after) {
-      $value: compact($value, nil);
-      @include ie-pseudo-after(nth($value, 1), nth($value, 2));
+    @else if($property == ie-pseudo-before or $property == ie-pseudo-after) {
+      $value: -compass-list($value);
+      $content: false;
+      $tag: '';
+      @if length($value) > 1 {
+        $content: nth($value, 2);
+        @if length($value) > 2 {
+          $tag: nth($value, 3);
+        }
+      }
+      @if $property == ie-pseudo-before {
+        @include ie-pseudo-before(nth($value, 1), $content, $tag);
+      }
+      @else {
+        @include ie-pseudo-after(nth($value, 1), $content, $tag);
+      }
     }
     // otherwise just use a key-value pair
     @else { #{$property}: $value; }

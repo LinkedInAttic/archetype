@@ -192,7 +192,7 @@
       @if($ie-styles) {
         $styles: $styles + $ie-styles;
       }
-      @include ie-pseudo($styles: $styles, $content: $char-code, $placement: $placement);
+      @include ie-pseudo($styles: $styles, $content: $char-code, $placement: $placement, $name: glyph);
     }
   }
 }

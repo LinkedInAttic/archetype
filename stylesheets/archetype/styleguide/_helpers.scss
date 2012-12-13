@@ -199,5 +199,5 @@
   $height: _styleguideGetLoaderDimension($size, static, height, $context);
   $margin-top: $height / -2;
   $margin-left: $width / -2;
-  @return "position:absolute;top:50%;left:50%;background:#{$bg};width:#{$width};height:#{$height};margin-left:#{$margin-left};margin-top:#{$margin-top};";
+  @return ("position:absolute;top:50%;left:50%;background:#{$bg};width:#{$width};height:#{$height};margin-left:#{$margin-left};margin-top:#{$margin-top};", false, loader);
 }

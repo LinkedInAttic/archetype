@@ -39,7 +39,7 @@ $CONFIG_STATE_MAPPINGS: associative-merge($CORE_STATE_MAPPINGS, $CONFIG_STATE_MA
 $CONFIG_DISABLED_CSS:             () !default;                                                      // a list of CSS3 features to always disable when using output-style()
 $CONFIG_Z_INDEX_BASE:             0 !default;                                                       // the default starting layer for z-index calculations
 $CONTENT_PLACEHOLDER:             "\0020" !default;                                                 // content placeholder (ensures block elements display correctly even if they're empty)
-$CONFIG_GENERATED_TAG_NAME:       archetype !default;                                               // the tag name to create when using ie-pseudo method
+$CONFIG_GENERATED_TAG_PREFIX:     archetype !default;                                               // the prefix for the tag name to create when using ie-pseudo method
 $CONFIG_GENERATED_TAG_CSS:        false !default;                                                   // styles to apply to the generated tag when using ie-pseudo method (use this as a way to reset styles on these tags)
 
 // z-layers
