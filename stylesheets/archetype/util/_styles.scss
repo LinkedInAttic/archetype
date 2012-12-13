@@ -185,7 +185,7 @@
     }
   }
   // deal with the states
-  @if length($states-data) {
+  @if length($states-data) > 0 {
     @each $state in $states-data {
       $value: nth($state, 2);
       $state: first-value-of($state);
@@ -197,7 +197,7 @@
     }
   }
   // deal with the nested selectors
-  @if length($selectors-data) {
+  @if length($selectors-data) > 0 {
     @each $selector in $selectors-data {
       @if(index(-compass-list($selectors), $selector) or $selectors == true) {
         #{first-value-of($selector)} {
@@ -231,7 +231,7 @@
     }
   }
   // deal with the states
-  @if length($states-data) {
+  @if length($states-data) > 0 {
     @each $state in $states-data {
       $value: nth($state, 2);
       $state: first-value-of($state);
@@ -243,7 +243,7 @@
     }
   }
   // deal with the nested selectors
-  @if length($selectors-data) {
+  @if length($selectors-data) > 0 {
     @each $selector in $selectors-data {
       @if(index(-compass-list($selectors), $selector) or $selectors == true) {
         #{first-value-of($selector)} {
@@ -274,7 +274,7 @@
 // @param     $prefix {String} the prefix to append to the state (for class names only)
 @function _getStateSelector($state, $prefix: $CONFIG_STATE_PREFIX) {
   $selector: associative($CONFIG_STATE_MAPPINGS, $state, $strict: true);
-  @if $selector == nil {
+  @if $selector == nil and length($selector) > 0 {
     $selector: '&.#{if(index(-compass-list($CONFIG_STATE_NO_PREFIX), $state), $prefix, "")}#{$state}';
   }
   @return $selector;
@@ -362,7 +362,7 @@
     // os friendly font stacks
     @if($property == font-family) {
       $stack: associative($CONFIG_SAFE_FONTS, $value, $strict: true);
-      @if($stack != nil and length($stack)) {
+      @if($stack != nil and length($stack) > 0) {
         // first, step through the list of os safe fonts
         @each $collection in $stack {
           @if(length($collection) > 1) {

@@ -73,7 +73,7 @@
     }
   }
   // take any unused vendors and stick them back onto the list
-  @if(length($unversioned)) {
+  @if(length($unversioned) > 0) {
     $list: join($list, $unversioned, comma);
   }
   @return $list;
