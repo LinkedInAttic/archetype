@@ -32,7 +32,7 @@ private
   # - <tt>value</tt> {Hash} the value to store
   #
   def self.add(theme, token, value)
-    (@components[theme] ||= {})[token] = value if Compass.configuration.environment.to_s.include?('dev')
+    (@components[theme] ||= {})[token] = value if not Compass.configuration.environment.to_s.include?('dev')
   end
 
   #
