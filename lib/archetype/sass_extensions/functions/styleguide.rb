@@ -1,5 +1,6 @@
 require 'archetype/functions/helpers'
 require 'archetype/functions/styleguide_memoizer'
+require 'thread'
 
 #
 # This is the magic of Archetype. This module provides the interfaces for constructing,
@@ -18,6 +19,7 @@ module Archetype::SassExtensions::Styleguide
   # e.g color: red; color: rgba(255,0,0, 0.8);
   FALLBACKS   = %w(background background-image background-color border border-bottom border-bottom-color border-color border-left border-left-color border-right border-right-color border-top border-top-color clip color layer-background-color outline outline-color)
   ADDITIVES   = FALLBACKS + [DROP, INHERIT, STYLEGUIDE]
+  @@archetype_styleguide_mutex = Mutex.new
   # :startdoc:
 
   #
@@ -294,13 +296,15 @@ private
   # - {Hash} the theme
   #
   def get_theme(theme)
-    @@styleguide_themes ||= {}
     theme_name = helpers.to_str(theme || 'archetype')
-    theme = @@styleguide_themes[theme_name] ||= {}
-    theme[:name] ||= theme_name
-    theme[:components] ||= {}
-    theme[:extensions] ||= []
-    return theme
+    @@archetype_styleguide_mutex.synchronize do
+      @@styleguide_themes ||= {}
+      theme = @@styleguide_themes[theme_name] ||= {}
+      theme[:name] ||= theme_name
+      theme[:components] ||= {}
+      theme[:extensions] ||= []
+      return theme
+    end
   end
 
   #

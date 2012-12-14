@@ -1,9 +1,14 @@
 require 'archetype/functions/helpers'
+require 'thread'
 
 #
 # This module provides some UI helper methods.
 #
 module Archetype::SassExtensions::UI
+  # :stopdoc:
+  @@archetype_ui_mutex = Mutex.new
+  # :startdoc:
+
   #
   # generate a unique token
   #
@@ -46,7 +51,9 @@ private
   end
 
   def uid
-    @@uid ||= 0
-    @@uid += 1
+    @@archetype_ui_mutex.synchronize do
+      @@uid ||= 0
+      @@uid += 1
+    end
   end
 end
