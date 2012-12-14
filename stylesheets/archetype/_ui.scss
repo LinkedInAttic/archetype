@@ -135,7 +135,7 @@
   @include pseudo-element($width: $width, $height: $height, $position: absolute);
   text-align: center;
   bottom: 0;
-  #{if($direction == left), right, left}: 0;
+  #{if($direction == left, right, left)}: 0;
 }
 
 // create a stroke line around text (or font icon)
