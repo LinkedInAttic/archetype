@@ -40,17 +40,19 @@
 // @param     $direction {String} the direction the caret is facing [up|down]
 // @return    {List} the border widths needed to generate the caret
 @function _styleguideCaretSize($size: medium, $direction: south) {
-  $caret: associative((
-    (small      $CONFIG_FONT_CARET_SMALL),
-    (medium     $CONFIG_FONT_CARET_MEDIUM),
-    (large      $CONFIG_FONT_CARET_LARGE),
-    (tooltip    $CONFIG_DIM_TOOLTIP_TIP)
-  ), $size);
+  @if type-of($size) != number {
+    $caret: associative((
+      (small      $CONFIG_FONT_CARET_SMALL),
+      (medium     $CONFIG_FONT_CARET_MEDIUM),
+      (large      $CONFIG_FONT_CARET_LARGE),
+      (tooltip    $CONFIG_DIM_TOOLTIP_TIP)
+    ), $size);
+  }
   @return associative((
-    (default    ($caret $caret 0)),
-    (north      (0 $caret $caret)),
-    (east       ($caret 0 $caret $caret)),
-    (west       ($caret $caret $caret 0))
+    (default    ($size $size 0)),
+    (north      (0 $size $size)),
+    (east       ($size 0 $size $size)),
+    (west       ($size $size $size 0))
   ), $direction);
 }
 
