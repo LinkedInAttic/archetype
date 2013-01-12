@@ -283,7 +283,7 @@
 // @param     $prefix {String} the prefix to append to the state (for class names only)
 @function _getStateSelector($state, $prefix: $CONFIG_STATE_PREFIX) {
   $selector: associative($CONFIG_STATE_MAPPINGS, $state, $strict: true);
-  @if $selector == nil and length($selector) > 0 {
+  @if $selector == nil or length($selector) == 0 {
     $selector: '&.#{if(index(-compass-list($CONFIG_STATE_NO_PREFIX), $state), $prefix, "")}#{$state}';
   }
   @return $selector;
