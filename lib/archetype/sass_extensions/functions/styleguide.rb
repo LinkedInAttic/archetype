@@ -35,16 +35,18 @@ module Archetype::SassExtensions::Styleguide
   # - {Boolean} whether or not the component was added
   #
   def styleguide_add_component(id, data, default = nil, theme = nil, force = false)
-    theme = get_theme(theme)
-    components = theme[:components]
-    id = helpers.to_str(id)
-    # if force was true, we have to invalidate the memoizer
-    memoizer.clear(theme[:name]) if force
-    # if we already have the component, don't create it again
-    return Sass::Script::Bool.new(false) if components[id] and not force and not Compass.configuration.environment.to_s.include?('dev')
-    # otherwise add it
-    components[id] = helpers.list_to_hash(default, 1, SPECIAL, ADDITIVES).merge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
-    return Sass::Script::Bool.new(true)
+    @@archetype_styleguide_mutex.synchronize do
+      theme = get_theme(theme)
+      components = theme[:components]
+      id = helpers.to_str(id)
+      # if force was true, we have to invalidate the memoizer
+      memoizer.clear(theme[:name]) if force
+      # if we already have the component, don't create it again
+      return Sass::Script::Bool.new(false) if components[id] and not force and not Compass.configuration.environment.to_s.include?('dev')
+      # otherwise add it
+      components[id] = helpers.list_to_hash(default, 1, SPECIAL, ADDITIVES).merge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
+      return Sass::Script::Bool.new(true)
+    end
   end
   Sass::Script::Functions.declare :styleguide_add_component, [:id, :data]
   Sass::Script::Functions.declare :styleguide_add_component, [:id, :data, :default]
@@ -63,18 +65,20 @@ module Archetype::SassExtensions::Styleguide
   # - {Boolean} whether or not the component was extended
   #
   def styleguide_extend_component(id, data, theme = nil, extension = nil, force = false)
-    theme = get_theme(theme)
-    components = theme[:components]
-    id = helpers.to_str(id)
-    # if force was set, we'll create a random token for the name
-    extension = rand(36**8).to_s(36) if force
-    # convert the extension into a hash (if we don't have an extension, compose one out of its data)
-    extension = helpers.to_str(extension || data).hash
-    extensions = theme[:extensions]
-    return Sass::Script::Bool.new(false) if extensions.include?(extension) and not force and not Compass.configuration.environment.to_s.include?('dev')
-    extensions.push(extension)
-    components[id] = (components[id] ||= {}).rmerge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
-    return Sass::Script::Bool.new(true)
+    @@archetype_styleguide_mutex.synchronize do
+      theme = get_theme(theme)
+      components = theme[:components]
+      id = helpers.to_str(id)
+      # if force was set, we'll create a random token for the name
+      extension = rand(36**8).to_s(36) if force
+      # convert the extension into a hash (if we don't have an extension, compose one out of its data)
+      extension = helpers.to_str(extension || data).hash
+      extensions = theme[:extensions]
+      return Sass::Script::Bool.new(false) if extensions.include?(extension) and not force and not Compass.configuration.environment.to_s.include?('dev')
+      extensions.push(extension)
+      components[id] = (components[id] ||= {}).rmerge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
+      return Sass::Script::Bool.new(true)
+    end
   end
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data]
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data, :theme]
@@ -90,8 +94,10 @@ module Archetype::SassExtensions::Styleguide
   # - {List} a key-value paired list of styles
   #
   def styleguide(description, state = 'false', theme = nil)
-    # convert it back to a Sass:List and carry on
-    return helpers.hash_to_list(get_styles(description, theme, state), 0, FALLBACKS)
+    @@archetype_styleguide_mutex.synchronize do
+      # convert it back to a Sass:List and carry on
+      return helpers.hash_to_list(get_styles(description, theme, state), 0, FALLBACKS)
+    end
   end
 
   #
@@ -105,10 +111,12 @@ module Archetype::SassExtensions::Styleguide
   # - {List} a key-value paired list of styles
   #
   def styleguide_diff(original, other, theme = nil)
-    original = get_styles(original, theme)
-    other = get_styles(other, theme)
-    diff = original.diff(other)
-    return helpers.hash_to_list(diff, 0, FALLBACKS)
+    @@archetype_styleguide_mutex.synchronize do
+      original = get_styles(original, theme)
+      other = get_styles(other, theme)
+      diff = original.diff(other)
+      return helpers.hash_to_list(diff, 0, FALLBACKS)
+    end
   end
 
 private
@@ -297,14 +305,12 @@ private
   #
   def get_theme(theme)
     theme_name = helpers.to_str(theme || 'archetype')
-    @@archetype_styleguide_mutex.synchronize do
-      @@styleguide_themes ||= {}
-      theme = @@styleguide_themes[theme_name] ||= {}
-      theme[:name] ||= theme_name
-      theme[:components] ||= {}
-      theme[:extensions] ||= []
-      return theme
-    end
+    @@styleguide_themes ||= {}
+    theme = @@styleguide_themes[theme_name] ||= {}
+    theme[:name] ||= theme_name
+    theme[:components] ||= {}
+    theme[:extensions] ||= []
+    return theme
   end
 
   #
