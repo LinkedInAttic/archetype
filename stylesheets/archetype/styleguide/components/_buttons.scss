@@ -4,7 +4,8 @@
 $STYLEGUIDE_BUTTONS_ID: button !default;
 $STYLEGUIDE_BUTTONS: () !default;
 
-$a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID, $STYLEGUIDE_BUTTONS, (
+@if not styleguide-component-exists($STYLEGUIDE_BUTTONS_ID, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID,  $STYLEGUIDE_BUTTONS, (
   (default, (
     // these are common between all buttons
     font-weight             bold,
@@ -334,3 +335,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID, $STYLEGUIDE_BUTTO
     ))
   ))
 ), $CONFIG_THEME);
+}

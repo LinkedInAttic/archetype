@@ -21,7 +21,7 @@ $CONFIG_RESET_EXCLUDES:           () !default;                                  
 
 // states used when printing out styles
 $CONFIG_STATE_PREFIX:             '' !default;                                                      // prefix state classnames @see to-style()
-$CONFIG_STATE_NO_PREFIX:         () !default;                                                       // states to never apply prefix to
+$CONFIG_STATE_NO_PREFIX:          () !default;                                                      // states to never apply prefix to
 // a mapping for state names to selectors
 $CORE_STATE_MAPPINGS: (
   'hover'           '&.#{$CONFIG_STATE_PREFIX}hover, &:hover, &.#{$CONFIG_STATE_PREFIX}focus, &:focus',
@@ -36,13 +36,13 @@ $CONFIG_STATE_MAPPINGS: () !default;
 $CONFIG_STATE_MAPPINGS: associative-merge($CORE_STATE_MAPPINGS, $CONFIG_STATE_MAPPINGS);
 
 // misc
-$CONFIG_DISABLED_CSS:             () !default;                                                      // a list of CSS3 features to always disable when using output-style()
-$CONFIG_Z_INDEX_BASE:             0 !default;                                                       // the default starting layer for z-index calculations
 $CONTENT_PLACEHOLDER:             "\0020" !default;                                                 // content placeholder (ensures block elements display correctly even if they're empty)
+$CONFIG_DISABLED_CSS:             () !default;                                                      // a list of CSS3 features to always disable when using output-style()
 $CONFIG_GENERATED_TAG_PREFIX:     archetype !default;                                               // the prefix for the tag name to create when using ie-pseudo method
 $CONFIG_GENERATED_TAG_CSS:        false !default;                                                   // styles to apply to the generated tag when using ie-pseudo method (use this as a way to reset styles on these tags)
 
 // z-layers
+$CONFIG_Z_INDEX_BASE:             0 !default;                                                       // the default starting layer for z-index calculations
 $CONFIG_Z_LAYERS_OFFSET:          100 !default;                                                     // the offset between z-layers
 $CONFIG_Z_LAYERS:                 (default dialog navigation) !default;                             // the orders for the z-layers
 
@@ -58,8 +58,9 @@ $CONFIG_KEYFRAME_LOADERS:         archetype-loader !default;                    
 
 // glyphs
 $CONFIG_GLYPHS_NAME:              ArchetypeGlyphs !default;                                         // name for the font-face
-$CONFIG_GLYPHS_EOT:               "vendor/archetype/fontawesome-webfont.eot" !default;                 // default eot path
-$CONFIG_GLYPHS_FILES:             font-files("vendor/archetype/fontawesome-webfont.ttf", "vendor/archetype/fontawesome-webfont.woff", "vendor/archetype/fontawesome-webfont.svg") !default;
+$CONFIG_GLYPHS_BASE_PATH:         'vendor/archetype/fontawesome-webfont' !default;                  // generic path to all glpyh fonts (sans extensions)
+$CONFIG_GLYPHS_EOT:               "#{$CONFIG_GLYPHS_BASE_PATH}.eot" !default;
+$CONFIG_GLYPHS_FILES:             font-files("#{$CONFIG_GLYPHS_BASE_PATH}.woff", "#{$CONFIG_GLYPHS_BASE_PATH}.ttf", "#{$CONFIG_GLYPHS_BASE_PATH}.svg") !default;
 $CONFIG_GLYPHS_WEIGHT:            normal !default;                                                  // font-weight for glyphs
 $CONFIG_GLYPHS_STYLE:             normal !default;                                                  // font-style for glyphs
 $CONFIG_GLYPHS_THRESHOLD:         16px !default;                                                    // the threshold to switch to halfling characters, if available

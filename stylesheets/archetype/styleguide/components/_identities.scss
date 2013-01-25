@@ -4,11 +4,19 @@
 $STYLEGUIDE_IDENTITY_ID: identity !default;
 $STYLEGUIDE_IDENTITY: () !default;
 
-$a-blackhole: styleguide-add-component($STYLEGUIDE_IDENTITY_ID, $STYLEGUIDE_IDENTITY, (
+@if not styleguide-component-exists($STYLEGUIDE_IDENTITY_ID, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component($STYLEGUIDE_IDENTITY_ID,  $STYLEGUIDE_IDENTITY, (
   (default, (
     color                   nth($CONFIG_COLOR_BRAND, 1),
-    text-decoration         none,
-    font-weight             bold
+    font-weight             bold,
+    text-decoration         nth($CONFIG_DECORATION_IDENTITY, 1),
+    (states, (
+      (hover, (
+        text-decoration     nth-cyclic($CONFIG_DECORATION_IDENTITY, 2),
+        nil
+      )),
+      nil
+    ))
   )),
   (in-dark, (
     color                   nth-cyclic($CONFIG_COLOR_BRAND, 2),
@@ -23,3 +31,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_IDENTITY_ID, $STYLEGUIDE_IDEN
     nil
   ))
 ), $CONFIG_THEME);
+}

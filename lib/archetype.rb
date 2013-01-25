@@ -29,6 +29,10 @@ module Archetype
     Compass::Configuration.add_configuration_property(:environment, "current environment") do
       :development
     end
+    # memoize
+    Compass::Configuration.add_configuration_property(:memoize, "should the memoizer be used to improve compilation speed") do
+      not (Compass.configuration.environment || :development).to_s.include?('dev')
+    end
   end
 end
 

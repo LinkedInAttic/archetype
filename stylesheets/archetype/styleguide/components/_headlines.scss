@@ -4,7 +4,8 @@
 $STYLEGUIDE_HEADLINES_ID: headline !default;
 $STYLEGUIDE_HEADLINES: () !default;
 
-$a-blackhole: styleguide-add-component($STYLEGUIDE_HEADLINES_ID, $STYLEGUIDE_HEADLINES, (
+@if not styleguide-component-exists($STYLEGUIDE_HEADLINES_ID, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component($STYLEGUIDE_HEADLINES_ID,  $STYLEGUIDE_HEADLINES, (
   (default, (
     font-size           nth($CONFIG_FONT_HEADLINE_LARGE, 1),
     font-weight         bold,
@@ -59,3 +60,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_HEADLINES_ID, $STYLEGUIDE_HEA
     text-shadow         nth-cyclic($CONFIG_SHADOW_COPY, 2)
   ))
 ), $CONFIG_THEME);
+}

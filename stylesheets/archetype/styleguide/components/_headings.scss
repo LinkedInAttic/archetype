@@ -4,7 +4,8 @@
 $STYLEGUIDE_HEADINGS_ID: heading !default;
 $STYLEGUIDE_HEADINGS: () !default;
 
-$a-blackhole: styleguide-add-component($STYLEGUIDE_HEADINGS_ID, $STYLEGUIDE_HEADINGS, (
+@if not styleguide-component-exists($STYLEGUIDE_HEADINGS_ID, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component($STYLEGUIDE_HEADINGS_ID,  $STYLEGUIDE_HEADINGS, (
   (default, (
     nil
   )),
@@ -29,3 +30,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_HEADINGS_ID, $STYLEGUIDE_HEAD
     nil
   ))
 ), $CONFIG_THEME);
+}

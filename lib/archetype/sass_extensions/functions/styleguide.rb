@@ -17,7 +17,7 @@ module Archetype::SassExtensions::Styleguide
   SPECIAL     = %w(states selectors)
   # these are unique CSS keys that can be exploited to provide fallback functionality by providing a second value
   # e.g color: red; color: rgba(255,0,0, 0.8);
-  FALLBACKS   = %w(background background-image background-color border border-bottom border-bottom-color border-color border-left border-left-color border-right border-right-color border-top border-top-color clip color layer-background-color outline outline-color)
+  FALLBACKS   = %w(background background-image background-color border border-bottom border-bottom-color border-color border-left border-left-color border-right border-right-color border-top border-top-color clip color layer-background-color outline outline-color white-space)
   ADDITIVES   = FALLBACKS + [DROP, INHERIT, STYLEGUIDE]
   @@archetype_styleguide_mutex = Mutex.new
   # :startdoc:
@@ -42,7 +42,7 @@ module Archetype::SassExtensions::Styleguide
       # if force was true, we have to invalidate the memoizer
       memoizer.clear(theme[:name]) if force
       # if we already have the component, don't create it again
-      return Sass::Script::Bool.new(false) if components[id] and not force and not Compass.configuration.environment.to_s.include?('dev')
+      return Sass::Script::Bool.new(false) if component_exists(id, theme, nil, force)
       # otherwise add it
       components[id] = helpers.list_to_hash(default, 1, SPECIAL, ADDITIVES).merge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
       return Sass::Script::Bool.new(true)
@@ -59,7 +59,7 @@ module Archetype::SassExtensions::Styleguide
   # - <tt>$id</tt> {String} the component identifier
   # - <tt>$data</tt> {List} the component data object
   # - <tt>$theme</tt> {String} the theme to insert the component into
-  # - <tt>$theme</tt> {String} the name of the extension
+  # - <tt>$extension</tt> {String} the name of the extension
   # - <tt>$force</tt> {Boolean} if true, forcibly extend the component
   # *Returns*:
   # - {Boolean} whether or not the component was extended
@@ -74,7 +74,7 @@ module Archetype::SassExtensions::Styleguide
       # convert the extension into a hash (if we don't have an extension, compose one out of its data)
       extension = helpers.to_str(extension || data).hash
       extensions = theme[:extensions]
-      return Sass::Script::Bool.new(false) if extensions.include?(extension) and not force and not Compass.configuration.environment.to_s.include?('dev')
+      return Sass::Script::Bool.new(false) if component_exists(id, theme, extension, force)
       extensions.push(extension)
       components[id] = (components[id] ||= {}).rmerge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
       return Sass::Script::Bool.new(true)
@@ -83,6 +83,29 @@ module Archetype::SassExtensions::Styleguide
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data]
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data, :theme]
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data, :theme, :extension]
+
+  #
+  # check whether or not a component (or a component extension) has already been defined
+  #
+  # *Parameters*:
+  # - <tt>$id</tt> {String} the component identifier
+  # - <tt>$data</tt> {List} the component data object
+  # - <tt>$theme</tt> {String} the theme to insert the component into
+  # - <tt>$extension</tt> {String} the name of the extension
+  # - <tt>$force</tt> {Boolean} if true, forcibly extend the component
+  # *Returns*:
+  # - {Boolean} whether or not the component/extension exists
+  #
+  def styleguide_component_exists(id, theme = nil, extension = nil, force = false)
+    @@archetype_styleguide_mutex.synchronize do
+      extension = helpers.to_str(extension) if not extension.nil?
+      return Sass::Script::Bool.new( component_exists(id, theme, extension, force) )
+    end
+  end
+  Sass::Script::Functions.declare :styleguide_extend_component, [:id]
+  Sass::Script::Functions.declare :styleguide_extend_component, [:id, :theme]
+  Sass::Script::Functions.declare :styleguide_extend_component, [:id, :theme, :extension]
+  Sass::Script::Functions.declare :styleguide_extend_component, [:id, :theme, :extension, :force]
 
   #
   # given a description of the component, convert it into CSS
@@ -96,7 +119,7 @@ module Archetype::SassExtensions::Styleguide
   def styleguide(description, state = 'false', theme = nil)
     @@archetype_styleguide_mutex.synchronize do
       # convert it back to a Sass:List and carry on
-      return helpers.hash_to_list(get_styles(description, theme, state), 0, FALLBACKS)
+      return helpers.hash_to_list(get_styles(description, theme, state), 0)
     end
   end
 
@@ -115,7 +138,7 @@ module Archetype::SassExtensions::Styleguide
       original = get_styles(original, theme)
       other = get_styles(other, theme)
       diff = original.diff(other)
-      return helpers.hash_to_list(diff, 0, FALLBACKS)
+      return helpers.hash_to_list(diff, 0)
     end
   end
 
@@ -357,5 +380,26 @@ private
       styles = styles.merge(state) if not (state.nil? or state.empty?)
     end
     return styles
+  end
+
+  #
+  # check whether or not a component (or a component extension) has already been defined
+  #
+  # *Parameters*:
+  # - <tt>$id</tt> {String} the component identifier
+  # - <tt>$data</tt> {List} the component data object
+  # - <tt>$theme</tt> {String} the theme to insert the component into
+  # - <tt>$extension</tt> {String} the name of the extension
+  # - <tt>$force</tt> {Boolean} if true, forcibly extend the component
+  # *Returns*:
+  # - {Boolean} whether or not the component/extension exists
+  #
+  def component_exists(id, theme = nil, extension = nil, force = false)
+    status = false
+    theme = get_theme(theme) if not theme.is_a? Hash
+    id = helpers.to_str(id)
+    # determine the status of the component
+    status = (extension.nil?) ? (not theme[:components][id].nil?) : theme[:extensions].include?(extension)
+    return (status and not force and Compass.configuration.memoize)
   end
 end

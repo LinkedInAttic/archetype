@@ -4,7 +4,8 @@
 $STYLEGUIDE_LINKS_ID: link !default;
 $STYLEGUIDE_LINKS: () !default;
 
-$a-blackhole: styleguide-add-component($STYLEGUIDE_LINKS_ID, $STYLEGUIDE_LINKS, (
+@if not styleguide-component-exists($STYLEGUIDE_LINKS_ID, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component($STYLEGUIDE_LINKS_ID,  $STYLEGUIDE_LINKS, (
   (default, (
     color                   nth($CONFIG_COLOR_BRAND, 1),
     text-decoration         nth($CONFIG_DECORATION_LINK, 1),
@@ -62,3 +63,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_LINKS_ID, $STYLEGUIDE_LINKS, 
   )),
   nil
 ), $CONFIG_THEME);
+}

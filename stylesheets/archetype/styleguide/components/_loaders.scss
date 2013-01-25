@@ -4,6 +4,7 @@
 $STYLEGUIDE_LOADERS_ID: loader !default;
 $STYLEGUIDE_LOADERS: () !default;
 
+@if not styleguide-component-exists($STYLEGUIDE_LOADERS_ID, $CONFIG_THEME) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_LOADERS_ID, $STYLEGUIDE_LOADERS, (
   (default, (
     display             block,
@@ -143,5 +144,11 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_LOADERS_ID, $STYLEGUIDE_LOADE
   (large in-punchcut, (
     inherit (large in-dark),
     nil
+  )),
+  (without-mask, (
+    background-color    nil,
+    opacity             nil,
+    nil
   ))
 ), $CONFIG_THEME);
+}

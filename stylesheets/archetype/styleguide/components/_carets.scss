@@ -4,7 +4,8 @@
 $STYLEGUIDE_CARETS_ID: caret !default;
 $STYLEGUIDE_CARETS: () !default;
 
-$a-blackhole: styleguide-add-component($STYLEGUIDE_CARETS_ID, $STYLEGUIDE_CARETS, (
+@if not styleguide-component-exists($STYLEGUIDE_CARETS_ID, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component($STYLEGUIDE_CARETS_ID,  $STYLEGUIDE_CARETS, (
   (default, (
     inline-block        true,
     vertical-align      middle,
@@ -332,3 +333,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_CARETS_ID, $STYLEGUIDE_CARETS
     margin-top          nil
   ))
 ), $CONFIG_THEME);
+}

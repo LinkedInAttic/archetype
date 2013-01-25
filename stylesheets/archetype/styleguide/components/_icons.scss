@@ -4,7 +4,8 @@
 $STYLEGUIDE_ICONS_ID: icon !default;
 $STYLEGUIDE_ICONS: () !default;
 
-$a-blackhole: styleguide-add-component($STYLEGUIDE_ICONS_ID, $STYLEGUIDE_ICONS, (
+@if not styleguide-component-exists($STYLEGUIDE_ICONS_ID, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component($STYLEGUIDE_ICONS_ID,  $STYLEGUIDE_ICONS, (
   (default, (
     inline-block        true,
     hide-text           true,
@@ -13,3 +14,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_ICONS_ID, $STYLEGUIDE_ICONS, 
   )),
   nil
 ), $CONFIG_THEME);
+}

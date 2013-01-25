@@ -4,6 +4,7 @@
 $STYLEGUIDE_PUNCHCUTS_ID: punchcut !default;
 $STYLEGUIDE_PUNCHCUTS: () !default;
 
+@if not styleguide-component-exists($STYLEGUIDE_PUNCHCUTS_ID, $CONFIG_THEME) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_PUNCHCUTS_ID, $STYLEGUIDE_PUNCHCUTS, (
   (default, (
     background  nth($CONFIG_TEXTURE_PUNCHCUT, 1),
@@ -14,3 +15,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_PUNCHCUTS_ID, $STYLEGUIDE_PUN
     nil
   ))
 ), $CONFIG_THEME);
+}

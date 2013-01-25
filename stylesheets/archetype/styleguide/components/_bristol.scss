@@ -4,6 +4,7 @@
 $STYLEGUIDE_BRISTOLS_ID: bristol !default;
 $STYLEGUIDE_BRISTOLS: () !default;
 
+@if not styleguide-component-exists($STYLEGUIDE_BRISTOLS_ID, $CONFIG_THEME) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_BRISTOLS_ID, $STYLEGUIDE_BRISTOLS, (
   (default, (
     background  nth($CONFIG_TEXTURE_BRISTOL, 1),
@@ -11,3 +12,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BRISTOLS_ID, $STYLEGUIDE_BRIS
   )),
   nil
 ), $CONFIG_THEME);
+}

@@ -4,7 +4,8 @@
 $STYLEGUIDE_HOVERCARDS_ID: hovercard !default;
 $STYLEGUIDE_HOVERCARDS: () !default;
 
-$a-blackhole: styleguide-add-component($STYLEGUIDE_HOVERCARDS_ID, $STYLEGUIDE_HOVERCARDS, (
+@if not styleguide-component-exists($STYLEGUIDE_HOVERCARDS_ID, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component($STYLEGUIDE_HOVERCARDS_ID,  $STYLEGUIDE_HOVERCARDS, (
   (default, (
     border-radius       $CONFIG_DIM_HOVERCARD_RADIUS,
     background          nth($CONFIG_TEXTURE_CONTAINER, 1),
@@ -15,6 +16,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_HOVERCARDS_ID, $STYLEGUIDE_HO
     max-width           $CONFIG_DIM_HOVERCARD_MAX_WIDTH,
     padding             $CONFIG_DIM_HOVERCARD_SPACING,
     // structure
+    outline             0,  // for accessibility purposes, we don't want to outline the hovercard if it has focus
     display             block,
     position            absolute,
     visibility          visible,
@@ -22,3 +24,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_HOVERCARDS_ID, $STYLEGUIDE_HO
   )),
   nil
 ), $CONFIG_THEME);
+}

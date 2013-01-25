@@ -4,30 +4,33 @@
 $STYLEGUIDE_CLOSES_ID: close !default;
 $STYLEGUIDE_CLOSES: () !default;
 
-$a-blackhole: styleguide-add-component($STYLEGUIDE_CLOSES_ID, $STYLEGUIDE_CLOSES, (
+@if not styleguide-component-exists($STYLEGUIDE_CLOSES_ID, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component($STYLEGUIDE_CLOSES_ID,  $STYLEGUIDE_CLOSES, (
   (default, (
     color               inherit,
     background          (transparent none),
-    padding             (nth($CONFIG_GLYPH_CLOSE, 4) 1px 0),
+    padding             (0 1px 0 0),
     border              0,
     margin              0,
     cursor              pointer,
     text-decoration     none,
     position            absolute,
+    overflow            hidden,
     top                 vertical-spacing(2),
     right               horizontal-spacing(2),
     width               nth($CONFIG_GLYPH_CLOSE, 4),
-    height              0,
-    overflow            hidden,
-    text-indent         1px,
-    glyph-icon          (nth($CONFIG_GLYPH_CLOSE, 1), nth($CONFIG_GLYPH_CLOSE, 2), nth($CONFIG_GLYPH_CLOSE, 3), before, 'vertical-align:top;line-height:1;position:absolute;top:0;right:0;'),
+    height              nth($CONFIG_GLYPH_CLOSE, 4),
+    text-indent         (nth($CONFIG_GLYPH_CLOSE, 4) + 1px),
+    glyph-icon          (nth($CONFIG_GLYPH_CLOSE, 1), nth($CONFIG_GLYPH_CLOSE, 2), nth($CONFIG_GLYPH_CLOSE, 3), before, 'text-decoration:none;vertical-align:top;line-height:1;position:absolute;top:0;right:0;'),
     (selectors, (
       ('&:before', (
         vertical-align  top,
         line-height     1,
         position        absolute,
         top             0,
-        right           0
+        right           0,
+        text-decoration none,
+        cursor          pointer
       )),
       nil
     )),
@@ -57,3 +60,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_CLOSES_ID, $STYLEGUIDE_CLOSES
   )),
   nil
 ), $CONFIG_THEME);
+}

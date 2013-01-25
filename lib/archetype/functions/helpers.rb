@@ -17,12 +17,11 @@ private
   # *Parameters*:
   # - <tt>hsh</tt> {Hash} the hash to convert
   # - <tt>depth</tt> {Integer} the depth to walk down into the hash
-  # - <tt>reductives</tt> {Array} a list of keys to split
   # - <tt>separator</tt> {Symbol} the separator to use for the Sass::List
   # *Returns*:
   # - {Sass::List} the converted list
   #
-  def self.hash_to_list(hsh, depth = 0, reductives = [], separator = :comma)
+  def self.hash_to_list(hsh, depth = 0, separator = :comma)
     if hsh.is_a? Hash
       list = []
       hsh.each do |item|
@@ -31,7 +30,7 @@ private
           tmp = []
           item[1] = [item[1]] if not item[1].is_a? Array
           item[1].each do |i|
-            list.push Sass::Script::List.new([Sass::Script::String.new(item[0]), hash_to_list(i, depth + 1, reductives)], separator)
+            list.push Sass::Script::List.new([Sass::Script::String.new(item[0]), hash_to_list(i, depth + 1)], separator)
           end
         end
       end

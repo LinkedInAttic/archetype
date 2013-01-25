@@ -4,6 +4,14 @@
 
 - initial public release
 
+## 0.0.1.pre.3 (unreleased)
+
+### New Features:
+
+- added `styleguide-component-exists()` method to check if a component/extension has already been registered in the theme
+- added `memoize` compiler configuration to allow enabling/disabling the internal styleguide memoizer
+- added test case for fallback CSS properties
+
 ## 0.0.1.pre.2 (unreleased)
 
 ### New Features:
@@ -32,6 +40,7 @@
 - nested inheritance would get corrupted (due to a volatile context being passed along)
 - `$exclude` in `to-styles` wasn't taking a list of keys cleanly
 - `font-family()` and `lang()` weren't respecting locale aliases
+- fixed thread safety issues
 
 ### Documentation:
 

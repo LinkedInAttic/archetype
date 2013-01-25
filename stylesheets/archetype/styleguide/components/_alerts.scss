@@ -4,6 +4,7 @@
 $STYLEGUIDE_ALERTS_ID: alert !default;
 $STYLEGUIDE_ALERTS: () !default;
 
+@if not styleguide-component-exists($STYLEGUIDE_ALERTS_ID, $CONFIG_THEME) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_ALERTS_ID, $STYLEGUIDE_ALERTS, (
   (default, (
     // fallback background
@@ -55,3 +56,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_ALERTS_ID, $STYLEGUIDE_ALERTS
     box-shadow            _styleguideGetAlertShadow(yield)
   ))
 ), $CONFIG_THEME);
+}

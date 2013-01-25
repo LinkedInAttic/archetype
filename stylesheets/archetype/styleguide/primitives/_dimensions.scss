@@ -21,7 +21,7 @@ $CONFIG_DIM_HOVERCARD_RADIUS:                   $CONFIG_DIM_TOOLTIP_RADIUS !defa
 $CONFIG_DIM_HOVERCARD_MAX_WIDTH:                $CONFIG_DIM_TOOLTIP_MAX_WIDTH !default;
 $CONFIG_DIM_HOVERCARD_SPACING:                  (vertical-spacing(4) horizontal-spacing(4)) !default;
 $CONFIG_DIM_HOVERCARD_TIP:                      (24px 15px) !default;
-$CONFIG_DIM_HOVERCARD_TIP_OFFSET:               10px !default;
+$CONFIG_DIM_HOVERCARD_TIP_OFFSET:               (10px) !default;
 
 // generic dimensions
 $CONFIG_DIM_GENERIC_BORDER:                     1px !default;

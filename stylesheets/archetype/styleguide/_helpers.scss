@@ -6,12 +6,14 @@
 // @param     $size {String} the size of the button to calculate
 // @return    {Number} the height of the button
 @function _styleguideGetButtonHeight($size: medium) {
-  $sizes: (
-    (small,   $CONFIG_FONT_BUTTON_SMALL),
-    (medium,  $CONFIG_FONT_BUTTON_MEDIUM),
-    (large,   $CONFIG_FONT_BUTTON_LARGE)
-  );
-  $size: associative($sizes, $size);
+  @if type-of($size) != list {
+    $sizes: (
+      (small,   $CONFIG_FONT_BUTTON_SMALL),
+      (medium,  $CONFIG_FONT_BUTTON_MEDIUM),
+      (large,   $CONFIG_FONT_BUTTON_LARGE)
+    );
+    $size: associative($sizes, $size);
+  }
   // font size + top/bottom padding
   @return nth($size, 1) + (2 * nth($size, 2));
 }
@@ -23,12 +25,14 @@
 // @param     $narrow {Bool} is the button narrow or not
 // @return    {Number} the padding on the button
 @function _styleguideGetButtonPadding($size: medium, $narrow: false) {
-  $sizes: (
-    (small,   $CONFIG_FONT_BUTTON_SMALL),
-    (medium,  $CONFIG_FONT_BUTTON_MEDIUM),
-    (large,   $CONFIG_FONT_BUTTON_LARGE)
-  );
-  $size: nth(associative($sizes, $size), 3);
+  @if type-of($size) != list {
+    $sizes: (
+      (small,   $CONFIG_FONT_BUTTON_SMALL),
+      (medium,  $CONFIG_FONT_BUTTON_MEDIUM),
+      (large,   $CONFIG_FONT_BUTTON_LARGE)
+    );
+    $size: nth(associative($sizes, $size), 3);
+  }
   $size: floor(if($narrow, $size * 0.75, $size));
   @return (0 $size);
 }
@@ -41,7 +45,7 @@
 // @return    {List} the border widths needed to generate the caret
 @function _styleguideCaretSize($size: medium, $direction: south) {
   @if type-of($size) != number {
-    $caret: associative((
+    $size: associative((
       (small      $CONFIG_FONT_CARET_SMALL),
       (medium     $CONFIG_FONT_CARET_MEDIUM),
       (large      $CONFIG_FONT_CARET_LARGE),
@@ -87,12 +91,15 @@
 // @param     $type {String} the type of alert [success|notice|yield|error]
 // @return    {List} the shadows on the alert
 @function _styleguideGetAlertShadow($type: notice) {
-  $color: associative((
-    (notice     $CONFIG_COLOR_BORDER_ALERT_NOTIFY),
-    (success    $CONFIG_COLOR_BORDER_ALERT_SUCCESS),
-    (error      $CONFIG_COLOR_BORDER_ALERT_ERROR),
-    (yield      $CONFIG_COLOR_BORDER_ALERT_YIELD)
-  ), $type);
+  $color: $type;
+  @if type-of($type) == string {
+    $color: associative((
+      (notice     $CONFIG_COLOR_BORDER_ALERT_NOTIFY),
+      (success    $CONFIG_COLOR_BORDER_ALERT_SUCCESS),
+      (error      $CONFIG_COLOR_BORDER_ALERT_ERROR),
+      (yield      $CONFIG_COLOR_BORDER_ALERT_YIELD)
+    ), $type);
+  }
   @if($color != nil and $CONFIG_DIM_GENERIC_BORDER != nil) {
     @return ((0 0 0 $CONFIG_DIM_GENERIC_BORDER $color), $CONFIG_SHADOW_ALERT);
   }
@@ -115,13 +122,16 @@
 // @function  _styleguideGetTooltipTipBG
 // @private
 // @param     $direction {String} the direction the tip is pointing [north|south|east|west]
-// @param     $type {String} the type of the tip [hovercard|tooltip]
+// @param     $type {String} the type of the tip [hovercard]
 // @return    {List} the background position offsets
 @function _styleguideGetTooltipTipBG($direction: south, $type: hovercard) {
-  $dim: associative((
-    hovercard       $CONFIG_DIM_HOVERCARD_TIP,
-    nil
-  ), $type);
+  $dim: $type;
+  @if type-of($type) == string {
+    $dim: associative((
+      hovercard   $CONFIG_DIM_HOVERCARD_TIP,
+      nil
+    ), $type);
+  }
   $a: nth($dim, 1);
   $b: nth-cyclic($dim, 2);
   // TODO - RTL support

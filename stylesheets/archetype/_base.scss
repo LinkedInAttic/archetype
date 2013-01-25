@@ -29,7 +29,7 @@ $RESET_INIT: false !default;
       @include base-reset($exclude: $exclude);
     }
   }
-  @if $CONFIG_GLYPHS_AUTO {
+  @if $CONFIG_GLYPHS_AUTO and do-once("archetype/base#glyph") {
     @include base-glyph();
   }
 }

@@ -4,7 +4,8 @@
 $STYLEGUIDE_FLYOUTS_ID: flyout !default;
 $STYLEGUIDE_FLYOUTS: () !default;
 
-$a-blackhole: styleguide-add-component($STYLEGUIDE_FLYOUTS_ID, $STYLEGUIDE_FLYOUTS, (
+@if not styleguide-component-exists($STYLEGUIDE_FLYOUTS_ID, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component($STYLEGUIDE_FLYOUTS_ID,  $STYLEGUIDE_FLYOUTS, (
   (default, (
     display               none,                         // hidden by default (use `visible flyout` if you want it shown by default)
     position              absolute,                     // position!
@@ -48,3 +49,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_FLYOUTS_ID, $STYLEGUIDE_FLYOU
     right                 0
   ))
 ), $CONFIG_THEME);
+}

@@ -4,7 +4,8 @@
 $STYLEGUIDE_CONTAINERS_ID: container !default;
 $STYLEGUIDE_CONTAINERS: () !default;
 
-$a-blackhole: styleguide-add-component($STYLEGUIDE_CONTAINERS_ID, $STYLEGUIDE_CONTAINERS, (
+@if not styleguide-component-exists($STYLEGUIDE_CONTAINERS_ID, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component($STYLEGUIDE_CONTAINERS_ID,  $STYLEGUIDE_CONTAINERS, (
   (default, (
     background        nth($CONFIG_TEXTURE_CONTAINER, 1),
     box-shadow        $CONFIG_SHADOW_CONTAINER,
@@ -23,3 +24,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_CONTAINERS_ID, $STYLEGUIDE_CO
     nil
   ))
 ), $CONFIG_THEME);
+}

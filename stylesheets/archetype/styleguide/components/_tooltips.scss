@@ -4,6 +4,7 @@
 $STYLEGUIDE_TOOLTIPS_ID: tooltip !default;
 $STYLEGUIDE_TOOLTIPS: () !default;
 
+@if not styleguide-component-exists($STYLEGUIDE_TOOLTIPS_ID, $CONFIG_THEME) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_TOOLTIPS_ID, $STYLEGUIDE_TOOLTIPS, (
   (default, (
     color               nth-cyclic($CONFIG_COLOR_COPY, 2),
@@ -16,6 +17,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_TOOLTIPS_ID, $STYLEGUIDE_TOOL
     max-width           $CONFIG_DIM_TOOLTIP_MAX_WIDTH,
     padding             $CONFIG_DIM_TOOLTIP_SPACING,
     // structure
+    outline             0,  // for accessibility purposes, we don't want to outline the tooltip if it has focus
     display             block,
     position            absolute,
     visibility          visible,
@@ -23,3 +25,4 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_TOOLTIPS_ID, $STYLEGUIDE_TOOL
   )),
   nil
 ), $CONFIG_THEME);
+}

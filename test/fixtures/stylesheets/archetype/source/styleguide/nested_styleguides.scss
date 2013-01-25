@@ -5,6 +5,7 @@
 
 @import "archetype"; 
 
+@if not styleguide-component-exists(nested-styleguide-test, $CONFIG_THEME) {
 $a-blackhole: styleguide-add-component(nested-styleguide-test, (), (
   (default, (
     display         block,
@@ -33,7 +34,7 @@ $a-blackhole: styleguide-add-component(nested-styleguide-test, (), (
   )),
   nil
 ), $CONFIG_THEME);
-
+}
 .nested-styleguide-test {
   @include styleguide(nested-styleguide-test);
 }

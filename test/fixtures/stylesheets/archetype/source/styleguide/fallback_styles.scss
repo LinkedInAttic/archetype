@@ -1,0 +1,22 @@
+// this case verifies that you can define `fallback` css properties
+
+@import "archetype"; 
+
+@if not styleguide-component-exists(fallback-styleguide-test, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component(fallback-styleguide-test, (), (
+  (default, (
+    background      (transparent url(/some/img.png) repeat),
+    background      rbga(255, 0, 0, 0.9),
+    white-space     pre-wrap,
+    white-space     -moz-pre-wrap,
+    white-space     -pre-wrap,
+    white-space     -o-pre-wrap,
+    something       invalid,
+    something       valid
+  )),
+  nil
+), $CONFIG_THEME);
+}
+.fallback-styleguide-test {
+  @include styleguide(fallback-styleguide-test);
+}

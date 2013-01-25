@@ -31,7 +31,7 @@
   audio,
   canvas,
   video {
-    @include inline-block();
+      @include inline-block();
   }
 
   /*
@@ -539,7 +539,8 @@
   }
 }
 
-// normalize reset
+// -------------------------
+// base-normalize() provides the main entry point to incorporate the behaviors of normalize.css onto the page.
 // @mixin     base-normalize
 // @param     $exclude {List} the list of features to exclude from the reset
 // @link      http://github.com/necolas/normalize.css
