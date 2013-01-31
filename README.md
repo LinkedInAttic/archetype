@@ -76,7 +76,7 @@ Archetype was originally written by [Eugene O'Neill](http://www.linkedin.com/in/
 
 ### Acknowledgements
 
-This project couldn't have been made possible without the amazing work by the following heros:
+This project couldn't have been made possible without the amazing work by the following heroes:
 
 - Dave Gandy for his awesome work on [FontAwesome](http://fortawesome.github.com/Font-Awesome/)
 - Chris Eppstein and other contributors of [Compass](http://compass-style.org/) for building an amazing framework, and for some great scaffolding code we've _borrowed_
