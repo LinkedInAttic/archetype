@@ -1,6 +1,6 @@
 # Archetype
 
-[![View Summary](https://secure.travis-ci.org/eoneill/archetype.png?branch=master)](http://travis-ci.org/#!/eoneill/archetype/branch_summary)
+[![Build Status](https://travis-ci.org/eoneill/archetype.png)](https://travis-ci.org/eoneill/archetype)
 
 Archetype is a UI pattern and component library for quickly iterating on and maintaining scalable web interfaces.
 
