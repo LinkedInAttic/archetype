@@ -18,7 +18,7 @@ Archetype is a UI pattern and component library for quickly iterating on and mai
 ### Install the gem
 
 ```bash
-[sudo] gem install archetype
+[sudo] gem install archetype --pre
 ```
 
 Instead of installing the gem directly via the command line, we recommend using [Bundler](http://gembundler.com/) to manage your gem dependencies.
