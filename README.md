@@ -79,7 +79,7 @@ Archetype was originally written by [Eugene O'Neill](http://www.linkedin.com/in/
 This project couldn't have been made possible without the amazing work by the following heros:
 
 - Dave Gandy for his awesome work on [FontAwesome](http://fortawesome.github.com/Font-Awesome/)
-- Chris Eppstein and other contributors of [Compass](http://compass-style.org/) for some great scaffolding code we've _borrowed_
+- Chris Eppstein and other contributors of [Compass](http://compass-style.org/) for building an amazing framework, and for some great scaffolding code we've _borrowed_
 - Nathan Weizenbaum and contributors for [making CSS fun again](http://sass-lang.com/)
 - Nicolas Gallagher and Jonathan Neal for some [Normalize.css](https://github.com/necolas/normalize.css) greatness
 - Nicolas Gallagher, Jonathan Neal, Kroc Camen, Paul Irish, and others for [HTML5 Boilerplate](http://html5boilerplate.com/)
