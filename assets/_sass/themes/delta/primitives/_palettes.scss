@@ -1,0 +1,13 @@
+// ==========
+// COLOR PALETTE
+// ==========
+
+// fonts
+$CONFIG_COLOR_BRAND:                                    (#0175b0  #ffffff) !default;
+$CONFIG_COLOR_BRAND_NAV:                                (#555555  #2e88b1) !default;
+
+// alerts
+$CONFIG_COLOR_BG_ALERT_NOTIFY:                          #2e88b1 !default;
+$CONFIG_GRADIENT_ALERT_NOTIFY:                          linear-gradient(top, #2e88b1, #0073AD) !default;
+$CONFIG_GRADIENT_ALERT_NOTIFY_IE:                       (#2e88b1, #0073AD, vertical) !default;
+$CONFIG_COLOR_BORDER_ALERT_NOTIFY:                      #0073AD !default;

@@ -6,7 +6,7 @@ tags      : [browsers, hacks, targeting]
 summary   : Learn how target-browser() can help you address cross-browser woes
 description : SUMMARY
 author    : eoneill
-published : false
+published : true
 weight    : 12
 ---
 {% include config %}

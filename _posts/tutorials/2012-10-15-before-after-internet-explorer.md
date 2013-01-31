@@ -6,7 +6,7 @@ tags      : [hacks, browsers, IE]
 summary   : 'Learn how to use Archetype mixins to simulate :before and :after support in IE6/7'
 description : SUMMARY
 author    : eoneill
-published : false
+published : true
 weight    : 9
 ---
 {% include config %}

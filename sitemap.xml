@@ -1,0 +1,26 @@
+---
+Title: Sitemap
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% for page in site.pages %}
+    {% if page.published != false %}
+    <url>
+      <loc>{{site.production_url}}{{ page.url }}</loc>
+      {% if page.lastmod or page.date %}<lastmod>{% if page.lastmod %}{{ page.lastmod | date: "%Y-%m-%d" }}{% else %}{{ page.date | date: "%Y-%m-%d" }}{% endif %}</lastmod>{% endif %}
+      {% if page.changefreq %}<changefreq>{{ page.changefreq }}</changefreq>{% endif %}
+      {% if page.priority %}<priority>{{ page.priority }}</priority>{% endif %}
+    </url>
+    {% endif %}
+  {% endfor %}
+  {% for page in site.posts %}
+    {% if page.published != false %}
+    <url>
+      <loc>{{site.production_url}}{{ page.url }}</loc>
+      <lastmod>{% if page.lastmod %}{{ page.lastmod | date: "%Y-%m-%d" }}{% else %}{{ page.date | date: "%Y-%m-%d" }}{% endif %}</lastmod>
+      {% if page.changefreq %}<changefreq>{{ page.changefreq }}</changefreq>{% endif %}
+      {% if page.priority %}<priority>{{ page.priority }}</priority>{% endif %}
+    </url>
+    {% endif %}
+  {% endfor %}
+</urlset>

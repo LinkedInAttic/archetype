@@ -1,13 +1,126 @@
-#__components__buttons .example .preview {
-  $button-sizes: (small medium large);
-  $button-types: (primary secondary spotlight);
-  // button scaffolding
-  .simple-button {
-    @each $size in $button-sizes {
-      @each $type in $button-types {
-        &.#{$size}.#{$type} {
-          @include styleguide($size $type button);
+#__components__buttons {
+  // simple button
+  .#{$dontuse}button_1_1 {
+    @include styleguide(primary button);
+  }
+  .#{$dontuse}button_1_2 {
+    @include styleguide(secondary button);
+  }
+  .#{$dontuse}button_1_3 {
+    @include styleguide(spotlight button);
+  }
+  // with sizes
+  .#{$dontuse}button_1_4 {
+    @include styleguide(small secondary button);
+  }
+  .#{$dontuse}button_1_5 {
+    @include styleguide(medium secondary button);
+  }
+  .#{$dontuse}button_1_6 {
+    @include styleguide(large secondary button);
+  }
+
+  // button groups
+  .#{$dontuse}button-group_2_0 {
+    @include styleguide(button-group);
+    a {
+      @include styleguide(primary button in a button-group);
+      &:first-child {
+        @include styleguide(first primary button in a button-group);
+      }
+      &:last-child {
+        @include styleguide(last primary button in a button-group);
+      }
+    }
+  }
+  .#{$dontuse}button-group_2_1 {
+    @include styleguide(button-group);
+    a {
+      @include styleguide(small secondary button in a button-group);
+      &:first-child {
+        @include styleguide(first small secondary button in a button-group);
+      }
+      &:last-child {
+        @include styleguide(last small secondary button in a button-group);
+      }
+    }
+  }
+
+  // button toolbars
+  .#{$dontuse}button-toolbar_3_0 {
+    @include styleguide(button-toolbar);
+    .save {
+      @include styleguide(small primary button in a button-toolbar);
+    }
+    .cancel {
+      @include styleguide(small secondary button in a button-toolbar);
+    }
+  }
+  .#{$dontuse}button-group_3_1 {
+    @include styleguide(button-group in a button-toolbar);
+    a {
+      @include styleguide(small secondary button in a button-group);
+      &:first-child {
+        @include styleguide(first small secondary button in a button-group);
+      }
+      &:last-child {
+        @include styleguide(last small secondary button in a button-group);
+      }
+    }
+  }
+
+  // menu button
+  .#{$dontuse}menu-button_4_1 {
+    @include styleguide(large primary button);
+    position: relative;
+    b {
+      @include styleguide(caret in a large primary button);
+    }
+    // flyout
+    ul {
+      @include styleguide(flyout);
+      li {
+        @include styleguide(muted copy, menu-item in a flyout);
+      }
+    }
+    // open it without JavaScript
+    &:hover, &:focus {
+      ul {
+        @include styleguide-diff(flyout, visible flyout);
+      }
+    }
+  }
+
+  // split button
+  .#{$dontuse}split-button_5_1 {
+    @include styleguide(button-group);
+    position: relative;
+    a {
+      @include styleguide(first spotlight button in a button-group);
+    }
+    .more {
+      @include styleguide(last narrow spotlight button in a button-group);
+      // open it without JavaScript
+      &:hover, &:focus {
+        dl {
+          @include styleguide-diff(flyout, visible flyout);
         }
+      }
+    }
+    b {
+      @include styleguide(caret in a spotlight button);
+    }
+    // flyout
+    dl {
+      @include styleguide(flyout);
+      dt {
+        @include styleguide(medium copy, heading in a flyout in a button);
+        &:first-child {
+          @include styleguide-diff(heading in a flyout in a button, first heading in a flyout in a button);
+        }
+      }
+      dd {
+        @include styleguide(small muted copy, menu-item in a flyout);
       }
     }
   }

@@ -1,5 +1,5 @@
 $CONFIG_RESET_AUTO: true;
-@import "themes/aspirational";
+@import "themes/delta";
 
 $main-logo: 'logos/logo.png';
 $main-logo-height: image-height($main-logo);
@@ -149,30 +149,8 @@ hr {
 // post details
 .post-details {
   @include styleguide(small muted copy);
-}
-
-// some simple pagination
-.pagination {
-  ul {
-    @include grid-row();
-  }
-  .prev,
-  .next {
-    &.disabled {
-      visibility: hidden;
-    }
-  }
-  .prev {
-    @include grid(5, $first: true, $indent: grid-indent($left: 1), $outdent: grid-outdent($left: 1));
-    @include text-align(left);
-  }
-  .next {
-    @include grid(5, $indent: grid-indent($right: 1), $outdent: grid-outdent($right: 1));
-    @include text-align(right);
-  }
-  .archive {
-    @include grid(7);
-    @include text-align(center);
+  .author {
+    @include styleguide(identity);
   }
 }
 

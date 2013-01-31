@@ -5,7 +5,7 @@ category  : documentation
 tags      : [intro, config]
 summary   : This document will cover the various configuration options available in Archetype.
 description : SUMMARY
-published : false
+published : true
 weight    : 2
 meta :
   date : false

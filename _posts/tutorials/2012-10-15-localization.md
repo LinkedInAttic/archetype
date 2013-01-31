@@ -6,7 +6,7 @@ tags      : [intro, locale, i18n, l10n]
 summary   : CSS can be challenging when you're dealing with multiple languages. Learn some techniques and tactics for dealing with common issues.
 description : SUMMARY
 author    : eoneill
-published : false
+published : true
 weight    : 5
 ---
 {% include config %}

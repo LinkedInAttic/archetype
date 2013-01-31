@@ -3,10 +3,10 @@ layout    : post
 title     : Creating Complex Layouts Using grid()
 category  : tutorials
 tags      : [intro, grid, layout]
-summary   : 
+summary   : TODO
 description : SUMMARY
 author    : eoneill
-published : false
+published : true
 weight    : 4
 ---
 {% include config %}

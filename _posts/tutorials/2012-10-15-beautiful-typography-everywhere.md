@@ -6,7 +6,7 @@ tags      : [fonts, targeting, browsers]
 summary   : Helvetica, Arial, sans-serif? Fun with font stacks in the 21st century.
 description : SUMMARY
 author    : eoneill
-published : false
+published : true
 weight    : 6
 ---
 {% include config %}

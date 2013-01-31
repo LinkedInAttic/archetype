@@ -5,7 +5,7 @@ category  : documentation
 tags      : [browsers]
 summary   : Sometimes, you just want things to work.
 description : SUMMARY
-published : false
+published : true
 weight    : 3
 meta :
   date : false

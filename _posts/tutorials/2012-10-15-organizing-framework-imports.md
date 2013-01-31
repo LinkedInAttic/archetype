@@ -6,7 +6,7 @@ tags      : [archetype, structure, extend]
 summary   : It's fun to be a rebel. Learn how to shim in your own functionality into Archetype and other frameworks
 description : SUMMARY
 author    : eoneill
-published : false
+published : true
 weight    : 8
 ---
 {% include config %}

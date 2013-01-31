@@ -3,10 +3,10 @@ layout    : post
 title     : z-index - On Top of the World
 category  : tutorials
 tags      : [zindex, advanced]
-summary   : 
+summary   : TODO
 description : SUMMARY
 author    : eoneill
-published : false
+published : true
 weight    : 13
 ---
 {% include config %}

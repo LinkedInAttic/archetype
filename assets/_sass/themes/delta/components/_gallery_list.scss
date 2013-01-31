@@ -1,0 +1,50 @@
+// ==========
+// GALLERY LIST
+// ==========
+$STYLEGUIDE_GALLERY_LIST_ID: gallery-list !default;
+$STYLEGUIDE_GALLERY_LIST: () !default;
+
+$a-blackhole: styleguide-add-component($STYLEGUIDE_GALLERY_LIST_ID, $STYLEGUIDE_GALLERY_LIST, (
+  (default, (
+    (selectors, (
+      ('li', (
+        display     block,
+        max-width   47%,
+        margin      (0 horizontal-spacing(2) vertical-spacing(4) 0),
+        nil
+      )),
+      ('figure', (
+        position    relative,
+        nil
+      )),
+      ('a', (
+        display     block,
+        width       100%,
+        height      100%,
+        styleguide  (muted link without an underline)
+      )),
+      ('img, figcaption, summary', (
+        display     block,
+        max-width   100%,
+        nil
+      )),
+      ('figcaption', (
+        filter      gradient(startColorstr='#b3000000', endColorstr='#b3000000', GradientType=0), // old IE fallback, weee!
+        background-color  #000,
+        background-color  rgba(0,0,0,0.7),
+        stretch     true,
+        padding     (vertical-spacing(4) horizontal-spacing(4)),
+        opacity     0,
+        transition  (opacity 300ms ease-in),
+        styleguide  (medium copy in a punchcut)
+      )),
+      ('a:hover figcaption', (
+        opacity     1,
+        nil
+      )),
+      nil
+    )),
+    nil
+  )),
+  nil
+), $CONFIG_THEME);

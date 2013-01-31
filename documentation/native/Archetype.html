@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+
+<title>module Archetype - Archetype v0.0.1.pre.3 Documentation</title>
+
+<link type="text/css" media="screen" href="./rdoc.css" rel="stylesheet">
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script type="text/javascript" charset="utf-8" src="./js/jquery.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/navigation.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search_index.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/search.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/searcher.js"></script>
+<script type="text/javascript" charset="utf-8" src="./js/darkfish.js"></script>
+
+
+<body id="top" class="module">
+<nav id="metadata">
+  <nav id="home-section" class="section">
+  <h3 class="section-header">
+    <a href="./index.html">Home</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </h3>
+</nav>
+
+
+  <nav id="search-section" class="section project-section" class="initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <h3 class="section-header">
+      <input type="text" name="search" placeholder="Search" id="search-field"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </h3>
+  </form>
+
+  <ul id="search-results" class="initially-hidden"></ul>
+</nav>
+
+
+  <div id="file-metadata">
+    <nav id="file-list-section" class="section">
+  <h3 class="section-header">Defined In</h3>
+  <ul>
+    <li>lib/archetype/version.rb
+    <li>lib/archetype.rb
+  </ul>
+</nav>
+
+    
+  </div>
+
+  <div id="class-metadata">
+    
+    
+    
+    <!-- Method Quickref -->
+<nav id="method-list-section" class="section">
+  <h3 class="section-header">Methods</h3>
+
+  <ul class="link-list">
+    
+    <li><a href="#method-c-const_missing">::const_missing</a>
+    
+    <li><a href="#method-c-init">::init</a>
+    
+    <li><a href="#method-c-register">::register</a>
+    
+  </ul>
+</nav>
+
+  </div>
+
+  <div id="project-metadata">
+    <nav id="fileindex-section" class="section project-section">
+  <h3 class="section-header">Pages</h3>
+
+  <ul>
+  
+    <li class="file"><a href="./lib/README_rdoc.html">README</a>
+  
+  </ul>
+</nav>
+
+    <nav id="classindex-section" class="section project-section">
+  <h3 class="section-header">Class and Module Index</h3>
+
+  <ul class="link-list">
+  
+    <li><a href="./Archetype.html">Archetype</a>
+  
+    <li><a href="./Archetype/Functions.html">Archetype::Functions</a>
+  
+    <li><a href="./Archetype/Functions/Hash.html">Archetype::Functions::Hash</a>
+  
+    <li><a href="./Archetype/Functions/Helpers.html">Archetype::Functions::Helpers</a>
+  
+    <li><a href="./Archetype/Functions/StyleguideMemoizer.html">Archetype::Functions::StyleguideMemoizer</a>
+  
+    <li><a href="./Archetype/SassExtensions.html">Archetype::SassExtensions</a>
+  
+    <li><a href="./Archetype/SassExtensions/Environment.html">Archetype::SassExtensions::Environment</a>
+  
+    <li><a href="./Archetype/SassExtensions/Lists.html">Archetype::SassExtensions::Lists</a>
+  
+    <li><a href="./Archetype/SassExtensions/Locale.html">Archetype::SassExtensions::Locale</a>
+  
+    <li><a href="./Archetype/SassExtensions/Numbers.html">Archetype::SassExtensions::Numbers</a>
+  
+    <li><a href="./Archetype/SassExtensions/Styleguide.html">Archetype::SassExtensions::Styleguide</a>
+  
+    <li><a href="./Archetype/SassExtensions/UI.html">Archetype::SassExtensions::UI</a>
+  
+    <li><a href="./Archetype/SassExtensions/Version.html">Archetype::SassExtensions::Version</a>
+  
+    <li><a href="./Archetype/Version.html">Archetype::Version</a>
+  
+  </ul>
+</nav>
+
+  </div>
+</nav>
+
+<div id="documentation">
+  <h1 class="module">module Archetype</h1>
+
+  <div id="description" class="description">
+    
+<p>Initialize <a href="Archetype.html">Archetype</a> and register it as a
+Compass extension</p>
+
+  </div><!-- description -->
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    <!-- Methods -->
+    
+     <section id="public-class-5Buntitled-5D-method-details" class="method-section section">
+      <h3 class="section-header">Public Class Methods</h3>
+
+    
+      <div id="method-c-const_missing" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">const_missing</span><span
+            class="method-args">(const)</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+
+          
+          <div class="method-source-code" id="const_missing-source">
+            <pre><span class="ruby-comment"># File lib/archetype/version.rb, line 60</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">const_missing</span>(<span class="ruby-identifier">const</span>)
+  <span class="ruby-comment"># This avoid reading from disk unless the VERSION is requested.</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">const</span> <span class="ruby-operator">==</span> <span class="ruby-value">:VERSION</span>
+    <span class="ruby-identifier">version</span>[<span class="ruby-value">:string</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-keyword">super</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- const_missing-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- const_missing-method -->
+
+    
+      <div id="method-c-init" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">init</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>initialize <a href="Archetype.html">Archetype</a></p>
+          
+
+          
+          <div class="method-source-code" id="init-source">
+            <pre><span class="ruby-comment"># File lib/archetype.rb, line 16</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">init</span>
+  <span class="ruby-comment"># register it</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">register</span>
+  <span class="ruby-comment"># setup configs</span>
+  <span class="ruby-comment"># locale</span>
+  <span class="ruby-constant">Compass</span><span class="ruby-operator">::</span><span class="ruby-constant">Configuration</span>.<span class="ruby-identifier">add_configuration_property</span>(<span class="ruby-value">:locale</span>, <span class="ruby-string">&quot;the user locale&quot;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-string">'en_US'</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># reading direction (ltr|rtl)</span>
+  <span class="ruby-constant">Compass</span><span class="ruby-operator">::</span><span class="ruby-constant">Configuration</span>.<span class="ruby-identifier">add_configuration_property</span>(<span class="ruby-value">:reading</span>, <span class="ruby-string">&quot;the user interface reading direction&quot;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-string">'ltr'</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># environment</span>
+  <span class="ruby-constant">Compass</span><span class="ruby-operator">::</span><span class="ruby-constant">Configuration</span>.<span class="ruby-identifier">add_configuration_property</span>(<span class="ruby-value">:environment</span>, <span class="ruby-string">&quot;current environment&quot;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-value">:development</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-comment"># memoize</span>
+  <span class="ruby-constant">Compass</span><span class="ruby-operator">::</span><span class="ruby-constant">Configuration</span>.<span class="ruby-identifier">add_configuration_property</span>(<span class="ruby-value">:memoize</span>, <span class="ruby-string">&quot;should the memoizer be used to improve compilation speed&quot;</span>) <span class="ruby-keyword">do</span>
+    <span class="ruby-keyword">not</span> (<span class="ruby-constant">Compass</span>.<span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">environment</span> <span class="ruby-operator">||</span> <span class="ruby-value">:development</span>).<span class="ruby-identifier">to_s</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-string">'dev'</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- init-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- init-method -->
+
+    
+      <div id="method-c-register" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">register</span><span
+            class="method-args">()</span>
+          <span class="method-click-advice">click to toggle source</span>
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>register the extension</p>
+          
+
+          
+          <div class="method-source-code" id="register-source">
+            <pre><span class="ruby-comment"># File lib/archetype.rb, line 12</span>
+<span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">register</span>
+  <span class="ruby-constant">Compass</span><span class="ruby-operator">::</span><span class="ruby-constant">Frameworks</span>.<span class="ruby-identifier">register</span>(<span class="ruby-ivar">@archetype</span>[<span class="ruby-value">:name</span>], <span class="ruby-value">:path</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@archetype</span>[<span class="ruby-value">:path</span>])
+<span class="ruby-keyword">end</span></pre>
+          </div><!-- register-source -->
+          
+        </div>
+
+        
+
+        
+      </div><!-- register-method -->
+
+    
+    </section><!-- public-class-method-details -->
+  
+  </section><!-- 5Buntitled-5D -->
+
+</div><!-- documentation -->
+
+
+<footer id="validator-badges">
+  <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
+</footer>
+

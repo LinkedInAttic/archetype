@@ -19,7 +19,13 @@ assets :
 <script>
 (function($) {
 $(function() {
-  $('.gallery-list').masonry({  itemSelector: 'li'});
+  var $gallery = $('.gallery-list');
+  $gallery.imagesLoaded( function(){
+    $gallery.masonry({
+      itemSelector : 'li'
+    });
+  });
 });
+
 })(jQuery);
 </script>

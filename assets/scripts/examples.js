@@ -1,0 +1,1 @@
+(function(a){a(function(){var b=a("section.code","#main");b.hide();b.before('<a href="javascript:void(0);" class="toggle-code">Toggle Code</a>');b.prev().on("click",function(c){a(this).next().toggle();c.preventDefault()})})})(jQuery);

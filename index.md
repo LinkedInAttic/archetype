@@ -5,5 +5,9 @@ title   : Welcome to Archetype
 {% include config %}
 
 {% highlight css linenos %}
-@include "archetype";
+@import "archetype";
 {% endhighlight %}
+
+# Coming Soon
+
+In the meantime, check out the [GitHub project page]({{ GIT_PATH }})

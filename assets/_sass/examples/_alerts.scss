@@ -1,0 +1,14 @@
+#__components__alerts {
+  $alert-types: (notice success error yield);
+  @each $type in $alert-types {
+    .#{$dontuse}alert-#{$type} {
+      @include styleguide($type alert);
+      .dismiss {
+        @include styleguide(close in a $type alert);
+      }
+      .more {
+        @include styleguide(link in a $type alert);
+      }
+    }
+  }
+}

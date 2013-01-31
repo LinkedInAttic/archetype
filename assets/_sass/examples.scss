@@ -2,6 +2,17 @@
 // the user the most accurate representation possible
 @import "archetype";
 
+$dontuse: 'dont-copy-this-class-name-';
+
 // examples
 @import "examples/buttons";
+@import "examples/alerts";
+@import "examples/tooltips";
+@import "examples/grid";
 
+.preview {
+  @include vertical-spacing($bottom: 1, $method: margin);
+  &.full {
+    @include grid(17, $first: true, $outdent: grid-outdent(1));
+  }
+}

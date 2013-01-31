@@ -1,0 +1,62 @@
+#__components__tooltips {
+  $directions: (south north east west);
+  .#{$dontuse}tooltip_1_1,
+  .#{$dontuse}tooltip_1_2,
+  .#{$dontuse}tooltip_1_3,
+  .#{$dontuse}tooltip_1_4 {
+    position: relative;
+    span {
+      @include styleguide(small copy in a tooltip, tooltip);
+      display: none;
+      min-width: 105px;
+    }
+    &:hover {
+      span {
+        display: block;
+      }
+    }
+  }
+  @for $i from 1 through 4 {
+    .#{$dontuse}tooltip_1_#{$i} span {
+      @if $i == 1 or $i == 2 { left: 50%; margin-left: -58px;}
+      @else { top: 50%; margin-top: -15px; }
+      @if $i == 1 { bottom: 100%; margin-bottom: 6px; }
+      @else if $i == 2 { top: 100%; margin-top: 6px; }
+      @else if $i == 3 { right: 100%; margin-right: 10px; }
+      @else if $i == 4 { left: 100%; margin-left: 10px; }
+      &:after {
+        @include styleguide(nth($directions, $i) caret on a tooltip);
+      }
+    }
+  }
+
+  .#{$dontuse}hovercard_1_1,
+  .#{$dontuse}hovercard_1_2,
+  .#{$dontuse}hovercard_1_3,
+  .#{$dontuse}hovercard_1_4 {
+    position: relative;
+    span {
+      @include styleguide(medium copy in a hovercard, hovercard);
+      display: none;
+      min-width: 105px;
+    }
+    &:hover {
+      span {
+        display: block;
+      }
+    }
+  }
+  @for $i from 1 through 4 {
+    .#{$dontuse}hovercard_1_#{$i} span {
+      @if $i == 1 or $i == 2 { left: 50%; margin-left: -71px;}
+      @else { top: 50%; margin-top: -31px; }
+      @if $i == 1 { bottom: 100%; margin-bottom: 11px; }
+      @else if $i == 2 { top: 100%; margin-top: 11px; }
+      @else if $i == 3 { right: 100%; margin-right: 12px; }
+      @else if $i == 4 { left: 100%; margin-left: 12px; }
+      &:after {
+        @include styleguide(nth($directions, $i) caret on a hovercard);
+      }
+    }
+  }
+}

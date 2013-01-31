@@ -5,7 +5,7 @@ category  : documentation
 tags      : [intro, install]
 summary   : Get your environment up and running and create your first Archetype project
 description : SUMMARY
-published : false
+published : true
 weight    : 1
 meta :
   date : false

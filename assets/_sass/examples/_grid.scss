@@ -1,0 +1,19 @@
+#__components__grid {
+  .dont-copy-this-class-name-grid-1_1,
+  .dont-copy-this-class-name-grid-1_2,
+  .dont-copy-this-class-name-grid-1_3 {
+    @include styleguide(module);
+    @include vertical-spacing(3);
+    text-align: center;
+  }
+  .dont-copy-this-class-name-grid-1_1 {
+    @include grid(5, $first: true);
+  }
+  .dont-copy-this-class-name-grid-1_2 {
+    @include grid(7);
+  }
+  .dont-copy-this-class-name-grid-1_3 {
+    @include grid(5);
+  }
+  
+}

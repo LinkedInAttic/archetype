@@ -6,7 +6,7 @@ tags      : [styleguide, components, core, extend]
 summary   : Learn how to extend core components to behave the way you want them to.
 description : SUMMARY
 author    : eoneill
-published : false
+published : true
 weight    : 3
 ---
 {% include config %}

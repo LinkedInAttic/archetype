@@ -2,13 +2,15 @@
 exclude   : ["README.md", "Rakefile", "changelog.md", "LICENSE", "Procfile", "Gemfile", "config.rb"]
 auto      : true
 pygments  : true
-# Maruku doesn't play nicely with scss syntax in pygments
-markdown  : rdiscount
+markdown  : rdiscount   # Maruku doesn't play nicely with scss syntax in pygments
+
 # site info
 title     : Archetype CSS
 tagline   : UI pattern and component library...
+
 # permalinks
 permalink : /:categories/:title
+
 # author
 author :
   name    : LinkedIn
@@ -19,14 +21,15 @@ authors :
     name  : Eugene O'Neill
     gplus : https://plus.google.com/109292640596869651573
     href  : http://www.linkedin.com/in/eugeneoneill
-# The production_url is only used when full-domain names are needed such as sitemap.txt 
+
 production_url : http://www.archetypecss.com
 
 ## custom configs
 # copyright notice
 copyright :
   holder  : LinkedIn Corporation
-  year    : 2012
+  year    : 2013
+
 # asset management
 assets :
   cacheBurst : true
@@ -38,27 +41,29 @@ assets :
         version : 1.8.2
 meta :
   image : 'ASSET_PATH/images/logos/archetype_mini_logo.png'
-archetype :
-  version : 0.0.1.pre.2
 lang      : en
+
 # git info
 git :
   account : eoneill
   repo    : archetype
+
 # footer
 footer :
   links : 
-    - {title : GitHub, url : 'GIT_PATH' }
-    - {title : Issue Tracker, url : 'GIT_PATH/issues?state=open' }
-    - {title : CHANGELOG, url : 'GIT_PATH/blob/master/CHANGELOG.md' }
-    - {title : Contributing, url : 'GIT_PATH/blob/master/CONTRIBUTING.md' }
+    - { title : GitHub, url : 'GIT_PATH' }
+    - { title : Credits, url : 'GIT_PATH/blob/master/README.md#credits' }
+    - { title : Issue Tracker, url : 'GIT_PATH/issues?state=open' }
+    - { title : CHANGELOG, url : 'GIT_PATH/blob/master/CHANGELOG.md' }
+    - { title : Contributing, url : 'GIT_PATH/blob/master/CONTRIBUTING.md' }
+
 # pagination
 pagination : false
 
 # API docs
 api_docs :
-  - {title: 'Module Methods', url: '/documentation/module/', summary : 'Explore the documentation for mixins and other module methods.' }
-  - {title: 'Native Methods', url: '/documentation/native/', summary : 'Learn about the native methods provided through the Sass function API.' }
+  - { title: 'Module Methods', url: '/documentation/module/', summary : 'Explore the documentation for mixins and other module methods.' }
+  - { title: 'Native Methods', url: '/documentation/native/', summary : 'Learn about the native methods provided through the Sass function API.' }
 
 # all links will be namespaced by BASE_PATH if defined
 BASE_PATH : false
@@ -76,22 +81,19 @@ archive_path    : /archive.html
 categories_path : /categories.html
 tags_path       : /tags.html
 
-# Settings for comments helper
-# Set 'provider' to the comment provider you want to use.
-# Set 'provider' to false to turn commenting off globally.
+# comments
 comments :
   provider : livefyre
   livefyre :
     site_id : 313052
 
-# Settings for analytics helper
-# Set 'provider' to the analytics provider you want to use.
-# Set 'provider' to false to turn analytics off globally.
+# analytics
 analytics :
   provider : google 
   google : 
     tracking_id : 'UA-1545927-5'
 
+# search
 search :
   provider : tapir
   tapir :

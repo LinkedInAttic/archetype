@@ -9,3 +9,5 @@ javascripts:
     - assets/vendor/jquery/1.8.2/jquery.min.js
   masonry:
     - assets/vendor/masonry/2.1.05/jquery.masonry.min.js
+  examples:
+    - assets/_scripts/examples.js

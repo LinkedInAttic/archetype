@@ -3,10 +3,10 @@ layout    : post
 title     : Scaffolding Can Be Good
 category  : tutorials
 tags      : [scaffolds, base]
-summary   : 
+summary   : TODO
 description : SUMMARY
 author    : eoneill
-published : false
+published : true
 weight    : 7
 ---
 {% include config %}

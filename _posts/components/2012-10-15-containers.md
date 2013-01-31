@@ -5,7 +5,7 @@ category  : components
 tags      : [components, styleguide, containers]
 summary   : ...
 description : SUMMARY
-published : false
+published : true
 weight    : 1
 meta :
   date : false
