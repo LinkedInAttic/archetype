@@ -45,15 +45,13 @@ require "archetype"
 
 Learn more about [Archetype configuration](http://www.archetypecss.com/documentation/configuration/).
 
-## Author
+## Credits
+
+### Author
 
 Archetype was originally written by [Eugene O'Neill](http://www.linkedin.com/in/eugeneoneill).
 
-## Core Developers
-
-- [Bikramjit Singh](http://www.linkedin.com/in/biksingh)
-
-## Inspiration
+### Inspiration
 
 - [Styleguides for the Web](http://paulrobertlloyd.com/2010/12/styleguides_for_the_web/)
 - [BBC Global Experience Language](http://www.bbc.co.uk/gel)
@@ -66,6 +64,7 @@ Archetype was originally written by [Eugene O'Neill](http://www.linkedin.com/in/
 
 ### Special Thanks
 
+- [Johnathan Leppert](http://www.linkedin.com/in/jleppert)
 - [Jakob Heuser](http://www.felocity.com/)
 - [David Delo](http://www.linkedin.com/in/daviddelo)
 - [Robert Martone](www.linkedin.com/in/robertmartone)
@@ -75,9 +74,9 @@ Archetype was originally written by [Eugene O'Neill](http://www.linkedin.com/in/
 - [Compass](http://compass-style.org/)
 - [Sass](http://sass-lang.com/)
 
-## Acknowledgements
+### Acknowledgements
 
-This project couldn't have been made possible without the amazing work by the following heros
+This project couldn't have been made possible without the amazing work by the following heros:
 
 - Dave Gandy for his awesome work on [FontAwesome](http://fortawesome.github.com/Font-Awesome/)
 - Chris Eppstein and other contributors of [Compass](http://compass-style.org/) for some great scaffolding code we've _borrowed_

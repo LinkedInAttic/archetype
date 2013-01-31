@@ -67,6 +67,9 @@
       $styles: if($styles and $styles != nil, #{$CONFIG_GENERATED_TAG_CSS}#{$styles}, $CONFIG_GENERATED_TAG_CSS);
     }
     $styles: if($styles and $styles != nil, 'this.el.style.cssText="#{$styles}",', '');
+    @if $name != '' {
+      $name: '-#{$name}';
+    }
     *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("#{$CONFIG_GENERATED_TAG_PREFIX}#{$name}"),#{$content}#{$styles}this.#{$method}(this.el));
   }
 }

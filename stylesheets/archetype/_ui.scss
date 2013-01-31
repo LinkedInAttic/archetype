@@ -182,7 +182,7 @@
     }
     @if($selector != '&') {
       // support for IE6/7
-      $styles: "font-family:#{$CONFIG_GLYPHS_NAME},a;font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;";
+      $styles: "font-family:'#{$CONFIG_GLYPHS_NAME}';font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;";
       @if($size != nil) {
         $styles: $styles + "font-size:#{$size};"
       }

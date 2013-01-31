@@ -136,14 +136,6 @@
     }
     // make sure content is always quoted
     @else if($property == content) { #{$property}: quote($value); }
-    // some things can accept multiple values for fallback e.g. background-color: (#ccc, rgba(0,0,0, 0.2))
-    // TODO - other things support fallback values as well, like border, but these are currently harder to implement
-    @else if(index(background-color color, $property)) {
-      $value: -compass-list($value);
-      @each $tmp in $value {
-        #{$property}: $tmp;
-      }
-    }
     // :before/:after
     @else if($property == ie-pseudo-before or $property == ie-pseudo-after) {
       $value: -compass-list($value);
