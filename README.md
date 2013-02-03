@@ -69,7 +69,7 @@ Archetype was originally written by [Eugene O'Neill](http://www.linkedin.com/in/
 - [Johnathan Leppert](http://www.linkedin.com/in/jleppert)
 - [Jakob Heuser](http://www.felocity.com/)
 - [David Delo](http://www.linkedin.com/in/daviddelo)
-- [Robert Martone](www.linkedin.com/in/robertmartone)
+- [Robert Martone](http://www.linkedin.com/in/robertmartone)
 - [Sean Sands](http://www.linkedin.com/in/snds117)
 - [Chris Eppstein](http://chriseppstein.github.com/)
 - [LinkedIn](http://www.linkedin.com/)
