@@ -217,7 +217,7 @@ module Archetype::SassExtensions::Lists
   def associative(list, key, strict = false)
     separator = list.separator if list.is_a?(Sass::Script::List)
     list = helpers.list_to_hash(list)
-    item = list[helpers.to_str(key)]
+    item = list[helpers.to_str(key, ' ' , :quotes)]
     item ||= list.first[1] if not strict
     return Sass::Script::List.new([], separator) if item.nil?
     return helpers.hash_to_list(item, 0, separator) if item.is_a?(Array) or item.is_a?(Hash)

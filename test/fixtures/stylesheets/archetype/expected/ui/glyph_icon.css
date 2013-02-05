@@ -11,3 +11,27 @@
   color: inherit;
   content: "\f0d7";
 }
+
+.false {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 100%;
+  color: inherit;
+}
+
+.size {
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.innerHTML="&#xf0d7;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:20px;color:inherit;",this.insertBefore(this.el));
+}
+.size:before {
+  font-family: FontAwesome;
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 20px;
+  color: inherit;
+  content: "\f0d7";
+}

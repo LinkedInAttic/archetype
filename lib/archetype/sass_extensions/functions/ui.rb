@@ -18,7 +18,7 @@ module Archetype::SassExtensions::UI
   # - {String} the unique string
   #
   def unique(prefix = '')
-    prefix = helpers.to_str(prefix).gsub(/\A"|"\Z/, '')
+    prefix = helpers.to_str(prefix, ' ', :quotes)
     prefix = '.' if prefix == 'class'
     prefix = '#' if prefix == 'id'
     return Sass::Script::String.new("#{prefix}archetype-uid-#{uid}")

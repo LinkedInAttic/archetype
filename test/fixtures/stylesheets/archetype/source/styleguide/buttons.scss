@@ -12,3 +12,7 @@
     }
   }
 }
+
+.test-exclude {
+  @include styleguide(small secondary button in a container, $exclude: width height border-radius padding font-size line-height cursor);
+}

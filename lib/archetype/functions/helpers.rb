@@ -58,7 +58,7 @@ private
     list.each do |item|
       item = item.to_a
       # convert the key to a string and strip off quotes
-      key = to_str(item[0]).gsub(/\A"|"\Z/, '')
+      key = to_str(item[0], ' ' , :quotes)
       value = item[1]
       if key != 'nil'
         # check if if it's a nesting hash
@@ -90,8 +90,10 @@ private
   # *Returns*:
   # - {String} the converted String
   #
-  def self.to_str(value, separator = ' ')
-    return value.is_a?(String) ? value : ((value.to_a).each{ |i| i.is_a?(String) ? i : i.value }).join(separator || '')
+  def self.to_str(value, separator = ' ', strip = nil)
+    value = value.is_a?(String) ? value : ((value.to_a).each{ |i| i.is_a?(String) ? i : i.value }).join(separator || '')
+    strip = /\A"|"\Z/ if strip == :quotes
+    return strip.nil? ? value : value.gsub(strip, '')
   end
 
   #

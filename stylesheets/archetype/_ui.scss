@@ -155,18 +155,27 @@
 // @param     $placement {String} where to place the icon [before|after|inline]
 // @param     $ie-styles {String} styles to apply to IE6/7 (this is needed because the faux :before isn't extensible)
 @mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: false) {
-  $char-mapping: -compass-list(associative($CONFIG_GLYPHS_MAPPINGS, $icon, $strict: true));
-  $char-code: nth($char-mapping, 1);
+  $char-mapping: nil;
+  $char-code: nil;
+  @if $icon {
+    $char-mapping: -compass-list(associative($CONFIG_GLYPHS_MAPPINGS, $icon, $strict: true));
+    $char-code: nth($char-mapping, 1);
+  }
   @if $char-code == nil and $icon != false {
     @warn "could not find character mapping for `#{icon}`";
   }
   @else {
     @if $size == default {
-      $default-size: nth-cyclic($char-mapping, 2);
+      $default-size: nil;
+      @if icon {
+        $default-size: nth-cyclic($char-mapping, 2);
+      }
       $size: if(type-of($default-size) == number, $default-size, 100%);
     }
     // if the size is under a given threshold, use a halfling, if available
-    $char-code: nth-cyclic(-compass-list($char-code), if(comparable($CONFIG_GLYPHS_THRESHOLD, $size) and $size <= $CONFIG_GLYPHS_THRESHOLD, 2, 1));
+    @if icon {
+      $char-code: nth-cyclic(-compass-list($char-code), if(comparable($CONFIG_GLYPHS_THRESHOLD, $size) and $size <= $CONFIG_GLYPHS_THRESHOLD, 2, 1));
+    }
     $selector: if(index(before after, $placement), '&:#{$placement}', '&');
     #{$selector} {
       font-family: $CONFIG_GLYPHS_NAME;

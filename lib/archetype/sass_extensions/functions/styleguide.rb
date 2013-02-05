@@ -239,7 +239,7 @@ private
           modifier = modifier.split
           if modifier[0] == REGEX
             # if it's a regex pattern, test if it matches
-            match = modifiers.join(' ') =~ /#{modifiers[1].gsub(/\A"|"\Z/, '')}/i
+            match = modifiers.join(' ') =~ /#{modifier[1].gsub(/\A"|"\Z/, '')}/i
           else
             # otherwise, if the modifier isn't in our list of modifiers, it's not valid and just move on
             modifier.each { |i| match = false if not modifiers.include?(i) }

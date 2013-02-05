@@ -165,7 +165,7 @@
 // @param     $states {Bool|List} if true, output all states; if false, output no states; if a list, output only the states in the list
 // @param     $exclude {List} a list of styles to exclude from output
 @mixin to-styles($list: (), $states: true, $selectors: true, $exclude: ()) {
-  $exclude: compact($exclude, nil);
+  $exclude: -compass-list($exclude);
   $states-data: ();
   $selectors-data: ();
   @each $item in $list {
@@ -211,7 +211,7 @@
 
 // this is identical to to-styles, but we need to avoid Sass' recursion check :(
 @mixin _toStyles2($list: (), $states: true, $selectors: true, $exclude: ()) {
-  $exclude: compact($exclude, nil);
+  $exclude: -compass-list($exclude);
   $states-data: ();
   $selectors-data: ();
   @each $item in $list {
