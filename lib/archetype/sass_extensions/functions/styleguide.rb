@@ -98,7 +98,7 @@ module Archetype::SassExtensions::Styleguide
   #
   def styleguide_component_exists(id, theme = nil, extension = nil, force = false)
     @@archetype_styleguide_mutex.synchronize do
-      extension = helpers.to_str(extension) if not extension.nil?
+      extension = helpers.to_str(extension).hash if not extension.nil?
       return Sass::Script::Bool.new( component_exists(id, theme, extension, force) )
     end
   end
