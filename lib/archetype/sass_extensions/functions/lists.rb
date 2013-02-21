@@ -47,8 +47,8 @@ module Archetype::SassExtensions::Lists
   def list_remove(list, idx = false, separator = nil)
     return list_replace(list, idx, nil, separator)
   end
-  Sass::Script::Functions.declare :list_replace, [:list, :idx]
-  Sass::Script::Functions.declare :list_replace, [:list, :idx, :separator]
+  Sass::Script::Functions.declare :list_remove, [:list, :idx]
+  Sass::Script::Functions.declare :list_remove, [:list, :idx, :separator]
 
   #
   # insert an item into a list
@@ -67,9 +67,9 @@ module Archetype::SassExtensions::Lists
     return list if (not idx or idx == Sass::Script::Bool.new(false)) or value.nil?
     return list_replace(list, idx, value, separator, -1)
   end
-  Sass::Script::Functions.declare :list_replace, [:list, :idx]
-  Sass::Script::Functions.declare :list_replace, [:list, :idx, :value]
-  Sass::Script::Functions.declare :list_replace, [:list, :idx, :value, :separator]
+  Sass::Script::Functions.declare :list_insert, [:list, :idx]
+  Sass::Script::Functions.declare :list_insert, [:list, :idx, :value]
+  Sass::Script::Functions.declare :list_insert, [:list, :idx, :value, :separator]
 
   #
   # sort a list
@@ -243,7 +243,7 @@ module Archetype::SassExtensions::Lists
     list = list.rmerge(extender)
     return helpers.hash_to_list(list, 0, separator)
   end
-  Sass::Script::Functions.declare :list_extend, [:list, :extender]
+  Sass::Script::Functions.declare :associative_merge, [:list, :extender]
 
 private
   def helpers
