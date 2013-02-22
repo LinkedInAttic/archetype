@@ -29,18 +29,25 @@ module Archetype
 
     def read_version
       require 'yaml'
-      @version = YAML::load(File.read(scope('VERSION.yml')))
-      @version[:teeny] = @version[:patch]
-      @version[:string] = "#{@version[:major]}.#{@version[:minor]}"
-      @version[:string] << ".#{@version[:patch]}" if @version[:patch]
-      @version[:string] << ".#{@version[:build]}" if @version[:build]
-      @version[:string] << ".#{@version[:state]}" if @version[:state]
-      @version[:string] << ".#{@version[:iteration]}" if @version[:iteration]
-      if !ENV['OFFICIAL'] && r = revision
-        @version[:string] << ".#{r[0..6]}"
-        @version[:rev] = r
+      begin
+        @version = YAML::load(File.read(scope('VERSION.yml')))
+        @version[:teeny] = @version[:patch]
+        @version[:string] = "#{@version[:major]}.#{@version[:minor]}"
+        @version[:string] << ".#{@version[:patch]}" if @version[:patch]
+        @version[:string] << ".#{@version[:build]}" if @version[:build]
+        @version[:string] << ".#{@version[:state]}" if @version[:state]
+        @version[:string] << ".#{@version[:iteration]}" if @version[:iteration]
+        if !ENV['OFFICIAL'] && r = revision
+          @version[:string] << ".#{r[0..6]}"
+          @version[:rev] = r
+        end
+        return @version
+      rescue
+        # this is a hack, but I'm not fully understanding how to fix this correctly
+        # see issue #4
+        # if it failed, try again, for now
+        return read_version
       end
-      @version
     end
 
     def revision
