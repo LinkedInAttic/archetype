@@ -124,7 +124,7 @@
 // @param     $direction {String} top=vertical left=horizontal
 @mixin fade-box($width: 100%, $height: 100%, $direction: top) {
   $direction: rtl($direction);
-  // TODO - update this when Compass supports IE alpha channels 
+  // TODO - update this when Compass supports IE alpha channels
   @if $direction == left {
     @include ie-filter(gradient(startColorstr='#00ffffff', endColorstr='#ffffff', GradientType=1));
   }
@@ -167,13 +167,13 @@
   @else {
     @if $size == default {
       $default-size: nil;
-      @if icon {
+      @if $icon {
         $default-size: nth-cyclic($char-mapping, 2);
       }
       $size: if(type-of($default-size) == number, $default-size, 100%);
     }
     // if the size is under a given threshold, use a halfling, if available
-    @if icon {
+    @if $icon {
       $char-code: nth-cyclic(-compass-list($char-code), if(comparable($CONFIG_GLYPHS_THRESHOLD, $size) and $size <= $CONFIG_GLYPHS_THRESHOLD, 2, 1));
     }
     $selector: if(index(before after, $placement), '&:#{$placement}', '&');
@@ -189,7 +189,7 @@
         content: $char-code;
       }
     }
-    @if($selector != '&') {
+    @if($selector != '&' and $ie-styles != nil) {
       // support for IE6/7
       $styles: "font-family:'#{$CONFIG_GLYPHS_NAME}';font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;";
       @if($size != nil) {
