@@ -1,0 +1,349 @@
+@-webkit-keyframes archetype-loader {
+  from {
+    -webkit-transform: rotate(0deg);
+  }
+
+  to {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@-moz-keyframes archetype-loader {
+  from {
+    -moz-transform: rotate(0deg);
+  }
+
+  to {
+    -moz-transform: rotate(360deg);
+  }
+}
+
+@-ms-keyframes archetype-loader {
+  from {
+    -ms-transform: rotate(0deg);
+  }
+
+  to {
+    -ms-transform: rotate(360deg);
+  }
+}
+
+@-o-keyframes archetype-loader {
+  from {
+    -o-transform: rotate(0deg);
+  }
+
+  to {
+    -o-transform: rotate(360deg);
+  }
+}
+
+@keyframes archetype-loader {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes archetype-loader-position-medium-1 {
+  from, to {
+    background-position: 0 -230px;
+    width: 58px;
+    height: 58px;
+    margin-left: -29px;
+    margin-top: -29px;
+  }
+}
+
+@-moz-keyframes archetype-loader-position-medium-1 {
+  from, to {
+    background-position: 0 -230px;
+    width: 58px;
+    height: 58px;
+    margin-left: -29px;
+    margin-top: -29px;
+  }
+}
+
+@-ms-keyframes archetype-loader-position-medium-1 {
+  from, to {
+    background-position: 0 -230px;
+    width: 58px;
+    height: 58px;
+    margin-left: -29px;
+    margin-top: -29px;
+  }
+}
+
+@-o-keyframes archetype-loader-position-medium-1 {
+  from, to {
+    background-position: 0 -230px;
+    width: 58px;
+    height: 58px;
+    margin-left: -29px;
+    margin-top: -29px;
+  }
+}
+
+@keyframes archetype-loader-position-medium-1 {
+  from, to {
+    background-position: 0 -230px;
+    width: 58px;
+    height: 58px;
+    margin-left: -29px;
+    margin-top: -29px;
+  }
+}
+
+@-webkit-keyframes archetype-loader-position-medium-2 {
+  from, to {
+    background-position: 0 -288px;
+    width: 58px;
+    height: 58px;
+    margin-left: -29px;
+    margin-top: -29px;
+  }
+}
+
+@-moz-keyframes archetype-loader-position-medium-2 {
+  from, to {
+    background-position: 0 -288px;
+    width: 58px;
+    height: 58px;
+    margin-left: -29px;
+    margin-top: -29px;
+  }
+}
+
+@-ms-keyframes archetype-loader-position-medium-2 {
+  from, to {
+    background-position: 0 -288px;
+    width: 58px;
+    height: 58px;
+    margin-left: -29px;
+    margin-top: -29px;
+  }
+}
+
+@-o-keyframes archetype-loader-position-medium-2 {
+  from, to {
+    background-position: 0 -288px;
+    width: 58px;
+    height: 58px;
+    margin-left: -29px;
+    margin-top: -29px;
+  }
+}
+
+@keyframes archetype-loader-position-medium-2 {
+  from, to {
+    background-position: 0 -288px;
+    width: 58px;
+    height: 58px;
+    margin-left: -29px;
+    margin-top: -29px;
+  }
+}
+
+@-webkit-keyframes archetype-loader-position-small-1 {
+  from, to {
+    background-position: 0 -692px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+  }
+}
+
+@-moz-keyframes archetype-loader-position-small-1 {
+  from, to {
+    background-position: 0 -692px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+  }
+}
+
+@-ms-keyframes archetype-loader-position-small-1 {
+  from, to {
+    background-position: 0 -692px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+  }
+}
+
+@-o-keyframes archetype-loader-position-small-1 {
+  from, to {
+    background-position: 0 -692px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+  }
+}
+
+@keyframes archetype-loader-position-small-1 {
+  from, to {
+    background-position: 0 -692px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+  }
+}
+
+@-webkit-keyframes archetype-loader-position-small-2 {
+  from, to {
+    background-position: 0 -708px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+  }
+}
+
+@-moz-keyframes archetype-loader-position-small-2 {
+  from, to {
+    background-position: 0 -708px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+  }
+}
+
+@-ms-keyframes archetype-loader-position-small-2 {
+  from, to {
+    background-position: 0 -708px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+  }
+}
+
+@-o-keyframes archetype-loader-position-small-2 {
+  from, to {
+    background-position: 0 -708px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+  }
+}
+
+@keyframes archetype-loader-position-small-2 {
+  from, to {
+    background-position: 0 -708px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+  }
+}
+
+@-webkit-keyframes archetype-loader-position-large-1 {
+  from, to {
+    background-position: 0 -462px;
+    width: 115px;
+    height: 115px;
+    margin-left: -57.5px;
+    margin-top: -57.5px;
+  }
+}
+
+@-moz-keyframes archetype-loader-position-large-1 {
+  from, to {
+    background-position: 0 -462px;
+    width: 115px;
+    height: 115px;
+    margin-left: -57.5px;
+    margin-top: -57.5px;
+  }
+}
+
+@-ms-keyframes archetype-loader-position-large-1 {
+  from, to {
+    background-position: 0 -462px;
+    width: 115px;
+    height: 115px;
+    margin-left: -57.5px;
+    margin-top: -57.5px;
+  }
+}
+
+@-o-keyframes archetype-loader-position-large-1 {
+  from, to {
+    background-position: 0 -462px;
+    width: 115px;
+    height: 115px;
+    margin-left: -57.5px;
+    margin-top: -57.5px;
+  }
+}
+
+@keyframes archetype-loader-position-large-1 {
+  from, to {
+    background-position: 0 -462px;
+    width: 115px;
+    height: 115px;
+    margin-left: -57.5px;
+    margin-top: -57.5px;
+  }
+}
+
+@-webkit-keyframes archetype-loader-position-large-2 {
+  from, to {
+    background-position: 0 -577px;
+    width: 115px;
+    height: 115px;
+    margin-left: -57.5px;
+    margin-top: -57.5px;
+  }
+}
+
+@-moz-keyframes archetype-loader-position-large-2 {
+  from, to {
+    background-position: 0 -577px;
+    width: 115px;
+    height: 115px;
+    margin-left: -57.5px;
+    margin-top: -57.5px;
+  }
+}
+
+@-ms-keyframes archetype-loader-position-large-2 {
+  from, to {
+    background-position: 0 -577px;
+    width: 115px;
+    height: 115px;
+    margin-left: -57.5px;
+    margin-top: -57.5px;
+  }
+}
+
+@-o-keyframes archetype-loader-position-large-2 {
+  from, to {
+    background-position: 0 -577px;
+    width: 115px;
+    height: 115px;
+    margin-left: -57.5px;
+    margin-top: -57.5px;
+  }
+}
+
+@keyframes archetype-loader-position-large-2 {
+  from, to {
+    background-position: 0 -577px;
+    width: 115px;
+    height: 115px;
+    margin-left: -57.5px;
+    margin-top: -57.5px;
+  }
+}
