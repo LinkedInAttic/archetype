@@ -46,7 +46,7 @@ $CONFIG_Z_INDEX_BASE:             0 !default;                                   
 $CONFIG_Z_LAYERS_OFFSET:          100 !default;                                                     // the offset between z-layers
 $CONFIG_Z_LAYERS:                 (default dialog navigation) !default;                             // the orders for the z-layers
 
-// compass 
+// compass
 $COMPASS_RTL_SUPPORT:             false !default;                                                   // does your Compass version support RTL? set to true if Compass mixins support RTL
 
 // sprites
@@ -304,12 +304,12 @@ $CONFIG_BROWSER_WARN_ON_HACK:     false !default;                               
 $CONFIG_BROWSER_VENDORS_HACK: (
   (webkit-all, safari webkit chrome),
   (gecko-all,  firefox gecko mozilla),
-  (opera-all,  opera)
+  (opera-all,  opera) // NOTE: this may stop working once Opera switches over to using WebKit/Blink
 ) !default;
 
 // os targeting
 $CONFIG_OS_VENDORS_CLASS: (
-  (os-win,   windows win winxp win7),
+  (os-win,   windows win winxp win7 win8),
   (os-mac,   apple mac osx),
   (os-linux, linux),
   (os-other, other misc unknown)
@@ -321,21 +321,30 @@ $CORE_SAFE_FONTS: (
   (sans-serif, (
     (default, (
       (default          (sans-serif)),
-      (ko_KR            ('Malgun Gothic', default))
+      (ko_KR            ('Malgun Gothic', default)),
+      (zh_TW            (SimSun, default)),
+      (zh_CN            (SimSun, default))
     )),
     (win, (
       (default          (Arial, sans-serif)),
       (ja_JP            (メイリオ, Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', default)),
+      (zh_TW            ('微軟正黑體', 'Microsoft JhengHei', PMingLiu, '宋体', SimSun, default)),
+      (zh_CN            ('华文细黑', 'STHeiti Light', '微软雅黑体', 'Microsoft Yahei', '新宋体', NSimSun, '宋体', SimSun, default)),
       (ko_KR            nil)
     )),
     (mac, (
       (default          (Helvetica, Arial, sans-serif)),
+      (zh_TW            ('黑體-繁', 'Heiti TC', '儷黑Pro', 'LiHei Pro', PMingLiu, '宋体', SimSun, default)),
+      (zh_CN            ('黑体-简', 'Heiti SC', '华文细黑', 'STHeiti Light', '华文黑体', STHeiti, default)),
       (ja_JP            ('Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'ＭＳ Ｐゴシック', 'MS PGothic', default)),
       (ko_KR            nil)
     )),
     (linux, (
       (default          (Helvetica, FreeSans, 'Liberation Sans', Helmet, Arial, sans-serif)),
-      (CJK              nil)
+      (zh_TW            (PMingLiu, '宋体', SimSun, default)),
+      (zh_CN            ('新宋体', NSimSun, '宋体', SimSun, default)),
+      (ja_JP            nil),
+      (ko_KR            nil)
     ))
   )),
   (serif, (
