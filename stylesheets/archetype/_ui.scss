@@ -315,3 +315,12 @@
   margin-left: $width / -2;
   margin-top: $height / -2;
 }
+
+// a method for removing default styling from a button
+// @mixin     unstyled-button
+@mixin unstyled-button() {
+  background: none;
+  border: none;
+  padding: 0;
+  @include appearance(none);
+}
