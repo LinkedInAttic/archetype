@@ -14,6 +14,7 @@
 - added `unstyled-button()` method to remove default styling from a `<button>` element
 - added `prefixed-tag()` method for consistency when generating tag names
 - added Chinese font stacks
+- added wildcard support to `locale()` function (e.g. `locale(en_ ja_JP _DE)`)
 
 ### Resolved Issues:
 
