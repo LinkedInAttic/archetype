@@ -18,6 +18,7 @@ matrix:
     - rvm: ruby-head
     - rvm: jruby-head
     - rvm: jruby-18mode
+    - rvm: jruby-19mode # this currently fails because of rmagick. see https://github.com/linkedin/archetype/issues/5
     - rvm: rbx-18mode
     - rvm: ree
 script: "bundle exec rake test"

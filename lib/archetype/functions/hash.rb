@@ -17,7 +17,7 @@ module Archetype::Functions::Hash
       new_hash[key] = oldval.class == self.class ? oldval.rmerge(newval) : newval
     end
   end
-  
+
   #
   # adds the contents of other_hash to hsh, deep merged
   #
