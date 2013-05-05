@@ -1,9 +1,11 @@
 # this is all take from Compass because they already did the awesome testing framework
 require 'test_helper'
-require 'fileutils'
 require 'compass'
 require 'compass/logger'
 require 'sass/plugin'
+unless ENV['CI']
+  require 'fileutils'
+end
 
 class ArchetypeTest < Test::Unit::TestCase
 

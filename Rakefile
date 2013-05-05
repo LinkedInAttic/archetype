@@ -1,13 +1,15 @@
-require "rake"
-require "colorize"
-require "fileutils"
+require 'rake'
+
+unless ENV['CI']
+  require 'colorize'
+  require 'fileutils'
+end
 
 @gemspec = 'archetype.gemspec'
 @spec = Gem::Specification.load(@gemspec)
-@ruby_version = '1.9.3'
-@devnull = File.new("/dev/null").path
+@devnull = File.new('/dev/null').path
 @version_without_revision = @spec.version.to_s.gsub(@revision_pattern = /\.[a-z0-9]{7}$/, '')
-@docs = "./docs"
+@docs = './docs'
 
 Dir.glob('tasks/*.rake').each { |r| import r }
 
