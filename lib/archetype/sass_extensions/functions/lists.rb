@@ -6,7 +6,7 @@ require 'archetype/functions/helpers'
 module Archetype::SassExtensions::Lists
   #
   # replace an index in a list
-  # 
+  #
   # *Parameters*:
   # - <tt>$list</tt> {List} the list to replace from
   # - <tt>$value</tt> {\*} the value to replace (if nil, it's a removal)

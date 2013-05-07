@@ -34,4 +34,6 @@ Gem::Specification.new do |gemspec|
   # dependencies
   gemspec.add_dependency('compass')
   gemspec.add_dependency('sass')
+  # required for OrderedHash on Ruby < 1.9
+  gemspec.add_dependency('hashery')
 end
