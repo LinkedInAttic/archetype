@@ -24,7 +24,8 @@ private
   def self.hash_to_list(hsh, depth = 0, separator = :comma)
     if hsh.is_a? Hash
       list = []
-      hsh.each do |item|
+      hsh.each do |key, item|
+        item = [key, item]
         # if its a hash, convert it to a List
         if item.is_a? Hash or item.is_a? Array
           tmp = []
@@ -54,7 +55,7 @@ private
   #
   def self.list_to_hash(list, depth = 0, nest = [], additives = [])
     list = list.to_a
-    hsh = {}
+    hsh = Archetype::Hash.new
     list.each do |item|
       item = item.to_a
       # convert the key to a string and strip off quotes

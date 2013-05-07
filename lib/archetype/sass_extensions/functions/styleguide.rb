@@ -76,7 +76,7 @@ module Archetype::SassExtensions::Styleguide
       extensions = theme[:extensions]
       return Sass::Script::Bool.new(false) if component_exists(id, theme, extension, force)
       extensions.push(extension)
-      components[id] = (components[id] ||= {}).rmerge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
+      components[id] = (components[id] ||= Archetype::Hash.new).rmerge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
       return Sass::Script::Bool.new(true)
     end
   end
@@ -223,16 +223,17 @@ private
   #
   def extract_styles(id, modifiers, strict = false, theme = nil, context = nil)
     theme = get_theme(theme)
-    context ||= theme[:components][id] || {}
+    context ||= theme[:components][id] || Archetype::Hash.new
     modifiers = helpers.to_str(modifiers)
-    return {} if context.nil? or context.empty?
+    return Archetype::Hash.new if context.nil? or context.empty?
     # push on the defaults first
-    out = (strict ? resolve_dependents(id, context[modifiers], theme[:name], context) : context[DEFAULT]) || {}
+    out = (strict ? resolve_dependents(id, context[modifiers], theme[:name], context) : context[DEFAULT]) || Archetype::Hash.new
     out = out.clone
     # if it's not strict, find anything that matched
     if not strict
       modifiers = modifiers.split
-      context.each do |definition|
+      context.each do |key, definition|
+        definition = [key, definition]
         modifier = definition[0]
         if modifier != DEFAULT
           match = true
@@ -254,8 +255,8 @@ private
     SPECIAL.each do |special_key|
       if out.is_a? Hash
         special = out[special_key]
-        tmp = {}
-        (special || {}).each { |key, value| tmp[key] = extract_styles(key, key, true, theme[:name], special) }
+        tmp = Archetype::Hash.new
+        (special || Archetype::Hash.new).each { |key, value| tmp[key] = extract_styles(key, key, true, theme[:name], special) }
         out[special_key] = tmp if not tmp.empty?
       end
     end
@@ -289,7 +290,7 @@ private
       # check for dropped styles
       drop = value[DROP]
       if not drop.nil?
-        tmp = {}
+        tmp = Archetype::Hash.new
         if %w(all true).include?(helpers.to_str(drop)) and not keys.nil? and not keys.empty?
           keys.each do |key|
             tmp[key] = 'nil'
@@ -307,7 +308,7 @@ private
       inherit = value[INHERIT]
       if inherit and not inherit.empty?
         # create a temporary object and extract the nested styles
-        tmp = {}
+        tmp = Archetype::Hash.new
         inherit.each { |related| tmp = tmp.rmerge(extract_styles(id, related, true, theme, context)) }
         # remove the inheritance key and update the styles
         value.delete(INHERIT)
@@ -349,7 +350,7 @@ private
   def get_styles(description, theme = nil, state = 'false')
     state = helpers.to_str(state)
     description = description.to_a
-    styles = {}
+    styles = Archetype::Hash.new
     description.each do |sentence|
       # get the grammar from the sentence
       id, modifiers, token = grammar(sentence, theme, state)

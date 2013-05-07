@@ -1,6 +1,8 @@
 # :stopdoc:
 # This module extends the native Ruby Hash class to support deep merging
 # and comparing the difference between hashes.
+# This functionality mimics that found in ActiveSupport
+# @see https://github.com/rails/rails/blob/master/activesupport/lib/active_support/core_ext/hash/deep_merge.rb
 #
 module Archetype::Functions::Hash
   #
@@ -11,11 +13,8 @@ module Archetype::Functions::Hash
   # *Returns*:
   # - {Hash} a new hash containing the contents of other_hash and the contents of hsh, deep merged
   #
-  def rmerge(other_hash)
-    new_hash = {}
-    merge(other_hash) do |key, oldval, newval|
-      new_hash[key] = oldval.class == self.class ? oldval.rmerge(newval) : newval
-    end
+  def rmerge(other_hash, &block)
+    dup.rmerge!(other_hash, &block)
   end
 
   #
@@ -26,10 +25,16 @@ module Archetype::Functions::Hash
   # *Returns*:
   # - {Hash} the original hash with the addition of the contents of other_hash
   #
-  def rmerge!(other_hash)
-    merge!(other_hash) do |key, oldval, newval|
-      oldval.class == self.class ? oldval.rmerge!(newval) : newval
+  def rmerge!(other_hash, &block)
+    other_hash.each_pair do |k,v|
+      tv = self[k]
+      if tv.is_a?(Hash) && v.is_a?(Hash)
+        self[k] = tv.rmerge(v, &block)
+      else
+        self[k] = block && tv ? block.call(k, tv, v) : v
+      end
     end
+    return self
   end
 
   #
@@ -41,7 +46,7 @@ module Archetype::Functions::Hash
   # - {Hash} a representation of the difference between the two hashes
   #
   def diff(other_hash)
-    (self.keys + other_hash.keys).uniq.inject({}) do |tmp, key|
+    (self.keys + other_hash.keys).uniq.inject(Archetype::Hash.new) do |tmp, key|
       # special comparison for gradients
       are_gradients = self[key].is_a?(Compass::SassExtensions::Functions::GradientSupport::LinearGradient) and other_hash[key].is_a?(Compass::SassExtensions::Functions::GradientSupport::LinearGradient)
       eq_gradients = are_gradients ? (self[key].to_s == other_hash[key].to_s) : true
@@ -128,6 +133,17 @@ private
   end
 end
 
-class Hash
-  include Archetype::Functions::Hash
+# this shims the Hash functionality to ensure we have an ordered hash guarantee
+module Archetype
+  if RUBY_VERSION < '1.9'
+    require 'hashery/ordered_hash'
+    class Hash < Hashery::OrderedHash
+      include Archetype::Functions::Hash
+    end
+  else
+    class Hash < ::Hash
+      include Archetype::Functions::Hash
+    end
+  end
 end
+
