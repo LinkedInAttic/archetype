@@ -8,7 +8,7 @@ require 'sass/version'
 #
 module Archetype::SassExtensions::Version
   # :stopdoc:
-  COMPARATOR_PATTERN  = /([neglt]+|[><=!]+)/
+  COMPARATOR_PATTERN  = /(\s[neqglt]+\s|[><=!]+)/
   VERSION_PATTERN     = /\d+(\.\d+)*(\.[x|\*])?/
   # :startdoc:
 
@@ -60,7 +60,7 @@ private
     # check for wild cards
     wild = version.index('x')
     # check the comparison
-    comparator = (comparator || [])[0] || 'eq'
+    comparator = ((comparator || [])[0] || 'eq').strip
     eq = comparator =~ /(e|=)/
     lt = comparator =~ /(l|<)/
     gt = comparator =~ /(g|>)/

@@ -16,7 +16,7 @@ class SassExtensionsTest < Test::Unit::TestCase
     assert_equal "true", evaluate("archetype-version('Compass >= 0.12')")
     assert_equal "false", evaluate("archetype-version('Sass >= 99.0.0')")
     assert_equal "true", evaluate("archetype-version('Sass gt 3.0')")
-    assert_equal "false", evaluate("archetype-version(Archetype ne 99)")
+    assert_equal "true", evaluate("archetype-version(Archetype ne 99)")
   end
 
 

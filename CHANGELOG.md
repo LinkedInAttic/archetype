@@ -23,6 +23,7 @@
 - quotes on strings passed to `associative()` weren't being stripped correctly
 - fixed some minor glyph issues
 - out-of-order CSS issues in Ruby 1.8.7 are fixed using `Hashery::OrderedHash`
+- fixed issue with `archetype-version()` incorrectly matching comparators
 
 ### Tests:
 
