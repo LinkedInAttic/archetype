@@ -70,3 +70,14 @@
     *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("#{prefixed-tag($name)}"),#{$content}#{$styles}this.#{$method}(this.el));
   }
 }
+
+// a hack that allows elements with transparent backgrounds to be focusable in older versions of IE
+// @mixin    transparent-focusable
+// @param    $url {URL} an optional URL to point to an image (not required)
+@mixin transparent-focusable($url: url(https://)) {
+  $bg: (transparent);
+  @if $url and ($legacy-support-for-ie6 or $legacy-support-for-ie7) {
+    $bg: append($bg, $url);
+  }
+  background: $bg;
+}

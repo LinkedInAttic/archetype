@@ -15,6 +15,7 @@
 - added `prefixed-tag()` method for consistency when generating tag names
 - added Chinese font stacks
 - added wildcard support to `locale()` function (e.g. `locale(en_ ja_JP _DE)`)
+- added `transparent-focusable()` mixin for transparent background support in older IE
 
 ### Resolved Issues:
 
