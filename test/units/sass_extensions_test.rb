@@ -49,19 +49,6 @@ class SassExtensionsTest < Test::Unit::TestCase
     # TODO
   end
 
-  # list-sort
-  #def test_list_sort
-  #  assert_equal "1 2 3 4", evaluate("list-sort(2 4 3 1)")
-  #  assert_equal "4 3 2 1", evaluate("list-sort(2 4 3 1, true)")
-  #  assert_equal "a b c d", evaluate("list-sort(d a b c)")
-  #end
-
-  # list-reverse
-  #def test_list_reverse
-  #  assert_equal "4 3 2 1", evaluate("list-reverse(1 2 3 4)")
-  #  assert_equal "d c b a", evaluate("list-reverse(a b c d)")
-  #end
-
   # list-add
   def test_list_add
     assert_equal "2 3 4", evaluate("list-add(1 2 3, 1)")

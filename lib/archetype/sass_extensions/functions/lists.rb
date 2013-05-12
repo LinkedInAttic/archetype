@@ -72,38 +72,6 @@ module Archetype::SassExtensions::Lists
   Sass::Script::Functions.declare :list_insert, [:list, :idx, :value, :separator]
 
   #
-  # sort a list
-  #
-  # *Parameters*:
-  # - <tt>$list</tt> {List} the list to sort
-  # - <tt>$reverse</tt> {Boolean} sort the list in reverse order
-  # *Returns*:
-  # - {List} the sorted list
-  #
-  # TODO - this is failing, fix this
-  #def list_sort(list, reverse = false)
-  #  separator = list.separator if list.is_a?(Sass::Script::List)
-  #  list = list.to_a.sort
-  #  list = list.reverse if (reverse == Sass::Script::Bool.new(true))
-  #  return Sass::Script::List.new(list, separator)
-  #end
-
-  #
-  # reverse order a list
-  #
-  # *Parameters*:
-  # - <tt>$list</tt> {List} the list to reverse
-  # *Returns*:
-  # - {List} the reversed list
-  #
-  # TODO - this is failing, fix this
-  #def list_reverse(list)
-  #  separator = list.separator if list.is_a?(Sass::Script::List)
-  #  list = list.to_a.reverse
-  #  return Sass::Script::List.new(list, separator)
-  #end
-
-  #
   # add values(s) to a list
   #
   # *Parameters*:
