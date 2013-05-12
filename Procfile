@@ -1,3 +1,3 @@
-jekyll:  jekyll --server --safe
+jekyll:  jekyll serve --safe --watch
 compass: compass watch assets/
 jammit: guard

@@ -1,6 +1,5 @@
 # general configs
 exclude   : ["README.md", "Rakefile", "changelog.md", "LICENSE", "Procfile", "Gemfile", "config.rb"]
-auto      : true
 pygments  : true
 markdown  : rdiscount   # Maruku doesn't play nicely with scss syntax in pygments
 
