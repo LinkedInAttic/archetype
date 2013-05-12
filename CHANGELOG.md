@@ -16,6 +16,7 @@
 - added Chinese font stacks
 - added wildcard support to `locale()` function (e.g. `locale(en_ ja_JP _DE)`)
 - added `transparent-focusable()` mixin for transparent background support in older IE
+- added ability to customize `output-style()` with `custom-output-styler()` mixin and `has-custom-output-styler()` function (NEEDS DOCUMENTATION)
 
 ### Resolved Issues:
 

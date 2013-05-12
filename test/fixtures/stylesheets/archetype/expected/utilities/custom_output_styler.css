@@ -1,0 +1,8 @@
+.test {
+  font-size: 13px;
+  line-height: 17px;
+  /* post override */
+  color: #222222;
+  /* pre override */
+  font-weight: normal;
+}
