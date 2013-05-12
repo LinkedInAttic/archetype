@@ -43,6 +43,8 @@
 </nav>
 
 
+  
+
   <div id="file-metadata">
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
@@ -58,15 +60,16 @@
     
     
     
+    
     <!-- Method Quickref -->
 <nav id="method-list-section" class="section">
   <h3 class="section-header">Methods</h3>
 
   <ul class="link-list">
     
-    <li><a href="#method-i-_ie_pseudo_content">#_ie_pseudo_content</a>
+    <li ><a href="#method-i-_ie_pseudo_content">#_ie_pseudo_content</a>
     
-    <li><a href="#method-i-unique">#unique</a>
+    <li ><a href="#method-i-unique">#unique</a>
     
   </ul>
 </nav>
@@ -89,8 +92,6 @@
 
   <ul class="link-list">
   
-    <li><a href="../../Archetype.html">Archetype</a>
-  
     <li><a href="../../Archetype/Functions.html">Archetype::Functions</a>
   
     <li><a href="../../Archetype/Functions/Hash.html">Archetype::Functions::Hash</a>
@@ -105,11 +106,19 @@
   
     <li><a href="../../Archetype/SassExtensions/Lists.html">Archetype::SassExtensions::Lists</a>
   
+    <li><a href="../../Archetype/SassExtensions/Lists/Sass.html">Archetype::SassExtensions::Lists::Sass</a>
+  
+    <li><a href="../../Archetype/SassExtensions/Lists/Sass/Script.html">Archetype::SassExtensions::Lists::Sass::Script</a>
+  
     <li><a href="../../Archetype/SassExtensions/Locale.html">Archetype::SassExtensions::Locale</a>
   
     <li><a href="../../Archetype/SassExtensions/Numbers.html">Archetype::SassExtensions::Numbers</a>
   
     <li><a href="../../Archetype/SassExtensions/Styleguide.html">Archetype::SassExtensions::Styleguide</a>
+  
+    <li><a href="../../Archetype/SassExtensions/Styleguide/Sass.html">Archetype::SassExtensions::Styleguide::Sass</a>
+  
+    <li><a href="../../Archetype/SassExtensions/Styleguide/Sass/Script.html">Archetype::SassExtensions::Styleguide::Sass::Script</a>
   
     <li><a href="../../Archetype/SassExtensions/UI.html">Archetype::SassExtensions::UI</a>
   
@@ -155,7 +164,9 @@
         <div class="method-heading">
           <span class="method-name">_ie_pseudo_content</span><span
             class="method-args">(content)</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -173,20 +184,21 @@
 <p>{String} the processed string</p>
 </li></ul>
           
+          
 
           
           <div class="method-source-code" id="_ie_pseudo_content-source">
-            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/ui.rb, line 35</span>
+            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/ui.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">_ie_pseudo_content</span>(<span class="ruby-identifier">content</span>)
   <span class="ruby-identifier">content</span> = <span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">to_str</span>(<span class="ruby-identifier">content</span>)
   <span class="ruby-comment"># escape &amp;</span>
-  <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r\&amp;/</span>, <span class="ruby-string">'&amp;amp;'</span>)
+  <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\&amp;/</span>, <span class="ruby-string">&#39;&amp;amp;&#39;</span>)
   <span class="ruby-comment"># convert char codes (and remove single trailing whitespace if present) (e.g. \2079 -&gt; &amp;#x2079;)</span>
-  <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r\\([\da-zA-Z]{4})\s?/</span>, <span class="ruby-string">'&amp;#x\1;'</span>)
+  <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\([\da-zA-Z]{4})\s?/</span>, <span class="ruby-string">&#39;&amp;#x\1;&#39;</span>)
   <span class="ruby-comment"># escape tags and cleanup quotes</span>
-  <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r\&lt;/</span>, <span class="ruby-string">'&amp;lt;'</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r\&gt;/</span>, <span class="ruby-string">'&amp;gt;'</span>)
+  <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\&lt;/</span>, <span class="ruby-string">&#39;&amp;lt;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\&gt;/</span>, <span class="ruby-string">&#39;&amp;gt;&#39;</span>)
   <span class="ruby-comment"># cleanup quotes</span>
-  <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r\A&quot;|&quot;\Z/</span>, <span class="ruby-string">''</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r\&quot;/</span>, <span class="ruby-string">'\&quot;'</span>)
+  <span class="ruby-identifier">content</span> = <span class="ruby-identifier">content</span>.<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\A&quot;|&quot;\Z/</span>, <span class="ruby-string">&#39;&#39;</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">/\&quot;/</span>, <span class="ruby-string">&#39;\&quot;&#39;</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">content</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- _ie_pseudo_content-source -->
@@ -204,7 +216,9 @@
         <div class="method-heading">
           <span class="method-name">unique</span><span
             class="method-args">(prefix = '')</span>
+          
           <span class="method-click-advice">click to toggle source</span>
+          
         </div>
         
 
@@ -223,15 +237,17 @@
 <p>{String} the unique string</p>
 </li></ul>
           
+          
 
           
           <div class="method-source-code" id="unique-source">
             <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/ui.rb, line 20</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">unique</span>(<span class="ruby-identifier">prefix</span> = <span class="ruby-string">''</span>)
-  <span class="ruby-identifier">prefix</span> = <span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">to_str</span>(<span class="ruby-identifier">prefix</span>).<span class="ruby-identifier">gsub</span>(<span class="ruby-regexp">%r\A&quot;|&quot;\Z/</span>, <span class="ruby-string">''</span>)
-  <span class="ruby-identifier">prefix</span> = <span class="ruby-string">'.'</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">prefix</span> <span class="ruby-operator">==</span> <span class="ruby-string">'class'</span>
-  <span class="ruby-identifier">prefix</span> = <span class="ruby-string">'#'</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">prefix</span> <span class="ruby-operator">==</span> <span class="ruby-string">'id'</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{prefix}archetype-uid-#{uid}&quot;</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">unique</span>(<span class="ruby-identifier">prefix</span> = <span class="ruby-string">&#39;&#39;</span>)
+  <span class="ruby-identifier">prefix</span> = <span class="ruby-identifier">helpers</span>.<span class="ruby-identifier">to_str</span>(<span class="ruby-identifier">prefix</span>, <span class="ruby-string">&#39; &#39;</span>, <span class="ruby-value">:quotes</span>)
+  <span class="ruby-identifier">prefix</span> = <span class="ruby-string">&#39;.&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">prefix</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;class&#39;</span>
+  <span class="ruby-identifier">prefix</span> = <span class="ruby-string">&#39;#&#39;</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">prefix</span> <span class="ruby-operator">==</span> <span class="ruby-string">&#39;id&#39;</span>
+  <span class="ruby-identifier">suffix</span> = <span class="ruby-constant">Compass</span>.<span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">testing</span> <span class="ruby-operator">?</span> <span class="ruby-string">&quot;RANDOM_UID&quot;</span> <span class="ruby-operator">:</span> <span class="ruby-node">&quot;#{Time.now.to_i}-#{rand(36**8).to_s(36)}-#{uid}&quot;</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>(<span class="ruby-node">&quot;#{prefix}archetype-uid-#{suffix}&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
           </div><!-- unique-source -->
           
@@ -252,7 +268,7 @@
 
 <footer id="validator-badges">
   <p><a href="http://validator.w3.org/check/referer">[Validate]</a>
-  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 3.12.
+  <p>Generated by <a href="https://github.com/rdoc/rdoc">RDoc</a> 4.0.1.
   <p>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish Rdoc Generator</a> 3.
 </footer>
 
