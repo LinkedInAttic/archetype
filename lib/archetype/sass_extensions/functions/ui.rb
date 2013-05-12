@@ -21,7 +21,8 @@ module Archetype::SassExtensions::UI
     prefix = helpers.to_str(prefix, ' ', :quotes)
     prefix = '.' if prefix == 'class'
     prefix = '#' if prefix == 'id'
-    return Sass::Script::String.new("#{prefix}archetype-uid-#{uid}")
+    suffix = Compass.configuration.testing ? "RANDOM_UID" : "#{Time.now.to_i}-#{rand(36**8).to_s(36)}-#{uid}"
+    return Sass::Script::String.new("#{prefix}archetype-uid-#{suffix}")
   end
 
   #

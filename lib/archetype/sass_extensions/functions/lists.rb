@@ -245,6 +245,32 @@ module Archetype::SassExtensions::Lists
   end
   Sass::Script::Functions.declare :associative_merge, [:list, :extender]
 
+  #
+  # given a string of styles, convert it into a key-value pair list
+  #
+  # *Parameters*:
+  # - <tt>$string</tt> {String} the string to convert
+  # *Returns*:
+  # - <tt>$list</tt> {List} the converted list of styles
+  #
+  def _style_string_to_list(string = '')
+    # convert to string and strip all comments
+    string = helpers.to_str(string, ' ').gsub(/\/\*[^\*\/]*\*\//, '')
+    # then split it on each rule
+    tmp = string.split(';')
+    styles = []
+    # and for each rule break it into it's key-value pairs
+    tmp.each do |rule|
+      kvp = []
+      rule.split(':').each do |str|
+        kvp.push Sass::Script::String.new(str)
+      end
+      styles.push Sass::Script::List.new(kvp, :comma)
+    end
+    # the recompose the list
+    return Sass::Script::List.new(styles, :comma)
+  end
+
 private
   def helpers
     @helpers ||= Archetype::Functions::Helpers

@@ -34,19 +34,19 @@
 }
 
 // proxy for ie-pseudo
-// @mixin    ie-pseudo-before
-// @param    $styles {String} the styles to apply to the pseudo-element
-// @param    $content {String} the content to insert into the element (similar to css `content` attribute)
-// @param    $name {String} the name of the element
+// @mixin     ie-pseudo-before
+// @param     $styles {String} the styles to apply to the pseudo-element
+// @param     $content {String} the content to insert into the element (similar to css `content` attribute)
+// @param     $name {String} the name of the element
 @mixin ie-pseudo-before($styles: false, $content: false, $name: '') {
   @include ie-pseudo($styles, $content, before, $name);
 }
 
 // proxy for ie-pseudo
-// @mixin    ie-pseudo-after
-// @param    $styles {String} the styles to apply to the pseudo-element
-// @param    $content {String} the content to insert into the element (similar to css `content` attribute)
-// @param    $name {String} the name of the element
+// @mixin     ie-pseudo-after
+// @param     $styles {String} the styles to apply to the pseudo-element
+// @param     $content {String} the content to insert into the element (similar to css `content` attribute)
+// @param     $name {String} the name of the element
 @mixin ie-pseudo-after($styles: false, $content: false, $name: '') {
   @include ie-pseudo($styles, $content, after, $name);
 }
@@ -54,26 +54,38 @@
 // this creates a one-type executing expression that inserts an element relative to `this` element.
 // this allows some level of support for :before/:after in IE6/7
 // inspired by http://nicolasgallagher.com/better-float-containment-in-ie/
-// @mixin    ie-pseudo
-// @param    $styles {String} the styles to apply to the pseudo-element
-// @param    $content {String} the content to insert into the element (similar to css `content` attribute)
-// @param    $placement {String} [before|after] simulate :before or :after behavior
-// @param    $name {String} the name of the element
-@mixin ie-pseudo($styles: false, $content: false, $placement: before, $name: '') {
+// @mixin     ie-pseudo
+// @param     $styles {String} the styles to apply to the pseudo-element
+// @param     $content {String} the content to insert into the element (similar to css `content` attribute)
+// @param     $placement {String} [before|after] simulate :before or :after behavior
+// @param     $name {String} the name of the element
+// @param     $uid {String} a custom, unique identifier for the generate element
+@mixin ie-pseudo($styles: false, $content: false, $placement: before, $name: '', $uid: false) {
+  $archetype-pseudo-selector: false;
   @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+    $uid: if($uid, $uid, unique('ie-pseudo-'));
+    $archetype-pseudo-selector: '& ##{$uid}';
     $method: if($placement == before, insertBefore, appendChild);
     $content: if($content and $content != nil, 'this.el.innerHTML="#{-ie-pseudo-content($content)}",', '');
     @if $CONFIG_GENERATED_TAG_CSS {
       $styles: if($styles and $styles != nil, #{$CONFIG_GENERATED_TAG_CSS}#{$styles}, $CONFIG_GENERATED_TAG_CSS);
     }
-    $styles: if($styles and $styles != nil, 'this.el.style.cssText="#{$styles}",', '');
-    *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("#{prefixed-tag($name)}"),#{$content}#{$styles}this.#{$method}(this.el));
+    // if we're using inline styles...
+    $inline: if($styles and $styles != nil and $CONFIG_GENERATED_TAG_INLINE, 'this.el.style.cssText="#{$styles}",', '');
+    *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("#{prefixed-tag($name)}"),this.el.id="#{$uid}",#{$content}#{$inline}this.#{$method}(this.el));
+    // if we're NOT using inline styles...
+    @if not $CONFIG_GENERATED_TAG_INLINE {
+      // output it on the generated selector
+      #{$archetype-pseudo-selector} {
+        @include to-styles(-style-string-to-list($styles));
+      }
+    }
   }
 }
 
 // a hack that allows elements with transparent backgrounds to be focusable in older versions of IE
-// @mixin    transparent-focusable
-// @param    $url {URL} an optional URL to point to an image (not required)
+// @mixin     transparent-focusable
+// @param     $url {URL} an optional URL to point to an image (not required)
 @mixin transparent-focusable($url: url(https://)) {
   $bg: (transparent);
   @if $url and ($legacy-support-for-ie6 or $legacy-support-for-ie7) {

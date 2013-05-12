@@ -3,7 +3,7 @@ require 'archetype'
 
 class SassExtensionsTest < Test::Unit::TestCase
   setup do
-    Compass.reset_configuration!
+    reset
   end
 
   ## VERSION
@@ -23,13 +23,13 @@ class SassExtensionsTest < Test::Unit::TestCase
   ## ENVIRONMENT
   # test that archetype-env() is working correctly
   def test_env
-    Compass.reset_configuration!
+    reset
     assert_equal "development", evaluate("archetype-env()")
     Compass.configuration.environment = :production
     assert_equal "production", evaluate("archetype-env()")
     Compass.configuration.environment = :staging
     assert_equal "staging", evaluate("archetype-env()")
-    Compass.reset_configuration!
+    reset
   end
 
 
@@ -127,16 +127,16 @@ class SassExtensionsTest < Test::Unit::TestCase
   ## LOCALE
   # locale
   def test_locale
-    Compass.reset_configuration!
+    reset
     assert_equal "en_US", evaluate("locale()")
     Compass.configuration.locale = "ja_JP"
     assert_equal "ja_JP", evaluate("locale()")
-    Compass.reset_configuration!
+    reset
   end
 
   # lang
   def test_lang
-    Compass.reset_configuration!
+    reset
     assert_equal "true", evaluate("lang(en_US)")
     assert_equal "true", evaluate("lang(fr_FR en_US)")
     assert_equal "false", evaluate("lang(fr_FR)")
@@ -145,7 +145,7 @@ class SassExtensionsTest < Test::Unit::TestCase
     assert_equal "true", evaluate("lang(ja_JP)")
     assert_equal "true", evaluate("lang(CJK)")
     assert_equal "true", evaluate("lang(CJK en_US)")
-    Compass.reset_configuration!
+    reset
   end
 
 
@@ -183,11 +183,11 @@ class SassExtensionsTest < Test::Unit::TestCase
   ## UI
   # test generating unique tokens
   def test_unique
-    assert_equal ".archetype-uid-1", evaluate("unique(class)")
-    assert_equal ".archetype-uid-2", evaluate("unique(class)")
-    assert_equal "\#archetype-uid-3", evaluate("unique(id)")
-    assert_equal "my-prefix-archetype-uid-4", evaluate("unique(my-prefix-)")
-    assert_equal ".testing-archetype-uid-5", evaluate("unique('.testing-')")
+    assert_equal ".archetype-uid-RANDOM_UID", evaluate("unique(class)")
+    assert_equal ".archetype-uid-RANDOM_UID", evaluate("unique(class)")
+    assert_equal "\#archetype-uid-RANDOM_UID", evaluate("unique(id)")
+    assert_equal "my-prefix-archetype-uid-RANDOM_UID", evaluate("unique(my-prefix-)")
+    assert_equal ".testing-archetype-uid-RANDOM_UID", evaluate("unique('.testing-')")
   end
 
   # test pseudo content escaping and formatting for innerHTML
@@ -203,5 +203,10 @@ class SassExtensionsTest < Test::Unit::TestCase
 protected
   def evaluate(value)
     Sass::Script::Parser.parse(value, 0, 0).perform(Sass::Environment.new).to_s
+  end
+
+  def reset
+    Compass.reset_configuration!
+    Compass.configuration.testing = true
   end
 end
