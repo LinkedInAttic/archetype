@@ -204,6 +204,26 @@ hr {
   }
 }
 
+// SEARCH
+#search {
+  // GOOGLE
+  .gsc-resultsHeader {
+    display: none;
+  }
+  .gsc-control {
+    width: 100%;
+  }
+  .gs-result .gs-title,
+  .gs-result .gs-title * {
+    @include styleguide(link);
+  }
+  .gs-result a.gs-visibleUrl,
+  .gs-result .gs-visibleUrl {
+    @include styleguide(annotation);
+  }
+}
+
+
 // customizations
 @import "pygment";
 @import "livefyre";
