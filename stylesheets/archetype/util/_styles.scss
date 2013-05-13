@@ -37,7 +37,7 @@
       @include custom-output-styler($property, $value, $method: pre);
     }
     // border-radius
-    @else if($property == border-radius)             { @include border-radius(rtl($value, border-radius)); }
+    @else if($property == border-radius)        { @include border-radius(rtl($value, border-radius)); }
     // box-sizing
     @else if($property == box-sizing)           { @include box-sizing($value); }
     // box-shadow
@@ -97,6 +97,7 @@
     @else if($property == left)                 { @include left($value); }
     @else if($property == right)                { @include right($value); }
     @else if($property == glyph-icon)           { @include glyph-icon(nth($value, 1), nth($value, 2), nth($value, 3), nth($value, 4), nth($value, 5)); }
+    @else if($property == extend)               { @extend #{$value}; }
     // animations
     @else if($property == animation) {
       @if archetype-version('compass >= 0.13') {
