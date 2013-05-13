@@ -10,6 +10,7 @@ Icon
 ._*
 tmp/*
 .sass-cache
+.rbx
 test/tmp
 test/fixtures/stylesheets/*/tmp
 test/fixtures/stylesheets/*/saved
