@@ -1,0 +1,12 @@
+{% if site.safe and site.search.provider %}
+
+<div id="search"></div>
+
+{% case site.search.provider %}
+{% when "google" %}
+  {% include partials/providers/search/google %}
+{% when "tapir" %}
+  {% include partials/providers/search/tapir %}
+{% endcase %}
+
+{% endif %}

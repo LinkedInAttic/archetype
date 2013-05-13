@@ -94,6 +94,8 @@ analytics :
 
 # search
 search :
-  provider : tapir
+  provider : google
   tapir :
     token : 506beaeb3f61b03a8b000229
+  google :
+    api_key : AIzaSyBbGmKl7tnOL4qG9QcAALUGWb-wylEQ11U
