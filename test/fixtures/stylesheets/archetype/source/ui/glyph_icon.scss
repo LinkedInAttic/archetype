@@ -11,3 +11,15 @@
 .size {
   @include glyph-icon(caret-down, $size: 20px);
 }
+
+$CONFIG_GENERATED_TAG_INLINE: false;
+.not-inline {
+  @include glyph-icon(caret-down);
+}
+
+.ie-uid {
+  @include glyph-icon(caret-down, $ie-uid: my-custom-id);
+  #{$archetype-glyph-selector} {
+    color: pink;
+  }
+}

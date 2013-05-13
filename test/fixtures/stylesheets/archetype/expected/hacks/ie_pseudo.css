@@ -1,11 +1,11 @@
 .before {
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype"),this.el.style.cssText="color: red; background: green;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.style.cssText="color: red; background: green;",this.insertBefore(this.el));
 }
 
 .after-content {
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype"),this.el.innerHTML="&#x27BD;",this.appendChild(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#x27BD;",this.appendChild(this.el));
 }
 
 .before-style-content {
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype"),this.el.innerHTML="testing &#x27BD;if this works",this.el.style.cssText="color: red; background: green;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="testing &#x27BD;if this works",this.el.style.cssText="color: red; background: green;",this.insertBefore(this.el));
 }

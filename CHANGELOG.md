@@ -15,12 +15,18 @@
 - added `prefixed-tag()` method for consistency when generating tag names
 - added Chinese font stacks
 - added wildcard support to `locale()` function (e.g. `locale(en_ ja_JP _DE)`)
+- added `transparent-focusable()` mixin for transparent background support in older IE
+- added ability to customize `output-style()` with `custom-output-styler()` mixin and `has-custom-output-styler()` function (NEEDS DOCUMENTATION)
+- added better support for targeting IE6/7 glyphs and `ie-pseudo()` generated elements (NEEDS DOCUMENTATION)
+- making `unique()` generated IDs genuinely unique
+- adding support for a `testing` config flag
 
 ### Resolved Issues:
 
 - quotes on strings passed to `associative()` weren't being stripped correctly
 - fixed some minor glyph issues
 - out-of-order CSS issues in Ruby 1.8.7 are fixed using `Hashery::OrderedHash`
+- fixed issue with `archetype-version()` incorrectly matching comparators
 
 ### Tests:
 

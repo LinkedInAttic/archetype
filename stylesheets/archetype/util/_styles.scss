@@ -32,8 +32,12 @@
 @mixin output-style($property, $value: nil) {
   @if($property != nil and nth(-compass-list($value), 1) != nil and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
+    // check to see if we have a custom output styler (pre)
+    @if has-custom-output-styler($property, $value, pre) == true {
+      @include custom-output-styler($property, $value, $method: pre);
+    }
     // border-radius
-    @if($property == border-radius)             { @include border-radius(rtl($value, border-radius)); }
+    @else if($property == border-radius)             { @include border-radius(rtl($value, border-radius)); }
     // box-sizing
     @else if($property == box-sizing)           { @include box-sizing($value); }
     // box-shadow
@@ -51,7 +55,7 @@
     // background-size
     @else if($property == background-size)      { @include background-size($value); }
     // background-origin
-    @else if($property == background-origin)      { @include background-origin($value); }
+    @else if($property == background-origin)    { @include background-origin($value); }
     // IE filters
     @else if($property == ie-filter)            { @include ie-filter($value); }
     // hide-text
@@ -153,6 +157,10 @@
       @else {
         @include ie-pseudo-after(nth($value, 1), $content, $tag);
       }
+    }
+    // check to see if we have a custom output styler (post)
+    @else if has-custom-output-styler($property, $value, post) == true {
+      @include custom-output-styler($property, $value, $method: post);
     }
     // otherwise just use a key-value pair
     @else { #{$property}: $value; }

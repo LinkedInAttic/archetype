@@ -72,38 +72,6 @@ module Archetype::SassExtensions::Lists
   Sass::Script::Functions.declare :list_insert, [:list, :idx, :value, :separator]
 
   #
-  # sort a list
-  #
-  # *Parameters*:
-  # - <tt>$list</tt> {List} the list to sort
-  # - <tt>$reverse</tt> {Boolean} sort the list in reverse order
-  # *Returns*:
-  # - {List} the sorted list
-  #
-  # TODO - this is failing, fix this
-  #def list_sort(list, reverse = false)
-  #  separator = list.separator if list.is_a?(Sass::Script::List)
-  #  list = list.to_a.sort
-  #  list = list.reverse if (reverse == Sass::Script::Bool.new(true))
-  #  return Sass::Script::List.new(list, separator)
-  #end
-
-  #
-  # reverse order a list
-  #
-  # *Parameters*:
-  # - <tt>$list</tt> {List} the list to reverse
-  # *Returns*:
-  # - {List} the reversed list
-  #
-  # TODO - this is failing, fix this
-  #def list_reverse(list)
-  #  separator = list.separator if list.is_a?(Sass::Script::List)
-  #  list = list.to_a.reverse
-  #  return Sass::Script::List.new(list, separator)
-  #end
-
-  #
   # add values(s) to a list
   #
   # *Parameters*:
@@ -244,6 +212,32 @@ module Archetype::SassExtensions::Lists
     return helpers.hash_to_list(list, 0, separator)
   end
   Sass::Script::Functions.declare :associative_merge, [:list, :extender]
+
+  #
+  # given a string of styles, convert it into a key-value pair list
+  #
+  # *Parameters*:
+  # - <tt>$string</tt> {String} the string to convert
+  # *Returns*:
+  # - <tt>$list</tt> {List} the converted list of styles
+  #
+  def _style_string_to_list(string = '')
+    # convert to string and strip all comments
+    string = helpers.to_str(string, ' ').gsub(/\/\*[^\*\/]*\*\//, '')
+    # then split it on each rule
+    tmp = string.split(';')
+    styles = []
+    # and for each rule break it into it's key-value pairs
+    tmp.each do |rule|
+      kvp = []
+      rule.split(':').each do |str|
+        kvp.push Sass::Script::String.new(str)
+      end
+      styles.push Sass::Script::List.new(kvp, :comma)
+    end
+    # the recompose the list
+    return Sass::Script::List.new(styles, :comma)
+  end
 
 private
   def helpers
