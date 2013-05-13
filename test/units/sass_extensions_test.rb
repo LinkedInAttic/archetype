@@ -3,7 +3,8 @@ require 'archetype'
 
 class SassExtensionsTest < Test::Unit::TestCase
   setup do
-    reset
+    Compass.reset_configuration!
+    Compass.configuration.testing = true
   end
 
   ## VERSION
