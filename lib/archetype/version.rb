@@ -10,7 +10,7 @@ module Archetype
     # Method borrowed from Compass. All credit goes to Chris Eppstein and other contributors
     # https://github.com/chriseppstein/compass/blob/stable/lib/compass/version.rb
     # \(This method swiped from Haml and then modified, some credit goes to Nathan Weizenbaum\)
-    # 
+    #
     # *Returns*:
     # - {String} the version of Archetype
     #
@@ -30,7 +30,7 @@ module Archetype
     def read_version
       require 'yaml'
       begin
-        @version = YAML::load(File.read(scope('VERSION.yml')))
+        @version = YAML.load(File.read(scope('VERSION.yml')))
         @version[:teeny] = @version[:patch]
         @version[:string] = "#{@version[:major]}.#{@version[:minor]}"
         @version[:string] << ".#{@version[:patch]}" if @version[:patch]

@@ -5,7 +5,7 @@ task :version do
 end
 
 def bump(what)
-  file = File.join(File.dirname(__FILE__), 'VERSION.yml')
+  file = File.join(File.dirname(__FILE__), '..', 'VERSION.yml')
   f = File.read(file)
   @version = YAML::load(f)
   order = [:major, :minor, :build, :iteration]
@@ -18,7 +18,7 @@ def bump(what)
   @version[:build] = 0 if slot < order.index(:build)  and not @version[:build].nil?
   @version.delete(:state) if slot < order.index(:iteration)
   @version.delete(:iteration) if slot < order.index(:iteration)
-  File.open(file, 'w+') {|f| f.write(YAML::dump(@version)) }
+  File.open(file, 'w+') {|f| f.write(YAML.dump(@version)) }
   version = "v#{@version[:major]}"
   version += ".#{@version[:minor]}" if @version[:minor]
   version += ".#{@version[:build]}" if @version[:build]
@@ -34,7 +34,7 @@ namespace :version do
     bump(:min)
   end
 
-  namespace :bump do    
+  namespace :bump do
     desc "bump major version"
     task :major do
       bump(:major)
