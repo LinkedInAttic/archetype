@@ -20,6 +20,7 @@
 - added better support for targeting IE6/7 glyphs and `ie-pseudo()` generated elements (NEEDS DOCUMENTATION)
 - making `unique()` generated IDs genuinely unique
 - adding support for a `testing` config flag
+- adding support for `@extend` from a styleguide component
 
 ### Resolved Issues:
 
