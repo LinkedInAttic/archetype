@@ -17,7 +17,7 @@ module Archetype::SassExtensions::Styleguide
   SPECIAL     = %w(states selectors)
   # these are unique CSS keys that can be exploited to provide fallback functionality by providing a second value
   # e.g color: red; color: rgba(255,0,0, 0.8);
-  FALLBACKS   = %w(background background-image background-color border border-bottom border-bottom-color border-color border-left border-left-color border-right border-right-color border-top border-top-color clip color layer-background-color outline outline-color white-space)
+  FALLBACKS   = %w(background background-image background-color border border-bottom border-bottom-color border-color border-left border-left-color border-right border-right-color border-top border-top-color clip color layer-background-color outline outline-color white-space extend)
   ADDITIVES   = FALLBACKS + [DROP, INHERIT, STYLEGUIDE]
   @@archetype_styleguide_mutex = Mutex.new
   # :startdoc:
