@@ -1,0 +1,18 @@
+<script src="//www.google.com/jsapi?key={{ site.search.google.api_key }}"></script>
+<script>
+(function() {
+google.load('search', '1');
+google.setOnLoadCallback(function() {
+  var searchControl = new google.search.SearchControl(),
+      webSearch = new google.search.WebSearch(),
+      q = window.location.search.match(/^.*[\?\&]q\=([^\?\&]+)/);
+  webSearch.setSiteRestriction('archetypecss.com');
+  searchControl.addSearcher(webSearch);
+  searchControl.draw(document.getElementById('search'));
+  // if there's a query search, extract it and start a search
+  if(q && q.length && (q = decodeURIComponent(q[1]))) {
+    searchControl.execute(q);
+  }
+});
+}());
+</script>
