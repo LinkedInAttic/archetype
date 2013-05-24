@@ -1,3 +1,4 @@
 .test {
-  background: transparent url(https://);
+  background: transparent;
+  *background: transparent url(https://);
 }
