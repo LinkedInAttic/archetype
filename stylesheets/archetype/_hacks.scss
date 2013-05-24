@@ -88,8 +88,8 @@
 // @param     $url {URL} an optional URL to point to an image (not required)
 @mixin transparent-focusable($url: url(https://)) {
   $bg: (transparent);
-  @if $url and ($legacy-support-for-ie6 or $legacy-support-for-ie7) {
-    $bg: append($bg, $url);
-  }
   background: $bg;
+  @if $url {
+    @include target-browser(ie lte 7, background, append($bg, $url));
+  }
 }
