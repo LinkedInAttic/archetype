@@ -83,12 +83,13 @@
   }
 }
 
-// a hack that allows elements with transparent backgrounds to be focusable in older versions of IE
+// a hack that allows elements with transparent backgrounds to be focusable in IE
 // @mixin     transparent-focusable
-// @param     $url {URL} an optional URL to point to an image (not required)
-@mixin transparent-focusable($url: url(https://)) {
+// @param     $url {String} an optional URL to point to an image (not required)
+// @param     $data {String} an optional data URI for a transparent image (not required)
+@mixin transparent-focusable($url: url(https://), $data: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7') {
   $bg: (transparent);
-  background: $bg;
+  background: append($bg, $data);
   @if $url {
     @include target-browser(ie lte 7, background, append($bg, $url));
   }
