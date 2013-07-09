@@ -74,6 +74,8 @@
     @else if($property == max-height)           { @include max-height($value); }
     // stretch
     @else if($property == stretch)              { @include stretch(); }
+    // appearance
+    @else if($property == appearance)           { @include appearance($value); }
     // bunch of RTL support
     @else if($property == margin)               { @include margin($value); }
     @else if($property == margin-left)          { @include margin-left($value); }
