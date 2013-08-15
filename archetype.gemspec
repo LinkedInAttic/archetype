@@ -19,7 +19,9 @@ Gem::Specification.new do |gemspec|
   gemspec.require_paths = %w(lib)
 
   # Gem Files
+  gemspec.executables = %w(archetype)
   gemspec.files = %w(LICENSE README.md CHANGELOG.md VERSION.yml)
+  gemspec.files += Dir.glob("bin/*")
   gemspec.files += Dir.glob("lib/**/*")
   gemspec.files += Dir.glob("stylesheets/**/*")
   gemspec.files += Dir.glob("templates/**/*")
