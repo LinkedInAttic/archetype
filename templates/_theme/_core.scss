@@ -1,0 +1,13 @@
+// setup theme configs and styles
+@import "config";
+@import "primitives";
+
+// extend the __THEME_EXTENDS__ theme
+@import "__THEME_EXTENDS__";
+//@import "../__THEME_EXTENDS__/core";
+
+// import helper functions
+@import "helpers";
+
+// finally initialize our custom components
+@import "components";

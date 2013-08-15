@@ -43,7 +43,7 @@
 
 .target-ie-lte-9 {
   @include target-browser(ie lte 9, border-color, #111);
-  @include target-browser(ie lte 9, background, #2c2c2b); 
+  @include target-browser(ie lte 9, background, #2c2c2b);
 }
 
 .target-ie-7-8-9 {
@@ -67,4 +67,11 @@
 
 .target-opera {
   @include target-browser(opera, width, 82%);
+}
+
+.target-with-content-block {
+  @include target-browser(ie lte 8) {
+    /* testing content block */
+    color: red;
+  };
 }
