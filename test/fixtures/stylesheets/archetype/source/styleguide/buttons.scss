@@ -1,4 +1,4 @@
-@import "archetype"; 
+@import "archetype";
 
 @each $context in container, bristol, punchcut {
   .#{$context} {

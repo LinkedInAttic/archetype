@@ -55,30 +55,66 @@ private
   #
   def self.list_to_hash(list, depth = 0, nest = [], additives = [])
     list = list.to_a
+    previous = nil
     hsh = Archetype::Hash.new
     list.each do |item|
       item = item.to_a
+
+      # if a 3rd item exists, we probably forgot a comma somewhere
+      if previous.nil? and not item[2].nil?
+        msg = "you're likely missing a comma in your data structure"
+        begin
+          logger.record(:warning, "#{msg}: #{item}")
+        rescue
+          logger.record(:warning, msg)
+        end
+      end
+
       # convert the key to a string and strip off quotes
       key = to_str(item[0], ' ' , :quotes)
+      # capture the value
       value = item[1]
+
       if key != 'nil'
+        if is_value(value, :blank)
+          if previous.nil?
+            previous = key
+            next
+          else
+            value = item[0]
+            key = previous
+            previous = nil
+          end
+        elsif not previous.nil?
+          # if we got here, something is wrong with the structure
+          list.shift if to_str(list[0]) == previous # remove the first item if it's the previous key, which is now the parent key
+          list = list[0].to_a # now the remaining items were munged, so split them out
+          hsh = Archetype::Hash.new
+          hsh[previous] = list_to_hash(list, depth - 1, nest, additives)
+          return hsh
+        end
+      end
+
+      # update the hash if we have a valid key and hash
+      if key != 'nil' and not is_value(value, :blank)
         # check if if it's a nesting hash
         nested = nest.include?(key)
         # if it's nested or we haven't reached out depth, recurse
         if nested or depth > 0
           value = list_to_hash(value, nested ? depth + 1 : depth - 1, nest, additives)
         end
-        # update the hash key
-        if not is_value(value, :blank)
-          if additives.include?(key)
-            hsh[key] ||= []
-            hsh[key].push(value)
-          else
-            hsh[key] = value
-          end
+
+        if additives.include?(key)
+          hsh[key] ||= []
+          hsh[key].push(value)
+        else
+          hsh[key] = value
         end
       end
     end
+
+    logger.record(:warning, "one of your data structures is ambiguous, please double check near `#{previous}`") if not previous.nil?
+
     return hsh
   end
 
@@ -92,7 +128,9 @@ private
   # - {String} the converted String
   #
   def self.to_str(value, separator = ' ', strip = nil)
-    value = value.is_a?(String) ? value : ((value.to_a).each{ |i| i.is_a?(String) ? i : i.value }).join(separator || '')
+    if not value.is_a?(String)
+      value = ((value.to_a).each{ |i| i.nil? ? 'nil' : (i.is_a?(String) ? i : i.value) }).join(separator || '')
+    end
     strip = /\A"|"\Z/ if strip == :quotes
     return strip.nil? ? value : value.gsub(strip, '')
   end
@@ -112,11 +150,13 @@ private
     when :blank
       is_it = false
       value = value.value if value.is_a?(Sass::Script::String)
+      is_it = value.nil?
       is_it = value.empty? if value.is_a?(String)
       is_it = value.to_a.empty? if value.is_a?(Sass::Script::List) or value.is_a?(Array)
     when :nil
       is_it = false
       value = value.value if value.is_a?(Sass::Script::String)
+      is_it = value.nil?
       is_it = value == 'nil' if value.is_a?(String)
       is_it = to_str(value) == 'nil' if value.is_a?(Sass::Script::List) or value.is_a?(Array)
     end

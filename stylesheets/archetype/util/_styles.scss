@@ -76,6 +76,10 @@
     @else if($property == stretch)              { @include stretch(); }
     // appearance
     @else if($property == appearance)           { @include appearance($value); }
+    // unhide-element
+    @else if($property == unhide-element)       { @include unhide-element(); }
+    // ellipsis
+    @else if($property == ellipsis)             { @include ellipsis(); }
     // bunch of RTL support
     @else if($property == margin)               { @include margin($value); }
     @else if($property == margin-left)          { @include margin-left($value); }
