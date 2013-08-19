@@ -112,6 +112,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID,  $STYLEGUIDE_BUTT
   )),
   // IMPORTANCE in CONTEXTS
   ((primary in-dark), (
+    inherit (in-dark),
     (states, (
       (hover, (
         background-color    $CONFIG_COLOR_BG_BUTTON_PRIMARY_DARK_HOVER,
@@ -119,10 +120,10 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID,  $STYLEGUIDE_BUTT
         background-image    $CONFIG_GRADIENT_BUTTON_PRIMARY_DARK_HOVER
       )),
       nil
-    )),
-    nil
+    ))
   )),
   ((secondary in-dark), (
+    inherit (in-dark),
     (states, (
       (hover, (
         background-color    $CONFIG_COLOR_BG_BUTTON_SECONDARY_DARK_HOVER,
@@ -130,10 +131,10 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID,  $STYLEGUIDE_BUTT
         background-image    $CONFIG_GRADIENT_BUTTON_SECONDARY_DARK_HOVER
       )),
       nil
-    )),
-    nil
+    ))
   )),
   ((spotlight in-dark), (
+    inherit (in-dark),
     (states, (
       (hover, (
         background-color    $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT_DARK_HOVER,
@@ -141,8 +142,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID,  $STYLEGUIDE_BUTT
         background-image    $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_DARK_HOVER
       )),
       nil
-    )),
-    nil
+    ))
   )),
   // in the punchcut context (inherit from in-dark)
   (primary in-punchcut, (

@@ -117,6 +117,21 @@
   clip: rect(1px, 1px, 1px, 1px);
 }
 
+// reverse hide-element and make the element visibile again
+// @mixin     unhide-element
+// @see       hide-element
+// @param     $position {String} value for the position property
+// @param     $height {String} value for the height property
+// @param     $width {String} value for the width property
+// @param     $overflow {String} value for the overflow property
+@mixin unhide-element($position: static, $height:auto, $width:auto, $overflow:visible) {
+  position: $position;
+  height: $height;
+  width: $width;
+  overflow: $overflow;
+  clip: auto;
+}
+
 // mixin for generating a fade box which fades from transparent to white
 // @mixin     fade-box
 // @param     $width {String} the width of the overlay

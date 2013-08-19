@@ -28,7 +28,7 @@ namespace :test do
       # compile the fixtures
       puts "checking test cases..."
       CHECKMARK = "\u2713 "
-      errors = %x[compass compile #{fixtures} | grep 'error.*#{fixtures}']
+      errors = %x[compass compile #{fixtures} --trace | grep 'error.*#{fixtures}']
       # check for compilation errors
       if not errors.empty?
         puts "Please fix the following errors before proceeding:".colorize(:red)

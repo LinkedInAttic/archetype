@@ -3,7 +3,7 @@
 // - nested selectors
 // - nested `styleguide` calls in nested selectors
 
-@import "archetype"; 
+@import "archetype";
 
 @if not styleguide-component-exists(nested-styleguide-test, $CONFIG_THEME) {
 $a-blackhole: styleguide-add-component(nested-styleguide-test, (), (
