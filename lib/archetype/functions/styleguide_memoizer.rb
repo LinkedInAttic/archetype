@@ -50,12 +50,20 @@ private
   end
 
   #
-  # invalidate the entire memoizer for the theme
+  # invalidate the memoizer for the theme
   #
   # *Parameters*:
   # - <tt>theme</tt> {String} the theme name
   #
   def self.clear(theme)
     @components[theme] = {}
+  end
+
+
+  #
+  # resets the entire memoizer
+  #
+  def self.reset!
+    @components = {}
   end
 end
