@@ -60,9 +60,9 @@ private
     list.each do |item|
       item = item.to_a
 
-      # if a 3rd item exists, we probably forgot a comma somewhere
+      # if a 3rd item exists, we probably forgot a comma or parens somewhere
       if previous.nil? and not item[2].nil?
-        msg = "you're likely missing a comma in your data structure"
+        msg = "you're likely missing a comma or parens in your data structure"
         begin
           logger.record(:warning, "#{msg}: #{item}")
         rescue
