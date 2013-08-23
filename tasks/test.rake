@@ -1,6 +1,8 @@
 ## TESTS
 require 'rake/testtask'
 
+debug = false
+
 task :test do
   # make sure the gem is buildable
   puts "Testing the gem builds correctly..."
@@ -19,6 +21,10 @@ namespace :test do
   task :update do
     Rake::Task['test:update:fixtures'].invoke
   end
+  task :debug do
+    debug = true
+    Rake::Task['test:update'].invoke
+  end
   namespace :update do
     #desc "update fixture expectations for test cases if needed"
     task :fixtures do
@@ -28,10 +34,11 @@ namespace :test do
       # compile the fixtures
       puts "checking test cases..."
       CHECKMARK = "\u2713 "
-      errors = %x[compass compile #{fixtures} --trace | grep 'error.*#{fixtures}']
+      filter = debug ? '--trace' : "| grep 'error.*#{fixtures}'"
+      errors = %x[compass compile #{fixtures} #{filter}]
       # check for compilation errors
       if not errors.empty?
-        puts "Please fix the following errors before proceeding:".colorize(:red)
+        puts "Please fix the following errors before proceeding:".colorize(:red) if not debug
         puts errors
       else
         # check to see what's changed
