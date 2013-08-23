@@ -77,10 +77,7 @@
 // @param     $type {List} the glpyh data
 // @return    {List} the parameters needed for glyph-icon()
 @function _styleguideGetAlertGlyph($type: $CONFIG_GLYPH_ALERT_NOTIFY) {
-  $offset: _styleguideGetAlertGlyphOffset($type);
-  $top: nth($offset, 1);
-  $left: nth($offset, 2);
-  @return (nth($type, 1), nth($type, 2), nth($type, 3), before, 'position:absolute;line-height:1;top:#{$top};left:#{$left};')
+  @return (nth($type, 1), nth($type, 2), nth($type, 3), before, '')
 }
 
 
