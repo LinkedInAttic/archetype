@@ -224,13 +224,13 @@ private
   # *Returns*:
   # - {Hash} a hash of the extracted styles
   #
-  def extract_styles(id, modifiers, strict = false, theme = nil, context = nil, in_key = nil)
+  def extract_styles(id, modifiers, strict = false, theme = nil, context = nil)
     theme = get_theme(theme)
     context ||= theme[:components][id] || Archetype::Hash.new
     modifiers = helpers.to_str(modifiers)
     return Archetype::Hash.new if context.nil? or context.empty?
     # push on the defaults first
-    out = (strict ? resolve_dependents(id, context[modifiers], theme[:name], context, in_key) : context[DEFAULT]) || Archetype::Hash.new
+    out = (strict ? resolve_dependents(id, context[modifiers], theme[:name], context) : context[DEFAULT]) || Archetype::Hash.new
     out = out.clone
     # if it's not strict, find anything that matched
     if not strict
@@ -250,7 +250,7 @@ private
           end
           # if it matched, process it
           if match
-            tmp = resolve_dependents(id, definition[1], theme[:name], nil, out, in_key)
+            tmp = resolve_dependents(id, definition[1], theme[:name], nil, out)
             out, tmp = post_resolve_drops(out, tmp)
             out = out.rmerge(tmp)
           end
@@ -266,7 +266,7 @@ private
           out[special_key] = Archetype::Hash.new
         else
           tmp = Archetype::Hash.new
-          special.each { |key, value| tmp[key] = extract_styles(key, key, true, theme[:name], special, special_key) }
+          special.each { |key, value| tmp[key] = extract_styles(key, key, true, theme[:name], special) }
           out[special_key] = tmp if not tmp.empty?
         end
       end
@@ -281,6 +281,16 @@ private
     return out
   end
 
+  #
+  # given two objects, resolve the chain of dropped styles
+  #  this runs after having already resolved the dropped styles and merged
+  #
+  # *Parameters*:
+  # - <tt>obj</tt> {Hash} the source object
+  # - <tt>merger</tt> {Hash} the object to be merged in
+  # *Returns*:
+  # - {Array.<Hash>} the resulting `obj` and `merger` objects
+  #
   def post_resolve_drops(obj, merger)
     return [obj, merger] if obj.nil? or merger.nil?
     drop = merger[DROP]
@@ -296,14 +306,22 @@ private
     SPECIAL.each do |special|
       if obj[special].is_a?(Hash) and merger[special].is_a?(Hash)
         obj[special], merger[special] = post_resolve_drops(obj[special], merger[special])
-      else
       end
     end
     return [obj, merger]
   end
 
-  def resolve_drops(value, obj, in_key)
-    is_special = SPECIAL.include?(in_key)
+  #
+  # given two objects, resolve the chain of dropped styles
+  #
+  # *Parameters*:
+  # - <tt>value</tt> {Hash} the source object
+  # - <tt>obj</tt> {Hash} the object to be merged in
+  # - <tt>is_special</tt> {Boolean} whether this is from a SPECIAL branch of a Hash
+  # *Returns*:
+  # - {Array.<Hash>} the resulting value
+  #
+  def resolve_drops(value, obj, is_special = false)
     return value if not (value.is_a?(Hash) and obj.is_a?(Hash))
     keys = obj.keys
     drop = value[DROP]
@@ -339,7 +357,7 @@ private
       value = tmp.rmerge(value)
     end
     value.each do |key|
-      value[key] = resolve_drops(value[key], obj[key], key) if not value[key].nil?
+      value[key] = resolve_drops(value[key], obj[key], key, SPECIAL.include?(key)) if not value[key].nil?
     end
     return value
   end
@@ -356,20 +374,20 @@ private
   # *Returns*:
   # - {Hash} a hash of the resolved styles
   #
-  def resolve_dependents(id, value, theme = nil, context = nil, obj = nil, in_key = nil)
+  def resolve_dependents(id, value, theme = nil, context = nil, obj = nil)
     # we have to create a clone here as the passed in value is volatile and we're performing destructive changes
     value = value.clone
     # check that we're dealing with a hash
     if value.is_a?(Hash)
       # check for dropped styles
-      value = resolve_drops(value, obj, in_key)
+      value = resolve_drops(value, obj)
 
       # check for inheritance
       inherit = value[INHERIT]
       if not (inherit.nil? or inherit.empty?)
         # create a temporary object and extract the nested styles
         tmp = Archetype::Hash.new
-        inherit.each { |related| tmp = tmp.rmerge(extract_styles(id, related, true, theme, context, in_key)) }
+        inherit.each { |related| tmp = tmp.rmerge(extract_styles(id, related, true, theme, context)) }
         # remove the inheritance key and update the styles
         value.delete(INHERIT)
         value = tmp.rmerge(value)
