@@ -368,3 +368,6 @@ $CONFIG_SAFE_FONTS: associative-merge($CORE_SAFE_FONTS, $CONFIG_SAFE_FONTS);
 
 $archetype-glyph-selector: false !default;
 $archetype-pseudo-selector: false !default;
+
+$CORE_GLYPH_SELECTOR_VAR: '$archetype-glyph-selector';
+$CORE_GLYPH_SELECTOR_VAR: '$archetype-pseudo-selector';

@@ -1,0 +1,675 @@
+.alert.error {
+  background-color: #da4f49;
+  background-repeat: no-repeat;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ee5f5b), color-stop(100%, #bd362f));
+  background: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+  background: -moz-linear-gradient(top, #ee5f5b, #bd362f);
+  background: -o-linear-gradient(top, #ee5f5b, #bd362f);
+  background: linear-gradient(top, #ee5f5b, #bd362f);
+  -webkit-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf057;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+}
+.alert.error:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 36px;
+  color: inherit;
+  content: "\f057";
+}
+.alert.error:before, .alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.error .dismiss {
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+}
+.alert.error .dismiss:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 11px;
+  color: inherit;
+  content: "\f00d";
+}
+.alert.error .dismiss.hover, .alert.error .dismiss:hover, .alert.error .dismiss.focus, .alert.error .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+.alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.alert.success {
+  background-color: #5bb75b;
+  background-repeat: no-repeat;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #62c462), color-stop(100%, #51a351));
+  background: -webkit-linear-gradient(top, #62c462, #51a351);
+  background: -moz-linear-gradient(top, #62c462, #51a351);
+  background: -o-linear-gradient(top, #62c462, #51a351);
+  background: linear-gradient(top, #62c462, #51a351);
+  -webkit-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf058;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+}
+.alert.success:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 36px;
+  color: inherit;
+  content: "\f058";
+}
+.alert.success:before, .alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.success .dismiss {
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+}
+.alert.success .dismiss:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 11px;
+  color: inherit;
+  content: "\f00d";
+}
+.alert.success .dismiss.hover, .alert.success .dismiss:hover, .alert.success .dismiss.focus, .alert.success .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+.alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.alert.notice {
+  background-color: #49afcd;
+  background-repeat: no-repeat;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5bc0de), color-stop(100%, #2f96b4));
+  background: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+  background: -moz-linear-gradient(top, #5bc0de, #2f96b4);
+  background: -o-linear-gradient(top, #5bc0de, #2f96b4);
+  background: linear-gradient(top, #5bc0de, #2f96b4);
+  -webkit-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf05a;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+}
+.alert.notice:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 36px;
+  color: inherit;
+  content: "\f05a";
+}
+.alert.notice:before, .alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.notice .dismiss {
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+}
+.alert.notice .dismiss:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 11px;
+  color: inherit;
+  content: "\f00d";
+}
+.alert.notice .dismiss.hover, .alert.notice .dismiss:hover, .alert.notice .dismiss.focus, .alert.notice .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+.alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.alert.yield {
+  background-color: #faa732;
+  background-repeat: no-repeat;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fbb450), color-stop(100%, #f89406));
+  background: -webkit-linear-gradient(top, #fbb450, #f89406);
+  background: -moz-linear-gradient(top, #fbb450, #f89406);
+  background: -o-linear-gradient(top, #fbb450, #f89406);
+  background: linear-gradient(top, #fbb450, #f89406);
+  -webkit-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf071;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+}
+.alert.yield:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 36px;
+  color: inherit;
+  content: "\f071";
+}
+.alert.yield:before, .alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.yield .dismiss {
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+}
+.alert.yield .dismiss:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 11px;
+  color: inherit;
+  content: "\f00d";
+}
+.alert.yield .dismiss.hover, .alert.yield .dismiss:hover, .alert.yield .dismiss.focus, .alert.yield .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+.alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.alert.error {
+  background-color: #da4f49;
+  background-repeat: no-repeat;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ee5f5b), color-stop(100%, #bd362f));
+  background: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+  background: -moz-linear-gradient(top, #ee5f5b, #bd362f);
+  background: -o-linear-gradient(top, #ee5f5b, #bd362f);
+  background: linear-gradient(top, #ee5f5b, #bd362f);
+  -webkit-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf057;",this.insertBefore(this.el));
+}
+.alert.error:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 36px;
+  color: inherit;
+  content: "\f057";
+}
+.alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
+  "font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 36px;
+  color: inherit;
+}
+.alert.error:before, .alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.error .dismiss {
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+}
+.alert.error .dismiss:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 11px;
+  color: inherit;
+  content: "\f00d";
+}
+.alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  "font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 11px;
+  color: inherit;
+  text-decoration: none;
+}
+.alert.error .dismiss.hover, .alert.error .dismiss:hover, .alert.error .dismiss.focus, .alert.error .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+.alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.alert.success {
+  background-color: #5bb75b;
+  background-repeat: no-repeat;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #62c462), color-stop(100%, #51a351));
+  background: -webkit-linear-gradient(top, #62c462, #51a351);
+  background: -moz-linear-gradient(top, #62c462, #51a351);
+  background: -o-linear-gradient(top, #62c462, #51a351);
+  background: linear-gradient(top, #62c462, #51a351);
+  -webkit-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf058;",this.insertBefore(this.el));
+}
+.alert.success:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 36px;
+  color: inherit;
+  content: "\f058";
+}
+.alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
+  "font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 36px;
+  color: inherit;
+}
+.alert.success:before, .alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.success .dismiss {
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+}
+.alert.success .dismiss:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 11px;
+  color: inherit;
+  content: "\f00d";
+}
+.alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  "font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 11px;
+  color: inherit;
+  text-decoration: none;
+}
+.alert.success .dismiss.hover, .alert.success .dismiss:hover, .alert.success .dismiss.focus, .alert.success .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+.alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.alert.notice {
+  background-color: #49afcd;
+  background-repeat: no-repeat;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5bc0de), color-stop(100%, #2f96b4));
+  background: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+  background: -moz-linear-gradient(top, #5bc0de, #2f96b4);
+  background: -o-linear-gradient(top, #5bc0de, #2f96b4);
+  background: linear-gradient(top, #5bc0de, #2f96b4);
+  -webkit-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf05a;",this.insertBefore(this.el));
+}
+.alert.notice:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 36px;
+  color: inherit;
+  content: "\f05a";
+}
+.alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
+  "font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 36px;
+  color: inherit;
+}
+.alert.notice:before, .alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.notice .dismiss {
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+}
+.alert.notice .dismiss:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 11px;
+  color: inherit;
+  content: "\f00d";
+}
+.alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  "font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 11px;
+  color: inherit;
+  text-decoration: none;
+}
+.alert.notice .dismiss.hover, .alert.notice .dismiss:hover, .alert.notice .dismiss.focus, .alert.notice .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+.alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.alert.yield {
+  background-color: #faa732;
+  background-repeat: no-repeat;
+  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fbb450), color-stop(100%, #f89406));
+  background: -webkit-linear-gradient(top, #fbb450, #f89406);
+  background: -moz-linear-gradient(top, #fbb450, #f89406);
+  background: -o-linear-gradient(top, #fbb450, #f89406);
+  background: linear-gradient(top, #fbb450, #f89406);
+  -webkit-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf071;",this.insertBefore(this.el));
+}
+.alert.yield:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 36px;
+  color: inherit;
+  content: "\f071";
+}
+.alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
+  "font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 36px;
+  color: inherit;
+}
+.alert.yield:before, .alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.yield .dismiss {
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+}
+.alert.yield .dismiss:before {
+  font-family: "FontAwesome";
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 11px;
+  color: inherit;
+  content: "\f00d";
+}
+.alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  "font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 11px;
+  color: inherit;
+  text-decoration: none;
+}
+.alert.yield .dismiss.hover, .alert.yield .dismiss:hover, .alert.yield .dismiss.focus, .alert.yield .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+.alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}

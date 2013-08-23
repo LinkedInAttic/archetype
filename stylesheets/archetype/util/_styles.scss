@@ -207,7 +207,7 @@
       $state: first-value-of($state);
       @if(index(-compass-list($states), $state) or $states == true) {
         #{_getStateSelector($state)} {
-          @include _toStyles2($value, true, true, $exclude);
+          @include to-styles($value, true, true, $exclude);
         }
       }
     }
@@ -216,8 +216,8 @@
   @if length($selectors-data) > 0 {
     @each $selector in $selectors-data {
       @if(index(-compass-list($selectors), $selector) or $selectors == true) {
-        #{first-value-of($selector)} {
-          @include _toStyles2(nth($selector, 2), true, true, $exclude);
+        #{_getSelectorSelector($selector)} {
+          @include to-styles(nth($selector, 2), true, true, $exclude);
         }
       }
     }
@@ -292,6 +292,17 @@
   $selector: associative($CONFIG_STATE_MAPPINGS, $state, $strict: true);
   @if $selector == nil or length($selector) == 0 {
     $selector: '&.#{if(index(-compass-list($CONFIG_STATE_NO_PREFIX), $state), $prefix, "")}#{$state}';
+  }
+  @return $selector;
+}
+
+@function _getSelectorSelector($selector) {
+  $selector: first-value-of(-compass-list($selector));
+  @if $selector == $CORE_GLYPH_SELECTOR_VAR {
+    $selector: $archetype-glyph-selector;
+  }
+  @elseif $selector == $CORE_GLYPH_SELECTOR_VAR {
+    $selector: $archetype-pseudo-selector;
   }
   @return $selector;
 }
