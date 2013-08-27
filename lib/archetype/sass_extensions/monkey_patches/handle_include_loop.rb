@@ -1,3 +1,4 @@
+# :stopdoc:
 # monkey patch Sass to exclude special mixins from it's include loop logic
 module Sass
   module Tree

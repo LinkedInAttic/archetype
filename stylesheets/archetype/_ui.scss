@@ -170,6 +170,7 @@
 // @param     $placement {String} where to place the icon [before|after|inline]
 // @param     $ie-styles {String} styles to apply to IE6/7 (this is needed because the faux :before isn't extendable)
 // @param     $ie-uid {String} a custom, unique identifier for the generate IE6/7 element
+// @content
 @mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: false, $ie-uid: false) {
   $archetype-glyph-selector: false;
   $char-mapping: nil;
@@ -195,7 +196,7 @@
     }
     $selector: if(index(before after, $placement), '&:#{$placement}', '&');
     #{$selector} {
-      font-family: '#{$CONFIG_GLYPHS_NAME}';
+      font-family: '#{$CONFIG_GLYPHS_NAME}-#{$CONFIG_GLYPHS_VERSION}', '#{$CONFIG_GLYPHS_NAME}';
       font-weight: $CONFIG_GLYPHS_WEIGHT;
       font-style: $CONFIG_GLYPHS_STYLE;
       text-decoration: inherit;
@@ -209,7 +210,7 @@
     $archetype-glyph-selector: $selector;
     @if($selector != '&' and $ie-styles != nil) {
       // support for IE6/7
-      $styles: "font-family:'#{$CONFIG_GLYPHS_NAME}';font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;";
+      $styles: "font-family:'#{$CONFIG_GLYPHS_NAME}-#{$CONFIG_GLYPHS_VERSION}', '#{$CONFIG_GLYPHS_NAME}';font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;";
       @if($size != nil) {
         $styles: $styles + "font-size:#{$size};"
       }
@@ -222,6 +223,11 @@
       @include ie-pseudo($styles: $styles, $content: $char-code, $placement: $placement, $name: glyph, $uid: $ie-uid);
       @if $archetype-pseudo-selector {
         $archetype-glyph-selector: '#{$selector}, #{$archetype-pseudo-selector}';
+      }
+    }
+    @if archetype-version('Sass >= 3.2') {
+      #{$archetype-glyph-selector} {
+        @content;
       }
     }
   }

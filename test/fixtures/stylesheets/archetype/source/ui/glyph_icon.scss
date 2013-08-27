@@ -1,5 +1,7 @@
 @import "archetype";
 
+@include base-glyph();
+
 .simple {
   @include glyph-icon(caret-down);
 }
@@ -21,5 +23,13 @@ $CONFIG_GENERATED_TAG_INLINE: false;
   @include glyph-icon(caret-down, $ie-uid: my-custom-id);
   #{$archetype-glyph-selector} {
     color: pink;
+  }
+}
+
+.content-block {
+  @include glyph-icon(caret-down) {
+    position: absolute;
+    top: 10px;
+    left: 10px;
   }
 }
