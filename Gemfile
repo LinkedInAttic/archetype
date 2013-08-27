@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'jekyll', '~> 1.0.0'
-gem 'archetype', '0.0.1.pre.3.00dfd9a'
+gem 'archetype', '0.0.1.pre.3.6ed259b'
 gem 'compass'
 gem 'foreman'
 gem 'rake'
