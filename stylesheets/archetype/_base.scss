@@ -38,6 +38,9 @@ $RESET_INIT: false !default;
   // the font-face mixin will likely change in a future version, keep an eye on this
   // https://github.com/chriseppstein/compass/issues/867
   @include font-face($CONFIG_GLYPHS_NAME, $CONFIG_GLYPHS_FILES, $CONFIG_GLYPHS_EOT, $CONFIG_GLYPHS_WEIGHT, $CONFIG_GLYPHS_STYLE);
+  // output a second @font-face set with a versioned family name
+  // this will help avoid collisions when multi-app CSS is loaded on a single page
+  @include font-face('#{$CONFIG_GLYPHS_NAME}-#{$CONFIG_GLYPHS_VERSION}', $CONFIG_GLYPHS_FILES, $CONFIG_GLYPHS_EOT, $CONFIG_GLYPHS_WEIGHT, $CONFIG_GLYPHS_STYLE);
 }
 
 // auto invoke base reset
