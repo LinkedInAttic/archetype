@@ -4,7 +4,7 @@
 <head>
 <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
 
-<title>module Archetype::SassExtensions::Environment - Archetype v0.0.1.pre.3 Documentation</title>
+<title>module Sass::Tree::Visitors - Archetype v0.0.1.pre.3 Documentation</title>
 
 <link type="text/css" media="screen" href="../../rdoc.css" rel="stylesheet">
 
@@ -49,7 +49,7 @@
     <nav id="file-list-section" class="section">
   <h3 class="section-header">Defined In</h3>
   <ul>
-    <li>lib/archetype/sass_extensions/functions/environment.rb
+    <li>lib/archetype/sass_extensions/monkey_patches/handle_include_loop.rb
   </ul>
 </nav>
 
@@ -61,17 +61,7 @@
     
     
     
-    <!-- Method Quickref -->
-<nav id="method-list-section" class="section">
-  <h3 class="section-header">Methods</h3>
-
-  <ul class="link-list">
     
-    <li ><a href="#method-i-archetype_env">#archetype_env</a>
-    
-  </ul>
-</nav>
-
   </div>
 
   <div id="project-metadata">
@@ -131,12 +121,10 @@
 </nav>
 
 <div id="documentation">
-  <h1 class="module">module Archetype::SassExtensions::Environment</h1>
+  <h1 class="module">module Sass::Tree::Visitors</h1>
 
   <div id="description" class="description">
     
-<p>Archetype environment</p>
-
   </div><!-- description -->
 
   
@@ -153,50 +141,6 @@
 
     <!-- Methods -->
     
-     <section id="public-instance-5Buntitled-5D-method-details" class="method-section section">
-      <h3 class="section-header">Public Instance Methods</h3>
-
-    
-      <div id="method-i-archetype_env" class="method-detail ">
-        
-        <div class="method-heading">
-          <span class="method-name">archetype_env</span><span
-            class="method-args">()</span>
-          
-          <span class="method-click-advice">click to toggle source</span>
-          
-        </div>
-        
-
-        <div class="method-description">
-          
-          <p>get the current environment (this is similar to compass_env)</p>
-
-<p><strong>Returns</strong>:</p>
-<ul><li>
-<p>{String} the current environment the compiler is running in</p>
-</li></ul>
-          
-          
-
-          
-          <div class="method-source-code" id="archetype_env-source">
-            <pre><span class="ruby-comment"># File lib/archetype/sass_extensions/functions/environment.rb, line 11</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">archetype_env</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-constant">Sass</span><span class="ruby-operator">::</span><span class="ruby-constant">Script</span><span class="ruby-operator">::</span><span class="ruby-constant">String</span>.<span class="ruby-identifier">new</span>((<span class="ruby-constant">Compass</span>.<span class="ruby-identifier">configuration</span>.<span class="ruby-identifier">environment</span> <span class="ruby-operator">||</span> <span class="ruby-value">:development</span>).<span class="ruby-identifier">to_s</span>)
-<span class="ruby-keyword">end</span></pre>
-          </div><!-- archetype_env-source -->
-          
-        </div>
-
-        
-
-        
-      </div><!-- archetype_env-method -->
-
-    
-    </section><!-- public-instance-method-details -->
-  
   </section><!-- 5Buntitled-5D -->
 
 </div><!-- documentation -->

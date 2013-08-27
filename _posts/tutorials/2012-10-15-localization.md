@@ -25,7 +25,7 @@ reading = ltr
 
 These let you define the locale as well as the reading direction (`ltr` or `rtl`).
 
-## lang() to the rescue
+## `lang()` to the rescue
 
 Now that the locale is set, we can use `lang()` to perform some conditional logic.
 
@@ -70,13 +70,31 @@ sometimes less is more
 @if( not lang(en_US de_DE fr_FR) ) { ... }
 {% endhighlight %}
 
+### wildcards
+
+The `lang()` method supports some basic wildcard matching.
+
+For example, you can match against country codes:
+
+{% highlight css %}
+// all `JP` or `CN` regions
+@if( lang(_JP _CN) ) { ... }
+{% endhighlight %}
+
+Or match against language codes:
+
+{% highlight css %}
+// all `en` or `zh` languages
+@if( lang(en_ zh_) ) { ... }
+{% endhighlight %}
+
 ## Poorman's right-to-left
 
 There are existing solutions out there to address many right-to-left issues. [CSSJanus](http://cssjanus.commoner.com/) is an awesome open source project to post-process your CSS files.
 
 If you're not able to integrate these extra tools into your build step, or have other reasons not to use them, Archetype provides some simple methods for dealing with a lot of common RTL issues.
 
-By setting `reading = rtl` in your Compass config, Archetype will rendering in a right-to-left reading order. This means, all components, mixins, and the [grid](/tutorials/complex-layouts-grid/) in Archetype will flip direction horizontally.
+By setting `reading = rtl` in your Compass config, Archetype will render in a right-to-left reading order. This means, all components, mixins, and the [grid](/tutorials/complex-layouts-grid/) in Archetype will flip direction horizontally.
 
 There are other mixins and methods that you can use outside of the core features.
 
