@@ -21,7 +21,7 @@ Primitives are simple, configurable values like colors, fonts, and background im
 
 ### Components
 
-Components define the sets of styles to be applied to identifiers. Identifiers have a one-to-one mapping with a component. In many cases, components are derived from various primitives and define a key-value store for all the styles
+Components define the sets of styles to be applied to identifiers. Identifiers have a one-to-one mapping with a component. In many cases, components are derived from various primitives and define a key-value mapping of all the styles
 
 Components start off something like this:
 
@@ -69,8 +69,6 @@ Now when we invoke `@include styleguide(awesome example)`, we'll get a new set o
 
 <span class="note">NOTE: you can remove previously defined styles by setting them to nil, like the background example above.</span>
 
-<span class="note">GOTCHA: a caveat with the data structure is that if you're defining only a single key-value pair, you'll need to specify an extra empty placeholder `nil` (don't ask why, just do it).</span>
-
 You can also define multiple combinations of variants and contexts:
 
 <span class="note">[scss/themes/my_custom_theme/components/_example.scss]</span>
@@ -108,55 +106,14 @@ Now each of these invocations will produce a customized result:
 
 `@include styleguide(awesome example in a punchcut);`
 
-#### Using inherit
+#### Special properties
 
-Each set of modifiers and contexts will follow a cascading model, naturally inheriting the styles from previously matching modifiers and contexts. That is, if in our example above, if we invoke <br/> `@include styleguide(awesome example in a punchcut)`, we will get the following output:
+Archetype supports a few special properties within these data structures to give you even more flexibility. These properties include `drop`, `inherit`, `styleguide`, `selectors`, and `states`.
 
-{% highlight css %}
-color:        white;
-background:   yellow;
-font-weight:  bold;
-font-size:    20px;
-{% endhighlight %}
+We'll cover these in more detail in follow up tutorials:
 
-We can take this one step further and inherit between different modifiers/contexts:
-
-<span class="note">`[scss/themes/my_custom_theme/components/_example.scss]`</span>
-{% highlight css %}
-$STYLEGUIDE_EXAMPLES_ID: example !default;
-$STYLEGUIDE_EXAMPLES: () !default;
-
-$a-blackhole: styleguide-add-component($STYLEGUIDE_EXAMPLES_ID, $STYLEGUIDE_EXAMPLES, (
-  (default, (
-    color        red,
-    background   yellow
-  )),
-  (awesome, (
-    font-weight  bold,
-    nil
-  )),
-  (cool, (
-    inherit (awesome),
-    nil
-  )),
-  (in-punchcut, (
-    color        white,
-    background   nil
-  )),
-  (awesome in-punchcut, (
-    font-size    20px,
-    nil
-  )),
-  (cool in-punchcut, (
-    inherit (awesome in-punchcut),
-    nil
-  ))
-), $CONFIG_THEME);
-{% endhighlight %}
-
-In this example, cool and awesome can now be used interchangeably.
-
-<span class="note">NOTE: you can only inherit within the same identifier. To inherit another identifier, use the `styleguide` keyword.</span>
+- [Special Keywords](/tutorials/styleguide-keywords)
+- [States vs Selectors](/tutorials/styleguide-states-vs-selectors)
 
 #### Plugging it in
 
@@ -165,7 +122,7 @@ Now that we have a new identifier file, let's wire it into the global styleguide
 <span class="note">`[scss/themes/my_custom_theme/_components.scss]`</span>
 {% highlight css %}
 ...
-@import "examples";
+@import "components/examples";
 {% endhighlight %}
 
 You now have a new, fully functional style definition, so go get your styleguide on!

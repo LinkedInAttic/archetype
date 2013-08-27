@@ -19,7 +19,7 @@ Well, thanks to the genius of [Nicolas Gallagher](http://nicolasgallagher.com) a
 
 Read the full article on Nicholas' blog for the details, but the basic concept is to use an `expression` (which only works in IE6/7) to insert an element into the DOM that can be styled.
 
-## ie-pseudo-before and ie-pseudo-after
+## `ie-pseudo-before` and `ie-pseudo-after`
 
 To simplify this, Archetype provides two mixins for inserting these elements for you.
 
@@ -27,22 +27,20 @@ Here's an example of how this works.
 
 {% highlight css %}
 .mail {
-  // insert a red 'mail' icon
+  @include ie-pseudo-before($content: '\2709') {
+    // any custom IE styles here
+  };
+  #{$archetype-pseudo-selector}, // this is a special selector created after each call to ie-pseudo-*
   &:before {
+    // shared styles
     color: red;
     font-size: 20px;
-    content: "\2709";
+    content: "\2709"
   }
-  ie-pseudo-before($styles: 'color:red; font-size: 20px;', $content: '\2709');
 }
 {% endhighlight %}
 
 Easy peasy! IE6/7 will now get a fancy mail icon as well.
-
-These methods take two parameters, `$styles` and `$content`. `$styles` is a string of your CSS values (yeah, it kinda sucks).
-
-`$content` is a string of the content you want inserted into the element. This follows the same rules as the regular CSS `content` property.
-That is, it uses backslash escaping for unicode characters and all other HTML entities get escaped before being inserted.
 
 ## Limitations
 

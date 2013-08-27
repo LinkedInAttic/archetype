@@ -1,5 +1,6 @@
 .highlight {
   @include styleguide(module);
+  border: 1px solid #DDDDDD; // TODO styleguide
   @include vertical-spacing(2, $method: margin);
   @include vertical-spacing(2);
   @include horizontal-spacing(4);

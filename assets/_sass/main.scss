@@ -116,6 +116,15 @@ hr {
   }
   p {
     @include vertical-spacing(2, $method: margin);
+    code {
+      border: 1px solid #DDDDDD; // TODO styleguide
+      border-radius: 2px;
+    }
+    .note {
+      code {
+        border: none;
+      }
+    }
   }
 
   // article list

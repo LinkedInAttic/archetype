@@ -81,9 +81,9 @@ task :page do
 end # task :page
 
 desc "Launch preview environment"
-task :preview do
+task :localhost do
   system "foreman start"
-end # task :preview
+end # task :localhost
 
 def ask(message, valid_options)
   if valid_options

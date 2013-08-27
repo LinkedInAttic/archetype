@@ -4,7 +4,7 @@
 <ul class="methods">
   {#methods}
     <li id="{name}" class="well is-method is-source-{source_clean} is-category-{category_clean}{?private} is-private{/private}{?mixin} is-mixin{/mixin}{?function} is-function{/function}">
-      <h2 class="method-name"><a href="#method:{name}" class="method">{name}</a><span class="signature">( {signature} )</span>{?deprecated}&nbsp;<span class="badge badge-error">deprecated</span>{/deprecated}</h2>
+      <h2 class="method-name"><a href="#method:{name}" class="method">{name}</a><span class="signature">( {signature} ){?content} {~lb}<div>&nbsp;&nbsp;@content;</div>{~rb}{/content}</span>{?deprecated}&nbsp;<span class="badge badge-error">deprecated</span>{/deprecated}</h2>
       {?overview}
         <p class="overview">
           {#overview}
