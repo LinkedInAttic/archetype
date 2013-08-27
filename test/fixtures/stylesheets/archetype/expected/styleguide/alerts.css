@@ -16,10 +16,10 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf057;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf057;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
 }
 .alert.error:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -49,10 +49,10 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
 }
 .alert.error .dismiss:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -92,10 +92,10 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf058;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf058;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
 }
 .alert.success:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -125,10 +125,10 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
 }
 .alert.success .dismiss:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -168,10 +168,10 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf05a;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf05a;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
 }
 .alert.notice:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -201,10 +201,10 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
 }
 .alert.notice .dismiss:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -244,10 +244,10 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf071;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf071;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
 }
 .alert.yield:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -277,10 +277,10 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
 }
 .alert.yield .dismiss:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -323,7 +323,7 @@
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf057;",this.insertBefore(this.el));
 }
 .alert.error:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -333,7 +333,7 @@
   content: "\f057";
 }
 .alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
-  "font-family: 'FontAwesome';
+  font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -364,7 +364,7 @@
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
 }
 .alert.error .dismiss:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -374,7 +374,7 @@
   content: "\f00d";
 }
 .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
-  "font-family: 'FontAwesome';
+  font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -416,7 +416,7 @@
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf058;",this.insertBefore(this.el));
 }
 .alert.success:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -426,7 +426,7 @@
   content: "\f058";
 }
 .alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
-  "font-family: 'FontAwesome';
+  font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -457,7 +457,7 @@
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
 }
 .alert.success .dismiss:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -467,7 +467,7 @@
   content: "\f00d";
 }
 .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
-  "font-family: 'FontAwesome';
+  font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -509,7 +509,7 @@
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf05a;",this.insertBefore(this.el));
 }
 .alert.notice:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -519,7 +519,7 @@
   content: "\f05a";
 }
 .alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
-  "font-family: 'FontAwesome';
+  font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -550,7 +550,7 @@
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
 }
 .alert.notice .dismiss:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -560,7 +560,7 @@
   content: "\f00d";
 }
 .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
-  "font-family: 'FontAwesome';
+  font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -602,7 +602,7 @@
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf071;",this.insertBefore(this.el));
 }
 .alert.yield:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -612,7 +612,7 @@
   content: "\f071";
 }
 .alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
-  "font-family: 'FontAwesome';
+  font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -643,7 +643,7 @@
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
 }
 .alert.yield .dismiss:before {
-  font-family: "FontAwesome";
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -653,7 +653,7 @@
   content: "\f00d";
 }
 .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
-  "font-family: 'FontAwesome';
+  font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
