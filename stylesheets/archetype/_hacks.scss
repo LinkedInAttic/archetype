@@ -67,7 +67,7 @@
   }
 }
 
-// this creates a one-type executing expression that inserts an element relative to `this` element.
+// this creates a one-time executing expression that inserts an element relative to `this` element.
 // this allows some level of support for :before/:after in IE6/7
 // inspired by http://nicolasgallagher.com/better-float-containment-in-ie/
 // @mixin     ie-pseudo
