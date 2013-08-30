@@ -30,7 +30,8 @@
 // @param     $property {String} the CSS property to output
 // @param     $value {*} the CSS value to output
 @mixin output-style($property, $value: nil) {
-  @if($property != nil and nth(-compass-list($value), 1) != nil and not index($CONFIG_DISABLED_CSS, $property)) {
+
+  @if($property != nil and length(-compass-list($value)) > 0 and first-value-of(-compass-list($value)) != nil and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
     // check to see if we have a custom output styler (pre)
     @if has-custom-output-styler($property, $value, pre) == true {
@@ -80,6 +81,8 @@
     @else if($property == unhide-element)       { @include unhide-element(); }
     // ellipsis
     @else if($property == ellipsis)             { @include ellipsis(); }
+    // scale
+    @else if($property == scale)                { @include scale($value); }
     // bunch of RTL support
     @else if($property == margin)               { @include margin($value); }
     @else if($property == margin-left)          { @include margin-left($value); }
@@ -188,36 +191,31 @@
       $property: nth($item, 1);
       $value: nth($item, 2);
       @if(not index($exclude, $property)) {
-        @if($property == states and $states != false) {
-          $states-data: $value;
+        // deal with the states
+        @if($property == states and $states != false and length($value) > 0) {
+          @each $state in $value {
+            $val: nth($state, 2);
+            $state: first-value-of($state);
+            @if(index(-compass-list($states), $state) or $states == true) {
+              #{_getStateSelector($state)} {
+                @include to-styles($val, true, true, $exclude);
+              }
+            }
+          }
         }
-        @else if($property == selectors and $selectors != false) {
-          $selectors-data: $value;
+        // deal with the nested selectors
+        @else if($property == selectors and $selectors != false and length($value) > 0) {
+          @each $selector in $value {
+            @if(index(-compass-list($selectors), $selector) or $selectors == true) {
+              #{_getSelectorSelector($selector)} {
+                @include to-styles(nth($selector, 2), true, true, $exclude);
+              }
+            }
+          }
         }
-        @else if($selectors == true and $states == true) {
+        // otherwise, just output it
+        @else if($selectors == true and $states == true ) {
           @include _outputStyle($property, unquote($value));
-        }
-      }
-    }
-  }
-  // deal with the states
-  @if length($states-data) > 0 {
-    @each $state in $states-data {
-      $value: nth($state, 2);
-      $state: first-value-of($state);
-      @if(index(-compass-list($states), $state) or $states == true) {
-        #{_getStateSelector($state)} {
-          @include to-styles($value, true, true, $exclude);
-        }
-      }
-    }
-  }
-  // deal with the nested selectors
-  @if length($selectors-data) > 0 {
-    @each $selector in $selectors-data {
-      @if(index(-compass-list($selectors), $selector) or $selectors == true) {
-        #{_getSelectorSelector($selector)} {
-          @include to-styles(nth($selector, 2), true, true, $exclude);
         }
       }
     }
