@@ -1,18 +1,16 @@
 # Contributing to Archetype
 
-1. Fork *Archetype*[^1]
+1. Fork *Archetype*
+  - New to GitHub? Read this great article about [forking and contributing to open-source projects on GitHub](https://help.github.com/articles/fork-a-repo)
 2. Update the Issue Tracker
   - if there's already an open ticket, feel free to comment on it or ask any follow up questions
   - if there isn't a ticket, create one and let us know what you plan to do
   - we like to keep an open dialog with developers :)
 3. Code away!
 4. Update or create test cases for your changes
-5. Make sure all tests are passing `rake test`[^2]
+5. Make sure all tests are passing `rake test`
 6. Commit and push your changes (referencing any related issues in the comment)
 7. Finally, create a [Pull Request](https://help.github.com/articles/creating-a-pull-request)
-
-[^1]: New to GitHub? Read this great article about [forking and contributing to open-source projects on GitHub](https://help.github.com/articles/fork-a-repo).  
-[^2]: You must use Ruby 1.9.x when running tests. We rely on [ordered Hashes](http://www.igvita.com/2009/02/04/ruby-19-internals-ordered-hash/), which isn't implemented natively in 1.8.x.
 
 ## Testing
 
