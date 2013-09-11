@@ -61,9 +61,6 @@
   color: inherit;
   content: "\f00d";
 }
-.alert.error .dismiss.hover, .alert.error .dismiss:hover, .alert.error .dismiss.focus, .alert.error .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
 .alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
   line-height: 1;
@@ -72,6 +69,9 @@
   right: 0;
   text-decoration: none;
   cursor: pointer;
+}
+.alert.error .dismiss.hover, .alert.error .dismiss:hover, .alert.error .dismiss.focus, .alert.error .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 .alert.success {
@@ -137,9 +137,6 @@
   color: inherit;
   content: "\f00d";
 }
-.alert.success .dismiss.hover, .alert.success .dismiss:hover, .alert.success .dismiss.focus, .alert.success .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
 .alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
   line-height: 1;
@@ -148,6 +145,9 @@
   right: 0;
   text-decoration: none;
   cursor: pointer;
+}
+.alert.success .dismiss.hover, .alert.success .dismiss:hover, .alert.success .dismiss.focus, .alert.success .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 .alert.notice {
@@ -213,9 +213,6 @@
   color: inherit;
   content: "\f00d";
 }
-.alert.notice .dismiss.hover, .alert.notice .dismiss:hover, .alert.notice .dismiss.focus, .alert.notice .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
 .alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
   line-height: 1;
@@ -224,6 +221,9 @@
   right: 0;
   text-decoration: none;
   cursor: pointer;
+}
+.alert.notice .dismiss.hover, .alert.notice .dismiss:hover, .alert.notice .dismiss.focus, .alert.notice .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 .alert.yield {
@@ -289,9 +289,6 @@
   color: inherit;
   content: "\f00d";
 }
-.alert.yield .dismiss.hover, .alert.yield .dismiss:hover, .alert.yield .dismiss.focus, .alert.yield .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
 .alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
   line-height: 1;
@@ -300,6 +297,9 @@
   right: 0;
   text-decoration: none;
   cursor: pointer;
+}
+.alert.yield .dismiss.hover, .alert.yield .dismiss:hover, .alert.yield .dismiss.focus, .alert.yield .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 .alert.error {
@@ -382,9 +382,6 @@
   color: inherit;
   text-decoration: none;
 }
-.alert.error .dismiss.hover, .alert.error .dismiss:hover, .alert.error .dismiss.focus, .alert.error .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
 .alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
   line-height: 1;
@@ -393,6 +390,9 @@
   right: 0;
   text-decoration: none;
   cursor: pointer;
+}
+.alert.error .dismiss.hover, .alert.error .dismiss:hover, .alert.error .dismiss.focus, .alert.error .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 .alert.success {
@@ -475,9 +475,6 @@
   color: inherit;
   text-decoration: none;
 }
-.alert.success .dismiss.hover, .alert.success .dismiss:hover, .alert.success .dismiss.focus, .alert.success .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
 .alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
   line-height: 1;
@@ -486,6 +483,9 @@
   right: 0;
   text-decoration: none;
   cursor: pointer;
+}
+.alert.success .dismiss.hover, .alert.success .dismiss:hover, .alert.success .dismiss.focus, .alert.success .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 .alert.notice {
@@ -568,9 +568,6 @@
   color: inherit;
   text-decoration: none;
 }
-.alert.notice .dismiss.hover, .alert.notice .dismiss:hover, .alert.notice .dismiss.focus, .alert.notice .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
 .alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
   line-height: 1;
@@ -579,6 +576,9 @@
   right: 0;
   text-decoration: none;
   cursor: pointer;
+}
+.alert.notice .dismiss.hover, .alert.notice .dismiss:hover, .alert.notice .dismiss.focus, .alert.notice .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
 
 .alert.yield {
@@ -661,9 +661,6 @@
   color: inherit;
   text-decoration: none;
 }
-.alert.yield .dismiss.hover, .alert.yield .dismiss:hover, .alert.yield .dismiss.focus, .alert.yield .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
 .alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
   line-height: 1;
@@ -672,4 +669,7 @@
   right: 0;
   text-decoration: none;
   cursor: pointer;
+}
+.alert.yield .dismiss.hover, .alert.yield .dismiss:hover, .alert.yield .dismiss.focus, .alert.yield .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
