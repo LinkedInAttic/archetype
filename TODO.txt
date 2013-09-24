@@ -2,8 +2,8 @@ Home/Landing Page
 
 Tutorials
 ---------
-Creating Complex Layouts Using grid() 
-Scaffolding Can Be Good 
+Creating Complex Layouts Using grid()
+Scaffolding Can Be Good
 z-index - On Top of the World
 Custom Themes - /tutorials/custom-themes/
 
@@ -18,3 +18,23 @@ Intro
 Components
 ----------
 (all of them!)
+
+
+
+modifiers vs contexts
+- modifiers describe different types of a component (e.g. small, large, premium, first, last, persistent)
+- contexts define how a component looks inside of something else (e.g. "in a toolbar", "in a container")
+
+primitives
+- what are they, where do i find them
+- naming conventions? (is this too low level for this talk?)
+
+selectors vs states
+- examples
+- what do states give you for free?
+- complex states
+
+mixins inside of components
+- adding new mixins to styleguide parser
+
+namespacing components

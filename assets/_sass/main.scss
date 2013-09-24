@@ -5,6 +5,18 @@ $main-logo: 'logos/logo.png';
 $main-logo-height: image-height($main-logo);
 $main-header-height: $main-logo-height;
 
+@mixin responsive($reset: false) {
+  @media only screen and (max-width : 480px) {
+    @if $reset {
+      width: auto;
+      float: none;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    @content;
+  }
+}
+
 // GENERAL BODY SETUP
 body, button, input, textarea {
   // make sure everyone is using the sans-serif stack by default
@@ -32,6 +44,7 @@ hr {
 #global-footer {
   div {
     @include grid-canvas();
+    @include responsive(true);
   }
 }
 
@@ -40,9 +53,17 @@ hr {
   @include vertical-spacing($top: 2);
   @include styleguide(navigation);
   height: $main-header-height;
+  @include responsive() {
+    position: static;
+    height: auto;
+  }
   div {
     position: relative;
     height: $main-header-height;
+    @include responsive() {
+      position: static;
+      height: auto;
+    }
   }
   .brand {
     display: block;
@@ -50,6 +71,11 @@ hr {
     background: image-url($main-logo) no-repeat;
     width: image-width($main-logo);
     height: $main-logo-height;
+    @include responsive() {
+      position: static;
+      max-width: 100%;
+      background-size: 100% auto;
+    }
   }
   nav {
     ul {
@@ -57,6 +83,11 @@ hr {
       bottom: 0;
       @include right(0);
       @include inline-block();
+      @include responsive() {
+        position: static;
+        background-color: nth($CONFIG_TEXTURE_NAV, 1);
+        width: 100%;
+      }
     }
     li {
       @include inline-block();
@@ -79,21 +110,32 @@ hr {
 #main {
   @include grid-canvas();
   padding-top: $main-header-height + vertical-spacing(2) + 5px;
+  @include responsive(true) {
+    padding-top: 0;
+  }
   // IE6 treats position:fixed differently, so we need to NOT offset the main content
   @include target-browser(ie 6, padding-top, vertical-spacing(2));
   article {
     @include grid($center: true, $indent: grid-indent(1));
+    @include responsive(true);
     .note {
       @include styleguide(small muted copy);
+    }
+    @include responsive() {
+      img {
+        max-width: 100%;
+      }
     }
   }
   // side-by-side layout
   .has-aside & {
     article {
       @include grid(17, $first: true, $indent: grid-indent(1));
+      @include responsive(true);
     }
     aside {
       @include grid(7, $indent: grid-indent(1));
+      @include responsive(true);
     }
   }
   article,
@@ -194,9 +236,12 @@ hr {
   .copyright,
   li {
     display: inline;
+    @include responsive() {
+      @include horizontal-spacing(2);
+    }
   }
   li {
-    @include horizontal-spacing(2, $abuse: true);
+    @include horizontal-spacing(2);
     border-#{rtl(right)}: 1px solid nth-cyclic($CONFIG_COLOR_BRAND, 2);
     &:last-child {
       padding-#{rtl(right)}: 0;
@@ -209,6 +254,11 @@ hr {
     @include vertical-spacing($top: -4, $method: margin);
     a {
       @include styleguide(small muted copy in a punchcut, muted link in a punchcut);
+    }
+  }
+  .social-actions {
+    @include responsive() {
+      @include horizontal-spacing(2);
     }
   }
 }

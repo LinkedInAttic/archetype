@@ -1,5 +1,5 @@
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{ page.title }} {% if page.tagline %}({{ page.tagline }}) {% endif %}| {{ site.title }}</title>
 {% if AUTHOR.name %}<meta name="author" content="{{ AUTHOR.name }}"/>{% endif %}
 {% include partials/stylesheets %}
