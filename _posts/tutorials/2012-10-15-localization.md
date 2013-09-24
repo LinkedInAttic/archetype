@@ -88,6 +88,8 @@ Or match against language codes:
 @if( lang(en_ zh_) ) { ... }
 {% endhighlight %}
 
+
+<!--
 ## Poorman's right-to-left
 
 There are existing solutions out there to address many right-to-left issues. [CSSJanus](http://cssjanus.commoner.com/) is an awesome open source project to post-process your CSS files.
@@ -115,6 +117,7 @@ The `rtl()` method can also be used to wrap content when passing into other mixi
 // ...
 // border-radius: 10px 5px 30px 20px;
 {% endhighlight %}
+-->
 
 ## More localization fun
 
