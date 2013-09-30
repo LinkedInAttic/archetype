@@ -84,8 +84,8 @@
 // @param     $browsers {List} the List of browsers to target
 // @param     $property {String} the CSS property
 // @param     $value {*} the CSS value
-// @param     $merge {Bool} should the class name be merged e.g. `.ie8.example` vs `.ie8 .example`
-// @param     $inline {Bool} if set to false, don't use inline hacks even if available
+// @param     $merge {Boolean} should the class name be merged e.g. `.ie8.example` vs `.ie8 .example`
+// @param     $inline {Boolean} if set to false, don't use inline hacks even if available
 // @content
 // @usage:
 // =target-browser(ie 8, border, 10px);
@@ -178,7 +178,7 @@
 // @param     $os {List} the List of operating systems to target
 // @param     $property {String} the CSS property
 // @param     $value {*} the CSS value
-// @param     $merge {Bool} should the class name be merged e.g. `.os-win.example` vs `.os-win .example`
+// @param     $merge {Boolean} should the class name be merged e.g. `.os-win.example` vs `.os-win .example`
 // @content
 @mixin target-os($os: (), $property: nil, $value: nil, $merge: false) {
   $os: -compass-list($os);

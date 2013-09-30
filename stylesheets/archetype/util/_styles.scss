@@ -180,7 +180,7 @@
 // convert a list of key-value pairs into CSS rules
 // @mixin     to-styles
 // @param     $list {List} a key-value paired list of ($property $value)
-// @param     $states {Bool|List} if true, output all states; if false, output no states; if a list, output only the states in the list
+// @param     $states {Boolean|List} if true, output all states; if false, output no states; if a list, output only the states in the list
 // @param     $exclude {List} a list of styles to exclude from output
 @mixin to-styles($list: (), $states: true, $selectors: true, $exclude: ()) {
   $exclude: -compass-list($exclude);
@@ -217,65 +217,6 @@
         @else if($selectors == true and $states == true ) {
           @include _outputStyle($property, unquote($value));
         }
-      }
-    }
-  }
-}
-
-// this is identical to to-styles, but we need to avoid Sass' recursion check :(
-@mixin _toStyles2($list: (), $states: true, $selectors: true, $exclude: ()) {
-  $exclude: -compass-list($exclude);
-  $states-data: ();
-  $selectors-data: ();
-  @each $item in $list {
-    @if(length($item) > 1) {
-      $property: nth($item, 1);
-      $value: nth($item, 2);
-      @if(not index($exclude, $property)) {
-        @if($property == states and $states != false) {
-          $states-data: $value;
-        }
-        @else if($property == selectors and $selectors != false) {
-          $selectors-data: $value;
-        }
-        @else if($selectors == true and $states == true) {
-          @include _outputStyle($property, unquote($value));
-        }
-      }
-    }
-  }
-  // deal with the states
-  @if length($states-data) > 0 {
-    @each $state in $states-data {
-      $value: nth($state, 2);
-      $state: first-value-of($state);
-      @if(index(-compass-list($states), $state) or $states == true) {
-        #{_getStateSelector($state)} {
-          @include _toStyles_final($value, $exclude);
-        }
-      }
-    }
-  }
-  // deal with the nested selectors
-  @if length($selectors-data) > 0 {
-    @each $selector in $selectors-data {
-      @if(index(-compass-list($selectors), $selector) or $selectors == true) {
-        #{first-value-of($selector)} {
-          @include _toStyles_final(nth($selector, 2), $exclude);
-        }
-      }
-    }
-  }
-}
-// this is a dumbed down version of to-styles. this is the final step and won't go any deeper
-@mixin _toStyles_final($list: (), $exclude: ()) {
-  $exclude: -compass-list($exclude);
-  @each $item in $list {
-    @if(length($item) > 1) {
-      $property: nth($item, 1);
-      $value: nth($item, 2);
-      @if(not index($exclude, $property)) {
-        @include _outputStyle($property, unquote($value));
       }
     }
   }

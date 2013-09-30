@@ -5,7 +5,7 @@
 // @param     $value {List|String} [*|left|right] the value to augment
 // @param     $method {String} [border-radius|background]
 // @param     $force {String} [ltr|rtl] allows you to ignore reading-direction()
-// @return    {Bool|List|String} the augmented value
+// @return    {Boolean|List|String} the augmented value
 @function rtl($value: false, $method: false, $force: false) {
   $dir: if($force, $force, reading-direction());
   @if($value == false) {
