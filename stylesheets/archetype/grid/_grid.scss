@@ -68,7 +68,7 @@
 // @param     $left {Number} the number of units to dent left
 // @param     $right {Number} the number of units to dent right
 // @param     $direction {String} [in|out] the direction to dent
-// @param     $abuse {Bool} @see _getUnit
+// @param     $abuse {Boolean} @see _getUnit
 // @return    $dent {List} list of dents
 @function _gridDent($list: false, $left: 0, $right: 0, $direction: in, $abuse: false) {
   $factor: if($direction == out, -1, 1) * $CONFIG_GRID_SPACING_FACTOR;
@@ -92,7 +92,7 @@
 // @param     $list {List} list of indents
 // @param     $left {Number} the number of units to indent left
 // @param     $right {Number} the number of units to indent right
-// @param     $abuse {Bool} @see _getUnit
+// @param     $abuse {Boolean} @see _getUnit
 // @return    {List} list of indents
 @function grid-indent($list: false, $left: 0, $right: 0, $abuse: false) {
   @return _gridDent($list, $left, $right, $direction: in, $abuse: $abuse);
@@ -103,7 +103,7 @@
 // @param     $list {List} list of outdents
 // @param     $left {Number} the number of units to outdent left
 // @param     $right {Number} the number of units to outdent right
-// @param     $abuse {Bool} @see _getUnit
+// @param     $abuse {Boolean} @see _getUnit
 // @return    {List} list of outdents
 @function grid-outdent($list: false, $left: 0, $right: 0, $abuse: false) {
   @return _gridDent($list, $left, $right, $direction: out, $abuse: $abuse);
@@ -217,7 +217,7 @@
 
 // this lets rows clear the floated containers
 // @mixin     grid-row
-// @param     $debug {Bool} use debug stylings
+// @param     $debug {Boolean} use debug stylings
 @mixin grid-row($debug: false) {
   @include grid-block(true);
   @include debug-hover-box(rgb(255, 0, 255), $if: ($debug or $CONFIG_GRID_DEBUG));
@@ -225,7 +225,7 @@
 
 // output the block methods
 // @mixin     grid-block
-// @param     $row {Bool} is this block a row
+// @param     $row {Boolean} is this block a row
 @mixin grid-block($row: false) {
   // FLOAT
   @if($CONFIG_GRID_ALIGN_METHOD == float){
@@ -257,7 +257,7 @@
       //text-space-collapse: collapse;
     }
     @else {
-      // if reading direction is differernt from the grid direction,
+      // if reading direction is different from the grid direction,
       // reset the reading direction of the inner container
       @if(reading-direction() != $CONFIG_GRID_DIRECTION) {
         direction: reading-direction();
@@ -283,7 +283,7 @@
       border-spacing: $CONFIG_GRID_GUTTER 0;
     }
     @else {
-      // if reading direction is differernt from the grid direction,
+      // if reading direction is different from the grid direction,
       // reset the reading direction of the inner container
       @if(reading-direction() != $CONFIG_GRID_DIRECTION) {
         direction: reading-direction();
@@ -302,7 +302,7 @@
 // @mixin     grid-canvas
 // @param     $columns {Number} the number or fraction of columns to span, if fraction, must specify $of
 // @param     $of {Number} the total number of columns spanned, only use with fractional $columns
-// @param     $debug {Bool} use debug stylings
+// @param     $debug {Boolean} use debug stylings
 @mixin grid-canvas($columns: false, $of: false, $debug: false) {
   @include grid($columns: $columns, $of: $of, $debug: $debug, $canvas: true);
 }
@@ -310,15 +310,15 @@
 // the main grid mixin
 // @mixin     grid
 // @param     $columns {Number} the number or fraction of columns to span, if fraction, must specify $of
-// @param     $first {Bool} is this the first grid block of a row
+// @param     $first {Boolean} is this the first grid block of a row
 // @param     $of {Number} the total number of columns spanned, only use with fractional $columns
 // @param     $indent {List} the grid indents @see grid-indent
 // @param     $outdent {List} the grid outdents @see grid-outdent
 // @param     $offset {List} the grid offsets @see grid-offset, grid-push, grid-pull
-// @param     $canvas {Bool} treat this grid block as a canvas; a canvas is a non-floated, centered grid-block
-// @param     $row {Bool} @see grid-row
-// @param     $center {Bool} whether or not to center the grid block
-// @param     $debug {Bool} use debug stylings
+// @param     $canvas {Boolean} treat this grid block as a canvas; a canvas is a non-floated, centered grid-block
+// @param     $row {Boolean} @see grid-row
+// @param     $center {Boolean} whether or not to center the grid block
+// @param     $debug {Boolean} use debug stylings
 @mixin grid($columns: false, $first: false, $of: false, $indent: false, $outdent: false, $offset: false, $offset-method: $CONFIG_GRID_OFFSET_METHOD, $canvas: false, $row: false, $center: false, $debug: false) {
   @if($row) {
     @include grid-row($debug: $debug);

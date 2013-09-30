@@ -144,7 +144,7 @@ module Archetype::SassExtensions::Lists
   # - <tt>$haystack</tt> {List} input list
   # - <tt>$needle</tt> {List} the value(s) to search for
   # *Returns*:
-  # - {Number|Bool} if an item is found, returns the index, otherwise returns false
+  # - {Number|Boolean} if an item is found, returns the index, otherwise returns false
   #
   def index2(haystack, needle)
     haystack = haystack.to_a
@@ -178,7 +178,7 @@ module Archetype::SassExtensions::Lists
   # *Parameters*:
   # - <tt>$list</tt> {List} the list to search in
   # - <tt>$key</tt> {String} the key identifier (name)
-  # - <tt>$strict</tt> {Bool} if true, does a strict match against the key
+  # - <tt>$strict</tt> {Boolean} if true, does a strict match against the key
   # *Returns*:
   # - {*} the data associated with $key
   #

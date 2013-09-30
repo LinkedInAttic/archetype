@@ -5,7 +5,7 @@
 // @private
 // @param     $unit {Number} unit of measurement
 // @param     $direction {String} [horizontal|vertical] spacing
-// @param     $abuse {Bool} @see _getUnit
+// @param     $abuse {Boolean} @see _getUnit
 // @return    {String} the calculated spacing
 @function _spacing($unit: nil, $direction: horizontal, $abuse: false) {
   @if $unit == nil {
@@ -19,7 +19,7 @@
 // horizonatl spacing calculations
 // @function  horizontal-spacing
 // @param     $unit {Number} unit of measurement
-// @param     $abuse {Bool} @see _getUnit
+// @param     $abuse {Boolean} @see _getUnit
 // @return    {String} the calculated horizontal spacing
 @function horizontal-spacing($unit, $abuse: false) {
   @return _spacing($unit, $abuse: $abuse);
@@ -28,7 +28,7 @@
 // vertical spacing calculations
 // @function  vertical-spacing
 // @param     $unit {Number} unit of measurement
-// @param     $abuse {Bool} @see _getUnit
+// @param     $abuse {Boolean} @see _getUnit
 // @return    {String} the calculated vertical spacing
 @function vertical-spacing($unit, $abuse: false) {
   @return _spacing($unit, $direction: vertical, $abuse: $abuse);
@@ -40,7 +40,7 @@
 // @param     $top {Number} the units to offset from the top
 // @param     $bottom {Number} the units to offset from the bottom
 // @param     $method {String} [margin|padding] offset method
-// @param     $abuse {Bool} @see _getUnit
+// @param     $abuse {Boolean} @see _getUnit
 @mixin vertical-spacing($list: false, $top: nil, $bottom: nil, $method: false, $abuse: false) {
   $list: get-collection($list, ($top $bottom), $min: 2);
   @include _spacing($list, vertical, $method: $method, $abuse: $abuse);
@@ -51,7 +51,7 @@
 // @param     $left {Number} the units to offset from the left
 // @param     $right {Number} the units to offset from the right
 // @param     $method {String} [margin|padding] offset method
-// @param     $abuse {Bool} @see _getUnit
+// @param     $abuse {Boolean} @see _getUnit
 @mixin horizontal-spacing($list: false, $left: nil, $right: nil, $method: false, $abuse: false) {
   $list: get-collection($list, ($left $right), $min: 2);
   @include _spacing($list, $method: $method, $abuse: $abuse);
@@ -62,7 +62,7 @@
 // @private
 // @param     $units {List} the list of units e.g. (1) => $left:1 $right:1; (1 0) => $left:1 $right:0;
 // @param     $method {String} [margin|padding] offset method
-// @param     $abuse {Bool} @see _getUnit
+// @param     $abuse {Boolean} @see _getUnit
 @mixin _spacing($units, $direction: horizontal, $method: false, $abuse: false) {
   @if(not $method) {
     $method: $CONFIG_SPACING_METHOD;

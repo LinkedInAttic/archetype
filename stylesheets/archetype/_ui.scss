@@ -71,7 +71,7 @@
 // @param     $color {Color} the color of the arrow
 @mixin triangle($direction: bottom, $width: 1em, $height: false, $color: #aaa) {
   $direction: rtl($direction);
-  // if no height was specified, assume it's identitcal to width
+  // if no height was specified, assume it's identical to width
   @if(not $height) {
     $height: $width;
   }
@@ -117,7 +117,7 @@
   clip: rect(1px, 1px, 1px, 1px);
 }
 
-// reverse hide-element and make the element visibile again
+// reverse hide-element and make the element visible again
 // @mixin     unhide-element
 // @see       hide-element
 // @param     $position {String} value for the position property
