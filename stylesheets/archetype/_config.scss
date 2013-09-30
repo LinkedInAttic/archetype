@@ -61,7 +61,7 @@ $CONFIG_KEYFRAME_LOADERS:         archetype-loader !default;                    
 $CONFIG_GLYPHS_NAME:              FontAwesome !default;                                             // name for the font-face
 $CONFIG_GLYPHS_VERSION:           '0.0.1' !default;                                                 // the glyph library version number
 $CONFIG_GLYPHS_SVG_ID:            $CONFIG_GLYPHS_NAME !default;
-$CONFIG_GLYPHS_BASE_PATH:         'vendor/archetype/fontawesome-webfont' !default;                  // generic path to all glpyh fonts (sans extensions)
+$CONFIG_GLYPHS_BASE_PATH:         'vendor/archetype/fontawesome-webfont' !default;                  // generic path to all glyph fonts (sans extensions)
 $CONFIG_GLYPHS_EOT:               '#{$CONFIG_GLYPHS_BASE_PATH}.eot' !default;
 $CONFIG_GLYPHS_FILES:             font-files('#{$CONFIG_GLYPHS_BASE_PATH}.woff', '#{$CONFIG_GLYPHS_BASE_PATH}.ttf', '#{$CONFIG_GLYPHS_BASE_PATH}.svg##{$CONFIG_GLYPHS_SVG_ID}') !default;
 $CONFIG_GLYPHS_WEIGHT:            normal !default;                                                  // font-weight for glyphs

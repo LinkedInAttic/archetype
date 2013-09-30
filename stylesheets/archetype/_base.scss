@@ -2,6 +2,7 @@
 @import "base/normalize";
 @import "base/reset";
 @import "base/hybrid";
+@import "base/h5bp";
 
 // protect against multiple resets
 $RESET_INIT: false !default;
@@ -11,14 +12,18 @@ $RESET_INIT: false !default;
 // sets the base styles for the page (e.g. reset or normalize)
 // @mixin     base
 // @param     $exclude {List} the list of styles to exclude @see _normalize.scss and _reset.scss
-// @param     $method {String} reset method [reset|normalize|hybrid]
-// @param     $force {Bool} force reset to invoke; by default base() can only be invoked once, to re-invoke must pass in $force: true
+// @param     $method {String} reset method [reset|normalize|h5bp|hybrid]
+// @param     $force {Boolean} force reset to invoke; by default base() can only be invoked once, to re-invoke must pass in $force: true
 @mixin base($exclude: $CONFIG_RESET_EXCLUDES, $method: $CONFIG_RESET_METHOD, $force: false) {
   @if not $RESET_INIT or $force {
     $RESET_INIT: true;
     // normalize
     @if $method == normalize {
       @include base-normalize($exclude: $exclude);
+    }
+    // html5 boiler plate
+    @else if $method == h5bp {
+      @include base-h5bp($exclude: $exclude);
     }
     // hyrbid reset (reset + some normalize)
     @else if $method == hybrid {

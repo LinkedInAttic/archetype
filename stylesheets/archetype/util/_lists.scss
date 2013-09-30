@@ -5,7 +5,7 @@
 // @param     $list {List} the list to remove from
 // @param     $idx {Number} the index to remove
 // @param     $separator {String} the separator to use [auto|comma|space]
-// @return    $new-list {Bool} the list with removed index
+// @return    $new-list {Boolean} the list with removed index
 @function list-remove($list: (), $idx: false, $separator: auto) {
   @return list-replace($list: $list, $idx: $idx, $value: nil, $separator: $separator);
 }

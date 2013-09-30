@@ -22,7 +22,7 @@
 // @function  _styleguideGetButtonPadding
 // @private
 // @param     $size {String} the size of the button to calculate
-// @param     $narrow {Bool} is the button narrow or not
+// @param     $narrow {Boolean} is the button narrow or not
 // @return    {Number} the padding on the button
 @function _styleguideGetButtonPadding($size: medium, $narrow: false) {
   @if type-of($size) != list {
@@ -63,7 +63,7 @@
 // helper function to get the alert icon offset
 // @function  _styleguideGetAlertGlyphOffset
 // @private
-// @param     $type {List} the glpyh data
+// @param     $type {List} the glyph data
 // @return    {List} the top and left offsets for the glyph
 @function _styleguideGetAlertGlyphOffset($type: $CONFIG_GLYPH_ALERT_NOTIFY) {
   $top: (nth-cyclic($CONFIG_DIM_ALERTS_SPACING, 1) + nth-cyclic($CONFIG_DIM_ALERTS_SPACING, 3) + nth-cyclic($CONFIG_FONT_NOTICE, 2) - nth($type, 4)) / 2;
@@ -74,7 +74,7 @@
 // helper function to extract the glyhp styles for an alert icon
 // @function  _styleguideGetAlertGlyph
 // @private
-// @param     $type {List} the glpyh data
+// @param     $type {List} the glyph data
 // @return    {List} the parameters needed for glyph-icon()
 @function _styleguideGetAlertGlyph($type: $CONFIG_GLYPH_ALERT_NOTIFY) {
   @return (nth($type, 1), nth($type, 2), nth($type, 3), before, '')
