@@ -27,9 +27,9 @@ Gem::Specification.new do |gemspec|
   gemspec.files += Dir.glob("templates/**/*")
   # test files
   gemspec.files += Dir.glob("test/**/*.*")
-  gemspec.files -= Dir.glob("test/fixtures/stylesheets/*/saved/**/*.*")
+  gemspec.files -= Dir.glob("test/fixtures/stylesheets/*/expected/**/*.*")
   gemspec.test_files = Dir.glob("test/**/*.*")
-  gemspec.test_files -= Dir.glob("test/fixtures/stylesheets/*/saved/**/*.*")
+  gemspec.test_files -= Dir.glob("test/fixtures/stylesheets/*/expected/**/*.*")
 
   # Gem Bookkeeping
   gemspec.rubygems_version = %q{1.3.6}
