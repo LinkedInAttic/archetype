@@ -1,33 +1,43 @@
 # Changelog
 
-## 0.0.1
 
-- initial public release
+## 0.0.2.pre.1 (pre-released)
+
+### Resolved Issues:
+
+- support Sass 3.3.0 and Compass 0.13.0
+
+### Major Changes:
+
+- dropped support for older versions of Sass/Compass (sorry, can't pass up the new feature set)
+- removed `gradient-with-deg` mixin
+- removed `_isLegacySupported` function
+- `inline-block` in styleguide component has changed syntax to take proper arguments
 
 ## 0.0.1.pre.3 (pre-released)
 
 ### New Features:
 
-- added `styleguide-component-exists()` method to check if a component/extension has already been registered in the theme
+- added `styleguide-component-exists` method to check if a component/extension has already been registered in the theme
 - added `memoize` compiler configuration to allow enabling/disabling the internal styleguide memoizer
-- `glyph-icon()` can now take `false` as an icon name and not output anything
-- added `unstyled-button()` method to remove default styling from a `<button>` element
-- added `prefixed-tag()` method for consistency when generating tag names
+- `glyph-icon` can now take `false` as an icon name and not output anything
+- added `unstyled-button` method to remove default styling from a `<button>` element
+- added `prefixed-tag` method for consistency when generating tag names
 - added Chinese font stacks
-- added wildcard support to `locale()` function (e.g. `locale(en_ ja_JP _DE)`)
-- added `transparent-focusable()` mixin for transparent background support in older IE
-- added ability to customize `output-style()` with `custom-output-styler()` mixin and `has-custom-output-styler()` function (NEEDS DOCUMENTATION)
-- added better support for targeting IE6/7 glyphs and `ie-pseudo()` generated elements (NEEDS DOCUMENTATION)
-- making `unique()` generated IDs genuinely unique
+- added wildcard support to `locale` function (e.g. `locale(en_ ja_JP _DE)`)
+- added `transparent-focusable` mixin for transparent background support in older IE
+- added ability to customize `output-style` with `custom-output-styler` mixin and `has-custom-output-styler` function (NEEDS DOCUMENTATION)
+- added better support for targeting IE6/7 glyphs and `ie-pseudo` generated elements (NEEDS DOCUMENTATION)
+- making `unique` generated IDs genuinely unique
 - adding support for a `testing` config flag
 - adding support for `@extend` from a styleguide component
 
 ### Resolved Issues:
 
-- quotes on strings passed to `associative()` weren't being stripped correctly
+- quotes on strings passed to `associative` weren't being stripped correctly
 - fixed some minor glyph issues
 - out-of-order CSS issues in Ruby 1.8.7 are fixed using `Hashery::OrderedHash`
-- fixed issue with `archetype-version()` incorrectly matching comparators
+- fixed issue with `archetype-version` incorrectly matching comparators
 
 ### Tests:
 
@@ -45,10 +55,10 @@
 - added support for `drop` and `styleguide` keywords in components
   - `drop` allows you to drop previously defined styles within a component definition (e.g. if you need to remove defaults)
   - `styleguide` in a component definition will insert the derived styles from a styleguide() call. this allows you to share styles between components
-- added `styleguide-diff()` method
-- added `ie-pseudo()` methods to support dynamically generating pseudo :before and :after elements (using expressions)
-- added `stroke()` mixin to create a stroke line around text (or font icon)
-- added `hide-element()` mixin to hide elements from screen but keep them screen-reader accessible
+- added `styleguide-diff` method
+- added `ie-pseudo` methods to support dynamically generating pseudo :before and :after elements (using expressions)
+- added `stroke` mixin to create a stroke line around text (or font icon)
+- added `hide-element` mixin to hide elements from screen but keep them screen-reader accessible
 - added basic support for fallback CSS values (e.g. border: red; border: rgba(255,0,0, 0.8);)
 - added `$CONFIG_STATE_MAPPINGS` to simplify the mapping between state names and selectors
 
@@ -56,13 +66,13 @@
 
 - loading spinners now use CSS3 animations and require some integration work
 - updated default vertical/horizontal spacing to 5px
-- `list-extend()` is now `associative-merge()`
+- `list-extend` is now `associative-merge`
 
 ### Resolved Issues:
 
 - nested inheritance would get corrupted (due to a volatile context being passed along)
 - `$exclude` in `to-styles` wasn't taking a list of keys cleanly
-- `font-family()` and `lang()` weren't respecting locale aliases
+- `font-family` and `lang` weren't respecting locale aliases
 - fixed thread safety issues
 
 ### Documentation:
@@ -75,15 +85,15 @@
 
 ### New Features:
 
-- `styleguide-add-component()`, `styleguide-extend-component()`, and `styleguide()` now take a `$theme` parameter
+- `styleguide-add-component`, `styleguide-extend-component`, and `styleguide` now take a `$theme` parameter
 - `$CONFIG_THEME` can change the global theme
 - `$CONFIG_STYLEGUIDE_DISABLE_SPRITES` will prevent styleguide sprites from being generated if set to `true`
 - theme components are cached
-- `styleguide()` calls are memoized
+- `styleguide` calls are memoized
 
 ### Major Changes:
 
-- `filter()` mixin is now `ie-filter()` to prevent conflicts with Compass' `filter()` mixin
+- `filter` mixin is now `ie-filter` to prevent conflicts with Compass' `filter` mixin
 - Compass overrides are no longer loaded as Archetype core
 
 ### Resolved Issues:

@@ -14,7 +14,7 @@
   #{$property}: $value; /* #{$method} override */
 }
 
-@import "archetype";
+@import "test_harness";
 
 .test {
   @include styleguide(copy);

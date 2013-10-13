@@ -16,12 +16,7 @@
 // @param     $if {Boolean} override $CONFIG_DEBUG
 @mixin debug-message($message, $if: nil) {
   @if(is-debug-enabled($if)) {
-    @if archetype-version('sass >= 3.2') {
-      /* #{$message} */
-    }
-    @else {
-      -archetype-debug: quote($message);
-    }
+    /* #{$message} */
   }
 }
 

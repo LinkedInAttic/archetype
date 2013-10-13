@@ -1,105 +1,199 @@
 .target-ie-6 {
+  /* [archetype:target-browser:being] --- ie 6 --- */
   _vertical-align: -5px;
+  /* [archetype:target-browser:end]   --- ie 6 --- */
+  /* [archetype:target-browser:being] --- ie 6 --- */
   _background-position: 6px -2170px;
+  /* [archetype:target-browser:end]   --- ie 6 --- */
+  /* [archetype:target-browser:being] --- ie 6 --- */
   _overflow: hidden;
+  /* [archetype:target-browser:end]   --- ie 6 --- */
+}
+.ie.ie6 .target-ie-6 {
+  /* [archetype:target-browser:begin] --- ie 6 --- */
+  /* [archetype:target-browser:end]   --- ie 6 --- */
+}
+.ie.ie6 .target-ie-6 {
+  /* [archetype:target-browser:begin] --- ie 6 --- */
+  /* [archetype:target-browser:end]   --- ie 6 --- */
+}
+.ie.ie6 .target-ie-6 {
+  /* [archetype:target-browser:begin] --- ie 6 --- */
+  /* [archetype:target-browser:end]   --- ie 6 --- */
 }
 
 .target-ie-lte-7 {
+  /* [archetype:target-browser:being] --- ie lte 7 --- */
   *margin-top: 1px;
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+  /* [archetype:target-browser:being] --- ie lte 7 --- */
   *padding: 0;
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+  /* [archetype:target-browser:being] --- ie lte 7 --- */
   *width: 195px;
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+  /* [archetype:target-browser:being] --- ie lte 7 --- */
   *font-size: 0.01em;
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+  /* [archetype:target-browser:being] --- ie lte 7 --- */
   *height: 18px;
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+}
+.ie.lte7 .target-ie-lte-7 {
+  /* [archetype:target-browser:begin] --- ie lte 7 --- */
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+}
+.ie.lte7 .target-ie-lte-7 {
+  /* [archetype:target-browser:begin] --- ie lte 7 --- */
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+}
+.ie.lte7 .target-ie-lte-7 {
+  /* [archetype:target-browser:begin] --- ie lte 7 --- */
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+}
+.ie.lte7 .target-ie-lte-7 {
+  /* [archetype:target-browser:begin] --- ie lte 7 --- */
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+}
+.ie.lte7 .target-ie-lte-7 {
+  /* [archetype:target-browser:begin] --- ie lte 7 --- */
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
 }
 
 .ie.ie6 .target-ie-6-7, .ie.ie7 .target-ie-6-7 {
+  /* [archetype:target-browser:begin] --- ie 6 7 --- */
   display: inline;
+  /* [archetype:target-browser:end]   --- ie 6 7 --- */
 }
 .ie.ie6 .target-ie-6-7, .ie.ie7 .target-ie-6-7 {
+  /* [archetype:target-browser:begin] --- ie 6 7 --- */
   zoom: 1;
+  /* [archetype:target-browser:end]   --- ie 6 7 --- */
 }
 .ie.ie6 .target-ie-6-7, .ie.ie7 .target-ie-6-7 {
+  /* [archetype:target-browser:begin] --- ie 6 7 --- */
   margin-left: 0;
+  /* [archetype:target-browser:end]   --- ie 6 7 --- */
 }
 
 .ie.ie7 .target-ie-7 {
+  /* [archetype:target-browser:begin] --- ie 7 --- */
   vertical-align: -5px;
+  /* [archetype:target-browser:end]   --- ie 7 --- */
 }
 .ie.ie7 .target-ie-7 {
+  /* [archetype:target-browser:begin] --- ie 7 --- */
   background-position: 6px -2170px;
+  /* [archetype:target-browser:end]   --- ie 7 --- */
 }
 .ie.ie7 .target-ie-7 {
+  /* [archetype:target-browser:begin] --- ie 7 --- */
   overflow: hidden;
+  /* [archetype:target-browser:end]   --- ie 7 --- */
 }
 
 .ie.ie7 .target-ie-7-8, .ie.ie8 .target-ie-7-8 {
-  min-height: 250px !important;
-  height: auto !important;
-  height: 250px !important;
+  /* [archetype:target-browser:begin] --- ie 7 8 --- */
+  min-height: 250px;
+  height: auto;
+  _height: 250px;
+  /* [archetype:target-browser:end]   --- ie 7 8 --- */
 }
 
 .ie.lte8 .target-ie-lte-8 {
+  /* [archetype:target-browser:begin] --- ie lte 8 --- */
   filter: BasicImage(rotation=3);
+  /* [archetype:target-browser:end]   --- ie lte 8 --- */
 }
 .ie.lte8 .target-ie-lte-8 {
+  /* [archetype:target-browser:begin] --- ie lte 8 --- */
   padding-bottom: 8px;
+  /* [archetype:target-browser:end]   --- ie lte 8 --- */
 }
 .ie.lte8 .target-ie-lte-8 {
+  /* [archetype:target-browser:begin] --- ie lte 8 --- */
   line-height: 1.6;
+  /* [archetype:target-browser:end]   --- ie lte 8 --- */
 }
 
 .ie.ie8 .target-ie-8 {
+  /* [archetype:target-browser:begin] --- ie 8 --- */
   margin-top: 2px;
+  /* [archetype:target-browser:end]   --- ie 8 --- */
 }
 .ie.ie8 .target-ie-8 {
+  /* [archetype:target-browser:begin] --- ie 8 --- */
   min-height: 170px;
-  height: auto !important;
-  height: 170px;
+  height: auto;
+  _height: 170px;
+  /* [archetype:target-browser:end]   --- ie 8 --- */
 }
 
 .ie.lte9 .target-ie-lte-9 {
+  /* [archetype:target-browser:begin] --- ie lte 9 --- */
   border-color: #111111;
+  /* [archetype:target-browser:end]   --- ie lte 9 --- */
 }
 .ie.lte9 .target-ie-lte-9 {
+  /* [archetype:target-browser:begin] --- ie lte 9 --- */
   background: #2c2c2b;
+  /* [archetype:target-browser:end]   --- ie lte 9 --- */
 }
 
-.ie.ie7 .target-ie-7-8-9, .ie.ie8 .target-ie-7-8-9 {
+.ie.ie7 .target-ie-7-8-9, .ie.ie8 .target-ie-7-8-9, .ie.ie9 .target-ie-7-8-9 {
+  /* [archetype:target-browser:begin] --- ie 7 8 9 --- */
   width: 250px;
+  /* [archetype:target-browser:end]   --- ie 7 8 9 --- */
 }
 
-.ie .target-ie-9 {
+.ie.ie9 .target-ie-9 {
+  /* [archetype:target-browser:begin] --- ie 9 --- */
   right: -83px;
+  /* [archetype:target-browser:end]   --- ie 9 --- */
 }
-.ie .target-ie-9 {
+.ie.ie9 .target-ie-9 {
+  /* [archetype:target-browser:begin] --- ie 9 --- */
   top: 17px;
+  /* [archetype:target-browser:end]   --- ie 9 --- */
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   .target-webkit {
+    /* [archetype:target-browser:begin] --- webkit --- */
     line-height: 16px;
+    /* [archetype:target-browser:end]   --- webkit --- */
   }
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   .target-webkit {
+    /* [archetype:target-browser:begin] --- webkit --- */
     padding-top: 10px;
+    /* [archetype:target-browser:end]   --- webkit --- */
   }
 }
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
   .target-webkit {
+    /* [archetype:target-browser:begin] --- webkit --- */
     width: 151px;
+    /* [archetype:target-browser:end]   --- webkit --- */
   }
 }
 
 .target-firefox, .target-firefox x:-moz-any-link {
+  /* [archetype:target-browser:begin] --- gecko --- */
   margin-top: 16px;
+  /* [archetype:target-browser:end]   --- gecko --- */
 }
 
 .target-opera, .target-opera x:-o-prefocus {
+  /* [archetype:target-browser:begin] --- opera --- */
   width: 82%;
+  /* [archetype:target-browser:end]   --- opera --- */
 }
 
 .ie.lte8 .target-with-content-block {
+  /* [archetype:target-browser:begin] --- ie lte 8 --- */
   /* testing content block */
   color: red;
+  /* [archetype:target-browser:end]   --- ie lte 8 --- */
 }

@@ -1,17 +1,23 @@
 .stroke {
-  -webkit-box-shadow: 0 1px 0 black, 0 -1px 0 black, 1px 0 0 black, -1px 0 0 black;
   -moz-box-shadow: 0 1px 0 black, 0 -1px 0 black, 1px 0 0 black, -1px 0 0 black;
+  -ms-box-shadow: 0 1px 0 black, 0 -1px 0 black, 1px 0 0 black, -1px 0 0 black;
+  -o-box-shadow: 0 1px 0 black, 0 -1px 0 black, 1px 0 0 black, -1px 0 0 black;
+  -webkit-box-shadow: 0 1px 0 black, 0 -1px 0 black, 1px 0 0 black, -1px 0 0 black;
   box-shadow: 0 1px 0 black, 0 -1px 0 black, 1px 0 0 black, -1px 0 0 black;
 }
 
 .stroke-fat {
-  -webkit-box-shadow: 0 10px 0 black, 0 -10px 0 black, 10px 0 0 black, -10px 0 0 black;
   -moz-box-shadow: 0 10px 0 black, 0 -10px 0 black, 10px 0 0 black, -10px 0 0 black;
+  -ms-box-shadow: 0 10px 0 black, 0 -10px 0 black, 10px 0 0 black, -10px 0 0 black;
+  -o-box-shadow: 0 10px 0 black, 0 -10px 0 black, 10px 0 0 black, -10px 0 0 black;
+  -webkit-box-shadow: 0 10px 0 black, 0 -10px 0 black, 10px 0 0 black, -10px 0 0 black;
   box-shadow: 0 10px 0 black, 0 -10px 0 black, 10px 0 0 black, -10px 0 0 black;
 }
 
 .stroke-colorful {
-  -webkit-box-shadow: 0 10px 0 red, 0 -10px 0 red, 10px 0 0 red, -10px 0 0 red;
   -moz-box-shadow: 0 10px 0 red, 0 -10px 0 red, 10px 0 0 red, -10px 0 0 red;
+  -ms-box-shadow: 0 10px 0 red, 0 -10px 0 red, 10px 0 0 red, -10px 0 0 red;
+  -o-box-shadow: 0 10px 0 red, 0 -10px 0 red, 10px 0 0 red, -10px 0 0 red;
+  -webkit-box-shadow: 0 10px 0 red, 0 -10px 0 red, 10px 0 0 red, -10px 0 0 red;
   box-shadow: 0 10px 0 red, 0 -10px 0 red, 10px 0 0 red, -10px 0 0 red;
 }

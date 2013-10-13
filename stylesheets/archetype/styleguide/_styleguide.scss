@@ -12,11 +12,11 @@
   @if length($definition) > 0 {
     $styles: styleguide($definition, $state, $theme);
     // output a debug message
-    @include debug-message("[archetype:styleguide:begin] --- #{$definition} ---");
+    /* [archetype:styleguide:begin] --- #{$definition} --- */
     // generate actual styles
     @include to-styles($styles, $exclude: $exclude);
     // more debugging
-    @include debug-message("[archetype:styleguide:end]   --- #{$definition} ---");
+    /* [archetype:styleguide:end]   --- #{$definition} --- */
   }
 }
 
@@ -32,10 +32,10 @@
   $diff: styleguide-diff($original, $other, $theme);
   @if length($diff) > 0 {
     // output a debug message
-    @include debug-message("[archetype:styleguide:diff:begin] --- `#{$original}` vs `#{$other}` ---");
+    /* [archetype:styleguide:diff:begin] --- `#{$original}` vs `#{$other}` --- */
     // generate actual styles
     @include to-styles($diff, $exclude: $exclude);
     // more debugging
-    @include debug-message("[archetype:styleguide:diff:end]   --- `#{$original}` vs `#{$other}` ---");
+    /* [archetype:styleguide:diff:end]   --- `#{$original}` vs `#{$other}` --- */
   }
 }

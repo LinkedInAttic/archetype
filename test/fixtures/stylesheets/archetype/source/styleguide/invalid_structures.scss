@@ -1,4 +1,4 @@
-@import "archetype";
+@import "test_harness";
 
 // this should throw a warning because we can't retrieve the key-value pairs for the top level
 @if not styleguide-component-exists(test-missing-nil, $CONFIG_THEME) {
