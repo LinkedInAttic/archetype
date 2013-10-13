@@ -1,7 +1,7 @@
 # Changelog
 
 
-## 0.0.2.pre.1 (pre-released)
+## 0.0.2.alpha.1 (pre-released)
 
 ### Resolved Issues:
 

@@ -89,7 +89,7 @@ private
 
   def each_sass_file(sass_dir = nil)
     sass_dir ||= template_path(@current_project)
-    Dir.glob("#{sass_dir}/**/*.s[ac]ss").each do |sass_file|
+    Dir.glob("#{sass_dir}/**/[^_]*.s[ac]ss").each do |sass_file|
       yield sass_file[(sass_dir.length+1)..-6]
     end
   end
