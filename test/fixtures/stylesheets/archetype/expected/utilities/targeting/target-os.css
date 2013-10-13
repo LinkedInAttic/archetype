@@ -1,55 +1,87 @@
 .os-linux .target-linux {
+  /* [archetype:target-os:begin] --- linux --- */
   top: -3px;
+  /* [archetype:target-os:end]   --- linux --- */
 }
 .os-linux .target-linux {
+  /* [archetype:target-os:begin] --- linux --- */
   width: 300px;
+  /* [archetype:target-os:end]   --- linux --- */
 }
 
 .os-mac .target-apple {
+  /* [archetype:target-os:begin] --- apple --- */
   top: -3px;
+  /* [archetype:target-os:end]   --- apple --- */
 }
 .os-mac .target-apple {
+  /* [archetype:target-os:begin] --- apple --- */
   width: 300px;
+  /* [archetype:target-os:end]   --- apple --- */
 }
 
 .os-mac .target-mac {
+  /* [archetype:target-os:begin] --- mac --- */
   top: -3px;
+  /* [archetype:target-os:end]   --- mac --- */
 }
 .os-mac .target-mac {
+  /* [archetype:target-os:begin] --- mac --- */
   width: 300px;
+  /* [archetype:target-os:end]   --- mac --- */
 }
 
 .os-mac .target-osx {
+  /* [archetype:target-os:begin] --- osx --- */
   top: -3px;
+  /* [archetype:target-os:end]   --- osx --- */
 }
 .os-mac .target-osx {
+  /* [archetype:target-os:begin] --- osx --- */
   width: 300px;
+  /* [archetype:target-os:end]   --- osx --- */
 }
 
 .os-win .target-windows {
+  /* [archetype:target-os:begin] --- windows --- */
   top: -3px;
+  /* [archetype:target-os:end]   --- windows --- */
 }
 .os-win .target-windows {
+  /* [archetype:target-os:begin] --- windows --- */
   width: 300px;
+  /* [archetype:target-os:end]   --- windows --- */
 }
 
 .os-win .target-win {
+  /* [archetype:target-os:begin] --- win --- */
   top: -3px;
+  /* [archetype:target-os:end]   --- win --- */
 }
 .os-win .target-win {
+  /* [archetype:target-os:begin] --- win --- */
   width: 300px;
+  /* [archetype:target-os:end]   --- win --- */
 }
 
 .os-win .target-winxp {
+  /* [archetype:target-os:begin] --- winxp --- */
   top: -3px;
+  /* [archetype:target-os:end]   --- winxp --- */
 }
 .os-win .target-winxp {
+  /* [archetype:target-os:begin] --- winxp --- */
   width: 300px;
+  /* [archetype:target-os:end]   --- winxp --- */
 }
 
 .os-win .target-win7 {
+  /* [archetype:target-os:begin] --- win7 --- */
   top: -3px;
+  /* [archetype:target-os:end]   --- win7 --- */
 }
 .os-win .target-win7 {
+  /* [archetype:target-os:begin] --- win7 --- */
   width: 300px;
+  /* [archetype:target-os:end]   --- win7 --- */
 }

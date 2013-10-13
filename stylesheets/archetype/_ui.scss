@@ -225,10 +225,8 @@
         $archetype-glyph-selector: '#{$selector}, #{$archetype-pseudo-selector}';
       }
     }
-    @if archetype-version('Sass >= 3.2') {
-      #{$archetype-glyph-selector} {
-        @content;
-      }
+    #{$archetype-glyph-selector} {
+      @content;
     }
   }
 }
@@ -263,33 +261,9 @@
 // @private
 @mixin -generate-loader-keyframes-360() {
   @if do-once("archetype/ui/generate-keyframe/#{$CONFIG_KEYFRAME_LOADERS}") {
-    @if archetype-version('compass >= 0.13') {
-      @include keyframes($CONFIG_KEYFRAME_LOADERS) {
-        from { @include rotate(0deg); }
-        to { @include rotate(360deg); }
-      }
-    }
-    @else {
-      @-webkit-keyframes #{$CONFIG_KEYFRAME_LOADERS} {
-        from { -webkit-transform: rotate(0deg); }
-        to { -webkit-transform: rotate(360deg); }
-      }
-      @-moz-keyframes #{$CONFIG_KEYFRAME_LOADERS} {
-        from { -moz-transform: rotate(0deg); }
-        to { -moz-transform: rotate(360deg); }
-      }
-      @-ms-keyframes #{$CONFIG_KEYFRAME_LOADERS} {
-        from { -ms-transform: rotate(0deg); }
-        to { -ms-transform: rotate(360deg); }
-      }
-      @-o-keyframes #{$CONFIG_KEYFRAME_LOADERS} {
-        from { -o-transform: rotate(0deg); }
-        to { -o-transform: rotate(360deg); }
-      }
-      @keyframes #{$CONFIG_KEYFRAME_LOADERS} {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-      }
+    @include keyframes($CONFIG_KEYFRAME_LOADERS) {
+      from { @include rotate(0deg); }
+      to { @include rotate(360deg); }
     }
   }
 }
@@ -304,27 +278,8 @@
 @mixin -generate-loader-keyframes-position($name, $position, $width, $height) {
   $name: unquote('#{$CONFIG_KEYFRAME_LOADERS}-position-#{$name}');
   @if do-once("archetype/ui/generate-keyframe/#{$name}") {
-    @if archetype-version('compass >= 0.13') {
-      @include keyframes($name) {
-        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
-      }
-    }
-    @else {
-      @-webkit-keyframes #{$name} {
-        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
-      }
-      @-moz-keyframes #{$name} {
-        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
-      }
-      @-ms-keyframes #{$name} {
-        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
-      }
-      @-o-keyframes #{$name} {
-        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
-      }
-      @keyframes #{$name} {
-        from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
-      }
+    @include keyframes($name) {
+      from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
     }
   }
 }

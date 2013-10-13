@@ -1,4 +1,4 @@
-@import "archetype";
+@import "test_harness";
 
 @if not styleguide-component-exists(multi-value-styleguide-test, $CONFIG_THEME) {
 $a-blackhole: styleguide-add-component(multi-value-styleguide-test, (), (

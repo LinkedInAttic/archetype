@@ -1,9 +1,9 @@
-@import "archetype";
+@import "test_harness";
 
 a {
-  @include filter(Shadow(Strength=2, Direction=135, Color='#CCCCCC'));
+  @include ie-filter(Shadow(Strength=2, Direction=135, Color='#CCCCCC'));
 }
 
 b {
-  @include filter(gradient(enabled=false));
+  @include ie-filter(gradient(enabled=false));
 }

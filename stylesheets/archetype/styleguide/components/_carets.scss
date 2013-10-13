@@ -7,8 +7,7 @@ $STYLEGUIDE_CARETS: () !default;
 @if not styleguide-component-exists($STYLEGUIDE_CARETS_ID, $CONFIG_THEME) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_CARETS_ID,  $STYLEGUIDE_CARETS, (
   (default, (
-    inline-block        true,
-    vertical-align      middle,
+    inline-block        (middle, middle),
     // triangle... @see triangle() mixin
     height              0,
     width               0,

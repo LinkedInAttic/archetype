@@ -1,16 +1,26 @@
 a {
+  /* [archetype:target-os:begin] --- default --- */
   font-family: Georgia, serif;
+  /* [archetype:target-os:end]   --- default --- */
 }
 
 b {
+  /* [archetype:target-os:begin] --- default --- */
   font-family: sans-serif;
+  /* [archetype:target-os:end]   --- default --- */
 }
 .os-win b {
+  /* [archetype:target-os:begin] --- win --- */
   font-family: Arial, sans-serif;
+  /* [archetype:target-os:end]   --- win --- */
 }
 .os-mac b {
+  /* [archetype:target-os:begin] --- mac --- */
   font-family: Helvetica, Arial, sans-serif;
+  /* [archetype:target-os:end]   --- mac --- */
 }
 .os-linux b {
+  /* [archetype:target-os:begin] --- linux --- */
   font-family: Helvetica, FreeSans, "Liberation Sans", Helmet, Arial, sans-serif;
+  /* [archetype:target-os:end]   --- linux --- */
 }

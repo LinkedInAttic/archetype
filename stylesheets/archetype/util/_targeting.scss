@@ -1,17 +1,5 @@
 // @category  utilities/targeting
 
-@function _isLegacySupported($vendor, $comparator, $version) {
-  // we currently only check for legacy IE support
-  @if $vendor != ie { @return true; }
-  $compass-not-legacy-ie-version: 9;  // the version if IE that Compass starts considering `legacy`
-  $min-ie-legacy-support: 999;
-  $supported-legacy-ie: ();
-  @if($legacy-support-for-ie8) { $min-ie-legacy-support: 8; $supported-legacy-ie: append($supported-legacy-ie, 8); }
-  @if($legacy-support-for-ie7) { $min-ie-legacy-support: 7; $supported-legacy-ie: append($supported-legacy-ie, 7); }
-  @if($legacy-support-for-ie6) { $min-ie-legacy-support: 6; $supported-legacy-ie: append($supported-legacy-ie, 6); }
-  @return if($comparator == lte, $version >= $min-ie-legacy-support, index($supported-legacy-ie, $version));
-}
-
 // given a list of browsers and versions, this will consolidate them into a
 // normalized list of targeted browsers
 // @function  _getTargetedBrowsers
@@ -19,6 +7,7 @@
 // @param     $browsers {List} the browsers/versions to target
 // @param     $using {String} an optional string to append to the end of each item
 // @param     $vendors {List} the list of supported vendors for class targeting
+// @param     $threshold {Number} the minimum browser usage threshold to support
 // @return    $list {List} the normalized list of targeted browsers
 // @usage:
 // _getTargetedBrowsers(ie) => (.ie)
@@ -26,7 +15,7 @@
 // _getTargetedBrowsers(ie 6 7) => (.ie.ie6, .ie.ie7)
 // _getTargetedBrowsers(ie 10 lt 9) => (.ie.ie10, .ie.lte8)
 // _getTargetedBrowsers(ie 6, $using: '&') => (.ie.ie6&) // e.g. for merging with other selectors
-@function _getTargetedBrowsers($browsers, $using: '', $vendors: $CONFIG_BROWSER_VENDORS_CLASS) {
+@function _getTargetedBrowsers($browsers, $using: '', $vendors: $CONFIG_BROWSER_VENDORS_CLASS, $threshold: $critical-usage-threshold) {
   $browsers: -compass-list($browsers);
   $vendors: -compass-list($vendors);
   $comparators: (eq lt lte);
@@ -53,7 +42,7 @@
     }
     // otherwise assume it's a version
     @else if(type-of($item) == number) {
-      $tmp: $item;
+      $tmp: if($vendor == ie, $item, 9999); // we only support versions for IE, otherwise, set an obsurdly high version
       // if it's equalitative, prefix the vendor onto the version
       @if(not $comparator or $comparator == eq) {
         $item: #{$vendor}#{$item};
@@ -62,7 +51,7 @@
       @else {
         $item: #{$comparator}#{($item + $version-adjust)};
       }
-      @if($vendor and _isLegacySupported($vendor, $comparator, $tmp)) {
+      @if($vendor and support-legacy-browser($vendor, "#{$tmp}", $critical-usage-threshold)) {
         $item: '.#{$vendor}.#{$item}#{$using}';
         $list: append($list, unquote($item), comma);
         $unversioned: list-remove($unversioned, index($unversioned, '.#{$vendor}#{$using}'));
@@ -90,7 +79,7 @@
 // @usage:
 // =target-browser(ie 8, border, 10px);
 // =target-browser(ie lte 7, padding, 0);
-@mixin target-browser($browsers, $property: nil, $value: nil, $merge: false, $inline: true) {
+@mixin target-browser($browsers, $property: nil, $value: nil, $merge: false, $inline: true, $threshold: $critical-usage-threshold) {
   @if($CONFIG_BROWSER_ALLOW_HACKS) {
     // target webkit, Safari3+, Chrome1+
     @if(index2($browsers, associative($CONFIG_BROWSER_VENDORS_HACK, webkit-all) )) {
@@ -100,12 +89,10 @@
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       @media screen and (-webkit-min-device-pixel-ratio:0) {
         & {
-          @include debug-message("[archetype:target-browser:begin] --- webkit ---");
+          /* [archetype:target-browser:begin] --- webkit --- */
           @include output-style($property, $value);
-          @if archetype-version('sass >= 3.2') {
-            @content;
-          }
-          @include debug-message("[archetype:target-browser:end]   --- webkit ---");
+          @content;
+          /* [archetype:target-browser:end]   --- webkit --- */
         }
       }
     }
@@ -116,12 +103,10 @@
       }
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       &, x:-moz-any-link {
-        @include debug-message("[archetype:target-browser:begin] --- gecko ---");
+        /* [archetype:target-browser:begin] --- gecko --- */
         @include output-style($property, $value);
-        @if archetype-version('sass >= 3.2') {
-          @content;
-        }
-        @include debug-message("[archetype:target-browser:end]   --- gecko ---");
+        @content;
+        /* [archetype:target-browser:end]   --- gecko --- */
       }
     }
     // target opera
@@ -131,44 +116,40 @@
       }
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       &, x:-o-prefocus {
-        @include debug-message("[archetype:target-browser:begin] --- opera ---");
+        /* [archetype:target-browser:begin] --- opera --- */
         @include output-style($property, $value);
-        @if archetype-version('sass >= 3.2') {
-          @content;
-        }
-        @include debug-message("[archetype:target-browser:end]   --- opera ---");
+        @content;
+        /* [archetype:target-browser:end]   --- opera --- */
       }
     }
     // if there's only one target browser and it's IE6 or IE lte 7, we can use an inline hack
     @if($inline) {
-      $tmp: _getTargetedBrowsers($browsers);
+      $tmp: _getTargetedBrowsers($browsers, $threshold: $threshold);
       @if(length($tmp) == 1) {
         $support: ();
-        @if($legacy-support-for-ie6) { $support: append($support, '.ie.ie6'); }
-        @if($legacy-support-for-ie6 or $legacy-support-for-ie7) { $support: append($support, '.ie.lte7'); }
+        @if(support-legacy-browser('ie', '6', $critical-usage-threshold)) { $support: append($support, '.ie.ie6'); }
+        @if(support-legacy-browser('ie', '7', $critical-usage-threshold)) { $support: append($support, '.ie.lte7'); }
         $idx: index2($support, $tmp);
         @if($idx) {
           $prefix: nth(('_', '*'), $idx);
           $value: if(index($CORE_CSS_RTL_VALUE_SUPPORT, $property), rtl($value, $property), $value);
           // NOTE: RTL support on properties like `border-left-width` won't fully work until Compass/Sass support string replace methods
-          @include debug-message("[archetype:target-browser:being] --- #{$browsers} ---");
+          /* [archetype:target-browser:being] --- #{$browsers} --- */
           @include output-style(#{$prefix}#{rtl($property)}, $value);
-          @include debug-message("[archetype:target-browser:end]   --- #{$browsers} ---");
+          /* [archetype:target-browser:end]   --- #{$browsers} --- */
           $value: nil;
         }
       }
     }
   }
   // target via class names
-  $classes: _getTargetedBrowsers($browsers, $using: if($merge, '&', ' &'));
+  $classes: _getTargetedBrowsers($browsers, $using: if($merge, '&', ' &'), $threshold: $threshold);
   @if(length($classes) > 0) {
     #{$classes} {
-      @include debug-message("[archetype:target-browser:begin] --- #{$browsers} ---");
+      /* [archetype:target-browser:begin] --- #{$browsers} --- */
       @include output-style($property, $value);
-      @if archetype-version('sass >= 3.2') {
-        @content;
-      }
-      @include debug-message("[archetype:target-browser:end]   --- #{$browsers} ---");
+      @content;
+      /* [archetype:target-browser:end]   --- #{$browsers} --- */
     }
   }
 }
@@ -201,12 +182,10 @@
   }
   @if(length($classes) > 0) {
     #{$classes} {
-      @include debug-message("[archetype:target-os:begin] --- #{$os} ---");
+      /* [archetype:target-os:begin] --- #{$os} --- */
       @include output-style($property, $value);
-      @if archetype-version('sass >= 3.2') {
-        @content;
-      }
-      @include debug-message("[archetype:target-os:end]   --- #{$os} ---");
+      @content;
+      /* [archetype:target-os:end]   --- #{$os} --- */
     }
   }
 }

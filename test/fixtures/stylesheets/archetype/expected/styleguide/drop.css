@@ -1,8 +1,10 @@
 .dropping-styles-test {
   /* should contain hover state and .test selector */
+  /* [archetype:styleguide:begin] --- dropping-styles-test --- */
   display: block;
   color: red;
   background: green;
+  /* [archetype:styleguide:end]   --- dropping-styles-test --- */
 }
 .dropping-styles-test.hover, .dropping-styles-test:hover, .dropping-styles-test.focus, .dropping-styles-test:focus {
   background: #eeeeee;
@@ -14,9 +16,11 @@
 }
 .dropping-styles-test.parent {
   /* should contain hover state and .test selector */
+  /* [archetype:styleguide:begin] --- parent dropping-styles-test --- */
   display: none;
   color: black;
   background: green;
+  /* [archetype:styleguide:end]   --- parent dropping-styles-test --- */
 }
 .dropping-styles-test.parent.hover, .dropping-styles-test.parent:hover, .dropping-styles-test.parent.focus, .dropping-styles-test.parent:focus {
   background: #eeeeee;
@@ -28,9 +32,11 @@
 }
 .dropping-styles-test.heir {
   /* should contain hover state and .test selector */
+  /* [archetype:styleguide:begin] --- heir dropping-styles-test --- */
   display: none;
   color: black;
   background: green;
+  /* [archetype:styleguide:end]   --- heir dropping-styles-test --- */
 }
 .dropping-styles-test.heir.hover, .dropping-styles-test.heir:hover, .dropping-styles-test.heir.focus, .dropping-styles-test.heir:focus {
   background: #eeeeee;
@@ -42,11 +48,15 @@
 }
 .dropping-styles-test.dropped {
   /* should only contain color:yellow */
+  /* [archetype:styleguide:begin] --- dropped dropping-styles-test --- */
   color: yellow;
+  /* [archetype:styleguide:end]   --- dropped dropping-styles-test --- */
 }
 .dropping-styles-test.dropped2 {
   /* should contain color:yellow, custom :hover, :active */
+  /* [archetype:styleguide:begin] --- dropped2 dropping-styles-test --- */
   color: yellow;
+  /* [archetype:styleguide:end]   --- dropped2 dropping-styles-test --- */
 }
 .dropping-styles-test.dropped2.hover, .dropping-styles-test.dropped2:hover, .dropping-styles-test.dropped2.focus, .dropping-styles-test.dropped2:focus {
   color: blue;
@@ -57,7 +67,9 @@
 }
 .dropping-styles-test.dropped3 {
   /* should only contain color:purple */
+  /* [archetype:styleguide:begin] --- dropped3 dropping-styles-test --- */
   display: block;
   color: purple;
   background: green;
+  /* [archetype:styleguide:end]   --- dropped3 dropping-styles-test --- */
 }

@@ -8,8 +8,7 @@ $STYLEGUIDE_BUTTON_GROUPS: () !default;
 $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTON_GROUPS_ID, $STYLEGUIDE_BUTTON_GROUPS, (
   (default, (
     line-height         1,
-    inline-block        true, // this will use the inline-block() mixin
-    vertical-align      middle,
+    inline-block        (middle, middle), // this will use the inline-block() mixin
     clearfix            legacy-pie-clearfix,
     position            relative,
     nil

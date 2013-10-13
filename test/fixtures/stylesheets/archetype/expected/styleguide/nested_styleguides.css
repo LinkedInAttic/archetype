@@ -1,8 +1,10 @@
 .nested-styleguide-test {
+  /* [archetype:styleguide:begin] --- nested-styleguide-test --- */
   text-decoration: none;
   display: block;
   color: red;
   background: green;
+  /* [archetype:styleguide:end]   --- nested-styleguide-test --- */
 }
 .nested-styleguide-test.hover, .nested-styleguide-test:hover, .nested-styleguide-test.focus, .nested-styleguide-test:focus {
   text-decoration: none;
@@ -15,6 +17,10 @@
   line-height: 22px;
   color: #0088cc;
   text-decoration: none;
+}
+.nested-styleguide-test h3 {
+  /* [archetype:target-os:begin] --- default --- */
+  /* [archetype:target-os:end]   --- default --- */
 }
 .nested-styleguide-test h3.hover, .nested-styleguide-test h3:hover, .nested-styleguide-test h3.focus, .nested-styleguide-test h3:focus {
   text-decoration: none;

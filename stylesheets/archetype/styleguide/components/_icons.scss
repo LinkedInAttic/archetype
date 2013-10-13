@@ -7,7 +7,7 @@ $STYLEGUIDE_ICONS: () !default;
 @if not styleguide-component-exists($STYLEGUIDE_ICONS_ID, $CONFIG_THEME) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_ICONS_ID,  $STYLEGUIDE_ICONS, (
   (default, (
-    inline-block        true,
+    inline-block        middle,
     hide-text           true,
     content             $CONTENT_PLACEHOLDER,
     background          (none no-repeat scroll 0 0 transparent)
