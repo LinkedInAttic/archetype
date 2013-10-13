@@ -2,11 +2,11 @@ path = "#{File.dirname(__FILE__)}/lib"
 require File.join(path, 'archetype/version')
 
 Gem::Specification.new do |gemspec|
-  # Release Specific Information
+  ## Release Specific Information
   gemspec.version = Archetype::VERSION
   gemspec.date = Date.today
 
-  # Gem Details
+  ## Gem Details
   gemspec.name = 'archetype'
   gemspec.authors = ["Eugene ONeill", "LinkedIn"]
   gemspec.summary = %q{a UI pattern and component library for Compass}
@@ -15,7 +15,7 @@ Gem::Specification.new do |gemspec|
   gemspec.homepage = "http://www.archetypecss.com/"
   gemspec.license = "Apache License (2.0)"
 
-  # Paths
+  ## Paths
   gemspec.require_paths = %w(lib)
 
   # Gem Files
@@ -31,7 +31,7 @@ Gem::Specification.new do |gemspec|
   gemspec.test_files = Dir.glob("test/**/*.*")
   gemspec.test_files -= Dir.glob("test/fixtures/stylesheets/*/expected/**/*.*")
 
-  # Gem Bookkeeping
+  ## Gem Bookkeeping
   gemspec.rubygems_version = %q{1.3.6}
   # dependencies
   gemspec.add_dependency('compass')
