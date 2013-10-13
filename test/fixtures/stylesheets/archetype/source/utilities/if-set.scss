@@ -1,4 +1,4 @@
-@import "archetype";
+@import "test_harness";
 
 a {
   @include if-set(margin, 5px);

@@ -1,4 +1,4 @@
-@import "archetype";
+@import "test_harness";
 
 @each $type in (error success notice yield) {
   .alert.#{$type} {

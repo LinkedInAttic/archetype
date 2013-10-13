@@ -1,4 +1,5 @@
 .simple-button.disabled {
+  /* [archetype:styleguide:begin] --- small primary button --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -9,16 +10,18 @@
   text-align: center;
   width: auto;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
   padding: 0 10px;
   height: 26px;
   line-height: 24px;
-  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 12px;
   color: white;
@@ -26,26 +29,28 @@
   border-color: #1b5480;
   *zoom: 1;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF0066CC', endColorstr='#FF0033CC');
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0066cc), color-stop(100%, #0033cc));
-  background-image: -webkit-linear-gradient(top, #0066cc, #0033cc);
   background-image: -moz-linear-gradient(top, #0066cc, #0033cc);
   background-image: -o-linear-gradient(top, #0066cc, #0033cc);
-  background-image: linear-gradient(top, #0066cc, #0033cc);
+  background-image: -webkit-linear-gradient(top, #0066cc, #0033cc);
+  background-image: linear-gradient(to bottom, #0066cc, #0033cc);
   white-space: nowrap;
   display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
-  *vertical-align: auto;
-  zoom: 1;
+  *vertical-align: middle;
+  *zoom: 1;
   *display: inline;
-  vertical-align: middle;
-  -webkit-box-shadow: none;
   -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  -o-box-shadow: none;
+  -webkit-box-shadow: none;
   box-shadow: none;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
+  /* [archetype:styleguide:end]   --- small primary button --- */
 }
 .simple-button.my-custom-hover {
+  /* [archetype:styleguide:begin] --- small primary button --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -56,16 +61,18 @@
   text-align: center;
   width: auto;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
   padding: 0 10px;
   height: 26px;
   line-height: 24px;
-  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 12px;
   color: white;
@@ -73,24 +80,26 @@
   border-color: #1b5480;
   *zoom: 1;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF0066CC', endColorstr='#FF0033CC');
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0066cc), color-stop(100%, #0033cc));
-  background-image: -webkit-linear-gradient(top, #0066cc, #0033cc);
   background-image: -moz-linear-gradient(top, #0066cc, #0033cc);
   background-image: -o-linear-gradient(top, #0066cc, #0033cc);
-  background-image: linear-gradient(top, #0066cc, #0033cc);
+  background-image: -webkit-linear-gradient(top, #0066cc, #0033cc);
+  background-image: linear-gradient(to bottom, #0066cc, #0033cc);
   white-space: nowrap;
   display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
-  *vertical-align: auto;
-  zoom: 1;
+  *vertical-align: middle;
+  *zoom: 1;
   *display: inline;
-  vertical-align: middle;
-  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
   -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  -o-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  /* [archetype:styleguide:end]   --- small primary button --- */
 }
 .simple-button.normal {
+  /* [archetype:styleguide:begin] --- small primary button --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -101,16 +110,18 @@
   text-align: center;
   width: auto;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   -ms-border-radius: 3px;
   -o-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
   padding: 0 10px;
   height: 26px;
   line-height: 24px;
-  -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
   box-sizing: border-box;
   font-size: 12px;
   color: white;
@@ -118,49 +129,52 @@
   border-color: #1b5480;
   *zoom: 1;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF0088CC', endColorstr='#FF0055CC');
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0088cc), color-stop(100%, #0055cc));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0055cc);
   background-image: -moz-linear-gradient(top, #0088cc, #0055cc);
   background-image: -o-linear-gradient(top, #0088cc, #0055cc);
-  background-image: linear-gradient(top, #0088cc, #0055cc);
+  background-image: -webkit-linear-gradient(top, #0088cc, #0055cc);
+  background-image: linear-gradient(to bottom, #0088cc, #0055cc);
   white-space: nowrap;
   display: -moz-inline-stack;
   display: inline-block;
   vertical-align: middle;
-  *vertical-align: auto;
-  zoom: 1;
+  *vertical-align: middle;
+  *zoom: 1;
   *display: inline;
-  vertical-align: middle;
+  /* [archetype:styleguide:end]   --- small primary button --- */
 }
 .simple-button.normal.hover, .simple-button.normal:hover, .simple-button.normal.focus, .simple-button.normal:focus {
   background-color: #0055cc;
   *zoom: 1;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF0066CC', endColorstr='#FF0033CC');
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0066cc), color-stop(100%, #0033cc));
-  background-image: -webkit-linear-gradient(top, #0066cc, #0033cc);
   background-image: -moz-linear-gradient(top, #0066cc, #0033cc);
   background-image: -o-linear-gradient(top, #0066cc, #0033cc);
-  background-image: linear-gradient(top, #0066cc, #0033cc);
-  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  background-image: -webkit-linear-gradient(top, #0066cc, #0033cc);
+  background-image: linear-gradient(to bottom, #0066cc, #0033cc);
   -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  -ms-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  -o-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
 }
 .simple-button.normal.active, .simple-button.normal:active {
-  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset;
   -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset;
+  -ms-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset;
+  -o-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset;
+  -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25) inset;
 }
 .simple-button.normal.disabled, .simple-button.normal[disabled] {
   background-color: #0055cc;
   *zoom: 1;
   filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF0066CC', endColorstr='#FF0033CC');
-  background-image: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #0066cc), color-stop(100%, #0033cc));
-  background-image: -webkit-linear-gradient(top, #0066cc, #0033cc);
   background-image: -moz-linear-gradient(top, #0066cc, #0033cc);
   background-image: -o-linear-gradient(top, #0066cc, #0033cc);
-  background-image: linear-gradient(top, #0066cc, #0033cc);
-  -webkit-box-shadow: none;
+  background-image: -webkit-linear-gradient(top, #0066cc, #0033cc);
+  background-image: linear-gradient(to bottom, #0066cc, #0033cc);
   -moz-box-shadow: none;
+  -ms-box-shadow: none;
+  -o-box-shadow: none;
+  -webkit-box-shadow: none;
   box-shadow: none;
   cursor: default;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
@@ -168,10 +182,14 @@
 }
 
 .anchor.missing {
+  /* [archetype:styleguide:begin] --- link --- */
   color: #0088cc;
   text-decoration: none;
+  /* [archetype:styleguide:end]   --- link --- */
 }
 .anchor.my-custom-hover {
+  /* [archetype:styleguide:begin] --- link --- */
   color: #0088cc;
   text-decoration: underline;
+  /* [archetype:styleguide:end]   --- link --- */
 }

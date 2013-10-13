@@ -1,4 +1,5 @@
 .fallback-styleguide-test {
+  /* [archetype:styleguide:begin] --- fallback-styleguide-test --- */
   background: transparent url(/some/img.png) repeat;
   background: rbga(255, 0, 0, 0.9);
   white-space: pre-wrap;
@@ -6,4 +7,5 @@
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   something: valid;
+  /* [archetype:styleguide:end]   --- fallback-styleguide-test --- */
 }

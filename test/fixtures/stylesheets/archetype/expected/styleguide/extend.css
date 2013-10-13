@@ -5,3 +5,8 @@
 .extend-styleguide-test {
   background: green;
 }
+
+.extend-styleguide-test {
+  /* [archetype:styleguide:begin] --- extend-styleguide-test --- */
+  /* [archetype:styleguide:end]   --- extend-styleguide-test --- */
+}

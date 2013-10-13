@@ -4,7 +4,7 @@
 // hack to support negative margins in legacy IE
 // @mixin     hack-negative-margin
 @mixin hack-negative-margin() {
-  @if($legacy-support-for-ie6 or $legacy-support-for-ie7) {
+  @if(support-legacy-browser('ie', '7', $critical-usage-threshold)) {
     @include has-layout();
     position: relative;
   }
@@ -40,13 +40,8 @@
 // @param     $name {String} the name of the element
 // @content
 @mixin ie-pseudo-before($styles: false, $content: false, $name: '') {
-  @if archetype-version('Sass >= 3.2') {
-    @include ie-pseudo($styles, $content, before, $name) {
-      @content;
-    }
-  }
-  @else {
-    @include ie-pseudo($styles, $content, before, $name);
+  @include ie-pseudo($styles, $content, before, $name) {
+    @content;
   }
 }
 
@@ -57,13 +52,8 @@
 // @param     $name {String} the name of the element
 // @content
 @mixin ie-pseudo-after($styles: false, $content: false, $name: '') {
-  @if archetype-version('Sass >= 3.2') {
-    @include ie-pseudo($styles, $content, after, $name) {
-      @content;
-    }
-  }
-  @else {
-    @include ie-pseudo($styles, $content, after, $name);
+  @include ie-pseudo($styles, $content, after, $name) {
+    @content;
   }
 }
 
@@ -79,7 +69,7 @@
 // @content
 @mixin ie-pseudo($styles: false, $content: false, $placement: before, $name: '', $uid: false) {
   $archetype-pseudo-selector: false;
-  @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
+  @if(support-legacy-browser('ie', '7', $critical-usage-threshold)) {
     $uid: if($uid, $uid, unique('ie-pseudo-'));
     $archetype-pseudo-selector: '& ##{$uid}';
     $method: if($placement == before, insertBefore, appendChild);
@@ -95,9 +85,7 @@
       // output it on the generated selector
       #{$archetype-pseudo-selector} {
         @include to-styles(-style-string-to-list(unquote($styles)));
-        @if archetype-version('Sass >= 3.2') {
-          @content;
-        }
+        @content;
       }
     }
   }

@@ -1,13 +1,15 @@
 .alert.error {
+  /* [archetype:styleguide:begin] --- error alert --- */
   background-color: #da4f49;
   background-repeat: no-repeat;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ee5f5b), color-stop(100%, #bd362f));
-  background: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
   background: -moz-linear-gradient(top, #ee5f5b, #bd362f);
   background: -o-linear-gradient(top, #ee5f5b, #bd362f);
-  background: linear-gradient(top, #ee5f5b, #bd362f);
-  -webkit-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  background: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+  background: linear-gradient(to bottom, #ee5f5b, #bd362f);
   -moz-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
   box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
@@ -17,6 +19,7 @@
   position: relative;
   padding: 10px 20px 10px 50px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf057;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- error alert --- */
 }
 .alert.error:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -35,6 +38,7 @@
   line-height: 1;
 }
 .alert.error .dismiss {
+  /* [archetype:styleguide:begin] --- close in a error alert --- */
   color: white;
   background: transparent none;
   padding: 0 1px 0 0;
@@ -50,6 +54,7 @@
   height: 11px;
   text-indent: 12px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- close in a error alert --- */
 }
 .alert.error .dismiss:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -75,15 +80,17 @@
 }
 
 .alert.success {
+  /* [archetype:styleguide:begin] --- success alert --- */
   background-color: #5bb75b;
   background-repeat: no-repeat;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #62c462), color-stop(100%, #51a351));
-  background: -webkit-linear-gradient(top, #62c462, #51a351);
   background: -moz-linear-gradient(top, #62c462, #51a351);
   background: -o-linear-gradient(top, #62c462, #51a351);
-  background: linear-gradient(top, #62c462, #51a351);
-  -webkit-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  background: -webkit-linear-gradient(top, #62c462, #51a351);
+  background: linear-gradient(to bottom, #62c462, #51a351);
   -moz-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
   box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
@@ -93,6 +100,7 @@
   position: relative;
   padding: 10px 20px 10px 50px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf058;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- success alert --- */
 }
 .alert.success:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -111,6 +119,7 @@
   line-height: 1;
 }
 .alert.success .dismiss {
+  /* [archetype:styleguide:begin] --- close in a success alert --- */
   color: white;
   background: transparent none;
   padding: 0 1px 0 0;
@@ -126,6 +135,7 @@
   height: 11px;
   text-indent: 12px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- close in a success alert --- */
 }
 .alert.success .dismiss:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -151,15 +161,17 @@
 }
 
 .alert.notice {
+  /* [archetype:styleguide:begin] --- notice alert --- */
   background-color: #49afcd;
   background-repeat: no-repeat;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5bc0de), color-stop(100%, #2f96b4));
-  background: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
   background: -moz-linear-gradient(top, #5bc0de, #2f96b4);
   background: -o-linear-gradient(top, #5bc0de, #2f96b4);
-  background: linear-gradient(top, #5bc0de, #2f96b4);
-  -webkit-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  background: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+  background: linear-gradient(to bottom, #5bc0de, #2f96b4);
   -moz-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
   box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
@@ -169,6 +181,7 @@
   position: relative;
   padding: 10px 20px 10px 50px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf05a;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- notice alert --- */
 }
 .alert.notice:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -187,6 +200,7 @@
   line-height: 1;
 }
 .alert.notice .dismiss {
+  /* [archetype:styleguide:begin] --- close in a notice alert --- */
   color: white;
   background: transparent none;
   padding: 0 1px 0 0;
@@ -202,6 +216,7 @@
   height: 11px;
   text-indent: 12px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- close in a notice alert --- */
 }
 .alert.notice .dismiss:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -227,15 +242,17 @@
 }
 
 .alert.yield {
+  /* [archetype:styleguide:begin] --- yield alert --- */
   background-color: #faa732;
   background-repeat: no-repeat;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fbb450), color-stop(100%, #f89406));
-  background: -webkit-linear-gradient(top, #fbb450, #f89406);
   background: -moz-linear-gradient(top, #fbb450, #f89406);
   background: -o-linear-gradient(top, #fbb450, #f89406);
-  background: linear-gradient(top, #fbb450, #f89406);
-  -webkit-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  background: -webkit-linear-gradient(top, #fbb450, #f89406);
+  background: linear-gradient(to bottom, #fbb450, #f89406);
   -moz-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
   box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
@@ -245,6 +262,7 @@
   position: relative;
   padding: 10px 20px 10px 50px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf071;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- yield alert --- */
 }
 .alert.yield:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -263,6 +281,7 @@
   line-height: 1;
 }
 .alert.yield .dismiss {
+  /* [archetype:styleguide:begin] --- close in a yield alert --- */
   color: white;
   background: transparent none;
   padding: 0 1px 0 0;
@@ -278,6 +297,7 @@
   height: 11px;
   text-indent: 12px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;text-decoration:none;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- close in a yield alert --- */
 }
 .alert.yield .dismiss:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -303,15 +323,17 @@
 }
 
 .alert.error {
+  /* [archetype:styleguide:begin] --- error alert --- */
   background-color: #da4f49;
   background-repeat: no-repeat;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ee5f5b), color-stop(100%, #bd362f));
-  background: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
   background: -moz-linear-gradient(top, #ee5f5b, #bd362f);
   background: -o-linear-gradient(top, #ee5f5b, #bd362f);
-  background: linear-gradient(top, #ee5f5b, #bd362f);
-  -webkit-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  background: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+  background: linear-gradient(to bottom, #ee5f5b, #bd362f);
   -moz-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
   box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
@@ -321,6 +343,7 @@
   position: relative;
   padding: 10px 20px 10px 50px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf057;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- error alert --- */
 }
 .alert.error:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -347,6 +370,7 @@
   line-height: 1;
 }
 .alert.error .dismiss {
+  /* [archetype:styleguide:begin] --- close in a error alert --- */
   color: white;
   background: transparent none;
   padding: 0 1px 0 0;
@@ -362,6 +386,7 @@
   height: 11px;
   text-indent: 12px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- close in a error alert --- */
 }
 .alert.error .dismiss:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -396,15 +421,17 @@
 }
 
 .alert.success {
+  /* [archetype:styleguide:begin] --- success alert --- */
   background-color: #5bb75b;
   background-repeat: no-repeat;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #62c462), color-stop(100%, #51a351));
-  background: -webkit-linear-gradient(top, #62c462, #51a351);
   background: -moz-linear-gradient(top, #62c462, #51a351);
   background: -o-linear-gradient(top, #62c462, #51a351);
-  background: linear-gradient(top, #62c462, #51a351);
-  -webkit-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  background: -webkit-linear-gradient(top, #62c462, #51a351);
+  background: linear-gradient(to bottom, #62c462, #51a351);
   -moz-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
   box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
@@ -414,6 +441,7 @@
   position: relative;
   padding: 10px 20px 10px 50px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf058;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- success alert --- */
 }
 .alert.success:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -440,6 +468,7 @@
   line-height: 1;
 }
 .alert.success .dismiss {
+  /* [archetype:styleguide:begin] --- close in a success alert --- */
   color: white;
   background: transparent none;
   padding: 0 1px 0 0;
@@ -455,6 +484,7 @@
   height: 11px;
   text-indent: 12px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- close in a success alert --- */
 }
 .alert.success .dismiss:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -489,15 +519,17 @@
 }
 
 .alert.notice {
+  /* [archetype:styleguide:begin] --- notice alert --- */
   background-color: #49afcd;
   background-repeat: no-repeat;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5bc0de), color-stop(100%, #2f96b4));
-  background: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
   background: -moz-linear-gradient(top, #5bc0de, #2f96b4);
   background: -o-linear-gradient(top, #5bc0de, #2f96b4);
-  background: linear-gradient(top, #5bc0de, #2f96b4);
-  -webkit-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  background: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+  background: linear-gradient(to bottom, #5bc0de, #2f96b4);
   -moz-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
   box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
@@ -507,6 +539,7 @@
   position: relative;
   padding: 10px 20px 10px 50px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf05a;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- notice alert --- */
 }
 .alert.notice:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -533,6 +566,7 @@
   line-height: 1;
 }
 .alert.notice .dismiss {
+  /* [archetype:styleguide:begin] --- close in a notice alert --- */
   color: white;
   background: transparent none;
   padding: 0 1px 0 0;
@@ -548,6 +582,7 @@
   height: 11px;
   text-indent: 12px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- close in a notice alert --- */
 }
 .alert.notice .dismiss:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -582,15 +617,17 @@
 }
 
 .alert.yield {
+  /* [archetype:styleguide:begin] --- yield alert --- */
   background-color: #faa732;
   background-repeat: no-repeat;
-  background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fbb450), color-stop(100%, #f89406));
-  background: -webkit-linear-gradient(top, #fbb450, #f89406);
   background: -moz-linear-gradient(top, #fbb450, #f89406);
   background: -o-linear-gradient(top, #fbb450, #f89406);
-  background: linear-gradient(top, #fbb450, #f89406);
-  -webkit-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  background: -webkit-linear-gradient(top, #fbb450, #f89406);
+  background: linear-gradient(to bottom, #fbb450, #f89406);
   -moz-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
   box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
@@ -600,6 +637,7 @@
   position: relative;
   padding: 10px 20px 10px 50px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf071;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- yield alert --- */
 }
 .alert.yield:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";
@@ -626,6 +664,7 @@
   line-height: 1;
 }
 .alert.yield .dismiss {
+  /* [archetype:styleguide:begin] --- close in a yield alert --- */
   color: white;
   background: transparent none;
   padding: 0 1px 0 0;
@@ -641,6 +680,7 @@
   height: 11px;
   text-indent: 12px;
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+  /* [archetype:styleguide:end]   --- close in a yield alert --- */
 }
 .alert.yield .dismiss:before {
   font-family: "FontAwesome-0.0.1", "FontAwesome";

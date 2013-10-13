@@ -35,8 +35,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID,  $STYLEGUIDE_BUTT
     background-image        $CONFIG_GRADIENT_BUTTON_PRIMARY,
     white-space             nowrap,
     // alignment
-    inline-block            true, // this will use the inline-block() mixin
-    vertical-align          middle,
+    inline-block            (middle, middle), // this will use the inline-block() mixin
     // states
     (states, (
       (hover, (

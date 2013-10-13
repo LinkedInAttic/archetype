@@ -1,4 +1,10 @@
 .test {
   background: transparent "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+  /* [archetype:target-browser:being] --- ie lte 7 --- */
   *background: transparent url(https://);
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+}
+.ie.lte7 .test {
+  /* [archetype:target-browser:begin] --- ie lte 7 --- */
+  /* [archetype:target-browser:end]   --- ie lte 7 --- */
 }

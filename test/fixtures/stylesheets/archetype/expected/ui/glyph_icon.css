@@ -1,19 +1,17 @@
 @font-face {
   font-family: "FontAwesome";
   src: url('/assets/fonts/vendor/archetype/fontawesome-webfont.eot');
-  src: url('/assets/fonts/vendor/archetype/fontawesome-webfont.eot?#iefix') format('eot'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.woff') format('woff'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.ttf') format('truetype'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.svg#FontAwesome') format('svg');
+  src: url('/assets/fonts/vendor/archetype/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.woff') format('woff'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.ttf') format('truetype'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.svg#FontAwesome') format('svg');
   font-weight: normal;
   font-style: normal;
 }
-
 @font-face {
   font-family: "FontAwesome-0.0.1";
   src: url('/assets/fonts/vendor/archetype/fontawesome-webfont.eot');
-  src: url('/assets/fonts/vendor/archetype/fontawesome-webfont.eot?#iefix') format('eot'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.woff') format('woff'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.ttf') format('truetype'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.svg#FontAwesome') format('svg');
+  src: url('/assets/fonts/vendor/archetype/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.woff') format('woff'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.ttf') format('truetype'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.svg#FontAwesome') format('svg');
   font-weight: normal;
   font-style: normal;
 }
-
 .simple {
   *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf0d7;",this.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:100%;color:inherit;",this.insertBefore(this.el));
 }

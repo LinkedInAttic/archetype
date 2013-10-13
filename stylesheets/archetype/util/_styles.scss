@@ -38,51 +38,51 @@
       @include custom-output-styler($property, $value, $method: pre);
     }
     // border-radius
-    @else if($property == border-radius)        { @include border-radius(rtl($value, border-radius)); }
+    @else if($property == border-radius)        { @include border-radius($value...); }
     // box-sizing
-    @else if($property == box-sizing)           { @include box-sizing($value); }
+    @else if($property == box-sizing)           { @include box-sizing($value...); }
     // box-shadow
-    @else if($property == box-shadow)           { @include box-shadow($value); }
+    @else if($property == box-shadow)           { @include box-shadow($value...); }
     // text-shadow
-    @else if($property == text-shadow)          { @include text-shadow($value); }
+    @else if($property == text-shadow)          { @include text-shadow($value); } // TODO
     // filter-gradient
-    @else if($property == filter-gradient)      { @include filter-gradient(nth($value,1), nth($value,2), nth($value,3)); }
+    @else if($property == filter-gradient)      { @include filter-gradient($value...); }
     // background
-    @else if($property == background)           { @include background($value); }
+    @else if($property == background)           { @include background($value...); }
     // background-image
-    @else if($property == background-image or $property == gradient) { @include background-image($value); }
+    @else if($property == background-image or $property == gradient) { @include background-image($value...); }
     // background-clip
-    @else if($property == background-clip)      { @include background-clip($value); }
+    @else if($property == background-clip)      { @include background-clip($value...); }
     // background-size
-    @else if($property == background-size)      { @include background-size($value); }
+    @else if($property == background-size)      { @include background-size($value...); }
     // background-origin
-    @else if($property == background-origin)    { @include background-origin($value); }
+    @else if($property == background-origin)    { @include background-origin($value...); }
     // IE filters
-    @else if($property == ie-filter)            { @include ie-filter($value); }
+    @else if($property == ie-filter)            { @include ie-filter($value...); }
     // hide-text
-    @else if($property == hide-text)            { @include hide-text($direction: if($value == true, $hide-text-direction, $value)); }
+    @else if($property == hide-text)            { @include hide-text($direction: if($value == true, $hide-text-direction, $value...)); }
     // inline-block
-    @else if($property == inline-block)         { @include inline-block(); }
+    @else if($property == inline-block)         { @include inline-block($value...); } // TODO
     // opacity
-    @else if($property == opacity)              { @include opacity($value); }
+    @else if($property == opacity)              { @include opacity($value...); }
     // min-width
-    @else if($property == min-width)            { @include min-width($value); }
+    @else if($property == min-width)            { @include min-width($value...); }
     // min-height
-    @else if($property == min-height)           { @include min-height($value); }
+    @else if($property == min-height)           { @include min-height($value...); }
     // max-width
-    @else if($property == max-width)            { @include max-width($value); }
+    @else if($property == max-width)            { @include max-width($value...); }
     // max-height
-    @else if($property == max-height)           { @include max-height($value); }
+    @else if($property == max-height)           { @include max-height($value...); }
     // stretch
-    @else if($property == stretch)              { @include stretch(); }
+    @else if($property == stretch)              { @include stretch($value...); } // TODO
     // appearance
-    @else if($property == appearance)           { @include appearance($value); }
+    @else if($property == appearance)           { @include appearance($value...); }
     // unhide-element
-    @else if($property == unhide-element)       { @include unhide-element(); }
+    @else if($property == unhide-element)       { @include unhide-element($value...); }
     // ellipsis
-    @else if($property == ellipsis)             { @include ellipsis(); }
+    @else if($property == ellipsis)             { @include ellipsis($value...); }
     // scale
-    @else if($property == scale)                { @include scale($value); }
+    @else if($property == scale)                { @include scale($value...); }
     // bunch of RTL support
     @else if($property == margin)               { @include margin($value); }
     @else if($property == margin-left)          { @include margin-left($value); }
@@ -105,20 +105,15 @@
     @else if($property == background-position)  { @include background-position($value); }
     @else if($property == left)                 { @include left($value); }
     @else if($property == right)                { @include right($value); }
-    @else if($property == glyph-icon)           { @include glyph-icon(nth($value, 1), nth($value, 2), nth($value, 3), nth($value, 4), nth($value, 5)); }
+    // z-index
+    @else if($property == z-index)              { @include z-index($value...); }
+    @else if($property == glyph-icon)           { @include glyph-icon($value...); }
     @else if($property == extend)               { @extend #{$value}; }
+    // make sure content is always quoted
+    @else if($property == content)              { content: quote($value); }
     // animations
     @else if($property == animation) {
-      @if archetype-version('compass >= 0.13') {
-        @include animation($value);
-      }
-      @else {
-        -webkit-animation: $value;
-        -moz-animation: $value;
-        -ms-animation: $value;
-        -o-animation: $value;
-        animation: $value;
-      }
+      @include animation($value...);
     }
     // hasLayout
     @else if($property == has-layout) {
@@ -127,7 +122,7 @@
         @include has-layout();
       }
       @else {
-        @include has-layout($value);
+        @include has-layout($value...);
       }
     }
     // clearfix
@@ -142,14 +137,6 @@
         @include clearfix();
       }
     }
-    // z-index
-    @else if($property == z-index) {
-      $value: -compass-list($value);
-      @if(length($value) > 1) { @include z-index(nth($value, 1), nth($value, 2)); }
-      @else { @include z-index($value); }
-    }
-    // make sure content is always quoted
-    @else if($property == content) { #{$property}: quote($value); }
     // :before/:after
     @else if($property == ie-pseudo-before or $property == ie-pseudo-after) {
       $value: -compass-list($value);
@@ -282,44 +269,6 @@
   @include if-set(width, $width);
   @include if-set(height, $height);
   @include if-set(position, $position);
-}
-
-// this is a helper for simple gradients when a direction is desired in degrees,
-// but we still want to support old webkit browsers
-// @mixin     gradient-with-deg
-// @param     $deg {Number} the direction degree
-// @param     $start {Color} the start color
-// @param     $end {Color} the end color
-@mixin gradient-with-deg($deg, $start, $end) {
-  // make sure it's a deg
-  $deg: if(unitless($deg), $deg * 1deg, $deg);
-  // we'll divide the circle into sections
-  $sector: (360deg / 8);
-  // offset it for calculations
-  $tmp: $deg - ($sector / 2);
-  $map: (
-    (right top),
-    (right),
-    (right bottom),
-    (bottom),
-    (left bottom),
-    (left),
-    (left top),
-    (top)
-  );
-  // compute the region it falls in
-  $region: nth($map, ceil(if($tmp < 0deg, 360 - $tmp, $tmp) / $sector));
-  // NOTE: we temporarily disable old webkit gradients as they don't support degrees
-  // this is a fallback for old webkit
-  @if($support-for-original-webkit-gradients) {
-    background-image: -owg(linear-gradient($region, $start, $end));
-  }
-  $tmp: $support-for-original-webkit-gradients;
-  $support-for-original-webkit-gradients: false;
-  // now the others
-  @include background-image(linear-gradient($deg, $start, $end));
-  // restore the old webkit value
-  $support-for-original-webkit-gradients: $tmp;
 }
 
 // abstract common issues and generate safe styles
