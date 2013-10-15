@@ -2,7 +2,7 @@
 desc "push new #{@spec.name} gem release and add a git tag"
 task :release do
   version = @spec.version
-  clean = `git status` =~ /nothing to commit \(working directory clean\)/
+  clean = `git status --porcelain` == ''
   puts "Before proceeding, all UNPUBLISHED changes will be reverted".colorize(:yellow) if not clean
   # strip off the revision if it's set
   version = @version_without_revision
