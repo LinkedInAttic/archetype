@@ -50,7 +50,7 @@
     // background
     @else if($property == background)           { @include background($value...); }
     // background-image
-    @else if($property == background-image or $property == gradient) { @include background-image($value...); }
+    @else if($property == background-image)     { @include background-image($value...); }
     // background-clip
     @else if($property == background-clip)      { @include background-clip($value...); }
     // background-size
@@ -182,8 +182,30 @@
             $val: nth($state, 2);
             $state: first-value-of($state);
             @if(index(-compass-list($states), $state) or $states == true) {
-              #{_getStateSelector($state)} {
-                @include to-styles($val, true, true, $exclude);
+              // get the state selector mappings
+              $selector-map: _getStateSelectorMap($state);
+              // output the state selectors if we're not using _only_ BEM style
+              @if($CONFIG_STATE_USE_BEM != only) {
+                $selector: map-get($selector-map, selector);
+                // if the selector is valid...
+                @if($selector != null) {
+                  // output it
+                  #{$selector} {
+                    @include to-styles($val, true, true, $exclude);
+                  }
+                }
+              }
+              // if BEM style states are enabled...
+              @if($CONFIG_STATE_USE_BEM) {
+                // get the BEM states
+                $bem-states: map-get($selector-map, states);
+                // for each BEM state
+                @each $bem-state in $bem-states {
+                  // output it (this looks scarier than it really is...)
+                  @at-root #{&}--#{$bem-state} {
+                    @include to-styles($val, true, true, $exclude);
+                  }
+                }
               }
             }
           }
@@ -208,16 +230,19 @@
 }
 
 // helper function to compute the selector for various states
-// @function  _getStateSelector
+// @function  _getStateSelectorMap
 // @private
 // @param     $state {String} the state to select
 // @param     $prefix {String} the prefix to append to the state (for class names only)
-@function _getStateSelector($state, $prefix: $CONFIG_STATE_PREFIX) {
-  $selector: associative($CONFIG_STATE_MAPPINGS, $state, $strict: true);
-  @if $selector == nil or length($selector) == 0 {
-    $selector: '&.#{if(index(-compass-list($CONFIG_STATE_NO_PREFIX), $state), $prefix, "")}#{$state}';
+@function _getStateSelectorMap($state, $prefix: $CONFIG_STATE_PREFIX) {
+  $map: map-get($CONFIG_STATE_MAPPINGS, $state);
+  @if $map == null or length($map) == 0 {
+    $map: (
+      selector : '&.#{if(index(-compass-list($CONFIG_STATE_NO_PREFIX), $state), $prefix, "")}#{$state}',
+      states   : ($state)
+    );
   }
-  @return $selector;
+  @return $map;
 }
 
 @function _getSelectorSelector($selector) {
