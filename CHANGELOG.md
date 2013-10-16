@@ -1,8 +1,5 @@
 # Changelog
 
-* Table of contents
-{:toc}
-
 ## 0.0.2.alpha.1 (unreleased)
 
 ### Resolved Issues:
