@@ -1,0 +1,44 @@
+@import "test_harness";
+
+@if not styleguide-component-exists(bem-state-selector-styleguide-test, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component(bem-state-selector-styleguide-test, (), (
+  (default, (
+    display         block,
+    color           red,
+    (states, (
+      (hover, (
+        color  red
+      )),
+      (hover-only, (
+        color  blue
+      )),
+      (focus, (
+        color  green
+      )),
+      (active, (
+        color  black
+      )),
+      (my-custom-state, (
+        color  pink
+      ))
+    ))
+  )),
+  nil
+), $CONFIG_THEME);
+}
+
+
+$CONFIG_STATE_USE_BEM: false;
+.nested-styleguide-test-false {
+  @include styleguide(bem-state-selector-styleguide-test);
+}
+
+$CONFIG_STATE_USE_BEM: true;
+.nested-styleguide-test-true {
+  @include styleguide(bem-state-selector-styleguide-test);
+}
+
+$CONFIG_STATE_USE_BEM: only;
+.nested-styleguide-test-only {
+  @include styleguide(bem-state-selector-styleguide-test);
+}

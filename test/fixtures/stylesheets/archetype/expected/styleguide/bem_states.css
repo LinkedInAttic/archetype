@@ -1,0 +1,86 @@
+.nested-styleguide-test-false {
+  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test --- */
+  display: block;
+  color: red;
+  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test --- */
+}
+.nested-styleguide-test-false.hover, .nested-styleguide-test-false:hover, .nested-styleguide-test-false.focus, .nested-styleguide-test-false:focus {
+  color: red;
+}
+.nested-styleguide-test-false.hover, .nested-styleguide-test-false:hover {
+  color: blue;
+}
+.nested-styleguide-test-false.focus, .nested-styleguide-test-false:focus {
+  color: green;
+}
+.nested-styleguide-test-false.active, .nested-styleguide-test-false:active {
+  color: black;
+}
+.nested-styleguide-test-false.my-custom-state {
+  color: pink;
+}
+
+.nested-styleguide-test-true {
+  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test --- */
+  display: block;
+  color: red;
+  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test --- */
+}
+.nested-styleguide-test-true.hover, .nested-styleguide-test-true:hover, .nested-styleguide-test-true.focus, .nested-styleguide-test-true:focus {
+  color: red;
+}
+.nested-styleguide-test-true--hover {
+  color: red;
+}
+.nested-styleguide-test-true--focus {
+  color: red;
+}
+.nested-styleguide-test-true.hover, .nested-styleguide-test-true:hover {
+  color: blue;
+}
+.nested-styleguide-test-true--hover {
+  color: blue;
+}
+.nested-styleguide-test-true.focus, .nested-styleguide-test-true:focus {
+  color: green;
+}
+.nested-styleguide-test-true--focus {
+  color: green;
+}
+.nested-styleguide-test-true.active, .nested-styleguide-test-true:active {
+  color: black;
+}
+.nested-styleguide-test-true--active {
+  color: black;
+}
+.nested-styleguide-test-true.my-custom-state {
+  color: pink;
+}
+.nested-styleguide-test-true--my-custom-state {
+  color: pink;
+}
+
+.nested-styleguide-test-only {
+  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test --- */
+  display: block;
+  color: red;
+  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test --- */
+}
+.nested-styleguide-test-only--hover {
+  color: red;
+}
+.nested-styleguide-test-only--focus {
+  color: red;
+}
+.nested-styleguide-test-only--hover {
+  color: blue;
+}
+.nested-styleguide-test-only--focus {
+  color: green;
+}
+.nested-styleguide-test-only--active {
+  color: black;
+}
+.nested-styleguide-test-only--my-custom-state {
+  color: pink;
+}
