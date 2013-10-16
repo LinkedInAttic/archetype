@@ -1,0 +1,25 @@
+@import "test_harness";
+
+@if not styleguide-component-exists(content-styleguide-test, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component(content-styleguide-test, (), (
+  (default, (
+    content   '\2193'
+  )),
+  (two, (
+    content   test
+  )),
+  (three, (
+    content   unquote('" (" attr(href) ")"')
+  )),
+  (four, (
+    content   attr(data-icon)
+  ))
+), $CONFIG_THEME);
+}
+
+.content {
+  @include styleguide(one content-styleguide-test);
+  @include styleguide(two content-styleguide-test);
+  @include styleguide(three content-styleguide-test);
+  @include styleguide(four content-styleguide-test);
+}
