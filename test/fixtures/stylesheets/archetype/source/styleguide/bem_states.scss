@@ -28,17 +28,17 @@ $a-blackhole: styleguide-add-component(bem-state-selector-styleguide-test, (), (
 }
 
 
-$CONFIG_STATE_USE_BEM: false;
+$CONFIG_STATE_BEM: false;
 .nested-styleguide-test-false {
   @include styleguide(bem-state-selector-styleguide-test);
 }
 
-$CONFIG_STATE_USE_BEM: true;
+$CONFIG_STATE_BEM: true;
 .nested-styleguide-test-true {
   @include styleguide(bem-state-selector-styleguide-test);
 }
 
-$CONFIG_STATE_USE_BEM: only;
+$CONFIG_STATE_BEM: only;
 .nested-styleguide-test-only {
   @include styleguide(bem-state-selector-styleguide-test);
 }

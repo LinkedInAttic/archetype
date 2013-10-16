@@ -185,7 +185,7 @@
               // get the state selector mappings
               $selector-map: _getStateSelectorMap($state);
               // output the state selectors if we're not using _only_ BEM style
-              @if($CONFIG_STATE_USE_BEM != only) {
+              @if($CONFIG_STATE_BEM != only) {
                 $selector: map-get($selector-map, selector);
                 // if the selector is valid...
                 @if($selector != null) {
@@ -196,7 +196,7 @@
                 }
               }
               // if BEM style states are enabled...
-              @if($CONFIG_STATE_USE_BEM) {
+              @if($CONFIG_STATE_BEM) {
                 // get the BEM states
                 $bem-states: map-get($selector-map, states);
                 // for each BEM state
@@ -258,13 +258,13 @@
 
 // mixin for outputting filters in legacy IE
 // @mixin     ie-filter
-// @param     $value {String|List} a set of filters to output, sans `progid:DXImageTransform.Microsoft` prefix
+// @param     $value {String|List} a set of filters to output
 @mixin ie-filter($value, $use-prefix: false) {
   $out: false;
   $value: -compass-list($value);
   $ms-filter-prefix: 'progid:DXImageTransform.Microsoft.';
   @each $item in $value {
-    @if($item != none) {
+    @if($item != none and str-index($item, $ms-filter-prefix) != 1) {
       $item: #{$ms-filter-prefix}#{$item};
     }
     $out: if($out, '#{$out},#{$item}', '#{$item}');
