@@ -109,8 +109,6 @@
     @else if($property == z-index)              { @include z-index($value...); }
     @else if($property == glyph-icon)           { @include glyph-icon($value...); }
     @else if($property == extend)               { @extend #{$value}; }
-    // make sure content is always quoted
-    @else if($property == content)              { content: quote($value); }
     // animations
     @else if($property == animation) {
       @include animation($value...);
@@ -202,7 +200,7 @@
         }
         // otherwise, just output it
         @else if($selectors == true and $states == true ) {
-          @include _outputStyle($property, unquote($value));
+          @include _outputStyle($property, $value);
         }
       }
     }
