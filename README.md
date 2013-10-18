@@ -15,6 +15,10 @@ Archetype is a UI pattern and component library for quickly iterating on and mai
 - [Discussion](https://github.com/eoneill/archetype/issues)
 - [Archetype configuration](http://www.archetypecss.com/documentation/configuration/)
 
+## Developing Archetype
+
+If you're looking to contribute to Archetype, check out the [CONTRIBUTING](CONTRIBUTING.md) article.
+
 ## Installation
 
 ### Install the gem
