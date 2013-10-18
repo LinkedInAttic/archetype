@@ -19,7 +19,7 @@ Archetype is a UI pattern and component library for quickly iterating on and mai
 
 ### Install the gem
 
-```bash
+```sh
 [sudo] gem install archetype --pre
 ```
 
@@ -27,7 +27,7 @@ Instead of installing the gem directly via the command line, we recommend using 
 
 ### Creating a new project with Archetype
 
-```bash
+```sh
 compass create ~/workspace/your-project -r archetype --using archetype
 ```
 
