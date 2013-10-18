@@ -1,5 +1,6 @@
 archetype-*.gem
-demo/*
+/demo/*
+/themes/*
 doc/*
 docs/*
 Gemfile.lock
@@ -11,9 +12,9 @@ Icon
 tmp/*
 .sass-cache
 .rbx
-test/tmp
-test/fixtures/stylesheets/*/tmp
-test/fixtures/stylesheets/*/saved
-test/fixtures/stylesheets/empty
-test/fixtures/stylesheets/*/sass/.sass-cache
-test/fixtures/stylesheets/archetype/assets/images/**/archetype/**/*-*.png
+/test/tmp
+/test/fixtures/stylesheets/*/tmp
+/test/fixtures/stylesheets/*/saved
+/test/fixtures/stylesheets/empty
+/test/fixtures/stylesheets/*/sass/.sass-cache
+/test/fixtures/stylesheets/archetype/assets/images/**/archetype/**/*-*.png

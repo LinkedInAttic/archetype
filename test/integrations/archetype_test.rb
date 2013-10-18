@@ -3,9 +3,7 @@ require 'test_helper'
 require 'compass'
 require 'compass/logger'
 require 'sass/plugin'
-unless ENV['CI']
-  require 'fileutils'
-end
+require 'fileutils'
 
 class ArchetypeTest < Test::Unit::TestCase
 

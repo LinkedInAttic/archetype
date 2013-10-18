@@ -16,6 +16,8 @@
 - dropped `gradient` from supported keywords in styleguide components (use `background-image` instead)
 - added `$CONFIG_STATE_BEM` and `$CONFIG_STATE_BEM_SEPARATOR` to generate [BEM style state selectors](http://bem.info/method/)
 - `$CORE_STATE_MAPPINGS` and `$CONFIG_STATE_MAPPINGS` are now proper Sass maps
+- `styleguide` function now has the same signature as the mixin and can take multiple definitions at once
+- `styleguide-diff` now takes two `styleguide` results as params
 
 ## 0.0.1.pre.3 (pre-released)
 

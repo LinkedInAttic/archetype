@@ -1,5 +1,6 @@
 ## TESTS
 require 'rake/testtask'
+require 'fileutils'
 
 debug = false
 
@@ -16,45 +17,51 @@ Rake::TestTask.new :test do |t|
   t.verbose = true
 end
 
+
 namespace :test do
+  debug = false
   desc "update test expectations if needed"
   task :update do
     Rake::Task['test:update:fixtures'].invoke
   end
   task :debug do
     debug = true
-    Rake::Task['test:update'].invoke
+    Rake::Task['test:update:fixtures'].invoke
   end
   namespace :update do
+    # paths
+    EXPECTED  = 'expected'
+    TMP       = 'tmp'
+    FIXTURES  = '../test/fixtures/stylesheets/archetype'
     #desc "update fixture expectations for test cases if needed"
     task :fixtures do
-      fixtures = 'test/fixtures/stylesheets/archetype'
+      fixtures_path = File.join([File.dirname(__FILE__)] + FIXTURES.split('/'))
       # remove any existing temporary files
-      FileUtils.rm_rf(File.join(File.dirname(__FILE__), '..', fixtures, 'tmp/.'))
+      FileUtils.rm_rf(File.join(fixtures_path, TMP))
       # compile the fixtures
       puts "checking test cases..."
       CHECKMARK = "\u2713 "
-      filter = debug ? '--trace' : "| grep 'error.*#{fixtures}'"
-      errors = %x[compass compile #{fixtures} #{filter}]
+      filter = debug ? '--trace' : "| grep 'error.*#{FIXTURES}'"
+      errors = %x[compass compile #{fixtures_path} #{filter}]
       # check for compilation errors
       if not errors.empty?
         puts "Please fix the following errors before proceeding:".colorize(:red) if not debug
         puts errors
       else
         # check to see what's changed
-        diff = %x[diff -r #{fixtures}/expected/ #{fixtures}/tmp/]
+        diff = %x[diff -r #{File.join(fixtures_path, EXPECTED, '')} #{File.join(fixtures_path, TMP, '')}]
         # ignore non-CSS files in css/
-        diff = diff.gsub(/^Only in .*\/expected\/(.*)\:.*[^.css]/, '')
+        diff = diff.gsub(/^Only in .*\/css\/(.*)\:.*[^.css]/, '')
         if diff.empty?
           puts "#{CHECKMARK}Cool! Looks like all the tests are up to date".colorize(:green)
         else
           puts "The following changes were found:"
           puts "===================================="
           # check for new or removed expectations
-          diff.scan(/^Only in .*\/(expected|tmp)\/(.*)\: (.*).css/).each do |match|
-            config = (match[0] == 'tmp') ? [:green, '>', 'NEW TEST'] : [:red, '<', 'DELETED']
-            puts "[#{File.join(match[1], match[2])}]  #{config[2].colorize(config[0])}".colorize(:cyan)
-            new_file = File.join(File.dirname(__FILE__), '..', fixtures, match[0], match[1], match[2]) + '.css'
+          diff.scan(/^Only in .*\/(#{EXPECTED}|#{TMP})\/(.*)\: (.*).css/).each do |match|
+            config = (match[0] == TMP) ? [:green, '>', 'NEW TEST'] : [:red, '<', 'DELETED']
+            puts "[#{File.join(match[1], match[2])}] #{config[2].colorize(config[0])}".colorize(:cyan)
+            new_file = File.join(fixtures_path, match[0], match[1], match[2]) + '.css'
             puts File.read(new_file).gsub(/^(.*)/, config[1] + ' \1').colorize(config[0])
           end
           diff = diff.gsub(/^diff\s\-r\s.*\/tmp\/(.*).css/, '[\1]'.colorize(:cyan))
@@ -66,8 +73,8 @@ namespace :test do
           puts "===================================="
           puts "Are all of these changes expected? [y/n]".colorize(:yellow)
           if (($stdin.gets.chomp)[0] == 'y')
-            FileUtils.rm_rf(File.join(File.dirname(__FILE__), '..', fixtures, 'expected/.'))
-            FileUtils.cp_r(File.join(File.dirname(__FILE__), '..', fixtures, 'tmp/.'), File.join(File.dirname(__FILE__), '..', fixtures, 'expected'))
+            FileUtils.rm_rf(File.join(fixtures_path, EXPECTED, '.'))
+            FileUtils.cp_r(File.join(fixtures_path, TMP, '.'), File.join(fixtures_path, EXPECTED))
             puts "#{CHECKMARK}Thanks! The test expectations have been updated".colorize(:green)
           else
             puts "Please manually update the test cases and expectations".colorize(:red)
