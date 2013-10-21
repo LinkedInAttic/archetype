@@ -124,6 +124,7 @@ private
   # *Parameters*:
   # - <tt>value</tt> {String|Sass::String|Sass::List} the thing to convert
   # - <tt>separator</tt> {String} the separator to use for joining Sass::List
+  # - <tt>strip</tt> {\*} the properties to strip from the resulting string
   # *Returns*:
   # - {String} the converted String
   #

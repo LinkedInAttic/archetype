@@ -1,0 +1,29 @@
+@import "test_harness";
+
+@if not styleguide-component-exists(bem-elements-selector-styleguide-test, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component(bem-elements-selector-styleguide-test, (), (
+  (default, (
+    display         block,
+    color           red,
+    (selectors, (
+      ('&.test', (
+        color  green
+      )),
+      ('%bem element', (
+        color  blue
+      )),
+      ('%bem text', (
+        color  orange
+      )),
+      ('input', (
+        color  yellow
+      ))
+    ))
+  )),
+  nil
+), $CONFIG_THEME);
+}
+
+.bem-element-test {
+  @include styleguide(bem-elements-selector-styleguide-test);
+}

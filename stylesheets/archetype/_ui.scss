@@ -306,3 +306,29 @@
   padding: 0;
   @include appearance(none);
 }
+
+// a mixin to output the current context in a BEM style selector
+// @link http://bem.info/method/
+// @mixin     BEM
+// @param     $element {String} the element name
+// @param     $modifier {String} the modifier
+@mixin bem($element: null, $modifier: null) {
+  $selector: "#{&}";
+  @if $element {
+    @debug "#{&}";
+    @debug str-index("#{&}", $CONFIG_BEM_ELEMENT_SEPARATOR);
+    @if str-index("#{&}", $CONFIG_BEM_ELEMENT_SEPARATOR) or str-index("#{&}", $CONFIG_BEM_MODIFIER_SEPARATOR) {
+      @warn "the current context may produce a non-standard BEM selector for element `#{$element}`: #{&}";
+    }
+    $selector: "#{$selector}#{$CONFIG_BEM_ELEMENT_SEPARATOR}#{$element}";
+  }
+  @if $modifier {
+    @if str-index("#{&}", $CONFIG_BEM_MODIFIER_SEPARATOR) {
+      @warn "the current context may produce a non-standard BEM selector for modifier `#{$modifier}`: #{&}";
+    }
+    $selector: "#{$selector}#{$CONFIG_BEM_MODIFIER_SEPARATOR}#{$modifier}";
+  }
+  @at-root #{$selector} {
+    @content;
+  }
+}

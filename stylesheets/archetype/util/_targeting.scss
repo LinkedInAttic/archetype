@@ -51,7 +51,7 @@
       @else {
         $item: #{$comparator}#{($item + $version-adjust)};
       }
-      @if($vendor and support-legacy-browser($vendor, "#{$tmp}", $critical-usage-threshold)) {
+      @if($vendor and support-legacy-browser($vendor, "#{$tmp}", $threshold: $critical-usage-threshold)) {
         $item: '.#{$vendor}.#{$item}#{$using}';
         $list: append($list, unquote($item), comma);
         $unversioned: list-remove($unversioned, index($unversioned, '.#{$vendor}#{$using}'));
@@ -127,8 +127,8 @@
       $tmp: _getTargetedBrowsers($browsers, $threshold: $threshold);
       @if(length($tmp) == 1) {
         $support: ();
-        @if(support-legacy-browser('ie', '6', $critical-usage-threshold)) { $support: append($support, '.ie.ie6'); }
-        @if(support-legacy-browser('ie', '7', $critical-usage-threshold)) { $support: append($support, '.ie.lte7'); }
+        @if(support-legacy-browser('ie', '6', $threshold: $critical-usage-threshold)) { $support: append($support, '.ie.ie6'); }
+        @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) { $support: append($support, '.ie.lte7'); }
         $idx: index2($support, $tmp);
         @if($idx) {
           $prefix: nth(('_', '*'), $idx);

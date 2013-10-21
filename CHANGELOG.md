@@ -7,6 +7,12 @@
 - support Sass 3.3.0 and Compass 0.13.0
 - `content` is no longer improperly quoted if not needed
 
+### New Features:
+
+- added `$CONFIG_STATE_BEM` and `$CONFIG_BEM_MODIFIER_SEPARATOR` to generate [BEM style state selectors](http://bem.info/method/)
+- added `$CONFIG_BEM_ELEMENT_SEPARATOR` and `bem` mixin
+- added `str-replace` function for simple Sass::String replacements
+
 ### Major Changes:
 
 - dropped support for older versions of Sass/Compass (sorry, can't pass up the new feature set)
@@ -14,7 +20,6 @@
 - removed `_isLegacySupported` function
 - `inline-block` in styleguide component has changed syntax to take proper arguments
 - dropped `gradient` from supported keywords in styleguide components (use `background-image` instead)
-- added `$CONFIG_STATE_BEM` and `$CONFIG_STATE_BEM_SEPARATOR` to generate [BEM style state selectors](http://bem.info/method/)
 - `$CORE_STATE_MAPPINGS` and `$CONFIG_STATE_MAPPINGS` are now proper Sass maps
 - `styleguide` function now has the same signature as the mixin and can take multiple definitions at once
 - `styleguide-diff` now takes two `styleguide` results as params

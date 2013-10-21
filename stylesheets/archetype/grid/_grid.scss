@@ -247,7 +247,7 @@
       }
       // fix to collapse white space between inline-block elements
       letter-spacing: -0.313em; // webkit
-      @if(support-legacy-browser('ie', '7', $critical-usage-threshold)) {
+      @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) {
         *letter-spacing: normal;  // restore for IE6/7
       }
       word-spacing: -0.438em;   // IE/firefox
@@ -288,7 +288,7 @@
       @if(reading-direction() != $CONFIG_GRID_DIRECTION) {
         direction: reading-direction();
       }
-      @if(support-legacy-browser('ie', '7', $critical-usage-threshold)) {
+      @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) {
         *display:       inline;
       }
       display:        table-cell;

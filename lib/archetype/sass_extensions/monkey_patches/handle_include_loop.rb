@@ -6,7 +6,7 @@ module Sass
       class Perform
         def handle_include_loop!(node)
           # PATCH: a list of exempt mixins
-          exempt = %w(to-styles output-style -outputStyle)
+          exempt = %w(to-styles output-style -outputStyle bem)
           exempts = []
 
           msg = "An @include loop has been found:"
