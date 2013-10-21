@@ -1,0 +1,3 @@
+// environment
+$CONFIG_DEBUG_ENVS:   (dev development);                                                // environments to allow debug in
+$CONFIG_DEBUG:        (index($CONFIG_DEBUG_ENVS, archetype-env()) != false) !default;   // global debugging mode (enabled by default in $CONFIG_DEBUG_ENVS)

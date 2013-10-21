@@ -1,0 +1,8 @@
+// resets
+$CONFIG_RESET_METHOD:       hybrid !default;  // reset method [reset|normalize|hybrid]
+$CONFIG_RESET_AUTO:         false !default;   // if true, importing `archetype` will invoke the reset
+$CONFIG_RESET_EXCLUDES:     () !default;      // list of things to exclude from the reset
+
+// keyframe animations
+$CONFIG_KEYFRAMES_AUTO:     $CONFIG_RESET_AUTO !default;  // whether or not to auto generate the keyframe animations
+$CONFIG_KEYFRAME_LOADERS:   archetype-loader !default;    // loading spinner keyframe name

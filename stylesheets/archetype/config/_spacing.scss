@@ -1,0 +1,5 @@
+// spacing
+$CONFIG_SPACING:            5px !default;               // spacing factor
+$CONFIG_HORIZONTAL_SPACING: $CONFIG_SPACING !default;   // horizontal spacing
+$CONFIG_VERTICAL_SPACING:   $CONFIG_SPACING !default;   // veritcal spacing
+$CONFIG_SPACING_METHOD:     padding !default;           // method for providing spacing [padding|margin]

@@ -1,0 +1,18 @@
+// browser targeting
+$CONFIG_BROWSER_VENDORS_CLASS:    (ie) !default;    // a list of browsers to support via class targeting
+$CONFIG_BROWSER_ALLOW_HACKS:      true !default;    // if set to true, allow browser targeting hacks
+$CONFIG_BROWSER_WARN_ON_HACK:     false !default;   // if hacks are used, throw a warning
+// this is an associative list for various hacks
+$CONFIG_BROWSER_VENDORS_HACK: (
+  (webkit-all, safari webkit chrome),
+  (gecko-all,  firefox gecko mozilla),
+  (opera-all,  opera) // NOTE: this may stop working once Opera switches over to using WebKit/Blink
+) !default;
+
+// os targeting
+$CONFIG_OS_VENDORS_CLASS: (
+  (os-win,   windows win winxp win7 win8),
+  (os-mac,   apple mac osx),
+  (os-linux, linux),
+  (os-other, other misc unknown)
+) !default;
