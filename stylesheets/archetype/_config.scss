@@ -19,11 +19,14 @@ $CONFIG_RESET_METHOD:             hybrid !default;                              
 $CONFIG_RESET_AUTO:               false !default;                                                   // if true, importing `archetype` will invoke the reset
 $CONFIG_RESET_EXCLUDES:           () !default;                                                      // list of things to exclude from the reset
 
+// BEM support
+$CONFIG_BEM_MODIFIER_SEPARATOR:   '--' !default;                                                    // the separator to denote the BEM modifier (e.g. .my-block--enabled)
+$CONFIG_BEM_ELEMENT_SEPARATOR:    '__' !default;                                                    // the separator to denote the BEM element (e.g. .my-block__element)
+
 // states used when printing out styles
 $CONFIG_STATE_PREFIX:             '' !default;                                                      // prefix state classnames @see to-style()
 $CONFIG_STATE_NO_PREFIX:          () !default;                                                      // states to never apply prefix to
 $CONFIG_STATE_BEM:                false !default;                                                   // use the BEM syntax for printing states [true|false|only]
-$CONFIG_STATE_BEM_SEPARATOR:      '--' !default;                                                    // the separator to denote the BEM state (e.g. .my-element--hover)
 // a mapping for state names to selectors
 $CORE_STATE_MAPPINGS: (
   'hover' : (

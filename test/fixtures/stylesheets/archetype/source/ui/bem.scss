@@ -1,0 +1,40 @@
+@import "test_harness";
+
+.dialog {
+  /* this is a dialog */
+  @include bem($modifier: open) {
+    /* this is the open state of the dialog */
+  }
+  @include bem($element: header) {
+    /* this is a header within a dialog */
+  }
+  @include bem(header, collapsed) {
+    /* this is a header in the collapsed state, within a dialog */
+  }
+}
+
+.dialog__something {
+  /* this is already a BEM style selector, so we should get some warnings */
+  @include bem($modifier: open) {
+    /* this is the open state of the dialog */
+  }
+  @include bem($element: header) {
+    /* this is a header within a dialog */
+  }
+  @include bem(header, collapsed) {
+    /* this is a header in the collapsed state, within a dialog */
+  }
+}
+
+.dialog--weird {
+  /* this is already a BEM style selector, so we should get some warnings */
+  @include bem($modifier: open) {
+    /* this is the open state of the dialog */
+  }
+  @include bem($element: header) {
+    /* this is a header within a dialog */
+  }
+  @include bem(header, collapsed) {
+    /* this is a header in the collapsed state, within a dialog */
+  }
+}

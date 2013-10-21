@@ -1,0 +1,20 @@
+.bem-element-test {
+  /* [archetype:styleguide:begin] --- bem-elements-selector-styleguide-test --- */
+  display: block;
+  color: red;
+  /* selector was... element */
+  /* selector was... text */
+  /* [archetype:styleguide:end]   --- bem-elements-selector-styleguide-test --- */
+}
+.bem-element-test.test {
+  color: green;
+}
+.bem-element-test__element {
+  color: blue;
+}
+.bem-element-test__text {
+  color: orange;
+}
+.bem-element-test input {
+  color: yellow;
+}

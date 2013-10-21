@@ -4,7 +4,7 @@
 // hack to support negative margins in legacy IE
 // @mixin     hack-negative-margin
 @mixin hack-negative-margin() {
-  @if(support-legacy-browser('ie', '7', $critical-usage-threshold)) {
+  @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) {
     @include has-layout();
     position: relative;
   }
@@ -69,7 +69,7 @@
 // @content
 @mixin ie-pseudo($styles: false, $content: false, $placement: before, $name: '', $uid: false) {
   $archetype-pseudo-selector: null !global;
-  @if(support-legacy-browser('ie', '7', $critical-usage-threshold)) {
+  @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) {
     $uid: if($uid, $uid, unique('ie-pseudo-'));
     $archetype-pseudo-selector: '& ##{$uid}' !global;
     $method: if($placement == before, insertBefore, appendChild);
