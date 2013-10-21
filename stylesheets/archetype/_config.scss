@@ -76,6 +76,9 @@ $COMPASS_RTL_SUPPORT:             false !default;                               
 // sprites
 $CONFIG_DISABLE_STYLEGUIDE_SPRITES: false !default;                                                 // disable all sprite generation in styleguide
 
+// smart content
+$CONFIG_USE_SMART_CONTENT:        false !default;                                                   // use @extend when possible to smartly output content
+
 // keyframe animations
 $CONFIG_KEYFRAMES_AUTO:           $CONFIG_RESET_AUTO !default;                                      // whether or not to auto generate the keyframe animations
 $CONFIG_KEYFRAME_LOADERS:         archetype-loader !default;                                        // loading spinner keyframe name
@@ -401,8 +404,9 @@ $CORE_SAFE_FONTS: (
 $CONFIG_SAFE_FONTS: () !default;
 $CONFIG_SAFE_FONTS: associative-merge($CORE_SAFE_FONTS, $CONFIG_SAFE_FONTS);
 
-$archetype-glyph-selector: false !default;
-$archetype-pseudo-selector: false !default;
+$archetype-glyph-selector: null !default;
+$archetype-pseudo-selector: null !default;
+$archetype-placeholder-registry: () !default;
 
 $CORE_GLYPH_SELECTOR_VAR: '$archetype-glyph-selector';
 $CORE_GLYPH_SELECTOR_VAR: '$archetype-pseudo-selector';

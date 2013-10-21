@@ -27,18 +27,20 @@ $a-blackhole: styleguide-add-component(bem-state-selector-styleguide-test, (), (
 ), $CONFIG_THEME);
 }
 
-
+/* BEM states off */
 $CONFIG_STATE_BEM: false;
-.nested-styleguide-test-false {
+.bem-state-test-false {
   @include styleguide(bem-state-selector-styleguide-test);
 }
 
+/* BEM states on */
 $CONFIG_STATE_BEM: true;
-.nested-styleguide-test-true {
+.bem-state-test-true {
   @include styleguide(bem-state-selector-styleguide-test);
 }
 
+/* BEM states ONLY */
 $CONFIG_STATE_BEM: only;
-.nested-styleguide-test-only {
+.bem-state-test-only {
   @include styleguide(bem-state-selector-styleguide-test);
 }

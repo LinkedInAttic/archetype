@@ -172,7 +172,7 @@
 // @param     $ie-uid {String} a custom, unique identifier for the generate IE6/7 element
 // @content
 @mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: false, $ie-uid: false) {
-  $archetype-glyph-selector: false;
+  $archetype-glyph-selector: null !global;
   $char-mapping: nil;
   $char-code: nil;
   @if $icon {
@@ -207,7 +207,7 @@
         content: $char-code;
       }
     }
-    $archetype-glyph-selector: $selector;
+    $archetype-glyph-selector: $selector !global;
     @if($selector != '&' and $ie-styles != nil) {
       // support for IE6/7
       $styles: "font-family:'#{$CONFIG_GLYPHS_NAME}-#{$CONFIG_GLYPHS_VERSION}', '#{$CONFIG_GLYPHS_NAME}';font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;";
@@ -222,7 +222,7 @@
       }
       @include ie-pseudo($styles: $styles, $content: $char-code, $placement: $placement, $name: glyph, $uid: $ie-uid);
       @if $archetype-pseudo-selector {
-        $archetype-glyph-selector: '#{$selector}, #{$archetype-pseudo-selector}';
+        $archetype-glyph-selector: '#{$selector}, #{$archetype-pseudo-selector}' !global;
       }
     }
     #{$archetype-glyph-selector} {
