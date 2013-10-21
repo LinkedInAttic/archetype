@@ -10,7 +10,7 @@
 @mixin styleguide($is: (), $is-2: false, $is-3: false, $is-4: false, $is-5: false, $is-6: false, $is-7: false, $is-8: false, $is-9: false, $is-10: false, $exclude: (), $state: false, $theme: $CONFIG_THEME) {
   $definition: compact($is, $is-2, $is-3, $is-4, $is-5, $is-6, $is-7, $is-8, $is-9, $is-10);
   @if length($definition) > 0 {
-    $styles: styleguide($definition, $state, $theme);
+    $styles: _styleguide($definition, $state, $theme);
     // output a debug message
     /* [archetype:styleguide:begin] --- #{$definition} --- */
     // generate actual styles
@@ -20,22 +20,31 @@
   }
 }
 
+// returns the styleguide object
+// @function  styleguide
+// @param     $is ... $is-10   {List} a descriptive definition of the element, must contain an ID and optionally any modifiers e.g. `large primary button`
+// @param     $exclude {List} a list of styles to exclude from output
+// @param     $state {String} a specific state to output
+// @param     $theme {String} the theme name
+@function styleguide($is: (), $is-2: false, $is-3: false, $is-4: false, $is-5: false, $is-6: false, $is-7: false, $is-8: false, $is-9: false, $is-10: false, $exclude: (), $state: false, $theme: $CONFIG_THEME) {
+  $definition: compact($is, $is-2, $is-3, $is-4, $is-5, $is-6, $is-7, $is-8, $is-9, $is-10);
+  @return _styleguide($definition, $state, $theme);
+}
+
 // output the difference between two styelguide invocations
 // @mixin     styleguide-diff
 // @param     $original {List} the original styleguide reference to compare to
 // @param     $other {List} the other styleguide reference
 // @param     $exclude {List} a list of styles to exclude from output
 // @param     $theme {String} the theme name
-@mixin styleguide-diff($original, $other, $exclude: (), $theme: $CONFIG_THEME) {
-  $original: compact($original, nil);
-  $other: compact($other, nil);
-  $diff: styleguide-diff($original, $other, $theme);
+@mixin styleguide-diff($original, $other, $exclude: ()) {
+  $diff: styleguide-diff($original, $other);
   @if length($diff) > 0 {
     // output a debug message
-    /* [archetype:styleguide:diff:begin] --- `#{$original}` vs `#{$other}` --- */
+    /* [archetype:styleguide:diff:begin] --- --- */
     // generate actual styles
     @include to-styles($diff, $exclude: $exclude);
     // more debugging
-    /* [archetype:styleguide:diff:end]   --- `#{$original}` vs `#{$other}` --- */
+    /* [archetype:styleguide:diff:end]   --- --- */
   }
 }

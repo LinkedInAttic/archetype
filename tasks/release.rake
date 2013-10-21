@@ -24,7 +24,7 @@ task :release do
   version = @version_without_revision
   puts "You are about to release #{"v#{version}".colorize(:green)}".colorize(:cyan)
   proceed_on_input "Is this correct? [y/n]".colorize(:cyan) do
-    #Rake::Task['git:revert'].invoke if not clean
+    Rake::Task['git:revert'].invoke if not clean
     Rake::Task['gem:build'].invoke
     begin
       puts "checking previously released versions..."
@@ -37,10 +37,10 @@ task :release do
       proceed_on_input "couldn't verify release versions, proceed with caution".colorize(:yellow)
     end
 
-    #%x{
-    #  git tag -a v#{version} -m \"version #{version}\" && git push --tags
-    #  gem push #{@spec.name}-#{version}.gem
-    #}
+    %x[
+      git tag -a v#{version} -m \"version #{version}\" && git push --tags
+      gem push #{@spec.name}-#{version}.gem
+    ]
     puts "Successfully released v#{version}!".colorize(:green)
   end
 end

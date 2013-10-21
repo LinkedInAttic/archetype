@@ -50,7 +50,7 @@
     // background
     @else if($property == background)           { @include background($value...); }
     // background-image
-    @else if($property == background-image or $property == gradient) { @include background-image($value...); }
+    @else if($property == background-image)     { @include background-image($value...); }
     // background-clip
     @else if($property == background-clip)      { @include background-clip($value...); }
     // background-size
@@ -162,6 +162,32 @@
   }
 }
 
+// outputs @content into a placeholder, and then extends it,
+// if the placeholder already exists, just extend it
+// @mixin     archetype-smart-content
+// @param     $placeholder {String} the placeholder
+// @param     $extend {Boolean} if false, will only create the placeholder, but not extend it
+// @content
+@mixin archetype-smart-content($placeholder, $extend: true) {
+  @if $CONFIG_USE_SMART_CONTENT {
+    // if we haven't already registered this placeholder...
+    @if not index($archetype-placeholder-registry, $placeholder) {
+      // create it...
+      @at-root #{$placeholder} {
+        @content;
+      }
+      // and register it...
+      $archetype-placeholder-registry: append($archetype-placeholder-registry, $placeholder) !global;
+    }
+    @if $extend {
+      @extend #{$placeholder} !optional;
+    }
+  }
+  @elseif $extend {
+    @content;
+  }
+}
+
 // convert a list of key-value pairs into CSS rules
 // @mixin     to-styles
 // @param     $list {List} a key-value paired list of ($property $value)
@@ -171,36 +197,68 @@
   $exclude: -compass-list($exclude);
   $states-data: ();
   $selectors-data: ();
-  @each $item in $list {
-    @if(length($item) > 1) {
-      $property: nth($item, 1);
-      $value: nth($item, 2);
-      @if(not index($exclude, $property)) {
-        // deal with the states
-        @if($property == states and $states != false and length($value) > 0) {
-          @each $state in $value {
-            $val: nth($state, 2);
-            $state: first-value-of($state);
-            @if(index(-compass-list($states), $state) or $states == true) {
-              #{_getStateSelector($state)} {
-                @include to-styles($val, true, true, $exclude);
+  $placeholder: (
+    list:       $list,
+    states:     $states,
+    selectors:  $selectors,
+    exclude:    $exclude
+  );
+  $placeholder: unquote("%#{tokenize($placeholder)}");
+  // register a placeholder if needed
+  @include archetype-smart-content($placeholder) {
+    @each $item in $list {
+      @if(length($item) > 1) {
+        $property: nth($item, 1);
+        $value: nth($item, 2);
+        @if(not index($exclude, $property)) {
+          // deal with the states
+          @if($property == states and $states != false and length($value) > 0) {
+            @each $state in $value {
+              $val: nth($state, 2);
+              $state: first-value-of($state);
+              @if(index(-compass-list($states), $state) or $states == true) {
+                // get the state selector mappings
+                $selector-map: _getStateSelectorMap($state);
+                // output the state selectors if we're not using _only_ BEM style
+                @if($CONFIG_STATE_BEM != only) {
+                  $selector: map-get($selector-map, selector);
+                  // if the selector is valid...
+                  @if($selector != null) {
+                    // output it
+                    #{$selector} {
+                      @include to-styles($val, true, true, $exclude);
+                    }
+                  }
+                }
+                // if BEM style states are enabled...
+                @if($CONFIG_STATE_BEM) {
+                  // get the BEM states
+                  $bem-states: map-get($selector-map, states);
+                  // for each BEM state
+                  @each $bem-state in $bem-states {
+                    // output it (this looks scarier than it really is...)
+                    @at-root #{&}--#{$bem-state} {
+                      @include to-styles($val, true, true, $exclude);
+                    }
+                  }
+                }
               }
             }
           }
-        }
-        // deal with the nested selectors
-        @else if($property == selectors and $selectors != false and length($value) > 0) {
-          @each $selector in $value {
-            @if(index(-compass-list($selectors), $selector) or $selectors == true) {
-              #{_getSelectorSelector($selector)} {
-                @include to-styles(nth($selector, 2), true, true, $exclude);
+          // deal with the nested selectors
+          @else if($property == selectors and $selectors != false and length($value) > 0) {
+            @each $selector in $value {
+              @if(index(-compass-list($selectors), $selector) or $selectors == true) {
+                #{_getSelectorSelector($selector)} {
+                  @include to-styles(nth($selector, 2), true, true, $exclude);
+                }
               }
             }
           }
-        }
-        // otherwise, just output it
-        @else if($selectors == true and $states == true ) {
-          @include _outputStyle($property, $value);
+          // otherwise, just output it
+          @else if($selectors == true and $states == true ) {
+            @include _outputStyle($property, $value);
+          }
         }
       }
     }
@@ -208,16 +266,19 @@
 }
 
 // helper function to compute the selector for various states
-// @function  _getStateSelector
+// @function  _getStateSelectorMap
 // @private
 // @param     $state {String} the state to select
 // @param     $prefix {String} the prefix to append to the state (for class names only)
-@function _getStateSelector($state, $prefix: $CONFIG_STATE_PREFIX) {
-  $selector: associative($CONFIG_STATE_MAPPINGS, $state, $strict: true);
-  @if $selector == nil or length($selector) == 0 {
-    $selector: '&.#{if(index(-compass-list($CONFIG_STATE_NO_PREFIX), $state), $prefix, "")}#{$state}';
+@function _getStateSelectorMap($state, $prefix: $CONFIG_STATE_PREFIX) {
+  $map: map-get($CONFIG_STATE_MAPPINGS, $state);
+  @if $map == null or length($map) == 0 {
+    $map: (
+      selector : '&.#{if(index(-compass-list($CONFIG_STATE_NO_PREFIX), $state), $prefix, "")}#{$state}',
+      states   : ($state)
+    );
   }
-  @return $selector;
+  @return $map;
 }
 
 @function _getSelectorSelector($selector) {
@@ -233,13 +294,13 @@
 
 // mixin for outputting filters in legacy IE
 // @mixin     ie-filter
-// @param     $value {String|List} a set of filters to output, sans `progid:DXImageTransform.Microsoft` prefix
+// @param     $value {String|List} a set of filters to output
 @mixin ie-filter($value, $use-prefix: false) {
   $out: false;
   $value: -compass-list($value);
   $ms-filter-prefix: 'progid:DXImageTransform.Microsoft.';
   @each $item in $value {
-    @if($item != none) {
+    @if($item != none and str-index($item, $ms-filter-prefix) != 1) {
       $item: #{$ms-filter-prefix}#{$item};
     }
     $out: if($out, '#{$out},#{$item}', '#{$item}');

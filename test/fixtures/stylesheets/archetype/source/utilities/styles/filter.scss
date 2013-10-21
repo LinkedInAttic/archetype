@@ -7,3 +7,7 @@ a {
 b {
   @include ie-filter(gradient(enabled=false));
 }
+
+c {
+  @include ie-filter(progid:DXImageTransform.Microsoft.Shadow(Strength=2, Direction=135, Color='#CCCCCC'));
+}

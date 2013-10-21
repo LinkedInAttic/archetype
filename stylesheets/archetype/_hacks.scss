@@ -68,10 +68,10 @@
 // @param     $uid {String} a custom, unique identifier for the generate element
 // @content
 @mixin ie-pseudo($styles: false, $content: false, $placement: before, $name: '', $uid: false) {
-  $archetype-pseudo-selector: false;
+  $archetype-pseudo-selector: null !global;
   @if(support-legacy-browser('ie', '7', $critical-usage-threshold)) {
     $uid: if($uid, $uid, unique('ie-pseudo-'));
-    $archetype-pseudo-selector: '& ##{$uid}';
+    $archetype-pseudo-selector: '& ##{$uid}' !global;
     $method: if($placement == before, insertBefore, appendChild);
     $content: if($content and $content != nil, 'this.el.innerHTML="#{-ie-pseudo-content($content)}",', '');
     @if $CONFIG_GENERATED_TAG_CSS {

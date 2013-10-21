@@ -119,7 +119,7 @@ module Archetype::SassExtensions::Styleguide
   # *Returns*:
   # - {List} a key-value paired list of styles
   #
-  def styleguide(description, state = 'false', theme = nil)
+  def _styleguide(description, state = 'false', theme = nil)
     @@archetype_styleguide_mutex.synchronize do
       # convert it back to a Sass:List and carry on
       return helpers.hash_to_list(get_styles(description, theme, state), 0)
@@ -138,8 +138,8 @@ module Archetype::SassExtensions::Styleguide
   #
   def styleguide_diff(original, other, theme = nil)
     @@archetype_styleguide_mutex.synchronize do
-      original = get_styles(original, theme)
-      other = get_styles(other, theme)
+      original = helpers.list_to_hash(original)
+      other = helpers.list_to_hash(other)
       diff = original.diff(other)
       return helpers.hash_to_list(diff, 0)
     end
@@ -406,7 +406,7 @@ private
   # - {Hash} the theme
   #
   def get_theme(theme)
-    theme_name = helpers.to_str(theme || 'archetype')
+    theme_name = helpers.to_str(theme || environment.var('CONFIG_THEME'))
     @@styleguide_themes ||= {}
     theme = @@styleguide_themes[theme_name] ||= {}
     theme[:name] ||= theme_name

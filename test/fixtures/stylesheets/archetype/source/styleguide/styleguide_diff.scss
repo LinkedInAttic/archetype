@@ -1,0 +1,27 @@
+@import "test_harness";
+
+.button {
+  @include styleguide(button);
+  &.primary {
+    @include styleguide-diff(styleguide(button), styleguide(primary button));
+  }
+  &.secondary {
+    @include styleguide-diff(styleguide(button), styleguide(secondary button));
+  }
+  &.spotlight {
+    @include styleguide-diff(styleguide(button), styleguide(spotlight button));
+  }
+}
+
+.text {
+  @include styleguide(copy);
+  &.muted {
+    @include styleguide-diff(styleguide(copy), styleguide(muted copy));
+  }
+}
+h1 {
+  @include styleguide(large headline);
+  .note {
+    @include styleguide-diff(styleguide(large headline), styleguide(small muted copy));
+  }
+}

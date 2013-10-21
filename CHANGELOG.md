@@ -1,13 +1,11 @@
 # Changelog
 
-* Table of contents
-{:toc}
-
-## 0.0.2.alpha.1 (pre-released)
+## 0.0.2.alpha.1 (unreleased)
 
 ### Resolved Issues:
 
 - support Sass 3.3.0 and Compass 0.13.0
+- `content` is no longer improperly quoted if not needed
 
 ### Major Changes:
 
@@ -15,6 +13,11 @@
 - removed `gradient-with-deg` mixin
 - removed `_isLegacySupported` function
 - `inline-block` in styleguide component has changed syntax to take proper arguments
+- dropped `gradient` from supported keywords in styleguide components (use `background-image` instead)
+- added `$CONFIG_STATE_BEM` and `$CONFIG_STATE_BEM_SEPARATOR` to generate [BEM style state selectors](http://bem.info/method/)
+- `$CORE_STATE_MAPPINGS` and `$CONFIG_STATE_MAPPINGS` are now proper Sass maps
+- `styleguide` function now has the same signature as the mixin and can take multiple definitions at once
+- `styleguide-diff` now takes two `styleguide` results as params
 
 ## 0.0.1.pre.3 (pre-released)
 

@@ -22,18 +22,41 @@ $CONFIG_RESET_EXCLUDES:           () !default;                                  
 // states used when printing out styles
 $CONFIG_STATE_PREFIX:             '' !default;                                                      // prefix state classnames @see to-style()
 $CONFIG_STATE_NO_PREFIX:          () !default;                                                      // states to never apply prefix to
+$CONFIG_STATE_BEM:                false !default;                                                   // use the BEM syntax for printing states [true|false|only]
+$CONFIG_STATE_BEM_SEPARATOR:      '--' !default;                                                    // the separator to denote the BEM state (e.g. .my-element--hover)
 // a mapping for state names to selectors
 $CORE_STATE_MAPPINGS: (
-  'hover'           '&.#{$CONFIG_STATE_PREFIX}hover, &:hover, &.#{$CONFIG_STATE_PREFIX}focus, &:focus',
-  'hover-only'      '&.#{$CONFIG_STATE_PREFIX}hover, &:hover',
-  'focus'           '&.#{$CONFIG_STATE_PREFIX}focus, &:focus',
-  'active'          '&.#{$CONFIG_STATE_PREFIX}active, &:active',
-  'visited'         '&.#{$CONFIG_STATE_PREFIX}visited, &:visited',
-  'disabled'        '&.#{$CONFIG_STATE_PREFIX}disabled, &[disabled]',
-  'focus-inner'     '&::-moz-focus-inner'
+  'hover' : (
+    selector  : '&.#{$CONFIG_STATE_PREFIX}hover, &:hover, &.#{$CONFIG_STATE_PREFIX}focus, &:focus',
+    states    : hover focus
+  ),
+  'hover-only' : (
+    selector  : '&.#{$CONFIG_STATE_PREFIX}hover, &:hover',
+    states    : hover
+  ),
+  'focus' : (
+    selector  : '&.#{$CONFIG_STATE_PREFIX}focus, &:focus',
+    states    : focus
+  ),
+  'active' : (
+    selector  : '&.#{$CONFIG_STATE_PREFIX}active, &:active',
+    states    : active
+  ),
+  'visited' : (
+    selector  : '&.#{$CONFIG_STATE_PREFIX}visited, &:visited',
+    states    : visited
+  ),
+  'disabled' : (
+    selector  : '&.#{$CONFIG_STATE_PREFIX}disabled, &[disabled]',
+    states    : disabled
+  ),
+  'focus-inner' : (
+    selector  : '&::-moz-focus-inner',
+    states    : null
+  )
 );
 $CONFIG_STATE_MAPPINGS: () !default;
-$CONFIG_STATE_MAPPINGS: associative-merge($CORE_STATE_MAPPINGS, $CONFIG_STATE_MAPPINGS);
+$CONFIG_STATE_MAPPINGS: map-merge($CORE_STATE_MAPPINGS, $CONFIG_STATE_MAPPINGS);
 
 // misc
 $CONTENT_PLACEHOLDER:             '\0020' !default;                                                 // content placeholder (ensures block elements display correctly even if they're empty)
@@ -52,6 +75,9 @@ $COMPASS_RTL_SUPPORT:             false !default;                               
 
 // sprites
 $CONFIG_DISABLE_STYLEGUIDE_SPRITES: false !default;                                                 // disable all sprite generation in styleguide
+
+// smart content
+$CONFIG_USE_SMART_CONTENT:        false !default;                                                   // use @extend when possible to smartly output content
 
 // keyframe animations
 $CONFIG_KEYFRAMES_AUTO:           $CONFIG_RESET_AUTO !default;                                      // whether or not to auto generate the keyframe animations
@@ -378,8 +404,9 @@ $CORE_SAFE_FONTS: (
 $CONFIG_SAFE_FONTS: () !default;
 $CONFIG_SAFE_FONTS: associative-merge($CORE_SAFE_FONTS, $CONFIG_SAFE_FONTS);
 
-$archetype-glyph-selector: false !default;
-$archetype-pseudo-selector: false !default;
+$archetype-glyph-selector: null !default;
+$archetype-pseudo-selector: null !default;
+$archetype-placeholder-registry: () !default;
 
 $CORE_GLYPH_SELECTOR_VAR: '$archetype-glyph-selector';
 $CORE_GLYPH_SELECTOR_VAR: '$archetype-pseudo-selector';

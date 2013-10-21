@@ -1,0 +1,37 @@
+// verifies the behavior of archetype-smart-content
+
+$CONFIG_USE_SMART_CONTENT: true;
+@import "test_harness";
+
+@mixin test1 {
+  @include to-styles((
+    color       red,
+    overflow    hidden
+  ));
+}
+
+.test1a {
+  @include test1;
+}
+
+.test1b {
+  @include test1;
+}
+
+//
+
+.test2a {
+  @include styleguide(small copy);
+}
+
+.test2b {
+  @include styleguide(small copy);
+}
+
+.test2c {
+  @include styleguide(small copy);
+}
+
+.test2d {
+  @include styleguide(small muted copy);
+}

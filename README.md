@@ -15,11 +15,15 @@ Archetype is a UI pattern and component library for quickly iterating on and mai
 - [Discussion](https://github.com/eoneill/archetype/issues)
 - [Archetype configuration](http://www.archetypecss.com/documentation/configuration/)
 
+## Developing Archetype
+
+If you're looking to contribute to Archetype, check out the [CONTRIBUTING](CONTRIBUTING.md) article.
+
 ## Installation
 
 ### Install the gem
 
-```bash
+```sh
 [sudo] gem install archetype --pre
 ```
 
@@ -27,7 +31,7 @@ Instead of installing the gem directly via the command line, we recommend using 
 
 ### Creating a new project with Archetype
 
-```bash
+```sh
 compass create ~/workspace/your-project -r archetype --using archetype
 ```
 
@@ -82,6 +86,6 @@ This project couldn't have been made possible without the amazing work by the fo
 
 - Dave Gandy for his awesome work on [FontAwesome](http://fortawesome.github.com/Font-Awesome/)
 - Chris Eppstein and other contributors of [Compass](http://compass-style.org/) for building an amazing framework, and for some great scaffolding code we've _borrowed_
-- Nathan Weizenbaum and contributors for [making CSS fun again](http://sass-lang.com/)
+- Hampton Catlin, Nathan Weizenbaum, Chris Eppstein and contributors for [making CSS fun again](http://sass-lang.com/)
 - Nicolas Gallagher and Jonathan Neal for some [Normalize.css](https://github.com/necolas/normalize.css) greatness
 - Nicolas Gallagher, Jonathan Neal, Kroc Camen, Paul Irish, and others for [HTML5 Boilerplate](http://html5boilerplate.com/)

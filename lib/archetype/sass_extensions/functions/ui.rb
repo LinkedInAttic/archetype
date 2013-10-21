@@ -26,6 +26,20 @@ module Archetype::SassExtensions::UI
   end
 
   #
+  # tokenize a given value
+  #
+  # *Parameters*:
+  # - <tt>$item</tt> {*} the item to generate a unique hash from
+  # *Returns*:
+  # - {String} a token of the string
+  #
+  def tokenize(item)
+    prefix = helpers.to_str(environment.var('CONFIG_GENERATED_TAG_PREFIX') || 'archetype') + '-'
+    token = prefix + helpers.to_str(item).hash.to_s
+    return Sass::Script::String.new(token)
+  end
+
+  #
   # parse a CSS content string and format it for injection into innerHTML
   #
   # *Parameters*:

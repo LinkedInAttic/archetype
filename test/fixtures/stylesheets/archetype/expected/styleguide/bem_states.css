@@ -1,0 +1,89 @@
+/* BEM states off */
+.bem-state-test-false {
+  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test --- */
+  display: block;
+  color: red;
+  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test --- */
+}
+.bem-state-test-false.hover, .bem-state-test-false:hover, .bem-state-test-false.focus, .bem-state-test-false:focus {
+  color: red;
+}
+.bem-state-test-false.hover, .bem-state-test-false:hover {
+  color: blue;
+}
+.bem-state-test-false.focus, .bem-state-test-false:focus {
+  color: green;
+}
+.bem-state-test-false.active, .bem-state-test-false:active {
+  color: black;
+}
+.bem-state-test-false.my-custom-state {
+  color: pink;
+}
+
+/* BEM states on */
+.bem-state-test-true {
+  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test --- */
+  display: block;
+  color: red;
+  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test --- */
+}
+.bem-state-test-true.hover, .bem-state-test-true:hover, .bem-state-test-true.focus, .bem-state-test-true:focus {
+  color: red;
+}
+.bem-state-test-true--hover {
+  color: red;
+}
+.bem-state-test-true--focus {
+  color: red;
+}
+.bem-state-test-true.hover, .bem-state-test-true:hover {
+  color: blue;
+}
+.bem-state-test-true--hover {
+  color: blue;
+}
+.bem-state-test-true.focus, .bem-state-test-true:focus {
+  color: green;
+}
+.bem-state-test-true--focus {
+  color: green;
+}
+.bem-state-test-true.active, .bem-state-test-true:active {
+  color: black;
+}
+.bem-state-test-true--active {
+  color: black;
+}
+.bem-state-test-true.my-custom-state {
+  color: pink;
+}
+.bem-state-test-true--my-custom-state {
+  color: pink;
+}
+
+/* BEM states ONLY */
+.bem-state-test-only {
+  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test --- */
+  display: block;
+  color: red;
+  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test --- */
+}
+.bem-state-test-only--hover {
+  color: red;
+}
+.bem-state-test-only--focus {
+  color: red;
+}
+.bem-state-test-only--hover {
+  color: blue;
+}
+.bem-state-test-only--focus {
+  color: green;
+}
+.bem-state-test-only--active {
+  color: black;
+}
+.bem-state-test-only--my-custom-state {
+  color: pink;
+}
