@@ -1,0 +1,38 @@
+.dialog {
+  /* this is a dialog */
+}
+.dialog--open {
+  /* this is the open state of the dialog */
+}
+.dialog__header {
+  /* this is a header within a dialog */
+}
+.dialog__header--collapsed {
+  /* this is a header in the collapsed state, within a dialog */
+}
+
+.dialog__something {
+  /* this is already a BEM style selector, so we should get some warnings */
+}
+.dialog__something--open {
+  /* this is the open state of the dialog */
+}
+.dialog__something__header {
+  /* this is a header within a dialog */
+}
+.dialog__something__header--collapsed {
+  /* this is a header in the collapsed state, within a dialog */
+}
+
+.dialog--weird {
+  /* this is already a BEM style selector, so we should get some warnings */
+}
+.dialog--weird--open {
+  /* this is the open state of the dialog */
+}
+.dialog--weird__header {
+  /* this is a header within a dialog */
+}
+.dialog--weird__header--collapsed {
+  /* this is a header in the collapsed state, within a dialog */
+}
