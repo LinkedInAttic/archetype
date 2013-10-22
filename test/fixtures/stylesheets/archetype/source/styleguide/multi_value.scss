@@ -1,6 +1,6 @@
 @import "test_harness";
 
-@if not styleguide-component-exists(multi-value-styleguide-test, $CONFIG_THEME) {
+@if should-register-component(multi-value-styleguide-test) {
 $a-blackhole: styleguide-add-component(multi-value-styleguide-test, (), (
   (default, (
     color           gray,
@@ -11,7 +11,7 @@ $a-blackhole: styleguide-add-component(multi-value-styleguide-test, (), (
     target-browser  (ie 8, color, red),
     target-browser  (firefox, color, pink)
   ))
-), $CONFIG_THEME);
+));
 }
 .multi-value-styleguide-test {
   @include styleguide(multi-value-styleguide-test);

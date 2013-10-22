@@ -4,7 +4,7 @@
 $STYLEGUIDE_LOADERS_ID: loader !default;
 $STYLEGUIDE_LOADERS: () !default;
 
-@if not styleguide-component-exists($STYLEGUIDE_LOADERS_ID, $CONFIG_THEME) {
+@if should-register-component($STYLEGUIDE_LOADERS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_LOADERS_ID, $STYLEGUIDE_LOADERS, (
   (default, (
     display             block,
@@ -150,5 +150,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_LOADERS_ID, $STYLEGUIDE_LOADE
     opacity             nil,
     nil
   ))
-), $CONFIG_THEME);
+));
 }

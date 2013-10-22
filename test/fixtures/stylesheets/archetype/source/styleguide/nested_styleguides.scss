@@ -5,7 +5,7 @@
 
 @import "test_harness";
 
-@if not styleguide-component-exists(nested-styleguide-test, $CONFIG_THEME) {
+@if should-register-component(nested-styleguide-test) {
 $a-blackhole: styleguide-add-component(nested-styleguide-test, (), (
   (default, (
     display         block,
@@ -33,7 +33,7 @@ $a-blackhole: styleguide-add-component(nested-styleguide-test, (), (
     nil
   )),
   nil
-), $CONFIG_THEME);
+));
 }
 .nested-styleguide-test {
   @include styleguide(nested-styleguide-test);

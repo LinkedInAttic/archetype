@@ -4,7 +4,7 @@
 $STYLEGUIDE_LINKS_ID: link !default;
 $STYLEGUIDE_LINKS: () !default;
 
-@if not styleguide-component-exists($STYLEGUIDE_LINKS_ID, $CONFIG_THEME) {
+@if should-register-component($STYLEGUIDE_LINKS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_LINKS_ID,  $STYLEGUIDE_LINKS, (
   (default, (
     color                   nth($CONFIG_COLOR_BRAND, 1),
@@ -62,5 +62,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_LINKS_ID,  $STYLEGUIDE_LINKS,
     ))
   )),
   nil
-), $CONFIG_THEME);
+));
 }

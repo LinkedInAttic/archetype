@@ -4,7 +4,7 @@
 $STYLEGUIDE_COPY_ID: copy !default;
 $STYLEGUIDE_COPY: () !default;
 
-@if not styleguide-component-exists($STYLEGUIDE_COPY_ID, $CONFIG_THEME) {
+@if should-register-component($STYLEGUIDE_COPY_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_COPY_ID,  $STYLEGUIDE_COPY, (
   (default, (
     font-size           nth($CONFIG_FONT_COPY_MEDIUM, 1),
@@ -81,5 +81,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_COPY_ID,  $STYLEGUIDE_COPY, (
     color               nth($CONFIG_COLOR_COPY_MUTED, 1),
     nil
   ))
-), $CONFIG_THEME);
+));
 }

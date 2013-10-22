@@ -4,7 +4,7 @@
 $STYLEGUIDE_BUTTONS_ID: button !default;
 $STYLEGUIDE_BUTTONS: () !default;
 
-@if not styleguide-component-exists($STYLEGUIDE_BUTTONS_ID, $CONFIG_THEME) {
+@if should-register-component($STYLEGUIDE_BUTTONS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID,  $STYLEGUIDE_BUTTONS, (
   (default, (
     // these are common between all buttons
@@ -334,5 +334,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID,  $STYLEGUIDE_BUTT
       ))
     ))
   ))
-), $CONFIG_THEME);
+));
 }

@@ -12,6 +12,7 @@
 - added `$CONFIG_STATE_BEM` and `$CONFIG_BEM_MODIFIER_SEPARATOR` to generate [BEM style state selectors](http://bem.info/method/)
 - added `$CONFIG_BEM_ELEMENT_SEPARATOR` and `bem` mixin
 - added `str-replace` function for simple Sass::String replacements
+- added `$CONFIG_THEME_EXCLUDE` takes a list of components that will be excluded (not registered)
 
 ### Major Changes:
 

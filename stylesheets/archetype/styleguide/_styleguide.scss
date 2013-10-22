@@ -48,3 +48,14 @@
     /* [archetype:styleguide:diff:end]   --- --- */
   }
 }
+
+// checks to see whether or not a component should be registered
+// @function  should-register-component
+// @param     $component-id {String} the component identifier
+// @param     $extension-id {String} the extension identifier
+// @return    {Boolean} whether or not the component should be registered
+@function should-register-component($component-id, $extension-id: null) {
+  $component-exists: if($extension-id, styleguide-component-exists($component-id, $CONFIG_THEME), styleguide-component-exists($component-id, $CONFIG_THEME, $extension-id));
+  $component-excluded: index($CONFIG_THEME_EXCLUDE, $component-id);
+  @return not ($component-exists or $component-excluded);
+}

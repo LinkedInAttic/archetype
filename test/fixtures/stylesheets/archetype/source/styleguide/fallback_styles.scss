@@ -2,7 +2,7 @@
 
 @import "test_harness";
 
-@if not styleguide-component-exists(fallback-styleguide-test, $CONFIG_THEME) {
+@if should-register-component(fallback-styleguide-test) {
 $a-blackhole: styleguide-add-component(fallback-styleguide-test, (), (
   (default, (
     background      (transparent url(/some/img.png) repeat),
@@ -15,7 +15,7 @@ $a-blackhole: styleguide-add-component(fallback-styleguide-test, (), (
     something       valid
   )),
   nil
-), $CONFIG_THEME);
+));
 }
 .fallback-styleguide-test {
   @include styleguide(fallback-styleguide-test);

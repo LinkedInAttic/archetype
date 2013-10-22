@@ -4,7 +4,7 @@
 $STYLEGUIDE_BUTTON_TOOLBARS_ID: button-toolbar !default;
 $STYLEGUIDE_BUTTON_TOOLBARS: () !default;
 
-@if not styleguide-component-exists($STYLEGUIDE_BUTTON_TOOLBARS_ID, $CONFIG_THEME) {
+@if should-register-component($STYLEGUIDE_BUTTON_TOOLBARS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTON_TOOLBARS_ID,  $STYLEGUIDE_BUTTON_TOOLBARS, (
   (default, (
     line-height         1,
@@ -12,5 +12,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTON_TOOLBARS_ID,  $STYLEGU
     clearfix            legacy-pie-clearfix
   )),
   nil
-), $CONFIG_THEME);
+));
 }
