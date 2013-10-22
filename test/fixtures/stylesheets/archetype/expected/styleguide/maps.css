@@ -2,6 +2,7 @@
   /* [archetype:styleguide:begin] --- map-structure-test --- */
   display: block;
   color: red;
+  color: rgba(255, 0, 0, 0.8);
   /* [archetype:styleguide:end]   --- map-structure-test --- */
 }
 .test.test {
@@ -9,4 +10,13 @@
 }
 .test.hover, .test:hover, .test.focus, .test:focus {
   color: blue;
+}
+
+.map-get {
+  /* map[first]: first-value */
+  /* map[dup]: value, value2 */
+}
+
+.map-keys {
+  /* keys: first, dup */
 }

@@ -50,6 +50,7 @@ private
   # - <tt>list</tt> {Sass::Script::Value::List} the list to convert
   # - <tt>depth</tt> {Integer} the depth to reach into nested Lists
   # - <tt>nest</tt> {Array} a list of keys to treat as nested objects
+  # - <tt>additives</tt> {Array} a list of keys that are additive
   # *Returns*:
   # - {Hash} the converted hash
   #
@@ -125,6 +126,7 @@ private
   # - <tt>data</tt> {Sass::Script::Value::List|Sass::Script::Value::Map} the data to convert
   # - <tt>depth</tt> {Integer} the depth to reach into nested Lists
   # - <tt>nest</tt> {Array} a list of keys to treat as nested objects
+  # - <tt>additives</tt> {Array} a list of keys that are additive
   # *Returns*:
   # - {Hash} the converted hash
   #
@@ -135,54 +137,21 @@ private
 
   #
   # converts a Sass::Script::Value::Map to an internal Hash
+  # - <tt>data</tt> {Sass::Script::Value::Map} the map to convert
+  # - <tt>depth</tt> {Integer} the depth to reach into nested Lists
+  # - <tt>nest</tt> {Array} a list of keys to treat as nested objects
+  # - <tt>additives</tt> {Array} a list of keys that are additive
+  # *Returns*:
+  # - {Hash} the converted hash
   #
   def self.map_to_hash(data, depth = 0, nest = [], additives = [])
     hsh = Archetype::Hash.new
     # recurisvely convert sub-maps into a hash
     data.to_h.each do |key, value|
       key = to_str(key, ' ' , :quotes)
-      value = value.is_a?(Sass::Script::Value::Map) ? map_to_hash(value, depth, nest, additives) : value
-      if additives.include?(key)
-        hsh[key] ||= []
-        hsh[key].push(value)
-      else
-        hsh[key] = value
-      end
+      hsh[key] = value.is_a?(Sass::Script::Value::Map) ? map_to_hash(value) : value
     end
     return hsh
-  end
-
-  #
-  # convert a Hash to a Sass::Script::Value::Map
-  #
-  # *Parameters*:
-  # - <tt>hsh</tt> {Hash} the hash to convert
-  # - <tt>depth</tt> {Integer} the depth to walk down into the hash
-  # - <tt>separator</tt> {Symbol} the separator to use for the Sass::Script::Value::List
-  # *Returns*:
-  # - {Sass::Script::Value::Map} the converted map
-  #
-  ## TODO: this doesn't work yet...
-  def self.hash_to_map(hsh)
-    new_hash = {}
-    list = []
-    hsh.each do |key, item|
-      key = Sass::Script::Value::String.new(key)
-      if item.is_a? Hash
-        item = hash_to_map(item)
-      elsif item.is_a? Array
-        # TODO major!
-        item = nil
-        #item = Sass::Script::Value::List.new(item, :comma)
-      elsif item.is_a? String
-        item = Sass::Script::Value::String.new(item)
-      elsif item.is_a? Numeric
-        item = Sass::Script::Value::Number.new(item)
-      end
-      new_hash[key] = item if not item.nil?
-    end
-    puts Sass::Script::Value::Map.new(new_hash)
-    return Sass::Script::Value::Map.new(new_hash)
   end
 
   #
@@ -197,7 +166,7 @@ private
   #
   def self.to_str(value, separator = ' ', strip = nil)
     if not value.is_a?(String)
-      value = ((value.to_a).each{ |i| i.nil? ? 'nil' : (i.is_a?(String) ? i : i.value) }).join(separator || '')
+      value = ((value.to_a).each{ |i| i.nil? ? 'nil' : (i.is_a?(String) ? i : i.is_a?(Array) ? to_str(i, separator, strip) : i.value) }).join(separator || '')
     end
     strip = /\A"|"\Z/ if strip == :quotes
     return strip.nil? ? value : value.gsub(strip, '')
