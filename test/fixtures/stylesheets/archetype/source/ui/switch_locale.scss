@@ -1,0 +1,30 @@
+@import "test_harness";
+
+@mixin test-locale() {
+  /* current locale is: `#{locale()}` */
+  @if lang(en_US de_DE fr_FR) {
+    /* one of: en_US de_DE fr_FR */
+  }
+  @if lang(zh_TW ko_KR ja_JP) {
+    /* one of: zh_TW ko_KR ja_JP */
+  }
+  @if lang(CJK) {
+    /* one of: CJK */
+  }
+  @if lang(de_ _FR) {
+    /* one of: de_* *_FR */
+  }
+}
+
+.default {
+  @include test-locale();
+}
+
+@each $locale in (en_US de_DE fr_FR zh_TW ko_KR ja_JP pt_BR ro_RU) {
+  .#{$locale} {
+    @include switch-locale($locale) {
+      @include test-locale();
+    }
+    /* global locale: #{locale()} */
+  }
+}

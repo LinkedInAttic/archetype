@@ -13,6 +13,7 @@
 - added `$CONFIG_BEM_ELEMENT_SEPARATOR` and `bem` mixin
 - added `str-replace` function for simple Sass::String replacements
 - added `$CONFIG_THEME_EXCLUDE` takes a list of components that will be excluded (not registered)
+- added `switch-locale` mixin to switch the interface locale
 
 ### Major Changes:
 

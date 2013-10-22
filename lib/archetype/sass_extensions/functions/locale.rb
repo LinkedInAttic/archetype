@@ -11,7 +11,7 @@ module Archetype::SassExtensions::Locale
   # - {String|Boolean} the current locale or whether or not the current locale is in the test set
   #
   def locale(locales = nil)
-    locale = (Compass.configuration.locale || 'en_US').to_s
+    locale = (environment.var('CONFIG_LOCALE') || Compass.configuration.locale || 'en_US').to_s
     # if the locales are nil, just return the current locale
     return Sass::Script::String.new(locale) if locales.nil?
     locales = locales.to_a.collect{|i| i.to_s}
@@ -51,7 +51,7 @@ module Archetype::SassExtensions::Locale
   #
   def reading_direction
     direction = Compass.configuration.reading || 'ltr'
-    return Sass::Script::String.new(direction == 'rlt' ? 'rtl' : 'ltr')
+    return Sass::Script::String.new(direction == 'rtl' ? 'rtl' : 'ltr')
   end
 
 private
