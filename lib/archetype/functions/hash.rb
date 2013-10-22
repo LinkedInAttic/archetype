@@ -72,7 +72,7 @@ private
   # *Parameters*:
   # - <tt>key</tt> {String} the property to lookup
   # *Returns*:
-  # - {Sass::String|Sass::Number} the default value
+  # - {Sass::Script::Value::String|Sass::Script::Value::Number} the default value
   #
   def css_defaults(key)
     if @css_defaults.nil?
@@ -127,8 +127,8 @@ private
       @css_defaults = s
     end
     value = @css_defaults[key]
-    value = Sass::Script::String.new(value) if value.is_a? String
-    value = Sass::Script::Number.new(value) if value.is_a? Numeric
+    value = Sass::Script::Value::String.new(value) if value.is_a? String
+    value = Sass::Script::Value::Number.new(value) if value.is_a? Numeric
     return value
   end
 end

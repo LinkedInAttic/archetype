@@ -1,0 +1,55 @@
+.default {
+  /* current locale is: `en_US` */
+  /* one of: en_US de_DE fr_FR */
+}
+
+.en_US {
+  /* current locale is: `en_US` */
+  /* one of: en_US de_DE fr_FR */
+  /* global locale: en_US */
+}
+
+.de_DE {
+  /* current locale is: `de_DE` */
+  /* one of: en_US de_DE fr_FR */
+  /* one of: de_* *_FR */
+  /* global locale: en_US */
+}
+
+.fr_FR {
+  /* current locale is: `fr_FR` */
+  /* one of: en_US de_DE fr_FR */
+  /* one of: de_* *_FR */
+  /* global locale: en_US */
+}
+
+.zh_TW {
+  /* current locale is: `zh_TW` */
+  /* one of: zh_TW ko_KR ja_JP */
+  /* one of: CJK */
+  /* global locale: en_US */
+}
+
+.ko_KR {
+  /* current locale is: `ko_KR` */
+  /* one of: zh_TW ko_KR ja_JP */
+  /* one of: CJK */
+  /* global locale: en_US */
+}
+
+.ja_JP {
+  /* current locale is: `ja_JP` */
+  /* one of: zh_TW ko_KR ja_JP */
+  /* one of: CJK */
+  /* global locale: en_US */
+}
+
+.pt_BR {
+  /* current locale is: `pt_BR` */
+  /* global locale: en_US */
+}
+
+.ro_RU {
+  /* current locale is: `ro_RU` */
+  /* global locale: en_US */
+}

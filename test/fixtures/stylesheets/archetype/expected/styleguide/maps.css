@@ -1,0 +1,12 @@
+.test {
+  /* [archetype:styleguide:begin] --- map-structure-test --- */
+  display: block;
+  color: red;
+  /* [archetype:styleguide:end]   --- map-structure-test --- */
+}
+.test.test {
+  color: green;
+}
+.test.hover, .test:hover, .test.focus, .test:focus {
+  color: blue;
+}

@@ -1,4 +1,4 @@
-#require File.join(File.dirname(__FILE__), '..', '..', '..', '..', 'lib/archetype')
+require 'test/unit'
 require 'archetype'
 
 project_type      = :stand_alone
@@ -11,7 +11,6 @@ http_images_path  = "/assets/images"
 http_fonts_path   = "/assets/fonts"
 line_comments     = false
 environment       = :production
-testing           = true
 
 asset_cache_buster do |path, file|
   "busted=true"

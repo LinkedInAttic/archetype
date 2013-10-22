@@ -21,8 +21,8 @@ module Archetype::SassExtensions::UI
     prefix = helpers.to_str(prefix, ' ', :quotes)
     prefix = '.' if prefix == 'class'
     prefix = '#' if prefix == 'id'
-    suffix = Compass.configuration.testing ? "RANDOM_UID" : "#{Time.now.to_i}-#{rand(36**8).to_s(36)}-#{uid}"
-    return Sass::Script::String.new("#{prefix}archetype-uid-#{suffix}")
+    suffix = defined?(Test::Unit) ? "RANDOM_UID" : "#{Time.now.to_i}-#{rand(36**8).to_s(36)}-#{uid}"
+    return Sass::Script::Value::String.new("#{prefix}archetype-uid-#{suffix}")
   end
 
   #
@@ -36,7 +36,7 @@ module Archetype::SassExtensions::UI
   def tokenize(item)
     prefix = helpers.to_str(environment.var('CONFIG_GENERATED_TAG_PREFIX') || 'archetype') + '-'
     token = prefix + helpers.to_str(item).hash.to_s
-    return Sass::Script::String.new(token)
+    return Sass::Script::Value::String.new(token)
   end
 
   #
@@ -57,7 +57,34 @@ module Archetype::SassExtensions::UI
     content = content.gsub(/\</, '&lt;').gsub(/\>/, '&gt;')
     # cleanup quotes
     content = content.gsub(/\A"|"\Z/, '').gsub(/\"/, '\\"')
-    return Sass::Script::String.new(content)
+    return Sass::Script::Value::String.new(content)
+  end
+
+  #
+  # given a string of styles, convert it into a map
+  #
+  # *Parameters*:
+  # - <tt>$string</tt> {String} the string to convert
+  # *Returns*:
+  # - <tt>$map</tt> {Map} the converted map of styles
+  #
+  ## TODO: this doesn't work yet...
+  def _style_string_to_map(string = '')
+    # convert to string and strip all comments
+    string = helpers.to_str(string, ' ').gsub(/\/\*[^\*\/]*\*\//, '')
+    # then split it on each rule
+    tmp = string.split(';')
+    styles = []
+    # and for each rule break it into it's key-value pairs
+    tmp.each do |rule|
+      kvp = []
+      rule.split(':').each do |str|
+        kvp.push Sass::Script::Value::String.new(str)
+      end
+      styles.push Sass::Script::Value::List.new(kvp, :comma)
+    end
+    # the recompose the list
+    return Sass::Script::Value::Map.new(styles)
   end
 
 private

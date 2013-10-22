@@ -33,7 +33,7 @@ module Archetype::SassExtensions::Version
     # strip off any non-official versioning (e.g. pre/alpha/rc)
     lib = lib.match(VERSION_PATTERN)[0]
     result = compare_version(lib, test.match(VERSION_PATTERN), test.match(COMPARATOR_PATTERN))
-    return Sass::Script::String.new(lib) if result.nil?
+    return Sass::Script::Value::String.new(lib) if result.nil?
     return Sass::Script::Bool.new(result)
   end
 

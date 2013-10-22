@@ -312,6 +312,7 @@
 // @mixin     BEM
 // @param     $element {String} the element name
 // @param     $modifier {String} the modifier
+// @content
 @mixin bem($element: null, $modifier: null) {
   $selector: "#{&}";
   $msg: "the current context may produce a non-standard BEM selector for";
@@ -330,4 +331,16 @@
   @at-root #{$selector} {
     @content;
   }
+}
+
+// temporarily switch the interface locale
+// @mixin     switch-locale
+// @param     $locale {String} the locale code to switch to
+// @content
+@mixin switch-locale($locale) {
+  // keep track of the current locale
+  $current: $CONFIG_LOCALE;
+  $CONFIG_LOCALE: $locale !global;
+  @content;
+  $CONFIG_LOCALE: $current !global;
 }

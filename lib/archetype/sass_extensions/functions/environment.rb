@@ -9,6 +9,6 @@ module Archetype::SassExtensions::Environment
   # - {String} the current environment the compiler is running in
   #
   def archetype_env
-    return Sass::Script::String.new((Compass.configuration.environment || :development).to_s)
+    return Sass::Script::Value::String.new((Compass.configuration.environment || :development).to_s)
   end
 end

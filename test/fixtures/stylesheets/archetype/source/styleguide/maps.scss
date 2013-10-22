@@ -1,0 +1,25 @@
+@import "test_harness";
+
+@if should-register-component(map-structure-test) {
+$a-blackhole: styleguide-add-component(map-structure-test, (), (
+  default: (
+    display:         block,
+    color:           red,
+    //color:           rgba(red, 0.8), // TODO - this currently won't work because of duplicate keys error in sass
+    selectors: (
+      '&.test': (
+        color:  green
+      )
+    ),
+    states: (
+      hover: (
+        color: blue
+      )
+    )
+  )
+));
+}
+
+.test {
+  @include styleguide(map-structure-test);
+}

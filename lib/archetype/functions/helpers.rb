@@ -12,14 +12,14 @@ private
   end
 
   #
-  # convert a Hash to a Sass::List
+  # convert a Hash to a Sass::Script::Value::List
   #
   # *Parameters*:
   # - <tt>hsh</tt> {Hash} the hash to convert
   # - <tt>depth</tt> {Integer} the depth to walk down into the hash
-  # - <tt>separator</tt> {Symbol} the separator to use for the Sass::List
+  # - <tt>separator</tt> {Symbol} the separator to use for the Sass::Script::Value::List
   # *Returns*:
-  # - {Sass::List} the converted list
+  # - {Sass::Script::Value::List} the converted list
   #
   def self.hash_to_list(hsh, depth = 0, separator = :comma)
     if hsh.is_a? Hash
@@ -31,23 +31,23 @@ private
           tmp = []
           item[1] = [item[1]] if not item[1].is_a? Array
           item[1].each do |i|
-            list.push Sass::Script::List.new([Sass::Script::String.new(item[0]), hash_to_list(i, depth + 1)], separator)
+            list.push Sass::Script::Value::List.new([Sass::Script::Value::String.new(item[0]), hash_to_list(i, depth + 1)], separator)
           end
         end
       end
-      return Sass::Script::List.new(list, separator)
+      return Sass::Script::Value::List.new(list, separator)
     end
     # if its an array, cast to a List
-    return Sass::Script::List.new(hsh, separator) if hsh.is_a? Array
+    return Sass::Script::Value::List.new(hsh, separator) if hsh.is_a? Array
     # otherwise just return it
     return hsh
   end
 
   #
-  # convert a Sass::List to a Hash
+  # convert a Sass::Script::Value::List to a Hash
   #
   # *Parameters*:
-  # - <tt>list</tt> {Sass::List} the list to convert
+  # - <tt>list</tt> {Sass::Script::Value::List} the list to convert
   # - <tt>depth</tt> {Integer} the depth to reach into nested Lists
   # - <tt>nest</tt> {Array} a list of keys to treat as nested objects
   # *Returns*:
@@ -119,11 +119,78 @@ private
   end
 
   #
+  # convert a Sass::Script::Value::List or Sass::Script::Value::Map to an internal Hash
+  #
+  # *Parameters*:
+  # - <tt>data</tt> {Sass::Script::Value::List|Sass::Script::Value::Map} the data to convert
+  # - <tt>depth</tt> {Integer} the depth to reach into nested Lists
+  # - <tt>nest</tt> {Array} a list of keys to treat as nested objects
+  # *Returns*:
+  # - {Hash} the converted hash
+  #
+  def self.data_to_hash(data, depth = 0, nest = [], additives = [])
+    method = data.is_a?(Sass::Script::Value::Map) ? :map_to_hash : :list_to_hash
+    return self.method(method).call(data, depth, nest, additives)
+  end
+
+  #
+  # converts a Sass::Script::Value::Map to an internal Hash
+  #
+  def self.map_to_hash(data, depth = 0, nest = [], additives = [])
+    hsh = Archetype::Hash.new
+    # recurisvely convert sub-maps into a hash
+    data.to_h.each do |key, value|
+      key = to_str(key, ' ' , :quotes)
+      value = value.is_a?(Sass::Script::Value::Map) ? map_to_hash(value, depth, nest, additives) : value
+      if additives.include?(key)
+        hsh[key] ||= []
+        hsh[key].push(value)
+      else
+        hsh[key] = value
+      end
+    end
+    return hsh
+  end
+
+  #
+  # convert a Hash to a Sass::Script::Value::Map
+  #
+  # *Parameters*:
+  # - <tt>hsh</tt> {Hash} the hash to convert
+  # - <tt>depth</tt> {Integer} the depth to walk down into the hash
+  # - <tt>separator</tt> {Symbol} the separator to use for the Sass::Script::Value::List
+  # *Returns*:
+  # - {Sass::Script::Value::Map} the converted map
+  #
+  ## TODO: this doesn't work yet...
+  def self.hash_to_map(hsh)
+    new_hash = {}
+    list = []
+    hsh.each do |key, item|
+      key = Sass::Script::Value::String.new(key)
+      if item.is_a? Hash
+        item = hash_to_map(item)
+      elsif item.is_a? Array
+        # TODO major!
+        item = nil
+        #item = Sass::Script::Value::List.new(item, :comma)
+      elsif item.is_a? String
+        item = Sass::Script::Value::String.new(item)
+      elsif item.is_a? Numeric
+        item = Sass::Script::Value::Number.new(item)
+      end
+      new_hash[key] = item if not item.nil?
+    end
+    puts Sass::Script::Value::Map.new(new_hash)
+    return Sass::Script::Value::Map.new(new_hash)
+  end
+
+  #
   # convert things to a String
   #
   # *Parameters*:
-  # - <tt>value</tt> {String|Sass::String|Sass::List} the thing to convert
-  # - <tt>separator</tt> {String} the separator to use for joining Sass::List
+  # - <tt>value</tt> {String|Sass::Script::Value::String|Sass::Script::Value::List} the thing to convert
+  # - <tt>separator</tt> {String} the separator to use for joining Sass::Script::Value::List
   # - <tt>strip</tt> {\*} the properties to strip from the resulting string
   # *Returns*:
   # - {String} the converted String
@@ -140,7 +207,7 @@ private
   # test a value for blankness or nilness
   #
   # *Parameters*:
-  # - <tt>value</tt> {String|Array|Sass::String|Sass::List} the thing to test
+  # - <tt>value</tt> {String|Array|Sass::Script::Value::String|Sass::Script::Value::List} the thing to test
   # - <tt>test</tt> {Symbol} the test to perform [:blank|:nil]
   # *Returns*:
   # - {Boolean} whether or not the value is nil/blank
@@ -150,16 +217,16 @@ private
     case test
     when :blank
       is_it = false
-      value = value.value if value.is_a?(Sass::Script::String)
+      value = value.value if value.is_a?(Sass::Script::Value::String)
       is_it = value.nil?
       is_it = value.empty? if value.is_a?(String)
-      is_it = value.to_a.empty? if value.is_a?(Sass::Script::List) or value.is_a?(Array)
+      is_it = value.to_a.empty? if value.is_a?(Sass::Script::Value::List) or value.is_a?(Array)
     when :nil
       is_it = false
-      value = value.value if value.is_a?(Sass::Script::String)
+      value = value.value if value.is_a?(Sass::Script::Value::String)
       is_it = value.nil?
       is_it = value == 'nil' if value.is_a?(String)
-      is_it = to_str(value) == 'nil' if value.is_a?(Sass::Script::List) or value.is_a?(Array)
+      is_it = to_str(value) == 'nil' if value.is_a?(Sass::Script::Value::List) or value.is_a?(Array)
     end
     return is_it
   end

@@ -2,8 +2,6 @@
   /* [archetype:styleguide:begin] --- bem-elements-selector-styleguide-test --- */
   display: block;
   color: red;
-  /* selector was... element */
-  /* selector was... text */
   /* [archetype:styleguide:end]   --- bem-elements-selector-styleguide-test --- */
 }
 .bem-element-test.test {

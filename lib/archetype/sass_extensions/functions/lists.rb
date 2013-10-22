@@ -1,7 +1,7 @@
 require 'archetype/functions/helpers'
 
 #
-# This module provides a set of Sass functions for working with Sass::List
+# This module provides a set of Sass functions for working with Sass::Script::Value::List
 #
 module Archetype::SassExtensions::Lists
   #
@@ -18,7 +18,7 @@ module Archetype::SassExtensions::Lists
   def list_replace(list, idx = false, value = nil, separator = nil)
     # return early if the index is invalid (no operation)
     return list if (not idx or idx == Sass::Script::Bool.new(false))
-    separator ||= list.separator if list.is_a?(Sass::Script::List)
+    separator ||= list.separator if list.is_a?(Sass::Script::Value::List)
     # if $value is `nil`, make sure we can use it
     value = nil if value == Sass::Script::String.new('nil')
     # cast and zero-index $idx
@@ -28,7 +28,7 @@ module Archetype::SassExtensions::Lists
     # remove or replace the given value
     list.delete_at(idx) if value.nil?
     list[idx,1] = value if not value.nil?
-    return Sass::Script::List.new(list, separator)
+    return Sass::Script::Value::List.new(list, separator)
   end
   Sass::Script::Functions.declare :list_replace, [:list, :idx]
   Sass::Script::Functions.declare :list_replace, [:list, :idx, :value]
@@ -151,7 +151,7 @@ module Archetype::SassExtensions::Lists
     needle = needle.to_a
     index = haystack.index(haystack.detect { |i| needle.include?(i) })
     if index
-      return Sass::Script::Number.new(index + 1)
+      return Sass::Script::Value::Number.new(index + 1)
     else
       return Sass::Script::Bool.new(false)
     end
@@ -167,7 +167,7 @@ module Archetype::SassExtensions::Lists
   # - {*} the nth item in the List
   #
   def nth_cyclic(list, n = 1)
-    n = n.to_i if n.is_a?(Sass::Script::Number)
+    n = n.to_i if n.is_a?(Sass::Script::Value::Number)
     list = list.to_a
     return list[(n - 1) % list.size]
   end
@@ -183,11 +183,11 @@ module Archetype::SassExtensions::Lists
   # - {*} the data associated with $key
   #
   def associative(list, key, strict = false)
-    separator = list.separator if list.is_a?(Sass::Script::List)
+    separator = list.separator if list.is_a?(Sass::Script::Value::List)
     list = helpers.list_to_hash(list)
     item = list[helpers.to_str(key, ' ' , :quotes)]
     item ||= list.first[1] if not strict
-    return Sass::Script::List.new([], separator) if item.nil?
+    return Sass::Script::Value::List.new([], separator) if item.nil?
     return helpers.hash_to_list(item, 0, separator) if item.is_a?(Array) or item.is_a?(Hash)
     # no conversion needed, so just return
     return item
@@ -205,7 +205,7 @@ module Archetype::SassExtensions::Lists
   # - <tt>$list</tt> {List} the extended list
   #
   def associative_merge(list, extender, kwargs = {})
-    separator = list.separator if list.is_a?(Sass::Script::List)
+    separator = list.separator if list.is_a?(Sass::Script::Value::List)
     list = helpers.list_to_hash(list)
     extender = helpers.list_to_hash(extender)
     list = list.rmerge(extender)
@@ -231,12 +231,12 @@ module Archetype::SassExtensions::Lists
     tmp.each do |rule|
       kvp = []
       rule.split(':').each do |str|
-        kvp.push Sass::Script::String.new(str)
+        kvp.push Sass::Script::Value::String.new(str)
       end
-      styles.push Sass::Script::List.new(kvp, :comma)
+      styles.push Sass::Script::Value::List.new(kvp, :comma)
     end
     # the recompose the list
-    return Sass::Script::List.new(styles, :comma)
+    return Sass::Script::Value::List.new(styles, :comma)
   end
 
 private
@@ -248,14 +248,14 @@ private
   # perform math operations on a list
   #
   # *Parameters*:
-  # - <tt>list</tt> {Sass::List} the list operate on
-  # - <tt>values</tt> {Sass::List|Sass::Number|Sass::String} the value(s) perform with
+  # - <tt>list</tt> {Sass::Script::Value::List} the list operate on
+  # - <tt>values</tt> {Sass::Script::Value::List|Sass::Script::Value::Number|Sass::Script::Value::String} the value(s) perform with
   # - <tt>method</tt> {Symbol} the method to perform [:plus|:minus|:times|:div|:mod]
   # *Returns*:
-  # - {Sass::List} the final list
+  # - {Sass::Script::Value::List} the final list
   #
   def list_math(list, values, method = :plus)
-    separator = list.separator if list.is_a?(Sass::Script::List)
+    separator = list.separator if list.is_a?(Sass::Script::Value::List)
     values = values.to_a
     list = list.to_a
     values.fill(values[0], 0..(list.size - 1)) if values.size < list.size
@@ -273,6 +273,6 @@ private
         x[0].mod(x[1])
       end
     end
-    return Sass::Script::List.new(list, separator)
+    return Sass::Script::Value::List.new(list, separator)
   end
 end

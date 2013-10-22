@@ -4,7 +4,6 @@ require 'archetype'
 class SassExtensionsTest < Test::Unit::TestCase
   setup do
     Compass.reset_configuration!
-    Compass.configuration.testing = true
   end
 
   ## VERSION
@@ -194,6 +193,5 @@ protected
 
   def reset
     Compass.reset_configuration!
-    Compass.configuration.testing = true
   end
 end
