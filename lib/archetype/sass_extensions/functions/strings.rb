@@ -1,7 +1,7 @@
 require 'archetype/functions/helpers'
 
 #
-# This module provides a set of Sass functions for working with Sass::String
+# This module provides a set of Sass functions for working with Sass::Script::Value::String
 #
 module Archetype::SassExtensions::Strings
   #
@@ -21,7 +21,7 @@ module Archetype::SassExtensions::Strings
     needle = helpers.to_str(needle, ' ', :quotes)
     replacement = helpers.to_str(replacement, ' ', :quotes)
     str = str.method(method).call(needle, replacement)
-    return Sass::Script::String.new(str)
+    return Sass::Script::Value::String.new(str)
   end
   Sass::Script::Functions.declare :str_replace, [:haystack, :needle, :replacement]
   Sass::Script::Functions.declare :str_replace, [:haystack, :needle, :replacement, :all]

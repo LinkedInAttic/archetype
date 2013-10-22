@@ -13,7 +13,7 @@ module Archetype::SassExtensions::Locale
   def locale(locales = nil)
     locale = (environment.var('CONFIG_LOCALE') || Compass.configuration.locale || 'en_US').to_s
     # if the locales are nil, just return the current locale
-    return Sass::Script::String.new(locale) if locales.nil?
+    return Sass::Script::Value::String.new(locale) if locales.nil?
     locales = locales.to_a.collect{|i| i.to_s}
     # add wild card support for language or territory
     match = locale.match(LOCALE_PATTERN)
@@ -51,7 +51,7 @@ module Archetype::SassExtensions::Locale
   #
   def reading_direction
     direction = Compass.configuration.reading || 'ltr'
-    return Sass::Script::String.new(direction == 'rtl' ? 'rtl' : 'ltr')
+    return Sass::Script::Value::String.new(direction == 'rtl' ? 'rtl' : 'ltr')
   end
 
 private

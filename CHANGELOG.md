@@ -11,7 +11,7 @@
 
 - added `$CONFIG_STATE_BEM` and `$CONFIG_BEM_MODIFIER_SEPARATOR` to generate [BEM style state selectors](http://bem.info/method/)
 - added `$CONFIG_BEM_ELEMENT_SEPARATOR` and `bem` mixin
-- added `str-replace` function for simple Sass::String replacements
+- added `str-replace` function for simple Sass::Script::Value::String replacements
 - added `$CONFIG_THEME_EXCLUDE` takes a list of components that will be excluded (not registered)
 - added `switch-locale` mixin to switch the interface locale
 
@@ -25,6 +25,7 @@
 - `$CORE_STATE_MAPPINGS` and `$CONFIG_STATE_MAPPINGS` are now proper Sass maps
 - `styleguide` function now has the same signature as the mixin and can take multiple definitions at once
 - `styleguide-diff` now takes two `styleguide` results as params
+- removed `testing` configuration, instead check for `defined?(Test::Unit)`
 
 ## 0.0.1.pre.3 (pre-released)
 

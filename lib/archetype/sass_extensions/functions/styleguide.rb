@@ -30,8 +30,8 @@ module Archetype::SassExtensions::Styleguide
   #
   # *Parameters*:
   # - <tt>$id</tt> {String} the component identifier
-  # - <tt>$data</tt> {List} the component data object
-  # - <tt>$default</tt> {List} the default data object (for extending)
+  # - <tt>$data</tt> {Map|List} the component data object
+  # - <tt>$default</tt> {Map|List} the default data object (for extending)
   # - <tt>$theme</tt> {String} the theme to insert the component into
   # - <tt>$force</tt> {Boolean} if true, forcibly insert the component
   # *Returns*:
@@ -47,7 +47,7 @@ module Archetype::SassExtensions::Styleguide
       # if we already have the component, don't create it again
       return Sass::Script::Bool.new(false) if component_exists(id, theme, nil, force)
       # otherwise add it
-      components[id] = helpers.list_to_hash(default, 1, SPECIAL, ADDITIVES).merge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
+      components[id] = helpers.data_to_hash(default, 1, SPECIAL, ADDITIVES).merge(helpers.data_to_hash(data, 1, SPECIAL, ADDITIVES))
       return Sass::Script::Bool.new(true)
     end
   end
@@ -79,7 +79,7 @@ module Archetype::SassExtensions::Styleguide
       extensions = theme[:extensions]
       return Sass::Script::Bool.new(false) if component_exists(id, theme, extension, force)
       extensions.push(extension)
-      components[id] = (components[id] ||= Archetype::Hash.new).rmerge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
+      components[id] = (components[id] ||= Archetype::Hash.new).rmerge(helpers.data_to_hash(data, 1, SPECIAL, ADDITIVES))
       return Sass::Script::Bool.new(true)
     end
   end
@@ -138,8 +138,8 @@ module Archetype::SassExtensions::Styleguide
   #
   def styleguide_diff(original, other, theme = nil)
     @@archetype_styleguide_mutex.synchronize do
-      original = helpers.list_to_hash(original)
-      other = helpers.list_to_hash(other)
+      original = helpers.data_to_hash(original)
+      other = helpers.data_to_hash(other)
       diff = original.diff(other)
       return helpers.hash_to_list(diff, 0)
     end

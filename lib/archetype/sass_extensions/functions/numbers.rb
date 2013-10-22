@@ -1,5 +1,5 @@
 #
-# This module provides a set of Sass functions for working with Sass::Number
+# This module provides a set of Sass functions for working with Sass::Script::Value::Number
 #
 module Archetype::SassExtensions::Numbers
   #
@@ -12,8 +12,8 @@ module Archetype::SassExtensions::Numbers
   #
   def strip_units(number)
     value = 0
-    value = number.value.to_f if number.is_a?(Sass::Script::String)
-    value = number.value if number.is_a?(Sass::Script::Number)
-    return Sass::Script::Number.new(value)
+    value = number.value.to_f if number.is_a?(Sass::Script::Value::String)
+    value = number.value if number.is_a?(Sass::Script::Value::Number)
+    return Sass::Script::Value::Number.new(value)
   end
 end
