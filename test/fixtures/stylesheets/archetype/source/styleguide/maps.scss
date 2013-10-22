@@ -5,7 +5,7 @@ $a-blackhole: styleguide-add-component(map-structure-test, (), (
   default: (
     display:         block,
     color:           red,
-    //color:           rgba(red, 0.8), // TODO - this currently won't work because of duplicate keys error in sass
+    color:           rgba(red, 0.8), // this works because of a patch, you shouldn't use multi-keyed maps
     selectors: (
       '&.test': (
         color:  green
@@ -22,4 +22,20 @@ $a-blackhole: styleguide-add-component(map-structure-test, (), (
 
 .test {
   @include styleguide(map-structure-test);
+}
+
+
+$map: (
+  first: first-value,
+  dup: value,
+  dup: value2
+);
+
+.map-get {
+  /* map[first]: #{map-get($map, first)} */
+  /* map[dup]: #{map-get($map, dup)} */
+}
+
+.map-keys {
+  /* keys: #{map-keys($map)} */
 }
