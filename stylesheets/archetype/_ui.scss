@@ -314,17 +314,16 @@
 // @param     $modifier {String} the modifier
 @mixin bem($element: null, $modifier: null) {
   $selector: "#{&}";
+  $msg: "the current context may produce a non-standard BEM selector for";
   @if $element {
-    @debug "#{&}";
-    @debug str-index("#{&}", $CONFIG_BEM_ELEMENT_SEPARATOR);
-    @if str-index("#{&}", $CONFIG_BEM_ELEMENT_SEPARATOR) or str-index("#{&}", $CONFIG_BEM_MODIFIER_SEPARATOR) {
-      @warn "the current context may produce a non-standard BEM selector for element `#{$element}`: #{&}";
+    @if str-index("#{&}", $CONFIG_BEM_ELEMENT_SEPARATOR) > 0 or str-index("#{&}", $CONFIG_BEM_MODIFIER_SEPARATOR) > 0 {
+      @warn "#{$msg} element `#{$element}`: #{&}";
     }
     $selector: "#{$selector}#{$CONFIG_BEM_ELEMENT_SEPARATOR}#{$element}";
   }
   @if $modifier {
-    @if str-index("#{&}", $CONFIG_BEM_MODIFIER_SEPARATOR) {
-      @warn "the current context may produce a non-standard BEM selector for modifier `#{$modifier}`: #{&}";
+    @if str-index("#{&}", $CONFIG_BEM_MODIFIER_SEPARATOR) > 0 {
+      @warn "#{$msg} modifier `#{$modifier}`: #{&}";
     }
     $selector: "#{$selector}#{$CONFIG_BEM_MODIFIER_SEPARATOR}#{$modifier}";
   }

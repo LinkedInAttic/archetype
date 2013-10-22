@@ -4,7 +4,7 @@
 $STYLEGUIDE_BUTTON_GROUPS_ID: button-group !default;
 $STYLEGUIDE_BUTTON_GROUPS: () !default;
 
-@if not styleguide-component-exists($STYLEGUIDE_BUTTON_GROUPS_ID, $CONFIG_THEME) {
+@if should-register-component($STYLEGUIDE_BUTTON_GROUPS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTON_GROUPS_ID, $STYLEGUIDE_BUTTON_GROUPS, (
   (default, (
     line-height         1,
@@ -42,5 +42,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTON_GROUPS_ID, $STYLEGUIDE
     nil
   )),
   nil
-), $CONFIG_THEME);
+));
 }

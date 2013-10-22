@@ -406,7 +406,7 @@ private
   # - {Hash} the theme
   #
   def get_theme(theme)
-    theme_name = helpers.to_str(theme || environment.var('CONFIG_THEME'))
+    theme_name = helpers.to_str(theme || environment.var('CONFIG_THEME') || 'archetype')
     @@styleguide_themes ||= {}
     theme = @@styleguide_themes[theme_name] ||= {}
     theme[:name] ||= theme_name

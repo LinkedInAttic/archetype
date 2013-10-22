@@ -1,29 +1,29 @@
 @import "test_harness";
 
 // this should throw a warning because we can't retrieve the key-value pairs for the top level
-@if not styleguide-component-exists(test-missing-nil, $CONFIG_THEME) {
+@if should-register-component(test-missing-nil) {
 $a-blackhole: styleguide-add-component(test-missing-nil, (), (
   (default, (
     color       red,
     nil
   ))
   // missing nil
-), $CONFIG_THEME);
+));
 }
 
 // this should still throw a warning because we can't retrieve the key-value pairs for the properties
-@if not styleguide-component-exists(test-missing-nil-2, $CONFIG_THEME) {
+@if should-register-component(test-missing-nil-2) {
 $a-blackhole: styleguide-add-component(test-missing-nil-2, (), (
   (default, (
     color       yellow
     // missing nil
   )),
   nil
-), $CONFIG_THEME);
+));
 }
 
 // this should still throw a warning because we can't retrieve the key-value pairs for the properties
-@if not styleguide-component-exists(test-missing-comma, $CONFIG_THEME) {
+@if should-register-component(test-missing-comma) {
 $a-blackhole: styleguide-add-component(test-missing-nil-3, (), (
   (default, (
     color       blue,
@@ -36,11 +36,11 @@ $a-blackhole: styleguide-add-component(test-missing-nil-3, (), (
     ))
   )),
   nil
-), $CONFIG_THEME);
+));
 }
 
 // this should throw a warning because we probably forgot a comma somewhere
-@if not styleguide-component-exists(test-missing-comma, $CONFIG_THEME) {
+@if should-register-component(test-missing-comma) {
 $a-blackhole: styleguide-add-component(test-missing-comma, (), (
   (default, (
     color       white,
@@ -55,17 +55,17 @@ $a-blackhole: styleguide-add-component(test-missing-comma, (), (
     ))
   )),
   nil
-), $CONFIG_THEME);
+));
 }
 
 // this should throw a warning because we used an empty value for a property
-@if not styleguide-component-exists(test-empty-value, $CONFIG_THEME) {
+@if should-register-component(test-empty-value) {
 $a-blackhole: styleguide-add-component(test-empty-value, (), (
   (default, (
     color   // this is ambiguous, but shouldn't cause an error
   )),
   nil
-), $CONFIG_THEME);
+));
 }
 
 .test-missing-nil {

@@ -4,7 +4,7 @@
 $STYLEGUIDE_ANNOTATIONS_ID: annotation !default;
 $STYLEGUIDE_ANNOTATIONS: () !default;
 
-@if not styleguide-component-exists($STYLEGUIDE_ANNOTATIONS_ID, $CONFIG_THEME) {
+@if should-register-component($STYLEGUIDE_ANNOTATIONS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_ANNOTATIONS_ID, $STYLEGUIDE_ANNOTATIONS, (
   (default, (
     font-size           nth($CONFIG_FONT_ANNOTATION_MEDIUM, 1),
@@ -23,5 +23,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_ANNOTATIONS_ID, $STYLEGUIDE_A
     inherit (in-dark),
     nil
   ))
-), $CONFIG_THEME);
+));
 }

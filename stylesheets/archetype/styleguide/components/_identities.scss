@@ -4,7 +4,7 @@
 $STYLEGUIDE_IDENTITY_ID: identity !default;
 $STYLEGUIDE_IDENTITY: () !default;
 
-@if not styleguide-component-exists($STYLEGUIDE_IDENTITY_ID, $CONFIG_THEME) {
+@if should-register-component($STYLEGUIDE_IDENTITY_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_IDENTITY_ID,  $STYLEGUIDE_IDENTITY, (
   (default, (
     color                   nth($CONFIG_COLOR_BRAND, 1),
@@ -30,5 +30,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_IDENTITY_ID,  $STYLEGUIDE_IDE
     inherit (in-dark),
     nil
   ))
-), $CONFIG_THEME);
+));
 }

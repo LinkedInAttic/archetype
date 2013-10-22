@@ -4,7 +4,7 @@
 $STYLEGUIDE_TOOLTIPS_ID: tooltip !default;
 $STYLEGUIDE_TOOLTIPS: () !default;
 
-@if not styleguide-component-exists($STYLEGUIDE_TOOLTIPS_ID, $CONFIG_THEME) {
+@if should-register-component($STYLEGUIDE_TOOLTIPS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_TOOLTIPS_ID, $STYLEGUIDE_TOOLTIPS, (
   (default, (
     color               nth-cyclic($CONFIG_COLOR_COPY, 2),
@@ -24,5 +24,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_TOOLTIPS_ID, $STYLEGUIDE_TOOL
     z-index             1
   )),
   nil
-), $CONFIG_THEME);
+));
 }

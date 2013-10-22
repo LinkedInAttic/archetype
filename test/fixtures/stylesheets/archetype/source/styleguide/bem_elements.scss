@@ -1,6 +1,6 @@
 @import "test_harness";
 
-@if not styleguide-component-exists(bem-elements-selector-styleguide-test, $CONFIG_THEME) {
+@if should-register-component(bem-elements-selector-styleguide-test) {
 $a-blackhole: styleguide-add-component(bem-elements-selector-styleguide-test, (), (
   (default, (
     display         block,
@@ -21,7 +21,7 @@ $a-blackhole: styleguide-add-component(bem-elements-selector-styleguide-test, ()
     ))
   )),
   nil
-), $CONFIG_THEME);
+));
 }
 
 .bem-element-test {

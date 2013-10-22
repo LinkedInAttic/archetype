@@ -4,7 +4,7 @@
 $STYLEGUIDE_CARETS_ID: caret !default;
 $STYLEGUIDE_CARETS: () !default;
 
-@if not styleguide-component-exists($STYLEGUIDE_CARETS_ID, $CONFIG_THEME) {
+@if should-register-component($STYLEGUIDE_CARETS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_CARETS_ID,  $STYLEGUIDE_CARETS, (
   (default, (
     inline-block        (middle, middle),
@@ -331,5 +331,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_CARETS_ID,  $STYLEGUIDE_CARET
     bottom              $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
     margin-top          nil
   ))
-), $CONFIG_THEME);
+));
 }
