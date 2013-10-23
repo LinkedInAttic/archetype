@@ -81,5 +81,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_COPY_ID,  $STYLEGUIDE_COPY, (
     color               nth($CONFIG_COLOR_COPY_MUTED, 1),
     nil
   ))
-));
+)) !global;
 }

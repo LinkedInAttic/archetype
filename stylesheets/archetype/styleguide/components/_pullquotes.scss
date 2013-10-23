@@ -25,5 +25,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_PULLQUOTES_ID, $STYLEGUIDE_PU
     inherit (in-dark),
     nil
   ))
-));
+)) !global;
 }

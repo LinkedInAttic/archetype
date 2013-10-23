@@ -15,7 +15,7 @@ $a-blackhole: styleguide-add-component(extend-styleguide-test, (), (
     extend    '%some-extend-placeholder'
   )),
   nil
-));
+)) !global;
 }
 
 .extend-styleguide-test {

@@ -30,5 +30,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_IDENTITY_ID,  $STYLEGUIDE_IDE
     inherit (in-dark),
     nil
   ))
-));
+)) !global;
 }

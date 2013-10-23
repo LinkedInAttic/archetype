@@ -67,7 +67,7 @@ $a-blackhole: styleguide-add-component(dropping-styles-test, (), (
     ))
   )),
   nil
-));
+)) !global;
 }
 
 .dropping-styles-test {

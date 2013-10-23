@@ -119,10 +119,10 @@ module Archetype::SassExtensions::Styleguide
   # *Returns*:
   # - {List} a key-value paired list of styles
   #
-  def _styleguide(description, state = 'false', theme = nil)
+  def _styleguide(description, state = nil, theme = nil)
     @@archetype_styleguide_mutex.synchronize do
       # convert it back to a Sass:List and carry on
-      return helpers.hash_to_list(get_styles(description, theme, state), 0)
+      return helpers.hash_to_map(get_styles(description, theme, state))
     end
   end
 
@@ -141,8 +141,14 @@ module Archetype::SassExtensions::Styleguide
       original = helpers.data_to_hash(original)
       other = helpers.data_to_hash(other)
       diff = original.diff(other)
-      return helpers.hash_to_list(diff, 0)
+      return helpers.hash_to_map(diff)
     end
+  end
+
+  def component_registration_setup(type = nil)
+    method = (type.nil?) ? :enable : :disable
+    Archetype::Patches::Maps.method(method).call
+    return Sass::Script::Bool.new(true)
   end
 
 private
@@ -163,7 +169,7 @@ private
   # *Returns*:
   # - {Array} an array containing the identifer, modifiers, and a token
   #
-  def grammar(sentence, theme = nil, state = 'false')
+  def grammar(sentence, theme = nil, state = nil)
     theme = get_theme(theme)
     components = theme[:components]
     # get a list of valid ids
@@ -273,10 +279,18 @@ private
     end
     # check for nested styleguides
     styleguide = out[STYLEGUIDE]
-    if not (styleguide.nil? or styleguide.empty?)
-      styles = get_styles(styleguide, theme[:name])
-      out.delete(STYLEGUIDE)
-      out = styles.rmerge(out)
+    if not styleguide.nil?
+      if styleguide.is_a?(Sass::Script::Value::Map)
+        map = helpers.map_to_hash(styleguide)
+        styleguide = map['values'].to_a
+      else
+        styleguide = [styleguide]
+      end
+      if not styleguide.empty?
+        styles = get_styles(styleguide, theme[:name])
+        out.delete(STYLEGUIDE)
+        out = styles.rmerge(out)
+      end
     end
     return out
   end
@@ -301,7 +315,6 @@ private
         obj.delete(key) if not SPECIAL.include?(key)
       end
       merger.delete(DROP)
-    else
     end
     SPECIAL.each do |special|
       if obj[special].is_a?(Hash) and merger[special].is_a?(Hash)
@@ -330,27 +343,13 @@ private
       if DROPALL.include?(helpers.to_str(drop))
         if not keys.nil?
           keys.each do |key|
-            if SPECIAL.include?(key)
-              if not (obj[key].nil? or obj[key].empty?)
-                tmp[key] = Archetype::Hash.new
-                tmp[key][DROP] = obj[key].keys
-              end
-            else
-              tmp[key] = 'nil'
-            end
+            special_drop_key(obj, tmp, key)
           end
         end
       else
         drop.to_a.each do |key|
           key = helpers.to_str(key)
-          if SPECIAL.include?(key)
-            if not (obj[key].nil? or obj[key].empty?)
-              tmp[key] = Archetype::Hash.new
-              tmp[key][DROP] = obj[key].keys
-            end
-          else
-            tmp[key] = 'nil'
-          end
+          special_drop_key(obj, tmp, key)
         end
       end
       value.delete(DROP) if not is_special
@@ -360,6 +359,26 @@ private
       value[key] = resolve_drops(value[key], obj[key], key, SPECIAL.include?(key)) if not value[key].nil?
     end
     return value
+  end
+
+
+  #
+  # helper method for resolve_drops
+  #
+  # *Parameters*:
+  # - <tt>obj</tt> {Hash} the object
+  # - <tt>tmp</tt> {Hash} the temporary object
+  # - <tt>key</tt> {String} the key we care about
+  #
+  def special_drop_key(obj, tmp, key)
+    if SPECIAL.include?(key)
+      if not (obj[key].nil? or obj[key].empty?)
+        tmp[key] = Archetype::Hash.new
+        tmp[key][DROP] = obj[key].keys
+      end
+    else
+      tmp[key] = 'nil'
+    end
   end
 
   #
@@ -383,8 +402,8 @@ private
       value = resolve_drops(value, obj)
 
       # check for inheritance
-      inherit = value[INHERIT]
-      if not (inherit.nil? or inherit.empty?)
+      inherit = (value[INHERIT] || []).to_a
+      if not inherit.empty?
         # create a temporary object and extract the nested styles
         tmp = Archetype::Hash.new
         inherit.each { |related| tmp = tmp.rmerge(extract_styles(id, related, true, theme, context)) }
@@ -425,8 +444,7 @@ private
   # *Returns*:
   # - {Hash} the styles
   #
-  def get_styles(description, theme = nil, state = 'false')
-    state = helpers.to_str(state)
+  def get_styles(description, theme = nil, state = nil)
     styles = Archetype::Hash.new
     description.to_a.each do |sentence|
       # get the grammar from the sentence
@@ -449,7 +467,8 @@ private
       end
     end
     # now that we've collected all of our styles, if we requested a single state, merge that state upstream
-    if state != 'false' and styles['states']
+    if not (state.nil? or state.is_a?(Sass::Script::Value::Null) or state == Sass::Script::Value::Bool.new(false) or styles['states'].empty?)
+      state = helpers.to_str(state)
       state = styles['states'][state]
       # remove any nested/special keys
       SPECIAL.each do |special|

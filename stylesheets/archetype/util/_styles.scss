@@ -34,6 +34,7 @@
   @if($property != nil and length(-compass-list($value)) > 0 and first-value-of(-compass-list($value)) != nil and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
     // check to see if we have a custom output styler (pre)
+    @debug $property;
     @if has-custom-output-styler($property, $value, pre) == true {
       @include custom-output-styler($property, $value, $method: pre);
     }
@@ -194,74 +195,80 @@
 // @param     $states {Boolean|List} if true, output all states; if false, output no states; if a list, output only the states in the list
 // @param     $exclude {List} a list of styles to exclude from output
 @mixin to-styles($map: (), $states: true, $selectors: true, $exclude: ()) {
-  $exclude: -compass-list($exclude);
-  $states-data: ();
-  $selectors-data: ();
-  $placeholder: (
-    map:        $map,
-    states:     $states,
-    selectors:  $selectors,
-    exclude:    $exclude
-  );
-  $placeholder: unquote("%#{tokenize($placeholder)}");
-  // register a placeholder if needed
-  @include archetype-smart-content($placeholder) {
-    @each $property, $value in $map {
-      @if(not index($exclude, $property)) {
-        // deal with the states
-        @if($property == states and $states != false and length($value) > 0) {
-          @each $state, $val in $value {
-            @if(index(-compass-list($states), $state) or $states == true) {
-              // get the state selector mappings
-              $selector-map: _getStateSelectorMap($state);
-              // output the state selectors if we're not using _only_ BEM style
-              @if($CONFIG_STATE_BEM != only) {
-                $selector: map-get($selector-map, selector);
-                // if the selector is valid...
-                @if($selector != null) {
-                  // output it
-                  #{$selector} {
-                    @include to-styles($val, true, true, $exclude);
+  @if $map {
+    $exclude: -compass-list($exclude);
+    $placeholder: (
+      map:        $map,
+      states:     $states,
+      selectors:  $selectors,
+      exclude:    $exclude
+    );
+    $placeholder: unquote("%#{tokenize($placeholder)}");
+    // register a placeholder if needed
+    @include archetype-smart-content($placeholder) {
+      @each $property, $value in $map {
+        $values: append((), $value);
+        @if map-key-has-multiple-values($value) {
+          $values: map-get($value, values);
+        }
+        @each $value in $values {
+          @if(not index($exclude, $property)) {
+            // deal with the states
+            @if($property == states and $states != false and length($value) > 0) {
+              @each $state, $val in $value {
+                @if(index(-compass-list($states), $state) or $states == true) {
+                  // get the state selector mappings
+                  $selector-map: _getStateSelectorMap($state);
+                  // output the state selectors if we're not using _only_ BEM style
+                  @if($CONFIG_STATE_BEM != only) {
+                    $selector: map-get($selector-map, selector);
+                    // if the selector is valid...
+                    @if($selector != null) {
+                      // output it
+                      #{$selector} {
+                        @include to-styles($val, true, true, $exclude);
+                      }
+                    }
                   }
-                }
-              }
-              // if BEM style states are enabled...
-              @if($CONFIG_STATE_BEM) {
-                // get the BEM states
-                $bem-states: map-get($selector-map, states);
-                // for each BEM state
-                @each $bem-state in $bem-states {
-                  // output it (this looks scarier than it really is...)
-                  @include bem($modifier: $bem-state) {
-                    @include to-styles($val, true, true, $exclude);
+                  // if BEM style states are enabled...
+                  @if($CONFIG_STATE_BEM) {
+                    // get the BEM states
+                    $bem-states: map-get($selector-map, states);
+                    // for each BEM state
+                    @each $bem-state in $bem-states {
+                      // output it (this looks scarier than it really is...)
+                      @include bem($modifier: $bem-state) {
+                        @include to-styles($val, true, true, $exclude);
+                      }
+                    }
                   }
                 }
               }
             }
-          }
-        }
-        // deal with the nested selectors
-        @else if($property == selectors and $selectors != false and length($value) > 0) {
-          @each $selector, $val in $value {
-            @if(index(-compass-list($selectors), $selector) or $selectors == true) {
-              $sel: _getSelectorSelector($selector);
-              @if str-index($sel, '%bem ') == 1 {
-                $sel: str-replace($sel, '%bem ', '');
-                @include bem($element: $sel) {
-                  @include to-styles($val, true, true, $exclude);
-                }
-              }
-              @else {
-                #{$sel} {
-                  @include to-styles($val, true, true, $exclude);
+            // deal with the nested selectors
+            @else if($property == selectors and $selectors != false and length($value) > 0) {
+              @each $selector, $val in $value {
+                @if(index(-compass-list($selectors), $selector) or $selectors == true) {
+                  $sel: _getSelectorSelector($selector);
+                  @if str-index($sel, '%bem ') == 1 {
+                    $sel: str-replace($sel, '%bem ', '');
+                    @include bem($element: $sel) {
+                      @include to-styles($val, true, true, $exclude);
+                    }
+                  }
+                  @else {
+                    #{$sel} {
+                      @include to-styles($val, true, true, $exclude);
+                    }
+                  }
                 }
               }
             }
+            // otherwise, just output it
+            @else if($selectors == true and $states == true ) {
+              @include _outputStyle($property, $value);
+            }
           }
-        }
-        // otherwise, just output it
-        @else if($selectors == true and $states == true ) {
-          @include _outputStyle($property, $value);
         }
       }
     }

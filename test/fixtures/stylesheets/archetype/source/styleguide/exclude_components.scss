@@ -7,7 +7,7 @@ $a-blackhole: styleguide-add-component(excluded-component, (), (
     display         block
   )),
   nil
-));
+)) !global;
 }
 
 .excluded-component {

@@ -13,5 +13,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_ICONS_ID,  $STYLEGUIDE_ICONS,
     background          (none no-repeat scroll 0 0 transparent)
   )),
   nil
-));
+)) !global;
 }

@@ -33,7 +33,7 @@ $a-blackhole: styleguide-add-component(nested-styleguide-test, (), (
     nil
   )),
   nil
-));
+)) !global;
 }
 .nested-styleguide-test {
   @include styleguide(nested-styleguide-test);

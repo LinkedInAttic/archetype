@@ -8,7 +8,7 @@ $a-blackhole: styleguide-add-component(test-missing-nil, (), (
     nil
   ))
   // missing nil
-));
+)) !global;
 }
 
 // this should still throw a warning because we can't retrieve the key-value pairs for the properties
@@ -19,7 +19,7 @@ $a-blackhole: styleguide-add-component(test-missing-nil-2, (), (
     // missing nil
   )),
   nil
-));
+)) !global;
 }
 
 // this should still throw a warning because we can't retrieve the key-value pairs for the properties
@@ -36,7 +36,7 @@ $a-blackhole: styleguide-add-component(test-missing-nil-3, (), (
     ))
   )),
   nil
-));
+)) !global;
 }
 
 // this should throw a warning because we probably forgot a comma somewhere
@@ -55,7 +55,7 @@ $a-blackhole: styleguide-add-component(test-missing-comma, (), (
     ))
   )),
   nil
-));
+)) !global;
 }
 
 // this should throw a warning because we used an empty value for a property
@@ -65,7 +65,7 @@ $a-blackhole: styleguide-add-component(test-empty-value, (), (
     color   // this is ambiguous, but shouldn't cause an error
   )),
   nil
-));
+)) !global;
 }
 
 .test-missing-nil {

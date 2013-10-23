@@ -150,5 +150,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_LOADERS_ID, $STYLEGUIDE_LOADE
     opacity             nil,
     nil
   ))
-));
+)) !global;
 }

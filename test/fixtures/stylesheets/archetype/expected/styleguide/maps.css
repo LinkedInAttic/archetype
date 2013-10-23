@@ -11,12 +11,3 @@
 .test.hover, .test:hover, .test.focus, .test:focus {
   color: blue;
 }
-
-.map-get {
-  /* map[first]: first-value */
-  /* map[dup]: value, value2 */
-}
-
-.map-keys {
-  /* keys: first, dup */
-}

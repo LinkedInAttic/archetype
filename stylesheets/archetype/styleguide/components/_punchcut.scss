@@ -14,5 +14,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_PUNCHCUTS_ID, $STYLEGUIDE_PUN
     box-shadow  nil,
     nil
   ))
-));
+)) !global;
 }

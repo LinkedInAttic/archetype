@@ -62,5 +62,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_LINKS_ID,  $STYLEGUIDE_LINKS,
     ))
   )),
   nil
-));
+)) !global;
 }

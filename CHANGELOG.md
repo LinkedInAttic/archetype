@@ -14,6 +14,8 @@
 - added `str-replace` function for simple Sass::Script::Value::String replacements
 - added `$CONFIG_THEME_EXCLUDE` takes a list of components that will be excluded (not registered)
 - added `switch-locale` mixin to switch the interface locale
+- styleguides now support registering maps
+- `to-styles` now takes a map (but still supports a key-value paired list)
 
 ### Major Changes:
 

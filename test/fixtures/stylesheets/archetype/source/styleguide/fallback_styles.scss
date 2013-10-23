@@ -15,7 +15,7 @@ $a-blackhole: styleguide-add-component(fallback-styleguide-test, (), (
     something       valid
   )),
   nil
-));
+)) !global;
 }
 .fallback-styleguide-test {
   @include styleguide(fallback-styleguide-test);

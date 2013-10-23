@@ -12,5 +12,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTON_TOOLBARS_ID,  $STYLEGU
     clearfix            legacy-pie-clearfix
   )),
   nil
-));
+)) !global;
 }

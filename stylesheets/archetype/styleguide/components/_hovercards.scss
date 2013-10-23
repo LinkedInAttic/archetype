@@ -23,5 +23,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_HOVERCARDS_ID,  $STYLEGUIDE_H
     z-index             1
   )),
   nil
-));
+)) !global;
 }

@@ -11,7 +11,7 @@ $a-blackhole: styleguide-add-component(multi-value-styleguide-test, (), (
     target-browser  (ie 8, color, red),
     target-browser  (firefox, color, pink)
   ))
-));
+)) !global;
 }
 .multi-value-styleguide-test {
   @include styleguide(multi-value-styleguide-test);

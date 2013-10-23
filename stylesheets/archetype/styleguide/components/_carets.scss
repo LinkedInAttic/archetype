@@ -331,5 +331,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_CARETS_ID,  $STYLEGUIDE_CARET
     bottom              $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
     margin-top          nil
   ))
-));
+)) !global;
 }

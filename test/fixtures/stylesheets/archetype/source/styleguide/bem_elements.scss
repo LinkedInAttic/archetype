@@ -21,7 +21,7 @@ $a-blackhole: styleguide-add-component(bem-elements-selector-styleguide-test, ()
     ))
   )),
   nil
-));
+)) !global;
 }
 
 .bem-element-test {

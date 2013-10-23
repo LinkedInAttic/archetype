@@ -14,7 +14,7 @@ $a-blackhole: styleguide-add-component(content-styleguide-test, (), (
   (four, (
     content   attr(data-icon)
   ))
-));
+)) !global;
 }
 
 .content {

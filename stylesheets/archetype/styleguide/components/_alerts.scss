@@ -55,5 +55,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_ALERTS_ID, $STYLEGUIDE_ALERTS
     glyph-icon            _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_YIELD),
     box-shadow            _styleguideGetAlertShadow(yield)
   ))
-));
+)) !global;
 }

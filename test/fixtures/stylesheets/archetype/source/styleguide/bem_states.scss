@@ -24,7 +24,7 @@ $a-blackhole: styleguide-add-component(bem-state-selector-styleguide-test, (), (
     ))
   )),
   nil
-));
+)) !global;
 }
 
 /* BEM states off */

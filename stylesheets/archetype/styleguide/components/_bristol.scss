@@ -11,5 +11,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BRISTOLS_ID, $STYLEGUIDE_BRIS
     nil
   )),
   nil
-));
+)) !global;
 }

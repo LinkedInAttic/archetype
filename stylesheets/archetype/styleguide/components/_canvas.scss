@@ -11,5 +11,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_CANVAS_ID,  $STYLEGUIDE_CANVA
     nil
   )),
   nil
-));
+)) !global;
 }

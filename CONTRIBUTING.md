@@ -85,5 +85,5 @@ Ruby tests are currently limited to unit tests. These test cases live in `test/u
 - Styleguide components should be uppercase, underscored, and prefixed with `STYLEGUIDE` (e.g. `$STYLEGUIDE_NEW_COMPONENT_ID`)
 - Use multi-line convention with each rule on a separate line
 - Use a semi-colon after every declaration (including the last declaration of a rule)
-- Use the convention `$a-blackhole: my-procedural-method();` when you're not using the value returned by a method
+- Use the convention `$a-blackhole: my-procedural-method() !global;` when you're not using the value returned by a method
 - Use Sassdoc syntax for documenting all methods
