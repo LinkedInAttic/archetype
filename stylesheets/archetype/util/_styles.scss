@@ -34,7 +34,6 @@
   @if($property != nil and length(-compass-list($value)) > 0 and first-value-of(-compass-list($value)) != nil and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
     // check to see if we have a custom output styler (pre)
-    @debug $property;
     @if has-custom-output-styler($property, $value, pre) == true {
       @include custom-output-styler($property, $value, $method: pre);
     }
