@@ -4,6 +4,12 @@
 module Archetype::Functions::Helpers
 private
 
+  META = {
+    :meta => '-archetype-meta',
+    :has_multiples => 'has-multiple-values',
+    :values => 'values'
+  }
+
   #
   # provides a convenience interface to the Compass::Logger
   #
@@ -197,11 +203,34 @@ private
   def self.array_to_meta(array)
     return array[0] if array.size == 1
     return Sass::Script::Value::Map.new({
-      Sass::Script::Value::String.new('-archetype-meta') => Sass::Script::Value::Map.new({
-        Sass::Script::Value::String.new('has-multiple-values') => Sass::Script::Value::Bool.new(true)
+      Sass::Script::Value::String.new(META[:meta]) => Sass::Script::Value::Map.new({
+        Sass::Script::Value::String.new(META[:has_multiples]) => Sass::Script::Value::Bool.new(true)
       }),
-      Sass::Script::Value::String.new('values') => Sass::Script::Value::List.new(array, :comma)
+      Sass::Script::Value::String.new(META[:values]) => Sass::Script::Value::List.new(array, :comma)
     })
+  end
+
+  #
+  # convert a Sass map with meta data to an array of values
+  #
+  # *Example*:
+  #   meta_to_array(((-archetype-meta: (has-multiple-values: true), values: (1, "foo", "bar", 2, "baz"))))
+  #     #=> [1, "foo", "bar", 2, "baz"]
+  # *Parameters*:
+  # - <tt>map</tt> {Sass::Script::Value::Map} the map to convert
+  # *Returns*:
+  # - {Array} the converted array
+  #
+  def self.meta_to_array(map)
+    hash = map.is_a?(Sass::Script::Value::Map) ? map_to_hash(map) : map
+    if hash.is_a?(Hash)
+      meta = hash[META[:meta]]
+      if not meta.nil? and not meta[META[:has_multiples]].nil? and meta[META[:has_multiples]]
+        return (map[META[:values]] || []).to_a
+      end
+    end
+    # dunno what we got, but it wasn't meta enough, so just return the original map
+    return map
   end
 
   #

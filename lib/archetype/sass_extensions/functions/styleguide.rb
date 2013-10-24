@@ -175,6 +175,7 @@ private
     # get a list of valid ids
     styleguideIds = components.keys
     sentence = sentence.split if sentence.is_a? String
+
     sentence = sentence.to_a
     id = nil
     modifiers = []
@@ -186,7 +187,7 @@ private
       # these are things that are useless to us, so we just leave them out
       ignore = %w(a an also the this that is was it)
       # these are our context switches (e.g. `headline in a button`)
-      contexts = %w(in)
+      contexts = %w(in within)
       sentence.each do |item|
         item = item.value
         # find the ID
@@ -438,7 +439,7 @@ private
   # driver method for converting a sentence into a list of styles
   #
   # *Parameters*:
-  # - <tt>description</tt> {String|List} the description of the component
+  # - <tt>description</tt> {String|List|Array} the description of the component
   # - <tt>theme</tt> {String} the theme to use
   # - <tt>state</tt> {String} the name of a state to return
   # *Returns*:
@@ -447,6 +448,8 @@ private
   def get_styles(description, theme = nil, state = nil)
     styles = Archetype::Hash.new
     description.to_a.each do |sentence|
+      # if we have a hash, it denotes multiple values, so we need to convert this back to an array and recurse
+      return get_styles(helpers.meta_to_array(sentence)) if sentence.is_a?(Hash) or sentence.is_a?(Sass::Script::Value::Map)
       # get the grammar from the sentence
       id, modifiers, token = grammar(sentence, theme, state)
       if id
