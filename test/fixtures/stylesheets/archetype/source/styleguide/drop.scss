@@ -1,73 +1,65 @@
 @import "test_harness";
 
 @if should-register-component(dropping-styles-test) {
+$a-blackhole: component-registration-setup() !global;
 $a-blackhole: styleguide-add-component(dropping-styles-test, (), (
-  (default, (
-    display         block,
-    color           red,
-    background      green,
-    (states, (
-      (hover, (
-        styleguide  module,
-        border      (2px solid red),
-        (selectors, (
-          ('.test', (
-            padding  100px,
-            margin   20px
-          )),
-          nil
-        ))
-      )),
-      nil
-    ))
-  )),
-  (parent, (
-    display         none,
-    color           black
-  )),
-  (heir, (
-    inherit (parent),
-    nil
-  )),
-  (dropped, (
-    drop            true,
-    color           yellow
-  )),
-  (dropped2, (
-    drop            true,
-    color           yellow,
-    (states, (
-      (hover, (
-        color       blue,
-        nil
-      )),
-      (active, (
-        color       green,
-        width       100%
-      )),
-      nil
-    ))
-  )),
-  (dropped3, (
-    color           purple,
-    (states, (
-      drop          hover,  // TODO: this is currently throwing an ambiguous warning, need to investigate
-      nil
-    )),
-    nil
-  )),
-  (dropped4, (
-    color           purple,
-    (states, (
-      (hover, (
-        drop        selectors,
-        nil
-      )),
-      nil
-    ))
-  )),
-  nil
+  default: (
+    display:        block,
+    color:          red,
+    background:     green,
+    states: (
+      hover: (
+        styleguide:  module,
+        border:      (2px solid red),
+        selectors: (
+          '.test': (
+            padding: 100px,
+            margin:  20px
+          )
+        )
+      )
+    )
+  ),
+  parent: (
+    display:        none,
+    color:          black
+  ),
+  heir: (
+    inherit: (parent)
+  ),
+  dropped: (
+    drop:           true,
+    color:          yellow
+  ),
+  dropped2: (
+    drop:           true,
+    color:          yellow,
+    states: (
+      hover: (
+        color:      blue
+      ),
+      active: (
+        color:      green,
+        width:      100%
+      )
+    )
+  ),
+  dropped3: (
+    color:          purple,
+    states: (
+      drop:         hover
+    )
+  ),
+  dropped4: (
+    color:          purple,
+    states: (
+      hover: (
+        drop:       selectors
+      )
+    )
+  )
 )) !global;
+$a-blackhole: component-registration-setup(teardown) !global;
 }
 
 .dropping-styles-test {

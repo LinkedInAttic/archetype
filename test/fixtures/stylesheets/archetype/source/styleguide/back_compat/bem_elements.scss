@@ -1,0 +1,29 @@
+@import "test_harness";
+
+@if should-register-component(bem-elements-selector-styleguide-test-back-compat) {
+$a-blackhole: styleguide-add-component(bem-elements-selector-styleguide-test-back-compat, (), (
+  (default, (
+    display         block,
+    color           red,
+    (selectors, (
+      ('&.test', (
+        color  green
+      )),
+      ('%bem element', (
+        color  blue
+      )),
+      ('%bem text', (
+        color  orange
+      )),
+      ('input', (
+        color  yellow
+      ))
+    ))
+  )),
+  nil
+)) !global;
+}
+
+.bem-element-test-back-compat {
+  @include styleguide(bem-elements-selector-styleguide-test-back-compat);
+}

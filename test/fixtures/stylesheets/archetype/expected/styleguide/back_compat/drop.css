@@ -1,0 +1,75 @@
+.dropping-styles-test-back-compat {
+  /* should contain hover state and .test selector */
+  /* [archetype:styleguide:begin] --- dropping-styles-test-back-compat --- */
+  display: block;
+  color: red;
+  background: green;
+  /* [archetype:styleguide:end]   --- dropping-styles-test-back-compat --- */
+}
+.dropping-styles-test-back-compat.hover, .dropping-styles-test-back-compat:hover, .dropping-styles-test-back-compat.focus, .dropping-styles-test-back-compat:focus {
+  background: #eeeeee;
+  border: 2px solid red;
+}
+.dropping-styles-test-back-compat.hover .test, .dropping-styles-test-back-compat:hover .test, .dropping-styles-test-back-compat.focus .test, .dropping-styles-test-back-compat:focus .test {
+  padding: 100px;
+  margin: 20px;
+}
+.dropping-styles-test-back-compat.parent {
+  /* should contain hover state and .test selector */
+  /* [archetype:styleguide:begin] --- parent dropping-styles-test-back-compat --- */
+  display: none;
+  color: black;
+  background: green;
+  /* [archetype:styleguide:end]   --- parent dropping-styles-test-back-compat --- */
+}
+.dropping-styles-test-back-compat.parent.hover, .dropping-styles-test-back-compat.parent:hover, .dropping-styles-test-back-compat.parent.focus, .dropping-styles-test-back-compat.parent:focus {
+  background: #eeeeee;
+  border: 2px solid red;
+}
+.dropping-styles-test-back-compat.parent.hover .test, .dropping-styles-test-back-compat.parent:hover .test, .dropping-styles-test-back-compat.parent.focus .test, .dropping-styles-test-back-compat.parent:focus .test {
+  padding: 100px;
+  margin: 20px;
+}
+.dropping-styles-test-back-compat.heir {
+  /* should contain hover state and .test selector */
+  /* [archetype:styleguide:begin] --- heir dropping-styles-test-back-compat --- */
+  display: none;
+  color: black;
+  background: green;
+  /* [archetype:styleguide:end]   --- heir dropping-styles-test-back-compat --- */
+}
+.dropping-styles-test-back-compat.heir.hover, .dropping-styles-test-back-compat.heir:hover, .dropping-styles-test-back-compat.heir.focus, .dropping-styles-test-back-compat.heir:focus {
+  background: #eeeeee;
+  border: 2px solid red;
+}
+.dropping-styles-test-back-compat.heir.hover .test, .dropping-styles-test-back-compat.heir:hover .test, .dropping-styles-test-back-compat.heir.focus .test, .dropping-styles-test-back-compat.heir:focus .test {
+  padding: 100px;
+  margin: 20px;
+}
+.dropping-styles-test-back-compat.dropped {
+  /* should only contain color:yellow */
+  /* [archetype:styleguide:begin] --- dropped dropping-styles-test-back-compat --- */
+  color: yellow;
+  /* [archetype:styleguide:end]   --- dropped dropping-styles-test-back-compat --- */
+}
+.dropping-styles-test-back-compat.dropped2 {
+  /* should contain color:yellow, custom :hover, :active */
+  /* [archetype:styleguide:begin] --- dropped2 dropping-styles-test-back-compat --- */
+  color: yellow;
+  /* [archetype:styleguide:end]   --- dropped2 dropping-styles-test-back-compat --- */
+}
+.dropping-styles-test-back-compat.dropped2.hover, .dropping-styles-test-back-compat.dropped2:hover, .dropping-styles-test-back-compat.dropped2.focus, .dropping-styles-test-back-compat.dropped2:focus {
+  color: blue;
+}
+.dropping-styles-test-back-compat.dropped2.active, .dropping-styles-test-back-compat.dropped2:active {
+  color: green;
+  width: 100%;
+}
+.dropping-styles-test-back-compat.dropped3 {
+  /* should only contain color:purple */
+  /* [archetype:styleguide:begin] --- dropped3 dropping-styles-test-back-compat --- */
+  display: block;
+  color: purple;
+  background: green;
+  /* [archetype:styleguide:end]   --- dropped3 dropping-styles-test-back-compat --- */
+}

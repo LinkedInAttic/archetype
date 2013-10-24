@@ -5,8 +5,8 @@ $CONFIG_USE_SMART_CONTENT: true;
 
 @mixin test1 {
   @include to-styles((
-    color       red,
-    overflow    hidden
+    color:      red,
+    overflow:   hidden
   ));
 }
 

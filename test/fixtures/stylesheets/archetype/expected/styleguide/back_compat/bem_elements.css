@@ -1,0 +1,18 @@
+.bem-element-test-back-compat {
+  /* [archetype:styleguide:begin] --- bem-elements-selector-styleguide-test-back-compat --- */
+  display: block;
+  color: red;
+  /* [archetype:styleguide:end]   --- bem-elements-selector-styleguide-test-back-compat --- */
+}
+.bem-element-test-back-compat.test {
+  color: green;
+}
+.bem-element-test-back-compat__element {
+  color: blue;
+}
+.bem-element-test-back-compat__text {
+  color: orange;
+}
+.bem-element-test-back-compat input {
+  color: yellow;
+}

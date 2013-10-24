@@ -1,20 +1,22 @@
 @import "test_harness";
 
 @if should-register-component(content-styleguide-test) {
+$a-blackhole: component-registration-setup() !global;
 $a-blackhole: styleguide-add-component(content-styleguide-test, (), (
-  (default, (
-    content   '\2193'
-  )),
-  (two, (
-    content   test
-  )),
-  (three, (
-    content   unquote('" (" attr(href) ")"')
-  )),
-  (four, (
-    content   attr(data-icon)
-  ))
+  default: (
+    content:  '\2193'
+  ),
+  two: (
+    content:   test
+  ),
+  three: (
+    content:  unquote('" (" attr(href) ")"')
+  ),
+  four: (
+    content:  attr(data-icon)
+  )
 )) !global;
+$a-blackhole: component-registration-setup(teardown) !global;
 }
 
 .content {

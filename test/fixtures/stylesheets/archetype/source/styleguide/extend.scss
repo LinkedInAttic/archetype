@@ -9,13 +9,14 @@
 }
 
 @if should-register-component(extend-styleguide-test) {
+$a-blackhole: component-registration-setup() !global;
 $a-blackhole: styleguide-add-component(extend-styleguide-test, (), (
-  (default, (
-    extend    '.some-extend-class',
-    extend    '%some-extend-placeholder'
-  )),
-  nil
+  default: (
+    extend:   '.some-extend-class',
+    extend:   '%some-extend-placeholder'
+  )
 )) !global;
+$a-blackhole: component-registration-setup(teardown) !global;
 }
 
 .extend-styleguide-test {

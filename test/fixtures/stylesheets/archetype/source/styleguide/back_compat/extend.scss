@@ -1,0 +1,23 @@
+@import "test_harness";
+
+.some-extend-class {
+  color: red;
+}
+
+%some-extend-placeholder {
+  background: green;
+}
+
+@if should-register-component(extend-styleguide-test-back-compat) {
+$a-blackhole: styleguide-add-component(extend-styleguide-test-back-compat, (), (
+  (default, (
+    extend    '.some-extend-class',
+    extend    '%some-extend-placeholder'
+  )),
+  nil
+)) !global;
+}
+
+.extend-styleguide-test-back-compat {
+  @include styleguide(extend-styleguide-test-back-compat);
+}

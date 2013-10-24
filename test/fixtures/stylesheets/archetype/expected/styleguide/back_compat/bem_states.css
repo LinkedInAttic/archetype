@@ -1,0 +1,89 @@
+/* BEM states off */
+.bem-state-test-back-compat-false {
+  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test-back-compat --- */
+  display: block;
+  color: red;
+  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test-back-compat --- */
+}
+.bem-state-test-back-compat-false.hover, .bem-state-test-back-compat-false:hover, .bem-state-test-back-compat-false.focus, .bem-state-test-back-compat-false:focus {
+  color: red;
+}
+.bem-state-test-back-compat-false.hover, .bem-state-test-back-compat-false:hover {
+  color: blue;
+}
+.bem-state-test-back-compat-false.focus, .bem-state-test-back-compat-false:focus {
+  color: green;
+}
+.bem-state-test-back-compat-false.active, .bem-state-test-back-compat-false:active {
+  color: black;
+}
+.bem-state-test-back-compat-false.my-custom-state {
+  color: pink;
+}
+
+/* BEM states on */
+.bem-state-test-back-compat-true {
+  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test-back-compat --- */
+  display: block;
+  color: red;
+  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test-back-compat --- */
+}
+.bem-state-test-back-compat-true.hover, .bem-state-test-back-compat-true:hover, .bem-state-test-back-compat-true.focus, .bem-state-test-back-compat-true:focus {
+  color: red;
+}
+.bem-state-test-back-compat-true--hover {
+  color: red;
+}
+.bem-state-test-back-compat-true--focus {
+  color: red;
+}
+.bem-state-test-back-compat-true.hover, .bem-state-test-back-compat-true:hover {
+  color: blue;
+}
+.bem-state-test-back-compat-true--hover {
+  color: blue;
+}
+.bem-state-test-back-compat-true.focus, .bem-state-test-back-compat-true:focus {
+  color: green;
+}
+.bem-state-test-back-compat-true--focus {
+  color: green;
+}
+.bem-state-test-back-compat-true.active, .bem-state-test-back-compat-true:active {
+  color: black;
+}
+.bem-state-test-back-compat-true--active {
+  color: black;
+}
+.bem-state-test-back-compat-true.my-custom-state {
+  color: pink;
+}
+.bem-state-test-back-compat-true--my-custom-state {
+  color: pink;
+}
+
+/* BEM states ONLY */
+.bem-state-test-back-compat-only {
+  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test-back-compat --- */
+  display: block;
+  color: red;
+  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test-back-compat --- */
+}
+.bem-state-test-back-compat-only--hover {
+  color: red;
+}
+.bem-state-test-back-compat-only--focus {
+  color: red;
+}
+.bem-state-test-back-compat-only--hover {
+  color: blue;
+}
+.bem-state-test-back-compat-only--focus {
+  color: green;
+}
+.bem-state-test-back-compat-only--active {
+  color: black;
+}
+.bem-state-test-back-compat-only--my-custom-state {
+  color: pink;
+}

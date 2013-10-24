@@ -1,0 +1,46 @@
+@import "test_harness";
+
+@if should-register-component(bem-state-selector-styleguide-test-back-compat) {
+$a-blackhole: styleguide-add-component(bem-state-selector-styleguide-test-back-compat, (), (
+  (default, (
+    display         block,
+    color           red,
+    (states, (
+      (hover, (
+        color  red
+      )),
+      (hover-only, (
+        color  blue
+      )),
+      (focus, (
+        color  green
+      )),
+      (active, (
+        color  black
+      )),
+      (my-custom-state, (
+        color  pink
+      ))
+    ))
+  )),
+  nil
+)) !global;
+}
+
+/* BEM states off */
+$CONFIG_STATE_BEM: false;
+.bem-state-test-back-compat-false {
+  @include styleguide(bem-state-selector-styleguide-test-back-compat);
+}
+
+/* BEM states on */
+$CONFIG_STATE_BEM: true;
+.bem-state-test-back-compat-true {
+  @include styleguide(bem-state-selector-styleguide-test-back-compat);
+}
+
+/* BEM states ONLY */
+$CONFIG_STATE_BEM: only;
+.bem-state-test-back-compat-only {
+  @include styleguide(bem-state-selector-styleguide-test-back-compat);
+}
