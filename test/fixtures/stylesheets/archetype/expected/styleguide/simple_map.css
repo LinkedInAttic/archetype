@@ -11,3 +11,16 @@
 .test.hover, .test:hover, .test.focus, .test:focus {
   color: blue;
 }
+
+.test2 {
+  /* [archetype:styleguide:begin] --- map-structure-test in something --- */
+  display: block;
+  color: yellow;
+  /* [archetype:styleguide:end]   --- map-structure-test in something --- */
+}
+.test2.test {
+  color: green;
+}
+.test2.hover, .test2:hover, .test2.focus, .test2:focus {
+  color: blue;
+}

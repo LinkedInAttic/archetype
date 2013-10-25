@@ -1,0 +1,31 @@
+.test2a {
+  /* [archetype:styleguide:begin] --- small copy --- */
+  /* [archetype:styleguide:end]   --- small copy --- */
+}
+.test2a, .test2b, .test2c {
+  font-size: 12px;
+  line-height: 14px;
+  color: #222222;
+  font-weight: normal;
+}
+
+.test2b {
+  /* [archetype:styleguide:begin] --- small copy --- */
+  /* [archetype:styleguide:end]   --- small copy --- */
+}
+
+.test2c {
+  /* [archetype:styleguide:begin] --- small copy --- */
+  /* [archetype:styleguide:end]   --- small copy --- */
+}
+
+.test2d {
+  /* [archetype:styleguide:begin] --- small muted copy --- */
+  /* [archetype:styleguide:end]   --- small muted copy --- */
+}
+.test2d {
+  font-size: 12px;
+  line-height: 14px;
+  color: #555555;
+  font-weight: normal;
+}

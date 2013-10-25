@@ -17,6 +17,9 @@ $a-blackhole: styleguide-add-component(map-structure-test, (), (
         color: blue
       )
     )
+  ),
+  in something: (
+    color: yellow
   )
 )) !global;
 }
@@ -24,4 +27,7 @@ $a-blackhole: component-registration-setup(teardown);
 
 .test {
   @include styleguide(map-structure-test);
+}
+.test2 {
+  @include styleguide(map-structure-test in something);
 }

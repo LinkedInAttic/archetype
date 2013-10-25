@@ -176,6 +176,30 @@ private
     styleguideIds = components.keys
     sentence = sentence.split if sentence.is_a? String
 
+    id, modifiers = grammarize(sentence, styleguideIds)
+
+    # if there was no id, return a list of valid IDs for reporting
+    modifiers = styleguideIds if id.nil?
+    # get the list of currenty installed component extensions
+    extensions = theme[:extensions] if not id.nil?
+    # TODO - low - eoneill: make sure we always want to return unique modifiers
+    # i can't think of a case where we wouldn't want to remove dups
+    # maybe in the case where we're looking for strict keys on the lookup?
+    modifiers = modifiers.uniq
+    token = memoizer.tokenize(theme[:name], extensions, id, modifiers, state)
+    return id, modifiers, token
+  end
+
+  #
+  # given a sentence, convert it to it's internal representation
+  #
+  # *Parameters*:
+  # - <tt>sentence</tt> {Array|List} the sentence describing the component
+  # - <tt>ids</tt> {Array} the list of identifiers
+  # *Returns*:
+  # - {Array} an array containing the identifer and modifiers
+  #
+  def grammarize(sentence, ids = [])
     sentence = sentence.to_a
     id = nil
     modifiers = []
@@ -189,9 +213,9 @@ private
       # these are our context switches (e.g. `headline in a button`)
       contexts = %w(in within)
       sentence.each do |item|
-        item = item.value
+        item = item.value if not item.is_a?(String)
         # find the ID
-        if id.nil? and styleguideIds.include?(item) and prefix.empty? and order.empty?
+        if id.nil? and ids.include?(item) and prefix.empty? and order.empty?
           id = item
         # if it's a `context`, we need to increase the depth and reset the prefix
         elsif contexts.include?(item)
@@ -207,16 +231,7 @@ private
         end
       end
     end
-    # if there was no id, return a list of valid IDs for reporting
-    modifiers = styleguideIds if id.nil?
-    # get the list of currenty installed component extensions
-    extensions = theme[:extensions] if not id.nil?
-    # TODO - low - eoneill: make sure we always want to return unique modifiers
-    # i can't think of a case where we wouldn't want to remove dups
-    # maybe in the case where we're looking for strict keys on the lookup?
-    modifiers = modifiers.uniq
-    token = memoizer.tokenize(theme[:name], extensions, id, modifiers, state)
-    return id, modifiers, token
+    return id, modifiers
   end
 
   #
@@ -243,8 +258,7 @@ private
     if not strict
       modifiers = modifiers.split
       context.each do |key, definition|
-        definition = [key, definition]
-        modifier = definition[0]
+        modifier = grammarize(key.split(' '))[1].join(' ')
         if modifier != DEFAULT
           match = true
           modifier = modifier.split
@@ -257,7 +271,7 @@ private
           end
           # if it matched, process it
           if match
-            tmp = resolve_dependents(id, definition[1], theme[:name], nil, out)
+            tmp = resolve_dependents(id, definition, theme[:name], nil, out)
             out, tmp = post_resolve_drops(out, tmp)
             out = out.rmerge(tmp)
           end
