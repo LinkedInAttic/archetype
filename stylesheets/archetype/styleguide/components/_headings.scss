@@ -29,5 +29,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_HEADINGS_ID,  $STYLEGUIDE_HEA
     inherit (first in-flyout in-in-button-group),
     nil
   ))
-));
+)) !global;
 }

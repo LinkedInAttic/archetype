@@ -1,3 +1,6 @@
+// setup the environment for component registration
+$a-blackhole: component-registration-setup() !global;
+
 // import components
 @import "components/alerts";
 @import "components/annotations";
@@ -23,3 +26,6 @@
 @import "components/pullquotes";
 @import "components/punchcut";
 @import "components/tooltips";
+
+// teardown the environment
+$a-blackhole: component-registration-setup(teardown) !global;

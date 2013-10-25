@@ -1,5 +1,6 @@
 @import "test_harness";
 
+$a-blackhole: component-registration-setup();
 @if should-register-component(map-structure-test) {
 $a-blackhole: styleguide-add-component(map-structure-test, (), (
   default: (
@@ -16,26 +17,17 @@ $a-blackhole: styleguide-add-component(map-structure-test, (), (
         color: blue
       )
     )
+  ),
+  in something: (
+    color: yellow
   )
-));
+)) !global;
 }
+$a-blackhole: component-registration-setup(teardown);
 
 .test {
   @include styleguide(map-structure-test);
 }
-
-
-$map: (
-  first: first-value,
-  dup: value,
-  dup: value2
-);
-
-.map-get {
-  /* map[first]: #{map-get($map, first)} */
-  /* map[dup]: #{map-get($map, dup)} */
-}
-
-.map-keys {
-  /* keys: #{map-keys($map)} */
+.test2 {
+  @include styleguide(map-structure-test in something);
 }

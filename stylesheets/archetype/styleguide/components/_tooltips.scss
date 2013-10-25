@@ -24,5 +24,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_TOOLTIPS_ID, $STYLEGUIDE_TOOL
     z-index             1
   )),
   nil
-));
+)) !global;
 }

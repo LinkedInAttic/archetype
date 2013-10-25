@@ -4,6 +4,12 @@
 module Archetype::Functions::Helpers
 private
 
+  META = {
+    :meta => '-archetype-meta',
+    :has_multiples => 'has-multiple-values',
+    :values => 'values'
+  }
+
   #
   # provides a convenience interface to the Compass::Logger
   #
@@ -12,10 +18,10 @@ private
   end
 
   #
-  # convert a Hash to a Sass::Script::Value::List
+  # convert an Archetype::Hash to a Sass::Script::Value::List
   #
   # *Parameters*:
-  # - <tt>hsh</tt> {Hash} the hash to convert
+  # - <tt>hsh</tt> {Archetype::Hash} the hash to convert
   # - <tt>depth</tt> {Integer} the depth to walk down into the hash
   # - <tt>separator</tt> {Symbol} the separator to use for the Sass::Script::Value::List
   # *Returns*:
@@ -44,7 +50,7 @@ private
   end
 
   #
-  # convert a Sass::Script::Value::List to a Hash
+  # convert a Sass::Script::Value::List to an Archetype::Hash
   #
   # *Parameters*:
   # - <tt>list</tt> {Sass::Script::Value::List} the list to convert
@@ -52,12 +58,13 @@ private
   # - <tt>nest</tt> {Array} a list of keys to treat as nested objects
   # - <tt>additives</tt> {Array} a list of keys that are additive
   # *Returns*:
-  # - {Hash} the converted hash
+  # - {Archetype::Hash} the converted hash
   #
   def self.list_to_hash(list, depth = 0, nest = [], additives = [])
     list = list.to_a
     previous = nil
     hsh = Archetype::Hash.new
+    dups = Set.new
     list.each do |item|
       item = item.to_a
 
@@ -108,10 +115,16 @@ private
         if additives.include?(key)
           hsh[key] ||= []
           hsh[key].push(value)
+          dups << key
         else
           hsh[key] = value
         end
       end
+    end
+
+    dups.each do |key|
+      # convert it's array of values into a meta object
+      hsh[key] = self.array_to_meta(hsh[key])
     end
 
     logger.record(:warning, "one of your data structures is ambiguous, please double check near `#{previous}`") if not previous.nil?
@@ -120,7 +133,7 @@ private
   end
 
   #
-  # convert a Sass::Script::Value::List or Sass::Script::Value::Map to an internal Hash
+  # convert a Sass::Script::Value::List or Sass::Script::Value::Map to an Archetype::Hash
   #
   # *Parameters*:
   # - <tt>data</tt> {Sass::Script::Value::List|Sass::Script::Value::Map} the data to convert
@@ -128,7 +141,7 @@ private
   # - <tt>nest</tt> {Array} a list of keys to treat as nested objects
   # - <tt>additives</tt> {Array} a list of keys that are additive
   # *Returns*:
-  # - {Hash} the converted hash
+  # - {Archetype::Hash} the converted hash
   #
   def self.data_to_hash(data, depth = 0, nest = [], additives = [])
     method = data.is_a?(Sass::Script::Value::Map) ? :map_to_hash : :list_to_hash
@@ -136,13 +149,13 @@ private
   end
 
   #
-  # converts a Sass::Script::Value::Map to an internal Hash
+  # converts a Sass::Script::Value::Map to an Archetype::Hash
   # - <tt>data</tt> {Sass::Script::Value::Map} the map to convert
   # - <tt>depth</tt> {Integer} the depth to reach into nested Lists
   # - <tt>nest</tt> {Array} a list of keys to treat as nested objects
   # - <tt>additives</tt> {Array} a list of keys that are additive
   # *Returns*:
-  # - {Hash} the converted hash
+  # - {Archetype::Hash} the converted hash
   #
   def self.map_to_hash(data, depth = 0, nest = [], additives = [])
     hsh = Archetype::Hash.new
@@ -152,6 +165,72 @@ private
       hsh[key] = value.is_a?(Sass::Script::Value::Map) ? map_to_hash(value) : value
     end
     return hsh
+  end
+
+  #
+  # convert an Archetype::Hash to a Sass::Script::Value::Map
+  #
+  # *Parameters*:
+  # - <tt>hsh</tt> {Archetype::Hash} the hash to convert
+  # - <tt>depth</tt> {Integer} the depth to walk down into the hash
+  # - <tt>separator</tt> {Symbol} the separator to use for the Sass::Script::Value::List
+  # *Returns*:
+  # - {Sass::Script::Value::List} the converted list
+  #
+  def self.hash_to_map(hsh)
+    if hsh.is_a? Hash
+      new_hsh = Archetype::Hash.new
+      hsh.each do |key, item|
+        new_hsh[Sass::Script::Value::String.new(key)] = (item.is_a? Hash) ? self.hash_to_map(item) : item
+      end
+    else
+      new_hsh = {}
+    end
+    return Sass::Script::Value::Map.new(new_hsh)
+  end
+
+  #
+  # convert an array of values into a Sass map with meta data
+  #
+  # *Example*:
+  #   array_to_meta([1, "foo", "bar", 2, "baz"])
+  #     #=> ((-archetype-meta: (has-multiple-values: true), values: (1, "foo", "bar", 2, "baz")))
+  # *Parameters*:
+  # - <tt>array</tt> {Array} the array to convert
+  # *Returns*:
+  # - {Sass::Script::Value::Map} the converted map
+  #
+  def self.array_to_meta(array)
+    return array[0] if array.size == 1
+    return Sass::Script::Value::Map.new({
+      Sass::Script::Value::String.new(META[:meta]) => Sass::Script::Value::Map.new({
+        Sass::Script::Value::String.new(META[:has_multiples]) => Sass::Script::Value::Bool.new(true)
+      }),
+      Sass::Script::Value::String.new(META[:values]) => Sass::Script::Value::List.new(array, :comma)
+    })
+  end
+
+  #
+  # convert a Sass map with meta data to an array of values
+  #
+  # *Example*:
+  #   meta_to_array(((-archetype-meta: (has-multiple-values: true), values: (1, "foo", "bar", 2, "baz"))))
+  #     #=> [1, "foo", "bar", 2, "baz"]
+  # *Parameters*:
+  # - <tt>map</tt> {Sass::Script::Value::Map} the map to convert
+  # *Returns*:
+  # - {Array} the converted array
+  #
+  def self.meta_to_array(map)
+    hash = map.is_a?(Sass::Script::Value::Map) ? map_to_hash(map) : map
+    if hash.is_a?(Hash)
+      meta = hash[META[:meta]]
+      if not meta.nil? and not meta[META[:has_multiples]].nil? and meta[META[:has_multiples]]
+        return (map[META[:values]] || []).to_a
+      end
+    end
+    # dunno what we got, but it wasn't meta enough, so just return the original map
+    return map
   end
 
   #
@@ -195,6 +274,7 @@ private
       value = value.value if value.is_a?(Sass::Script::Value::String)
       is_it = value.nil?
       is_it = value == 'nil' if value.is_a?(String)
+      is_it = value.empty? if value.is_a?(Hash)
       is_it = to_str(value) == 'nil' if value.is_a?(Sass::Script::Value::List) or value.is_a?(Array)
     end
     return is_it

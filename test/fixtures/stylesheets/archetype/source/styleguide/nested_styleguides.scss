@@ -6,35 +6,32 @@
 @import "test_harness";
 
 @if should-register-component(nested-styleguide-test) {
+$a-blackhole: component-registration-setup() !global;
 $a-blackhole: styleguide-add-component(nested-styleguide-test, (), (
-  (default, (
-    display         block,
-    color           red,
-    styleguide      (muted link without an underline),
-    background      green,
-    (states, (
-      (hover, (
-        styleguide  module,
-        nil
-      )),
-      nil
-    )),
-    (selectors, (
-      ('h3', (
-        styleguide  (large headline),
-        styleguide  (link without an underline),
-        nil
-      )),
-      ('&:after', (
-        color       red,
-        nil
-      ))
-    )),
-    nil
-  )),
-  nil
-));
+  default: (
+    display:         block,
+    color:           red,
+    styleguide:      (muted link without an underline),
+    background:      green,
+    states: (
+      hover: (
+        styleguide:  module
+      )
+    ),
+    selectors: (
+      'h3': (
+        styleguide:  (large headline),
+        styleguide:  (link without an underline)
+      ),
+      '&:after': (
+        color:      red
+      )
+    )
+  )
+)) !global;
+$a-blackhole: component-registration-setup(teardown) !global;
 }
+
 .nested-styleguide-test {
   @include styleguide(nested-styleguide-test);
 }

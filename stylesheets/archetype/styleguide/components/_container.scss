@@ -23,5 +23,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_CONTAINERS_ID,  $STYLEGUIDE_C
     target-browser    nil,
     nil
   ))
-));
+)) !global;
 }

@@ -48,5 +48,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_FLYOUTS_ID,  $STYLEGUIDE_FLYO
     left                  nil,
     right                 0
   ))
-));
+)) !global;
 }

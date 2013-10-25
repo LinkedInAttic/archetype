@@ -35,7 +35,7 @@ module Archetype::SassExtensions::UI
   #
   def tokenize(item)
     prefix = helpers.to_str(environment.var('CONFIG_GENERATED_TAG_PREFIX') || 'archetype') + '-'
-    token = prefix + helpers.to_str(item).hash.to_s
+    token = prefix + item.hash.to_s
     return Sass::Script::Value::String.new(token)
   end
 
@@ -68,23 +68,16 @@ module Archetype::SassExtensions::UI
   # *Returns*:
   # - <tt>$map</tt> {Map} the converted map of styles
   #
-  ## TODO: this doesn't work yet...
   def _style_string_to_map(string = '')
     # convert to string and strip all comments
-    string = helpers.to_str(string, ' ').gsub(/\/\*[^\*\/]*\*\//, '')
-    # then split it on each rule
-    tmp = string.split(';')
-    styles = []
-    # and for each rule break it into it's key-value pairs
-    tmp.each do |rule|
-      kvp = []
-      rule.split(':').each do |str|
-        kvp.push Sass::Script::Value::String.new(str)
-      end
-      styles.push Sass::Script::Value::List.new(kvp, :comma)
+    string = helpers.to_str(string, ' ').gsub(/\/\*(?!\*\/)*\*\//, '')
+    # then split it on each rule and for each rule break it into it's key-value pairs
+    styles = string.split(';').map do |rule|
+      k, v = rule.split(':')
+      [Sass::Script::Value::String.new(k), Sass::Script::Value::String.new(v)]
     end
-    # the recompose the list
-    return Sass::Script::Value::Map.new(styles)
+    # then recompose the map
+    return Sass::Script::Value::Map.new(Sass::Util.to_hash(styles))
   end
 
 private

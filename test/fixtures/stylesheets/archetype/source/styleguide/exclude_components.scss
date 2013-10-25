@@ -2,12 +2,13 @@ $CONFIG_THEME_EXCLUDE: (excluded-component);
 @import "test_harness";
 
 @if should-register-component(excluded-component) {
+$a-blackhole: component-registration-setup() !global;
 $a-blackhole: styleguide-add-component(excluded-component, (), (
-  (default, (
-    display         block
-  )),
-  nil
-));
+  default: (
+    display:        block
+  )
+)) !global;
+$a-blackhole: component-registration-setup(teardown) !global;
 }
 
 .excluded-component {

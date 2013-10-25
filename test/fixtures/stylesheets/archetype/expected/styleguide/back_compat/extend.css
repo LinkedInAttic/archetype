@@ -1,0 +1,12 @@
+.some-extend-class, .extend-styleguide-test-back-compat {
+  color: red;
+}
+
+.extend-styleguide-test-back-compat {
+  background: green;
+}
+
+.extend-styleguide-test-back-compat {
+  /* [archetype:styleguide:begin] --- extend-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:end]   --- extend-styleguide-test-back-compat --- */
+}

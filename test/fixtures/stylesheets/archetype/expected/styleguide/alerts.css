@@ -402,10 +402,9 @@
   font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
   font-size: 11px;
   color: inherit;
-  text-decoration: none;
 }
 .alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
@@ -500,10 +499,9 @@
   font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
   font-size: 11px;
   color: inherit;
-  text-decoration: none;
 }
 .alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
@@ -598,10 +596,9 @@
   font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
   font-size: 11px;
   color: inherit;
-  text-decoration: none;
 }
 .alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
@@ -696,10 +693,9 @@
   font-family: 'FontAwesome-0.0.1', 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
   font-size: 11px;
   color: inherit;
-  text-decoration: none;
 }
 .alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;

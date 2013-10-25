@@ -1,27 +1,29 @@
 @import "test_harness";
 
+
 @if should-register-component(bem-elements-selector-styleguide-test) {
+$a-blackhole: component-registration-setup() !global;
 $a-blackhole: styleguide-add-component(bem-elements-selector-styleguide-test, (), (
-  (default, (
-    display         block,
-    color           red,
-    (selectors, (
-      ('&.test', (
-        color  green
-      )),
-      ('%bem element', (
-        color  blue
-      )),
-      ('%bem text', (
-        color  orange
-      )),
-      ('input', (
-        color  yellow
-      ))
-    ))
-  )),
-  nil
-));
+  default: (
+    display:        block,
+    color:          red,
+    selectors: (
+      '&.test': (
+        color: green
+      ),
+      '%bem element': (
+        color: blue
+      ),
+      '%bem text': (
+        color: orange
+      ),
+      'input': (
+        color: yellow
+      )
+    )
+  )
+)) !global;
+$a-blackhole: component-registration-setup(teardown) !global;
 }
 
 .bem-element-test {

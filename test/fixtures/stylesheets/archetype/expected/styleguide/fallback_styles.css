@@ -6,6 +6,7 @@
   white-space: -moz-pre-wrap;
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
+  something: invalid;
   something: valid;
   /* [archetype:styleguide:end]   --- fallback-styleguide-test --- */
 }

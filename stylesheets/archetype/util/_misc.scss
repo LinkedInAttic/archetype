@@ -106,3 +106,12 @@ $REGISTRY_DO_ONCE: () !default;
   @if $image == nil { @return nil; }
   @return image-height($image);
 }
+
+//
+@function map-key-has-multiple-values($map) {
+  @if type-of($map) == map and map-has-key($map, -archetype-meta) {
+    $map: map-get($map, -archetype-meta);
+    @return map-has-key($map, has-multiple-values);
+  }
+  @return false;
+}

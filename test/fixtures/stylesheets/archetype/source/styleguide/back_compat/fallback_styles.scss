@@ -1,0 +1,22 @@
+// this case verifies that you can define `fallback` css properties
+
+@import "test_harness";
+
+@if should-register-component(fallback-styleguide-test-back-compat) {
+$a-blackhole: styleguide-add-component(fallback-styleguide-test-back-compat, (), (
+  (default, (
+    background      (transparent url(/some/img.png) repeat),
+    background      rbga(255, 0, 0, 0.9),
+    white-space     pre-wrap,
+    white-space     -moz-pre-wrap,
+    white-space     -pre-wrap,
+    white-space     -o-pre-wrap,
+    something       invalid,
+    something       valid
+  )),
+  nil
+)) !global;
+}
+.fallback-styleguide-test-back-compat {
+  @include styleguide(fallback-styleguide-test-back-compat);
+}

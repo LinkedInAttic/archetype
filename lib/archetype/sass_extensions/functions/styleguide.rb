@@ -119,10 +119,10 @@ module Archetype::SassExtensions::Styleguide
   # *Returns*:
   # - {List} a key-value paired list of styles
   #
-  def _styleguide(description, state = 'false', theme = nil)
+  def _styleguide(description, state = nil, theme = nil)
     @@archetype_styleguide_mutex.synchronize do
       # convert it back to a Sass:List and carry on
-      return helpers.hash_to_list(get_styles(description, theme, state), 0)
+      return helpers.hash_to_map(get_styles(description, theme, state))
     end
   end
 
@@ -141,8 +141,14 @@ module Archetype::SassExtensions::Styleguide
       original = helpers.data_to_hash(original)
       other = helpers.data_to_hash(other)
       diff = original.diff(other)
-      return helpers.hash_to_list(diff, 0)
+      return helpers.hash_to_map(diff)
     end
+  end
+
+  def component_registration_setup(type = nil)
+    method = (type.nil?) ? :enable : :disable
+    Archetype::Patches::Maps.method(method).call
+    return Sass::Script::Bool.new(true)
   end
 
 private
@@ -163,12 +169,37 @@ private
   # *Returns*:
   # - {Array} an array containing the identifer, modifiers, and a token
   #
-  def grammar(sentence, theme = nil, state = 'false')
+  def grammar(sentence, theme = nil, state = nil)
     theme = get_theme(theme)
     components = theme[:components]
     # get a list of valid ids
     styleguideIds = components.keys
     sentence = sentence.split if sentence.is_a? String
+
+    id, modifiers = grammarize(sentence, styleguideIds)
+
+    # if there was no id, return a list of valid IDs for reporting
+    modifiers = styleguideIds if id.nil?
+    # get the list of currenty installed component extensions
+    extensions = theme[:extensions] if not id.nil?
+    # TODO - low - eoneill: make sure we always want to return unique modifiers
+    # i can't think of a case where we wouldn't want to remove dups
+    # maybe in the case where we're looking for strict keys on the lookup?
+    modifiers = modifiers.uniq
+    token = memoizer.tokenize(theme[:name], extensions, id, modifiers, state)
+    return id, modifiers, token
+  end
+
+  #
+  # given a sentence, convert it to it's internal representation
+  #
+  # *Parameters*:
+  # - <tt>sentence</tt> {Array|List} the sentence describing the component
+  # - <tt>ids</tt> {Array} the list of identifiers
+  # *Returns*:
+  # - {Array} an array containing the identifer and modifiers
+  #
+  def grammarize(sentence, ids = [])
     sentence = sentence.to_a
     id = nil
     modifiers = []
@@ -180,11 +211,11 @@ private
       # these are things that are useless to us, so we just leave them out
       ignore = %w(a an also the this that is was it)
       # these are our context switches (e.g. `headline in a button`)
-      contexts = %w(in)
+      contexts = %w(in within)
       sentence.each do |item|
-        item = item.value
+        item = item.value if not item.is_a?(String)
         # find the ID
-        if id.nil? and styleguideIds.include?(item) and prefix.empty? and order.empty?
+        if id.nil? and ids.include?(item) and prefix.empty? and order.empty?
           id = item
         # if it's a `context`, we need to increase the depth and reset the prefix
         elsif contexts.include?(item)
@@ -200,16 +231,7 @@ private
         end
       end
     end
-    # if there was no id, return a list of valid IDs for reporting
-    modifiers = styleguideIds if id.nil?
-    # get the list of currenty installed component extensions
-    extensions = theme[:extensions] if not id.nil?
-    # TODO - low - eoneill: make sure we always want to return unique modifiers
-    # i can't think of a case where we wouldn't want to remove dups
-    # maybe in the case where we're looking for strict keys on the lookup?
-    modifiers = modifiers.uniq
-    token = memoizer.tokenize(theme[:name], extensions, id, modifiers, state)
-    return id, modifiers, token
+    return id, modifiers
   end
 
   #
@@ -236,8 +258,7 @@ private
     if not strict
       modifiers = modifiers.split
       context.each do |key, definition|
-        definition = [key, definition]
-        modifier = definition[0]
+        modifier = grammarize(key.split(' '))[1].join(' ')
         if modifier != DEFAULT
           match = true
           modifier = modifier.split
@@ -250,7 +271,7 @@ private
           end
           # if it matched, process it
           if match
-            tmp = resolve_dependents(id, definition[1], theme[:name], nil, out)
+            tmp = resolve_dependents(id, definition, theme[:name], nil, out)
             out, tmp = post_resolve_drops(out, tmp)
             out = out.rmerge(tmp)
           end
@@ -273,10 +294,18 @@ private
     end
     # check for nested styleguides
     styleguide = out[STYLEGUIDE]
-    if not (styleguide.nil? or styleguide.empty?)
-      styles = get_styles(styleguide, theme[:name])
-      out.delete(STYLEGUIDE)
-      out = styles.rmerge(out)
+    if not styleguide.nil?
+      if styleguide.is_a?(Sass::Script::Value::Map)
+        map = helpers.map_to_hash(styleguide)
+        styleguide = map['values'].to_a
+      else
+        styleguide = [styleguide]
+      end
+      if not styleguide.empty?
+        styles = get_styles(styleguide, theme[:name])
+        out.delete(STYLEGUIDE)
+        out = styles.rmerge(out)
+      end
     end
     return out
   end
@@ -301,7 +330,6 @@ private
         obj.delete(key) if not SPECIAL.include?(key)
       end
       merger.delete(DROP)
-    else
     end
     SPECIAL.each do |special|
       if obj[special].is_a?(Hash) and merger[special].is_a?(Hash)
@@ -330,27 +358,13 @@ private
       if DROPALL.include?(helpers.to_str(drop))
         if not keys.nil?
           keys.each do |key|
-            if SPECIAL.include?(key)
-              if not (obj[key].nil? or obj[key].empty?)
-                tmp[key] = Archetype::Hash.new
-                tmp[key][DROP] = obj[key].keys
-              end
-            else
-              tmp[key] = 'nil'
-            end
+            special_drop_key(obj, tmp, key)
           end
         end
       else
         drop.to_a.each do |key|
           key = helpers.to_str(key)
-          if SPECIAL.include?(key)
-            if not (obj[key].nil? or obj[key].empty?)
-              tmp[key] = Archetype::Hash.new
-              tmp[key][DROP] = obj[key].keys
-            end
-          else
-            tmp[key] = 'nil'
-          end
+          special_drop_key(obj, tmp, key)
         end
       end
       value.delete(DROP) if not is_special
@@ -360,6 +374,26 @@ private
       value[key] = resolve_drops(value[key], obj[key], key, SPECIAL.include?(key)) if not value[key].nil?
     end
     return value
+  end
+
+
+  #
+  # helper method for resolve_drops
+  #
+  # *Parameters*:
+  # - <tt>obj</tt> {Hash} the object
+  # - <tt>tmp</tt> {Hash} the temporary object
+  # - <tt>key</tt> {String} the key we care about
+  #
+  def special_drop_key(obj, tmp, key)
+    if SPECIAL.include?(key)
+      if not (obj[key].nil? or obj[key].empty?)
+        tmp[key] = Archetype::Hash.new
+        tmp[key][DROP] = obj[key].keys
+      end
+    else
+      tmp[key] = 'nil'
+    end
   end
 
   #
@@ -383,8 +417,8 @@ private
       value = resolve_drops(value, obj)
 
       # check for inheritance
-      inherit = value[INHERIT]
-      if not (inherit.nil? or inherit.empty?)
+      inherit = (value[INHERIT] || []).to_a
+      if not inherit.empty?
         # create a temporary object and extract the nested styles
         tmp = Archetype::Hash.new
         inherit.each { |related| tmp = tmp.rmerge(extract_styles(id, related, true, theme, context)) }
@@ -419,16 +453,17 @@ private
   # driver method for converting a sentence into a list of styles
   #
   # *Parameters*:
-  # - <tt>description</tt> {String|List} the description of the component
+  # - <tt>description</tt> {String|List|Array} the description of the component
   # - <tt>theme</tt> {String} the theme to use
   # - <tt>state</tt> {String} the name of a state to return
   # *Returns*:
   # - {Hash} the styles
   #
-  def get_styles(description, theme = nil, state = 'false')
-    state = helpers.to_str(state)
+  def get_styles(description, theme = nil, state = nil)
     styles = Archetype::Hash.new
     description.to_a.each do |sentence|
+      # if we have a hash, it denotes multiple values, so we need to convert this back to an array and recurse
+      return get_styles(helpers.meta_to_array(sentence)) if sentence.is_a?(Hash) or sentence.is_a?(Sass::Script::Value::Map)
       # get the grammar from the sentence
       id, modifiers, token = grammar(sentence, theme, state)
       if id
@@ -449,7 +484,8 @@ private
       end
     end
     # now that we've collected all of our styles, if we requested a single state, merge that state upstream
-    if state != 'false' and styles['states']
+    if not (state.nil? or state.is_a?(Sass::Script::Value::Null) or state == Sass::Script::Value::Bool.new(false) or styles['states'].empty?)
+      state = helpers.to_str(state)
       state = styles['states'][state]
       # remove any nested/special keys
       SPECIAL.each do |special|

@@ -23,5 +23,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_ANNOTATIONS_ID, $STYLEGUIDE_A
     inherit (in-dark),
     nil
   ))
-));
+)) !global;
 }

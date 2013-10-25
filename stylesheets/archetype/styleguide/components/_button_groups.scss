@@ -42,5 +42,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTON_GROUPS_ID, $STYLEGUIDE
     nil
   )),
   nil
-));
+)) !global;
 }

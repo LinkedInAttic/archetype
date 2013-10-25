@@ -60,5 +60,5 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_HEADLINES_ID,  $STYLEGUIDE_HE
     inherit (in-dark),
     text-shadow         nth-cyclic($CONFIG_SHADOW_COPY, 2)
   ))
-));
+)) !global;
 }
