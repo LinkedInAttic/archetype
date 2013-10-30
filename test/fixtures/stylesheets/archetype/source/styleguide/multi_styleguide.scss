@@ -1,0 +1,17 @@
+@import "test_harness";
+
+@if should-register-component(multi-styleguide-styleguide-test) {
+$a-blackhole: component-registration-setup() !global;
+$a-blackhole: styleguide-add-component(multi-styleguide-styleguide-test, (), (
+  default: (
+    styleguide:   large headline,
+    styleguide:   small copy,
+    styleguide:   canvas
+  )
+)) !global;
+$a-blackhole: component-registration-setup(teardown) !global;
+}
+
+.multi-value-styleguide-test {
+  @include styleguide(multi-styleguide-styleguide-test);
+}

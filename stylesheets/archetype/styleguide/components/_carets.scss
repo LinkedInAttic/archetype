@@ -6,330 +6,287 @@ $STYLEGUIDE_CARETS: () !default;
 
 @if should-register-component($STYLEGUIDE_CARETS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_CARETS_ID,  $STYLEGUIDE_CARETS, (
-  (default, (
-    inline-block        (middle, middle),
+  default: (
+    inline-block:         (middle, middle),
     // triangle... @see triangle() mixin
-    height              0,
-    width               0,
-    font-size           0,
-    line-height         0,
-    border-style        dashed,
-    border-color        transparent,
-    border-top-style    solid,
-    border-width        _styleguideCaretSize(medium),
-    border-top-color    nth($CONFIG_COLOR_COPY, 1),
-    overflow            hidden,
-    content             $CONTENT_PLACEHOLDER
-  )),
-  (in-dark, (
-    border-top-color    nth-cyclic($CONFIG_COLOR_COPY, 2),
-    nil
-  )),
-  (in-punchcut, (
-    inherit (in-dark),
-    nil
-  )),
-  (in-bristol, (
-    inherit (in-dark),
-    nil
-  )),
-  (in-tooltip, (
-    inherit (in-dark),
-    nil
-  )),
-  (in-button, (
-    border-top-color    $CONFIG_COLOR_BUTTON_PRIMARY,
-    nil
-  )),
-  (in-button in-secondary, (
-    border-top-color    $CONFIG_COLOR_BUTTON_SECONDARY,
-    nil
-  )),
-  (in-button in-spotlight, (
-    border-top-color    $CONFIG_COLOR_BUTTON_SPOTLIGHT,
-    nil
-  )),
+    height:               0,
+    width:                0,
+    font-size:            0,
+    line-height:          0,
+    border-style:         dashed,
+    border-color:         transparent,
+    border-top-style:     solid,
+    border-width:         _styleguideCaretSize(medium),
+    border-top-color:     nth($CONFIG_COLOR_COPY, 1),
+    overflow:             hidden,
+    content:              $CONTENT_PLACEHOLDER
+  ),
+  in dark: (
+    border-top-color:     nth-cyclic($CONFIG_COLOR_COPY, 2)
+  ),
+  in a $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:              in dark
+  ),
+  in a $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:              in dark
+  ),
+  in a $STYLEGUIDE_TOOLTIPS_ID: (
+    inherit:              in dark
+  ),
+  in a $STYLEGUIDE_BUTTONS_ID: (
+    border-top-color:     $CONFIG_COLOR_BUTTON_PRIMARY
+  ),
+  in a secondary $STYLEGUIDE_BUTTONS_ID: (
+    border-top-color:     $CONFIG_COLOR_BUTTON_SECONDARY
+  ),
+  in a spotlight $STYLEGUIDE_BUTTONS_ID: (
+    border-top-color:     $CONFIG_COLOR_BUTTON_SPOTLIGHT
+  ),
   // SIZES
-  (large, (
-    border-width        _styleguideCaretSize(large),
-    nil
-  )),
-  (small, (
-    border-width        _styleguideCaretSize(small),
-    nil
-  )),
-  (in-button in-large, (
-    inherit (large),
-    nil
-  )),
-  (in-button in-small, (
-    inherit (small),
-    nil
-  )),
+  large: (
+    border-width:         _styleguideCaretSize(large)
+  ),
+  small: (
+    border-width:         _styleguideCaretSize(small)
+  ),
+  in a large $STYLEGUIDE_BUTTONS_ID: (
+    inherit:              large
+  ),
+  in a small $STYLEGUIDE_BUTTONS_ID: (
+    inherit:              small
+  ),
   // upward caret
-  (north, (
-    border-top-color    nil,
-    border-top-style    nil,
-    border-bottom-style solid,
-    border-bottom-color nth($CONFIG_COLOR_COPY, 1),
-    border-width        _styleguideCaretSize(medium, north)
-  )),
-  (north in-button, (
-    border-bottom-color $CONFIG_COLOR_BUTTON_PRIMARY,
-    nil
-  )),
-  (north in-button in-secondary, (
-    border-bottom-color $CONFIG_COLOR_BUTTON_SECONDARY,
-    nil
-  )),
-  (north in-button in-spotlight, (
-    border-bottom-color $CONFIG_COLOR_BUTTON_SPOTLIGHT,
-    nil
-  )),
+  north: (
+    border-top-color:     null,
+    border-top-style:     null,
+    border-bottom-style:  solid,
+    border-bottom-color:  nth($CONFIG_COLOR_COPY, 1),
+    border-width:         _styleguideCaretSize(medium, north)
+  ),
+  north in a $STYLEGUIDE_BUTTONS_ID: (
+    border-bottom-color:  $CONFIG_COLOR_BUTTON_PRIMARY
+  ),
+  north in a secondary $STYLEGUIDE_BUTTONS_ID: (
+    border-bottom-color:  $CONFIG_COLOR_BUTTON_SECONDARY
+  ),
+  north in a spotlight $STYLEGUIDE_BUTTONS_ID: (
+    border-bottom-color:  $CONFIG_COLOR_BUTTON_SPOTLIGHT
+  ),
   // rightward caret
-  (east, (
-    border-top-color    nil,
-    border-top-style    nil,
-    border-left-style   solid,
-    border-left-color   nth($CONFIG_COLOR_COPY, 1),
-    border-width        _styleguideCaretSize(medium, east)
-  )),
-  (east in-button, (
-    border-left-color   $CONFIG_COLOR_BUTTON_PRIMARY,
-    nil
-  )),
-  (east in-button in-secondary, (
-    border-left-color   $CONFIG_COLOR_BUTTON_SECONDARY,
-    nil
-  )),
-  (east in-button in-spotlight, (
-    border-left-color   $CONFIG_COLOR_BUTTON_SPOTLIGHT,
-    nil
-  )),
+  east: (
+    border-top-color:     null,
+    border-top-style:     null,
+    border-left-style:    solid,
+    border-left-color:    nth($CONFIG_COLOR_COPY, 1),
+    border-width:         _styleguideCaretSize(medium, east)
+  ),
+  east in a $STYLEGUIDE_BUTTONS_ID: (
+    border-left-color:    $CONFIG_COLOR_BUTTON_PRIMARY
+  ),
+  east in a secondary $STYLEGUIDE_BUTTONS_ID: (
+    border-left-color:    $CONFIG_COLOR_BUTTON_SECONDARY
+  ),
+  east in a spotlight $STYLEGUIDE_BUTTONS_ID: (
+    border-left-color:    $CONFIG_COLOR_BUTTON_SPOTLIGHT
+  ),
   // leftward caret
-  (west, (
-    border-top-color    nil,
-    border-top-style    nil,
-    border-right-style  solid,
-    border-right-color  nth($CONFIG_COLOR_COPY, 1),
-    border-width        _styleguideCaretSize(medium, east)
-  )),
-  (west in-button, (
-    border-left-color   $CONFIG_COLOR_BUTTON_PRIMARY,
-    nil
-  )),
-  (west in-button in-secondary, (
-    border-left-color   $CONFIG_COLOR_BUTTON_SECONDARY,
-    nil
-  )),
-  (west in-button in-spotlight, (
-    border-left-color   $CONFIG_COLOR_BUTTON_SPOTLIGHT,
-    nil
-  )),
+  west: (
+    border-top-color:     null,
+    border-top-style:     null,
+    border-right-style:   solid,
+    border-right-color:   nth($CONFIG_COLOR_COPY, 1),
+    border-width:         _styleguideCaretSize(medium, east)
+  ),
+  west in a $STYLEGUIDE_BUTTONS_ID: (
+    border-left-color:    $CONFIG_COLOR_BUTTON_PRIMARY
+  ),
+  west in a secondary $STYLEGUIDE_BUTTONS_ID: (
+    border-left-color:    $CONFIG_COLOR_BUTTON_SECONDARY
+  ),
+  west in a spotlight$STYLEGUIDE_BUTTONS_ID: (
+    border-left-color:    $CONFIG_COLOR_BUTTON_SPOTLIGHT
+  ),
   // SIZES
-  (north in-button in-large, (
-    border-width        _styleguideCaretSize(large, north),
-    nil
-  )),
-  (north in-button in-small, (
-    border-width        _styleguideCaretSize(small, north),
-    nil
-  )),
-  (west in-button in-large, (
-    border-width        _styleguideCaretSize(large, west),
-    nil
-  )),
-  (west in-button in-small, (
-    border-width        _styleguideCaretSize(small, west),
-    nil
-  )),
-  (east in-button in-large, (
-    border-width        _styleguideCaretSize(large, east),
-    nil
-  )),
-  (east in-button in-small, (
-    border-width        _styleguideCaretSize(small, east),
-    nil
-  )),
+  north in a large $STYLEGUIDE_BUTTONS_ID: (
+    border-width:         _styleguideCaretSize(large, north)
+  ),
+  north in a small $STYLEGUIDE_BUTTONS_ID: (
+    border-width:         _styleguideCaretSize(small, north)
+  ),
+  west in a large $STYLEGUIDE_BUTTONS_ID: (
+    border-width:         _styleguideCaretSize(large, west)
+  ),
+  west in a small $STYLEGUIDE_BUTTONS_ID: (
+    border-width:         _styleguideCaretSize(small, west)
+  ),
+  east in a large $STYLEGUIDE_BUTTONS_ID: (
+    border-width:         _styleguideCaretSize(large, east)
+  ),
+  east in a small $STYLEGUIDE_BUTTONS_ID: (
+    border-width:         _styleguideCaretSize(small, east)
+  ),
   // on hovercards
-  (on-hovercard, (
+  on a $STYLEGUIDE_HOVERCARDS_ID: (
     // remove unneeded styles
-    inline-block        nil,
-    vertical-align      nil,
-    height              nil,
-    width               nil,
-    font-size           nil,
-    line-height         nil,
-    border-style        nil,
-    border-color        nil,
-    border-top-style    nil,
-    border-right-style  nil,
-    border-bottom-style nil,
-    border-left-style   nil,
-    border-width        nil,
-    border-top-color    nil,
-    border-right-color  nil,
-    border-bottom-color nil,
-    border-left-color   nil,
-    overflow            nil,
+    drop:                 all,
     // real styles
-    position            absolute,
-    display             block,
-    width               nth($CONFIG_DIM_HOVERCARD_TIP, 1),
-    height              nth-cyclic($CONFIG_DIM_HOVERCARD_TIP, 2),
-    margin-left         -1/2*nth($CONFIG_DIM_HOVERCARD_TIP, 1),
-    background          (transparent image-url($CONFIG_IMG_HOVERCARD_TIP) _styleguideGetTooltipTipBG(south) no-repeat),
-    top                 100%,
-    left                50%
-  )),
-  (south-west on-hovercard, (
-    left                $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
-    margin-left         nil
-  )),
-  (south-east on-hovercard, (
-    left                nil,
-    right               $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
-    margin-left         nil
-  )),
-  (north on-hovercard, (
-    background-position _styleguideGetTooltipTipBG(north),
-    top                 nil,
-    bottom              100%
-  )),
-  (north-west on-hovercard, (
-    inherit (north on-hovercard),
-    left                $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
-    margin-left         nil
-  )),
-  (north-east on-hovercard, (
-    inherit (north on-hovercard),
-    left                nil,
-    right               $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
-    margin-left         nil
-  )),
-  (east on-hovercard, (
-    width               nth-cyclic($CONFIG_DIM_HOVERCARD_TIP, 2),
-    height              nth($CONFIG_DIM_HOVERCARD_TIP, 1),
-    margin-top          -1/2*nth($CONFIG_DIM_HOVERCARD_TIP, 1),
-    margin-left         nil,
-    background-position _styleguideGetTooltipTipBG(east),
-    top                 50%,
-    left                100%
-  )),
-  (east-north on-hovercard, (
-    inherit (east on-hovercard),
-    top                 $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
-    margin-top          nil
-  )),
-  (east-south on-hovercard, (
-    inherit (east on-hovercard),
-    top                 nil,
-    bottom              $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
-    margin-top          nil
-  )),
-  (west on-hovercard, (
-    width               nth-cyclic($CONFIG_DIM_HOVERCARD_TIP, 2),
-    height              nth($CONFIG_DIM_HOVERCARD_TIP, 1),
-    margin-top          -1/2*nth($CONFIG_DIM_HOVERCARD_TIP, 1),
-    margin-left         nil,
-    background-position _styleguideGetTooltipTipBG(west),
-    top                 50%,
-    right               100%,
-    left                nil
-  )),
-  (west-north on-hovercard, (
-    inherit (west on-hovercard),
-    top                 $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
-    margin-top          nil
-  )),
-  (west-south on-hovercard, (
-    inherit (west on-hovercard),
-    top                 nil,
-    bottom              $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
-    margin-top          nil
-  )),
+    position:             absolute,
+    display:              block,
+    width:                nth($CONFIG_DIM_HOVERCARD_TIP, 1),
+    height:               nth-cyclic($CONFIG_DIM_HOVERCARD_TIP, 2),
+    margin-left:          -1/2*nth($CONFIG_DIM_HOVERCARD_TIP, 1),
+    background:           (transparent image-url($CONFIG_IMG_HOVERCARD_TIP) _styleguideGetTooltipTipBG(south) no-repeat),
+    top:                  100%,
+    left:                 50%
+  ),
+  south-west on a $STYLEGUIDE_HOVERCARDS_ID: (
+    left:                 $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
+    margin-left:          null
+  ),
+  south-east on a $STYLEGUIDE_HOVERCARDS_ID: (
+    left:                 null,
+    right:                $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
+    margin-left:          null
+  ),
+  north on a $STYLEGUIDE_HOVERCARDS_ID: (
+    background-position:  _styleguideGetTooltipTipBG(north),
+    top:                  null,
+    bottom:               100%
+  ),
+  north-west on a $STYLEGUIDE_HOVERCARDS_ID: (
+    inherit:              north on $STYLEGUIDE_HOVERCARDS_ID,
+    left:                 $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
+    margin-left:          null
+  ),
+  north-east on a $STYLEGUIDE_HOVERCARDS_ID: (
+    inherit:              north on $STYLEGUIDE_HOVERCARDS_ID,
+    left:                 null,
+    right:                $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
+    margin-left:          null
+  ),
+  east on a $STYLEGUIDE_HOVERCARDS_ID: (
+    width:                nth-cyclic($CONFIG_DIM_HOVERCARD_TIP, 2),
+    height:               nth($CONFIG_DIM_HOVERCARD_TIP, 1),
+    margin-top:           -1/2*nth($CONFIG_DIM_HOVERCARD_TIP, 1),
+    margin-left:          null,
+    background-position:  _styleguideGetTooltipTipBG(east),
+    top:                  50%,
+    left:                 100%
+  ),
+  east-north on a $STYLEGUIDE_HOVERCARDS_ID: (
+    inherit:              east on $STYLEGUIDE_HOVERCARDS_ID,
+    top:                  $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
+    margin-top:           null
+  ),
+  east-south on a $STYLEGUIDE_HOVERCARDS_ID: (
+    inherit:              east on $STYLEGUIDE_HOVERCARDS_ID,
+    top:                  null,
+    bottom:               $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
+    margin-top:           null
+  ),
+  west on a $STYLEGUIDE_HOVERCARDS_ID: (
+    width:                nth-cyclic($CONFIG_DIM_HOVERCARD_TIP, 2),
+    height:               nth($CONFIG_DIM_HOVERCARD_TIP, 1),
+    margin-top:           -1/2*nth($CONFIG_DIM_HOVERCARD_TIP, 1),
+    margin-left:          null,
+    background-position:  _styleguideGetTooltipTipBG(west),
+    top:                  50%,
+    right:                100%,
+    left:                 null
+  ),
+  west-north on a $STYLEGUIDE_HOVERCARDS_ID: (
+    inherit:              west on $STYLEGUIDE_HOVERCARDS_ID,
+    top:                  $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
+    margin-top:           null
+  ),
+  west-south on $STYLEGUIDE_HOVERCARDS_ID: (
+    inherit:              west on $STYLEGUIDE_HOVERCARDS_ID,
+    top:                  null,
+    bottom:               $CONFIG_DIM_HOVERCARD_TIP_OFFSET,
+    margin-top:           null
+  ),
   // on tooltips
-  (on-tooltip, (
-    position            absolute,
-    margin-left         -1*$CONFIG_DIM_TOOLTIP_TIP,
-    top                 100%,
-    left                50%,
-    border-width        _styleguideCaretSize(tooltip),
-    border-top-color    nth($CONFIG_COLOR_BORDER_TOOLTIP, 1)
-  )),
-  (south-west on-tooltip, (
-    left                $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
-    margin-left         nil
-  )),
-  (south-east on-tooltip, (
-    left                nil,
-    right               $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
-    margin-left         nil
-  )),
-  (north on-tooltip, (
-    border-width        _styleguideCaretSize(tooltip, north),
-    border-top-color    nil,
-    border-top-style    nil,
-    border-bottom-style solid,
-    border-bottom-color nth($CONFIG_COLOR_BORDER_TOOLTIP, 1),
-    top                 nil,
-    bottom              100%
-  )),
-  (north-west on-tooltip, (
-    inherit (north on-tooltip),
-    left                $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
-    margin-left         nil
-  )),
-  (north-east on-tooltip, (
-    inherit (north on-tooltip),
-    right               $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
-    left                nil,
-    margin-left         nil
-  )),
-  (east on-tooltip, (
-    border-width        _styleguideCaretSize(tooltip, east),
-    border-top-color    nil,
-    border-top-style    nil,
-    border-left-style   solid,
-    border-left-color   nth($CONFIG_COLOR_BORDER_TOOLTIP, 1),
-    margin-left         nil,
-    margin-top          -1*$CONFIG_DIM_TOOLTIP_TIP,
-    top                 50%,
-    left                100%
-  )),
-  (east-north on-tooltip, (
-    inherit (east on-tooltip),
-    top                 $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
-    margin-top          nil
-  )),
-  (east-south on-tooltip, (
-    inherit (east on-tooltip),
-    top                 nil,
-    bottom              $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
-    margin-top          nil
-  )),
-  (west on-tooltip, (
-    border-width        _styleguideCaretSize(tooltip, west),
-    border-top-color    nil,
-    border-top-style    nil,
-    border-right-style  solid,
-    border-right-color  nth($CONFIG_COLOR_BORDER_TOOLTIP, 1),
-    margin-left         nil,
-    margin-top          -1*$CONFIG_DIM_TOOLTIP_TIP,
-    top                 50%,
-    right               100%,
-    left                nil
-  )),
-  (west-north on-tooltip, (
-    inherit (west on-tooltip),
-    top                 $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
-    margin-top          nil
-  )),
-  (west-south on-tooltip, (
-    inherit (west on-tooltip),
-    top                 nil,
-    bottom              $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
-    margin-top          nil
-  ))
+  on a $STYLEGUIDE_TOOLTIPS_ID: (
+    position:             absolute,
+    margin-left:          -1*$CONFIG_DIM_TOOLTIP_TIP,
+    top:                  100%,
+    left:                 50%,
+    border-width:         _styleguideCaretSize(tooltip),
+    border-top-color:     nth($CONFIG_COLOR_BORDER_TOOLTIP, 1)
+  ),
+  south-west on a $STYLEGUIDE_TOOLTIPS_ID: (
+    left:                 $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
+    margin-left:          null
+  ),
+  south-east on a $STYLEGUIDE_TOOLTIPS_ID: (
+    left:                 null,
+    right:                $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
+    margin-left:          null
+  ),
+  north on a $STYLEGUIDE_TOOLTIPS_ID: (
+    border-width:         _styleguideCaretSize(tooltip, north),
+    border-top-color:     null,
+    border-top-style:     null,
+    border-bottom-style:  solid,
+    border-bottom-color:  nth($CONFIG_COLOR_BORDER_TOOLTIP, 1),
+    top:                  null,
+    bottom:               100%
+  ),
+  north-west on a $STYLEGUIDE_TOOLTIPS_ID: (
+    inherit:              north on a $STYLEGUIDE_TOOLTIPS_ID,
+    left:                 $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
+    margin-left:          null
+  ),
+  north-east on a $STYLEGUIDE_TOOLTIPS_ID: (
+    inherit:              north on a $STYLEGUIDE_TOOLTIPS_ID,
+    right:                $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
+    left:                 null,
+    margin-left:          null
+  ),
+  east on a $STYLEGUIDE_TOOLTIPS_ID: (
+    border-width:         _styleguideCaretSize(tooltip, east),
+    border-top-color:     null,
+    border-top-style:     null,
+    border-left-style:    solid,
+    border-left-color:    nth($CONFIG_COLOR_BORDER_TOOLTIP, 1),
+    margin-left:          null,
+    margin-top:           -1*$CONFIG_DIM_TOOLTIP_TIP,
+    top:                  50%,
+    left:                 100%
+  ),
+  east-north on a $STYLEGUIDE_TOOLTIPS_ID: (
+    inherit:              east on a $STYLEGUIDE_TOOLTIPS_ID,
+    top:                  $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
+    margin-top:           null
+  ),
+  east-south on a $STYLEGUIDE_TOOLTIPS_ID: (
+    inherit:              east on a $STYLEGUIDE_TOOLTIPS_ID,
+    top:                  null,
+    bottom:               $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
+    margin-top:           null
+  ),
+  west on a $STYLEGUIDE_TOOLTIPS_ID: (
+    border-width:         _styleguideCaretSize(tooltip, west),
+    border-top-color:     null,
+    border-top-style:     null,
+    border-right-style:   solid,
+    border-right-color:   nth($CONFIG_COLOR_BORDER_TOOLTIP, 1),
+    margin-left:          null,
+    margin-top:           -1*$CONFIG_DIM_TOOLTIP_TIP,
+    top:                  50%,
+    right:                100%,
+    left:                 null
+  ),
+  west-north on a $STYLEGUIDE_TOOLTIPS_ID: (
+    inherit:              west on a $STYLEGUIDE_TOOLTIPS_ID,
+    top:                  $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
+    margin-top:           null
+  ),
+  west-south on a $STYLEGUIDE_TOOLTIPS_ID: (
+    inherit:              west on a $STYLEGUIDE_TOOLTIPS_ID,
+    top:                  null,
+    bottom:               $CONFIG_DIM_TOOLTIP_TIP_OFFSET,
+    margin-top:           null
+  )
 )) !global;
 }

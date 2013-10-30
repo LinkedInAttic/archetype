@@ -6,10 +6,8 @@ $STYLEGUIDE_BRISTOLS: () !default;
 
 @if should-register-component($STYLEGUIDE_BRISTOLS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_BRISTOLS_ID, $STYLEGUIDE_BRISTOLS, (
-  (default, (
-    background  nth($CONFIG_TEXTURE_BRISTOL, 1),
-    nil
-  )),
-  nil
+  default: (
+    background: nth($CONFIG_TEXTURE_BRISTOL, 1)
+  )
 )) !global;
 }

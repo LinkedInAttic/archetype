@@ -6,58 +6,51 @@ $STYLEGUIDE_CLOSES: () !default;
 
 @if should-register-component($STYLEGUIDE_CLOSES_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_CLOSES_ID,  $STYLEGUIDE_CLOSES, (
-  (default, (
-    color               inherit,
-    background          (transparent none),
-    padding             (0 1px 0 0),
-    border              0,
-    margin              0,
-    cursor              pointer,
-    text-decoration     none,
-    position            absolute,
-    overflow            hidden,
-    top                 vertical-spacing(2),
-    right               horizontal-spacing(2),
-    width               nth($CONFIG_GLYPH_CLOSE, 4),
-    height              nth($CONFIG_GLYPH_CLOSE, 4),
-    text-indent         (nth($CONFIG_GLYPH_CLOSE, 4) + 1px),
-    glyph-icon          (nth($CONFIG_GLYPH_CLOSE, 1), nth($CONFIG_GLYPH_CLOSE, 2), nth($CONFIG_GLYPH_CLOSE, 3), before, 'text-decoration:none;'),
-    (selectors, (
-      ($CORE_GLYPH_SELECTOR_VAR, (
-        vertical-align  top,
-        line-height     1,
-        position        absolute,
-        top             0,
-        right           0,
-        text-decoration none,
-        cursor          pointer
-      )),
-      nil
-    )),
-    (states, (
-      (hover, (
-        text-shadow     $CONFIG_SHADOW_CLOSES,
-        nil
-      )),
-      nil
-    ))
-  )),
-  (in-alert, (
-    color               nth($CONFIG_COLOR_COPY, 2),
-    nil
-  )),
-  (in-dialog, (
-    color               nth($CONFIG_COLOR_COPY, 2),
-    opacity             0.7,
-    top                 vertical-spacing(2.6, $abuse: true),
-    (states, (
-      (hover, (
-        opacity         1,
-        nil
-      )),
-      nil
-    ))
-  )),
-  nil
+  default: (
+    color:                inherit,
+    background:           transparent none,
+    padding:              0 1px 0 0,
+    border:               0,
+    margin:               0,
+    cursor:               pointer,
+    text-decoration:      none,
+    position:             absolute,
+    overflow:             hidden,
+    top:                  vertical-spacing(2),
+    right:                horizontal-spacing(2),
+    width:                nth($CONFIG_GLYPH_CLOSE, 4),
+    height:               nth($CONFIG_GLYPH_CLOSE, 4),
+    text-indent:          nth($CONFIG_GLYPH_CLOSE, 4) + 1px,
+    glyph-icon:           (nth($CONFIG_GLYPH_CLOSE, 1), nth($CONFIG_GLYPH_CLOSE, 2), nth($CONFIG_GLYPH_CLOSE, 3), before),
+    selectors: (
+      $CORE_GLYPH_SELECTOR_VAR: (
+        vertical-align:   top,
+        line-height:      1,
+        position:         absolute,
+        top:              0,
+        right:            0,
+        text-decoration:  none,
+        cursor:           pointer
+      )
+    ),
+    states: (
+      hover: (
+        text-shadow:      $CONFIG_SHADOW_CLOSES
+      )
+    )
+  ),
+  in a $STYLEGUIDE_ALERTS_ID: (
+    color:                nth($CONFIG_COLOR_COPY, 2)
+  ),
+  in dialog: (
+    color:                nth($CONFIG_COLOR_COPY, 2),
+    opacity:              0.7,
+    top:                  vertical-spacing(2.6, $abuse: true),
+    states: (
+      hover: (
+        opacity:          1
+      )
+    )
+  )
 )) !global;
 }

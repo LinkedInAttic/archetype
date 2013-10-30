@@ -1,0 +1,9 @@
+@import "test_harness";
+
+.container {
+  @include styleguide(container with a shadow);
+}
+
+.without-shadow {
+  @include styleguide(container without a shadow);
+}

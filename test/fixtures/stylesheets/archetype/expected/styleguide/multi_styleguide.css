@@ -1,0 +1,13 @@
+.multi-value-styleguide-test {
+  /* [archetype:styleguide:begin] --- multi-styleguide-styleguide-test --- */
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 14px;
+  color: #222222;
+  background: #cccccc;
+  /* [archetype:styleguide:end]   --- multi-styleguide-styleguide-test --- */
+}
+.multi-value-styleguide-test {
+  /* [archetype:target-os:begin] --- default --- */
+  /* [archetype:target-os:end]   --- default --- */
+}

@@ -6,47 +6,45 @@ $STYLEGUIDE_FLYOUTS: () !default;
 
 @if should-register-component($STYLEGUIDE_FLYOUTS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_FLYOUTS_ID,  $STYLEGUIDE_FLYOUTS, (
-  (default, (
-    display               none,                         // hidden by default (use `visible flyout` if you want it shown by default)
-    position              absolute,                     // position!
-    top                   100%,                         // align it to the bottom of the context
-    left                  0,                            // align left
-    z-index               1,
-    border                ($CONFIG_DIM_GENERIC_BORDER solid nth($CONFIG_COLOR_BORDER_FLYOUT,1)),
-    background            nth($CONFIG_TEXTURE_CONTAINER, 1),
-    box-shadow            $CONFIG_SHADOW_FLYOUT,
-    padding               $CONFIG_DIM_FLYOUT_SPACING,
-    min-width             $CONFIG_DIM_FLYOUT_MIN_WIDTH,
-    cursor                default,
-    float                 left,
-    list-style            none                          // just incase its a list
-  )),
-  (visible, (
-    display               block,
-    nil
-  )),
-  (in-button, (
+  default: (
+    display:                none,                         // hidden by default (use `visible flyout` if you want it shown by default)
+    position:               absolute,                     // position!
+    top:                    100%,                         // align it to the bottom of the context
+    left:                   0,                            // align left
+    z-index:                1,
+    border:                 $CONFIG_DIM_GENERIC_BORDER solid nth($CONFIG_COLOR_BORDER_FLYOUT,1),
+    background:             nth($CONFIG_TEXTURE_CONTAINER, 1),
+    box-shadow:             $CONFIG_SHADOW_FLYOUT,
+    padding:                $CONFIG_DIM_FLYOUT_SPACING,
+    min-width:              $CONFIG_DIM_FLYOUT_MIN_WIDTH,
+    cursor:                 default,
+    float:                  left,
+    list-style:             none                          // just incase its a list
+  ),
+  visible: (
+    display:                block
+  ),
+  in $STYLEGUIDE_BUTTONS_ID: (
     // restore some things used for buttons
-    font-weight           normal,
-    white-space           normal,
-    text-shadow           none,
+    font-weight:            normal,
+    white-space:            normal,
+    text-shadow:            none,
     // no box-shadow
-    box-shadow            nil,
+    box-shadow:             null,
     // thick borders!
-    border-width          $CONFIG_DIM_GENERIC_BORDER_THICK,
-    border-radius         $CONFIG_DIM_FLYOUT_RADIUS
-  )),
-  (in-button-group, (
-    inherit (in-button),
-    nil
-  )),
-  (upward, (
-    top                   nil,
-    bottom                100%
-  )),
-  (right aligned, (
-    left                  nil,
-    right                 0
-  ))
+    border-width:           $CONFIG_DIM_GENERIC_BORDER_THICK,
+    border-radius:          $CONFIG_DIM_FLYOUT_RADIUS
+  ),
+  in $STYLEGUIDE_BUTTON_GROUPS_ID: (
+    inherit:                in $STYLEGUIDE_BUTTONS_ID
+  ),
+  upward: (
+    top:                    null,
+    bottom:                 100%
+  ),
+  right aligned: (
+    left:                   null,
+    right:                  0
+  )
 )) !global;
 }

@@ -6,333 +6,294 @@ $STYLEGUIDE_BUTTONS: () !default;
 
 @if should-register-component($STYLEGUIDE_BUTTONS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID,  $STYLEGUIDE_BUTTONS, (
-  (default, (
+  default: (
     // these are common between all buttons
-    font-weight             bold,
-    border-width            $CONFIG_DIM_GENERIC_BORDER,
-    border-style            solid,
-    cursor                  pointer,
-    margin                  0,
-    overflow                visible,
-    text-decoration         (none !important),
-    text-align              center,
-    width                   auto,
-    text-shadow             $CONFIG_SHADOW_BUTTON_TEXT,
+    font-weight:              bold,
+    border-width:             $CONFIG_DIM_GENERIC_BORDER,
+    border-style:             solid,
+    cursor:                   pointer,
+    margin:                   0,
+    overflow:                 visible,
+    text-decoration:          none !important,
+    text-align:               center,
+    width:                    auto,
+    text-shadow:              $CONFIG_SHADOW_BUTTON_TEXT,
     // sizing
-    border-radius           $CONFIG_DIM_BUTTON_RADIUS,
-    padding                 _styleguideGetButtonPadding(medium),
+    border-radius:            $CONFIG_DIM_BUTTON_RADIUS,
+    padding:                  _styleguideGetButtonPadding(medium),
     // we set the size intentionally two pixels large and use box-sizing to adjust it
     // this makes IE6/7 behave properly and other browsers adjust correctly
-    height                  (_styleguideGetButtonHeight(medium) + (2*$CONFIG_DIM_GENERIC_BORDER)),
-    line-height             _styleguideGetButtonHeight(medium),
-    box-sizing              border-box,
-    font-size               nth($CONFIG_FONT_BUTTON_MEDIUM, 1),
+    height:                   _styleguideGetButtonHeight(medium) + (2*$CONFIG_DIM_GENERIC_BORDER),
+    line-height:              _styleguideGetButtonHeight(medium),
+    box-sizing:               border-box,
+    font-size:                nth($CONFIG_FONT_BUTTON_MEDIUM, 1),
     // palette
-    color                   $CONFIG_COLOR_BUTTON_PRIMARY,
-    background-color        $CONFIG_COLOR_BG_BUTTON_PRIMARY,
-    border-color            $CONFIG_COLOR_BORDER_BUTTON_PRIMARY,
-    filter-gradient         $CONFIG_GRADIENT_BUTTON_PRIMARY_IE,
-    background-image        $CONFIG_GRADIENT_BUTTON_PRIMARY,
-    white-space             nowrap,
+    color:                    $CONFIG_COLOR_BUTTON_PRIMARY,
+    background-color:         $CONFIG_COLOR_BG_BUTTON_PRIMARY,
+    border-color:             $CONFIG_COLOR_BORDER_BUTTON_PRIMARY,
+    filter-gradient:          $CONFIG_GRADIENT_BUTTON_PRIMARY_IE,
+    background-image:         $CONFIG_GRADIENT_BUTTON_PRIMARY,
+    white-space:              nowrap,
     // alignment
-    inline-block            (middle, middle), // this will use the inline-block() mixin
+    inline-block:             (middle, middle), // this will use the inline-block() mixin
     // states
-    (states, (
-      (hover, (
-        background-color    $CONFIG_COLOR_BG_BUTTON_PRIMARY_HOVER,
-        filter-gradient     $CONFIG_GRADIENT_BUTTON_PRIMARY_HOVER_IE,
-        background-image    $CONFIG_GRADIENT_BUTTON_PRIMARY_HOVER,
-        box-shadow          $CONFIG_SHADOW_BUTTON_HOVER
-      )),
-      (active, (
-        box-shadow          $CONFIG_SHADOW_BUTTON_ACTIVE,
-        nil
-      )),
-      (disabled, (
-        background-color    $CONFIG_COLOR_BG_BUTTON_PRIMARY_HOVER,
-        filter-gradient     $CONFIG_GRADIENT_BUTTON_PRIMARY_HOVER_IE,
-        background-image    $CONFIG_GRADIENT_BUTTON_PRIMARY_HOVER,
-        box-shadow          none,
-        cursor              default,
-        opacity             $CONFIG_OPACITY_BUTTON_DISABLED
-      ))
-    ))
-  )),
+    states: (
+      hover: (
+        background-color:     $CONFIG_COLOR_BG_BUTTON_PRIMARY_HOVER,
+        filter-gradient:      $CONFIG_GRADIENT_BUTTON_PRIMARY_HOVER_IE,
+        background-image:     $CONFIG_GRADIENT_BUTTON_PRIMARY_HOVER,
+        box-shadow:           $CONFIG_SHADOW_BUTTON_HOVER
+      ),
+      active: (
+        box-shadow:           $CONFIG_SHADOW_BUTTON_ACTIVE
+      ),
+      disabled: (
+        background-color:     $CONFIG_COLOR_BG_BUTTON_PRIMARY_HOVER,
+        filter-gradient:      $CONFIG_GRADIENT_BUTTON_PRIMARY_HOVER_IE,
+        background-image:     $CONFIG_GRADIENT_BUTTON_PRIMARY_HOVER,
+        box-shadow:           none,
+        cursor:               default,
+        opacity:              $CONFIG_OPACITY_BUTTON_DISABLED
+      )
+    )
+  ),
   // IMPORTANCE
-  (primary, (
-    // inherits from default
-    nil
-  )),
-  (secondary, (
-    text-shadow             $CONFIG_SHADOW_BUTTON_TEXT_INVERTED,
-    color                   $CONFIG_COLOR_BUTTON_SECONDARY,
-    background-color        $CONFIG_COLOR_BG_BUTTON_SECONDARY,
-    border-color            $CONFIG_COLOR_BORDER_BUTTON_SECONDARY,
-    filter-gradient         $CONFIG_GRADIENT_BUTTON_SECONDARY_IE,
-    background-image        $CONFIG_GRADIENT_BUTTON_SECONDARY,
-    (states, (
-      (hover, (
-        background-color    $CONFIG_COLOR_BG_BUTTON_SECONDARY_HOVER,
-        filter-gradient     $CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER_IE,
-        background-image    $CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER
-      )),
-      (disabled, (
-        background-color    $CONFIG_COLOR_BG_BUTTON_SECONDARY_HOVER,
-        filter-gradient     $CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER_IE,
-        background-image    $CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER
-      ))
-    ))
-  )),
-  (spotlight, (
-    text-shadow             $CONFIG_SHADOW_BUTTON_TEXT_INVERTED,
-    background-color        $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT,
-    border-color            $CONFIG_COLOR_BORDER_BUTTON_SPOTLIGHT,
-    color                   $CONFIG_COLOR_BUTTON_SPOTLIGHT,
-    filter-gradient         $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_IE,
-    background-image        $CONFIG_GRADIENT_BUTTON_SPOTLIGHT,
-    (states, (
-      (hover, (
-        background-color    $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT_HOVER,
-        filter-gradient     $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_HOVER_IE,
-        background-image    $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_HOVER
-      )),
-      (disabled, (
-        background-color    $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT_HOVER,
-        filter-gradient     $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_HOVER_IE,
-        background-image    $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_HOVER
-      ))
-    ))
-  )),
+  primary: (), // inherits from default
+  secondary: (
+    text-shadow:              $CONFIG_SHADOW_BUTTON_TEXT_INVERTED,
+    color:                    $CONFIG_COLOR_BUTTON_SECONDARY,
+    background-color:         $CONFIG_COLOR_BG_BUTTON_SECONDARY,
+    border-color:             $CONFIG_COLOR_BORDER_BUTTON_SECONDARY,
+    filter-gradient:          $CONFIG_GRADIENT_BUTTON_SECONDARY_IE,
+    background-image:         $CONFIG_GRADIENT_BUTTON_SECONDARY,
+    states: (
+      hover: (
+        background-color:     $CONFIG_COLOR_BG_BUTTON_SECONDARY_HOVER,
+        filter-gradient:      $CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER_IE,
+        background-image:     $CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER
+      ),
+      disabled: (
+        background-color:     $CONFIG_COLOR_BG_BUTTON_SECONDARY_HOVER,
+        filter-gradient:      $CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER_IE,
+        background-image:     $CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER
+      )
+    )
+  ),
+  spotlight: (
+    text-shadow:              $CONFIG_SHADOW_BUTTON_TEXT_INVERTED,
+    background-color:         $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT,
+    border-color:             $CONFIG_COLOR_BORDER_BUTTON_SPOTLIGHT,
+    color:                    $CONFIG_COLOR_BUTTON_SPOTLIGHT,
+    filter-gradient:          $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_IE,
+    background-image:         $CONFIG_GRADIENT_BUTTON_SPOTLIGHT,
+    states: (
+      hover: (
+        background-color:     $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT_HOVER,
+        filter-gradient:      $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_HOVER_IE,
+        background-image:     $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_HOVER
+      ),
+      disabled: (
+        background-color:     $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT_HOVER,
+        filter-gradient:      $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_HOVER_IE,
+        background-image:     $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_HOVER
+      )
+    )
+  ),
   // CONTEXTS
   // in a dark context
-  (in-dark, (
-    border-color            $CONFIG_COLOR_BORDER_BUTTON_DARK,
-    nil
-  )),
+  in dark: (
+    border-color:             $CONFIG_COLOR_BORDER_BUTTON_DARK
+  ),
   // IMPORTANCE in CONTEXTS
-  ((primary in-dark), (
-    inherit (in-dark),
-    (states, (
-      (hover, (
-        background-color    $CONFIG_COLOR_BG_BUTTON_PRIMARY_DARK_HOVER,
-        filter-gradient     $CONFIG_GRADIENT_BUTTON_PRIMARY_DARK_HOVER_IE,
-        background-image    $CONFIG_GRADIENT_BUTTON_PRIMARY_DARK_HOVER
-      )),
-      nil
-    ))
-  )),
-  ((secondary in-dark), (
-    inherit (in-dark),
-    (states, (
-      (hover, (
-        background-color    $CONFIG_COLOR_BG_BUTTON_SECONDARY_DARK_HOVER,
-        filter-gradient     $CONFIG_GRADIENT_BUTTON_SECONDARY_DARK_HOVER_IE,
-        background-image    $CONFIG_GRADIENT_BUTTON_SECONDARY_DARK_HOVER
-      )),
-      nil
-    ))
-  )),
-  ((spotlight in-dark), (
-    inherit (in-dark),
-    (states, (
-      (hover, (
-        background-color    $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT_DARK_HOVER,
-        filter-gradient     $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_DARK_HOVER_IE,
-        background-image    $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_DARK_HOVER
-      )),
-      nil
-    ))
-  )),
-  // in the punchcut context (inherit from in-dark)
-  (primary in-punchcut, (
-    inherit (primary in-dark),
-    nil
-  )),
-  (secondary in-punchcut, (
-    inherit (secondary in-dark),
-    nil
-  )),
-  (spotlight in-punchcut, (
-    inherit (spotlight in-dark),
-    nil
-  )),
-  // in the bristol context (inherit from in-dark)
-  (primary in-bristol, (
-    inherit (primary in-dark),
-    nil
-  )),
-  (secondary in-bristol, (
-    inherit (secondary in-dark),
-    nil
-  )),
-  (spotlight in-bristol, (
-    inherit (spotlight in-dark),
-    nil
-  )),
+  primary in dark: (
+    inherit:                  in dark,
+    states: (
+      hover: (
+        background-color:     $CONFIG_COLOR_BG_BUTTON_PRIMARY_DARK_HOVER,
+        filter-gradient:      $CONFIG_GRADIENT_BUTTON_PRIMARY_DARK_HOVER_IE,
+        background-image:     $CONFIG_GRADIENT_BUTTON_PRIMARY_DARK_HOVER
+      )
+    )
+  ),
+  secondary in dark: (
+    inherit:                  in dark,
+    states: (
+      hover: (
+        background-color:     $CONFIG_COLOR_BG_BUTTON_SECONDARY_DARK_HOVER,
+        filter-gradient:      $CONFIG_GRADIENT_BUTTON_SECONDARY_DARK_HOVER_IE,
+        background-image:     $CONFIG_GRADIENT_BUTTON_SECONDARY_DARK_HOVER
+      )
+    )
+  ),
+  spotlight in dark: (
+    inherit:                  in dark,
+    states: (
+      hover: (
+        background-color:     $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT_DARK_HOVER,
+        filter-gradient:      $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_DARK_HOVER_IE,
+        background-image:     $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_DARK_HOVER
+      )
+    )
+  ),
+  // in the punchcut context (inherit from in dark)
+  primary in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:                  primary in dark
+  ),
+  secondary in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:                  secondary in dark
+  ),
+  spotlight in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:                  spotlight in dark
+  ),
+  // in the bristol context (inherit from in dark)
+  primary in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:                  primary in dark
+  ),
+  secondary in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:                  secondary in dark
+  ),
+  spotlight in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:                  spotlight in dark
+  ),
   // BUTTON TOOLBARS
-  (in-button-toolbar, (
-    margin-right            $CONFIG_DIM_BUTTON_SPACING_OUTER,
-    float                   left,
-    display                 block,
-    inline-block            nil
-  )),
-  (small in-button-toolbar, (
-    margin-right            $CONFIG_DIM_BUTTON_SPACING_OUTER_NARROW,
-    nil
-  )),
-  (last in-button-toolbar, (
-    margin-right            nil,
-    nil
-  )),
-  (right aligned in-button-toolbar, (
-    float                   right,
-    margin-right            nil,
-    margin-left             $CONFIG_DIM_BUTTON_SPACING_OUTER
-  )),
-  (right aligned small in-button-toolbar, (
-    margin-left             $CONFIG_DIM_BUTTON_SPACING_OUTER_NARROW,
-    nil
-  )),
-  (right aligned last in-button-toolbar, (
-    margin-left             nil,
-    nil
-  )),
+  in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
+    margin-right:             $CONFIG_DIM_BUTTON_SPACING_OUTER,
+    float:                    left,
+    display:                  block,
+    inline-block:             null
+  ),
+  small in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
+    margin-right:             $CONFIG_DIM_BUTTON_SPACING_OUTER_NARROW
+  ),
+  last in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
+    margin-right:             null
+  ),
+  right aligned in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
+    float:                    right,
+    margin-right:             null,
+    margin-left:              $CONFIG_DIM_BUTTON_SPACING_OUTER
+  ),
+  right aligned small in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
+    margin-left:              $CONFIG_DIM_BUTTON_SPACING_OUTER_NARROW
+  ),
+  right aligned last in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
+    margin-left:              null,
+  ),
   // BUTTON GROUPS
-  (in-button-group, (
-    border-radius           0,
-    float                   left,
-    border-left-width       0,
-    display                 block,
-    inline-block            nil
-  )),
-  (last in-button-group, (
-    border-radius           (0 $CONFIG_DIM_BUTTON_RADIUS $CONFIG_DIM_BUTTON_RADIUS 0),
-    nil
-  )),
+  in $STYLEGUIDE_BUTTON_GROUPS_ID: (
+    border-radius:            0,
+    float:                    left,
+    border-left-width:        0,
+    display:                  block,
+    inline-block:             null
+  ),
+  last in $STYLEGUIDE_BUTTON_GROUPS_ID: (
+    border-radius:            0 $CONFIG_DIM_BUTTON_RADIUS $CONFIG_DIM_BUTTON_RADIUS 0
+  ),
   // fix the inner borders in a button group in a dark context
-  (in-button-group in-dark, (
-    border-right-color      $CONFIG_COLOR_BORDER_BUTTON_PRIMARY,
-    nil
-  )),
-  (secondary in-button-group in-dark, (
-    border-right-color      $CONFIG_COLOR_BORDER_BUTTON_SECONDARY,
-    nil
-  )),
-  (spotlight in-button-group in-dark, (
-    border-right-color      $CONFIG_COLOR_BORDER_BUTTON_SPOTLIGHT,
-    nil
-  )),
+  in $STYLEGUIDE_BUTTON_GROUPS_ID in dark: (
+    border-right-color:       $CONFIG_COLOR_BORDER_BUTTON_PRIMARY
+  ),
+  secondary in $STYLEGUIDE_BUTTON_GROUPS_ID in dark: (
+    border-right-color:       $CONFIG_COLOR_BORDER_BUTTON_SECONDARY,
+  ),
+  spotlight in $STYLEGUIDE_BUTTON_GROUPS_ID in dark: (
+    border-right-color:       $CONFIG_COLOR_BORDER_BUTTON_SPOTLIGHT
+  ),
   // restore the dark border for the last one
-  (last in-button-group in-dark, (
-    border-right-color      $CONFIG_COLOR_BORDER_BUTTON_DARK,
-    nil
-  )),
-  (in-button-group in-punchcut, (
-    inherit (in-button-group in-dark),
-    nil
-  )),
-  (secondary in-button-group in-punchcut, (
-    inherit (secondary in-button-group in-dark),
-    nil
-  )),
-  (spotlight in-button-group in-punchcut, (
-    inherit (spotlight in-button-group in-dark),
-    nil
-  )),
-  (last in-button-group in-punchcut, (
-    inherit (last in-button-group in-dark),
-    nil
-  )),
-  (in-button-group in-bristol, (
-    inherit (in-button-group in-dark),
-    nil
-  )),
-  (secondary in-button-group in-bristol, (
-    inherit (secondary in-button-group in-dark),
-    nil
-  )),
-  (spotlight in-button-group in-bristol, (
-    inherit (spotlight in-button-group in-dark),
-    nil
-  )),
-  (last in-button-group in-bristol, (
-    inherit (last in-button-group in-dark),
-    nil
-  )),
+  last in $STYLEGUIDE_BUTTON_GROUPS_ID in dark: (
+    border-right-color:       $CONFIG_COLOR_BORDER_BUTTON_DARK
+  ),
+  in $STYLEGUIDE_BUTTON_GROUPS_ID in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:                  in $STYLEGUIDE_BUTTON_GROUPS_ID in dark
+  ),
+  secondary in $STYLEGUIDE_BUTTON_GROUPS_ID in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:                  secondary in $STYLEGUIDE_BUTTON_GROUPS_ID in dark
+  ),
+  spotlight in $STYLEGUIDE_BUTTON_GROUPS_ID in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:                  spotlight in $STYLEGUIDE_BUTTON_GROUPS_ID in dark
+  ),
+  last in $STYLEGUIDE_BUTTON_GROUPS_ID in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:                  last in $STYLEGUIDE_BUTTON_GROUPS_ID in dark
+  ),
+  in $STYLEGUIDE_BUTTON_GROUPS_ID in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:                  in $STYLEGUIDE_BUTTON_GROUPS_ID in dark
+  ),
+  secondary in $STYLEGUIDE_BUTTON_GROUPS_ID in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:                  secondary in $STYLEGUIDE_BUTTON_GROUPS_ID in dark
+  ),
+  spotlight in $STYLEGUIDE_BUTTON_GROUPS_ID in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:                  spotlight in $STYLEGUIDE_BUTTON_GROUPS_ID in dark
+  ),
+  last in $STYLEGUIDE_BUTTON_GROUPS_ID in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:                  last in $STYLEGUIDE_BUTTON_GROUPS_ID in dark
+  ),
   // need to add here for inheritance order to preserve the first button appearance
-  (first in-button-group, (
-    border-radius           ($CONFIG_DIM_BUTTON_RADIUS 0 0 $CONFIG_DIM_BUTTON_RADIUS),
+  first in $STYLEGUIDE_BUTTON_GROUPS_ID: (
+    border-radius:            ($CONFIG_DIM_BUTTON_RADIUS 0 0 $CONFIG_DIM_BUTTON_RADIUS),
     // restore the left-border for the first button
-    border-left-width       nil
-  )),
+    border-left-width:        null
+  ),
   // SIZES
-  (large, (
-    font-size               nth($CONFIG_FONT_BUTTON_LARGE, 1),
-    padding                 _styleguideGetButtonPadding(large),
-    height                  (_styleguideGetButtonHeight(large) + (2*$CONFIG_DIM_GENERIC_BORDER)),
-    line-height             _styleguideGetButtonHeight(large)
-  )),
-  (medium, (
-    // inherits from default
-    nil
-  )),
-  (small, (
-    font-size               nth($CONFIG_FONT_BUTTON_SMALL, 1),
-    padding                 _styleguideGetButtonPadding(small),
-    height                  (_styleguideGetButtonHeight(small) + (2*$CONFIG_DIM_GENERIC_BORDER)),
-    line-height             _styleguideGetButtonHeight(small)
-  )),
+  large: (
+    font-size:                nth($CONFIG_FONT_BUTTON_LARGE, 1),
+    padding:                  _styleguideGetButtonPadding(large),
+    height:                   _styleguideGetButtonHeight(large) + (2*$CONFIG_DIM_GENERIC_BORDER),
+    line-height:              _styleguideGetButtonHeight(large)
+  ),
+  medium: null, // inherits from default
+  small: (
+    font-size:                nth($CONFIG_FONT_BUTTON_SMALL, 1),
+    padding:                  _styleguideGetButtonPadding(small),
+    height:                   _styleguideGetButtonHeight(small) + (2*$CONFIG_DIM_GENERIC_BORDER),
+    line-height:              _styleguideGetButtonHeight(small)
+  ),
   // narrow variants
-  (narrow, (
-    padding                 _styleguideGetButtonPadding(medium, narrow),
-    nil
-  )),
-  (narrow large, (
-    padding                 _styleguideGetButtonPadding(large, narrow),
-    nil
-  )),
-  (narrow small, (
-    padding                 _styleguideGetButtonPadding(small, narrow),
-    nil
-  )),
-  (indicator, (
-    hide-text               true,
-    border                  0,
-    color                   $CONFIG_COLOR_BUTTON_INDICATOR, // Added so IE 6/7 hide the text
-    width                   nth($CONFIG_DIM_BUTTON_INDICATOR_SMALL, 1),
-    height                  nth-cyclic($CONFIG_DIM_BUTTON_INDICATOR_SMALL, 2),
-    font-size               0,
-    line-height             0,
-    overflow                hidden,
-    padding                 0, // override browser defaults,
-    margin                  (0 horizontal-spacing(0.4, $abuse: true)),
-    text-shadow             nil,
-    border-radius           $CONFIG_DIM_BUTTON_INDICATOR_SMALL_RADIUS,
-    background-color        $CONFIG_COLOR_BUTTON_INDICATOR,
-    filter-gradient         nil,
-    background-image        nil,
-    (states, (
-      (hover, (
-        background-color    nil,
-        filter-gradient     nil,
-        background-image    nil,
-        box-shadow          nil
-      )),
-      (active, (
-        inherit (hover),
-        nil
-      )),
-      (disabled, (
-        color               nil,
-        background-color    nil,
-        filter-gradient     nil,
-        background-image    nil
-      )),
-      (selected, (
-        inherit (disabled),
-        nil
-      ))
-    ))
-  ))
+  narrow: (
+    padding:                  _styleguideGetButtonPadding(medium, narrow)
+  ),
+  narrow large: (
+    padding:                  _styleguideGetButtonPadding(large, narrow)
+  ),
+  narrow small: (
+    padding:                  _styleguideGetButtonPadding(small, narrow)
+  ),
+  indicator: (
+    hide-text:                true,
+    border:                   0,
+    color:                    $CONFIG_COLOR_BUTTON_INDICATOR, // Added so IE 6/7 hide the text
+    width:                    nth($CONFIG_DIM_BUTTON_INDICATOR_SMALL, 1),
+    height:                   nth-cyclic($CONFIG_DIM_BUTTON_INDICATOR_SMALL, 2),
+    font-size:                0,
+    line-height:              0,
+    overflow:                 hidden,
+    padding:                  0, // override browser defaults,
+    margin:                   0 horizontal-spacing(0.4, $abuse: true),
+    text-shadow:              null,
+    border-radius:            $CONFIG_DIM_BUTTON_INDICATOR_SMALL_RADIUS,
+    background-color:         $CONFIG_COLOR_BUTTON_INDICATOR,
+    filter-gradient:          null,
+    background-image:         null,
+    states: (
+      hover: (
+        background-color:     null,
+        filter-gradient:      null,
+        background-image:     null,
+        box-shadow:           null
+      ),
+      active: (
+        inherit: hover
+      ),
+      disabled: (
+        color:                null,
+        background-color:     null,
+        filter-gradient:      null,
+        background-image:     null
+      ),
+      selected: (
+        inherit:              disabled
+      )
+    )
+  )
 )) !global;
 }

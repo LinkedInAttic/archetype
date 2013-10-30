@@ -6,26 +6,22 @@ $STYLEGUIDE_MENU_ITEMS: () !default;
 
 @if should-register-component($STYLEGUIDE_MENU_ITEMS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_MENU_ITEMS_ID, $STYLEGUIDE_MENU_ITEMS, (
-  (default, (
-    nil
-  )),
-  (in-flyout, (
-    padding                   $CONFIG_DIM_MENU_ITEM_SPACING,
-    text-decoration           none,
-    display                   block,
-    (states, (
-      (hover, (
-        color                 nth-cyclic($CONFIG_COLOR_COPY, 2),
-        background-color      $CONFIG_COLOR_BG_BUTTON_PRIMARY,
-        filter-gradient       $CONFIG_GRADIENT_BUTTON_PRIMARY_IE,
-        background-image      $CONFIG_GRADIENT_BUTTON_PRIMARY,
-        nil
-      )),
-      (active, (
-        inherit (hover),
-        nil
-      ))
-    ))
-  ))
+  default: null,
+  in $STYLEGUIDE_FLYOUTS_ID: (
+    padding:                    $CONFIG_DIM_MENU_ITEM_SPACING,
+    text-decoration:            none,
+    display:                    block,
+    states: (
+      hover: (
+        color:                  nth-cyclic($CONFIG_COLOR_COPY, 2),
+        background-color:       $CONFIG_COLOR_BG_BUTTON_PRIMARY,
+        filter-gradient:        $CONFIG_GRADIENT_BUTTON_PRIMARY_IE,
+        background-image:       $CONFIG_GRADIENT_BUTTON_PRIMARY
+      ),
+      active: (
+        inherit: hover
+      )
+    )
+  )
 )) !global;
 }

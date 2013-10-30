@@ -6,23 +6,22 @@ $STYLEGUIDE_TOOLTIPS: () !default;
 
 @if should-register-component($STYLEGUIDE_TOOLTIPS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_TOOLTIPS_ID, $STYLEGUIDE_TOOLTIPS, (
-  (default, (
-    color               nth-cyclic($CONFIG_COLOR_COPY, 2),
-    border-radius       $CONFIG_DIM_TOOLTIP_RADIUS,
-    background          nth($CONFIG_TEXTURE_BRISTOL, 1),
-    border-color        nth($CONFIG_COLOR_BORDER_TOOLTIP, 1),
-    border-style        solid,
-    border-width        $CONFIG_DIM_GENERIC_BORDER,
-    box-shadow          $CONFIG_SHADOW_TOOLTIP,
-    max-width           $CONFIG_DIM_TOOLTIP_MAX_WIDTH,
-    padding             $CONFIG_DIM_TOOLTIP_SPACING,
+  default: (
+    color:                nth-cyclic($CONFIG_COLOR_COPY, 2),
+    border-radius:        $CONFIG_DIM_TOOLTIP_RADIUS,
+    background:           nth($CONFIG_TEXTURE_BRISTOL, 1),
+    border-color:         nth($CONFIG_COLOR_BORDER_TOOLTIP, 1),
+    border-style:         solid,
+    border-width:         $CONFIG_DIM_GENERIC_BORDER,
+    box-shadow:           $CONFIG_SHADOW_TOOLTIP,
+    max-width:            $CONFIG_DIM_TOOLTIP_MAX_WIDTH,
+    padding:              $CONFIG_DIM_TOOLTIP_SPACING,
     // structure
-    outline             0,  // for accessibility purposes, we don't want to outline the tooltip if it has focus
-    display             block,
-    position            absolute,
-    visibility          visible,
-    z-index             1
-  )),
-  nil
+    outline:              0,  // for accessibility purposes, we don't want to outline the tooltip if it has focus
+    display:              block,
+    position:             absolute,
+    visibility:           visible,
+    z-index:              1
+  )
 )) !global;
 }

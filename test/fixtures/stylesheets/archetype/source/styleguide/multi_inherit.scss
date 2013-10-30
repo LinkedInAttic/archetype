@@ -1,0 +1,38 @@
+@import "test_harness";
+
+@if should-register-component(multi-inherit-styleguide-test) {
+$a-blackhole: component-registration-setup() !global;
+$a-blackhole: styleguide-add-component(multi-inherit-styleguide-test, (), (
+  default: (
+    color:      red
+  ),
+  modifier1: (
+    color:      green,
+    display:    block,
+    height:     100px
+  ),
+  modifier2: (
+    height:     50px
+  ),
+  modifier3: (
+    inherit:    modifier1
+  ),
+  modifier4: (
+    inherit:    modifier3,
+    inherit:    modifier2
+  )
+)) !global;
+$a-blackhole: component-registration-setup(teardown) !global;
+}
+
+.multi-inherit-styleguide-test {
+  @include styleguide(multi-inherit-styleguide-test);
+}
+
+.multi-inherit-styleguide-test2 {
+  @include styleguide(modifier3 multi-inherit-styleguide-test);
+}
+
+.multi-inherit-styleguide-test3 {
+  @include styleguide(modifier4 multi-inherit-styleguide-test);
+}

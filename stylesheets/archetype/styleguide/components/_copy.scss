@@ -6,80 +6,67 @@ $STYLEGUIDE_COPY: () !default;
 
 @if should-register-component($STYLEGUIDE_COPY_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_COPY_ID,  $STYLEGUIDE_COPY, (
-  (default, (
-    font-size           nth($CONFIG_FONT_COPY_MEDIUM, 1),
-    line-height         nth-cyclic($CONFIG_FONT_COPY_MEDIUM, 2),
-    color               nth($CONFIG_COLOR_COPY, 1),
-    font-weight         normal
-  )),
+  default: (
+    font-size:            nth($CONFIG_FONT_COPY_MEDIUM, 1),
+    line-height:          nth-cyclic($CONFIG_FONT_COPY_MEDIUM, 2),
+    color:                nth($CONFIG_COLOR_COPY, 1),
+    font-weight:          normal
+  ),
   // sizes
-  (medium, (
-    nil
-  )),
-  (large, (
-    font-size           nth($CONFIG_FONT_COPY_LARGE, 1),
-    line-height         nth-cyclic($CONFIG_FONT_COPY_LARGE, 2)
-  )),
-  (small, (
-    font-size           nth($CONFIG_FONT_COPY_SMALL, 1),
-    line-height         nth-cyclic($CONFIG_FONT_COPY_SMALL, 2)
-  )),
+  medium: null, // inherit the default
+  large: (
+    font-size:            nth($CONFIG_FONT_COPY_LARGE, 1),
+    line-height:          nth-cyclic($CONFIG_FONT_COPY_LARGE, 2)
+  ),
+  small: (
+    font-size:            nth($CONFIG_FONT_COPY_SMALL, 1),
+    line-height:          nth-cyclic($CONFIG_FONT_COPY_SMALL, 2)
+  ),
   // contexts
-  (in-dark, (
-    color               nth-cyclic($CONFIG_COLOR_COPY, 2),
-    nil
-  )),
-  (in-module, (
-    color               nth($CONFIG_COLOR_COPY, 1),
-    nil
-  )),
-  (in-bristol, (
-    inherit (in-dark),
-    nil
-  )),
-  (in-tooltip, (
-    inherit (in-dark),
-    nil
-  )),
-  (in-alert, (
-    inherit (in-dark),
-    nil
-  )),
-  (in-punchcut, (
-    inherit (in-dark),
-    text-shadow         nth-cyclic($CONFIG_SHADOW_COPY, 2),
-    nil
-  )),
-  (breadcrumb, (
-    color               nth($CONFIG_COLOR_BREADCRUMB, 1),
-    font-size           nth($CONFIG_FONT_BREADCRUMB, 1),
-    font-weight         $CONFIG_FONT_WEIGHT_BREADCRUMB,
-    text-decoration     nth($CONFIG_DECORATION_LINK, 1),
-    text-shadow         $CONFIG_SHADOW_BREADCRUMB,
-    nil
-  )),
-  (active breadcrumb, (
-    color               nth($CONFIG_COLOR_BREADCRUMB_ACTIVE, 1),
-    font-size           nth($CONFIG_FONT_BREADCRUMB, 1),
-    font-weight         $CONFIG_FONT_WEIGHT_BREADCRUMB,
-    text-shadow         $CONFIG_SHADOW_BREADCRUMB,
-    border-left         ($CONFIG_DIM_GENERIC_BORDER solid $CONFIG_COLOR_BREADCRUMB),
-    margin              $CONFIG_DIM_BREADCRUMB_SPACING_OUTER,
-    padding             $CONFIG_DIM_BREADCRUMB_SPACING,
-    nil
-  )),
-  (emphasized, (
-    font-style          italic,
-    nil
-  )),
-  (strong, (
-    font-weight         bold,
-    nil
-  )),
+  in dark: (
+    color:                nth-cyclic($CONFIG_COLOR_COPY, 2)
+  ),
+  in $STYLEGUIDE_MODULES_ID: (
+    color:                nth($CONFIG_COLOR_COPY, 1)
+  ),
+  in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:              in dark
+  ),
+  in a $STYLEGUIDE_TOOLTIPS_ID: (
+    inherit:              in dark
+  ),
+  in a $STYLEGUIDE_ALERTS_ID: (
+    inherit:              in dark
+  ),
+  in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:              in dark,
+    text-shadow:          nth-cyclic($CONFIG_SHADOW_COPY, 2)
+  ),
+  breadcrumb: (
+    color:                nth($CONFIG_COLOR_BREADCRUMB, 1),
+    font-size:            nth($CONFIG_FONT_BREADCRUMB, 1),
+    font-weight:          $CONFIG_FONT_WEIGHT_BREADCRUMB,
+    text-decoration:      nth($CONFIG_DECORATION_LINK, 1),
+    text-shadow:          $CONFIG_SHADOW_BREADCRUMB
+  ),
+  active breadcrumb: (
+    color:                nth($CONFIG_COLOR_BREADCRUMB_ACTIVE, 1),
+    font-size:            nth($CONFIG_FONT_BREADCRUMB, 1),
+    font-weight:          $CONFIG_FONT_WEIGHT_BREADCRUMB,
+    text-shadow:          $CONFIG_SHADOW_BREADCRUMB,
+    border-left:          ($CONFIG_DIM_GENERIC_BORDER solid $CONFIG_COLOR_BREADCRUMB),
+    margin:               $CONFIG_DIM_BREADCRUMB_SPACING_OUTER,
+    padding:              $CONFIG_DIM_BREADCRUMB_SPACING
+  ),
+  emphasized: (
+    font-style:           italic
+  ),
+  strong: (
+    font-weight:          bold
+  ),
   // muted colors
-  (muted, (
-    color               nth($CONFIG_COLOR_COPY_MUTED, 1),
-    nil
-  ))
+  muted: (
+    color:                nth($CONFIG_COLOR_COPY_MUTED, 1)
+  )
 )) !global;
 }

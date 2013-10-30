@@ -6,41 +6,35 @@ $STYLEGUIDE_BUTTON_GROUPS: () !default;
 
 @if should-register-component($STYLEGUIDE_BUTTON_GROUPS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTON_GROUPS_ID, $STYLEGUIDE_BUTTON_GROUPS, (
-  (default, (
-    line-height         1,
-    inline-block        (middle, middle), // this will use the inline-block() mixin
-    clearfix            legacy-pie-clearfix,
-    position            relative,
-    nil
-  )),
+  default: (
+    line-height:        1,
+    inline-block:       (middle, middle), // this will use the inline-block() mixin
+    clearfix:           legacy-pie-clearfix,
+    position:           relative
+  ),
   // BUTTON TOOLBARS
-  (in-button-toolbar, (
-    margin-right            $CONFIG_DIM_BUTTON_SPACING_OUTER,
-    float                   left,
-    display                 block,
-    inline-block            nil
-  )),
-  (small in-button-toolbar, (
-    margin-right            $CONFIG_DIM_BUTTON_SPACING_OUTER_NARROW,
-    nil
-  )),
-  (last in-button-toolbar, (
-    margin-right            nil,
-    nil
-  )),
-  (right aligned in-button-toolbar, (
+  in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
+    margin-right:           $CONFIG_DIM_BUTTON_SPACING_OUTER,
+    float:                  left,
+    display:                block,
+    inline-block:           null
+  ),
+  small in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
+    margin-right            $CONFIG_DIM_BUTTON_SPACING_OUTER_NARROW
+  ),
+  last in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
+    margin-right            null
+  ),
+  right aligned in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
     float                   right,
-    margin-right            nil,
+    margin-right            null,
     margin-left             $CONFIG_DIM_BUTTON_SPACING_OUTER
-  )),
-  (right aligned small in-button-toolbar, (
-    margin-left             $CONFIG_DIM_BUTTON_SPACING_OUTER_NARROW,
-    nil
-  )),
-  (right aligned last in-button-toolbar, (
-    margin-left             nil,
-    nil
-  )),
-  nil
+  ),
+  right aligned small in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
+    margin-left             $CONFIG_DIM_BUTTON_SPACING_OUTER_NARROW
+  ),
+  right aligned last in $STYLEGUIDE_BUTTON_TOOLBARS_ID: (
+    margin-left             null
+  )
 )) !global;
 }

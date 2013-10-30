@@ -6,10 +6,8 @@ $STYLEGUIDE_CANVAS: () !default;
 
 @if should-register-component($STYLEGUIDE_CANVAS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_CANVAS_ID,  $STYLEGUIDE_CANVAS, (
-  (default, (
-    background  nth($CONFIG_TEXTURE_CANVAS, 1),
-    nil
-  )),
-  nil
+  default: (
+     background: nth($CONFIG_TEXTURE_CANVAS, 1)
+  )
 )) !global;
 }

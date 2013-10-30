@@ -6,54 +6,49 @@ $STYLEGUIDE_ALERTS: () !default;
 
 @if should-register-component($STYLEGUIDE_ALERTS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_ALERTS_ID, $STYLEGUIDE_ALERTS, (
-  (default, (
+  default: (
     // fallback background
-    background-color      $CONFIG_COLOR_BG_ALERT_NOTIFY,
-    background-repeat     no-repeat,
+    background-color:     $CONFIG_COLOR_BG_ALERT_NOTIFY,
+    background-repeat:    no-repeat,
     // gradient background
-    background            $CONFIG_GRADIENT_ALERT_NOTIFY,
-    box-shadow            _styleguideGetAlertShadow(notice),
+    background:           $CONFIG_GRADIENT_ALERT_NOTIFY,
+    box-shadow:           _styleguideGetAlertShadow(notice),
     // common
-    overflow              hidden,
-    display               block,
-    color                 nth-cyclic($CONFIG_COLOR_COPY, 2),
-    font-size             nth($CONFIG_FONT_NOTICE, 1),
-    line-height           nth-cyclic($CONFIG_FONT_NOTICE, 2),
-    position              relative,
-    padding               $CONFIG_DIM_ALERTS_SPACING,
-    glyph-icon            _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_NOTIFY),
-    (selectors, (
-      ($CORE_GLYPH_SELECTOR_VAR, (
-        position          absolute,
-        top               nth(_styleguideGetAlertGlyphOffset($CONFIG_GLYPH_ALERT_NOTIFY), 1),
-        left              nth(_styleguideGetAlertGlyphOffset($CONFIG_GLYPH_ALERT_NOTIFY), 2),
-        line-height       1
-      )),
-      nil
-    )),
-    nil
-  )),
-  (notice, (
-    // notice - default
-    nil
-  )),
-  (success, (
-    background-color      $CONFIG_COLOR_BG_ALERT_SUCCESS,
-    background            $CONFIG_GRADIENT_ALERT_SUCCESS,
-    glyph-icon            _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_SUCCESS),
-    box-shadow            _styleguideGetAlertShadow(success)
-  )),
-  (error, (
-    background-color      $CONFIG_COLOR_BG_ALERT_ERROR,
-    background            $CONFIG_GRADIENT_ALERT_ERROR,
-    glyph-icon            _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_ERROR),
-    box-shadow            _styleguideGetAlertShadow(error)
-  )),
-  (yield, (
-    background-color      $CONFIG_COLOR_BG_ALERT_YIELD,
-    background            $CONFIG_GRADIENT_ALERT_YIELD,
-    glyph-icon            _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_YIELD),
-    box-shadow            _styleguideGetAlertShadow(yield)
-  ))
+    overflow:             hidden,
+    display:              block,
+    color:                nth-cyclic($CONFIG_COLOR_COPY, 2),
+    font-size:            nth($CONFIG_FONT_NOTICE, 1),
+    line-height:          nth-cyclic($CONFIG_FONT_NOTICE, 2),
+    position:             relative,
+    padding:              $CONFIG_DIM_ALERTS_SPACING,
+    glyph-icon:           _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_NOTIFY),
+    selectors: (
+      $CORE_GLYPH_SELECTOR_VAR: (
+        position:         absolute,
+        top:              nth(_styleguideGetAlertGlyphOffset($CONFIG_GLYPH_ALERT_NOTIFY), 1),
+        left:             nth(_styleguideGetAlertGlyphOffset($CONFIG_GLYPH_ALERT_NOTIFY), 2),
+        line-height:      1
+      )
+    )
+  ),
+  notice: null, // just inherits the default
+  success: (
+    background-color:     $CONFIG_COLOR_BG_ALERT_SUCCESS,
+    background:           $CONFIG_GRADIENT_ALERT_SUCCESS,
+    glyph-icon:           _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_SUCCESS),
+    box-shadow:           _styleguideGetAlertShadow(success)
+  ),
+  error: (
+    background-color:     $CONFIG_COLOR_BG_ALERT_ERROR,
+    background:           $CONFIG_GRADIENT_ALERT_ERROR,
+    glyph-icon:           _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_ERROR),
+    box-shadow:           _styleguideGetAlertShadow(error)
+  ),
+  yield: (
+    background-color:     $CONFIG_COLOR_BG_ALERT_YIELD,
+    background:           $CONFIG_GRADIENT_ALERT_YIELD,
+    glyph-icon:           _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_YIELD),
+    box-shadow:           _styleguideGetAlertShadow(yield)
+  )
 )) !global;
 }

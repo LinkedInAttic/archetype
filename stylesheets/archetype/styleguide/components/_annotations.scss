@@ -6,22 +6,20 @@ $STYLEGUIDE_ANNOTATIONS: () !default;
 
 @if should-register-component($STYLEGUIDE_ANNOTATIONS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_ANNOTATIONS_ID, $STYLEGUIDE_ANNOTATIONS, (
-  (default, (
-    font-size           nth($CONFIG_FONT_ANNOTATION_MEDIUM, 1),
-    line-height         nth-cyclic($CONFIG_FONT_ANNOTATION_MEDIUM, 2),
-    color               nth($CONFIG_COLOR_ANNOTATION, 1)
-  )),
-  (in-dark, (
-    color               nth-cyclic($CONFIG_COLOR_ANNOTATION, 2),
-    text-shadow         (1px 1px 1px rgba(0, 0, 0, .75))
-  )),
-  (in-tooltip, (
-    inherit (in-dark),
-    nil
-  )),
-  (in-punchcut, (
-    inherit (in-dark),
-    nil
-  ))
+  default: (
+    font-size:          nth($CONFIG_FONT_ANNOTATION_MEDIUM, 1),
+    line-height:        nth-cyclic($CONFIG_FONT_ANNOTATION_MEDIUM, 2),
+    color:              nth($CONFIG_COLOR_ANNOTATION, 1)
+  ),
+  in dark: (
+    color:              nth-cyclic($CONFIG_COLOR_ANNOTATION, 2),
+    text-shadow:        1px 1px 1px rgba(0, 0, 0, .75)
+  ),
+  in a $STYLEGUIDE_TOOLTIPS_ID: (
+    inherit:            in dark,
+  ),
+  in a $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:            in dark,
+  )
 )) !global;
 }

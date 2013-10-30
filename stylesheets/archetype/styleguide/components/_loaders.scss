@@ -6,149 +6,133 @@ $STYLEGUIDE_LOADERS: () !default;
 
 @if should-register-component($STYLEGUIDE_LOADERS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_LOADERS_ID, $STYLEGUIDE_LOADERS, (
-  (default, (
-    display             block,
-    content             $CONTENT_PLACEHOLDER,
-    stretch             true,
-    opacity             0.7,
-    overflow            hidden,
-    hide-text           true,
-    background-color    _styleguideGetContextColor(nth($CONFIG_TEXTURE_CONTAINER, 1)),
-    ie-pseudo-after     _styleguideGetLoaderExpression(medium),
-    (selectors, (
-      ("&:after", (
-        position              absolute,
-        top                   50%,
-        left                  50%,
-        content               $CONTENT_PLACEHOLDER,
-        background-image      styleguide-sprite-url($CONFIG_SPRITE_LOADERS),
-        background-repeat     no-repeat,
-        background-position   _styleguideGetLoaderPosition(medium, static),
-        width                 _styleguideGetLoaderDimension(medium, static, width),
-        height                _styleguideGetLoaderDimension(medium, static, height),
-        margin-top            _styleguideGetLoaderDimension(medium, static, height) / -2,
-        margin-left           _styleguideGetLoaderDimension(medium, static, width) / -2,
-        animation             _styleguideGetLoaderAnimation(medium)
-      )),
-      nil
-    ))
-  )),
+  default: (
+    display:              block,
+    content:              $CONTENT_PLACEHOLDER,
+    stretch:              true,
+    opacity:              0.7,
+    overflow:             hidden,
+    hide-text:            true,
+    background-color:     _styleguideGetContextColor(nth($CONFIG_TEXTURE_CONTAINER, 1)),
+    ie-pseudo-after:      _styleguideGetLoaderExpression(medium),
+    selectors: (
+      "&:after": (
+        position:               absolute,
+        top:                    50%,
+        left:                   50%,
+        content:                $CONTENT_PLACEHOLDER,
+        background-image:       styleguide-sprite-url($CONFIG_SPRITE_LOADERS),
+        background-repeat:      no-repeat,
+        background-position:    _styleguideGetLoaderPosition(medium, static),
+        width:                  _styleguideGetLoaderDimension(medium, static, width),
+        height:                 _styleguideGetLoaderDimension(medium, static, height),
+        margin-top:             _styleguideGetLoaderDimension(medium, static, height) / -2,
+        margin-left:            _styleguideGetLoaderDimension(medium, static, width) / -2,
+        animation:              _styleguideGetLoaderAnimation(medium)
+      )
+    )
+  ),
   // sizes
-  (large, (
-    ie-pseudo-after     _styleguideGetLoaderExpression(large),
-    (selectors, (
-      ("&:after", (
-        background-position   _styleguideGetLoaderPosition(large, static),
-        width                 _styleguideGetLoaderDimension(large, static, width),
-        height                _styleguideGetLoaderDimension(large, static, height),
-        margin-top            _styleguideGetLoaderDimension(large, static, height) / -2,
-        margin-left           _styleguideGetLoaderDimension(large, static, width) / -2,
-        animation             _styleguideGetLoaderAnimation(large)
-      )),
-      nil
-    ))
+  large: (
+    ie-pseudo-after:      _styleguideGetLoaderExpression(large),
+    selectors: (
+      "&:after": (
+        background-position:    _styleguideGetLoaderPosition(large, static),
+        width:                  _styleguideGetLoaderDimension(large, static, width),
+        height:                 _styleguideGetLoaderDimension(large, static, height),
+        margin-top:             _styleguideGetLoaderDimension(large, static, height) / -2,
+        margin-left:            _styleguideGetLoaderDimension(large, static, width) / -2,
+        animation:              _styleguideGetLoaderAnimation(large)
+      )
+    )
     // expression hack
-  )),
-  (small, (
-    ie-pseudo-after     _styleguideGetLoaderExpression(small),
-    (selectors, (
-      ("&:after", (
-        background-position   _styleguideGetLoaderPosition(small, static),
-        width                 _styleguideGetLoaderDimension(small, static, width),
-        height                _styleguideGetLoaderDimension(small, static, height),
-        margin-top            _styleguideGetLoaderDimension(small, static, height) / -2,
-        margin-left           _styleguideGetLoaderDimension(small, static, width) / -2,
-        animation             _styleguideGetLoaderAnimation(small)
-      )),
-      nil
-    ))
+  ),
+  small: (
+    ie-pseudo-after:      _styleguideGetLoaderExpression(small),
+    selectors: (
+      "&:after": (
+        background-position:    _styleguideGetLoaderPosition(small, static),
+        width:                  _styleguideGetLoaderDimension(small, static, width),
+        height:                 _styleguideGetLoaderDimension(small, static, height),
+        margin-top:             _styleguideGetLoaderDimension(small, static, height) / -2,
+        margin-left:            _styleguideGetLoaderDimension(small, static, width) / -2,
+        animation:              _styleguideGetLoaderAnimation(small)
+      )
+    )
     // expression hack
-  )),
+  ),
   // contexts
-  (in-dark, (
-    ie-pseudo-after     _styleguideGetLoaderExpression(medium, 2),
-    (selectors, (
-      ("&:after", (
-        background-position   _styleguideGetLoaderPosition(medium, static, 2),
-        width                 _styleguideGetLoaderDimension(medium, static, width, 2),
-        height                _styleguideGetLoaderDimension(medium, static, height, 2),
-        margin-top            _styleguideGetLoaderDimension(medium, static, height, 2) / -2,
-        margin-left           _styleguideGetLoaderDimension(medium, static, width, 2) / -2,
-        animation             _styleguideGetLoaderAnimation(medium, 2)
-      )),
-      nil
-    ))
-  )),
-  (large in-dark, (
-    ie-pseudo-after     _styleguideGetLoaderExpression(large, 2),
-    (selectors, (
-      ("&:after", (
-        background-position   _styleguideGetLoaderPosition(large, static, 2),
-        width                 _styleguideGetLoaderDimension(large, static, width, 2),
-        height                _styleguideGetLoaderDimension(large, static, height, 2),
-        margin-top            _styleguideGetLoaderDimension(large, static, height, 2) / -2,
-        margin-left           _styleguideGetLoaderDimension(large, static, width, 2) / -2,
-        animation             _styleguideGetLoaderAnimation(large, 2)
-      )),
-      nil
-    ))
-  )),
-  (small in-dark, (
-    ie-pseudo-after     _styleguideGetLoaderExpression(small, 2),
-    (selectors, (
-      ("&:after", (
-        background-position   _styleguideGetLoaderPosition(small, static, 2),
-        width                 _styleguideGetLoaderDimension(small, static, width, 2),
-        height                _styleguideGetLoaderDimension(small, static, height, 2),
-        margin-top            _styleguideGetLoaderDimension(small, static, height, 2) / -2,
-        margin-left           _styleguideGetLoaderDimension(small, static, width, 2) / -2,
-        animation             _styleguideGetLoaderAnimation(small, 2)
-      )),
-      nil
-    ))
-  )),
-  (in-canvas, (
-    background-color    _styleguideGetContextColor($CONFIG_TEXTURE_CANVAS),
-    nil
-  )),
-  (in-module, (
-    background-color    _styleguideGetContextColor($CONFIG_TEXTURE_MODULE),
-    nil
-  )),
-  (in-heading, (
-    background-color    _styleguideGetContextColor($CONFIG_TEXTURE_HEADING),
-    nil
-  )),
-  (in-bristol, (
-    inherit (in-dark),
-    background-color    _styleguideGetContextColor($CONFIG_TEXTURE_BRISTOL),
-    nil
-  )),
-  (in-punchcut, (
-    inherit (in-dark),
-    background-color    _styleguideGetContextColor($CONFIG_TEXTURE_PUNCHCUT),
-    nil
-  )),
-  (small in-bristol, (
-    inherit (small in-dark),
-    nil
-  )),
-  (large in-bristol, (
-    inherit (large in-dark),
-    nil
-  )),
-  (small in-punchcut, (
-    inherit (small in-dark),
-    nil
-  )),
-  (large in-punchcut, (
-    inherit (large in-dark),
-    nil
-  )),
-  (without-mask, (
-    background-color    nil,
-    opacity             nil,
-    nil
-  ))
+  in dark: (
+    ie-pseudo-after:      _styleguideGetLoaderExpression(medium, 2),
+    selectors: (
+      "&:after": (
+        background-position:    _styleguideGetLoaderPosition(medium, static, 2),
+        width:                  _styleguideGetLoaderDimension(medium, static, width, 2),
+        height:                 _styleguideGetLoaderDimension(medium, static, height, 2),
+        margin-top:             _styleguideGetLoaderDimension(medium, static, height, 2) / -2,
+        margin-left:            _styleguideGetLoaderDimension(medium, static, width, 2) / -2,
+        animation:              _styleguideGetLoaderAnimation(medium, 2)
+      )
+    )
+  ),
+  large in dark: (
+    ie-pseudo-after:      _styleguideGetLoaderExpression(large, 2),
+    selectors: (
+      "&:after": (
+        background-position:    _styleguideGetLoaderPosition(large, static, 2),
+        width:                  _styleguideGetLoaderDimension(large, static, width, 2),
+        height:                 _styleguideGetLoaderDimension(large, static, height, 2),
+        margin-top:             _styleguideGetLoaderDimension(large, static, height, 2) / -2,
+        margin-left:            _styleguideGetLoaderDimension(large, static, width, 2) / -2,
+        animation:              _styleguideGetLoaderAnimation(large, 2)
+      )
+    )
+  ),
+  small in dark: (
+    ie-pseudo-after:      _styleguideGetLoaderExpression(small, 2),
+    selectors: (
+      "&:after": (
+        background-position:    _styleguideGetLoaderPosition(small, static, 2),
+        width:                  _styleguideGetLoaderDimension(small, static, width, 2),
+        height:                 _styleguideGetLoaderDimension(small, static, height, 2),
+        margin-top:             _styleguideGetLoaderDimension(small, static, height, 2) / -2,
+        margin-left:            _styleguideGetLoaderDimension(small, static, width, 2) / -2,
+        animation:              _styleguideGetLoaderAnimation(small, 2)
+      )
+    )
+  ),
+  in $STYLEGUIDE_CANVAS_ID: (
+    background-color:     _styleguideGetContextColor($CONFIG_TEXTURE_CANVAS)
+  ),
+  in $STYLEGUIDE_MODULES_ID: (
+    background-color:     _styleguideGetContextColor($CONFIG_TEXTURE_MODULE)
+  ),
+  in $STYLEGUIDE_HEADINGS_ID: (
+    background-color:     _styleguideGetContextColor($CONFIG_TEXTURE_HEADING)
+  ),
+  in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:              in dark,
+    background-color:     _styleguideGetContextColor($CONFIG_TEXTURE_BRISTOL)
+  ),
+  in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:              in dark,
+    background-color:     _styleguideGetContextColor($CONFIG_TEXTURE_PUNCHCUT)
+  ),
+  small in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:              small in dark
+  ),
+  large in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:              large in dark
+  ),
+  small in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:              small in dark
+  ),
+  large in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:              large in dark
+  ),
+  without mask: (
+    background-color:     null,
+    opacity:              null
+  )
 )) !global;
 }

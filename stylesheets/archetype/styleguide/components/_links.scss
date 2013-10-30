@@ -6,61 +6,49 @@ $STYLEGUIDE_LINKS: () !default;
 
 @if should-register-component($STYLEGUIDE_LINKS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_LINKS_ID,  $STYLEGUIDE_LINKS, (
-  (default, (
-    color                   nth($CONFIG_COLOR_BRAND, 1),
-    text-decoration         nth($CONFIG_DECORATION_LINK, 1),
-    (states, (
-      (hover, (
-        text-decoration     nth-cyclic($CONFIG_DECORATION_LINK, 2),
-        nil
-      )),
-      nil
-    ))
-  )),
-  (without-underline, (
-    (states, (
-      (hover, (
-        text-decoration     none,
-        nil
-      )),
-      nil
-    )),
-    nil
-  )),
-  (in-dark, (
-    color                   nth-cyclic($CONFIG_COLOR_BRAND, 2),
-    nil
-  )),
-  (in-punchcut, (
-    inherit (in-dark),
-    nil
-  )),
-  (in-bristol, (
-    inherit (in-dark),
-    nil
-  )),
-  (in-alert, (
-    color                   nth-cyclic($CONFIG_COLOR_COPY, 2),
-    font-weight             bold,
-    (states, (
-      (hover, (
-        color               nil,
-        nil
-      )),
-      nil
-    ))
-  )),
-  (muted, (
+  default: (
+    color:                    nth($CONFIG_COLOR_BRAND, 1),
+    text-decoration:          nth($CONFIG_DECORATION_LINK, 1),
+    states: (
+       hover: (
+         text-decoration:     nth-cyclic($CONFIG_DECORATION_LINK, 2)
+      )
+    )
+  ),
+  without underline: (
+    states: (
+      hover: (
+        text-decoration:      none
+      )
+    )
+  ),
+  in dark: (
+    color:                    nth-cyclic($CONFIG_COLOR_BRAND, 2)
+  ),
+  in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:                  in dark
+  ),
+  in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:                  in dark
+  ),
+  in a $STYLEGUIDE_ALERTS_ID: (
+    color:                    nth-cyclic($CONFIG_COLOR_COPY, 2),
+    font-weight:              bold,
+    states: (
+      hover: (
+        color:                null
+      )
+    )
+  ),
+  muted: (
     // de-emphasized links have no color until you hover over them
-    color                   nil,
-    (states, (
-      (hover, (
-        color               nth($CONFIG_COLOR_BRAND, 1),
-        text-decoration     none
-      )),
-      nil
-    ))
-  )),
-  nil
+    color:                    null,
+    states: (
+      hover: (
+        color:                nth($CONFIG_COLOR_BRAND, 1),
+        text-decoration:      none
+      )
+    )
+  )
 )) !global;
 }

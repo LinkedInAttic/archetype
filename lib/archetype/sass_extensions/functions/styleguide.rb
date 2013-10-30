@@ -15,6 +15,7 @@ module Archetype::SassExtensions::Styleguide
   DEFAULT     = 'default'
   REGEX       = 'regex'
   SPECIAL     = %w(states selectors)
+  STATES      = SPECIAL[0]
   DROPALL     = %w(all true)
   # these are unique CSS keys that can be exploited to provide fallback functionality by providing a second value
   # e.g color: red; color: rgba(255,0,0, 0.8);
@@ -250,10 +251,11 @@ private
     theme = get_theme(theme)
     context ||= theme[:components][id] || Archetype::Hash.new
     modifiers = helpers.to_str(modifiers)
-    return Archetype::Hash.new if context.nil? or context.empty?
+    return Archetype::Hash.new if helpers.is_value(context, :nil) or context.empty?
     # push on the defaults first
     out = (strict ? resolve_dependents(id, context[modifiers], theme[:name], context) : context[DEFAULT]) || Archetype::Hash.new
     out = out.clone
+    return Archetype::Hash.new if out.is_a?(Sass::Script::Value::Null)
     # if it's not strict, find anything that matched
     if not strict
       modifiers = modifiers.split
@@ -273,15 +275,15 @@ private
           if match
             tmp = resolve_dependents(id, definition, theme[:name], nil, out)
             out, tmp = post_resolve_drops(out, tmp)
-            out = out.rmerge(tmp)
+            out = out.rmerge(tmp) if not helpers.is_value(tmp, :nil)
           end
         end
       end
     end
-    # recompose the special keys and extract any nested/inherited styles
-    # this lets us define special states and elements
-    SPECIAL.each do |special_key|
-      if out.is_a? Hash
+    if out.is_a? Hash
+      # recompose the special keys and extract any nested/inherited styles
+      # this lets us define special states and elements
+      SPECIAL.each do |special_key|
         special = out[special_key] || Archetype::Hash.new
         if special == 'nil'
           out[special_key] = Archetype::Hash.new
@@ -291,20 +293,20 @@ private
           out[special_key] = tmp if not tmp.empty?
         end
       end
-    end
-    # check for nested styleguides
-    styleguide = out[STYLEGUIDE]
-    if not styleguide.nil?
-      if styleguide.is_a?(Sass::Script::Value::Map)
-        map = helpers.map_to_hash(styleguide)
-        styleguide = map['values'].to_a
-      else
-        styleguide = [styleguide]
-      end
-      if not styleguide.empty?
-        styles = get_styles(styleguide, theme[:name])
-        out.delete(STYLEGUIDE)
-        out = styles.rmerge(out)
+
+      # check for nested styleguides
+      styleguide = out[STYLEGUIDE]
+      if not styleguide.nil?
+        if helpers.is_value(styleguide, :hashy)
+          styleguide = helpers.meta_to_array(styleguide)
+        else
+          styleguide = [styleguide]
+        end
+        if not styleguide.empty?
+          styles = get_styles(styleguide, theme[:name])
+          out.delete(STYLEGUIDE)
+          out = styles.rmerge(out)
+        end
       end
     end
     return out
@@ -321,7 +323,10 @@ private
   # - {Array.<Hash>} the resulting `obj` and `merger` objects
   #
   def post_resolve_drops(obj, merger)
-    return [obj, merger] if obj.nil? or merger.nil?
+    # just return if it's nil
+    return [obj, merger] if helpers.is_value(obj, :nil) or helpers.is_value(merger, :nil)
+    # if it's a Sass::List, this is really an empty hash, so return a new hash
+    return [obj, Archetype::Hash.new] if merger.is_a?(Sass::Script::Value::List)
     drop = merger[DROP]
     keys = obj.keys
     if not drop.nil?
@@ -409,6 +414,7 @@ private
   # - {Hash} a hash of the resolved styles
   #
   def resolve_dependents(id, value, theme = nil, context = nil, obj = nil)
+    return value if value.nil?
     # we have to create a clone here as the passed in value is volatile and we're performing destructive changes
     value = value.clone
     # check that we're dealing with a hash
@@ -417,14 +423,23 @@ private
       value = resolve_drops(value, obj)
 
       # check for inheritance
-      inherit = (value[INHERIT] || []).to_a
-      if not inherit.empty?
-        # create a temporary object and extract the nested styles
-        tmp = Archetype::Hash.new
-        inherit.each { |related| tmp = tmp.rmerge(extract_styles(id, related, true, theme, context)) }
-        # remove the inheritance key and update the styles
-        value.delete(INHERIT)
-        value = tmp.rmerge(value)
+      inherit = value[INHERIT]
+      if not inherit.nil?
+        if helpers.is_value(inherit, :hashy)
+          inherit = helpers.meta_to_array(inherit)
+        else
+          inherit = [inherit.to_a]
+        end
+        if not inherit.empty?
+          # create a temporary object and extract the nested styles
+          tmp = Archetype::Hash.new
+          inherit.each { |related| tmp = tmp.rmerge(extract_styles(id, related, true, theme, context)) }
+          # remove the inheritance key and update the styles
+          value.delete(INHERIT)
+          inherit = extract_styles(id, inherit, true, theme, context)
+          value = inherit.rmerge(value)
+          value = tmp.rmerge(value)
+        end
       end
     end
     # return whatever we got
@@ -484,9 +499,9 @@ private
       end
     end
     # now that we've collected all of our styles, if we requested a single state, merge that state upstream
-    if not (state.nil? or state.is_a?(Sass::Script::Value::Null) or state == Sass::Script::Value::Bool.new(false) or styles['states'].empty?)
+    if not (state.nil? or state.is_a?(Sass::Script::Value::Null) or state == Sass::Script::Value::Bool.new(false) or styles[STATES].empty?)
       state = helpers.to_str(state)
-      state = styles['states'][state]
+      state = styles[STATES][state]
       # remove any nested/special keys
       SPECIAL.each do |special|
         styles.delete(special)
