@@ -22,6 +22,7 @@ module Archetype::SassExtensions::Styleguide
   FALLBACKS   = %w(background background-image background-color border border-bottom border-bottom-color border-color border-left border-left-color border-right border-right-color border-top border-top-color clip color layer-background-color outline outline-color white-space extend)
   # these are mixins that make sense to run multiple times within a block
   MULTIMIXINS = %w(target-browser)
+  # NOTE: these are no longer used/needed if you're using the map structures
   ADDITIVES   = FALLBACKS + [DROP, INHERIT, STYLEGUIDE] + MULTIMIXINS
   @@archetype_styleguide_mutex = Mutex.new
   # :startdoc:
@@ -131,25 +132,36 @@ module Archetype::SassExtensions::Styleguide
   # output the CSS differences between components
   #
   # *Parameters*:
-  # - <tt>$original</tt> {String|List} the description of the original component
-  # - <tt>$other</tt> {String|List} the description of the new component
+  # - <tt>$original</tt> {String|List|Map} the description or map representation of the original component
+  # - <tt>$other</tt> {String|List|Map} the description or map representation of the new component
   # - <tt>$theme</tt> {String} the theme to use
   # *Returns*:
   # - {List} a key-value paired list of styles
   #
   def styleguide_diff(original, other, theme = nil)
     @@archetype_styleguide_mutex.synchronize do
-      original = helpers.data_to_hash(original)
-      other = helpers.data_to_hash(other)
+      # normalize our input (for back-compat)
+      original = normalize_styleguide_definition(original)
+      other = normalize_styleguide_definition(other)
+      # compute the difference
       diff = original.diff(other)
+      # and return it as a map
       return helpers.hash_to_map(diff)
     end
   end
 
-  def component_registration_setup(type = nil)
-    method = (type.nil?) ? :enable : :disable
+  #
+  # flag the component registration phase
+  #
+  # *Parameters*:
+  # - <tt>$teardown</tt> {*} if set, will teardown the registration phase, otherwise sets it up
+  # *Returns*:
+  # - {Bool} always returns true
+  #
+  def component_registration_setup(teardown = nil)
+    method = (teardown.nil?) ? :enable : :disable
     Archetype::Patches::Maps.method(method).call
-    return Sass::Script::Bool.new(true)
+    return Sass::Script::Value::Bool.new(true)
   end
 
 private
@@ -530,5 +542,25 @@ private
     # determine the status of the component
     status = (extension.nil?) ? (not theme[:components][id].nil?) : theme[:extensions].include?(extension)
     return (status and not force and Compass.configuration.memoize)
+  end
+
+  # Returns a new list after removing any non-true values
+  def compass_compact(*args)
+    sep = :comma
+    if args.size == 1 && args.first.is_a?(Sass::Script::Value::List)
+      list = args.first
+      args = list.value
+      sep = list.separator
+    end
+    Sass::Script::Value::List.new(args.reject{|a| !a.to_bool}, sep)
+  end
+
+  def normalize_styleguide_definition(definition, theme = nil)
+    "#{definition} is not a Map" if not definition.is_a?(Sass::Script::Value::Map)
+    # if it's not a map, we got a description, which we need to convert
+    definition = get_styles([definition], theme, nil) if not definition.is_a?(Sass::Script::Value::Map)
+     # now convert the map to a hash if needed
+    definition = helpers.data_to_hash(definition) if not definition.is_a?(Hash)
+    return definition
   end
 end

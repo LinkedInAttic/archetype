@@ -11,6 +11,13 @@
   &.spotlight {
     @include styleguide-diff(styleguide(button), styleguide(spotlight button));
   }
+
+  &.state-hover {
+    @include styleguide(button, $state: hover);
+    &.secondary {
+      @include styleguide-diff(styleguide(button, $state: hover), styleguide(secondary button, $state: hover));
+    }
+  }
 }
 
 .text {

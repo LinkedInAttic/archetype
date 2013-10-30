@@ -25,6 +25,10 @@
   }
 }
 
+@function check-for-custom-styler($property, $value, $method: pre) {
+  @return mixin-exists('custom-output-styler') and function-exits('has-custom-output-styler') and has-custom-output-styler($property, $value, $method);
+}
+
 // output a property or augment it to use a mixin
 // @mixin     output-style
 // @param     $property {String} the CSS property to output
@@ -34,7 +38,7 @@
   @if($property != nil and length(-compass-list($value)) > 0 and first-value-of(-compass-list($value)) != nil and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
     // check to see if we have a custom output styler (pre)
-    @if has-custom-output-styler($property, $value, pre) == true {
+    @if check-for-custom-styler($property, $value, pre) {
       @include custom-output-styler($property, $value, $method: pre);
     }
     // border-radius
@@ -154,7 +158,7 @@
       }
     }
     // check to see if we have a custom output styler (post)
-    @else if has-custom-output-styler($property, $value, post) == true {
+    @else if check-for-custom-styler($property, $value, post) {
       @include custom-output-styler($property, $value, $method: post);
     }
     // otherwise just use a key-value pair
