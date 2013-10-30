@@ -51,7 +51,7 @@ $a-blackhole: styleguide-add-component(dropping-styles-test-back-compat, (), (
   (dropped3, (
     color           purple,
     (states, (
-      drop          hover,  // TODO: this is currently throwing an ambiguous warning, need to investigate
+      drop          hover,
       nil
     )),
     nil

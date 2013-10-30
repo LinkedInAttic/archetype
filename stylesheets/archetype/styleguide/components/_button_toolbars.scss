@@ -6,11 +6,10 @@ $STYLEGUIDE_BUTTON_TOOLBARS: () !default;
 
 @if should-register-component($STYLEGUIDE_BUTTON_TOOLBARS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTON_TOOLBARS_ID,  $STYLEGUIDE_BUTTON_TOOLBARS, (
-  (default, (
-    line-height         1,
-    inline-block        (middle, middle),
-    clearfix            legacy-pie-clearfix
-  )),
-  nil
+  default: (
+    line-height:        1,
+    inline-block:       (middle, middle),
+    clearfix:           legacy-pie-clearfix
+  )
 )) !global;
 }

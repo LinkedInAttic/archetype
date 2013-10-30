@@ -44,7 +44,7 @@
     // box-shadow
     @else if($property == box-shadow)           { @include box-shadow($value...); }
     // text-shadow
-    @else if($property == text-shadow)          { @include text-shadow($value); } // TODO
+    @else if($property == text-shadow)          { @include text-shadow($value); }
     // filter-gradient
     @else if($property == filter-gradient)      { @include filter-gradient($value...); }
     // background
@@ -62,7 +62,7 @@
     // hide-text
     @else if($property == hide-text)            { @include hide-text($direction: if($value == true, $hide-text-direction, $value...)); }
     // inline-block
-    @else if($property == inline-block)         { @include inline-block($value...); } // TODO
+    @else if($property == inline-block)         { @include inline-block($value...); }
     // opacity
     @else if($property == opacity)              { @include opacity($value...); }
     // min-width
@@ -74,7 +74,7 @@
     // max-height
     @else if($property == max-height)           { @include max-height($value...); }
     // stretch
-    @else if($property == stretch)              { @include stretch($value...); } // TODO
+    @else if($property == stretch)              { @include stretch($value...); }
     // appearance
     @else if($property == appearance)           { @include appearance($value...); }
     // unhide-element

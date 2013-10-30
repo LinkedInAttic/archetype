@@ -6,10 +6,8 @@ $STYLEGUIDE_MODULES: () !default;
 
 @if should-register-component($STYLEGUIDE_MODULES_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_MODULES_ID, $STYLEGUIDE_MODULES, (
-  (default, (
-    background  nth($CONFIG_TEXTURE_MODULE, 1),
-    nil
-  )),
-  nil
+  default: (
+     background:    nth($CONFIG_TEXTURE_MODULE, 1)
+  )
 )) !global;
 }

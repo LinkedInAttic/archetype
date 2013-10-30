@@ -1,6 +1,9 @@
 // setup the environment for component registration
 $a-blackhole: component-registration-setup() !global;
 
+// import the component identifiers
+@import "identifiers";
+
 // import components
 @import "components/alerts";
 @import "components/annotations";

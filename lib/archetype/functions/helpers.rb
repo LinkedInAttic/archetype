@@ -226,7 +226,7 @@ private
     if hash.is_a?(Hash)
       meta = hash[META[:meta]]
       if not meta.nil? and not meta[META[:has_multiples]].nil? and meta[META[:has_multiples]]
-        return (map[META[:values]] || []).to_a
+        return (hash[META[:values]] || []).to_a
       end
     end
     # dunno what we got, but it wasn't meta enough, so just return the original map
@@ -252,7 +252,7 @@ private
   end
 
   #
-  # test a value for blankness or nilness
+  # test a value for various conditions
   #
   # *Parameters*:
   # - <tt>value</tt> {String|Array|Sass::Script::Value::String|Sass::Script::Value::List} the thing to test
@@ -276,6 +276,9 @@ private
       is_it = value == 'nil' if value.is_a?(String)
       is_it = value.empty? if value.is_a?(Hash)
       is_it = to_str(value) == 'nil' if value.is_a?(Sass::Script::Value::List) or value.is_a?(Array)
+      is_it = true if value.is_a?(Sass::Script::Value::Null)
+    when :hashy
+      is_it = value.is_a?(Hash) or value.is_a?(Sass::Script::Value::Map)
     end
     return is_it
   end

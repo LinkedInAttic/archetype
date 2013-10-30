@@ -6,29 +6,24 @@ $STYLEGUIDE_IDENTITY: () !default;
 
 @if should-register-component($STYLEGUIDE_IDENTITY_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_IDENTITY_ID,  $STYLEGUIDE_IDENTITY, (
-  (default, (
-    color                   nth($CONFIG_COLOR_BRAND, 1),
-    font-weight             bold,
-    text-decoration         nth($CONFIG_DECORATION_IDENTITY, 1),
-    (states, (
-      (hover, (
-        text-decoration     nth-cyclic($CONFIG_DECORATION_IDENTITY, 2),
-        nil
-      )),
-      nil
-    ))
-  )),
-  (in-dark, (
-    color                   nth-cyclic($CONFIG_COLOR_BRAND, 2),
-    nil
-  )),
-  (in-punchcut, (
-    inherit (in-dark),
-    nil
-  )),
-  (in-bristol, (
-    inherit (in-dark),
-    nil
-  ))
+  default: (
+    color:                    nth($CONFIG_COLOR_BRAND, 1),
+    font-weight:              bold,
+    text-decoration:          nth($CONFIG_DECORATION_IDENTITY, 1),
+    states: (
+      hover: (
+        text-decoration:      nth-cyclic($CONFIG_DECORATION_IDENTITY, 2)
+      )
+    )
+  ),
+  in dark: (
+    color:                    nth-cyclic($CONFIG_COLOR_BRAND, 2)
+  ),
+  in $STYLEGUIDE_PUNCHCUTS_ID: (
+    inherit:                  in dark
+  ),
+  in $STYLEGUIDE_BRISTOLS_ID: (
+    inherit:                  in dark
+  )
 )) !global;
 }

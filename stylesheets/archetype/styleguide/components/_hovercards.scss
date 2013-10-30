@@ -6,22 +6,21 @@ $STYLEGUIDE_HOVERCARDS: () !default;
 
 @if should-register-component($STYLEGUIDE_HOVERCARDS_ID) {
 $a-blackhole: styleguide-add-component($STYLEGUIDE_HOVERCARDS_ID,  $STYLEGUIDE_HOVERCARDS, (
-  (default, (
-    border-radius       $CONFIG_DIM_HOVERCARD_RADIUS,
-    background          nth($CONFIG_TEXTURE_CONTAINER, 1),
-    border-color        nth($CONFIG_COLOR_BORDER_HOVERCARD, 1),
-    border-style        solid,
-    border-width        $CONFIG_DIM_GENERIC_BORDER,
-    box-shadow          $CONFIG_SHADOW_HOVERCARD,
-    max-width           $CONFIG_DIM_HOVERCARD_MAX_WIDTH,
-    padding             $CONFIG_DIM_HOVERCARD_SPACING,
+  default: (
+    border-radius:        $CONFIG_DIM_HOVERCARD_RADIUS,
+    background:           nth($CONFIG_TEXTURE_CONTAINER, 1),
+    border-color:         nth($CONFIG_COLOR_BORDER_HOVERCARD, 1),
+    border-style:         solid,
+    border-width:         $CONFIG_DIM_GENERIC_BORDER,
+    box-shadow:           $CONFIG_SHADOW_HOVERCARD,
+    max-width:            $CONFIG_DIM_HOVERCARD_MAX_WIDTH,
+    padding:              $CONFIG_DIM_HOVERCARD_SPACING,
     // structure
-    outline             0,  // for accessibility purposes, we don't want to outline the hovercard if it has focus
-    display             block,
-    position            absolute,
-    visibility          visible,
-    z-index             1
-  )),
-  nil
+    outline:              0,  // for accessibility purposes, we don't want to outline the hovercard if it has focus
+    display:              block,
+    position:             absolute,
+    visibility:           visible,
+    z-index:              1
+  )
 )) !global;
 }
