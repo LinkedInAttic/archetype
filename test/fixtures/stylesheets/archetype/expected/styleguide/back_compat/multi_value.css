@@ -1,5 +1,5 @@
 .multi-value-styleguide-test-back-compat {
-  /* [archetype:styleguide:begin] --- multi-value-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:begin] --- `multi-value-styleguide-test-back-compat` --- */
   color: grey;
   color: rgba(0, 0, 0, 0.7);
   background: white;
@@ -7,7 +7,7 @@
   /* [archetype:target-browser:being] --- ie lte 7 --- */
   *color: blue;
   /* [archetype:target-browser:end]   --- ie lte 7 --- */
-  /* [archetype:styleguide:end]   --- multi-value-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:end] --- `multi-value-styleguide-test-back-compat` --- */
 }
 .ie.lte7 .multi-value-styleguide-test-back-compat {
   /* [archetype:target-browser:begin] --- ie lte 7 --- */

@@ -1,14 +1,14 @@
 .content {
-  /* [archetype:styleguide:begin] --- one content-styleguide-test --- */
+  /* [archetype:styleguide:begin] --- `one content-styleguide-test` --- */
   content: "\2193";
-  /* [archetype:styleguide:end]   --- one content-styleguide-test --- */
-  /* [archetype:styleguide:begin] --- two content-styleguide-test --- */
+  /* [archetype:styleguide:end] --- `one content-styleguide-test` --- */
+  /* [archetype:styleguide:begin] --- `two content-styleguide-test` --- */
   content: test;
-  /* [archetype:styleguide:end]   --- two content-styleguide-test --- */
-  /* [archetype:styleguide:begin] --- three content-styleguide-test --- */
+  /* [archetype:styleguide:end] --- `two content-styleguide-test` --- */
+  /* [archetype:styleguide:begin] --- `three content-styleguide-test` --- */
   content: " (" attr(href) ")";
-  /* [archetype:styleguide:end]   --- three content-styleguide-test --- */
-  /* [archetype:styleguide:begin] --- four content-styleguide-test --- */
+  /* [archetype:styleguide:end] --- `three content-styleguide-test` --- */
+  /* [archetype:styleguide:begin] --- `four content-styleguide-test` --- */
   content: attr(data-icon);
-  /* [archetype:styleguide:end]   --- four content-styleguide-test --- */
+  /* [archetype:styleguide:end] --- `four content-styleguide-test` --- */
 }

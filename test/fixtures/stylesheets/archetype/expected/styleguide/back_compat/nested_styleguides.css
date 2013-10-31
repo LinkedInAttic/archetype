@@ -1,22 +1,26 @@
 .nested-styleguide-test-back-compat {
-  /* [archetype:styleguide:begin] --- nested-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:begin] --- `nested-styleguide-test-back-compat` --- */
   text-decoration: none;
   display: block;
   color: red;
   background: green;
-  /* [archetype:styleguide:end]   --- nested-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:end] --- `nested-styleguide-test-back-compat` --- */
 }
 .nested-styleguide-test-back-compat.hover, .nested-styleguide-test-back-compat:hover, .nested-styleguide-test-back-compat.focus, .nested-styleguide-test-back-compat:focus {
+  /* [archetype:styleguide:begin] --- `module` --- */
   text-decoration: none;
   color: #0088cc;
   background: #eeeeee;
+  /* [archetype:styleguide:end] --- `module` --- */
 }
 .nested-styleguide-test-back-compat h3 {
+  /* [archetype:styleguide:begin] --- `large headline, link without an underline` --- */
   font-size: 18px;
   font-weight: bold;
   line-height: 22px;
   color: #0088cc;
   text-decoration: none;
+  /* [archetype:styleguide:end] --- `large headline, link without an underline` --- */
 }
 .nested-styleguide-test-back-compat h3 {
   /* [archetype:target-os:begin] --- default --- */

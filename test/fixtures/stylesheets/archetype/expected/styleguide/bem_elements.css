@@ -1,8 +1,8 @@
 .bem-element-test {
-  /* [archetype:styleguide:begin] --- bem-elements-selector-styleguide-test --- */
+  /* [archetype:styleguide:begin] --- `bem-elements-selector-styleguide-test` --- */
   display: block;
   color: red;
-  /* [archetype:styleguide:end]   --- bem-elements-selector-styleguide-test --- */
+  /* [archetype:styleguide:end] --- `bem-elements-selector-styleguide-test` --- */
 }
 .bem-element-test.test {
   color: green;

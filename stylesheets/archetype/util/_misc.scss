@@ -107,11 +107,39 @@ $REGISTRY_DO_ONCE: () !default;
   @return image-height($image);
 }
 
-//
+// given a map with meta data, extract the message and substitute any key-value pairs (@see str-substitute)
+// @function  meta-message
+// @param     $map {Map} the map to observe
+// @param     $subsitutes {Map} the map of substitutes
+// @return    {String} the meta message
+@function meta-message($map, $subsitutes: ()) {
+  $message: null;
+  $meta: map-get-meta($map);
+  @if $meta {
+    $message: str-substitute(map-get($meta, message), $subsitutes);
+  }
+  @return $message;
+}
+
+// check to see if a map key has multiple values
+// @function  map-key-has-multiple-values
+// @param     $map {Map} the map to observe
+// @return    {Boolean} whether or not the map key represents multiple values
 @function map-key-has-multiple-values($map) {
-  @if type-of($map) == map and map-has-key($map, -archetype-meta) {
-    $map: map-get($map, -archetype-meta);
-    @return map-has-key($map, has-multiple-values);
+  $meta: map-get-meta($map);
+  @if $meta {
+    @return map-has-key($meta, has-multiple-values);
   }
   @return false;
+}
+
+// retrieve the archetype meta data from a map
+// @function  map-get-meta
+// @param     $map {Map} the map to observe
+// @return    {Map} the data contained within the meta key
+@function map-get-meta($map) {
+  @if type-of($map) == map and map-has-key($map, -archetype-meta) {
+    @return map-get($map, -archetype-meta);
+  }
+  @return null;
 }

@@ -1,8 +1,8 @@
 .bem-element-test-back-compat {
-  /* [archetype:styleguide:begin] --- bem-elements-selector-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:begin] --- `bem-elements-selector-styleguide-test-back-compat` --- */
   display: block;
   color: red;
-  /* [archetype:styleguide:end]   --- bem-elements-selector-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:end] --- `bem-elements-selector-styleguide-test-back-compat` --- */
 }
 .bem-element-test-back-compat.test {
   color: green;

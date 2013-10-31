@@ -1,5 +1,5 @@
 .simple-button.disabled {
-  /* [archetype:styleguide:begin] --- small primary button --- */
+  /* [archetype:styleguide:begin] --- `small primary button (state: disabled)` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -47,10 +47,10 @@
   box-shadow: none;
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
-  /* [archetype:styleguide:end]   --- small primary button --- */
+  /* [archetype:styleguide:end] --- `small primary button (state: disabled)` --- */
 }
 .simple-button.my-custom-hover {
-  /* [archetype:styleguide:begin] --- small primary button --- */
+  /* [archetype:styleguide:begin] --- `small primary button (state: hover)` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -96,10 +96,10 @@
   -o-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
   -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-  /* [archetype:styleguide:end]   --- small primary button --- */
+  /* [archetype:styleguide:end] --- `small primary button (state: hover)` --- */
 }
 .simple-button.normal {
-  /* [archetype:styleguide:begin] --- small primary button --- */
+  /* [archetype:styleguide:begin] --- `small primary button` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -140,7 +140,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- small primary button --- */
+  /* [archetype:styleguide:end] --- `small primary button` --- */
 }
 .simple-button.normal.hover, .simple-button.normal:hover, .simple-button.normal.focus, .simple-button.normal:focus {
   background-color: #0055cc;
@@ -182,14 +182,14 @@
 }
 
 .anchor.missing {
-  /* [archetype:styleguide:begin] --- link --- */
+  /* [archetype:styleguide:begin] --- `link (state: missing)` --- */
   color: #0088cc;
   text-decoration: none;
-  /* [archetype:styleguide:end]   --- link --- */
+  /* [archetype:styleguide:end] --- `link (state: missing)` --- */
 }
 .anchor.my-custom-hover {
-  /* [archetype:styleguide:begin] --- link --- */
+  /* [archetype:styleguide:begin] --- `link (state: hover)` --- */
   color: #0088cc;
   text-decoration: underline;
-  /* [archetype:styleguide:end]   --- link --- */
+  /* [archetype:styleguide:end] --- `link (state: hover)` --- */
 }

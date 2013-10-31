@@ -1,10 +1,10 @@
 a {
-  /* [archetype:styleguide:begin] --- headline --- */
+  /* [archetype:styleguide:begin] --- `headline` --- */
   font-size: 18px;
   font-weight: bold;
   line-height: 22px;
   color: black;
-  /* [archetype:styleguide:end]   --- headline --- */
+  /* [archetype:styleguide:end] --- `headline` --- */
 }
 a {
   /* [archetype:target-os:begin] --- default --- */
@@ -12,13 +12,13 @@ a {
 }
 
 b {
-  /* [archetype:styleguide:begin] --- muted xxlarge headline in a punchcut --- */
+  /* [archetype:styleguide:begin] --- `muted xxlarge headline in a punchcut` --- */
   font-size: 24px;
   font-weight: normal;
   line-height: 26px;
   color: white;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
-  /* [archetype:styleguide:end]   --- muted xxlarge headline in a punchcut --- */
+  /* [archetype:styleguide:end] --- `muted xxlarge headline in a punchcut` --- */
 }
 b {
   /* [archetype:target-os:begin] --- default --- */

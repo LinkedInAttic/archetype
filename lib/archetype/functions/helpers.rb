@@ -7,7 +7,8 @@ private
   META = {
     :meta => '-archetype-meta',
     :has_multiples => 'has-multiple-values',
-    :values => 'values'
+    :values => 'values',
+    :message => 'message'
   }
 
   #
@@ -234,6 +235,39 @@ private
   end
 
   #
+  # adds a meta message to the hash
+  #
+  # *Parameters*:
+  # - <tt>hash</tt> {Hash} the hash to store the message onto
+  # - <tt>message</tt> {String} the message to store
+  # *Returns*:
+  # - {Hash} the hash with the injected message
+  #
+  def self.add_meta_message(hash, message)
+    hash[META[:meta]] = Sass::Script::Value::Map.new({
+      Sass::Script::Value::String.new(META[:message]) => Sass::Script::Value::String.new(message)
+    })
+    return hash
+  end
+
+  #
+  # retrieves a meta message from a hash
+  #
+  # *Parameters*:
+  # - <tt>hash</tt> {Hash} the hash to retrieve the message from
+  # *Returns*:
+  # - {String} the meta message stored on the hash
+  #
+  def self.get_meta_message(hash)
+    if not hash[META[:meta]].nil?
+      meta = map_to_hash(hash[META[:meta]])
+      message = meta[META[:message]]
+      return message.to_s if not message.nil?
+    end
+    return nil
+  end
+
+  #
   # convert things to a String
   #
   # *Parameters*:
@@ -278,7 +312,7 @@ private
       is_it = to_str(value) == 'nil' if value.is_a?(Sass::Script::Value::List) or value.is_a?(Array)
       is_it = true if value.is_a?(Sass::Script::Value::Null)
     when :hashy
-      is_it = value.is_a?(Hash) or value.is_a?(Sass::Script::Value::Map)
+      is_it = value.is_a?(Hash) || value.is_a?(Sass::Script::Value::Map)
     end
     return is_it
   end

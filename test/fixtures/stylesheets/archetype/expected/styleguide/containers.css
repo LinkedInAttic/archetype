@@ -1,12 +1,12 @@
 .container {
-  /* [archetype:styleguide:begin] --- container with a shadow --- */
+  /* [archetype:styleguide:begin] --- `container with a shadow` --- */
   background: white;
   -moz-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
   -ms-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
   -o-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
   -webkit-box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
   box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
-  /* [archetype:styleguide:end]   --- container with a shadow --- */
+  /* [archetype:styleguide:end] --- `container with a shadow` --- */
 }
 .ie.lte8 .container {
   /* [archetype:target-browser:begin] --- ie lte 8 --- */
@@ -15,7 +15,7 @@
 }
 
 .without-shadow {
-  /* [archetype:styleguide:begin] --- container without a shadow --- */
+  /* [archetype:styleguide:begin] --- `container without a shadow` --- */
   background: white;
-  /* [archetype:styleguide:end]   --- container without a shadow --- */
+  /* [archetype:styleguide:end] --- `container without a shadow` --- */
 }

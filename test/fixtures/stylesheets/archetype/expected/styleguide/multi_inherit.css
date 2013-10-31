@@ -1,21 +1,21 @@
 .multi-inherit-styleguide-test {
-  /* [archetype:styleguide:begin] --- multi-inherit-styleguide-test --- */
+  /* [archetype:styleguide:begin] --- `multi-inherit-styleguide-test` --- */
   color: red;
-  /* [archetype:styleguide:end]   --- multi-inherit-styleguide-test --- */
+  /* [archetype:styleguide:end] --- `multi-inherit-styleguide-test` --- */
 }
 
 .multi-inherit-styleguide-test2 {
-  /* [archetype:styleguide:begin] --- modifier3 multi-inherit-styleguide-test --- */
+  /* [archetype:styleguide:begin] --- `modifier3 multi-inherit-styleguide-test` --- */
   color: green;
   display: block;
   height: 100px;
-  /* [archetype:styleguide:end]   --- modifier3 multi-inherit-styleguide-test --- */
+  /* [archetype:styleguide:end] --- `modifier3 multi-inherit-styleguide-test` --- */
 }
 
 .multi-inherit-styleguide-test3 {
-  /* [archetype:styleguide:begin] --- modifier4 multi-inherit-styleguide-test --- */
+  /* [archetype:styleguide:begin] --- `modifier4 multi-inherit-styleguide-test` --- */
   color: green;
   display: block;
   height: 50px;
-  /* [archetype:styleguide:end]   --- modifier4 multi-inherit-styleguide-test --- */
+  /* [archetype:styleguide:end] --- `modifier4 multi-inherit-styleguide-test` --- */
 }

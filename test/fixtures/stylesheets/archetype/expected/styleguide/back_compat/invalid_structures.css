@@ -1,19 +1,19 @@
 .test-missing-nil {
-  /* [archetype:styleguide:begin] --- test-missing-nil --- */
+  /* [archetype:styleguide:begin] --- `test-missing-nil` --- */
   color: red;
-  /* [archetype:styleguide:end]   --- test-missing-nil --- */
+  /* [archetype:styleguide:end] --- `test-missing-nil` --- */
 }
 
 .test-missing-nil-2 {
-  /* [archetype:styleguide:begin] --- test-missing-nil-2 --- */
+  /* [archetype:styleguide:begin] --- `test-missing-nil-2` --- */
   color: yellow;
-  /* [archetype:styleguide:end]   --- test-missing-nil-2 --- */
+  /* [archetype:styleguide:end] --- `test-missing-nil-2` --- */
 }
 
 .test-missing-nil-3 {
-  /* [archetype:styleguide:begin] --- test-missing-nil-3 --- */
+  /* [archetype:styleguide:begin] --- `test-missing-nil-3` --- */
   color: blue;
-  /* [archetype:styleguide:end]   --- test-missing-nil-3 --- */
+  /* [archetype:styleguide:end] --- `test-missing-nil-3` --- */
 }
 .test-missing-nil-3.hover, .test-missing-nil-3:hover, .test-missing-nil-3.focus, .test-missing-nil-3:focus {
   color: black;
@@ -22,13 +22,13 @@
 }
 
 .test-missing-comma {
-  /* [archetype:styleguide:begin] --- test-missing-comma --- */
+  /* [archetype:styleguide:begin] --- `test-missing-comma` --- */
   color: white;
   background: green;
-  /* [archetype:styleguide:end]   --- test-missing-comma --- */
+  /* [archetype:styleguide:end] --- `test-missing-comma` --- */
 }
 
 .test-empty-value {
-  /* [archetype:styleguide:begin] --- test-empty-value --- */
-  /* [archetype:styleguide:end]   --- test-empty-value --- */
+  /* [archetype:styleguide:begin] --- `test-empty-value` --- */
+  /* [archetype:styleguide:end] --- `test-empty-value` --- */
 }

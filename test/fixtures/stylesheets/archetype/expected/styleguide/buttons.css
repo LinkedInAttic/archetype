@@ -1,5 +1,5 @@
 .container .button.large.primary {
-  /* [archetype:styleguide:begin] --- large primary button in a container --- */
+  /* [archetype:styleguide:begin] --- `large primary button in a container` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -40,7 +40,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- large primary button in a container --- */
+  /* [archetype:styleguide:end] --- `large primary button in a container` --- */
 }
 .container .button.large.primary.hover, .container .button.large.primary:hover, .container .button.large.primary.focus, .container .button.large.primary:focus {
   background-color: #0055cc;
@@ -81,7 +81,7 @@
   opacity: 0.6;
 }
 .container .button.large.secondary {
-  /* [archetype:styleguide:begin] --- large secondary button in a container --- */
+  /* [archetype:styleguide:begin] --- `large secondary button in a container` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -122,7 +122,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- large secondary button in a container --- */
+  /* [archetype:styleguide:end] --- `large secondary button in a container` --- */
 }
 .container .button.large.secondary.hover, .container .button.large.secondary:hover, .container .button.large.secondary.focus, .container .button.large.secondary:focus {
   background-color: #e6e6e6;
@@ -163,7 +163,7 @@
   opacity: 0.6;
 }
 .container .button.large.spotlight {
-  /* [archetype:styleguide:begin] --- large spotlight button in a container --- */
+  /* [archetype:styleguide:begin] --- `large spotlight button in a container` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -204,7 +204,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- large spotlight button in a container --- */
+  /* [archetype:styleguide:end] --- `large spotlight button in a container` --- */
 }
 .container .button.large.spotlight.hover, .container .button.large.spotlight:hover, .container .button.large.spotlight.focus, .container .button.large.spotlight:focus {
   background-color: #343434;
@@ -245,7 +245,7 @@
   opacity: 0.6;
 }
 .container .button.medium.primary {
-  /* [archetype:styleguide:begin] --- medium primary button in a container --- */
+  /* [archetype:styleguide:begin] --- `medium primary button in a container` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -286,7 +286,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- medium primary button in a container --- */
+  /* [archetype:styleguide:end] --- `medium primary button in a container` --- */
 }
 .container .button.medium.primary.hover, .container .button.medium.primary:hover, .container .button.medium.primary.focus, .container .button.medium.primary:focus {
   background-color: #0055cc;
@@ -327,7 +327,7 @@
   opacity: 0.6;
 }
 .container .button.medium.secondary {
-  /* [archetype:styleguide:begin] --- medium secondary button in a container --- */
+  /* [archetype:styleguide:begin] --- `medium secondary button in a container` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -368,7 +368,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- medium secondary button in a container --- */
+  /* [archetype:styleguide:end] --- `medium secondary button in a container` --- */
 }
 .container .button.medium.secondary.hover, .container .button.medium.secondary:hover, .container .button.medium.secondary.focus, .container .button.medium.secondary:focus {
   background-color: #e6e6e6;
@@ -409,7 +409,7 @@
   opacity: 0.6;
 }
 .container .button.medium.spotlight {
-  /* [archetype:styleguide:begin] --- medium spotlight button in a container --- */
+  /* [archetype:styleguide:begin] --- `medium spotlight button in a container` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -450,7 +450,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- medium spotlight button in a container --- */
+  /* [archetype:styleguide:end] --- `medium spotlight button in a container` --- */
 }
 .container .button.medium.spotlight.hover, .container .button.medium.spotlight:hover, .container .button.medium.spotlight.focus, .container .button.medium.spotlight:focus {
   background-color: #343434;
@@ -491,7 +491,7 @@
   opacity: 0.6;
 }
 .container .button.small.primary {
-  /* [archetype:styleguide:begin] --- small primary button in a container --- */
+  /* [archetype:styleguide:begin] --- `small primary button in a container` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -532,7 +532,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- small primary button in a container --- */
+  /* [archetype:styleguide:end] --- `small primary button in a container` --- */
 }
 .container .button.small.primary.hover, .container .button.small.primary:hover, .container .button.small.primary.focus, .container .button.small.primary:focus {
   background-color: #0055cc;
@@ -573,7 +573,7 @@
   opacity: 0.6;
 }
 .container .button.small.secondary {
-  /* [archetype:styleguide:begin] --- small secondary button in a container --- */
+  /* [archetype:styleguide:begin] --- `small secondary button in a container` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -614,7 +614,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- small secondary button in a container --- */
+  /* [archetype:styleguide:end] --- `small secondary button in a container` --- */
 }
 .container .button.small.secondary.hover, .container .button.small.secondary:hover, .container .button.small.secondary.focus, .container .button.small.secondary:focus {
   background-color: #e6e6e6;
@@ -655,7 +655,7 @@
   opacity: 0.6;
 }
 .container .button.small.spotlight {
-  /* [archetype:styleguide:begin] --- small spotlight button in a container --- */
+  /* [archetype:styleguide:begin] --- `small spotlight button in a container` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -696,7 +696,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- small spotlight button in a container --- */
+  /* [archetype:styleguide:end] --- `small spotlight button in a container` --- */
 }
 .container .button.small.spotlight.hover, .container .button.small.spotlight:hover, .container .button.small.spotlight.focus, .container .button.small.spotlight:focus {
   background-color: #343434;
@@ -738,7 +738,7 @@
 }
 
 .bristol .button.large.primary {
-  /* [archetype:styleguide:begin] --- large primary button in a bristol --- */
+  /* [archetype:styleguide:begin] --- `large primary button in a bristol` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -779,7 +779,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- large primary button in a bristol --- */
+  /* [archetype:styleguide:end] --- `large primary button in a bristol` --- */
 }
 .bristol .button.large.primary.hover, .bristol .button.large.primary:hover, .bristol .button.large.primary.focus, .bristol .button.large.primary:focus {
   background-color: #0055cc;
@@ -820,7 +820,7 @@
   opacity: 0.6;
 }
 .bristol .button.large.secondary {
-  /* [archetype:styleguide:begin] --- large secondary button in a bristol --- */
+  /* [archetype:styleguide:begin] --- `large secondary button in a bristol` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -861,7 +861,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- large secondary button in a bristol --- */
+  /* [archetype:styleguide:end] --- `large secondary button in a bristol` --- */
 }
 .bristol .button.large.secondary.hover, .bristol .button.large.secondary:hover, .bristol .button.large.secondary.focus, .bristol .button.large.secondary:focus {
   background-color: #e6e6e6;
@@ -902,7 +902,7 @@
   opacity: 0.6;
 }
 .bristol .button.large.spotlight {
-  /* [archetype:styleguide:begin] --- large spotlight button in a bristol --- */
+  /* [archetype:styleguide:begin] --- `large spotlight button in a bristol` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -943,7 +943,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- large spotlight button in a bristol --- */
+  /* [archetype:styleguide:end] --- `large spotlight button in a bristol` --- */
 }
 .bristol .button.large.spotlight.hover, .bristol .button.large.spotlight:hover, .bristol .button.large.spotlight.focus, .bristol .button.large.spotlight:focus {
   background-color: #343434;
@@ -984,7 +984,7 @@
   opacity: 0.6;
 }
 .bristol .button.medium.primary {
-  /* [archetype:styleguide:begin] --- medium primary button in a bristol --- */
+  /* [archetype:styleguide:begin] --- `medium primary button in a bristol` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1025,7 +1025,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- medium primary button in a bristol --- */
+  /* [archetype:styleguide:end] --- `medium primary button in a bristol` --- */
 }
 .bristol .button.medium.primary.hover, .bristol .button.medium.primary:hover, .bristol .button.medium.primary.focus, .bristol .button.medium.primary:focus {
   background-color: #0055cc;
@@ -1066,7 +1066,7 @@
   opacity: 0.6;
 }
 .bristol .button.medium.secondary {
-  /* [archetype:styleguide:begin] --- medium secondary button in a bristol --- */
+  /* [archetype:styleguide:begin] --- `medium secondary button in a bristol` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1107,7 +1107,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- medium secondary button in a bristol --- */
+  /* [archetype:styleguide:end] --- `medium secondary button in a bristol` --- */
 }
 .bristol .button.medium.secondary.hover, .bristol .button.medium.secondary:hover, .bristol .button.medium.secondary.focus, .bristol .button.medium.secondary:focus {
   background-color: #e6e6e6;
@@ -1148,7 +1148,7 @@
   opacity: 0.6;
 }
 .bristol .button.medium.spotlight {
-  /* [archetype:styleguide:begin] --- medium spotlight button in a bristol --- */
+  /* [archetype:styleguide:begin] --- `medium spotlight button in a bristol` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1189,7 +1189,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- medium spotlight button in a bristol --- */
+  /* [archetype:styleguide:end] --- `medium spotlight button in a bristol` --- */
 }
 .bristol .button.medium.spotlight.hover, .bristol .button.medium.spotlight:hover, .bristol .button.medium.spotlight.focus, .bristol .button.medium.spotlight:focus {
   background-color: #343434;
@@ -1230,7 +1230,7 @@
   opacity: 0.6;
 }
 .bristol .button.small.primary {
-  /* [archetype:styleguide:begin] --- small primary button in a bristol --- */
+  /* [archetype:styleguide:begin] --- `small primary button in a bristol` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1271,7 +1271,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- small primary button in a bristol --- */
+  /* [archetype:styleguide:end] --- `small primary button in a bristol` --- */
 }
 .bristol .button.small.primary.hover, .bristol .button.small.primary:hover, .bristol .button.small.primary.focus, .bristol .button.small.primary:focus {
   background-color: #0055cc;
@@ -1312,7 +1312,7 @@
   opacity: 0.6;
 }
 .bristol .button.small.secondary {
-  /* [archetype:styleguide:begin] --- small secondary button in a bristol --- */
+  /* [archetype:styleguide:begin] --- `small secondary button in a bristol` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1353,7 +1353,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- small secondary button in a bristol --- */
+  /* [archetype:styleguide:end] --- `small secondary button in a bristol` --- */
 }
 .bristol .button.small.secondary.hover, .bristol .button.small.secondary:hover, .bristol .button.small.secondary.focus, .bristol .button.small.secondary:focus {
   background-color: #e6e6e6;
@@ -1394,7 +1394,7 @@
   opacity: 0.6;
 }
 .bristol .button.small.spotlight {
-  /* [archetype:styleguide:begin] --- small spotlight button in a bristol --- */
+  /* [archetype:styleguide:begin] --- `small spotlight button in a bristol` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1435,7 +1435,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- small spotlight button in a bristol --- */
+  /* [archetype:styleguide:end] --- `small spotlight button in a bristol` --- */
 }
 .bristol .button.small.spotlight.hover, .bristol .button.small.spotlight:hover, .bristol .button.small.spotlight.focus, .bristol .button.small.spotlight:focus {
   background-color: #343434;
@@ -1477,7 +1477,7 @@
 }
 
 .punchcut .button.large.primary {
-  /* [archetype:styleguide:begin] --- large primary button in a punchcut --- */
+  /* [archetype:styleguide:begin] --- `large primary button in a punchcut` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1518,7 +1518,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- large primary button in a punchcut --- */
+  /* [archetype:styleguide:end] --- `large primary button in a punchcut` --- */
 }
 .punchcut .button.large.primary.hover, .punchcut .button.large.primary:hover, .punchcut .button.large.primary.focus, .punchcut .button.large.primary:focus {
   background-color: #0055cc;
@@ -1559,7 +1559,7 @@
   opacity: 0.6;
 }
 .punchcut .button.large.secondary {
-  /* [archetype:styleguide:begin] --- large secondary button in a punchcut --- */
+  /* [archetype:styleguide:begin] --- `large secondary button in a punchcut` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1600,7 +1600,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- large secondary button in a punchcut --- */
+  /* [archetype:styleguide:end] --- `large secondary button in a punchcut` --- */
 }
 .punchcut .button.large.secondary.hover, .punchcut .button.large.secondary:hover, .punchcut .button.large.secondary.focus, .punchcut .button.large.secondary:focus {
   background-color: #e6e6e6;
@@ -1641,7 +1641,7 @@
   opacity: 0.6;
 }
 .punchcut .button.large.spotlight {
-  /* [archetype:styleguide:begin] --- large spotlight button in a punchcut --- */
+  /* [archetype:styleguide:begin] --- `large spotlight button in a punchcut` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1682,7 +1682,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- large spotlight button in a punchcut --- */
+  /* [archetype:styleguide:end] --- `large spotlight button in a punchcut` --- */
 }
 .punchcut .button.large.spotlight.hover, .punchcut .button.large.spotlight:hover, .punchcut .button.large.spotlight.focus, .punchcut .button.large.spotlight:focus {
   background-color: #343434;
@@ -1723,7 +1723,7 @@
   opacity: 0.6;
 }
 .punchcut .button.medium.primary {
-  /* [archetype:styleguide:begin] --- medium primary button in a punchcut --- */
+  /* [archetype:styleguide:begin] --- `medium primary button in a punchcut` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1764,7 +1764,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- medium primary button in a punchcut --- */
+  /* [archetype:styleguide:end] --- `medium primary button in a punchcut` --- */
 }
 .punchcut .button.medium.primary.hover, .punchcut .button.medium.primary:hover, .punchcut .button.medium.primary.focus, .punchcut .button.medium.primary:focus {
   background-color: #0055cc;
@@ -1805,7 +1805,7 @@
   opacity: 0.6;
 }
 .punchcut .button.medium.secondary {
-  /* [archetype:styleguide:begin] --- medium secondary button in a punchcut --- */
+  /* [archetype:styleguide:begin] --- `medium secondary button in a punchcut` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1846,7 +1846,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- medium secondary button in a punchcut --- */
+  /* [archetype:styleguide:end] --- `medium secondary button in a punchcut` --- */
 }
 .punchcut .button.medium.secondary.hover, .punchcut .button.medium.secondary:hover, .punchcut .button.medium.secondary.focus, .punchcut .button.medium.secondary:focus {
   background-color: #e6e6e6;
@@ -1887,7 +1887,7 @@
   opacity: 0.6;
 }
 .punchcut .button.medium.spotlight {
-  /* [archetype:styleguide:begin] --- medium spotlight button in a punchcut --- */
+  /* [archetype:styleguide:begin] --- `medium spotlight button in a punchcut` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -1928,7 +1928,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- medium spotlight button in a punchcut --- */
+  /* [archetype:styleguide:end] --- `medium spotlight button in a punchcut` --- */
 }
 .punchcut .button.medium.spotlight.hover, .punchcut .button.medium.spotlight:hover, .punchcut .button.medium.spotlight.focus, .punchcut .button.medium.spotlight:focus {
   background-color: #343434;
@@ -1969,7 +1969,7 @@
   opacity: 0.6;
 }
 .punchcut .button.small.primary {
-  /* [archetype:styleguide:begin] --- small primary button in a punchcut --- */
+  /* [archetype:styleguide:begin] --- `small primary button in a punchcut` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -2010,7 +2010,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- small primary button in a punchcut --- */
+  /* [archetype:styleguide:end] --- `small primary button in a punchcut` --- */
 }
 .punchcut .button.small.primary.hover, .punchcut .button.small.primary:hover, .punchcut .button.small.primary.focus, .punchcut .button.small.primary:focus {
   background-color: #0055cc;
@@ -2051,7 +2051,7 @@
   opacity: 0.6;
 }
 .punchcut .button.small.secondary {
-  /* [archetype:styleguide:begin] --- small secondary button in a punchcut --- */
+  /* [archetype:styleguide:begin] --- `small secondary button in a punchcut` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -2092,7 +2092,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- small secondary button in a punchcut --- */
+  /* [archetype:styleguide:end] --- `small secondary button in a punchcut` --- */
 }
 .punchcut .button.small.secondary.hover, .punchcut .button.small.secondary:hover, .punchcut .button.small.secondary.focus, .punchcut .button.small.secondary:focus {
   background-color: #e6e6e6;
@@ -2133,7 +2133,7 @@
   opacity: 0.6;
 }
 .punchcut .button.small.spotlight {
-  /* [archetype:styleguide:begin] --- small spotlight button in a punchcut --- */
+  /* [archetype:styleguide:begin] --- `small spotlight button in a punchcut` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -2174,7 +2174,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- small spotlight button in a punchcut --- */
+  /* [archetype:styleguide:end] --- `small spotlight button in a punchcut` --- */
 }
 .punchcut .button.small.spotlight.hover, .punchcut .button.small.spotlight:hover, .punchcut .button.small.spotlight.focus, .punchcut .button.small.spotlight:focus {
   background-color: #343434;
@@ -2216,7 +2216,7 @@
 }
 
 .test-exclude {
-  /* [archetype:styleguide:begin] --- small secondary button in a container --- */
+  /* [archetype:styleguide:begin] --- `small secondary button in a container` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -2246,7 +2246,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- small secondary button in a container --- */
+  /* [archetype:styleguide:end] --- `small secondary button in a container` --- */
 }
 .test-exclude.hover, .test-exclude:hover, .test-exclude.focus, .test-exclude:focus {
   background-color: #e6e6e6;

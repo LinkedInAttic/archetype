@@ -1,5 +1,5 @@
 .button {
-  /* [archetype:styleguide:begin] --- button --- */
+  /* [archetype:styleguide:begin] --- `button` --- */
   font-weight: bold;
   border-width: 1px;
   border-style: solid;
@@ -40,7 +40,7 @@
   *vertical-align: middle;
   *zoom: 1;
   *display: inline;
-  /* [archetype:styleguide:end]   --- button --- */
+  /* [archetype:styleguide:end] --- `button` --- */
 }
 .button.hover, .button:hover, .button.focus, .button:focus {
   background-color: #0055cc;
@@ -80,8 +80,12 @@
   filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=60);
   opacity: 0.6;
 }
+.button.primary {
+  /* [archetype:styleguide-diff:begin] --- `button` vs `primary button` --- */
+  /* [archetype:styleguide-diff:end] --- `button` vs `primary button` --- */
+}
 .button.secondary {
-  /* [archetype:styleguide:diff:begin] --- --- */
+  /* [archetype:styleguide-diff:begin] --- `button` vs `secondary button` --- */
   text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25);
   color: #333333;
   background-color: whitesmoke;
@@ -92,7 +96,7 @@
   background-image: -o-linear-gradient(top, #ffffff, #e6e6e6);
   background-image: -webkit-linear-gradient(top, #ffffff, #e6e6e6);
   background-image: linear-gradient(to bottom, #ffffff, #e6e6e6);
-  /* [archetype:styleguide:diff:end]   --- --- */
+  /* [archetype:styleguide-diff:end] --- `button` vs `secondary button` --- */
 }
 .button.secondary.hover, .button.secondary:hover, .button.secondary.focus, .button.secondary:focus {
   background-color: #e6e6e6;
@@ -113,7 +117,7 @@
   background-image: linear-gradient(to bottom, #f5f5f5, #e4e4e4);
 }
 .button.spotlight {
-  /* [archetype:styleguide:diff:begin] --- --- */
+  /* [archetype:styleguide-diff:begin] --- `button` vs `spotlight button` --- */
   text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25);
   background-color: #414141;
   border-color: #111111;
@@ -123,7 +127,7 @@
   background-image: -o-linear-gradient(top, #555555, #222222);
   background-image: -webkit-linear-gradient(top, #555555, #222222);
   background-image: linear-gradient(to bottom, #555555, #222222);
-  /* [archetype:styleguide:diff:end]   --- --- */
+  /* [archetype:styleguide-diff:end] --- `button` vs `spotlight button` --- */
 }
 .button.spotlight.hover, .button.spotlight:hover, .button.spotlight.focus, .button.spotlight:focus {
   background-color: #343434;
@@ -145,37 +149,37 @@
 }
 
 .text {
-  /* [archetype:styleguide:begin] --- copy --- */
+  /* [archetype:styleguide:begin] --- `copy` --- */
   font-size: 13px;
   line-height: 17px;
   color: #222222;
   font-weight: normal;
-  /* [archetype:styleguide:end]   --- copy --- */
+  /* [archetype:styleguide:end] --- `copy` --- */
 }
 .text.muted {
-  /* [archetype:styleguide:diff:begin] --- --- */
+  /* [archetype:styleguide-diff:begin] --- `copy` vs `muted copy` --- */
   color: #555555;
-  /* [archetype:styleguide:diff:end]   --- --- */
+  /* [archetype:styleguide-diff:end] --- `copy` vs `muted copy` --- */
 }
 
 h1 {
-  /* [archetype:styleguide:begin] --- large headline --- */
+  /* [archetype:styleguide:begin] --- `large headline` --- */
   font-size: 18px;
   font-weight: bold;
   line-height: 22px;
   color: black;
-  /* [archetype:styleguide:end]   --- large headline --- */
+  /* [archetype:styleguide:end] --- `large headline` --- */
 }
 h1 {
   /* [archetype:target-os:begin] --- default --- */
   /* [archetype:target-os:end]   --- default --- */
 }
 h1 .note {
-  /* [archetype:styleguide:diff:begin] --- --- */
+  /* [archetype:styleguide-diff:begin] --- `large headline` vs `small muted copy` --- */
   font-family: inherit;
   font-size: 12px;
   font-weight: normal;
   line-height: 14px;
   color: #555555;
-  /* [archetype:styleguide:diff:end]   --- --- */
+  /* [archetype:styleguide-diff:end] --- `large headline` vs `small muted copy` --- */
 }

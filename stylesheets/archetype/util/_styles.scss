@@ -197,7 +197,7 @@
 // @param     $map {Map} a of styles
 // @param     $states {Boolean|List} if true, output all states; if false, output no states; if a list, output only the states in the list
 // @param     $exclude {List} a list of styles to exclude from output
-@mixin to-styles($map: (), $states: true, $selectors: true, $exclude: ()) {
+@mixin to-styles($map: (), $states: true, $selectors: true, $exclude: (), $meta: ()) {
   @if $map {
     $exclude: -compass-list($exclude);
     $placeholder: (
@@ -206,6 +206,10 @@
       selectors:  $selectors,
       exclude:    $exclude
     );
+
+    $message: meta-message($map, map-merge($meta, (phase: begin, origin: $archetype-origin-function or styles)));
+    @if $message { /* #{$message} */ }
+
     $placeholder: unquote("%#{tokenize($placeholder)}");
     // register a placeholder if needed
     @include archetype-smart-content($placeholder) {
@@ -215,7 +219,7 @@
           $values: map-get($value, values);
         }
         @each $value in $values {
-          @if(not index($exclude, $property)) {
+          @if not (index($exclude, $property) or $property == '-archetype-meta') {
             // deal with the states
             @if($property == states and $states != false and length($value) > 0) {
               @each $state, $val in $value {
@@ -275,6 +279,9 @@
         }
       }
     }
+
+    $message: meta-message($map, map-merge($meta, (phase: end, origin: $archetype-origin-function or styles)));
+    @if $message { /* #{$message} */ }
   }
 }
 
