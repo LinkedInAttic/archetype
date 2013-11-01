@@ -1,7 +1,6 @@
 @import "test_harness";
 
 @if should-register-component(bem-state-selector-styleguide-test) {
-$a-blackhole: component-registration-setup() !global;
 $a-blackhole: styleguide-add-component(bem-state-selector-styleguide-test, (), (
   default: (
     display:        block,
@@ -25,7 +24,6 @@ $a-blackhole: styleguide-add-component(bem-state-selector-styleguide-test, (), (
     )
   )
 )) !global;
-$a-blackhole: component-registration-setup(teardown) !global;
 }
 
 /* BEM states off */

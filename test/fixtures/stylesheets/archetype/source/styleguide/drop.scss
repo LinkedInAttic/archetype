@@ -1,7 +1,6 @@
 @import "test_harness";
 
 @if should-register-component(dropping-styles-test) {
-$a-blackhole: component-registration-setup() !global;
 $a-blackhole: styleguide-add-component(dropping-styles-test, (), (
   default: (
     display:        block,
@@ -59,7 +58,6 @@ $a-blackhole: styleguide-add-component(dropping-styles-test, (), (
     )
   )
 )) !global;
-$a-blackhole: component-registration-setup(teardown) !global;
 }
 
 .dropping-styles-test {

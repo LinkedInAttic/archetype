@@ -1,6 +1,3 @@
-// setup the environment for component registration
-$a-blackhole: component-registration-setup() !global;
-
 // import the component identifiers
 @import "identifiers";
 
@@ -29,6 +26,3 @@ $a-blackhole: component-registration-setup() !global;
 @import "components/pullquotes";
 @import "components/punchcut";
 @import "components/tooltips";
-
-// teardown the environment
-$a-blackhole: component-registration-setup(teardown) !global;

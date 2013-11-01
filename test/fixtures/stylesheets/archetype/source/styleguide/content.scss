@@ -1,7 +1,6 @@
 @import "test_harness";
 
 @if should-register-component(content-styleguide-test) {
-$a-blackhole: component-registration-setup() !global;
 $a-blackhole: styleguide-add-component(content-styleguide-test, (), (
   default: (
     content:  '\2193'
@@ -16,7 +15,6 @@ $a-blackhole: styleguide-add-component(content-styleguide-test, (), (
     content:  attr(data-icon)
   )
 )) !global;
-$a-blackhole: component-registration-setup(teardown) !global;
 }
 
 .content {
