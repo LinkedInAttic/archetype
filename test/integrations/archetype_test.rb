@@ -1,9 +1,11 @@
+ENABLE_PROFILER = false
 # this is all take from Compass because they already did the awesome testing framework
 require 'test_helper'
 require 'compass'
 require 'compass/logger'
 require 'sass/plugin'
 require 'fileutils'
+require 'perftools' if ENABLE_PROFILER
 
 class ArchetypeTest < Test::Unit::TestCase
 
@@ -18,6 +20,7 @@ class ArchetypeTest < Test::Unit::TestCase
   end
 
   def test_archetype
+    PerfTools::CpuProfiler.start('tmp/profile') if ENABLE_PROFILER
     within_project('archetype') do |proj|
       each_css_file(proj.css_path) do |css_file|
         assert_no_errors css_file, 'archetype'
@@ -26,6 +29,7 @@ class ArchetypeTest < Test::Unit::TestCase
         assert_renders_correctly sass_file, :ignore_charset => true
       end
     end
+    PerfTools::CpuProfiler.stop if ENABLE_PROFILER
   end
 
 private

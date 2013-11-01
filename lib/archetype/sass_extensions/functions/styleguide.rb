@@ -156,20 +156,6 @@ module Archetype::SassExtensions::Styleguide
     end
   end
 
-  #
-  # flag the component registration phase
-  #
-  # *Parameters*:
-  # - <tt>$teardown</tt> {*} if set, will teardown the registration phase, otherwise sets it up
-  # *Returns*:
-  # - {Bool} always returns true
-  #
-  def component_registration_setup(teardown = nil)
-    method = (teardown.nil?) ? :enable : :disable
-    Archetype::Patches::Maps.method(method).call
-    return Sass::Script::Value::Bool.new(true)
-  end
-
 private
   def helpers
     @helpers ||= Archetype::Functions::Helpers
