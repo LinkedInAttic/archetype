@@ -170,35 +170,70 @@
 // @param     $placement {String} where to place the icon [before|after|inline]
 // @param     $ie-styles {String} styles to apply to IE6/7 (this is needed because the faux :before isn't extendable)
 // @param     $ie-uid {String} a custom, unique identifier for the generate IE6/7 element
+// @param     $library {String} the glyph library to use
 // @content
-@mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: false, $ie-uid: false) {
+@mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: '', $ie-uid: false, $library: default) {
   $archetype-glyph-selector: null !global;
-  $char-mapping: nil;
-  $char-code: nil;
-  @if $icon {
-    $char-mapping: -compass-list(associative($CONFIG_GLYPHS_MAPPINGS, $icon, $strict: true));
-    $char-code: nth($char-mapping, 1);
+  $char-mapping: null;
+  $char-code: null;
+  // check that the library is valid, if not, throw a warning and use the default
+  @if not map-has-key($CONFIG_GLYPHS_LIBRARIES, $library) {
+    @warn "could not find a glyph library for `#{$library}`, using default";
+    $library: default;
   }
-  @if $char-code == nil and $icon != false {
-    @warn "could not find character mapping for `#{icon}`";
+  // get the glyph library we'll be using...
+  @if $library != default {
+    $library: map-merge(map-get($CONFIG_GLYPHS_LIBRARIES, default), map-get($CONFIG_GLYPHS_LIBRARIES, $library));
   }
   @else {
+    $library: map-get($CONFIG_GLYPHS_LIBRARIES, $library);
+  }
+  // if we have an icon...
+  @if $icon {
+    // if it looks like it's a character code...
+    @if looks-like-character-code($icon) {
+      // just use it
+      $char-code: $icon;
+    }
+    // otherwise, we'll look up the character code from the library mapping
+    @else {
+      $char-mapping: map-get(map-get($library, mappings), $icon);
+      $char-code: nth($char-mapping, 1);
+    }
+  }
+  // if we couldn't find a valid character code (and we were asked to output an icon)...
+  @if $char-code == null and $icon != false {
+    // throw a warning and be done with it
+    @warn "could not find character mapping for `#{icon}`";
+  }
+  // otherwise continue on
+  @else {
     @if $size == default {
-      $default-size: nil;
-      @if $icon {
+      $default-size: null;
+      @if $icon and $char-mapping {
         $default-size: nth-cyclic($char-mapping, 2);
       }
       $size: if(type-of($default-size) == number, $default-size, 100%);
     }
-    // if the size is under a given threshold, use a halfling, if available
-    @if $icon {
-      $char-code: nth-cyclic(-compass-list($char-code), if(comparable($CONFIG_GLYPHS_THRESHOLD, $size) and $size <= $CONFIG_GLYPHS_THRESHOLD, 2, 1));
+
+    $grid: choose-best-glyph-grid(map-get($library, grids), $size);
+
+    $version: map-get($library, version);
+
+    $name: map-get($library, name);
+    @if $grid {
+      $name: "#{$name}_#{$grid}";
     }
+
+    $font-family: unquote(if($version, "'#{$name}-#{$version}', ", "") + "'#{$name}'");
+    $font-weight: map-get($library, weight) or $CONFIG_GLYPHS_WEIGHT;
+    $font-style: map-get($library, style) or $CONFIG_GLYPHS_STYLE;
+
     $selector: if(index(before after, $placement), '&:#{$placement}', '&');
     #{$selector} {
-      font-family: '#{$CONFIG_GLYPHS_NAME}-#{$CONFIG_GLYPHS_VERSION}', '#{$CONFIG_GLYPHS_NAME}';
-      font-weight: $CONFIG_GLYPHS_WEIGHT;
-      font-style: $CONFIG_GLYPHS_STYLE;
+      font-family: $font-family;
+      font-weight: $font-weight;
+      font-style: $font-style;
       text-decoration: inherit;
       speak: none;
       @include if-set(font-size, $size);
@@ -208,16 +243,16 @@
       }
     }
     $archetype-glyph-selector: $selector !global;
-    @if($selector != '&' and $ie-styles != nil) {
+    @if $selector != '&' and $ie-styles {
       // support for IE6/7
-      $styles: "font-family:'#{$CONFIG_GLYPHS_NAME}-#{$CONFIG_GLYPHS_VERSION}', '#{$CONFIG_GLYPHS_NAME}';font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;";
-      @if($size != nil) {
+      $styles: "font-family:#{$font-family};font-weight:#{$font-weight};font-style:#{$font-style};text-decoration:inherit;";
+      @if $size {
         $styles: $styles + "font-size:#{$size};"
       }
-      @if($color != nil) {
+      @if $color {
         $styles: $styles + "color:#{$color};"
       }
-      @if($ie-styles) {
+      @if $ie-styles {
         $styles: $styles + $ie-styles;
       }
       @include ie-pseudo($styles: $styles, $content: $char-code, $placement: $placement, $name: glyph, $uid: $ie-uid);

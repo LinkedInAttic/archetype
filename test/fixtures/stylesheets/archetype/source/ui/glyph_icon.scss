@@ -33,3 +33,8 @@ $CONFIG_GENERATED_TAG_INLINE: false;
     left: 10px;
   }
 }
+
+.custom-char-code {
+  @include glyph-icon('\e000');
+}
+

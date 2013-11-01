@@ -1,0 +1,268 @@
+@font-face {
+  font-family: "MyDefaultGlyphs_16px-1.0.5";
+  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.eot');
+  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.woff') format('woff'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.ttf') format('truetype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.svg#MyDefaultGlyphs') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MyDefaultGlyphs_12px-1.0.5";
+  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.eot');
+  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.woff') format('woff'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.ttf') format('truetype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.svg#MyDefaultGlyphs') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MyCustomGlyphs_16px-1.0.0";
+  src: url('/assets/fonts/');
+  src: url('/assets/fonts/?#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/16px/MyCustomGlyphs.otf') format('opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/16px/MyCustomGlyphs.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "MyCustomGlyphs_12px-1.0.0";
+  src: url('/assets/fonts/');
+  src: url('/assets/fonts/?#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/12px/MyCustomGlyphs.otf') format('opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/12px/MyCustomGlyphs.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+.simple {
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf0d7;",this.el.style.cssText="font-family:'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:100%;color:inherit;",this.insertBefore(this.el));
+}
+.simple:before {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 100%;
+  color: inherit;
+  content: "\f0d7";
+}
+
+.false {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 100%;
+  color: inherit;
+}
+
+.not-inline {
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf0d7;",this.insertBefore(this.el));
+}
+.not-inline:before {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 100%;
+  color: inherit;
+  content: "\f0d7";
+}
+.not-inline #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 100%;
+  color: inherit;
+}
+
+.ie-uid {
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="my-custom-id",this.el.innerHTML="&#xf0d7;",this.insertBefore(this.el));
+}
+.ie-uid:before {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 100%;
+  color: inherit;
+  content: "\f0d7";
+}
+.ie-uid #my-custom-id {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 100%;
+  color: inherit;
+}
+.ie-uid:before, .ie-uid #my-custom-id {
+  color: pink;
+}
+
+.content-block {
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf0d7;",this.insertBefore(this.el));
+}
+.content-block:before {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 100%;
+  color: inherit;
+  content: "\f0d7";
+}
+.content-block #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 100%;
+  color: inherit;
+}
+.content-block:before, .content-block #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.size.size20px {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 20px;
+  color: inherit;
+}
+.size.size16px {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 16px;
+  color: inherit;
+}
+.size.size12px {
+  font-family: 'MyDefaultGlyphs_12px-1.0.5', 'MyDefaultGlyphs_12px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 12px;
+  color: inherit;
+}
+.size.size24px {
+  font-family: 'MyDefaultGlyphs_12px-1.0.5', 'MyDefaultGlyphs_12px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 24px;
+  color: inherit;
+}
+.size.size13px {
+  font-family: 'MyDefaultGlyphs_12px-1.0.5', 'MyDefaultGlyphs_12px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 13px;
+  color: inherit;
+}
+.size.size17px {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 17px;
+  color: inherit;
+}
+.size.size57px {
+  font-family: 'MyDefaultGlyphs_12px-1.0.5', 'MyDefaultGlyphs_12px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 57px;
+  color: inherit;
+}
+.size.size100px {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 100px;
+  color: inherit;
+}
+.size.size100p {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 100%;
+  color: inherit;
+}
+.size.size100em {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 100em;
+  color: inherit;
+}
+
+.custom .simple {
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf0d7;",this.insertBefore(this.el));
+}
+.custom .simple:before {
+  font-family: 'MyCustomGlyphs_16px-1.0.0', 'MyCustomGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 100%;
+  color: inherit;
+  content: "\f0d7";
+}
+.custom .simple #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'MyCustomGlyphs_16px-1.0.0', 'MyCustomGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 100%;
+  color: inherit;
+}
+.custom .false {
+  font-family: 'MyCustomGlyphs_16px-1.0.0', 'MyCustomGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 100%;
+  color: inherit;
+}
+.custom .size {
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf0d7;",this.insertBefore(this.el));
+}
+.custom .size:before {
+  font-family: 'MyCustomGlyphs_16px-1.0.0', 'MyCustomGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 20px;
+  color: inherit;
+  content: "\f0d7";
+}
+.custom .size #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'MyCustomGlyphs_16px-1.0.0', 'MyCustomGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  font-size: 20px;
+  color: inherit;
+}

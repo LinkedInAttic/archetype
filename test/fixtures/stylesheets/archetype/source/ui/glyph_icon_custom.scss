@@ -1,0 +1,113 @@
+$CONFIG_GLYPHS_LIBRARIES: (
+  default: (
+    name:     MyDefaultGlyphs,
+    version:  '1.0.5',
+    grids:    16px 12px,
+    path:     'custom/path/to/MyDefaultGlyphs/{version}/{grid}/MyDefaultGlyphs',
+    files: (
+      eot:    '{path}.eot',
+      std:    ('{path}.woff', '{path}.ttf', '{path}.svg##{"{svg-id}"}')
+    ),
+    mappings: (
+      glass:                  '\f000',
+      music:                  '\f001',
+      search:                 '\f002',
+      caret-down:             '\f0d7'
+    )
+  ),
+  custom: (
+    name:     MyCustomGlyphs,
+    version:  '1.0.0',
+    svg-id:   MyCustomGlyphs-SVG,
+    path:     'custom/path/to/MyCustomGlyphs/{version}/{grid}/MyCustomGlyphs',
+    files: (
+      std: ('{path}.otf', '{path}.ttf')
+    ),
+    mappings: (
+      glass:                  '\f000',
+      music:                  '\f001',
+      search:                 '\f002',
+      caret-down:             '\f0d7'
+    )
+  )
+);
+
+@import "test_harness";
+
+@include base-glyph();
+
+.simple {
+  @include glyph-icon(caret-down);
+}
+
+.false {
+  @include glyph-icon(false, $placement: inline);
+}
+
+$CONFIG_GENERATED_TAG_INLINE: false;
+.not-inline {
+  @include glyph-icon(caret-down);
+}
+
+.ie-uid {
+  @include glyph-icon(caret-down, $ie-uid: my-custom-id);
+  #{$archetype-glyph-selector} {
+    color: pink;
+  }
+}
+
+.content-block {
+  @include glyph-icon(caret-down) {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+}
+
+// this tests support for grids and chooses the most appropriate grid size...
+.size {
+  &.size20px {
+    @include glyph-icon(false, $size: 20px, $placement: inline);
+  }
+  &.size16px {
+    @include glyph-icon(false, $size: 16px, $placement: inline);
+  }
+  &.size12px {
+    @include glyph-icon(false, $size: 12px, $placement: inline);
+  }
+  &.size24px {
+    @include glyph-icon(false, $size: 24px, $placement: inline);
+  }
+  &.size13px {
+    @include glyph-icon(false, $size: 13px, $placement: inline);
+  }
+  &.size17px {
+    @include glyph-icon(false, $size: 17px, $placement: inline);
+  }
+  &.size57px {
+    @include glyph-icon(false, $size: 57px, $placement: inline);
+  }
+  &.size100px {
+    @include glyph-icon(false, $size: 100px, $placement: inline);
+  }
+  &.size100p {
+    @include glyph-icon(false, $size: 100%, $placement: inline);
+  }
+  &.size100em {
+    @include glyph-icon(false, $size: 100em, $placement: inline);
+  }
+}
+
+.custom {
+  .simple {
+    @include glyph-icon(caret-down, $library: custom);
+  }
+
+  .false {
+    @include glyph-icon(false, $placement: inline, $library: custom);
+  }
+
+  .size {
+    @include glyph-icon(caret-down, $size: 20px, $library: custom);
+  }
+}

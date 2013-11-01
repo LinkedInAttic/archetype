@@ -30,22 +30,22 @@ module Archetype::SassExtensions::Strings
   # given a string and a map of key-values, replace any {key}'s with the associated value
   #
   # *Parameters*:
-  # - <tt>$string</tt> {String} the string to subsititute within
+  # - <tt>$str</tt> {String} the string to subsititute within
   # - <tt>$subsitutions</tt> {Map} the map of key-value pairs to substitute
   # *Returns*:
   # - {String} the string with substituted values
   #
-  def str_substitute(string, subsitutions = nil)
-    return Sass::Script::Value::String.new('') if string.is_a?(Sass::Script::Value::Null)
-    return string if subsitutions.nil?
+  def str_substitute(str, subsitutions = nil)
+    return Sass::Script::Value::String.new('') if str.is_a?(Sass::Script::Value::Null)
+    return str if subsitutions.nil?
     subsitutions = subsitutions.to_h
-    string = helpers.to_str(string)
+    str = helpers.to_str(str, ' ', :quotes)
     # for each key-value pair...
     subsitutions.each do |key, value|
       # replace all instances of the placeholder `{key}` with the value
-      string = string.gsub("{#{key}}", helpers.to_str(value))
+      str = str.gsub("{#{key}}", helpers.to_str(value, ' ', :quotes))
     end
-    Sass::Script::Value::String.new(string)
+    Sass::Script::Value::String.new(str)
   end
   Sass::Script::Functions.declare :str_substitute, [:string]
   Sass::Script::Functions.declare :str_substitute, [:string, :subsitutions]
