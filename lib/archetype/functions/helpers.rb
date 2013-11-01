@@ -159,9 +159,10 @@ private
   # - {Archetype::Hash} the converted hash
   #
   def self.map_to_hash(data, depth = 0, nest = [], additives = [])
+    data = data.to_h if data.respond_to?(:to_h)
     hsh = Archetype::Hash.new
     # recurisvely convert sub-maps into a hash
-    data.to_h.each do |key, value|
+    data.each do |key, value|
       key = to_str(key, ' ' , :quotes)
       hsh[key] = value.is_a?(Sass::Script::Value::Map) ? map_to_hash(value) : value
     end
