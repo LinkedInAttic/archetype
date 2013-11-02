@@ -82,7 +82,7 @@
 @mixin target-browser($browsers, $property: nil, $value: nil, $merge: false, $inline: true, $threshold: $critical-usage-threshold) {
   @if($CONFIG_BROWSER_ALLOW_HACKS) {
     // target webkit, Safari3+, Chrome1+
-    @if(index2($browsers, associative($CONFIG_BROWSER_VENDORS_HACK, webkit-all) )) {
+    @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, webkit-all) )) {
       @if $CONFIG_BROWSER_WARN_ON_HACK {
         @warn "using hack for webkit-all";
       }
@@ -97,7 +97,7 @@
       }
     }
     // target gecko
-    @if(index2($browsers, associative($CONFIG_BROWSER_VENDORS_HACK, gecko-all) )) {
+    @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, gecko-all) )) {
       @if $CONFIG_BROWSER_WARN_ON_HACK {
         @warn "using hack for gecko-all";
       }
@@ -110,7 +110,7 @@
       }
     }
     // target opera
-    @if(index2($browsers, associative($CONFIG_BROWSER_VENDORS_HACK, opera-all) )) {
+    @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, opera-all) )) {
       @if $CONFIG_BROWSER_WARN_ON_HACK {
         @warn "using hack for opera-all";
       }
@@ -170,10 +170,10 @@
     $classes: append($classes, unquote('&'), comma);
   }
   // step through the list of vendor OS's
-  @each $vendor in $CONFIG_OS_VENDORS_CLASS {
+  @each $vendor, $aliases in $CONFIG_OS_VENDORS_CLASS {
     // if it matches the requested os
-    @if index2(nth($vendor, 2), $os) {
-      $item: unquote('.#{nth($vendor, 1)}#{$using}');
+    @if index2($aliases, $os) {
+      $item: unquote('.#{$vendor}#{$using}');
       // if it's not already on the stack, push it
       @if(not index($classes, $item)) {
         $classes: append($classes, $item, comma);

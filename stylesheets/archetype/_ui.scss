@@ -281,13 +281,11 @@
     // generate rotating keyframes
     @include -generate-loader-keyframes-360();
     // generate specific keyframes
-    @each $size in $CONFIG_LOADERS {
-      @if $size != nil {
-        $values: nth($size, 2);
-        $size: nth($size, 1);
+    @each $size, $values in $CONFIG_LOADERS {
+      @if $size and $values {
         @each $context in (1 2) {
           $name: unquote('#{$size}-#{$context}');
-          $icon: nth-cyclic(associative($values, default), $context);
+          $icon: nth-cyclic(map-get($values, default), $context);
           $position: styleguide-sprite-position($CONFIG_SPRITE_LOADERS, $icon);
           $sprite-file: styleguide-sprite-file($CONFIG_SPRITE_LOADERS, $icon);
           $width: styleguide-image-width($sprite-file);

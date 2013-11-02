@@ -8,8 +8,8 @@
 // @private
 // @param     $property {String} the CSS property to output
 // @param     $value {*} the CSS value to output
-@mixin _outputStyle($property, $value: nil) {
-  @if($value != nil) {
+@mixin _outputStyle($property, $value: null) {
+  @if($value != null and $value != nil) {
     @if($property == target-browser) {
       @include target-browser(nth($value,1), nth($value,2), nth($value,3));
     }
@@ -33,9 +33,9 @@
 // @mixin     output-style
 // @param     $property {String} the CSS property to output
 // @param     $value {*} the CSS value to output
-@mixin output-style($property, $value: nil) {
+@mixin output-style($property, $value: null) {
 
-  @if($property != nil and length(-compass-list($value)) > 0 and first-value-of(-compass-list($value)) != nil and not index($CONFIG_DISABLED_CSS, $property)) {
+  @if($property != null and $property != nil and length(-compass-list($value)) > 0 and first-value-of(-compass-list($value)) != nil and first-value-of(-compass-list($value)) != null and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
     // check to see if we have a custom output styler (pre)
     @if check-for-custom-styler($property, $value, pre) {
@@ -351,22 +351,22 @@
 }
 
 // abstract common issues and generate safe styles
-@mixin safe($property: nil, $value: nil) {
-  @if($property != nil and $value != nil) {
+@mixin safe($property: null, $value: null) {
+  @if($property != null and $property != nil and $value != null and $value != nil) {
     // os friendly font stacks
     @if($property == font-family) {
-      $stack: associative($CONFIG_SAFE_FONTS, $value, $strict: true);
-      @if($stack != nil and length($stack) > 0) {
+      $stack: map-get($CONFIG_SAFE_FONTS, $value);
+      @if($stack and length($stack) > 0) {
         // first, step through the list of os safe fonts
         @each $collection in $stack {
           @if(length($collection) > 1) {
-            $default: nil;
+            $default: null;
             $os: nth($collection, 1);
             $fonts: nth($collection, 2);
-            $family: nil;
+            $family: null;
             // next, step through the list of lang safe fonts
             @each $item in $fonts {
-              @if($item != nil) {
+              @if($item != null and $item != nil) {
                 $lang: nth($item, 1);
                 $font: nth($item, 2);
                 // check if the language matches or it's the default
@@ -384,7 +384,7 @@
             @include target-os($os, font-family, $family);
           }
         }
-        $value: nil;
+        $value: null;
       }
     }
     // text-transform: uppercase isn't friendly to turkish
@@ -392,18 +392,18 @@
       // TODO - more investigation, this may affect other locales as well
       // @link http://www.w3.org/International/tests/html-css/text-transform/results-text-transform
       // @link https://developer.mozilla.org/en/CSS/text-transform
-      $value: nil;
+      $value: null;
     }
     @else if($property == font-variant and $value == small-caps and lang(tr_TR)) {
       // TODO - more investigation, this may affect other locales as well
       // @link https://developer.mozilla.org/en/CSS/font-variant
-      $value: nil;
+      $value: null;
     }
     // italics aren't pretty in CJK
     @else if($property == font-style and $value == italic and lang(CJK)) {
-      $value: nil;
+      $value: null;
     }
-    // if $value was set to `nil`, this does nothing
+    // if $value was set to `null`, this does nothing
     @include output-style($property, $value);
   }
 }
@@ -411,7 +411,7 @@
 // web-safe font stacks, if no safe fonts are found, use the raw `$family` as output
 // @mixin     font-family
 // @param     $family {String} the font stack to output
-@mixin font-family($family: nil) {
+@mixin font-family($family: null) {
   @include safe(font-family, $family);
 }
 
@@ -430,7 +430,7 @@
 // safely use font-style without localization issues
 // @mixin     font-style
 // @param     $style {String} the style
-@mixin font-style($style: nil) {
+@mixin font-style($style: null) {
   @include safe(font-style, $style);
 }
 
