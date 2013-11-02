@@ -78,6 +78,14 @@ $CONFIG_GENERATED_TAG_INLINE: false;
   &.size24px {
     @include glyph-icon(false, $size: 24px, $placement: inline);
   }
+  // force 16px grid
+  &.size24px--force_16px {
+    @include glyph-icon(false, $size: 24px, $placement: inline, $grid: 16px);
+  }
+  // force preferred grid (16px)
+  &.size24px--force_preferred {
+    @include glyph-icon(false, $size: 24px, $placement: inline, $grid: preferred);
+  }
   &.size13px {
     @include glyph-icon(false, $size: 13px, $placement: inline);
   }

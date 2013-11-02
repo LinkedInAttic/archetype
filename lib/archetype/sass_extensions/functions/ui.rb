@@ -116,9 +116,9 @@ module Archetype::SassExtensions::UI
 
         # simple algorithm to compute the distance between the size and grid
         #  choose the lesser of the (mod) or (grid - mod)
-        #  then divide it by grid^2
+        #  then divide it by grid^(number_of_grid_choices)
         mod = (tmp_size % tmp_grid)
-        distance = [mod, tmp_grid - mod].min / tmp_grid**2
+        distance = [mod, tmp_grid - mod].min / tmp_grid**(grids.length)
 
         # if it's closer (smaller distance), use it...
         if distance < best[:distance]

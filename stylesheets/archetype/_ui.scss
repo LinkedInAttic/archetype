@@ -171,8 +171,9 @@
 // @param     $ie-styles {String} styles to apply to IE6/7 (this is needed because the faux :before isn't extendable)
 // @param     $ie-uid {String} a custom, unique identifier for the generate IE6/7 element
 // @param     $library {String} the glyph library to use
+// @param     $grid {Number|String} the grid to use (defaults to a smart selection, use `preferred` to use always use the first (preferred) grid option)
 // @content
-@mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: '', $ie-uid: false, $library: default) {
+@mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: '', $ie-uid: false, $library: default, $grid: null) {
   $archetype-glyph-selector: null !global;
   $char-mapping: null;
   $char-code: null;
@@ -216,7 +217,14 @@
       $size: if(type-of($default-size) == number, $default-size, 100%);
     }
 
-    $grid: choose-best-glyph-grid(map-get($library, grids), $size);
+    // choose which grid size to use
+    $grids: map-get($library, grids);
+    @if $grid == preferred {
+      $grid: nth(-compass-list($grids), 1);
+    }
+    @else if not ($grid and index(-compass-list($grids), $grid)) {
+      $grid: choose-best-glyph-grid($grids, $size);
+    }
 
     $version: map-get($library, version);
 

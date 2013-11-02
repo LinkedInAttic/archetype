@@ -160,6 +160,24 @@
   font-size: 24px;
   color: inherit;
 }
+.size.size24px--force_16px {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 24px;
+  color: inherit;
+}
+.size.size24px--force_preferred {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: inherit;
+  speak: none;
+  font-size: 24px;
+  color: inherit;
+}
 .size.size13px {
   font-family: 'MyDefaultGlyphs_12px-1.0.5', 'MyDefaultGlyphs_12px';
   font-weight: normal;
