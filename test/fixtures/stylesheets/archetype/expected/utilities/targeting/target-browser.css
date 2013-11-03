@@ -1,11 +1,11 @@
 .target-ie-6 {
-  /* [archetype:target-browser:being] --- ie 6 --- */
+  /* [archetype:target-browser:begin] --- ie 6 --- */
   _vertical-align: -5px;
   /* [archetype:target-browser:end]   --- ie 6 --- */
-  /* [archetype:target-browser:being] --- ie 6 --- */
+  /* [archetype:target-browser:begin] --- ie 6 --- */
   _background-position: 6px -2170px;
   /* [archetype:target-browser:end]   --- ie 6 --- */
-  /* [archetype:target-browser:being] --- ie 6 --- */
+  /* [archetype:target-browser:begin] --- ie 6 --- */
   _overflow: hidden;
   /* [archetype:target-browser:end]   --- ie 6 --- */
 }
@@ -23,19 +23,19 @@
 }
 
 .target-ie-lte-7 {
-  /* [archetype:target-browser:being] --- ie lte 7 --- */
+  /* [archetype:target-browser:begin] --- ie lte 7 --- */
   *margin-top: 1px;
   /* [archetype:target-browser:end]   --- ie lte 7 --- */
-  /* [archetype:target-browser:being] --- ie lte 7 --- */
+  /* [archetype:target-browser:begin] --- ie lte 7 --- */
   *padding: 0;
   /* [archetype:target-browser:end]   --- ie lte 7 --- */
-  /* [archetype:target-browser:being] --- ie lte 7 --- */
+  /* [archetype:target-browser:begin] --- ie lte 7 --- */
   *width: 195px;
   /* [archetype:target-browser:end]   --- ie lte 7 --- */
-  /* [archetype:target-browser:being] --- ie lte 7 --- */
+  /* [archetype:target-browser:begin] --- ie lte 7 --- */
   *font-size: 0.01em;
   /* [archetype:target-browser:end]   --- ie lte 7 --- */
-  /* [archetype:target-browser:being] --- ie lte 7 --- */
+  /* [archetype:target-browser:begin] --- ie lte 7 --- */
   *height: 18px;
   /* [archetype:target-browser:end]   --- ie lte 7 --- */
 }

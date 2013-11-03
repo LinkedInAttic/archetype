@@ -79,7 +79,7 @@
 // @usage:
 // =target-browser(ie 8, border, 10px);
 // =target-browser(ie lte 7, padding, 0);
-@mixin target-browser($browsers, $property: nil, $value: nil, $merge: false, $inline: true, $threshold: $critical-usage-threshold) {
+@mixin target-browser($browsers, $property: null, $value: null, $merge: false, $inline: true, $threshold: $critical-usage-threshold) {
   @if($CONFIG_BROWSER_ALLOW_HACKS) {
     // target webkit, Safari3+, Chrome1+
     @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, webkit-all) )) {
@@ -134,10 +134,10 @@
           $prefix: nth(('_', '*'), $idx);
           $value: if(index($CORE_CSS_RTL_VALUE_SUPPORT, $property), rtl($value, $property), $value);
           // NOTE: RTL support on properties like `border-left-width` won't fully work until Compass/Sass support string replace methods
-          /* [archetype:target-browser:being] --- #{$browsers} --- */
+          /* [archetype:target-browser:begin] --- #{$browsers} --- */
           @include output-style(#{$prefix}#{rtl($property)}, $value);
           /* [archetype:target-browser:end]   --- #{$browsers} --- */
-          $value: nil;
+          $value: null;
         }
       }
     }
@@ -161,7 +161,7 @@
 // @param     $value {*} the CSS value
 // @param     $merge {Boolean} should the class name be merged e.g. `.os-win.example` vs `.os-win .example`
 // @content
-@mixin target-os($os: (), $property: nil, $value: nil, $merge: false) {
+@mixin target-os($os: (), $property: null, $value: null, $merge: false) {
   $os: -compass-list($os);
   $using: if($merge, '&', ' &');
   $classes: ();

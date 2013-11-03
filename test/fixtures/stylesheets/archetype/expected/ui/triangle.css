@@ -1,10 +1,10 @@
 .a {
   height: 0;
   width: 0;
-  /* [archetype:target-browser:being] --- ie 6 --- */
+  /* [archetype:target-browser:begin] --- ie 6 --- */
   _font-size: 0;
   /* [archetype:target-browser:end]   --- ie 6 --- */
-  /* [archetype:target-browser:being] --- ie 6 --- */
+  /* [archetype:target-browser:begin] --- ie 6 --- */
   _line-height: 0;
   /* [archetype:target-browser:end]   --- ie 6 --- */
   border-style: dashed;
@@ -25,10 +25,10 @@
 .b {
   height: 0;
   width: 0;
-  /* [archetype:target-browser:being] --- ie 6 --- */
+  /* [archetype:target-browser:begin] --- ie 6 --- */
   _font-size: 0;
   /* [archetype:target-browser:end]   --- ie 6 --- */
-  /* [archetype:target-browser:being] --- ie 6 --- */
+  /* [archetype:target-browser:begin] --- ie 6 --- */
   _line-height: 0;
   /* [archetype:target-browser:end]   --- ie 6 --- */
   border-style: dashed;
@@ -49,10 +49,10 @@
 .c {
   height: 0;
   width: 0;
-  /* [archetype:target-browser:being] --- ie 6 --- */
+  /* [archetype:target-browser:begin] --- ie 6 --- */
   _font-size: 0;
   /* [archetype:target-browser:end]   --- ie 6 --- */
-  /* [archetype:target-browser:being] --- ie 6 --- */
+  /* [archetype:target-browser:begin] --- ie 6 --- */
   _line-height: 0;
   /* [archetype:target-browser:end]   --- ie 6 --- */
   border-style: dashed;
