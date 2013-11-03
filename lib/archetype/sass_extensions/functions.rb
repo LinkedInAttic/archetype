@@ -1,9 +1,10 @@
-%w(lists strings styleguide ui locale numbers version environment).each do |func|
+%w(lists strings styleguide ui locale numbers version environment util).each do |func|
   require "archetype/sass_extensions/functions/#{func}"
 end
 
 # :stopdoc:
 module Sass::Script::Functions
+  include Archetype::SassExtensions::Util
   include Archetype::SassExtensions::Lists
   include Archetype::SassExtensions::Strings
   include Archetype::SassExtensions::Styleguide

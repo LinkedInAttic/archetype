@@ -4,17 +4,17 @@
 // @function  is-debug-enabled
 // @param     $if {Boolean} optional override for $CONFIG_DEBUG
 // @return    {Boolean} whether or not debug is enabled
-@function is-debug-enabled($if: nil) {
+@function is-debug-enabled($if: null) {
   // debug is only available in DEV environments, so check that first
   // then check if the debug flag/override is truthy
-  @return (index($CONFIG_DEBUG_ENVS, archetype-env()) and if($if == nil, $CONFIG_DEBUG, $if));
+  @return (index($CONFIG_DEBUG_ENVS, archetype-env()) and if($if == null, $CONFIG_DEBUG, $if));
 }
 
 // a debug helper, print out a message
 // @mixin     debug-message
 // @param     $message {String} the message to output
 // @param     $if {Boolean} override $CONFIG_DEBUG
-@mixin debug-message($message, $if: nil) {
+@mixin debug-message($message, $if: null) {
   @if(is-debug-enabled($if)) {
     /* #{$message} */
   }
@@ -25,7 +25,7 @@
 // @param     $color {String} the color to draw the border
 // @param     $opacity {Number}
 // @param     $if {Boolean} override $CONFIG_DEBUG
-@mixin debug-hover-box($color: rgb(0, 255, 255), $opacity: 0.9, $if: nil) {
+@mixin debug-hover-box($color: rgb(0, 255, 255), $opacity: 0.9, $if: null) {
   @if(is-debug-enabled($if)) {
     &:hover {
       @include opacity($opacity);

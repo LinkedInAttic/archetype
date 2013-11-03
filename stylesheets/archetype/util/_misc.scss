@@ -38,12 +38,12 @@ $REGISTRY_DO_ONCE: () !default;
   @return not $CONFIG_DISABLE_STYLEGUIDE_SPRITES and not $sprite;
 }
 
-// check that a sprite isn't nil or false
+// check that a sprite isn't null or false
 // @function  styleguide-check-sprite
 // @param     $map {SpriteMap} the sprite map to check against
 // @return    {Boolean} is the sprite set
 @function styleguide-check-sprite($map) {
-  @return not ($CONFIG_DISABLE_STYLEGUIDE_SPRITES and index(false nil, $map));
+  @return not ($CONFIG_DISABLE_STYLEGUIDE_SPRITES and index(false nil null, $map));
 }
 
 // wrapper for sprite()
@@ -52,9 +52,9 @@ $REGISTRY_DO_ONCE: () !default;
 // @param     $sprite {Sprite} the sprite name
 // @param     $offset-x {Number} the horizontal offset of the sprite position
 // @param     $offset-y {Number} the vertical offset of the sprite position
-// @return    {Sprite} the sprite object or nil
+// @return    {Sprite} the sprite object or null
 @function styleguide-sprite($map, $sprite, $offset-x: 0, $offset-y: 0) {
-  @if not styleguide-check-sprite($map) { @return nil; }
+  @if not styleguide-check-sprite($map) { @return null; }
   @return sprite($map, $sprite, $offset-x, $offset-y);
 }
 
@@ -64,18 +64,18 @@ $REGISTRY_DO_ONCE: () !default;
 // @param     $sprite {Sprite} the sprite name
 // @param     $offset-x {Number} the horizontal offset of the sprite position
 // @param     $offset-y {Number} the vertical offset of the sprite position
-// @return    {List} the sprite position or nil
+// @return    {List} the sprite position or null
 @function styleguide-sprite-position($map, $sprite, $offset-x: 0, $offset-y: 0) {
-  @if not styleguide-check-sprite($map) { @return nil; }
+  @if not styleguide-check-sprite($map) { @return null; }
   @return sprite-position($map, $sprite, $offset-x, $offset-y);
 }
 
 // wrapper for sprite-url()
 // @function  styleguide-sprite-url
 // @param     $map {SpriteMap} the sprite map
-// @return    {String} the sprite URL or nil
+// @return    {String} the sprite URL or null
 @function styleguide-sprite-url($map) {
-  @if not styleguide-check-sprite($map) { @return nil; }
+  @if not styleguide-check-sprite($map) { @return null; }
   @return sprite-url($map);
 }
 
@@ -83,27 +83,27 @@ $REGISTRY_DO_ONCE: () !default;
 // @function  styleguide-sprite-file
 // @param     $map {SpriteMap} the sprite map
 // @param     $sprite {Sprite} the sprite name
-// @return    {ImageFile} the image or nil
+// @return    {ImageFile} the image or null
 @function styleguide-sprite-file($map, $sprite) {
-  @if not styleguide-check-sprite($map) { @return nil; }
+  @if not styleguide-check-sprite($map) { @return null; }
   @return sprite-file($map, $sprite);
 }
 
 // wrapper for image-width()
 // @function  styleguide-image-width
 // @param     $image {ImageFile} the image
-// @return    {Number} the width of the image or nil
+// @return    {Number} the width of the image or null
 @function styleguide-image-width($image) {
-  @if $image == nil { @return nil; }
+  @if is-null($image) { @return null; }
   @return image-width($image);
 }
 
 // wrapper for image-height()
 // @function  styleguide-image-height
 // @param     $image {ImageFile} the image
-// @return    {Number} the height of the image or nil
+// @return    {Number} the height of the image or null
 @function styleguide-image-height($image) {
-  @if $image == nil { @return nil; }
+  @if is-null($image) { @return null; }
   @return image-height($image);
 }
 

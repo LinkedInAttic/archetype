@@ -77,7 +77,7 @@
 // @param     $type {List} the glyph data
 // @return    {List} the parameters needed for glyph-icon()
 @function _styleguideGetAlertGlyph($type: $CONFIG_GLYPH_ALERT_NOTIFY) {
-  @return (nth($type, 1), nth($type, 2), nth($type, 3), before, '')
+  @return (nth($type, 1), nth($type, 2), nth($type, 3), before, '');
 }
 
 
@@ -97,7 +97,7 @@
       (yield      $CONFIG_COLOR_BORDER_ALERT_YIELD)
     ), $type);
   }
-  @if($color != nil and $CONFIG_DIM_GENERIC_BORDER != nil) {
+  @if not is-null($color) and not is-null($CONFIG_DIM_GENERIC_BORDER) {
     @return ((0 0 0 $CONFIG_DIM_GENERIC_BORDER $color), $CONFIG_SHADOW_ALERT);
   }
   @else {
@@ -124,19 +124,18 @@
 @function _styleguideGetTooltipTipBG($direction: south, $type: hovercard) {
   $dim: $type;
   @if type-of($type) == string {
-    $dim: associative((
-      hovercard   $CONFIG_DIM_HOVERCARD_TIP,
-      nil
+    $dim: map-get((
+      hovercard:   $CONFIG_DIM_HOVERCARD_TIP
     ), $type);
   }
   $a: nth($dim, 1);
   $b: nth-cyclic($dim, 2);
   // TODO - RTL support
-  @return associative((
-    north         (-$b 0),
-    south         ((-$b) (-($a+$b))),
-    east          ((-($a+$b)) (-$b)),
-    west          (0 (-$b))
+  @return map-get((
+    north:  (-$b 0),
+    south:  ((-$b) (-($a+$b))),
+    east:   ((-($a+$b)) (-$b)),
+    west:   (0 (-$b))
   ), $direction);
 }
 
@@ -146,9 +145,9 @@
 // @param     $size {String} the size of the loading spinner e.g. [small|medium|large]
 // @param     $type {String} the type of the loading spinner e.g. [static|dynamic]
 // @param     $context {Number} the index for the context type
-// @return    {List} background position of the image or nil
+// @return    {List} background position of the image or null
 @function _styleguideGetLoaderPosition($size: medium, $type: static, $context: 1) {
-  $img: nth-cyclic(associative(associative($CONFIG_LOADERS, $size), $type), $context);
+  $img: nth-cyclic(map-get(map-get($CONFIG_LOADERS, $size), $type), $context);
   @return styleguide-sprite-position($CONFIG_SPRITE_LOADERS, $img);
 }
 
@@ -161,12 +160,16 @@
 // @param     $context {Number} the index for the context type
 // @return    {Number} the width/height of the loading spinner
 @function _styleguideGetLoaderDimension($size: medium, $type: static, $dim: width, $context: 1) {
-  $img: nth-cyclic(associative(associative($CONFIG_LOADERS, $size), $type), $context);
+  $img: nth-cyclic(map-get(map-get($CONFIG_LOADERS, $size), $type), $context);
+  @debug $img;
   $sprite-file: styleguide-sprite-file($CONFIG_SPRITE_LOADERS, $img);
+  @debug $sprite-file;
   @if $dim == width {
+    @debug styleguide-image-width($sprite-file);
     @return styleguide-image-width($sprite-file);
   }
   @else {
+    @debug styleguide-image-height($sprite-file);
     @return styleguide-image-height($sprite-file);
   }
   @return 0;
@@ -179,16 +182,16 @@
 // @param     $context {Number} the index for the context type
 // @return    {String} the animation value
 @function _styleguideGetLoaderAnimation($size: medium, $context: 1) {
-  $values: associative($CONFIG_LOADERS, $size);
+  $values: map-get($CONFIG_LOADERS, $size);
   $anim: ($CONFIG_KEYFRAME_LOADERS);
-  $duration:    nth-cyclic(associative($values, duration, $strict: true), $context);
-  $delay:       nth-cyclic(associative($values, delay, $strict: true), $context);
-  $steps:       nth-cyclic(associative($values, steps, $strict: true), $context);
-  $iterations:  nth-cyclic(associative($values, iterations, $strict: true), $context);
-  @if $duration != nil   { $anim: append($anim, $duration); }
-  @if $delay != nil      { $anim: append($anim, $delay); }
-  @if $steps != nil      { $anim: append($anim, steps($steps, end)); }
-  @if $iterations != nil { $anim: append($anim, $iterations); }
+  $duration:    nth-cyclic(map-get($values, duration), $context);
+  $delay:       nth-cyclic(map-get($values, delay), $context);
+  $steps:       nth-cyclic(map-get($values, steps), $context);
+  $iterations:  nth-cyclic(map-get($values, iterations), $context);
+  @if not is-null($duration)    { $anim: append($anim, $duration); }
+  @if not is-null($delay)       { $anim: append($anim, $delay); }
+  @if not is-null($steps)       { $anim: append($anim, steps($steps, end)); }
+  @if not is-null($iterations)  { $anim: append($anim, $iterations); }
   $position-keyframe-name: #{$CONFIG_KEYFRAME_LOADERS}-position-#{$size}-#{$context};
   $anim: unquote("#{$anim}, #{$position-keyframe-name} 0.1ms step-end infinite");
   @return $anim;
@@ -201,9 +204,9 @@
 // @param     $context {Number} the index for the context type
 // @return    {String} the CSS expression styles
 @function _styleguideGetLoaderExpression($size: medium, $context: 1) {
-  $img: nth-cyclic(associative(associative($CONFIG_LOADERS, $size), static), $context);
+  $img: nth-cyclic(map-get(map-get($CONFIG_LOADERS, $size), static), $context);
   $bg: styleguide-sprite($CONFIG_SPRITE_LOADERS, $img) no-repeat;
-  $bg: if($bg == nil, none, $bg);
+  $bg: if(is-null($bg), none, $bg);
   $width: _styleguideGetLoaderDimension($size, static, width, $context);
   $height: _styleguideGetLoaderDimension($size, static, height, $context);
   $margin-top: $height / -2;

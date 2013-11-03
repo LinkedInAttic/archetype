@@ -9,7 +9,7 @@
 // @param     $property {String} the CSS property to output
 // @param     $value {*} the CSS value to output
 @mixin _outputStyle($property, $value: null) {
-  @if($value != null and $value != nil) {
+  @if not is-null($value) {
     @if($property == target-browser) {
       @include target-browser(nth($value,1), nth($value,2), nth($value,3));
     }
@@ -35,7 +35,7 @@
 // @param     $value {*} the CSS value to output
 @mixin output-style($property, $value: null) {
 
-  @if($property != null and $property != nil and length(-compass-list($value)) > 0 and first-value-of(-compass-list($value)) != nil and first-value-of(-compass-list($value)) != null and not index($CONFIG_DISABLED_CSS, $property)) {
+  @if( not is-null($property) and length(-compass-list($value)) > 0 and not is-null(first-value-of(-compass-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
     // check to see if we have a custom output styler (pre)
     @if check-for-custom-styler($property, $value, pre) {
@@ -352,7 +352,7 @@
 
 // abstract common issues and generate safe styles
 @mixin safe($property: null, $value: null) {
-  @if($property != null and $property != nil and $value != null and $value != nil) {
+  @if not is-null($property) and not is-null($value) {
     // os friendly font stacks
     @if($property == font-family) {
       $stack: map-get($CONFIG_SAFE_FONTS, $value);
@@ -366,7 +366,7 @@
             $family: null;
             // next, step through the list of lang safe fonts
             @each $item in $fonts {
-              @if($item != null and $item != nil) {
+              @if not is-null($item) {
                 $lang: nth($item, 1);
                 $font: nth($item, 2);
                 // check if the language matches or it's the default
