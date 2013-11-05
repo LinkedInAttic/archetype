@@ -17,11 +17,14 @@ module Archetype::SassExtensions::Styleguide
   SPECIAL     = %w(states selectors)
   STATES      = SPECIAL[0]
   DROPALL     = %w(all true)
+  MESSAGE_PREFIX = "[archetype:{origin}:{phase}] --- `"
+  MESSAGE_SUFFIX = "` ---"
   # these are unique CSS keys that can be exploited to provide fallback functionality by providing a second value
   # e.g color: red; color: rgba(255,0,0, 0.8);
   FALLBACKS   = %w(background background-image background-color border border-bottom border-bottom-color border-color border-left border-left-color border-right border-right-color border-top border-top-color clip color layer-background-color outline outline-color white-space extend)
   # these are mixins that make sense to run multiple times within a block
   MULTIMIXINS = %w(target-browser)
+  # NOTE: these are no longer used/needed if you're using the map structures
   ADDITIVES   = FALLBACKS + [DROP, INHERIT, STYLEGUIDE] + MULTIMIXINS
   @@archetype_styleguide_mutex = Mutex.new
   # :startdoc:
@@ -131,25 +134,26 @@ module Archetype::SassExtensions::Styleguide
   # output the CSS differences between components
   #
   # *Parameters*:
-  # - <tt>$original</tt> {String|List} the description of the original component
-  # - <tt>$other</tt> {String|List} the description of the new component
+  # - <tt>$original</tt> {String|List|Map} the description or map representation of the original component
+  # - <tt>$other</tt> {String|List|Map} the description or map representation of the new component
   # - <tt>$theme</tt> {String} the theme to use
   # *Returns*:
   # - {List} a key-value paired list of styles
   #
-  def styleguide_diff(original, other, theme = nil)
+  def styleguide_diff(original, other)
     @@archetype_styleguide_mutex.synchronize do
-      original = helpers.data_to_hash(original)
-      other = helpers.data_to_hash(other)
+      # normalize our input (for back-compat)
+      original = normalize_styleguide_definition(original)
+      other = normalize_styleguide_definition(other)
+      # compute the difference
       diff = original.diff(other)
+      # convert the individual messages in a comparison
+      original_message = helpers.get_meta_message(original).sub(MESSAGE_PREFIX, '').sub(MESSAGE_SUFFIX, '')
+      other_message = helpers.get_meta_message(other).sub(MESSAGE_PREFIX, '').sub(MESSAGE_SUFFIX, '')
+      diff = helpers.add_meta_message(diff, "#{MESSAGE_PREFIX}#{original_message}` vs `#{other_message}#{MESSAGE_SUFFIX}")
+      # and return it as a map
       return helpers.hash_to_map(diff)
     end
-  end
-
-  def component_registration_setup(type = nil)
-    method = (type.nil?) ? :enable : :disable
-    Archetype::Patches::Maps.method(method).call
-    return Sass::Script::Bool.new(true)
   end
 
 private
@@ -285,7 +289,7 @@ private
       # this lets us define special states and elements
       SPECIAL.each do |special_key|
         special = out[special_key] || Archetype::Hash.new
-        if special == 'nil'
+        if special.is_a?(Sass::Script::Value::Null)
           out[special_key] = Archetype::Hash.new
         else
           tmp = Archetype::Hash.new
@@ -375,8 +379,11 @@ private
       value.delete(DROP) if not is_special
       value = tmp.rmerge(value)
     end
-    value.each do |key|
-      value[key] = resolve_drops(value[key], obj[key], key, SPECIAL.include?(key)) if not value[key].nil?
+    # suppress warnings from hashery (warning: multiple values for a block parameter (2 for 1))
+    silence_warnings do
+      value.each do |key|
+        value[key] = resolve_drops(value[key], obj[key], key, SPECIAL.include?(key)) if not value[key].nil?
+      end
     end
     return value
   end
@@ -397,7 +404,7 @@ private
         tmp[key][DROP] = obj[key].keys
       end
     else
-      tmp[key] = 'nil'
+      tmp[key] = Sass::Script::Value::Null.new
     end
   end
 
@@ -476,9 +483,18 @@ private
   #
   def get_styles(description, theme = nil, state = nil)
     styles = Archetype::Hash.new
+
+    all_states = state.nil? || state.is_a?(Sass::Script::Value::Null) || (state == Sass::Script::Value::Bool.new(false))
+
+    # debug message
+    message = []
+    message_extras = []
+
+    # for each description, extract the associated styles
     description.to_a.each do |sentence|
       # if we have a hash, it denotes multiple values, so we need to convert this back to an array and recurse
-      return get_styles(helpers.meta_to_array(sentence)) if sentence.is_a?(Hash) or sentence.is_a?(Sass::Script::Value::Map)
+      return get_styles(helpers.meta_to_array(sentence)) if helpers.is_value(sentence, :hashy)
+      message << sentence
       # get the grammar from the sentence
       id, modifiers, token = grammar(sentence, theme, state)
       if id
@@ -498,8 +514,16 @@ private
         helpers.logger.record(:warning, "[archetype:styleguide:missing_identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. please specify one of: #{modifiers.sort.join(', ')}")
       end
     end
+
+    message = message.join(', ')
+    message_extras << "theme: #{theme}" if not theme.nil? and not [environment.var('CONFIG_THEME'), 'archetype'].include?(theme)
+    message_extras << "state: #{state}" if not all_states
+    if not message_extras.empty?
+      message << " (#{message_extras.join(', ')})"
+    end
+
     # now that we've collected all of our styles, if we requested a single state, merge that state upstream
-    if not (state.nil? or state.is_a?(Sass::Script::Value::Null) or state == Sass::Script::Value::Bool.new(false) or styles[STATES].empty?)
+    if not (all_states or styles[STATES].nil? or styles[STATES].empty?)
       state = helpers.to_str(state)
       state = styles[STATES][state]
       # remove any nested/special keys
@@ -508,18 +532,18 @@ private
       end
       styles = styles.merge(state) if not (state.nil? or state.empty?)
     end
-    return styles
+
+    return helpers.add_meta_message(styles, "#{MESSAGE_PREFIX}#{message}#{MESSAGE_SUFFIX}")
   end
 
   #
   # check whether or not a component (or a component extension) has already been defined
   #
   # *Parameters*:
-  # - <tt>$id</tt> {String} the component identifier
-  # - <tt>$data</tt> {List} the component data object
-  # - <tt>$theme</tt> {String} the theme to insert the component into
-  # - <tt>$extension</tt> {String} the name of the extension
-  # - <tt>$force</tt> {Boolean} if true, forcibly extend the component
+  # - <tt>id</tt> {String} the component identifier
+  # - <tt>theme</tt> {String} the theme to insert the component into
+  # - <tt>extension</tt> {String} the name of the extension
+  # - <tt>force</tt> {Boolean} if true, forcibly extend the component
   # *Returns*:
   # - {Boolean} whether or not the component/extension exists
   #
@@ -530,5 +554,33 @@ private
     # determine the status of the component
     status = (extension.nil?) ? (not theme[:components][id].nil?) : theme[:extensions].include?(extension)
     return (status and not force and Compass.configuration.memoize)
+  end
+
+  #
+  # normalize the styleguide definition into a hash representative of the definition
+  #
+  # *Parameters*:
+  # - <tt>definition</tt> {String|List|Hash|Map} the styleguide definition
+  # *Returns*:
+  # - {Hash} the normalized hash representing the styleguide definition
+  #
+  def normalize_styleguide_definition(definition)
+    # if it's not a map, we got a description, which we need to convert
+    definition = get_styles([definition], nil, nil) if not definition.is_a?(Sass::Script::Value::Map)
+     # now convert the map to a hash if needed
+    definition = helpers.data_to_hash(definition) if not definition.is_a?(Hash)
+    return definition
+  end
+
+  #
+  # silence_warnings method borrowed from Rails
+  #  Sets $VERBOSE to nil for the duration of the block and back to its original value afterwards.
+  #  @link http://api.rubyonrails.org/classes/Kernel.html#method-i-silence_warnings
+  #
+  def silence_warnings
+    verbose, $VERBOSE = $VERBOSE, nil
+    yield
+  ensure
+    $VERBOSE = verbose
   end
 end

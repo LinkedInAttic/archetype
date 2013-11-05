@@ -147,69 +147,6 @@
   background-image: -webkit-linear-gradient(top, #444444, #111111);
   background-image: linear-gradient(to bottom, #444444, #111111);
 }
-.button.state-hover {
-  /* [archetype:styleguide:begin] --- `button (state: hover)` --- */
-  font-weight: bold;
-  border-width: 1px;
-  border-style: solid;
-  cursor: pointer;
-  margin: 0;
-  overflow: visible;
-  text-decoration: none !important;
-  text-align: center;
-  width: auto;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
-  -moz-border-radius: 3px;
-  -ms-border-radius: 3px;
-  -o-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  border-radius: 3px;
-  padding: 0 13px;
-  height: 31px;
-  line-height: 29px;
-  -moz-box-sizing: border-box;
-  -ms-box-sizing: border-box;
-  -o-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  font-size: 13px;
-  color: white;
-  background-color: #0055cc;
-  border-color: #1b5480;
-  *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FF0066CC', endColorstr='#FF0033CC');
-  background-image: -moz-linear-gradient(top, #0066cc, #0033cc);
-  background-image: -o-linear-gradient(top, #0066cc, #0033cc);
-  background-image: -webkit-linear-gradient(top, #0066cc, #0033cc);
-  background-image: linear-gradient(to bottom, #0066cc, #0033cc);
-  white-space: nowrap;
-  display: -moz-inline-stack;
-  display: inline-block;
-  vertical-align: middle;
-  *vertical-align: middle;
-  *zoom: 1;
-  *display: inline;
-  -moz-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-  -ms-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-  -o-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-  -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
-  /* [archetype:styleguide:end] --- `button (state: hover)` --- */
-}
-.button.state-hover.secondary {
-  /* [archetype:styleguide-diff:begin] --- `button (state: hover)` vs `secondary button (state: hover)` --- */
-  text-shadow: 0 -1px 0 rgba(255, 255, 255, 0.25);
-  color: #333333;
-  background-color: #e6e6e6;
-  border-color: #aaaaaa;
-  *zoom: 1;
-  filter: progid:DXImageTransform.Microsoft.gradient(gradientType=0, startColorstr='#FFF5F5F5', endColorstr='#FFE4E4E4');
-  background-image: -moz-linear-gradient(top, #f5f5f5, #e4e4e4);
-  background-image: -o-linear-gradient(top, #f5f5f5, #e4e4e4);
-  background-image: -webkit-linear-gradient(top, #f5f5f5, #e4e4e4);
-  background-image: linear-gradient(to bottom, #f5f5f5, #e4e4e4);
-  /* [archetype:styleguide-diff:end] --- `button (state: hover)` vs `secondary button (state: hover)` --- */
-}
 
 .text {
   /* [archetype:styleguide:begin] --- `copy` --- */

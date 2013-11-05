@@ -93,9 +93,4 @@ $a-blackhole: styleguide-add-component(dropping-styles-test-back-compat, (), (
     /* should only contain color:purple */
     @include styleguide(dropped3 dropping-styles-test-back-compat);
   }
-  // TODO fix this guy: drops nested multiple levels deep don't resolve yet :(
-  //&.dropped4 {
-  //  /* should contain color:purple, :hover, but no `.test` selector */
-  //  @include styleguide(dropped4 dropping-styles-test-back-compat);
-  //}
 }

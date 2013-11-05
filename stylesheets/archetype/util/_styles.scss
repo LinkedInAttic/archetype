@@ -8,8 +8,8 @@
 // @private
 // @param     $property {String} the CSS property to output
 // @param     $value {*} the CSS value to output
-@mixin _outputStyle($property, $value: nil) {
-  @if($value != nil) {
+@mixin _outputStyle($property, $value: null) {
+  @if not is-null($value) {
     @if($property == target-browser) {
       @include target-browser(nth($value,1), nth($value,2), nth($value,3));
     }
@@ -25,16 +25,20 @@
   }
 }
 
+@function check-for-custom-styler($property, $value, $method: pre) {
+  @return mixin-exists('custom-output-styler') and function-exits('has-custom-output-styler') and has-custom-output-styler($property, $value, $method);
+}
+
 // output a property or augment it to use a mixin
 // @mixin     output-style
 // @param     $property {String} the CSS property to output
 // @param     $value {*} the CSS value to output
-@mixin output-style($property, $value: nil) {
+@mixin output-style($property, $value: null) {
 
-  @if($property != nil and length(-compass-list($value)) > 0 and first-value-of(-compass-list($value)) != nil and not index($CONFIG_DISABLED_CSS, $property)) {
+  @if( not is-null($property) and length(-compass-list($value)) > 0 and not is-null(first-value-of(-compass-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
     // check to see if we have a custom output styler (pre)
-    @if has-custom-output-styler($property, $value, pre) == true {
+    @if check-for-custom-styler($property, $value, pre) {
       @include custom-output-styler($property, $value, $method: pre);
     }
     // border-radius
@@ -154,7 +158,7 @@
       }
     }
     // check to see if we have a custom output styler (post)
-    @else if has-custom-output-styler($property, $value, post) == true {
+    @else if check-for-custom-styler($property, $value, post) {
       @include custom-output-styler($property, $value, $method: post);
     }
     // otherwise just use a key-value pair
@@ -193,7 +197,7 @@
 // @param     $map {Map} a of styles
 // @param     $states {Boolean|List} if true, output all states; if false, output no states; if a list, output only the states in the list
 // @param     $exclude {List} a list of styles to exclude from output
-@mixin to-styles($map: (), $states: true, $selectors: true, $exclude: ()) {
+@mixin to-styles($map: (), $states: true, $selectors: true, $exclude: (), $meta: ()) {
   @if $map {
     $exclude: -compass-list($exclude);
     $placeholder: (
@@ -202,6 +206,10 @@
       selectors:  $selectors,
       exclude:    $exclude
     );
+
+    $message: meta-message($map, map-merge($meta, (phase: begin, origin: $archetype-origin-function or styles)));
+    @if $message { /* #{$message} */ }
+
     $placeholder: unquote("%#{tokenize($placeholder)}");
     // register a placeholder if needed
     @include archetype-smart-content($placeholder) {
@@ -211,7 +219,7 @@
           $values: map-get($value, values);
         }
         @each $value in $values {
-          @if(not index($exclude, $property)) {
+          @if not (index($exclude, $property) or $property == '-archetype-meta') {
             // deal with the states
             @if($property == states and $states != false and length($value) > 0) {
               @each $state, $val in $value {
@@ -271,6 +279,9 @@
         }
       }
     }
+
+    $message: meta-message($map, map-merge($meta, (phase: end, origin: $archetype-origin-function or styles)));
+    @if $message { /* #{$message} */ }
   }
 }
 
@@ -340,22 +351,22 @@
 }
 
 // abstract common issues and generate safe styles
-@mixin safe($property: nil, $value: nil) {
-  @if($property != nil and $value != nil) {
+@mixin safe($property: null, $value: null) {
+  @if not is-null($property) and not is-null($value) {
     // os friendly font stacks
     @if($property == font-family) {
-      $stack: associative($CONFIG_SAFE_FONTS, $value, $strict: true);
-      @if($stack != nil and length($stack) > 0) {
+      $stack: map-get($CONFIG_SAFE_FONTS, $value);
+      @if($stack and length($stack) > 0) {
         // first, step through the list of os safe fonts
         @each $collection in $stack {
           @if(length($collection) > 1) {
-            $default: nil;
+            $default: null;
             $os: nth($collection, 1);
             $fonts: nth($collection, 2);
-            $family: nil;
+            $family: null;
             // next, step through the list of lang safe fonts
             @each $item in $fonts {
-              @if($item != nil) {
+              @if not is-null($item) {
                 $lang: nth($item, 1);
                 $font: nth($item, 2);
                 // check if the language matches or it's the default
@@ -373,7 +384,7 @@
             @include target-os($os, font-family, $family);
           }
         }
-        $value: nil;
+        $value: null;
       }
     }
     // text-transform: uppercase isn't friendly to turkish
@@ -381,18 +392,18 @@
       // TODO - more investigation, this may affect other locales as well
       // @link http://www.w3.org/International/tests/html-css/text-transform/results-text-transform
       // @link https://developer.mozilla.org/en/CSS/text-transform
-      $value: nil;
+      $value: null;
     }
     @else if($property == font-variant and $value == small-caps and lang(tr_TR)) {
       // TODO - more investigation, this may affect other locales as well
       // @link https://developer.mozilla.org/en/CSS/font-variant
-      $value: nil;
+      $value: null;
     }
     // italics aren't pretty in CJK
     @else if($property == font-style and $value == italic and lang(CJK)) {
-      $value: nil;
+      $value: null;
     }
-    // if $value was set to `nil`, this does nothing
+    // if $value was set to `null`, this does nothing
     @include output-style($property, $value);
   }
 }
@@ -400,7 +411,7 @@
 // web-safe font stacks, if no safe fonts are found, use the raw `$family` as output
 // @mixin     font-family
 // @param     $family {String} the font stack to output
-@mixin font-family($family: nil) {
+@mixin font-family($family: null) {
   @include safe(font-family, $family);
 }
 
@@ -419,7 +430,7 @@
 // safely use font-style without localization issues
 // @mixin     font-style
 // @param     $style {String} the style
-@mixin font-style($style: nil) {
+@mixin font-style($style: null) {
   @include safe(font-style, $style);
 }
 

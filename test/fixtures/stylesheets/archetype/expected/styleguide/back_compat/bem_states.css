@@ -1,9 +1,9 @@
 /* BEM states off */
 .bem-state-test-back-compat-false {
-  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:begin] --- `bem-state-selector-styleguide-test-back-compat` --- */
   display: block;
   color: red;
-  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:end] --- `bem-state-selector-styleguide-test-back-compat` --- */
 }
 .bem-state-test-back-compat-false.hover, .bem-state-test-back-compat-false:hover, .bem-state-test-back-compat-false.focus, .bem-state-test-back-compat-false:focus {
   color: red;
@@ -23,10 +23,10 @@
 
 /* BEM states on */
 .bem-state-test-back-compat-true {
-  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:begin] --- `bem-state-selector-styleguide-test-back-compat` --- */
   display: block;
   color: red;
-  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:end] --- `bem-state-selector-styleguide-test-back-compat` --- */
 }
 .bem-state-test-back-compat-true.hover, .bem-state-test-back-compat-true:hover, .bem-state-test-back-compat-true.focus, .bem-state-test-back-compat-true:focus {
   color: red;
@@ -64,10 +64,10 @@
 
 /* BEM states ONLY */
 .bem-state-test-back-compat-only {
-  /* [archetype:styleguide:begin] --- bem-state-selector-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:begin] --- `bem-state-selector-styleguide-test-back-compat` --- */
   display: block;
   color: red;
-  /* [archetype:styleguide:end]   --- bem-state-selector-styleguide-test-back-compat --- */
+  /* [archetype:styleguide:end] --- `bem-state-selector-styleguide-test-back-compat` --- */
 }
 .bem-state-test-back-compat-only--hover {
   color: red;

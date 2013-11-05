@@ -7,9 +7,9 @@
 // @param     $direction {String} [horizontal|vertical] spacing
 // @param     $abuse {Boolean} @see _getUnit
 // @return    {String} the calculated spacing
-@function _spacing($unit: nil, $direction: horizontal, $abuse: false) {
-  @if $unit == nil {
-    @return nil;
+@function _spacing($unit: null, $direction: horizontal, $abuse: false) {
+  @if is-null($unit) {
+    @return null;
   }
   $unit: _getUnit($unit, $abuse);
   $spacing: if($direction == vertical, $CONFIG_VERTICAL_SPACING, $CONFIG_HORIZONTAL_SPACING);
@@ -41,7 +41,7 @@
 // @param     $bottom {Number} the units to offset from the bottom
 // @param     $method {String} [margin|padding] offset method
 // @param     $abuse {Boolean} @see _getUnit
-@mixin vertical-spacing($list: false, $top: nil, $bottom: nil, $method: false, $abuse: false) {
+@mixin vertical-spacing($list: false, $top: null, $bottom: null, $method: false, $abuse: false) {
   $list: get-collection($list, ($top $bottom), $min: 2);
   @include _spacing($list, vertical, $method: $method, $abuse: $abuse);
 }
@@ -52,7 +52,7 @@
 // @param     $right {Number} the units to offset from the right
 // @param     $method {String} [margin|padding] offset method
 // @param     $abuse {Boolean} @see _getUnit
-@mixin horizontal-spacing($list: false, $left: nil, $right: nil, $method: false, $abuse: false) {
+@mixin horizontal-spacing($list: false, $left: null, $right: null, $method: false, $abuse: false) {
   $list: get-collection($list, ($left $right), $min: 2);
   @include _spacing($list, $method: $method, $abuse: $abuse);
 }

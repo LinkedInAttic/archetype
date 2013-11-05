@@ -42,10 +42,62 @@ $RESET_INIT: false !default;
 @mixin base-glyph() {
   // the font-face mixin will likely change in a future version, keep an eye on this
   // https://github.com/chriseppstein/compass/issues/867
-  @include font-face($CONFIG_GLYPHS_NAME, $CONFIG_GLYPHS_FILES, $CONFIG_GLYPHS_EOT, $CONFIG_GLYPHS_WEIGHT, $CONFIG_GLYPHS_STYLE);
-  // output a second @font-face set with a versioned family name
-  // this will help avoid collisions when multi-app CSS is loaded on a single page
-  @include font-face('#{$CONFIG_GLYPHS_NAME}-#{$CONFIG_GLYPHS_VERSION}', $CONFIG_GLYPHS_FILES, $CONFIG_GLYPHS_EOT, $CONFIG_GLYPHS_WEIGHT, $CONFIG_GLYPHS_STYLE);
+
+  @each $key, $library in $CONFIG_GLYPHS_LIBRARIES {
+    @if $key != default {
+      $library: map-merge(map-get($CONFIG_GLYPHS_LIBRARIES, default), $library);
+    }
+    $name_raw:  map-get($library, name);
+    $files:     map-get($library, files);
+    $weight:    map-get($library, weight);
+    $style:     map-get($library, style);
+    $version:   map-get($library, version);
+    $path:      map-get($library, path);
+    $svg-id:    map-get($library, svg-id) or $name_raw;
+    $grids:     -compass-list(map-get($library, grids));
+
+    $output-fallback: $CONFIG_GLYPHS_OUTPUT_FALLBACK;
+
+    $subs: map-merge($library, (
+      path: str-substitute($path, (version: $version)),
+      svg-id: $svg-id
+    ));
+
+    // files
+    $files_eot_raw: str-substitute(map-get($files, eot), $library);
+    $files_std_raw: map-get($files, std);
+
+    @each $grid in $grids {
+      $name: $name_raw;
+      $subs: map-merge($subs, (grid: $grid));
+
+      $files_eot: if($files_eot_raw, quote(str-substitute($files_eot_raw, $subs)), false);
+      $files_std: ();
+      @each $file in $files_std_raw {
+        $file: quote(str-substitute($file, $subs));
+        $files_std: append($files_std, $file);
+      }
+
+      // if we have multiple grids...
+      @if $grid {
+        $name: "#{$name}_#{$grid}";
+        // output the fallback @font-face
+        @if $output-fallback {
+          @include font-face($name_raw, font-files($files_std...), $files_eot, $weight or $CONFIG_GLYPHS_WEIGHT, $style or $CONFIG_GLYPHS_STYLE);
+          @include font-face('#{$name_raw}-#{$version}', font-files($files_std...), $files_eot, $weight or $CONFIG_GLYPHS_WEIGHT, $style or $CONFIG_GLYPHS_STYLE);
+        }
+      }
+      @if $output-fallback or not $version {
+        @include font-face($name, font-files($files_std...), $files_eot, $weight or $CONFIG_GLYPHS_WEIGHT, $style or $CONFIG_GLYPHS_STYLE);
+      }
+      @if $version {
+        // output the @font-face set with a versioned family name
+        // this will help avoid collisions when multi-app CSS is loaded on a single page
+        @include font-face('#{$name}-#{$version}', font-files($files_std...), $files_eot, $weight or $CONFIG_GLYPHS_WEIGHT, $style or $CONFIG_GLYPHS_STYLE);
+      }
+      $output-fallback: false;
+    }
+  }
 }
 
 // auto invoke base reset

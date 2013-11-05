@@ -1,9 +1,9 @@
 .test {
-  /* [archetype:styleguide:begin] --- map-structure-test --- */
+  /* [archetype:styleguide:begin] --- `map-structure-test` --- */
   display: block;
   color: red;
   color: rgba(255, 0, 0, 0.8);
-  /* [archetype:styleguide:end]   --- map-structure-test --- */
+  /* [archetype:styleguide:end] --- `map-structure-test` --- */
 }
 .test.test {
   color: green;
@@ -13,10 +13,10 @@
 }
 
 .test2 {
-  /* [archetype:styleguide:begin] --- map-structure-test in something --- */
+  /* [archetype:styleguide:begin] --- `map-structure-test in something` --- */
   display: block;
   color: yellow;
-  /* [archetype:styleguide:end]   --- map-structure-test in something --- */
+  /* [archetype:styleguide:end] --- `map-structure-test in something` --- */
 }
 .test2.test {
   color: green;

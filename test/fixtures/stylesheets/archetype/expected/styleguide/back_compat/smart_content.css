@@ -1,6 +1,6 @@
 .test2a {
-  /* [archetype:styleguide:begin] --- small copy --- */
-  /* [archetype:styleguide:end]   --- small copy --- */
+  /* [archetype:styleguide:begin] --- `small copy` --- */
+  /* [archetype:styleguide:end] --- `small copy` --- */
 }
 .test2a, .test2b, .test2c {
   font-size: 12px;
@@ -10,18 +10,18 @@
 }
 
 .test2b {
-  /* [archetype:styleguide:begin] --- small copy --- */
-  /* [archetype:styleguide:end]   --- small copy --- */
+  /* [archetype:styleguide:begin] --- `small copy` --- */
+  /* [archetype:styleguide:end] --- `small copy` --- */
 }
 
 .test2c {
-  /* [archetype:styleguide:begin] --- small copy --- */
-  /* [archetype:styleguide:end]   --- small copy --- */
+  /* [archetype:styleguide:begin] --- `small copy` --- */
+  /* [archetype:styleguide:end] --- `small copy` --- */
 }
 
 .test2d {
-  /* [archetype:styleguide:begin] --- small muted copy --- */
-  /* [archetype:styleguide:end]   --- small muted copy --- */
+  /* [archetype:styleguide:begin] --- `small muted copy` --- */
+  /* [archetype:styleguide:end] --- `small muted copy` --- */
 }
 .test2d {
   font-size: 12px;

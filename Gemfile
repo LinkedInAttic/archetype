@@ -10,4 +10,5 @@ unless ENV["CI"]
   gem 'sassdoc'
   gem 'rdoc'
   gem 'colorize'
+  gem 'perftools.rb'
 end

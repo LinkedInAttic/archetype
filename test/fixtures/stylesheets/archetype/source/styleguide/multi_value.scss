@@ -1,7 +1,6 @@
 @import "test_harness";
 
 @if should-register-component(multi-value-styleguide-test) {
-$a-blackhole: component-registration-setup() !global;
 $a-blackhole: styleguide-add-component(multi-value-styleguide-test, (), (
   default: (
     color:          gray,
@@ -13,7 +12,6 @@ $a-blackhole: styleguide-add-component(multi-value-styleguide-test, (), (
     target-browser: (firefox, color, pink)
   )
 )) !global;
-$a-blackhole: component-registration-setup(teardown) !global;
 }
 
 .multi-value-styleguide-test {

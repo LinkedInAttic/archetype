@@ -11,12 +11,10 @@
   $definition: compact($is, $is-2, $is-3, $is-4, $is-5, $is-6, $is-7, $is-8, $is-9, $is-10);
   @if length($definition) > 0 {
     $styles: _styleguide($definition, $state, $theme);
-    // output a debug message
-    /* [archetype:styleguide:begin] --- #{$definition} --- */
-    // generate actual styles
+    // output the styles
+    $archetype-origin-function: styleguide !global;
     @include to-styles($styles, $exclude: $exclude);
-    // more debugging
-    /* [archetype:styleguide:end]   --- #{$definition} --- */
+    $archetype-origin-function: null !global;
   }
 }
 
@@ -40,12 +38,10 @@
 @mixin styleguide-diff($original, $other, $exclude: ()) {
   $diff: styleguide-diff($original, $other);
   @if length($diff) > 0 {
-    // output a debug message
-    /* [archetype:styleguide:diff:begin] --- --- */
-    // generate actual styles
-    @include to-styles($diff, $exclude: $exclude);
-    // more debugging
-    /* [archetype:styleguide:diff:end]   --- --- */
+    // output the styles
+    $archetype-origin-function: styleguide-diff !global;
+    @include to-styles($diff, $exclude: $exclude, $meta: (origin: styleguide-diff));
+    $archetype-origin-function: null !global;
   }
 }
 

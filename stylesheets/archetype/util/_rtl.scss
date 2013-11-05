@@ -8,11 +8,11 @@
 // @return    {Boolean|List|String} the augmented value
 @function rtl($value: false, $method: false, $force: false) {
   $dir: if($force, $force, reading-direction());
-  @if($value == false) {
+  @if $value == false {
     @return $dir == rtl;
   }
-  @if($value == nil) {
-    @return nil;
+  @if is-null($value) {
+    @return null;
   }
   @if $dir == rtl {
     // if it's a left/right value, flip it (all cases)

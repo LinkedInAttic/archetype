@@ -3,7 +3,6 @@
 @import "test_harness";
 
 @if should-register-component(fallback-styleguide-test) {
-$a-blackhole: component-registration-setup() !global;
 $a-blackhole: styleguide-add-component(fallback-styleguide-test, (), (
   default: (
     background:      (transparent url(/some/img.png) repeat),
@@ -16,7 +15,6 @@ $a-blackhole: styleguide-add-component(fallback-styleguide-test, (), (
     something:       valid
   )
 )) !global;
-$a-blackhole: component-registration-setup(teardown) !global;
 }
 
 .fallback-styleguide-test {

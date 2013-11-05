@@ -90,5 +90,5 @@ module Archetype::Patches::Maps
   end
 
   private
-  @enabled ||= false
+  @enabled ||= true
 end

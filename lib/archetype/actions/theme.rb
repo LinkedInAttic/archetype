@@ -1,4 +1,3 @@
-require 'fileutils'
 description = "Generate a new Archetype theme"
 
 if @description.nil?

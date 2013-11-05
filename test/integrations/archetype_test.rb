@@ -4,6 +4,7 @@ require 'compass'
 require 'compass/logger'
 require 'sass/plugin'
 require 'fileutils'
+require 'archetype'
 
 class ArchetypeTest < Test::Unit::TestCase
 
@@ -18,6 +19,7 @@ class ArchetypeTest < Test::Unit::TestCase
   end
 
   def test_archetype
+    Test::Profiler.start
     within_project('archetype') do |proj|
       each_css_file(proj.css_path) do |css_file|
         assert_no_errors css_file, 'archetype'
@@ -26,6 +28,7 @@ class ArchetypeTest < Test::Unit::TestCase
         assert_renders_correctly sass_file, :ignore_charset => true
       end
     end
+    Test::Profiler.stop
   end
 
 private

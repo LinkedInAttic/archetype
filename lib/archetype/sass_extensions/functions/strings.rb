@@ -26,6 +26,30 @@ module Archetype::SassExtensions::Strings
   Sass::Script::Functions.declare :str_replace, [:haystack, :needle, :replacement]
   Sass::Script::Functions.declare :str_replace, [:haystack, :needle, :replacement, :all]
 
+  #
+  # given a string and a map of key-values, replace any {key}'s with the associated value
+  #
+  # *Parameters*:
+  # - <tt>$str</tt> {String} the string to subsititute within
+  # - <tt>$subsitutions</tt> {Map} the map of key-value pairs to substitute
+  # *Returns*:
+  # - {String} the string with substituted values
+  #
+  def str_substitute(str, subsitutions = nil)
+    return Sass::Script::Value::String.new('') if str.is_a?(Sass::Script::Value::Null)
+    return str if subsitutions.nil?
+    subsitutions = subsitutions.to_h
+    str = helpers.to_str(str, ' ', :quotes)
+    # for each key-value pair...
+    subsitutions.each do |key, value|
+      # replace all instances of the placeholder `{key}` with the value
+      str = str.gsub("{#{key}}", helpers.to_str(value, ' ', :quotes))
+    end
+    Sass::Script::Value::String.new(str)
+  end
+  Sass::Script::Functions.declare :str_substitute, [:string]
+  Sass::Script::Functions.declare :str_substitute, [:string, :subsitutions]
+
 private
   def helpers
     @helpers ||= Archetype::Functions::Helpers
