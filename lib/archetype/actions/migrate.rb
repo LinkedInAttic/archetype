@@ -82,7 +82,7 @@ if @description.nil?
           when :all
             ''
           else
-            '.s[a|c]ss'
+            '.s[ac]ss'
           end
 
           Dir.glob(File.join(base, '**', "*#{ext}")) do |file|
