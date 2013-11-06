@@ -1,0 +1,9 @@
+@import "test_harness";
+
+.test {
+  @include fade-box();
+}
+
+.with-params {
+  @include fade-box($width: 100px, $height: 200px, $direction: left, $from: rgba(#012, 0.2), $to: rgba(#123, 1));
+}

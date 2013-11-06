@@ -1,9 +1,28 @@
 @import "test_harness";
 
-a {
-  @include font-family(serif);
+@mixin test {
+  .serif {
+    @include font-family(serif);
+  }
+
+  .sans-serif {
+    @include font-family(sans-serif);
+  }
+
+  .headline {
+    @include font-family(headline);
+  }
 }
 
-b {
-  @include font-family(sans-serif);
+@include test;
+
+$locales: en_US de_DE zh_TW zh_CN ar_AE ko_KR ;
+
+
+@each $locale in $locales {
+  .#{$locale} {
+    @include switch-locale($locale) {
+      @include test;
+    }
+  }
 }

@@ -2,7 +2,6 @@ require 'rake'
 
 unless ENV['CI']
   require 'colorize'
-  require 'fileutils'
 end
 
 @gemspec = 'archetype.gemspec'

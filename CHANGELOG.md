@@ -20,6 +20,9 @@
 - `glyph-icons` now supports multiple glyph libraries as well as multiple grid sizes via `$CONFIG_GLYPHS_LIBRARIES`
 - added `$CONFIG_GLYPHS_OUTPUT_FALLBACK` config
 - added `archetype migrate` command line action to test for migration/back-compat issues
+- improved locale functionality, including
+  - support for more complex formats. e.g. `sr_SP@Cyrillic`
+  - new methods to extract a piece of a locale: `locale-language`, `locale-territory`, `locale-modifier`
 
 ### Major Changes:
 

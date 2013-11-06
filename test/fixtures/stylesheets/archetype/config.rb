@@ -1,4 +1,5 @@
 require 'test/unit'
+require 'true'
 require 'archetype'
 
 project_type      = :stand_alone
@@ -11,6 +12,10 @@ http_images_path  = "/assets/images"
 http_fonts_path   = "/assets/fonts"
 line_comments     = false
 environment       = :production
+
+locale_aliases    = {
+  'cyrillic' => ['ru_RU', 'az_AZ', 'sr_SP', 'uz_UZ']
+}
 
 asset_cache_buster do |path, file|
   "busted=true"

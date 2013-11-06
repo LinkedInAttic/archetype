@@ -21,6 +21,10 @@ module Archetype
     Compass::Configuration.add_configuration_property(:locale, "the user locale") do
       'en_US'
     end
+    # locale_aliases
+    Compass::Configuration.add_configuration_property(:locale_aliases, "a mapping of locale name aliases") do
+      {}
+    end
     # reading direction (ltr|rtl)
     Compass::Configuration.add_configuration_property(:reading, "the user interface reading direction") do
       'ltr'
@@ -32,10 +36,6 @@ module Archetype
     # memoize
     Compass::Configuration.add_configuration_property(:memoize, "should the memoizer be used to improve compilation speed") do
       not (Compass.configuration.environment || :development).to_s.include?('dev')
-    end
-    # testing (for running unit tests)
-    Compass::Configuration.add_configuration_property(:testing, "is this a testing environment") do
-      ENV['CI']
     end
   end
 end

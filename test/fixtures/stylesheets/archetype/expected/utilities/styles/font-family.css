@@ -1,26 +1,204 @@
-a {
+@charset "UTF-8";
+.serif {
   /* [archetype:target-os:begin] --- default --- */
   font-family: Georgia, serif;
   /* [archetype:target-os:end]   --- default --- */
 }
 
-b {
+.sans-serif {
   /* [archetype:target-os:begin] --- default --- */
   font-family: sans-serif;
   /* [archetype:target-os:end]   --- default --- */
 }
-.os-win b {
+.os-win .sans-serif {
   /* [archetype:target-os:begin] --- win --- */
   font-family: Arial, sans-serif;
   /* [archetype:target-os:end]   --- win --- */
 }
-.os-mac b {
+.os-mac .sans-serif {
   /* [archetype:target-os:begin] --- mac --- */
   font-family: Helvetica, Arial, sans-serif;
   /* [archetype:target-os:end]   --- mac --- */
 }
-.os-linux b {
+.os-linux .sans-serif {
   /* [archetype:target-os:begin] --- linux --- */
   font-family: Helvetica, FreeSans, "Liberation Sans", Helmet, Arial, sans-serif;
   /* [archetype:target-os:end]   --- linux --- */
+}
+
+.headline {
+  /* [archetype:target-os:begin] --- default --- */
+  /* [archetype:target-os:end]   --- default --- */
+}
+
+.en_US .serif {
+  /* [archetype:target-os:begin] --- default --- */
+  font-family: Georgia, serif;
+  /* [archetype:target-os:end]   --- default --- */
+}
+.en_US .sans-serif {
+  /* [archetype:target-os:begin] --- default --- */
+  font-family: sans-serif;
+  /* [archetype:target-os:end]   --- default --- */
+}
+.os-win .en_US .sans-serif {
+  /* [archetype:target-os:begin] --- win --- */
+  font-family: Arial, sans-serif;
+  /* [archetype:target-os:end]   --- win --- */
+}
+.os-mac .en_US .sans-serif {
+  /* [archetype:target-os:begin] --- mac --- */
+  font-family: Helvetica, Arial, sans-serif;
+  /* [archetype:target-os:end]   --- mac --- */
+}
+.os-linux .en_US .sans-serif {
+  /* [archetype:target-os:begin] --- linux --- */
+  font-family: Helvetica, FreeSans, "Liberation Sans", Helmet, Arial, sans-serif;
+  /* [archetype:target-os:end]   --- linux --- */
+}
+.en_US .headline {
+  /* [archetype:target-os:begin] --- default --- */
+  /* [archetype:target-os:end]   --- default --- */
+}
+
+.de_DE .serif {
+  /* [archetype:target-os:begin] --- default --- */
+  font-family: Georgia, serif;
+  /* [archetype:target-os:end]   --- default --- */
+}
+.de_DE .sans-serif {
+  /* [archetype:target-os:begin] --- default --- */
+  font-family: sans-serif;
+  /* [archetype:target-os:end]   --- default --- */
+}
+.os-win .de_DE .sans-serif {
+  /* [archetype:target-os:begin] --- win --- */
+  font-family: Arial, sans-serif;
+  /* [archetype:target-os:end]   --- win --- */
+}
+.os-mac .de_DE .sans-serif {
+  /* [archetype:target-os:begin] --- mac --- */
+  font-family: Helvetica, Arial, sans-serif;
+  /* [archetype:target-os:end]   --- mac --- */
+}
+.os-linux .de_DE .sans-serif {
+  /* [archetype:target-os:begin] --- linux --- */
+  font-family: Helvetica, FreeSans, "Liberation Sans", Helmet, Arial, sans-serif;
+  /* [archetype:target-os:end]   --- linux --- */
+}
+.de_DE .headline {
+  /* [archetype:target-os:begin] --- default --- */
+  /* [archetype:target-os:end]   --- default --- */
+}
+
+.zh_TW .serif {
+  /* [archetype:target-os:begin] --- default --- */
+  /* [archetype:target-os:end]   --- default --- */
+}
+.zh_TW .sans-serif {
+  /* [archetype:target-os:begin] --- default --- */
+  font-family: SimSun, sans-serif;
+  /* [archetype:target-os:end]   --- default --- */
+}
+.os-win .zh_TW .sans-serif {
+  /* [archetype:target-os:begin] --- win --- */
+  font-family: Arial, sans-serif, "微軟正黑體", "Microsoft JhengHei", PMingLiu, "宋体", SimSun;
+  /* [archetype:target-os:end]   --- win --- */
+}
+.os-mac .zh_TW .sans-serif {
+  /* [archetype:target-os:begin] --- mac --- */
+  font-family: Helvetica, Arial, sans-serif, "黑體-繁", "Heiti TC", "儷黑Pro", "LiHei Pro", PMingLiu, "宋体", SimSun;
+  /* [archetype:target-os:end]   --- mac --- */
+}
+.os-linux .zh_TW .sans-serif {
+  /* [archetype:target-os:begin] --- linux --- */
+  font-family: Helvetica, FreeSans, "Liberation Sans", Helmet, Arial, sans-serif, PMingLiu, "宋体", SimSun;
+  /* [archetype:target-os:end]   --- linux --- */
+}
+.zh_TW .headline {
+  /* [archetype:target-os:begin] --- default --- */
+  /* [archetype:target-os:end]   --- default --- */
+}
+
+.zh_CN .serif {
+  /* [archetype:target-os:begin] --- default --- */
+  /* [archetype:target-os:end]   --- default --- */
+}
+.zh_CN .sans-serif {
+  /* [archetype:target-os:begin] --- default --- */
+  font-family: SimSun, sans-serif;
+  /* [archetype:target-os:end]   --- default --- */
+}
+.os-win .zh_CN .sans-serif {
+  /* [archetype:target-os:begin] --- win --- */
+  font-family: Arial, sans-serif, "华文细黑", "STHeiti Light", "微软雅黑体", "Microsoft Yahei", "新宋体", NSimSun, "宋体", SimSun;
+  /* [archetype:target-os:end]   --- win --- */
+}
+.os-mac .zh_CN .sans-serif {
+  /* [archetype:target-os:begin] --- mac --- */
+  font-family: Helvetica, Arial, sans-serif, "黑体-简", "Heiti SC", "华文细黑", "STHeiti Light", "华文黑体", STHeiti;
+  /* [archetype:target-os:end]   --- mac --- */
+}
+.os-linux .zh_CN .sans-serif {
+  /* [archetype:target-os:begin] --- linux --- */
+  font-family: Helvetica, FreeSans, "Liberation Sans", Helmet, Arial, sans-serif, "新宋体", NSimSun, "宋体", SimSun;
+  /* [archetype:target-os:end]   --- linux --- */
+}
+.zh_CN .headline {
+  /* [archetype:target-os:begin] --- default --- */
+  /* [archetype:target-os:end]   --- default --- */
+}
+
+.ar_AE .serif {
+  /* [archetype:target-os:begin] --- default --- */
+  font-family: Georgia, serif;
+  /* [archetype:target-os:end]   --- default --- */
+}
+.ar_AE .sans-serif {
+  /* [archetype:target-os:begin] --- default --- */
+  font-family: Tahoma, Arial, "Times New Roman", sans-serif;
+  /* [archetype:target-os:end]   --- default --- */
+}
+.os-win .ar_AE .sans-serif {
+  /* [archetype:target-os:begin] --- win --- */
+  /* [archetype:target-os:end]   --- win --- */
+}
+.os-mac .ar_AE .sans-serif {
+  /* [archetype:target-os:begin] --- mac --- */
+  /* [archetype:target-os:end]   --- mac --- */
+}
+.os-linux .ar_AE .sans-serif {
+  /* [archetype:target-os:begin] --- linux --- */
+  /* [archetype:target-os:end]   --- linux --- */
+}
+.ar_AE .headline {
+  /* [archetype:target-os:begin] --- default --- */
+  font-family: "Droid Arabic Naskh";
+  /* [archetype:target-os:end]   --- default --- */
+}
+
+.ko_KR .serif {
+  /* [archetype:target-os:begin] --- default --- */
+  /* [archetype:target-os:end]   --- default --- */
+}
+.ko_KR .sans-serif {
+  /* [archetype:target-os:begin] --- default --- */
+  font-family: "Malgun Gothic", sans-serif;
+  /* [archetype:target-os:end]   --- default --- */
+}
+.os-win .ko_KR .sans-serif {
+  /* [archetype:target-os:begin] --- win --- */
+  /* [archetype:target-os:end]   --- win --- */
+}
+.os-mac .ko_KR .sans-serif {
+  /* [archetype:target-os:begin] --- mac --- */
+  /* [archetype:target-os:end]   --- mac --- */
+}
+.os-linux .ko_KR .sans-serif {
+  /* [archetype:target-os:begin] --- linux --- */
+  /* [archetype:target-os:end]   --- linux --- */
+}
+.ko_KR .headline {
+  /* [archetype:target-os:begin] --- default --- */
+  /* [archetype:target-os:end]   --- default --- */
 }

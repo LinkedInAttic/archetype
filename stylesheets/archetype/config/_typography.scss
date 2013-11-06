@@ -1,61 +1,56 @@
-// TODO - convert to a map
 // os/language safe font stacks
 // these are core font definitions, these will be extended with whatever is in $CONFIG_SAFE_FONTS
 $CORE_SAFE_FONTS: (
-  (sans-serif, (
-    (default, (
-      (default          (sans-serif)),
-      (ko_KR            ('Malgun Gothic', default)),
-      (zh_TW            (SimSun, default)),
-      (zh_CN            (SimSun, default)),
-      (ar_AE            (Tahoma, Arial, 'Times New Roman', default))
-    )),
-    (win, (
-      (default          (Arial, sans-serif)),
-      (ja_JP            (メイリオ, Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', default)),
-      (zh_TW            (default, '微軟正黑體', 'Microsoft JhengHei', PMingLiu, '宋体', SimSun)),
-      (zh_CN            (default, '华文细黑', 'STHeiti Light', '微软雅黑体', 'Microsoft Yahei', '新宋体', NSimSun, '宋体', SimSun)),
-      (ko_KR            nil),
-      (ar_AE            nil)
-    )),
-    (mac, (
-      (default          (Helvetica, Arial, sans-serif)),
-      (zh_TW            (default, '黑體-繁', 'Heiti TC', '儷黑Pro', 'LiHei Pro', PMingLiu, '宋体', SimSun)),
-      (zh_CN            (default, '黑体-简', 'Heiti SC', '华文细黑', 'STHeiti Light', '华文黑体', STHeiti)),
-      (ja_JP            ('Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'ＭＳ Ｐゴシック', 'MS PGothic', default)),
-      (ko_KR            nil),
-      (ar_AE            nil)
-    )),
-    (linux, (
-      (default          (Helvetica, FreeSans, 'Liberation Sans', Helmet, Arial, sans-serif)),
-      (zh_TW            (default, PMingLiu, '宋体', SimSun)),
-      (zh_CN            (default, '新宋体', NSimSun, '宋体', SimSun)),
-      (ja_JP            nil),
-      (ko_KR            nil),
-      (ar_AE            nil)
-    ))
-  )),
-  (serif, (
-    (default, (
-      (default          (Georgia, serif)),
-      (CJK              nil)  // dont use any serif fonts in CJK langs
-    )),
-    nil
-  )),
-  (monospace, (
-    (default, (
-      (default          (Menlo, Monaco, Consolas, 'Courier New', monospace)),
-      nil
-    )),
-    nil
-  )),
-  (headline, (
-    (default, (
-      (default          nil), // by default, dont style headlines differently
-      (ar_AE            ('Droid Arabic Naskh')) // TODO: need to include the webfont
-    )),
-    nil
-  ))
+  sans-serif: (
+    default: (
+      default:           (sans-serif),
+      ko_KR:             ('Malgun Gothic', default),
+      zh_TW:             (SimSun, default),
+      zh_CN:             (SimSun, default),
+      ar_AE:             (Tahoma, Arial, 'Times New Roman', default)
+    ),
+    win: (
+      default:           (Arial, sans-serif),
+      ja_JP:             (メイリオ, Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', default),
+      zh_TW:             (default, '微軟正黑體', 'Microsoft JhengHei', PMingLiu, '宋体', SimSun),
+      zh_CN:             (default, '华文细黑', 'STHeiti Light', '微软雅黑体', 'Microsoft Yahei', '新宋体', NSimSun, '宋体', SimSun),
+      ko_KR:             null,
+      ar_AE:             null
+    ),
+    mac: (
+      default:           (Helvetica, Arial, sans-serif),
+      zh_TW:             (default, '黑體-繁', 'Heiti TC', '儷黑Pro', 'LiHei Pro', PMingLiu, '宋体', SimSun),
+      zh_CN:             (default, '黑体-简', 'Heiti SC', '华文细黑', 'STHeiti Light', '华文黑体', STHeiti),
+      ja_JP:             ('Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'ＭＳ Ｐゴシック', 'MS PGothic', default),
+      ko_KR:             null,
+      ar_AE:             null
+    ),
+    linux: (
+      default:           (Helvetica, FreeSans, 'Liberation Sans', Helmet, Arial, sans-serif),
+      zh_TW:             (default, PMingLiu, '宋体', SimSun),
+      zh_CN:             (default, '新宋体', NSimSun, '宋体', SimSun),
+      ja_JP:             null,
+      ko_KR:             null,
+      ar_AE:             null
+    )
+  ),
+  serif: (
+    default: (
+      default:           (Georgia, serif),
+      CJK:               null  // dont use any serif fonts in CJK langs
+    )
+  ),
+  monospace: (
+    default: (
+      default:           (Menlo, Monaco, Consolas, 'Courier New', monospace)
+    )
+  ),
+  headline: (
+    default: (
+      default:           null, // by default, dont style headlines differently
+      ar_AE:             ('Droid Arabic Naskh') // TODO: need to include the webfont
+    )
+  )
 ); // note that this declaration isn't a `default`, but rather is enforced everytime. this can be modified (via extending $CONFIG_SAFE_FONTS)
 $CONFIG_SAFE_FONTS: () !default;
-$CONFIG_SAFE_FONTS: associative-merge($CORE_SAFE_FONTS, $CONFIG_SAFE_FONTS);
+$CONFIG_SAFE_FONTS: map-merge($CORE_SAFE_FONTS, $CONFIG_SAFE_FONTS);
