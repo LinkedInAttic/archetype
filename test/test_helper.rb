@@ -4,9 +4,9 @@ $:.unshift(lib_dir) unless $:.include?(lib_dir)
 test_dir = File.dirname(__FILE__)
 $:.unshift(test_dir) unless $:.include?(test_dir)
 
-require 'rubygems'
 require 'compass'
 require 'test/unit'
+require 'true'
 
 class String
   def name

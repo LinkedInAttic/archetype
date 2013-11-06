@@ -1,4 +1,5 @@
 require 'test/unit'
+require 'true'
 require 'archetype'
 
 project_type      = :stand_alone

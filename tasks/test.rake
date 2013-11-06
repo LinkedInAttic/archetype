@@ -1,6 +1,5 @@
 ## TESTS
 require 'rake/testtask'
-require 'fileutils'
 
 debug = false
 
