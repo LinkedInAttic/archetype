@@ -31,13 +31,7 @@ module Archetype::SassExtensions::Locale
       locales.include?('_' + locale[:territory])
     )
   end
-
-  #
-  # @alias locale
-  #
-  def lang(locales)
-    return locale(locales)
-  end
+  alias_method :lang, :locale
 
   #
   # returns the locale language code
@@ -62,6 +56,7 @@ module Archetype::SassExtensions::Locale
   def locale_territory(locale = nil)
     return get_locale_piece(locale, :territory)
   end
+  alias_method :locale_country, :locale_territory
 
   #
   # returns the locale modifier
