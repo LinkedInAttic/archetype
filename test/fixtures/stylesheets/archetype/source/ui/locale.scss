@@ -1,0 +1,68 @@
+@import "test_harness";
+
+@mixin test-locale() {
+  /* current locale is: `#{locale()}` */
+  @if locale(en_US de_DE fr_FR) {
+    /* one of: en_US de_DE fr_FR */
+  }
+  @if locale(zh_TW ko_KR ja_JP) {
+    /* one of: zh_TW ko_KR ja_JP */
+  }
+  @if locale(CJK) {
+    /* one of: CJK */
+  }
+  @if locale(de_ _FR) {
+    /* one of: de_* *_FR */
+  }
+  // test lang() works the same as locale()
+  @if lang(fr_FR) {
+    /* fr_FR */
+  }
+}
+
+.default {
+  @include test-locale();
+}
+
+// test switch-locale
+@each $locale in (en_US de_DE fr_FR zh_TW ko_KR ja_JP pt_BR ro_RU) {
+  .#{$locale} {
+    @include switch-locale($locale) {
+      @include test-locale();
+    }
+    /* global locale: #{locale()} */
+  }
+}
+
+// test locale_aliases config
+.cyrillic {
+  @include switch-locale(ru_RU) {
+    /* cyrillic? #{locale(cyrillic)} */
+  }
+}
+.not-cyrillic {
+  @include switch-locale(en_US) {
+    /* cyrillic? #{locale(cyrillic)} */
+  }
+}
+
+// get locale pieces
+.language-codes {
+  /* locale-language(en_US):  #{locale-language(en_US)} */
+  /* locale-language():       #{locale-language()} */
+  /* locale-language(de_):    #{locale-language(de_)} */
+  /* locale-language(fR_):    #{locale-language(fR_)} */
+  /* locale-language(_RU):    #{locale-language(_RU)} */
+}
+.terrirory-codes {
+  /* locale-territory(en_US): #{locale-territory(en_US)} */
+  /* locale-territory():      #{locale-territory()} */
+  /* locale-territory(de_):   #{locale-territory(de_)} */
+  /* locale-territory(fR_):   #{locale-territory(fR_)} */
+  /* locale-territory(_RU):   #{locale-territory(_RU)} */
+}
+.modifier-codes {
+  /* locale-modifier(en_US):            #{locale-modifier(en_US)} */
+  /* locale-modifier('en_US@Latin'):    #{locale-modifier('en_US@Latin')} */
+  /* locale-modifier('sr_SP@Cyrillic'): #{locale-modifier('sr_SP@Cyrillic')} */
+}

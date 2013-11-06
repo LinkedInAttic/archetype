@@ -20,6 +20,7 @@
   /* current locale is: `fr_FR` */
   /* one of: en_US de_DE fr_FR */
   /* one of: de_* *_FR */
+  /* fr_FR */
   /* global locale: en_US */
 }
 
@@ -52,4 +53,34 @@
 .ro_RU {
   /* current locale is: `ro_RU` */
   /* global locale: en_US */
+}
+
+.cyrillic {
+  /* cyrillic? true */
+}
+
+.not-cyrillic {
+  /* cyrillic? false */
+}
+
+.language-codes {
+  /* locale-language(en_US):  en */
+  /* locale-language():       en */
+  /* locale-language(de_):    de */
+  /* locale-language(fR_):    fr */
+  /* locale-language(_RU):     */
+}
+
+.terrirory-codes {
+  /* locale-territory(en_US): US */
+  /* locale-territory():      US */
+  /* locale-territory(de_):    */
+  /* locale-territory(fR_):    */
+  /* locale-territory(_RU):   RU */
+}
+
+.modifier-codes {
+  /* locale-modifier(en_US):             */
+  /* locale-modifier('en_US@Latin'):    Latin */
+  /* locale-modifier('sr_SP@Cyrillic'): Cyrillic */
 }

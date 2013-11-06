@@ -11,16 +11,12 @@ module Archetype::SassExtensions::Locale
   # - {String|Boolean} the current locale or whether or not the current locale is in the test set
   #
   def locale(locales = nil)
-    locale = (environment.var('CONFIG_LOCALE') || Compass.configuration.locale || 'en_US').to_s
+    locale = get_locale(locale)
     # if the locales are nil, just return the current locale
     return Sass::Script::Value::String.new(locale) if locales.nil?
     locales = locales.to_a.collect{|i| i.to_s}
-    # add wild card support for language or territory
-    match = locale.match(LOCALE_PATTERN)
-    # language with wildcard territory
-    language = match[1] + '_'
-    # territory with wildcard language
-    territory = '_' + match[2]
+    # normalize the pieces of the locale
+    locale = normalize_locale(locale)
     # for each item, look it up in the alias list
     locales.each do |key|
       if a = locale_aliases[key]
@@ -28,19 +24,46 @@ module Archetype::SassExtensions::Locale
         locales.concat(a)
       end
     end
-    return Sass::Script::Bool.new(locales.include?(locale) || locales.include?(language) || locales.include?(territory))
+    return Sass::Script::Bool.new(
+      locales.include?(locale) ||
+      locales.include?("#{locale[:language]}_#{locale[:territory]}") ||
+      locales.include?(locale[:language] + '_') ||
+      locales.include?('_' + locale[:territory])
+    )
   end
 
   #
-  # test a list of locales against the current locale (this is now just an alias for locales(), for back-compat)
-  #
-  # *Parameters*:
-  # - <tt>$locales</tt> {List} the list of locales to test
-  # *Returns*:
-  # - {Boolean} is the current locale in the list or not
+  # @alias locale
   #
   def lang(locales)
     return locale(locales)
+  end
+
+  #
+  # returns the locale language code
+  #
+  # TODO
+  #
+  def locale_language(locale = nil)
+    return get_locale_piece(locale, :language)
+  end
+
+  #
+  # returns the locale territory code
+  #
+  # TODO
+  #
+  def locale_territory(locale = nil)
+    return get_locale_piece(locale, :territory)
+  end
+
+  #
+  # returns the locale modifier
+  #
+  # TODO
+  #
+  def locale_modifier(locale = nil)
+    return get_locale_piece(locale, :modifier)
   end
 
   #
@@ -56,7 +79,46 @@ module Archetype::SassExtensions::Locale
 
 private
 
-  LOCALE_PATTERN = /([a-z]{2})[-_]?([a-z]{2}?)/i
+  # pieces of the locale code
+  #  (1) language
+  #  (2) territory
+  #  (3) encoding (not currently used)
+  #  (4) modifier (e.g. @Cyrillic)
+  LOCALE_PATTERN = /\"?([a-z]{2})?[-_]?([a-z]{2})?(\.[^@]*)?(?:\@([^\"]+))?\"?/i
+
+  # TODO
+  def normalize_locale(locale = nil)
+    match = get_locale(locale).match(LOCALE_PATTERN) || []
+    return {
+      :language   => match[1].nil? ? nil : match[1].downcase,
+      :territory  => match[2].nil? ? nil : match[2].upcase,
+      :encoding   => match[3],
+      :modifier   => match[4]
+    }
+  end
+
+  # TODO
+  def get_locale(locale = nil)
+    return (locale || environment.var('CONFIG_LOCALE') || Compass.configuration.locale || 'en_US').to_s
+  end
+
+  #
+  # returns a normalized piece of the locale
+  #
+  # *Parameters*:
+  # - <tt>locale</tt> {String} the locale to examine
+  # - <tt>piece</tt> {Symbol} the piece of the locale to extract
+  # *Returns*:
+  # - {Sass::String} a string of the locale piece requested
+  #
+  def get_locale_piece(locale = nil, piece = :language)
+    piece = normalize_locale(locale)[piece]
+    if piece.nil?
+      return Sass::Script::Value::Null.new
+    else
+      return Sass::Script::Value::String.new(piece)
+    end
+  end
 
   #
   # provides an alias mapping for locale names
@@ -64,14 +126,9 @@ private
   # *Returns*:
   # - {Hash} a hash of aliases
   #
-  # TODO - make this easily extensible
   def locale_aliases
-    if @locale_aliases.nil?
-      a = {
-        'CJK' => ['ja_JP', 'ko_KR', 'zh_TW', 'zh_CN']
-      }
-      @locale_aliases = a
-    end
-    return @locale_aliases
+    @locale_aliases ||= {
+      'CJK' => ['ja_JP', 'ko_KR', 'zh_TW', 'zh_CN']
+    }.merge(Compass.configuration.locale_aliases || {})
   end
 end
