@@ -137,16 +137,19 @@
 // @param     $width {String} the width of the overlay
 // @param     $height {String} the height of the overlay
 // @param     $direction {String} top=vertical left=horizontal
-@mixin fade-box($width: 100%, $height: 100%, $direction: top) {
+// @param     $from {Color} the start color
+// @param     $to {Color} the end color
+@mixin fade-box($width: 100%, $height: 100%, $direction: top, $from: rgba(255,255,255,0.4), $to: rgba(255,255,255,1)) {
   $direction: rtl($direction);
-  // TODO - update this when Compass supports IE alpha channels
-  @if $direction == left {
-    @include ie-filter(gradient(startColorstr='#00ffffff', endColorstr='#ffffff', GradientType=1));
+  @if support-legacy-browser('ie', '8', $threshold: $critical-usage-threshold) {
+    @if $direction == left {
+      @include ie-filter(gradient(startColorstr=ie-hex-str($from), endColorstr=ie-hex-str($to), GradientType=1));
+    }
+    @else {
+      @include ie-filter(gradient(startColorstr=ie-hex-str($from), endColorstr=ie-hex-str($to)));
+    }
   }
-  @else {
-    @include ie-filter(gradient(startColorstr='#00ffffff', endColorstr='#ffffff'));
-  }
-  @include background-image(linear-gradient($direction, rgba(255,255,255,0.4), rgba(255,255,255,1)) );
+  @include background-image(linear-gradient($direction, $from, $to) );
   @include pseudo-element($width: $width, $height: $height, $position: absolute);
   text-align: center;
   bottom: 0;
