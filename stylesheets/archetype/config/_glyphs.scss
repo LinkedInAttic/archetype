@@ -1,7 +1,8 @@
 // glyphs
-$CONFIG_GLYPHS_WEIGHT:            normal !default;              // font-weight for glyphs
-$CONFIG_GLYPHS_STYLE:             normal !default;              // font-style for glyphs
+$CONFIG_GLYPHS_WEIGHT:            normal !default;              // font-weight for glyphs (if not set in the library config)
+$CONFIG_GLYPHS_STYLE:             normal !default;              // font-style for glyphs (if not set in the library config)
 $CONFIG_GLYPHS_OUTPUT_FALLBACK:   false !default;               // whether or not to output fallback font-family names (this is only needed if you mixed version content, not common)
+$CONFIG_GLYPHS_INLINE_FONTS:      false !default;               // whether or not to default to using inline fonts (if not set in the library config)
 $CONFIG_GLYPHS_AUTO:              $CONFIG_RESET_AUTO !default;  // whether or not to auto generate the font-face definition for the glyph font
 
 $CORE_GLYPHS_LIBRARIES: (

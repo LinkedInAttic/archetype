@@ -49,12 +49,17 @@ $RESET_INIT: false !default;
     }
     $name_raw:  map-get($library, name);
     $files:     map-get($library, files);
-    $weight:    map-get($library, weight);
-    $style:     map-get($library, style);
+    $weight:    map-get($library, weight) or $CONFIG_GLYPHS_WEIGHT;
+    $style:     map-get($library, style) or $CONFIG_GLYPHS_STYLE;
     $version:   map-get($library, version);
     $path:      map-get($library, path);
     $svg-id:    map-get($library, svg-id) or $name_raw;
     $grids:     -compass-list(map-get($library, grids));
+
+    $inlined:   map-get($files, inline);
+    @if $inlined == null {
+      $inlined: $CONFIG_GLYPHS_INLINE_FONTS;
+    }
 
     $output-fallback: $CONFIG_GLYPHS_OUTPUT_FALLBACK;
 
@@ -73,27 +78,34 @@ $RESET_INIT: false !default;
 
       $files_eot: if($files_eot_raw, quote(str-substitute($files_eot_raw, $subs)), false);
       $files_std: ();
+      $files: ();
       @each $file in $files_std_raw {
         $file: quote(str-substitute($file, $subs));
         $files_std: append($files_std, $file);
+        // keep track of the file for later...
+        $files: append($files, $file);
       }
 
-      // if we have multiple grids...
+      // decide if we're using inline (data URI) files
+      // TODO: this won't work properly until this patch lands: https://github.com/chriseppstein/compass/pull/1444
+      // if it's not merged before release, we'll monkey patch
+      $files_std: if($inlined, inline-font-files($files_std...), font-files($files_std...));
+
       @if $grid {
         $name: "#{$name}_#{$grid}";
         // output the fallback @font-face
         @if $output-fallback {
-          @include font-face($name_raw, font-files($files_std...), $files_eot, $weight or $CONFIG_GLYPHS_WEIGHT, $style or $CONFIG_GLYPHS_STYLE);
-          @include font-face('#{$name_raw}-#{$version}', font-files($files_std...), $files_eot, $weight or $CONFIG_GLYPHS_WEIGHT, $style or $CONFIG_GLYPHS_STYLE);
+          @include font-face($name_raw, $files_std, $files_eot, $weight, $style);
+          @include font-face('#{$name_raw}-#{$version}', $files_std, $files_eot, $weight, $style);
         }
       }
       @if $output-fallback or not $version {
-        @include font-face($name, font-files($files_std...), $files_eot, $weight or $CONFIG_GLYPHS_WEIGHT, $style or $CONFIG_GLYPHS_STYLE);
+        @include font-face($name, $files_std, $files_eot, $weight, $style);
       }
       @if $version {
         // output the @font-face set with a versioned family name
         // this will help avoid collisions when multi-app CSS is loaded on a single page
-        @include font-face('#{$name}-#{$version}', font-files($files_std...), $files_eot, $weight or $CONFIG_GLYPHS_WEIGHT, $style or $CONFIG_GLYPHS_STYLE);
+        @include font-face('#{$name}-#{$version}', $files_std, $files_eot, $weight, $style);
       }
       $output-fallback: false;
     }

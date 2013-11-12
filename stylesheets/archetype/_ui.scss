@@ -124,8 +124,8 @@
 // @param     $height {String} value for the height property
 // @param     $width {String} value for the width property
 // @param     $overflow {String} value for the overflow property
-@mixin unhide-element($position: static, $height:auto, $width:auto, $overflow:visible) {
-  position: $position;
+@mixin unhide-element($position: static, $height: auto, $width: auto, $overflow: visible) {
+  position: $position !important;
   height: $height;
   width: $width;
   overflow: $overflow;
