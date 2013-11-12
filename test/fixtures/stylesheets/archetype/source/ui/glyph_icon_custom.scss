@@ -5,6 +5,7 @@ $CONFIG_GLYPHS_LIBRARIES: (
     grids:    16px 12px,
     path:     'custom/path/to/MyDefaultGlyphs/{version}/{grid}/MyDefaultGlyphs',
     files: (
+      //inline: true,
       eot:    '{path}.eot',
       std:    ('{path}.woff', '{path}.ttf', '{path}.svg##{"{svg-id}"}')
     ),
@@ -31,6 +32,8 @@ $CONFIG_GLYPHS_LIBRARIES: (
     )
   )
 );
+
+//$CONFIG_GLYPHS_INLINE_FONTS: true;
 
 @import "test_harness";
 
