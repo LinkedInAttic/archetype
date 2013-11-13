@@ -76,7 +76,7 @@ private
   #
   def css_defaults(key)
     if @css_defaults.nil?
-      s = {}
+      s = Hash.new {|h, k| Sass::Script::Value::Null.new }
       # color
       s['color'] = 'inherit'
       # text
@@ -124,12 +124,19 @@ private
       s['ie-filter'] = 'gradient(enabled=false)'
       s['z-index'] = 0
       # --------------------
+      s = Sass::Util.map_vals(s) do |value| 
+        case value
+        when String
+          Sass::Script::Value::String.new(value)
+        when Numeric
+          Sass::Script::Value::Number.new(value)
+        else
+          raise ArgumentError.new("What should I do with #{value.inspect}")
+        end
+      end
       @css_defaults = s
     end
-    value = @css_defaults[key]
-    value = Sass::Script::Value::String.new(value) if value.is_a? String
-    value = Sass::Script::Value::Number.new(value) if value.is_a? Numeric
-    return value
+    return @css_defaults[key]
   end
 end
 
