@@ -17,8 +17,7 @@ $a-blackhole: styleguide-add-component(multi-inherit-styleguide-test, (), (
     inherit:    modifier1
   ),
   modifier4: (
-    inherit:    modifier3,
-    inherit:    modifier2
+    inherit: multiple-values(modifier3, modifier2)
   )
 )) !global;
 }

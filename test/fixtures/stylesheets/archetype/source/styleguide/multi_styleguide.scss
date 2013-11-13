@@ -3,9 +3,7 @@
 @if should-register-component(multi-styleguide-styleguide-test) {
 $a-blackhole: styleguide-add-component(multi-styleguide-styleguide-test, (), (
   default: (
-    styleguide:   large headline,
-    styleguide:   small copy,
-    styleguide:   canvas
+    styleguide: multiple-values(large headline, small copy, canvas)
   )
 )) !global;
 }

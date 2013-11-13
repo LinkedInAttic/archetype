@@ -112,7 +112,11 @@
     // z-index
     @else if($property == z-index)              { @include z-index($value...); }
     @else if($property == glyph-icon)           { @include glyph-icon($value...); }
-    @else if($property == extend)               { @extend #{$value}; }
+    @else if($property == extend)               {
+      @each $v in -compass-list($value) {
+        @extend #{$v};
+      }
+    }
     // animations
     @else if($property == animation) {
       @include animation($value...);

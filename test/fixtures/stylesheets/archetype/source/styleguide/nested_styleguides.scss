@@ -19,8 +19,7 @@ $a-blackhole: styleguide-add-component(nested-styleguide-test, (), (
     ),
     selectors: (
       'h3': (
-        styleguide:  (large headline),
-        styleguide:  (link without an underline)
+        styleguide:  multiple-values(large headline, link without an underline)
       ),
       '&:after': (
         color:      red
