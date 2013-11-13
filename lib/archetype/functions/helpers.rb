@@ -96,7 +96,7 @@ private
           end
         elsif not previous.nil?
           # if we got here, something is wrong with the structure
-          list.shift if to_str(list[0]) == previous # remove the first item if it's the previous key, which is now the parent key
+          list = list[1..-1] if to_str(list[0]) == previous # remove the first item if it's the previous key, which is now the parent key
           list = list[0].to_a # now the remaining items were munged, so split them out
           hsh = Archetype::Hash.new
           hsh[previous] = list_to_hash(list, depth - 1, nest, additives)
