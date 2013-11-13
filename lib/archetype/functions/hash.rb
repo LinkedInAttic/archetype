@@ -124,7 +124,7 @@ private
       s['ie-filter'] = 'gradient(enabled=false)'
       s['z-index'] = 0
       # --------------------
-      s = Sass::Util.map_vals(s) do |value| 
+      s = Sass::Util.map_vals(s) do |value|
         case value
         when String
           Sass::Script::Value::String.new(value)
@@ -153,4 +153,3 @@ module Archetype
     end
   end
 end
-
