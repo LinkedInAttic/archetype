@@ -5,8 +5,7 @@ $a-blackhole: component-registration-setup();
 $a-blackhole: styleguide-add-component(map-structure-test, (), (
   default: (
     display:         block,
-    color:           red,
-    color:           rgba(red, 0.8), // this works because of a patch, you shouldn't use multi-keyed maps
+    color:           multiple-values(red, rgba(red, 0.8)), // this works because of a patch, you shouldn't use multi-keyed maps
     selectors: (
       '&.test': (
         color:  green

@@ -1,12 +1,17 @@
-.some-extend-class, .extend-styleguide-test {
+.some-extend-class, .extend-styleguide-test, .extend-styleguide-test-multi {
   color: red;
 }
 
-.extend-styleguide-test {
+.extend-styleguide-test, .extend-styleguide-test-multi {
   background: green;
 }
 
 .extend-styleguide-test {
   /* [archetype:styleguide:begin] --- `extend-styleguide-test` --- */
   /* [archetype:styleguide:end] --- `extend-styleguide-test` --- */
+}
+
+.extend-styleguide-test-multi {
+  /* [archetype:styleguide:begin] --- `multi extend-styleguide-test` --- */
+  /* [archetype:styleguide:end] --- `multi extend-styleguide-test` --- */
 }

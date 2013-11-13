@@ -2,14 +2,16 @@
 # This module provides a set of helper functions and methods for working with Sass literals.
 #
 module Archetype::Functions::Helpers
-private
 
+  # used for archetype meta objects on a Map
   META = {
     :meta => '-archetype-meta',
     :has_multiples => 'has-multiple-values',
     :values => 'values',
     :message => 'message'
   }
+
+private
 
   #
   # provides a convenience interface to the Compass::Logger
