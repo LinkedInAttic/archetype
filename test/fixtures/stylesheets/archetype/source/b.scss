@@ -1,9 +1,0 @@
-@import "test_harness";
-
-a {
-  @include styleguide(headline);
-}
-
-b {
-  @include styleguide(muted xxlarge headline in a punchcut);
-}

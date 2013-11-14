@@ -1,0 +1,16 @@
+@import "test_harness";
+
+@include test-module("tests for getting derived styles from styleguide components") {
+
+  @include test("[function] styleguide-derived-style()") {
+
+    // given a definition sentence
+    $derived: styleguide-derived-style(small copy, line-height);
+    $expected: nth-cyclic($CONFIG_FONT_COPY_SMALL, 2);
+    @include assert-equal($derived, $expected, "line-height should be extracted from the styleguide definition");
+
+    // given an extracted styleguide object
+    $derived: styleguide-derived-style(styleguide(small copy), line-height);
+    @include assert-equal($derived, $expected, "line-height should be extracted from the styleguide object");
+  }
+}

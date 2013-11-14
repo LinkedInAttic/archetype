@@ -4,7 +4,7 @@ gemspec
 
 gem 'diff-lcs',     '~> 1.1.2'
 gem 'rake'
-gem 'true'
+gem 'true',         '0.2.0.rc.3'
 
 # these are only required for docs/development, not for running test cases
 unless ENV["CI"]

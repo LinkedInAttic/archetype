@@ -23,6 +23,7 @@
 - improved locale functionality, including
   - support for more complex formats. e.g. `sr_SP@Cyrillic`
   - new methods to extract a piece of a locale: `locale-language`, `locale-territory`, `locale-modifier`
+- added `derived-style` and `styleguide-derived-style` for extracting individual style rules from maps of styles or styleguide components
 
 ### Major Changes:
 

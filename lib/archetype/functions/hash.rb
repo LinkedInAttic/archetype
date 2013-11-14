@@ -54,89 +54,15 @@ module Archetype::Functions::Hash
         if self[key].kind_of?(Hash) && other_hash[key].kind_of?(Hash)
           tmp[key] = self[key].diff(other_hash[key])
         else
-          tmp[key] = other_hash[key] || css_defaults(key)
+          tmp[key] = other_hash[key] || Archetype::Functions::CSS.default(key)
           # if the key is `filter-gradient` and it was removed, we need to change the key to `ie-filter`
-          tmp['ie-filter'] = css_defaults('ie-filter') if key == 'filter-gradient' and tmp[key].nil?
+          tmp['ie-filter'] = Archetype::Functions::CSS.default('ie-filter') if key == 'filter-gradient' and tmp[key].nil?
           # if it came back as `nil` we couldn't understand it or it has no default, so axe it
           tmp.delete(key) if tmp[key].nil?
         end
       end
       tmp
     end
-  end
-
-private
-  #
-  # returns a best guess for the default CSS value of a given property
-  #
-  # *Parameters*:
-  # - <tt>key</tt> {String} the property to lookup
-  # *Returns*:
-  # - {Sass::Script::Value::String|Sass::Script::Value::Number} the default value
-  #
-  def css_defaults(key)
-    if @css_defaults.nil?
-      s = Hash.new {|h, k| Sass::Script::Value::Null.new }
-      # color
-      s['color'] = 'inherit'
-      # text
-      s['font'] = s['font-size'] = s['font-family'] = s['font-style'] = s['font-variant'] = s['font-weight'] = 'inherit'
-      s['text-decoration'] = s['text-transform'] = 'none'
-      s['text-align'] = 'left'
-      s['text-indent'] = 0
-      s['text-justify'] = 'auto'
-      s['text-overflow'] = 'clip'
-      s['line-height'] = 'normal'
-      # backgrounds
-      s['background'] = 'none'
-      s['background-color'] = 'transparent'
-      s['background-image'] = 'none'
-      s['background-repeat'] = 'repeat'
-      s['background-position'] = 'left top'
-      s['background-attachment'] = 'scroll'
-      s['background-clip'] = 'border-box'
-      s['background-size'] = 'auto'
-      s['background-origin'] = 'padding-box'
-      # borders
-      s['border'] = s['border-top'] = s['border-left'] = s['border-bottom'] = s['border-right'] = 'none'
-      s['border-color'] = s['border-top-color'] = s['border-left-color'] = s['border-bottom-color'] = s['border-right-color'] = 'transparent'
-      s['border-width'] = s['border-top-width'] = s['border-left-width'] = s['border-bottom-width'] = s['border-right-width'] = 0
-      s['border-style'] = s['border-top-style'] = s['border-left-style'] = s['border-bottom-style'] = s['border-right-style'] = 'solid'
-      # border-radius
-      s['border-radius'] = s['border-top-left-radius'] = s['border-top-right-radius'] = s['border-bottom-left-radius'] = s['border-bottom-right-radius'] = 0
-      # margin
-      s['margin'] = s['margin-top'] = s['margin-left'] = s['margin-bottom'] = s['margin-right'] = 0
-      # padding
-      s['padding'] = s['padding-top'] = s['padding-left'] = s['padding-bottom'] = s['padding-right'] = 0
-      # shadows
-      s['text-shadow'] = s['box-shadow'] = 'none'
-      # width/height
-      s['height'] = s['width'] = 'auto'
-      s['min-width'] = s['max-width'] = s['min-height'] = s['max-height'] = 'none'
-      # position
-      s['position'] = 'static'
-      s['top'] = s['right'] = s['bottom'] = s['left'] = 'auto'
-      s['clear'] = s['float'] = 'none'
-      # misc
-      s['overflow'] = 'visible'
-      s['opacity'] = 1
-      s['visibility'] = 'visible'
-      s['ie-filter'] = 'gradient(enabled=false)'
-      s['z-index'] = 0
-      # --------------------
-      s = Sass::Util.map_vals(s) do |value|
-        case value
-        when String
-          Sass::Script::Value::String.new(value)
-        when Numeric
-          Sass::Script::Value::Number.new(value)
-        else
-          raise ArgumentError.new("What should I do with #{value.inspect}")
-        end
-      end
-      @css_defaults = s
-    end
-    return @css_defaults[key]
   end
 end
 
