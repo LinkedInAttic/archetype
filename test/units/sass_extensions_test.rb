@@ -32,23 +32,6 @@ class SassExtensionsTest < Test::Unit::TestCase
     reset
   end
 
-
-  ## LISTS
-  # list-replace
-  def test_list_replace
-    # TODO
-  end
-
-  # list-remove
-  def test_list_remove
-    # TODO
-  end
-
-  # list-insert
-  def test_list_insert
-    # TODO
-  end
-
   # list-add
   def test_list_add
     assert_equal "2 3 4", evaluate("list-add(1 2 3, 1)")
@@ -100,17 +83,6 @@ class SassExtensionsTest < Test::Unit::TestCase
     assert_equal "c", evaluate("nth-cyclic(a b c, 24)")
   end
 
-  # associative
-  def test_associative
-    # TODO
-  end
-
-  # associative-merge
-  def test_list_associative_merge
-    # TODO
-  end
-
-
   ## LOCALE
   # locale
   def test_locale
@@ -143,29 +115,6 @@ class SassExtensionsTest < Test::Unit::TestCase
     assert_equal "20", evaluate("strip-units('20rem')")
     assert_equal "0", evaluate("strip-units(10 somethings)") # this is a failure, so returns 0
   end
-
-
-  ## STYLEGUIDE
-  # styleguide-add-component
-  def test_styleguide_add_component
-    # TODO - this is a more complex test
-  end
-
-  # styleguide-extend-component
-  def test_styleguide_extend_component
-    # TODO - this is a more complex test
-  end
-
-  # styleguide
-  def test_styleguide
-    # TODO - this is a more complex test
-  end
-
-  # styleguide-diff
-  def test_styleguide_diff
-    # TODO - this is a more complex test
-  end
-
 
   ## UI
   # test generating unique tokens
