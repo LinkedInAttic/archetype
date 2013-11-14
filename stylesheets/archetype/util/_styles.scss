@@ -218,11 +218,8 @@
     // register a placeholder if needed
     @include archetype-smart-content($placeholder) {
       @each $property, $value in $map {
-        $values: append((), $value);
-        @if map-key-has-multiple-values($value) {
-          $values: map-get($value, values);
-        }
-        @each $value in $values {
+        @include with-each-value($value) {
+          $value: $archetype-current-value;
           @if not (index($exclude, $property) or $property == '-archetype-meta') {
             // deal with the states
             @if($property == states and $states != false and length($value) > 0) {

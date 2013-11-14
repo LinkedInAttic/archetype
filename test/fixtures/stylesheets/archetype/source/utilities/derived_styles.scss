@@ -1,0 +1,46 @@
+// TODO move file!
+@import "test_harness";
+
+@include test-module("tests for getting derived styles") {
+  $styles-maps: (
+    simple: (
+      height: 10px,
+      line-height: 7px
+    ),
+    shortlonghand: (
+      border: 1px solid red,
+      border-width: 3px,
+      border-left: 2px solid green,
+      border-top-width: 4px
+    ),
+    overflow: (
+      overflow-y: visible,
+      overflow: hidden,
+      overflow-x: visible
+    )
+  );
+
+  // TODO
+  @include test("[function] derived-style()") {
+    // some simple tests...
+    $styles: map-get($styles-maps, simple);
+    $empty: ();
+
+    @include assert-equal(derived-style(null, height), null, "a null map shouldn't throw an exception");
+    @include assert-equal(derived-style($empty, height), null, "an empty map shouldn't throw an exception");
+    @include assert-equal(derived-style($styles, null), null, "a null key shouldn't throw an exception");
+
+    // test a value that exists
+    @include assert-equal(derived-style($styles, height), 10px, "height should be extracted from the style object");
+    // test a value that doesn"t exist
+    @include assert-equal(derived-style($styles, overflow), null, "overflow should be `null`");
+
+    $styles: map-get($styles-maps, shortlonghand);
+    @include assert-equal(derived-style($styles, border), 1px solid red, "extract the border as is");
+
+    $styles: map-get($styles-maps, overflow);
+    @include assert-equal(derived-style($styles, overflow), hidden, "overflow exact match");
+    @include assert-equal(derived-style($styles, overflow-x), visible, "overflow-x should respect it's hardcoded value");
+    @include assert-equal(derived-style($styles, overflow-y), visible, "overflow-y should respect it's hardcoded value");
+  }
+}

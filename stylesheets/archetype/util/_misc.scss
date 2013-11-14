@@ -106,3 +106,16 @@ $REGISTRY_DO_ONCE: () !default;
   @if is-null($image) { @return null; }
   @return image-height($image);
 }
+
+// helper mixin for iterating over a meta object that contains multiple values
+// @mixin     with-each-value
+// @param     $values {*} the value or meta object of values to iterate over
+// @content
+@mixin with-each-value($values) {
+  $values: if(has-multiple-values($values), map-get($values, values), append((), $values));
+  @each $value in $values {
+    $archetype-current-value: $value !global;
+    @content;
+    $archetype-current-value: null !global;
+  }
+}

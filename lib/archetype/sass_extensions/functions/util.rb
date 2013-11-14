@@ -49,7 +49,7 @@ module Archetype::SassExtensions::Util
   # *Returns*:
   # - {Boolean} whether or not the map key represents multiple values
   #
-  def map_key_has_multiple_values(map)
+  def has_multiple_values(map)
     meta = map_get_meta(map)
     return map_has_key(meta, Sass::Script::Value::String.new(helpers::META[:has_multiples])) if not meta.value.nil?
     return Sass::Script::Value::Bool.new(false);
@@ -68,6 +68,22 @@ module Archetype::SassExtensions::Util
       return map_get(map, Sass::Script::Value::String.new(helpers::META[:meta]))
     end
     return Sass::Script::Value::Null.new
+  end
+
+  #
+  # given a map of styles, get the derived style of a given property
+  #
+  # *Parameters*:
+  # - <tt>$styles</tt> {Map} the map of styles
+  # - <tt>$properties</tt> {String|List} the properties to extract the derived styles for
+  # - <tt>$format</tt> {String} the format to return the results in [auto|map|list]
+  # *Returns*:
+  # - {List|Map|*} either a list/map of the values or the individual value itself
+  #
+  def derived_style(styles, properties = [], format = 'auto')
+    # - <tt>$strict</tt> {Boolean} if true, will only return an exact match, and not try to extrapolate the value
+    # strict = Sass::Script::Value::Bool.new(false)
+    return Archetype::Functions::CSS.get_derived_styles(helpers.data_to_hash(styles), properties, helpers.to_str(format).to_sym, true)
   end
 
 private

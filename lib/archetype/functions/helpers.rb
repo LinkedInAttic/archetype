@@ -11,8 +11,6 @@ module Archetype::Functions::Helpers
     :message => 'message'
   }
 
-private
-
   #
   # provides a convenience interface to the Compass::Logger
   #

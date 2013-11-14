@@ -131,12 +131,11 @@ module Archetype::SassExtensions::Styleguide
   end
 
   #
-  # output the CSS differences between components
+  # returns the CSS differences between components
   #
   # *Parameters*:
   # - <tt>$original</tt> {String|List|Map} the description or map representation of the original component
   # - <tt>$other</tt> {String|List|Map} the description or map representation of the new component
-  # - <tt>$theme</tt> {String} the theme to use
   # *Returns*:
   # - {List} a key-value paired list of styles
   #
@@ -153,6 +152,25 @@ module Archetype::SassExtensions::Styleguide
       diff = helpers.add_meta_message(diff, "#{MESSAGE_PREFIX}#{original_message}` vs `#{other_message}#{MESSAGE_SUFFIX}")
       # and return it as a map
       return helpers.hash_to_map(diff)
+    end
+  end
+
+  #
+  # given a styleguide definition or object, extract specified styles
+  #
+  # *Parameters*:
+  # - <tt>$definition</tt> {String|List} the description of the component
+  # - <tt>$properties</tt> {String|List} the properties to extract the derived styles for
+  # - <tt>$format</tt> {String} the format to return the results in [auto|map|list]
+  # *Returns*:
+  # - {List|Map|*} either a list/map of the values or the individual value itself
+  #
+  def styleguide_derived_style(definition, properties = [], format = 'auto')
+    @@archetype_styleguide_mutex.synchronize do
+      # normalize our input
+      definition = normalize_styleguide_definition(definition)
+      # get the computed styles
+      return derived_style(definition, properties, format)
     end
   end
 
