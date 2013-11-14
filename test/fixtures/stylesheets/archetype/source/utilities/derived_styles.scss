@@ -32,7 +32,7 @@
 
     // test a value that exists
     @include assert-equal(derived-style($styles, height), 10px, "height should be extracted from the style object");
-    // test a value that doesn"t exist
+    // test a value that doesn't exist
     @include assert-equal(derived-style($styles, overflow), null, "overflow should be `null`");
 
     $styles: map-get($styles-maps, shortlonghand);
