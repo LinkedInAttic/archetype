@@ -253,7 +253,15 @@ module Archetype::Functions::CSS
   end
 
   #
-  # TODO
+  # calculates derived styles from a given map
+  #
+  # *Parameters*:
+  # - <tt>map</tt> {Sass::Script::Value::Map} the map of styles
+  # - <tt>properties</tt> {String|List|Array} the properties to extract the derived styles for
+  # - <tt>format</tt> {String} the format to return the results in [auto|map|list]
+  # - <tt>strict</tt> {Boolean} if true, will only return an exact match, and not try to extrapolate the value (TODO)
+  # *Returns*:
+  # - {*} the derived styles as either a list/map of the values or the individual value itself (based on the format)
   #
   def self.get_derived_styles(map, properties = [], format = :auto, strict = false)
     # TODO how to handle multiple values?
@@ -267,7 +275,6 @@ module Archetype::Functions::CSS
         # otherwise, let's do some work...
         if not strict
           # if the property is a short- or long-hand, we need to figure out what the value actually is
-          # TODO...
           tmp = get_derived_styles_from_related(map, property)
           value = tmp if not tmp.nil?
         end
@@ -290,9 +297,15 @@ module Archetype::Functions::CSS
 private
 
   #
-  # TODO
+  # given a set of related properties, compute the property value
   #
-  def self.get_derived_styles_from_related(map, property)
+  # *Parameters*:
+  # - <tt>hsh</tt> {Hash} the hash of styles
+  # - <tt>property</tt> {String} the original property we're looking for
+  # *Returns*:
+  # - {Hash} the derived styles
+  #
+  def self.get_derived_styles_from_related(hsh, property)
     # TODO: this doesn't support vendor prefixed properties (intentionally)
     base = property.match(/\A([a-z]+)/)
     if base and relatable_css_properties.include?(base[0])
@@ -304,7 +317,7 @@ private
         puts "found a handler for #{base}"
         base = /\A#{Regexp.escape(base)}/
         related = {}
-        map.each do |key, value|
+        hsh.each do |key, value|
           related[key] = value if key =~ base
         end
         puts "  related properties for #{property} are #{related.inspect}"
@@ -318,14 +331,20 @@ private
   end
 
   #
-  # TODO
+  # get the list of all CSS properties as a string
+  #
+  # *Returns*:
+  # - {String} all CSS properties
   #
   def self.all_css_properties
     @all_properties ||= ALL_CSS_PROPERTIES.keys.join(' ')
   end
 
   #
-  # TODO
+  # get a set of root CSS properties that have relative CSS properties
+  #
+  # *Returns*:
+  # - {Set} the set of CSS properties
   #
   def self.relatable_css_properties
     if @relatable_css_properties.nil?
@@ -340,14 +359,20 @@ private
   end
 
   #
-  # TODO
+  # output a warning about a disambiguous property found that can't be fully derived
+  #
+  # *Parameters*:
+  # - <tt>property</tt> {String} the property
   #
   def self.disambiguate_warning(property)
     Archetype::Functions::Helpers.logger.record(:warning, "Archetype doesn't currently know how to disambiguate the CSS property `#{property}`")
   end
 
   #
-  # TODO
+  # checks to see if a property is the root property or a descendent
+  #
+  # *Returns*:
+  # - {Boolean} true if the property is a root property
   #
   def self.is_root_property?(property)
     puts "is #{property} is root" if !property.include?('-')
@@ -355,7 +380,13 @@ private
   end
 
   #
-  # TODO
+  # given a set of related properties, get the set of properties that are currently available
+  #
+  # *Parameters*:
+  # - <tt>related</tt> {Hash} the hash of styles
+  # - <tt>property</tt> {String} the property to observe
+  # *Returns*:
+  # - {Hash} the available related properties and their values
   #
   def self.get_available_relatives(related, property)
     previous = nil
@@ -382,7 +413,11 @@ private
   end
 
   #
-  # TODO
+  # helper to iterate over each available relative property
+  #
+  # *Parameters*:
+  # - <tt>related</tt> {Hash} the hash of styles
+  # - <tt>property</tt> {String} the property to observe
   #
   def self.with_each_available_relative(related, property)
     get_available_relatives(related, property).each do |key, value|
@@ -407,35 +442,35 @@ private
   ## handlers
   # animation background border margin overflow padding perspective target transition
   #
-  # TODO
+  # handles the `animiation` properties
   #
   def self.handle_related_properties_animation(related, property)
     # TODO
   end
 
   #
-  # TODO
+  # handles the `background` properties
   #
   def self.handle_related_properties_background(related, property)
     # TODO
   end
 
   #
-  # TODO
+  # handles the `border` properties
   #
   def self.handle_related_properties_border(related, property)
     # TODO
   end
 
   #
-  # TODO
+  # handles the `margin` properties
   #
   def self.handle_related_properties_margin(related, property)
     return handle_related_symmetrical_properties(related, property)
   end
 
   #
-  # TODO
+  # handles the `overflow` properties
   #
   def self.handle_related_properties_overflow(related, property)
     if not is_root_property?(property)
@@ -445,14 +480,14 @@ private
   end
 
   #
-  # TODO
+  # handles the `padding` properties
   #
   def self.handle_related_properties_padding(related, property)
     return handle_related_symmetrical_properties(related, property)
   end
 
   #
-  # TODO
+  # handles the `perspective` properties
   #
   def self.handle_related_properties_perspective(related, property)
     # TODO
