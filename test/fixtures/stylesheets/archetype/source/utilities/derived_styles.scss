@@ -1,4 +1,3 @@
-// TODO move file!
 @import "test_harness";
 
 @include test-module("tests for getting derived styles") {
@@ -20,7 +19,6 @@
     )
   );
 
-  // TODO
   @include test("[function] derived-style()") {
     // some simple tests...
     $styles: map-get($styles-maps, simple);

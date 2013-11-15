@@ -428,7 +428,7 @@ private
   ####
 
   #
-  # TODO
+  # handle cases where property values are symmetrically aligned to denote [top right bottom left]
   #
   def self.handle_related_symmetrical_properties(related, property)
     relatives = get_available_relatives(related, property)
@@ -494,14 +494,14 @@ private
   end
 
   #
-  # TODO
+  # handles the `target` properties
   #
   def self.handle_related_properties_target(related, property)
     # TODO
   end
 
   #
-  # TODO
+  # handles the `transition` properties
   #
   def self.handle_related_properties_transition(related, property)
     # TODO
