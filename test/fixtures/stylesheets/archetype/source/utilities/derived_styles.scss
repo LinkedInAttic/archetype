@@ -1,27 +1,12 @@
 @import "test_harness";
 
 @include test-module("tests for getting derived styles") {
-  $styles-maps: (
-    simple: (
-      height: 10px,
-      line-height: 7px
-    ),
-    shortlonghand: (
-      border: 1px solid red,
-      border-width: 3px,
-      border-left: 2px solid green,
-      border-top-width: 4px
-    ),
-    overflow: (
-      overflow-y: visible,
-      overflow: hidden,
-      overflow-x: visible
-    )
-  );
-
   @include test("[function] derived-style()") {
     // some simple tests...
-    $styles: map-get($styles-maps, simple);
+    $styles: (
+      height: 10px,
+      line-height: 7px
+    );
     $empty: ();
 
     @include assert-equal(derived-style(null, height), null, "a null map shouldn't throw an exception");
@@ -33,12 +18,88 @@
     // test a value that doesn't exist
     @include assert-equal(derived-style($styles, overflow), null, "overflow should be `null`");
 
-    $styles: map-get($styles-maps, shortlonghand);
+    $styles: (
+      border: 1px solid red,
+      border-width: 3px,
+      border-left: 2px solid green,
+      border-top-width: 4px
+    );
     @include assert-equal(derived-style($styles, border), 1px solid red, "extract the border as is");
 
-    $styles: map-get($styles-maps, overflow);
-    @include assert-equal(derived-style($styles, overflow), hidden, "overflow exact match");
-    @include assert-equal(derived-style($styles, overflow-x), visible, "overflow-x should respect it's hardcoded value");
-    @include assert-equal(derived-style($styles, overflow-y), visible, "overflow-y should respect it's hardcoded value");
+    $styles: (
+      overflow-y: visible,
+      overflow: hidden,
+      overflow-x: visible
+    );
+    @include assert-equal(derived-style($styles, overflow), hidden, "overflow TODO...");
+    @include assert-equal(derived-style($styles, overflow-x), visible, "overflow-x should TODO...");
+    @include assert-equal(derived-style($styles, overflow-y), hidden, "overflow-y should TODO...");
+
+    $styles: (
+      margin-top: 5px,
+      margin: 7px 3px,
+      margin-left: 15px,
+      color: red,
+      padding-top: 5px
+    );
+    @include assert-equal(derived-style($styles, margin), (7px 3px 7px 15px), "TODO...");
+    @include assert-equal(derived-style($styles, margin-top), 7px, "TODO...");
+    @include assert-equal(derived-style($styles, margin-right), 3px, "TODO...");
+    @include assert-equal(derived-style($styles, margin-bottom), 7px, "TODO...");
+    @include assert-equal(derived-style($styles, margin-left), 15px, "TODO...");
+    @include assert-equal(derived-style($styles, margin-broken), null, "TODO...");
+
+    $styles: (
+      padding-top: 5px,
+      padding: 7px auto 3px 4px,
+      padding-left: auto,
+      padding-right: 2px,
+      color: red,
+      margin-top: 5px
+    );
+    @include assert-equal(derived-style($styles, padding), (7px 2px 3px auto), "TODO...");
+    @include assert-equal(derived-style($styles, padding-top), 7px, "TODO...");
+    @include assert-equal(derived-style($styles, padding-right), 2px, "TODO...");
+    @include assert-equal(derived-style($styles, padding-bottom), 3px, "TODO...");
+    @include assert-equal(derived-style($styles, padding-left), auto, "TODO...");
+    @include assert-equal(derived-style($styles, padding-broken), null, "TODO...");
+
+    // there's not enough info here to extrapolate `padding`, so it should be `null` and throw a warning
+    $styles: (
+      padding-top: 3px,
+      padding-bottom: 3px,
+      maring-left: 5px,
+      margin-right: 5px
+    );
+    @include assert-equal(derived-style($styles, padding), null, "TODO...");
+    @include assert-equal(derived-style($styles, padding-top), 3px, "TODO...");
+
+    $styles: (
+      animation-name: bounce,
+      animation-duration: 4s,
+      animation-iteration-count: 10,
+      animation: myAnimationName 5s ease infinite 3s,
+      animation-direction: alternate,
+      animation-timing-function: ease-out,
+      animation-fill-mode: forwards,
+      animation-delay: 2s
+    );
+    @include assert-equal(derived-style($styles, animation), (myAnimationName 5s ease-out 2s infinite alternate forwards running), "TODO...");
+    @include assert-equal(derived-style($styles, animation-duration), 5s, "TODO...");
+    @include assert-equal(derived-style($styles, animation-iteration-count), infinite, "TODO...");
+    @include assert-equal(derived-style($styles, animation-direction), alternate, "TODO...");
+    @include assert-equal(derived-style($styles, animation-timing-function), ease-out, "TODO...");
+    @include assert-equal(derived-style($styles, animation-fill-mode), forwards, "TODO...");
+    @include assert-equal(derived-style($styles, animation-delay), 2s, "TODO...");
+    @include assert-equal(derived-style($styles, animation-play-state), running, "TODO...");
+
+    $styles: (
+      animation-duration: 4s,
+      animation-iteration-count: 10,
+      animation-fill-mode: forwards,
+      animation-delay: 2s
+    );
+    @include assert-equal(derived-style($styles, animation), null, "TODO...");
+    @include assert-equal(derived-style($styles, animation-duration), 4s, "TODO...");
   }
 }
