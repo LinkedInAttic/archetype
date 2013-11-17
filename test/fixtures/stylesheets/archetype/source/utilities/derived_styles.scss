@@ -85,6 +85,7 @@
       animation-delay: 2s
     );
     @include assert-equal(derived-style($styles, animation), (myAnimationName 5s ease-out 2s infinite alternate forwards running), "TODO...");
+    @include assert-equal(derived-style($styles, animation-name), myAnimationName, "TODO...");
     @include assert-equal(derived-style($styles, animation-duration), 5s, "TODO...");
     @include assert-equal(derived-style($styles, animation-iteration-count), infinite, "TODO...");
     @include assert-equal(derived-style($styles, animation-direction), alternate, "TODO...");
@@ -100,6 +101,17 @@
       animation-delay: 2s
     );
     @include assert-equal(derived-style($styles, animation), null, "TODO...");
+    @include assert-equal(derived-style($styles, animation-name), null, "TODO...");
     @include assert-equal(derived-style($styles, animation-duration), 4s, "TODO...");
+
+    $styles: (
+      target-name: current,
+      target: new front,
+      target-position: behind
+    );
+    @include assert-equal(derived-style($styles, target), (new window behind), "TODO...");
+    @include assert-equal(derived-style($styles, target-name), new, "TODO...");
+    @include assert-equal(derived-style($styles, target-new), window, "TODO...");
+    @include assert-equal(derived-style($styles, target-position), behind, "TODO...");
   }
 }

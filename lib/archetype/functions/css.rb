@@ -273,14 +273,16 @@ module Archetype::Functions::CSS
       value = Sass::Script::Value::Null.new
       if not property.value.nil?
         property = Archetype::Functions::Helpers.to_str(property, ' ', :quotes)
-        puts "finding derived value for `#{property}`..."
+        puts "#{property} is not null"
+        puts "  map is: #{map.inspect}"
         # simple case, exact match only
         value = map[property] if map.key? property
 
         # if we're not doing strict matching...
         if not strict
+          puts "not strict, calling get_derived_styles_via_router"
           # if the property is a short- or long-hand, we need to figure out what the value actually is
-          value = get_derived_styles_from_related(map, property) || value
+          value = get_derived_styles_via_router(map, property) || value
         end
       end
       computed[property] = value
@@ -290,16 +292,18 @@ module Archetype::Functions::CSS
 
     case format
     when :map
-      #return Archetype::Functions::Helpers.hash_to_map(computed)
+      return Archetype::Functions::Helpers.hash_to_map(computed)
     when :list
-      #return Sass::Script::Value::List.new(computed.values, :comma)
+      return Sass::Script::Value::List.new(computed.values, :comma)
     else
-      puts "    derived value for `#{computed.keys.first}` is: `#{Archetype::Functions::Helpers.to_str(computed.values.first)}`"
+      puts "#{computed.keys.first} is: `#{Archetype::Functions::Helpers.to_str(computed.values.first)}`"
       return computed.values.first
     end
   end
 
 private
+
+  R_TIMING_FUNCTION = /^(?:linear|ease|ease-in|ease-out|ease-in-out|step-start|step-stop|steps\(.*\)|cubic-bezier\(.*\)|)$/
 
   #
   # given a set of related properties, compute the property value
@@ -310,57 +314,15 @@ private
   # *Returns*:
   # - {Hash} the derived styles
   #
-  def self.get_derived_styles_from_related(hsh, property)
-    # TODO: this doesn't support vendor prefixed properties (intentionally)
+  def self.get_derived_styles_via_router(hsh, property)
     base = get_property_base(property)
-    if base and relatable_css_properties.include?(base)
-      puts " base is `#{base}`..."
-      handler = "handle_related_properties_#{base}"
-      # if we know how to handle this property
-      if self.respond_to?(handler)
-        puts " found a handler for #{base}"
-        base = /^#{base}/
-        related = {}
-        hsh.each do |key, value|
-          related[key] = value if key =~ base
-        end
-        puts " related properties for #{property} are #{related.inspect}"
-        puts " calling `#{handler}`"
-        return self.method(handler).call(related, property)
-      else
-        warn_cannot_disambiguate_property(property)
-      end
-    end
-    # if we got here, return nil
-    return nil
-  end
-
-  #
-  # get the list of all CSS properties as a string
-  #
-  # *Returns*:
-  # - {String} all CSS properties
-  #
-  def self.all_css_properties
-    @all_properties ||= ALL_CSS_PROPERTIES.keys.join(' ')
-  end
-
-  #
-  # get a set of root CSS properties that have relative CSS properties
-  #
-  # *Returns*:
-  # - {Set} the set of CSS properties
-  #
-  def self.relatable_css_properties
-    if @relatable_css_properties.nil?
-      related = Set.new
-      all_css_properties.scan(/(?:^|\s)([a-z]+)(?:$|\s)/).each do |match|
-        related << match[0] if all_css_properties =~ /(?:^|\s)#{match[0]}-[^\s]+(?:$|\s)/
-      end
-      @relatable_css_properties = related
-      puts "relatable_css_properties: #{related.inspect}"
-    end
-    return @relatable_css_properties
+    puts "`#{property}` base is `#{base}`"
+    handler = "handle_derived_properties_for_#{base}"
+    # if we don't need any additional processing, stop here
+    return nil if not self.respond_to?(handler)
+    base = /^#{base}/
+    puts hsh.keys
+    return self.method(handler).call(hsh.select { |key, value| key =~ base }, property)
   end
 
   # TODO - doc
@@ -456,6 +418,31 @@ private
     return (property.match(/^([a-z]+)/) || [])[0]
   end
 
+  # TODO - doc
+  def self.get_timing_values(value)
+    return value.select do |item|
+      if item.is_a?(Sass::Script::Value::Number)
+        unit = Archetype::Functions::Helpers.to_str(item.unit_str)
+        ((item.unitless? and item.value == 0) or unit.include?('s'))
+      end
+    end
+  end
+
+  def self.with_each_relative_if_root(related, property)
+    styles = {}
+    get_available_relatives(related, property).each do |key, value|
+      # if it's the shorthand property...
+      if is_root_property?(key)
+        puts "starting block with #{styles.inspect}"
+        styles = yield(value.to_a.clone) if block_given?
+        puts "updated #{styles.inspect} from block"
+      else
+        styles[normalize_property_key(key)] = value
+      end
+    end
+    return styles
+  end
+
   ####
 
   # TODO - doc
@@ -498,28 +485,22 @@ private
   end
 
   #
-  # handle cases where property values are symmetrically aligned to denote [top right bottom left]
+  # handle cases where property values denote [top right bottom left]
   #
-  def self.handle_related_properties_margin_padding(related, property)
+  def self.handle_derived_properties_for_margin_padding(related, property)
     relatives = get_available_relatives(related, property)
     # we only care about the last piece of the property (e.g. `margin` or `top`)
     is_shorthand = is_root_property?(property)
-    styles = {}
-    relatives.each do |key, value|
-      # if it's the shorthand property...
-      if is_root_property?(key)
-        # blow away anything we've already discovered (because it's irrelevant)
-        # and extract the top/right/bottom/left values
-        array = value.to_a
-        styles = {
-          :top        => array[0],
-          :right      => array[1] || array[0],
-          :bottom     => array[2] || array[0],
-          :left       => array[3] || array[1] || array[0]
-        }
-      else
-        styles[normalize_property_key(key)] = value
-      end
+    styles = with_each_relative_if_root(related, property) do |items|
+      # blow away anything we've already discovered (because it's irrelevant)
+      # and extract the top/right/bottom/left values
+      # make the styles available to the calling context
+      {
+        :top        => items[0],
+        :right      => items[1] || items[0],
+        :bottom     => items[2] || items[0],
+        :left       => items[3] || items[1] || items[0]
+      }
     end
     # if we're getting the shorthand property, reconstruct the shorthand value
     if is_shorthand
@@ -539,53 +520,44 @@ private
   #
   # handles the `animiation` properties
   #
-  def self.handle_related_properties_animation(related, property)
-    relatives = get_available_relatives(related, property)
+  def self.handle_derived_properties_for_animation(related, property)
     is_shorthand = is_root_property?(property)
-    styles = {}
-    relatives.each do |key, value|
-      # if it's the shorthand property...
-      if is_root_property?(key)
-        # blow away anything we've already discovered (because it's irrelevant)
-        # and extract the top/right/bottom/left values
-        array = value.to_a
-        # identify the items that are timing units
-        timings = array.select do |item|
-          if item.is_a?(Sass::Script::Value::Number)
-            unit = Archetype::Functions::Helpers.to_str(item.unit_str)
-            ((item.unitless? and item.value == 0) or unit.include?('s'))
-          end
+    styles = with_each_relative_if_root(related, property) do |items|
+      # blow away anything we've already discovered (because it's irrelevant)
+      # identify the items that are timing units
+      timings = get_timing_values(items)
+      items = items - timings
+      # name duration timing-function delay iteration-count direction
+      styles = {
+        :duration => timings.shift  || default('animation-duration'),
+        :delay    => timings.shift  || default('animation-delay')
+      }
+      items.reject! do |item|
+        case Archetype::Functions::Helpers.to_str(item)
+        when /^(?:normal|alternate|reverse|alternate-reverse)$/
+          styles[:direction] = item
+        when /^(?:none|forwards|backwards|both)$/
+          styles[:fill_mode] = item
+        when /^(?:running|paused)$/
+          styles[:play_state] = item
+        when /^(?:[\d\.]+|infinite)$/
+          styles[:iteration_count] = item
+        when R_TIMING_FUNCTION
+          styles[:timing_function] = item
+        else
+          next
         end
-        array = array - timings
-        # name duration timing-function delay iteration-count direction
-        styles = {
-          :duration         => timings.shift  || default('animation-duration'),
-          :delay            => timings.shift  || default('animation-delay')
-        }
-        array.reject! do |item|
-          case Archetype::Functions::Helpers.to_str(item)
-          when /(?:normal|alternate|reverse)/
-            styles[:direction] = item
-          when /(?:none|wards|both)/
-            styles[:fill_mode] = item
-          when /(?:running|paused)/
-            styles[:play_state] = item
-          when /(?:[\d\.]+|infinite)/
-            styles[:iteration_count] = item
-          when /(?:ease|linear|cubic|step)/
-            styles[:timing_function] = item
-          end
-        end
-        styles[:name] = array.shift
-        # set defaults if we missed anything...
-        styles[:timing_function]  ||= array.shift || default('animation-timing-function')
-        styles[:iteration_count]  ||= default('animation-iteration-count')
-        styles[:direction]        ||= default('animation-direction')
-        styles[:fill_mode]        ||= default('animation-fill-mode')
-        styles[:play_state]       ||= default('animation-play-state')
-      else
-        styles[normalize_property_key(key)] = value
+        true
       end
+      styles[:name] = items.shift
+      # set defaults if we missed anything...
+      styles[:timing_function]  ||= items.shift || default('animation-timing-function')
+      styles[:iteration_count]  ||= default('animation-iteration-count')
+      styles[:direction]        ||= default('animation-direction')
+      styles[:fill_mode]        ||= default('animation-fill-mode')
+      styles[:play_state]       ||= default('animation-play-state')
+      # make the styles available to the calling context
+      styles
     end
 
     if is_shorthand
@@ -602,65 +574,133 @@ private
   #
   # handles the `background` properties
   #
-  def self.handle_related_properties_background(related, property)
+  def self.handle_derived_properties_for_background(related, property)
     # TODO
   end
 
   #
   # handles the `border` properties
   #
-  def self.handle_related_properties_border(related, property)
+  def self.handle_derived_properties_for_border(related, property)
     # TODO
   end
 
   #
   # handles the `margin` properties
   #
-  def self.handle_related_properties_margin(related, property)
-    return handle_related_properties_margin_padding(related, property)
+  def self.handle_derived_properties_for_margin(related, property)
+    return handle_derived_properties_for_margin_padding(related, property)
   end
 
   #
   # handles the `padding` properties
   #
-  def self.handle_related_properties_padding(related, property)
-    return handle_related_properties_margin_padding(related, property)
+  def self.handle_derived_properties_for_padding(related, property)
+    return handle_derived_properties_for_margin_padding(related, property)
   end
 
   #
   # handles the `overflow` properties
   #
-  def self.handle_related_properties_overflow(related, property)
+  def self.handle_derived_properties_for_overflow(related, property)
     return is_root_property?(property) ? nil : get_available_relatives(related, property).values.last
-  end
-
-  #
-  # handles the `perspective` properties
-  #
-  def self.handle_related_properties_perspective(related, property)
-    # nothing to do here, `perspective` and `perspective-origin` are independent
-    return nil
   end
 
   #
   # handles the `target` properties
   #
-  def self.handle_related_properties_target(related, property)
-    # TODO
-  end
+  def self.handle_derived_properties_for_target(related, property)
+    puts "handle_derived_properties_for_target keys: #{related.keys}"
+    is_shorthand = is_root_property?(property)
+    puts "started with: #{related}"
+    relatives = get_available_relatives(related, property)
+    puts "found relatives: #{relatives}"
+    styles = with_each_relative_if_root(related, property) do |items|
+      # blow away anything we've already discovered (because it's irrelevant)
+      puts "  items: #{items}"
+      # target-name target-new target-position
+      styles = { :name => items.shift }
+      puts "   name: #{styles[:name]}"
 
-  #
-  # handles the `transform` properties
-  #
-  def self.handle_related_properties_transform(related, property)
-    # TODO
+      items.each do |item|
+        puts "   checking #{Archetype::Functions::Helpers.to_str(item)}"
+        case Archetype::Functions::Helpers.to_str(item)
+        when /^(?:window|tab|none)$/
+          puts "    #{Archetype::Functions::Helpers.to_str(item)} is a target-new"
+          styles[:new] = item
+        when /^(?:above|behind|front|back)$/
+          puts "    #{Archetype::Functions::Helpers.to_str(item)} is a target-position"
+          styles[:position] = item
+        end
+      end
+      # set defaults if we missed anything...
+      styles[:new]      ||= default('target-new')
+      styles[:position] ||= default('target-position')
+      # make the styles available to the calling context
+      styles
+    end
+    if is_shorthand
+      if styles.nil? or styles[:name].nil?
+        warn_not_enough_infomation_to_derive(property, styles)
+        return nil
+      end
+      value = [styles[:name]]
+      value << styles[:new] if not styles[:new].nil?
+      value << styles[:position] if not styles[:position].nil?
+      return Sass::Script::Value::List.new(value, :space)
+    end
+
+    # otherwise just return the value we were asked for
+    return styles[normalize_property_key(property)]
   end
 
   #
   # handles the `transition` properties
   #
-  def self.handle_related_properties_transition(related, property)
-    # TODO
+  def self.handle_derived_properties_for_transition(related, property)
+    is_shorthand = is_root_property?(property)
+    styles = with_each_relative_if_root(related, property) do |items|
+      # blow away anything we've already discovered (because it's irrelevant)
+      timings = get_timing_values(items)
+      items = items - timings
+      # property duration timing-function delay
+      styles = {
+        :duration         => timings.shift  || default('transition-duration'),
+        :delay            => timings.shift  || default('transition-delay')
+      }
+      items.reject! do |item|
+        case Archetype::Functions::Helpers.to_str(item)
+        when R_TIMING_FUNCTION
+          styles[:timing_function] = item
+        else
+          next
+        end
+        true
+      end
+
+      # set defaults if we missed anything...
+      styles[:property] = items.shift || default('transition-property')
+      styles[:duration] ||= default('transition-duration')
+      styles[:delay]    ||= default('transition-delay')
+      styles[:timing_function] ||= default('transition-timing-function')
+      # make the styles available to the calling context
+      styles
+    end
+
+    if is_shorthand
+      if styles.nil? or styles[:property].nil?
+        warn_not_enough_infomation_to_derive(property, styles)
+        return nil
+      end
+      value = [styles[:property]]
+      value << styles[:duration]  || default('transition-duration')
+      value << styles[:delay]     || default('transition-delay')
+      value << styles[:timing_function] || default('transition-timing-function')
+      return Sass::Script::Value::List.new(value, :space)
+    end
+
+    # otherwise just return the value we were asked for
+    return styles[normalize_property_key(property)]
   end
 
 end
