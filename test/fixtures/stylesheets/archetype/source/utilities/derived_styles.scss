@@ -243,5 +243,22 @@
     //@include assert-equal(derived-style($styles, list-style-type), square, "TODO...");
     //@include assert-equal(derived-style($styles, list-style-position), inside, "TODO...");
     //@include assert-equal(derived-style($styles, list-style-image), url(image.png), "TODO...");
+
+    $styles: (
+      outline-width: 2px,
+      outline: red thick dotted,
+      outline-color: green,
+      outline-offset: 4px
+    );
+    /* derived-style($styles, outline): #{derived-style($styles, outline)} */
+    /* derived-style($styles, outline-color): #{derived-style($styles, outline-color)} */
+    /* derived-style($styles, outline-style): #{derived-style($styles, outline-style)} */
+    /* derived-style($styles, outline-width): #{derived-style($styles, outline-width)} */
+    /* derived-style($styles, outline-offset): #{derived-style($styles, outline-offset)} */
+    //@include assert-equal(derived-style($styles, outline), green dotted thick), "TODO...");
+    //@include assert-equal(derived-style($styles, outline-color), green), "TODO...");
+    //@include assert-equal(derived-style($styles, outline-style), dotted, "TODO...");
+    //@include assert-equal(derived-style($styles, outline-width), thick, "TODO...");
+    //@include assert-equal(derived-style($styles, outline-offset), 4px, "TODO...");
   //}
 //}

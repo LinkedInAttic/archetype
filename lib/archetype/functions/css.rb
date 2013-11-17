@@ -791,10 +791,13 @@ private
   def self.handle_derived_properties_for_list(related, property)
     is_shorthand = property == 'list-style'
     properties = %w(style-type style-position style-image)
+    augmented = false
     styles = {}
     get_available_relatives(related, property).each do |key, value|
+      styles[normalize_property_key(key)] = value
+      augmented = !(key == 'list-style')
       # if it's the shorthand property...
-      if key == 'list-style'
+      if !augmented
         styles = {}
         items = value.to_a.clone
         if helpers.to_str(items) == 'inherit'
@@ -833,12 +836,10 @@ private
             end
           end
         end
-      else
-        styles[normalize_property_key(key)] = value
       end
     end
 
-    if is_shorthand
+    if is_shorthand and augmented
       return nil if styles.nil? or styles.empty?
       styles = set_default_styles(styles, 'list', properties)
       value = [styles[:style_type], styles[:style_position], styles[:style_image]]
@@ -851,7 +852,53 @@ private
     return styles[normalize_property_key(property)]
   end
 
-  def self.handle_derived_properties_for_outline
-    # TODO - implement
+  def self.handle_derived_properties_for_outline(related, property)
+    is_shorthand = is_root_property?(property)
+    properties = %w(color style width)
+    styles, augmented = with_each_relative_if_root(related, property) do |items, comma_separated|
+      # blow away anything we've already discovered (because it's irrelevant)
+      styles = {}
+      items.reject! do |item|
+        if item.is_a?(Sass::Script::Value::Color)
+          styles[:color] = item
+        elsif item.is_a?(Sass::Script::Value::Number)
+          styles[:width] = item
+        else
+          case helpers.to_str(item)
+          when 'invert'
+            styles[:color] = item
+          when /^(?:none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset)$/
+            styles[:style] = item
+          when /^(?:thin|medium|thick)$/
+            styles[:width] = item
+          when 'inherit'
+            next
+          end
+        end
+        true
+      end
+      # at this point, we should only have `inherit` values left
+      items.each do |item|
+        if styles[:color].nil?
+          styles[:color] = item
+        elsif styles[:style].nil?
+          styles[:style] = item
+        else
+          styles[:width] ||= item
+        end
+      end
+      styles = set_default_styles(styles, 'outline', properties)
+      # make the styles available to the calling context
+      styles
+    end
+
+    if is_shorthand and augmented
+      return nil if styles.nil? or styles.empty?
+      styles = set_default_styles(styles, 'outline', properties)
+      return Sass::Script::Value::List.new([styles[:color], styles[:style], styles[:width]], :space)
+    end
+
+    # otherwise just return the value we were asked for
+    return styles[normalize_property_key(property)]
   end
 end

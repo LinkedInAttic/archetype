@@ -68,3 +68,8 @@
 /* derived-style($styles, list-style-type): square */
 /* derived-style($styles, list-style-position): inside */
 /* derived-style($styles, list-style-image): url(image.png) */
+/* derived-style($styles, outline): green dotted thick */
+/* derived-style($styles, outline-color): green */
+/* derived-style($styles, outline-style): dotted */
+/* derived-style($styles, outline-width): thick */
+/* derived-style($styles, outline-offset): 4px */
