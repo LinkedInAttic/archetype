@@ -840,7 +840,10 @@ private
     if is_shorthand
       return nil if styles.nil? or styles.empty?
       styles = set_default_styles(styles, 'list', properties)
-      return Sass::Script::Value::List.new([styles[:style_type], styles[:style_position], styles[:style_image]], :space)
+      value = [styles[:style_type], styles[:style_position], styles[:style_image]]
+      # we simplify it if the values are all identical
+      return value.first if value.uniq.length == 1
+      return Sass::Script::Value::List.new(value, :space)
     end
 
     # otherwise just return the value we were asked for
