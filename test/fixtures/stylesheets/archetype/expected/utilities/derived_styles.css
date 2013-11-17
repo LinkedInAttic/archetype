@@ -46,7 +46,16 @@
 /* derived-style($styles, background-clip): border-box */
 /* derived-style($styles, background-origin): content-box */
 /* derived-style($styles, background-size): 60px 80px */
-/* derived-style($styles, background): transparent 600px 10px auto no-repeat padding-box border-box scroll url(image1.png), transparent 10px 10px contain no-repeat padding-box border-box scroll url(image2.png), transparent left top auto repeat padding-box border-box scroll url(image3.png) */
+/* derived-style($styles, background): white 600px 10px auto no-repeat padding-box border-box scroll url(image1.png), white 10px 10px contain no-repeat padding-box border-box scroll url(image2.png), white left top auto repeat padding-box border-box scroll url(image3.png) */
+/* derived-style($styles, background-color): white */
+/* derived-style($styles, background-position): 600px 10px, 10px 10px, left top */
+/* derived-style($styles, background-attachment): scroll */
+/* derived-style($styles, background-image): url(image1.png), url(image2.png), url(image3.png) */
+/* derived-style($styles, background-repeat): no-repeat, no-repeat, repeat */
+/* derived-style($styles, background-clip): border-box */
+/* derived-style($styles, background-origin): padding-box */
+/* derived-style($styles, background-size): auto, contain, auto */
+/* derived-style($styles, background): url(image1.png) 600px 10px no-repeat, url(image2.png) 10px 10px contain no-repeat, url(image3.png) */
 /* derived-style($styles, background-color): transparent */
 /* derived-style($styles, background-position): 600px 10px, 10px 10px, left top */
 /* derived-style($styles, background-attachment): scroll */
