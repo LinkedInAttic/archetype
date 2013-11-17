@@ -604,7 +604,7 @@ private
               styles[:attachment] << item
             when /^(?:cover|contain)$/
               styles[:size] << item
-            when /(?:top|right|bottom|left|center)/
+            when /^(?:top|right|bottom|left|center)$/
               styles[:position][i] ||= []
               styles[:position][i] << item
             else
@@ -679,13 +679,6 @@ private
   # handles the `border` properties
   #
   def self.handle_derived_properties_for_border(related, property)
-    # TODO - implement
-  end
-
-  #
-  # handles the `font` properties
-  #
-  def self.handle_derived_properties_for_font(related, property)
     # TODO - implement
   end
 
@@ -794,8 +787,64 @@ private
   end
 
 
-  def self.handle_derived_properties_for_list
-    # TODO - implement
+  def self.handle_derived_properties_for_list(related, property)
+    is_shorthand = property == 'list-style'
+    properties = %w(style-type style-position style-image)
+    styles = {}
+    get_available_relatives(related, property).each do |key, value|
+      # if it's the shorthand property...
+      if key == 'list-style'
+        styles = {}
+        items = value.to_a.clone
+        if helpers.to_str(items) == 'inherit'
+          styles[:style_image] = styles[:style_type] = styles[:style_position] = items
+        else
+          items.reject! do |item|
+            case helpers.to_str(item)
+            when /^(?:armenian|circle|cjk-ideographic|decimal(?:-leading-zero)?|disc|georgian|hebrew|(?:hiragana|katakana)(?:-iroha)?|(?:lower|upper)-(?:alpha|greek|latin|roman)|square)$/
+              styles[:style_type] = item
+            when /^(?:inside|outside)$/
+              styles[:style_position] = item
+            when /^url\(.*\)$/
+              styles[:style_image] = item
+            else
+              next
+            end
+            true
+          end
+
+          items.each do |item|
+            case helpers.to_str(item)
+            when 'none'
+              if styles[:style_type].nil?
+                styles[:style_type] = item
+              else
+                styles[:style_image] ||= item
+              end
+            when 'inherit'
+              if styles[:style_type].nil?
+                styles[:style_type] = item
+              elsif styles[:style_type].nil?
+                styles[:style_position] = item
+              else
+                styles[:style_image] ||= item
+              end
+            end
+          end
+        end
+      else
+        styles[normalize_property_key(key)] = value
+      end
+    end
+
+    if is_shorthand
+      return nil if styles.nil? or styles.empty?
+      styles = set_default_styles(styles, 'list', properties)
+      return Sass::Script::Value::List.new([styles[:style_type], styles[:style_position], styles[:style_image]], :space)
+    end
+
+    # otherwise just return the value we were asked for
+    return styles[normalize_property_key(property)]
   end
 
   def self.handle_derived_properties_for_outline

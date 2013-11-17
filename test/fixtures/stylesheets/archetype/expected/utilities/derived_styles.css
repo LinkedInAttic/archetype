@@ -55,3 +55,7 @@
 /* derived-style($styles, background-clip): border-box */
 /* derived-style($styles, background-origin): padding-box */
 /* derived-style($styles, background-size): auto, contain, auto */
+/* derived-style($styles, list-style): square inside url(image.png) */
+/* derived-style($styles, list-style-type): square */
+/* derived-style($styles, list-style-position): inside */
+/* derived-style($styles, list-style-image): url(image.png) */

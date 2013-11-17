@@ -200,5 +200,19 @@
     //@include assert-equal(derived-style($styles, background-clip), border-box, "TODO...");
     //@include assert-equal(derived-style($styles, background-origin), padding-box, "TODO...");
     //@include assert-equal(derived-style($styles, background-size), (auto, contain, auto), "TODO...");
+
+    $styles: (
+      list-style-image: none,
+      list-style: square url(image.png),
+      list-style-position: inside
+    );
+    /* derived-style($styles, list-style): #{derived-style($styles, list-style)} */
+    /* derived-style($styles, list-style-type): #{derived-style($styles, list-style-type)} */
+    /* derived-style($styles, list-style-position): #{derived-style($styles, list-style-position)} */
+    /* derived-style($styles, list-style-image): #{derived-style($styles, list-style-image)} */
+    //@include assert-equal(derived-style($styles, list-style), (square inside url(image.png)), "TODO...");
+    //@include assert-equal(derived-style($styles, list-style-type), square, "TODO...");
+    //@include assert-equal(derived-style($styles, list-style-position), inside, "TODO...");
+    //@include assert-equal(derived-style($styles, list-style-image), url(image.png), "TODO...");
   //}
 //}
