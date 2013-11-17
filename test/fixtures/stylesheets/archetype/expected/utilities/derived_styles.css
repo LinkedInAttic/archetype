@@ -1,8 +1,57 @@
-/*  
-
-### tests for getting derived styles ------ */
-/*  - [function] derived-style() (39 Assertions, 39 Passed, 0 Failed) */
-/*  
-    1 Tests:
-    - 1 Passed
-    - 0 Failed */
+/* derived-style(null, height):  */
+/* derived-style($empty, height):  */
+/* derived-style($styles, null):  */
+/* derived-style($styles, height): 10px */
+/* derived-style($styles, overflow):  */
+/* derived-style($styles, border): 1px solid red */
+/* derived-style($styles, overflow): hidden */
+/* derived-style($styles, overflow-x): visible */
+/* derived-style($styles, overflow-y): hidden */
+/* derived-style($styles, margin): 7px 3px 7px 15px */
+/* derived-style($styles, margin-top): 7px */
+/* derived-style($styles, margin-right): 3px */
+/* derived-style($styles, margin-bottom): 7px */
+/* derived-style($styles, margin-left): 15px */
+/* derived-style($styles, margin-broken):  */
+/* derived-style($styles, padding): 7px 2px 3px auto */
+/* derived-style($styles, padding-top): 7px */
+/* derived-style($styles, padding-right): 2px */
+/* derived-style($styles, padding-bottom): 3px */
+/* derived-style($styles, padding-left): auto */
+/* derived-style($styles, padding-broken):  */
+/* derived-style($styles, padding):  */
+/* derived-style($styles, padding-top): 3px */
+/* derived-style($styles, animation): myAnimationName 5s ease-out 2s infinite alternate forwards running */
+/* derived-style($styles, animation-name): myAnimationName */
+/* derived-style($styles, animation-duration): 5s */
+/* derived-style($styles, animation-iteration-count): infinite */
+/* derived-style($styles, animation-direction): alternate */
+/* derived-style($styles, animation-timing-function): ease-out */
+/* derived-style($styles, animation-fill-mode): forwards */
+/* derived-style($styles, animation-delay): 2s */
+/* derived-style($styles, animation-play-state): running */
+/* derived-style($styles, animation):  */
+/* derived-style($styles, animation-name):  */
+/* derived-style($styles, animation-duration): 4s */
+/* derived-style($styles, target): new window behind */
+/* derived-style($styles, target-name): new */
+/* derived-style($styles, target-new): window */
+/* derived-style($styles, target-position): behind */
+/* derived-style($styles, background): red top 7% 60px 80px no-repeat content-box border-box scroll url(image.png) */
+/* derived-style($styles, background-color): red */
+/* derived-style($styles, background-position): top 7% */
+/* derived-style($styles, background-attachment): scroll */
+/* derived-style($styles, background-image): url(image.png) */
+/* derived-style($styles, background-repeat): no-repeat */
+/* derived-style($styles, background-clip): border-box */
+/* derived-style($styles, background-origin): content-box */
+/* derived-style($styles, background-size): 60px 80px */
+/* derived-style($styles, background): transparent 600px 10px auto no-repeat padding-box border-box scroll url(image1.png), transparent 10px 10px contain no-repeat padding-box border-box scroll url(image2.png), transparent left top auto repeat padding-box border-box scroll url(image3.png) */
+/* derived-style($styles, background-color): transparent */
+/* derived-style($styles, background-position): 600px 10px, 10px 10px, left top */
+/* derived-style($styles, background-attachment): scroll */
+/* derived-style($styles, background-image): url(image1.png), url(image2.png), url(image3.png) */
+/* derived-style($styles, background-repeat): no-repeat, no-repeat, repeat */
+/* derived-style($styles, background-clip): border-box */
+/* derived-style($styles, background-origin): padding-box */
+/* derived-style($styles, background-size): auto, contain, auto */

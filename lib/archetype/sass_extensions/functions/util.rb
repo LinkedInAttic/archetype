@@ -52,7 +52,7 @@ module Archetype::SassExtensions::Util
   def has_multiple_values(map)
     meta = map_get_meta(map)
     return map_has_key(meta, Sass::Script::Value::String.new(helpers::META[:has_multiples])) if not meta.value.nil?
-    return Sass::Script::Value::Bool.new(false);
+    return Sass::Script::Value::Bool.new(false)
   end
 
   #
@@ -83,9 +83,6 @@ module Archetype::SassExtensions::Util
   def derived_style(styles, properties = [], format = 'auto')
     # - <tt>$strict</tt> {Boolean} if true, will only return an exact match, and not try to extrapolate the value
     # strict = Sass::Script::Value::Bool.new(false)
-    puts '='*20
-    puts helpers.data_to_hash(styles)
-    puts '-'*20
     return Archetype::Functions::CSS.get_derived_styles(helpers.data_to_hash(styles), properties, helpers.to_str(format).to_sym, true)
   end
 

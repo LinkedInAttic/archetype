@@ -165,7 +165,6 @@ module Archetype::Functions::Helpers
     data.each do |key, value|
       key = to_str(key, ' ' , :quotes)
       hsh[key] = value.is_a?(Sass::Script::Value::Map) ? map_to_hash(value) : value
-      puts to_str(hsh[key]) if not hsh[key].is_a?(Hash)
     end
     return hsh
   end
