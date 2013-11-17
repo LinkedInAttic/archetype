@@ -616,7 +616,7 @@ private
 
         # deal with the `position` and `size`, as they're order dependent...
         items.each do |item|
-          if item.is_a?(Sass::Script::Value::Number)
+          if item.is_a?(Sass::Script::Value::Number) or helpers.to_str(item) == 'auto'
             styles[:position][i] ||= []
             if styles[:position][i].length < 2
               styles[:position][i] << item
@@ -679,14 +679,14 @@ private
   # handles the `border` properties
   #
   def self.handle_derived_properties_for_border(related, property)
-    # TODO
+    # TODO - implement
   end
 
   #
   # handles the `font` properties
   #
   def self.handle_derived_properties_for_font(related, property)
-    # TODO
+    # TODO - implement
   end
 
   #
@@ -793,4 +793,12 @@ private
     return styles[normalize_property_key(property)]
   end
 
+
+  def self.handle_derived_properties_for_list
+    # TODO - implement
+  end
+
+  def self.handle_derived_properties_for_outline
+    # TODO - implement
+  end
 end
