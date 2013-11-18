@@ -355,7 +355,8 @@ private
   # - {Boolean} true if the property is a root property
   #
   def self.is_root_property?(property)
-    return property == get_property_base(property)
+    special_roots = %w(list-style)
+    return special_roots.push(get_property_base(property)).include?(property)
   end
 
   #
@@ -436,7 +437,7 @@ private
         styles = yield(value.to_a.clone, (value.is_a?(Sass::Script::Value::List) && value.separator == :comma)) if block_given?
       end
     end
-    return styles, augmented
+    return styles, (augmented && is_root_property?(property))
   end
 
   ####
@@ -488,9 +489,7 @@ private
   # handle cases where property values denote [top right bottom left]
   #
   def self.handle_derived_properties_for_margin_padding(related, property)
-    # we only care about the last piece of the property (e.g. `margin` or `top`)
-    is_shorthand = is_root_property?(property)
-    styles, augmented = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
       # and extract the top/right/bottom/left values
       # make the styles available to the calling context
@@ -502,7 +501,7 @@ private
       }
     end
     # if we're getting the shorthand property, reconstruct the shorthand value
-    if is_shorthand and augmented
+    if reconstruct
       value = extrapolate_shorthand_margin_padding(styles)
       # if the value came back nil, we were missing something, so throw a warning...
       warn_not_enough_infomation_to_derive(property) if value.nil?
@@ -525,8 +524,7 @@ private
   #
   def self.handle_derived_properties_for_animation(related, property)
     properties = %w(name duration timing-function delay iteration-count direction play-state)
-    is_shorthand = is_root_property?(property)
-    styles, augmented = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
       # identify the items that are timing units
       timings = get_timing_values(items)
@@ -561,7 +559,7 @@ private
       styles
     end
 
-    if is_shorthand and augmented
+    if reconstruct
       value = extrapolate_shorthand_animation(styles)
       # if the value came back nil, we were missing something, so throw a warning...
       warn_not_enough_infomation_to_derive(property) if value.nil?
@@ -578,8 +576,7 @@ private
   def self.handle_derived_properties_for_background(related, property)
     properties = %w(color position size repeat origin clip attachment image)
     property_order = [:color, :position, :size, :repeat, :origin, :clip, :attachment, :image]
-    is_shorthand = is_root_property?(property)
-    styles, augmented = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
       i = 0
       # blow away anything we've already discovered (because it's irrelevant)
       styles = {}
@@ -645,7 +642,7 @@ private
       styles
     end
 
-    if is_shorthand and augmented
+    if reconstruct
       if styles.nil?
         warn_not_enough_infomation_to_derive(property)
         return nil
@@ -709,9 +706,9 @@ private
   #
   def self.handle_derived_properties_for_target(related, property)
     properties = %w(name new position)
-    is_shorthand = is_root_property?(property)
+    #####TODO
     relatives = get_available_relatives(related, property)
-    styles, augmented = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
       # target-name target-new target-position
       styles = { :name => items.shift }
@@ -729,7 +726,7 @@ private
       # make the styles available to the calling context
       styles
     end
-    if is_shorthand and augmented
+    if reconstruct
       if styles.nil? or styles[:name].nil?
         warn_not_enough_infomation_to_derive(property)
         return nil
@@ -746,9 +743,8 @@ private
   # handles the `transition` properties
   #
   def self.handle_derived_properties_for_transition(related, property)
-    is_shorthand = is_root_property?(property)
     properties = %w(property duration timing-function delay)
-    styles, augmented = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
       timings = get_timing_values(items)
       items = items - timings
@@ -774,7 +770,7 @@ private
       styles
     end
 
-    if is_shorthand and augmented
+    if reconstruct
       if styles.nil? or styles[:property].nil?
         warn_not_enough_infomation_to_derive(property) if not styles.empty?
         return nil
@@ -789,57 +785,49 @@ private
 
 
   def self.handle_derived_properties_for_list(related, property)
-    is_shorthand = property == 'list-style'
     properties = %w(style-type style-position style-image)
-    augmented = false
-    styles = {}
-    get_available_relatives(related, property).each do |key, value|
-      styles[normalize_property_key(key)] = value
-      augmented = !(key == 'list-style')
-      # if it's the shorthand property...
-      if !augmented
-        styles = {}
-        items = value.to_a.clone
-        if helpers.to_str(items) == 'inherit'
-          styles[:style_image] = styles[:style_type] = styles[:style_position] = items
-        else
-          items.reject! do |item|
-            case helpers.to_str(item)
-            when /^(?:armenian|circle|cjk-ideographic|decimal(?:-leading-zero)?|disc|georgian|hebrew|(?:hiragana|katakana)(?:-iroha)?|(?:lower|upper)-(?:alpha|greek|latin|roman)|square)$/
-              styles[:style_type] = item
-            when /^(?:inside|outside)$/
-              styles[:style_position] = item
-            when /^url\(.*\)$/
-              styles[:style_image] = item
-            else
-              next
-            end
-            true
+    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
+      styles = {}
+      if helpers.to_str(items) == 'inherit'
+        styles[:style_image] = styles[:style_type] = styles[:style_position] = items
+      else
+        items.reject! do |item|
+          case helpers.to_str(item)
+          when /^(?:armenian|circle|cjk-ideographic|decimal(?:-leading-zero)?|disc|georgian|hebrew|(?:hiragana|katakana)(?:-iroha)?|(?:lower|upper)-(?:alpha|greek|latin|roman)|square)$/
+            styles[:style_type] = item
+          when /^(?:inside|outside)$/
+            styles[:style_position] = item
+          when /^url\(.*\)$/
+            styles[:style_image] = item
+          else
+            next
           end
+          true
+        end
 
-          items.each do |item|
-            case helpers.to_str(item)
-            when 'none'
-              if styles[:style_type].nil?
-                styles[:style_type] = item
-              else
-                styles[:style_image] ||= item
-              end
-            when 'inherit'
-              if styles[:style_type].nil?
-                styles[:style_type] = item
-              elsif styles[:style_type].nil?
-                styles[:style_position] = item
-              else
-                styles[:style_image] ||= item
-              end
+        items.each do |item|
+          case helpers.to_str(item)
+          when 'none'
+            if styles[:style_type].nil?
+              styles[:style_type] = item
+            else
+              styles[:style_image] ||= item
+            end
+          when 'inherit'
+            if styles[:style_type].nil?
+              styles[:style_type] = item
+            elsif styles[:style_type].nil?
+              styles[:style_position] = item
+            else
+              styles[:style_image] ||= item
             end
           end
         end
       end
+      styles
     end
 
-    if is_shorthand and augmented
+    if reconstruct
       return nil if styles.nil? or styles.empty?
       styles = set_default_styles(styles, 'list', properties)
       value = [styles[:style_type], styles[:style_position], styles[:style_image]]
@@ -853,9 +841,8 @@ private
   end
 
   def self.handle_derived_properties_for_outline(related, property)
-    is_shorthand = is_root_property?(property)
     properties = %w(color style width)
-    styles, augmented = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
       styles = {}
       items.reject! do |item|
@@ -892,7 +879,7 @@ private
       styles
     end
 
-    if is_shorthand and augmented
+    if reconstruct
       return nil if styles.nil? or styles.empty?
       styles = set_default_styles(styles, 'outline', properties)
       return Sass::Script::Value::List.new([styles[:color], styles[:style], styles[:width]], :space)
