@@ -320,7 +320,9 @@ private
     # if we don't need any additional processing, stop here
     return nil if not self.respond_to?(handler)
     base = /^#{base}/
-    return self.method(handler).call(hsh.select { |key, value| key =~ base }, property)
+    value = self.method(handler).call(hsh.select { |key, value| key =~ base }, property)
+    value = value[normalize_property_key(property)] if value.is_a?(Hash)
+    return value
   end
 
   # TODO - doc
@@ -333,9 +335,11 @@ private
   #
   # *Parameters*:
   # - <tt>property</tt> {String} the property
+  # - <tt>info</tt> {String} additional info to display
   #
-  def self.warn_cannot_disambiguate_property(property)
-    warn("Archetype doesn't currently know how to disambiguate the CSS property `#{property}`")
+  def self.warn_cannot_disambiguate_property(property, info = nil)
+    info = info.nil? or info.empty? ? '' : " (#{info})"
+    warn("can't disambiguate the CSS property `#{property}#{info}`")
   end
 
   #
@@ -355,7 +359,7 @@ private
   # - {Boolean} true if the property is a root property
   #
   def self.is_root_property?(property)
-    special_roots = %w(list-style)
+    special_roots = %w(list-style border-image border-collapse border-spacing)
     return special_roots.push(get_property_base(property)).include?(property)
   end
 
@@ -369,40 +373,73 @@ private
   # - {Hash} the available related properties and their values
   #
   def self.get_available_relatives(related, property)
-    previous = nil
     set = Set.new
-    # find all potential parents (and self)
-    property.split('-').each do |value|
-      value = previous.nil? ? value : "#{previous}-#{value}"
-      set << value
-      previous = value
+    # border is a special case
+    if property =~ /^border/
+      set = get_available_relatives_for_border(related, property)
+    # everything else
+    else
+      previous = nil
+      # find all potential parents (and self)
+      property.split('-').each do |value|
+        value = previous.nil? ? value : "#{previous}-#{value}"
+        set << value
+        previous = value
+      end
+      base = /(?:^|\s)#{Regexp.escape(property)}-[^\s]+(?:$|\s)/
+      related.each do |key, value|
+        set << key if key =~ base
+      end
     end
-    base = /(?:^|\s)#{Regexp.escape(property)}-[^\s]+(?:$|\s)/
-    related.each do |key, value|
-      set << key if key =~ base
-    end
-    # special cases need to manipulate the set
-    # border
-    # TODO...
 
-    styles = {}
-    related.each do |key, value|
-      styles[key] = value if set.include?(key)
-    end
-    return styles
+    return related.select { |key, value| set.include?(key) }
   end
 
-  #
-  # helper to iterate over each available relative property
-  #
-  # *Parameters*:
-  # - <tt>related</tt> {Hash} the hash of styles
-  # - <tt>property</tt> {String} the property to observe
-  #
-  def self.with_each_available_relative(related, property)
-    get_available_relatives(related, property).each do |key, value|
-      yield(key, value) if block_given?
+  def self.get_available_relatives_for_border(related, property)
+    set = Set.new
+    rs_position = '(-(?:top|right|bottom|left))'
+    rs_type = '(-(?:color|width|style))'
+    r_border = /^border#{rs_position}?#{rs_type}?$/
+    case property
+    # border-radius and border-image
+    when /(radius|image)/
+      match = $1
+      if property == "border-#{match}"
+        pattern = /^border-.*#{match}/
+        ALL_CSS_PROPERTIES.each { |k,v| set << k if k =~ pattern }
+      else
+        set << "border-#{match}"
+        set << property
+      end
+    when r_border
+      if property != 'border'
+        position, type = $1, $2
+        if position
+          if type
+            # position and type
+            # e.g. for border-top-width
+            # we'll need: border, border-top, border-top-width, border-width
+            r_border = /^(border|border#{position}(#{type})?$|border#{type})$/
+          else
+            # position only
+            # e.g. for border-top
+            # we'll need: border, border-top, border-top-{type}, border-{type}
+            r_border = /^(border|border#{position}#{rs_type}?$|border#{rs_type})$/
+          end
+        else
+          # type only
+          # e.g. for border-width
+          # we'll need: border, border-width, border-{position}-width, border-{position}
+          r_border = /^(border|border#{rs_position}?#{type}$|border#{rs_position})$/
+        end
+      end
+      ALL_CSS_PROPERTIES.each { |k,v| set << k if k =~ r_border }
+    # handle border-collapse and border-spacing
+    else
+      set << property
     end
+    puts "relatives of `#{property}` include: #{set.inspect}"
+    return set
   end
 
   # TODO - doc
@@ -426,13 +463,26 @@ private
     end
   end
 
-  def self.with_each_relative_if_root(related, property)
+  #
+  # helper to iterate over each available relative property
+  #
+  # *Parameters*:
+  # - <tt>related</tt> {Hash} the hash of styles
+  # - <tt>property</tt> {String} the property to observe
+  #
+  def self.with_each_available_relative(related, property)
+    get_available_relatives(related, property).each do |key, value|
+      yield(key, value) if block_given?
+    end
+  end
+
+  def self.with_each_available_relative_if_root(related, property)
     styles = {}
     augmented = false
-    get_available_relatives(related, property).each do |key, value|
-      # if it's the shorthand property...
+    with_each_available_relative(related, property) do |key, value|
       styles[normalize_property_key(key)] = value
       augmented = !is_root_property?(key)
+      # if it's the shorthand property...
       if !augmented
         styles = yield(value.to_a.clone, (value.is_a?(Sass::Script::Value::List) && value.separator == :comma)) if block_given?
       end
@@ -489,7 +539,7 @@ private
   # handle cases where property values denote [top right bottom left]
   #
   def self.handle_derived_properties_for_margin_padding(related, property)
-    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
       # and extract the top/right/bottom/left values
       # make the styles available to the calling context
@@ -509,7 +559,7 @@ private
     end
 
     # otherwise just return the value we were asked for
-    return styles[normalize_property_key(property)]
+    return styles
   end
 
   def self.set_default_styles(styles, base, properties)
@@ -524,7 +574,7 @@ private
   #
   def self.handle_derived_properties_for_animation(related, property)
     properties = %w(name duration timing-function delay iteration-count direction play-state)
-    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
       # identify the items that are timing units
       timings = get_timing_values(items)
@@ -567,7 +617,7 @@ private
     end
 
     # otherwise just return the value we were asked for
-    return styles[normalize_property_key(property)]
+    return styles
   end
 
   #
@@ -576,7 +626,7 @@ private
   def self.handle_derived_properties_for_background(related, property)
     properties = %w(color position size repeat origin clip attachment image)
     property_order = [:color, :position, :size, :repeat, :origin, :clip, :attachment, :image]
-    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       i = 0
       # blow away anything we've already discovered (because it's irrelevant)
       styles = {}
@@ -670,14 +720,19 @@ private
     end
 
     # otherwise just return the value we were asked for
-    return styles[normalize_property_key(property)]
+    return styles
   end
 
   #
   # handles the `border` properties
   #
   def self.handle_derived_properties_for_border(related, property)
-    # TODO - implement
+    styles = {}
+    with_each_available_relative(related, property) do |key, value|
+      puts "  `#{key}`: `#{value}`"
+    end
+
+    return styles
   end
 
   #
@@ -706,9 +761,7 @@ private
   #
   def self.handle_derived_properties_for_target(related, property)
     properties = %w(name new position)
-    #####TODO
-    relatives = get_available_relatives(related, property)
-    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
       # target-name target-new target-position
       styles = { :name => items.shift }
@@ -736,7 +789,7 @@ private
     end
 
     # otherwise just return the value we were asked for
-    return styles[normalize_property_key(property)]
+    return styles
   end
 
   #
@@ -744,7 +797,7 @@ private
   #
   def self.handle_derived_properties_for_transition(related, property)
     properties = %w(property duration timing-function delay)
-    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
       timings = get_timing_values(items)
       items = items - timings
@@ -780,13 +833,13 @@ private
     end
 
     # otherwise just return the value we were asked for
-    return styles[normalize_property_key(property)]
+    return styles
   end
 
 
   def self.handle_derived_properties_for_list(related, property)
     properties = %w(style-type style-position style-image)
-    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       styles = {}
       if helpers.to_str(items) == 'inherit'
         styles[:style_image] = styles[:style_type] = styles[:style_position] = items
@@ -837,12 +890,12 @@ private
     end
 
     # otherwise just return the value we were asked for
-    return styles[normalize_property_key(property)]
+    return styles
   end
 
   def self.handle_derived_properties_for_outline(related, property)
     properties = %w(color style width)
-    styles, reconstruct = with_each_relative_if_root(related, property) do |items, comma_separated|
+    styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
       styles = {}
       items.reject! do |item|
@@ -886,6 +939,6 @@ private
     end
 
     # otherwise just return the value we were asked for
-    return styles[normalize_property_key(property)]
+    return styles
   end
 end
