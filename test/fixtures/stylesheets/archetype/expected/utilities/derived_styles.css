@@ -4,6 +4,42 @@
 /* derived-style($styles, height): 10px */
 /* derived-style($styles, overflow):  */
 /* derived-style($styles, border): 1px solid red */
+/* derived-style($styles, border-color): white */
+/* derived-style($styles, border-style):  */
+/* derived-style($styles, border-width): 3px */
+/* derived-style($styles, border-bottom):  */
+/* derived-style($styles, border-bottom-color):  */
+/* derived-style($styles, border-bottom-style):  */
+/* derived-style($styles, border-bottom-width):  */
+/* derived-style($styles, border-left): 2px solid green */
+/* derived-style($styles, border-left-color):  */
+/* derived-style($styles, border-left-style):  */
+/* derived-style($styles, border-left-width):  */
+/* derived-style($styles, border-right):  */
+/* derived-style($styles, border-right-color):  */
+/* derived-style($styles, border-right-style):  */
+/* derived-style($styles, border-right-width):  */
+/* derived-style($styles, border-top):  */
+/* derived-style($styles, border-top-color):  */
+/* derived-style($styles, border-top-style):  */
+/* derived-style($styles, border-top-width): 4px */
+/* ----------------------- */
+/* derived-style($styles, border-spacing): 10px 50px */
+/* ----------------------- */
+/* derived-style($styles, border-collapse): collapse */
+/* ----------------------- */
+/* derived-style($styles, border-image): url(image.png) 25 30% 10 20 fill / 15 / 1 repeat stretch */
+/* derived-style($styles, border-image-outset): 1 */
+/* derived-style($styles, border-image-repeat): repeat stretch */
+/* derived-style($styles, border-image-slice): 25 30% 10 20 fill */
+/* derived-style($styles, border-image-source): url(image.png) */
+/* derived-style($styles, border-image-width): 15 */
+/* ----------------------- */
+/* derived-style($styles, border-radius): 2px */
+/* derived-style($styles, border-bottom-left-radius):  */
+/* derived-style($styles, border-bottom-right-radius): 7px */
+/* derived-style($styles, border-top-left-radius): 3px */
+/* derived-style($styles, border-top-right-radius):  */
 /* derived-style($styles, overflow): hidden */
 /* derived-style($styles, overflow-x): visible */
 /* derived-style($styles, overflow-y): hidden */

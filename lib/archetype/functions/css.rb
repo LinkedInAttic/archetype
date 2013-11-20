@@ -300,6 +300,10 @@ module Archetype::Functions::CSS
 private
 
   R_TIMING_FUNCTION = /^(?:linear|ease|ease-in|ease-out|ease-in-out|step-start|step-stop|steps\(.*\)|cubic-bezier\(.*\)|)$/
+  RS_BORDER_POSITION = '(-(?:top|right|bottom|left))'
+  RS_BORDER_TYPE = '(-(?:color|width|style))'
+  R_BORDER_STD = /^border#{RS_BORDER_POSITION}?#{RS_BORDER_TYPE}?$/
+  R_BORDER_IMG_OR_RADIUS = /(image|radius)/
 
   def self.helpers
     @helpers ||= Archetype::Functions::Helpers
@@ -359,7 +363,7 @@ private
   # - {Boolean} true if the property is a root property
   #
   def self.is_root_property?(property)
-    special_roots = %w(list-style border-image border-collapse border-spacing)
+    special_roots = %w(list-style border-image border-radius)
     return special_roots.push(get_property_base(property)).include?(property)
   end
 
@@ -397,21 +401,19 @@ private
 
   def self.get_available_relatives_for_border(related, property)
     set = Set.new
-    rs_position = '(-(?:top|right|bottom|left))'
-    rs_type = '(-(?:color|width|style))'
-    r_border = /^border#{rs_position}?#{rs_type}?$/
+    set << property
     case property
     # border-radius and border-image
-    when /(radius|image)/
+    when R_BORDER_IMG_OR_RADIUS
       match = $1
       if property == "border-#{match}"
         pattern = /^border-.*#{match}/
         ALL_CSS_PROPERTIES.each { |k,v| set << k if k =~ pattern }
       else
         set << "border-#{match}"
-        set << property
       end
-    when r_border
+    when R_BORDER_STD
+      pattern = R_BORDER_STD
       if property != 'border'
         position, type = $1, $2
         if position
@@ -419,27 +421,34 @@ private
             # position and type
             # e.g. for border-top-width
             # we'll need: border, border-top, border-top-width, border-width
-            r_border = /^(border|border#{position}(#{type})?$|border#{type})$/
+            pattern = /^(border|border#{position}(#{type})?$|border#{type})$/
           else
             # position only
             # e.g. for border-top
             # we'll need: border, border-top, border-top-{type}, border-{type}
-            r_border = /^(border|border#{position}#{rs_type}?$|border#{rs_type})$/
+            pattern = /^(border|border#{position}#{RS_BORDER_TYPE}?$|border#{RS_BORDER_TYPE})$/
           end
         else
           # type only
           # e.g. for border-width
           # we'll need: border, border-width, border-{position}-width, border-{position}
-          r_border = /^(border|border#{rs_position}?#{type}$|border#{rs_position})$/
+          pattern = /^(border|border#{RS_BORDER_POSITION}?#{type}$|border#{RS_BORDER_POSITION})$/
         end
       end
-      ALL_CSS_PROPERTIES.each { |k,v| set << k if k =~ r_border }
-    # handle border-collapse and border-spacing
-    else
-      set << property
+      ALL_CSS_PROPERTIES.each { |k,v| set << k if k =~ pattern }
     end
-    puts "relatives of `#{property}` include: #{set.inspect}"
     return set
+  end
+
+  # TODO - doc
+  def self.collapse_multi_value_lists(styles, separator = :space)
+    styles.each do |key, value|
+      if value.is_a?(Array)
+        # if all the values are identical, we just need to return one
+        styles[key] = value.uniq.length == 1 ? value.first : Sass::Script::Value::List.new(value, separator)
+      end
+    end
+    return styles
   end
 
   # TODO - doc
@@ -484,7 +493,7 @@ private
       augmented = !is_root_property?(key)
       # if it's the shorthand property...
       if !augmented
-        styles = yield(value.to_a.clone, (value.is_a?(Sass::Script::Value::List) && value.separator == :comma)) if block_given?
+        styles = yield(value.to_a.dup, (value.is_a?(Sass::Script::Value::List) && value.separator == :comma)) if block_given?
       end
     end
     return styles, (augmented && is_root_property?(property))
@@ -633,7 +642,7 @@ private
       properties.each { |k| styles[k.to_sym] = [] }
 
       (comma_separated ? items.to_a : [items]).each do |items|
-        items = items.to_a.clone if items.respond_to?(:to_a)
+        items = items.to_a.dup if items.respond_to?(:to_a)
         items.reject! do |item|
           if item.is_a?(Sass::Script::Value::Color)
             styles[:color] << item
@@ -712,12 +721,7 @@ private
     end
 
     # collapse any multi-background values we got
-    styles.each do |key, value|
-      if value.is_a?(Array)
-        # if all the values are identical, we just need to return one
-        styles[key] = value.uniq.length == 1 ? value.first : Sass::Script::Value::List.new(value, :comma)
-      end
-    end
+    styles = collapse_multi_value_lists(styles, :comma)
 
     # otherwise just return the value we were asked for
     return styles
@@ -726,13 +730,114 @@ private
   #
   # handles the `border` properties
   #
-  def self.handle_derived_properties_for_border(related, property)
+  def self.handle_derived_properties_for_border(related, property, original_property = nil)
+    properties = {
+      :image => %w(image-source image-slice image-width image-outset image-repeat)
+    }
+    type = case property
+    when R_BORDER_IMG_OR_RADIUS
+      $1.to_sym
+    when R_BORDER_STD
+      :border
+    end
+    properties = properties[type]
     styles = {}
+    augmented = false
+    puts "finding value for `#{property}`"
     with_each_available_relative(related, property) do |key, value|
+      items = value.to_a.dup
+      styles[normalize_property_key(key)] = value
+      case type
+      when :image
+        # border-image
+        augmented = !is_root_property?(key)
+        contexts = [:image_slice, :image_width, :image_outset]
+        context = contexts.shift
+        count = 1
+        if !augmented
+          styles = {}
+          items.each do |item|
+            # source slice width outset repeat
+            # <source> <slice {1,4}> / <width {1,4}> <outset> <repeat{1,2}>
+            case helpers.to_str(item)
+            when /^(?:url\(.*\)|none)$/
+              styles[:image_source] = item
+            when /^(?:stretch|repeat|round|space)$/
+              styles[:image_repeat] ||= []
+              styles[:image_repeat] << item
+            when /(.+)\/(.+)/ # delimiter to denote which context (slice, width, outset) we're observing
+              [$1, $2].each_with_index do |item, i|
+                count -= 1 if item == 'fill' # don't count `fill`
+                if count > 4 or i == 1
+                  context = contexts.shift
+                  count = 1
+                end
+                if context
+                  item = (item =~ /^(\d+(?:\.\d+)?)(.*)/) ? Sass::Script::Value::Number.new($1.to_f, [$2]) : Sass::Script::Value::String.new(item)
+                  styles[context] ||= []
+                  styles[context] << item
+                  count += 1
+                end
+              end
+            when /^\d+/
+              # if we've reached out limit for the current context, adjust
+              if count > 4
+                context = contexts.shift
+                count = 1
+              end
+              # if we have a context, stash the value onto it
+              if context
+                styles[context] ||= []
+                styles[context] << item
+                count += 1
+              end
+            when /^fill$/
+              styles[:image_slice] ||= []
+              styles[:image_slice] << item
+               # don't count `fill`
+            when /^auto$/
+              styles[:image_width] ||= []
+              styles[:image_width] << item
+              count += 1
+            else
+              next
+            end
+            true
+          end
+          styles = set_default_styles(styles, 'border-image', properties)
+        end
+      when :radius
+        # border-radius
+      when :border
+
+      else
+        return nil
+      end
       puts "  `#{key}`: `#{value}`"
     end
+    pattern = /^border(#{RS_BORDER_POSITION}|#{RS_BORDER_TYPE})$/
 
-    return styles
+    puts "styles are: #{styles.inspect}"
+
+    styles = collapse_multi_value_lists(styles)
+
+    if augmented and (is_root_property?(property) or property =~ pattern)
+      value = nil
+      case type
+      when :radius
+        # border-radius
+      when :image
+        slash = Sass::Script::Value::String.new('/')
+        styles = set_default_styles(styles, 'border-image', properties)
+        value = [styles[:image_source], styles[:image_slice], slash, styles[:image_width], slash, styles[:image_outset], styles[:image_repeat]]
+      else
+        value = extrapolate_shorthand_simple(styles, property, properties)
+      end
+      puts "   shorthand for `#{property}` is: #{value}"
+      return Sass::Script::Value::List.new(value, :space)
+    end
+
+    return styles[normalize_property_key(property)]
   end
 
   #
@@ -784,7 +889,7 @@ private
         warn_not_enough_infomation_to_derive(property)
         return nil
       end
-      value = extrapolate_shorthand_simple(styles, 'target', properties)
+      value = extrapolate_shorthand_simple(styles, property, properties)
       return Sass::Script::Value::List.new(value, :space)
     end
 
@@ -828,7 +933,7 @@ private
         warn_not_enough_infomation_to_derive(property) if not styles.empty?
         return nil
       end
-      value = extrapolate_shorthand_simple(styles, 'transition', properties)
+      value = extrapolate_shorthand_simple(styles, property, properties)
       return Sass::Script::Value::List.new(value, :space)
     end
 

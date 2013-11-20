@@ -5,7 +5,7 @@
     // some simple tests...
     $styles: (
       height: 10px,
-      line-height: 7px
+      line-height: 7px,
       // TODO line-height should also derive from `font` shorthand
     );
     $empty: ();
@@ -31,7 +31,8 @@
       border-top-left-radius: 3px,
       border-radius: 2px,
       border-bottom-right-radius: 7px,
-      //border-image: source slice width outset repeat,
+      border-image: url(image.png) 25 30% 10 20 fill / 12px auto / 1 repeat stretch,
+      border-image-width: 15,
       border-collapse: collapse,
       border-spacing: 10px 50px,
     );
@@ -76,7 +77,7 @@
     $styles: (
       overflow-y: visible,
       overflow: hidden,
-      overflow-x: visible
+      overflow-x: visible,
     );
     /* derived-style($styles, overflow): #{derived-style($styles, overflow)} */
     /* derived-style($styles, overflow-x): #{derived-style($styles, overflow-x)} */
@@ -90,7 +91,7 @@
       margin: 7px 3px,
       margin-left: 15px,
       color: red,
-      padding-top: 5px
+      padding-top: 5px,
     );
     /* derived-style($styles, margin): #{derived-style($styles, margin)} */
     /* derived-style($styles, margin-top): #{derived-style($styles, margin-top)} */
@@ -111,7 +112,7 @@
       padding-left: auto,
       padding-right: 2px,
       color: red,
-      margin-top: 5px
+      margin-top: 5px,
     );
     /* derived-style($styles, padding): #{derived-style($styles, padding)} */
     /* derived-style($styles, padding-top): #{derived-style($styles, padding-top)} */
@@ -131,7 +132,7 @@
       padding-top: 3px,
       padding-bottom: 3px,
       maring-left: 5px,
-      margin-right: 5px
+      margin-right: 5px,
     );
     /* derived-style($styles, padding): #{derived-style($styles, padding)} */
     /* derived-style($styles, padding-top): #{derived-style($styles, padding-top)} */
@@ -146,7 +147,7 @@
       animation-direction: alternate,
       animation-timing-function: ease-out,
       animation-fill-mode: forwards,
-      animation-delay: 2s
+      animation-delay: 2s,
     );
     /* derived-style($styles, animation): #{derived-style($styles, animation)} */
     /* derived-style($styles, animation-name): #{derived-style($styles, animation-name)} */
@@ -171,7 +172,7 @@
       animation-duration: 4s,
       animation-iteration-count: 10,
       animation-fill-mode: forwards,
-      animation-delay: 2s
+      animation-delay: 2s,
     );
     /* derived-style($styles, animation): #{derived-style($styles, animation)} */
     /* derived-style($styles, animation-name): #{derived-style($styles, animation-name)} */
@@ -183,7 +184,7 @@
     $styles: (
       target-name: current,
       target: new front,
-      target-position: behind
+      target-position: behind,
     );
     /* derived-style($styles, target): #{derived-style($styles, target)} */
     /* derived-style($styles, target-name): #{derived-style($styles, target-name)} */
@@ -197,7 +198,7 @@
     $styles: (
       background-color: blue,
       background: red url(image.png) no-repeat top 7% 60px 80px,
-      background-origin: content-box
+      background-origin: content-box,
     );
     /* derived-style($styles, background): #{derived-style($styles, background)} */
     /* derived-style($styles, background-color): #{derived-style($styles, background-color)} */
@@ -222,9 +223,9 @@
       background: (
         url(image1.png) 600px 10px no-repeat,
         url(image2.png) 10px 10px contain no-repeat,
-        url(image3.png)
+        url(image3.png),
       ),
-      background-color: white
+      background-color: white,
     );
     /* derived-style($styles, background): #{derived-style($styles, background)} */
     /* derived-style($styles, background-color): #{derived-style($styles, background-color)} */
@@ -251,8 +252,8 @@
       background: (
         url(image1.png) 600px 10px no-repeat,
         url(image2.png) 10px 10px contain no-repeat,
-        url(image3.png)
-      )
+        url(image3.png),
+      ),
     );
     /* derived-style($styles, background): #{derived-style($styles, background)} */
     /* derived-style($styles, background-color): #{derived-style($styles, background-color)} */
@@ -276,7 +277,7 @@
     $styles: (
       list-style-image: none,
       list-style: square url(image.png),
-      list-style-position: inside
+      list-style-position: inside,
     );
     /* derived-style($styles, list-style): #{derived-style($styles, list-style)} */
     /* derived-style($styles, list-style-type): #{derived-style($styles, list-style-type)} */
@@ -291,7 +292,7 @@
       outline-width: 2px,
       outline: red thick dotted,
       outline-color: green,
-      outline-offset: 4px
+      outline-offset: 4px,
     );
     /* derived-style($styles, outline): #{derived-style($styles, outline)} */
     /* derived-style($styles, outline-color): #{derived-style($styles, outline-color)} */
