@@ -231,7 +231,11 @@ module Archetype::Functions::CSS
     'word-wrap'                   => :normal,
     'z-index'                     => :zero,
     # archetype custom properties...
-    'ie-filter'                   => :none
+    'ie-filter'                   => :none,
+    'border-top-radius'           => :zero,
+    'border-right-radius'         => :zero,
+    'border-bottom-radius'        => :zero,
+    'border-left-radius'          => :zero
   }
 
   #
@@ -395,7 +399,6 @@ private
         set << key if key =~ base
       end
     end
-
     return related.select { |key, value| set.include?(key) }
   end
 
@@ -406,7 +409,7 @@ private
     # border-radius and border-image
     when R_BORDER_IMG_OR_RADIUS
       match = $1
-      if property == "border-#{match}"
+      if property == "border-#{match}" or match == 'radius'
         pattern = /^border-.*#{match}/
         ALL_CSS_PROPERTIES.each { |k,v| set << k if k =~ pattern }
       else
@@ -732,7 +735,8 @@ private
   #
   def self.handle_derived_properties_for_border(related, property, original_property = nil)
     properties = {
-      :image => %w(image-source image-slice image-width image-outset image-repeat)
+      :image  => %w(image-source image-slice image-width image-outset image-repeat),
+      :radius => %w(top-left-radius top-right-radius bottom-right-radius bottom-left-radius)
     }
     type = case property
     when R_BORDER_IMG_OR_RADIUS
@@ -746,10 +750,11 @@ private
     puts "finding value for `#{property}`"
     with_each_available_relative(related, property) do |key, value|
       items = value.to_a.dup
-      styles[normalize_property_key(key)] = value
+
       case type
       when :image
         # border-image
+        styles[normalize_property_key(key)] = value
         augmented = !is_root_property?(key)
         contexts = [:image_slice, :image_width, :image_outset]
         context = contexts.shift
@@ -808,6 +813,33 @@ private
         end
       when :radius
         # border-radius
+        pieces = key.split('-')
+        if pieces.length > 2
+          augmented = true
+          if pieces.length > 3
+            # one of the longhand properties
+            # e.g. `border-top-right-radius`
+            styles[normalize_property_key(key)] = value
+          else
+            # one of the not-so-short shorthands
+            # e.g. `border-top-radius` (these aren't real properties, but Compass supports these, so why not)
+            position = pieces[1]
+            positions = [
+              ['top', 'bottom'],
+              ['left', 'right']
+            ]
+            vertical = positions[0].include?(position)
+            positions[vertical ? 1 : 0].each do |alt_position|
+              str = "border-#{vertical ? position : alt_position}-#{vertical ? alt_position : position}-radius"
+              styles[normalize_property_key(str)] = value
+            end
+          end
+        else
+          augmented = false
+          styles = {}
+          # TODO - doesn't support vertical radius correctly
+          properties.each { |k| styles[normalize_property_key(k, 'border')] = value }
+        end
       when :border
 
       else
@@ -824,17 +856,16 @@ private
     if augmented and (is_root_property?(property) or property =~ pattern)
       value = nil
       case type
-      when :radius
-        # border-radius
       when :image
         slash = Sass::Script::Value::String.new('/')
         styles = set_default_styles(styles, 'border-image', properties)
         value = [styles[:image_source], styles[:image_slice], slash, styles[:image_width], slash, styles[:image_outset], styles[:image_repeat]]
       else
+        # radius
         value = extrapolate_shorthand_simple(styles, property, properties)
       end
       puts "   shorthand for `#{property}` is: #{value}"
-      return Sass::Script::Value::List.new(value, :space)
+      return value ? Sass::Script::Value::List.new(value, :space) : nil
     end
 
     return styles[normalize_property_key(property)]
