@@ -77,13 +77,13 @@ module Archetype::SassExtensions::Util
   # - <tt>$styles</tt> {Map} the map of styles
   # - <tt>$properties</tt> {String|List} the properties to extract the derived styles for
   # - <tt>$format</tt> {String} the format to return the results in [auto|map|list]
+  # - <tt>$strict</tt> {Boolean} if true, will only return an exact match, and not try to extrapolate the value
   # *Returns*:
   # - {List|Map|*} either a list/map of the values or the individual value itself
   #
-  def derived_style(styles, properties = [], format = 'auto')
-    # - <tt>$strict</tt> {Boolean} if true, will only return an exact match, and not try to extrapolate the value
-    # strict = Sass::Script::Value::Bool.new(false)
-    return Archetype::Functions::CSS.get_derived_styles(helpers.data_to_hash(styles), properties, helpers.to_str(format).to_sym, true)
+  def derived_style(styles, properties = [], format = 'auto', strict = false)
+    strict = strict.value if strict.respond_to?(:value)
+    return Archetype::Functions::CSS.get_derived_styles(helpers.data_to_hash(styles), properties, helpers.to_str(format).to_sym, strict)
   end
 
 private

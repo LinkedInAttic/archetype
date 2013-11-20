@@ -3,25 +3,25 @@
 /* derived-style($styles, null):  */
 /* derived-style($styles, height): 10px */
 /* derived-style($styles, overflow):  */
-/* derived-style($styles, border): 1px solid red */
-/* derived-style($styles, border-color): white */
-/* derived-style($styles, border-style):  */
-/* derived-style($styles, border-width): 3px */
-/* derived-style($styles, border-bottom):  */
-/* derived-style($styles, border-bottom-color):  */
-/* derived-style($styles, border-bottom-style):  */
-/* derived-style($styles, border-bottom-width):  */
+/* derived-style($styles, border):  */
+/* derived-style($styles, border-color): red red red green */
+/* derived-style($styles, border-style): solid */
+/* derived-style($styles, border-width): 4px 3px 3px 2px */
+/* derived-style($styles, border-bottom): 3px solid red */
+/* derived-style($styles, border-bottom-color): red */
+/* derived-style($styles, border-bottom-style): solid */
+/* derived-style($styles, border-bottom-width): 3px */
 /* derived-style($styles, border-left): 2px solid green */
-/* derived-style($styles, border-left-color):  */
-/* derived-style($styles, border-left-style):  */
-/* derived-style($styles, border-left-width):  */
-/* derived-style($styles, border-right):  */
-/* derived-style($styles, border-right-color):  */
-/* derived-style($styles, border-right-style):  */
-/* derived-style($styles, border-right-width):  */
-/* derived-style($styles, border-top):  */
-/* derived-style($styles, border-top-color):  */
-/* derived-style($styles, border-top-style):  */
+/* derived-style($styles, border-left-color): green */
+/* derived-style($styles, border-left-style): solid */
+/* derived-style($styles, border-left-width): 2px */
+/* derived-style($styles, border-right): 3px solid red */
+/* derived-style($styles, border-right-color): red */
+/* derived-style($styles, border-right-style): solid */
+/* derived-style($styles, border-right-width): 3px */
+/* derived-style($styles, border-top): 4px solid red */
+/* derived-style($styles, border-top-color): red */
+/* derived-style($styles, border-top-style): solid */
 /* derived-style($styles, border-top-width): 4px */
 /* ----------------------- */
 /* derived-style($styles, border-spacing): 10px 50px */
@@ -40,6 +40,26 @@
 /* derived-style($styles, border-bottom-right-radius): 7px */
 /* derived-style($styles, border-top-left-radius): 4px */
 /* derived-style($styles, border-top-right-radius): 2px */
+/* derived-style($styles, border): 3px solid red */
+/* derived-style($styles, border-color): red */
+/* derived-style($styles, border-style): solid */
+/* derived-style($styles, border-width): 3px */
+/* derived-style($styles, border-bottom): 3px solid red */
+/* derived-style($styles, border-bottom-color): red */
+/* derived-style($styles, border-bottom-style): solid */
+/* derived-style($styles, border-bottom-width): 3px */
+/* derived-style($styles, border-left): 3px solid red */
+/* derived-style($styles, border-left-color): red */
+/* derived-style($styles, border-left-style): solid */
+/* derived-style($styles, border-left-width): 3px */
+/* derived-style($styles, border-right): 3px solid red */
+/* derived-style($styles, border-right-color): red */
+/* derived-style($styles, border-right-style): solid */
+/* derived-style($styles, border-right-width): 3px */
+/* derived-style($styles, border-top): 3px solid red */
+/* derived-style($styles, border-top-color): red */
+/* derived-style($styles, border-top-style): solid */
+/* derived-style($styles, border-top-width): 3px */
 /* derived-style($styles, overflow): hidden */
 /* derived-style($styles, overflow-x): visible */
 /* derived-style($styles, overflow-y): hidden */

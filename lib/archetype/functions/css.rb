@@ -269,8 +269,6 @@ module Archetype::Functions::CSS
   # - {*} the derived styles as either a list/map of the values or the individual value itself (based on the format)
   #
   def self.get_derived_styles(map, properties = [], format = :auto, strict = false)
-    # TODO remove this after testing
-    strict = false
     # TODO how to handle multiple values?
     computed = {}
     (properties || []).to_a.each do |property|
@@ -307,7 +305,10 @@ private
   RS_BORDER_POSITION = '(-(?:top|right|bottom|left))'
   RS_BORDER_TYPE = '(-(?:color|width|style))'
   R_BORDER_STD = /^border#{RS_BORDER_POSITION}?#{RS_BORDER_TYPE}?$/
+  R_BORDER_SHORTHANDS = /^border#{RS_BORDER_POSITION}?$/
   R_BORDER_IMG_OR_RADIUS = /(image|radius)/
+
+  NULL = Sass::Script::Value::Null.new
 
   def self.helpers
     @helpers ||= Archetype::Functions::Helpers
@@ -346,8 +347,9 @@ private
   # - <tt>info</tt> {String} additional info to display
   #
   def self.warn_cannot_disambiguate_property(property, info = nil)
-    info = info.nil? or info.empty? ? '' : " (#{info})"
-    warn("can't disambiguate the CSS property `#{property}#{info}`")
+    info = (info.nil? or info.empty?) ? '' : " (#{info})"
+    warn("cannot disambiguate the CSS property `#{property}#{info}`")
+    return NULL
   end
 
   #
@@ -358,6 +360,7 @@ private
   #
   def self.warn_not_enough_infomation_to_derive(property)
     warn("there isn't enough information to derive `#{property}`, so returning `null`")
+    return NULL
   end
 
   #
@@ -525,7 +528,7 @@ private
   end
 
   # TODO - doc
-  def self.extrapolate_shorthand_margin_padding(styles)
+  def self.extrapolate_shorthand_symmetrical(styles)
     # make sure we have enough info to continue
     return nil if styles.nil? or styles.length < 4
     # can we use 3 values?
@@ -555,18 +558,13 @@ private
       # blow away anything we've already discovered (because it's irrelevant)
       # and extract the top/right/bottom/left values
       # make the styles available to the calling context
-      {
-        :top        => items[0],
-        :right      => items[1] || items[0],
-        :bottom     => items[2] || items[0],
-        :left       => items[3] || items[1] || items[0]
-      }
+      extract_symmetical_values(items)
     end
     # if we're getting the shorthand property, reconstruct the shorthand value
     if reconstruct
-      value = extrapolate_shorthand_margin_padding(styles)
+      value = extrapolate_shorthand_symmetrical(styles)
       # if the value came back nil, we were missing something, so throw a warning...
-      warn_not_enough_infomation_to_derive(property) if value.nil?
+      return warn_not_enough_infomation_to_derive(property) if value.nil?
       return value
     end
 
@@ -577,6 +575,15 @@ private
   def self.set_default_styles(styles, base, properties)
     properties.each { |k| styles[normalize_property_key(k, base)] ||= default("#{base}-#{k}") }
     return styles
+  end
+
+  def self.extract_symmetical_values(items)
+    return {
+      :top        => items[0],
+      :right      => items[1] || items[0],
+      :bottom     => items[2] || items[0],
+      :left       => items[3] || items[1] || items[0]
+    }
   end
 
   ## handlers
@@ -624,7 +631,7 @@ private
     if reconstruct
       value = extrapolate_shorthand_animation(styles)
       # if the value came back nil, we were missing something, so throw a warning...
-      warn_not_enough_infomation_to_derive(property) if value.nil?
+      return warn_not_enough_infomation_to_derive(property) if value.nil?
       return value
     end
 
@@ -697,18 +704,12 @@ private
         i += 1
       end
 
-      #color position size repeat origin clip attachment image
-      # set defaults if we missed anything...
-
       # make the styles available to the calling context
       styles
     end
 
     if reconstruct
-      if styles.nil?
-        warn_not_enough_infomation_to_derive(property)
-        return nil
-      end
+      return warn_not_enough_infomation_to_derive(property) if styles.nil?
 
       shorthands = []
       total = 1
@@ -730,28 +731,79 @@ private
     return styles
   end
 
+  def self.deconstruct_shorthand_border(items, types)
+    tmp = {}
+    items.reject! do |item|
+      if item.is_a?(Sass::Script::Value::Number)
+        tmp[:width] = item
+      elsif item.is_a?(Sass::Script::Value::Color)
+        tmp[:color] = item
+      else
+        case helpers.to_str(item)
+        when /^(?:thin|medium|thick)$/
+          tmp[:width] = item
+        when /^(?:none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset)$/
+          tmp[:style] = item
+        else
+          next
+        end
+      end
+      true
+    end
+    items.each do |item|
+      if helpers.to_str(item) == 'inherit'
+        if tmp[:width].nil?
+          tmp[:width] = item
+        elsif tmp[:style].nil?
+          tmp[:style] = item
+        else
+          tmp[:color] ||= item
+        end
+      end
+    end
+    return set_default_styles(tmp, 'border', types)
+  end
+
+  def self.handle_derived_properties_for_border_shorthands(property, types, related)
+    styles = {}
+    types.each do |type|
+      value = handle_derived_properties_for_border(related, "#{property}-#{type}")
+      if value
+        styles[type.to_sym] = value
+        return warn_cannot_disambiguate_property(property) if value.to_a.to_a.length > 1
+      end
+    end
+    return nil if styles.empty?
+    return Sass::Script::Value::List.new(extrapolate_shorthand_simple(styles, property, types), :space)
+  end
+
   #
   # handles the `border` properties
   #
-  def self.handle_derived_properties_for_border(related, property, original_property = nil)
+  def self.handle_derived_properties_for_border(related, property)
     properties = {
       :image  => %w(image-source image-slice image-width image-outset image-repeat),
       :radius => %w(top-left-radius top-right-radius bottom-right-radius bottom-left-radius)
     }
-    type = case property
+    positions = %w(top right bottom left)
+    types = %w(width style color)
+
+    # shorthand for `border` and `border-{position}` will extrapolate from other shorthands
+    return handle_derived_properties_for_border_shorthands(property, types, related) if property =~ R_BORDER_SHORTHANDS
+
+    case_type = case property
     when R_BORDER_IMG_OR_RADIUS
       $1.to_sym
     when R_BORDER_STD
       :border
     end
-    properties = properties[type]
+    properties = properties[case_type] || []
     styles = {}
     augmented = false
-    puts "finding value for `#{property}`"
     with_each_available_relative(related, property) do |key, value|
       items = value.to_a.dup
 
-      case type
+      case case_type
       when :image
         # border-image
         styles[normalize_property_key(key)] = value
@@ -804,6 +856,9 @@ private
               styles[:image_width] ||= []
               styles[:image_width] << item
               count += 1
+            when '/'
+              context = contexts.shift
+              count = 1
             else
               next
             end
@@ -836,35 +891,71 @@ private
           end
         else
           augmented = false
-          styles = {}
+          shorthand = items.to_a
           # TODO - doesn't support vertical radius correctly
-          properties.each { |k| styles[normalize_property_key(k, 'border')] = value }
+          styles = {
+            :top_left_radius      => shorthand[0],
+            :top_right_radius     => shorthand[1] || shorthand[0],
+            :bottom_right_radius  => shorthand[2] || shorthand[0],
+            :bottom_left_radius   => shorthand[3] || shorthand[1] || shorthand[0]
+          }
         end
       when :border
-
-      else
-        return nil
+        key =~ R_BORDER_STD
+        position, type = $1, $2
+        if position or type
+          augmented = true
+          if position and type
+            # one of the longhand properties
+            # e.g. `border-top-style`
+            styles[normalize_property_key(key)] = value
+          else
+            # one of the not-so-short shorthands
+            # e.g. `border-top` or `border-style`
+            if position
+              # e.g. `border-top`
+              tmp = deconstruct_shorthand_border(items, types)
+              types.each { |k| styles[normalize_property_key("#{key}-#{k}")] = tmp[k.to_sym] }
+            else
+              # e.g. `border-style`
+              pattern = /^border#{RS_BORDER_POSITION}#{type}$/
+              tmp = extract_symmetical_values(items)
+              ALL_CSS_PROPERTIES.each { |k, v| styles[normalize_property_key(k)] = tmp[$1.gsub('-', '').to_sym] if k =~ pattern }
+            end
+          end
+        else
+          tmp = deconstruct_shorthand_border(items, types)
+          positions.each do |pos|
+            types.each { |k| styles[normalize_property_key("border-#{pos}-#{k}")] = tmp[k.to_sym] }
+          end
+        end
       end
-      puts "  `#{key}`: `#{value}`"
     end
-    pattern = /^border(#{RS_BORDER_POSITION}|#{RS_BORDER_TYPE})$/
-
-    puts "styles are: #{styles.inspect}"
+    pattern = /^border#{RS_BORDER_TYPE}$/
 
     styles = collapse_multi_value_lists(styles)
 
-    if augmented and (is_root_property?(property) or property =~ pattern)
+    if (augmented and is_root_property?(property)) or property =~ pattern
       value = nil
-      case type
+      case case_type
       when :image
         slash = Sass::Script::Value::String.new('/')
         styles = set_default_styles(styles, 'border-image', properties)
         value = [styles[:image_source], styles[:image_slice], slash, styles[:image_width], slash, styles[:image_outset], styles[:image_repeat]]
+      when :border
+        # e.g. border-color
+        type = $1
+        tmp = {}
+        positions.each do |pos|
+          key = "border-#{pos}#{type}"
+          tmp[pos.to_sym] = styles[normalize_property_key(key)] || default(key)
+        end
+        return nil if tmp.empty?
+        return extrapolate_shorthand_symmetrical(tmp)
       else
         # radius
         value = extrapolate_shorthand_simple(styles, property, properties)
       end
-      puts "   shorthand for `#{property}` is: #{value}"
       return value ? Sass::Script::Value::List.new(value, :space) : nil
     end
 
@@ -916,10 +1007,7 @@ private
       styles
     end
     if reconstruct
-      if styles.nil? or styles[:name].nil?
-        warn_not_enough_infomation_to_derive(property)
-        return nil
-      end
+      return warn_not_enough_infomation_to_derive(property) if styles.nil? or styles[:name].nil?
       value = extrapolate_shorthand_simple(styles, property, properties)
       return Sass::Script::Value::List.new(value, :space)
     end
@@ -961,7 +1049,7 @@ private
 
     if reconstruct
       if styles.nil? or styles[:property].nil?
-        warn_not_enough_infomation_to_derive(property) if not styles.empty?
+        return warn_not_enough_infomation_to_derive(property) if not styles.empty?
         return nil
       end
       value = extrapolate_shorthand_simple(styles, property, properties)

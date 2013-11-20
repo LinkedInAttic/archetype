@@ -76,6 +76,32 @@
     /* derived-style($styles, border-top-right-radius): #{derived-style($styles, border-top-right-radius)} */
 
     $styles: (
+      border-color: white,
+      border: 1px solid red,
+      border-width: 3px,
+    );
+    /* derived-style($styles, border): #{derived-style($styles, border)} */
+    /* derived-style($styles, border-color): #{derived-style($styles, border-color)} */
+    /* derived-style($styles, border-style): #{derived-style($styles, border-style)} */
+    /* derived-style($styles, border-width): #{derived-style($styles, border-width)} */
+    /* derived-style($styles, border-bottom): #{derived-style($styles, border-bottom)} */
+    /* derived-style($styles, border-bottom-color): #{derived-style($styles, border-bottom-color)} */
+    /* derived-style($styles, border-bottom-style): #{derived-style($styles, border-bottom-style)} */
+    /* derived-style($styles, border-bottom-width): #{derived-style($styles, border-bottom-width)} */
+    /* derived-style($styles, border-left): #{derived-style($styles, border-left)} */
+    /* derived-style($styles, border-left-color): #{derived-style($styles, border-left-color)} */
+    /* derived-style($styles, border-left-style): #{derived-style($styles, border-left-style)} */
+    /* derived-style($styles, border-left-width): #{derived-style($styles, border-left-width)} */
+    /* derived-style($styles, border-right): #{derived-style($styles, border-right)} */
+    /* derived-style($styles, border-right-color): #{derived-style($styles, border-right-color)} */
+    /* derived-style($styles, border-right-style): #{derived-style($styles, border-right-style)} */
+    /* derived-style($styles, border-right-width): #{derived-style($styles, border-right-width)} */
+    /* derived-style($styles, border-top): #{derived-style($styles, border-top)} */
+    /* derived-style($styles, border-top-color): #{derived-style($styles, border-top-color)} */
+    /* derived-style($styles, border-top-style): #{derived-style($styles, border-top-style)} */
+    /* derived-style($styles, border-top-width): #{derived-style($styles, border-top-width)} */
+
+    $styles: (
       overflow-y: visible,
       overflow: hidden,
       overflow-x: visible,

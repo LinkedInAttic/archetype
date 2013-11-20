@@ -162,15 +162,16 @@ module Archetype::SassExtensions::Styleguide
   # - <tt>$definition</tt> {String|List} the description of the component
   # - <tt>$properties</tt> {String|List} the properties to extract the derived styles for
   # - <tt>$format</tt> {String} the format to return the results in [auto|map|list]
+  # - <tt>$strict</tt> {Boolean} if true, will only return an exact match, and not try to extrapolate the value
   # *Returns*:
   # - {List|Map|*} either a list/map of the values or the individual value itself
   #
-  def styleguide_derived_style(definition, properties = [], format = 'auto')
+  def styleguide_derived_style(definition, properties = [], format = 'auto', strict = false)
     @@archetype_styleguide_mutex.synchronize do
       # normalize our input
       definition = normalize_styleguide_definition(definition)
       # get the computed styles
-      return derived_style(definition, properties, format)
+      return derived_style(definition, properties, format, strict)
     end
   end
 
