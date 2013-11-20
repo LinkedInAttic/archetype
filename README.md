@@ -1,6 +1,6 @@
 # Archetype
 
-[![Build Status](https://travis-ci.org/linkedin/archetype.png)](https://travis-ci.org/linkedin/archetype) [![Gem Version](https://badge.fury.io/rb/archetype.png)](http://badge.fury.io/rb/archetype)
+[![Build Status](https://travis-ci.org/linkedin/archetype.png)](https://travis-ci.org/linkedin/archetype) [![Code Climate](https://codeclimate.com/github/linkedin/archetype.png)](https://codeclimate.com/github/linkedin/archetype) [![Gem Version](https://badge.fury.io/rb/archetype.png)](http://badge.fury.io/rb/archetype)
 
 Archetype is a UI pattern and component library for quickly iterating on and maintaining scalable web interfaces.
 
