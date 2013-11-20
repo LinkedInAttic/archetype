@@ -308,12 +308,6 @@ private
   R_BORDER_SHORTHANDS = /^border#{RS_BORDER_POSITION}?$/
   R_BORDER_IMG_OR_RADIUS = /(image|radius)/
 
-  NULL = Sass::Script::Value::Null.new
-
-  def self.helpers
-    @helpers ||= Archetype::Functions::Helpers
-  end
-
   #
   # given a set of related properties, compute the property value
   #
@@ -325,7 +319,7 @@ private
   #
   def self.get_derived_styles_via_router(hsh, property)
     base = get_property_base(property)
-    handler = "handle_derived_properties_for_#{base}"
+    handler = "get_derived_styles_router_for_#{base}"
     # if we don't need any additional processing, stop here
     return nil if not self.respond_to?(handler)
     base = /^#{base}/
@@ -334,264 +328,15 @@ private
     return value
   end
 
-  # TODO - doc
-  def self.warn(msg)
-    helpers.logger.record(:warning, msg)
-  end
+
+  ## ------------------- #
+  ## ROUTERS             #
+  ## ------------------- #
 
   #
-  # output a warning about a disambiguous property found that can't be fully derived
+  # router for `animiation` properties
   #
-  # *Parameters*:
-  # - <tt>property</tt> {String} the property
-  # - <tt>info</tt> {String} additional info to display
-  #
-  def self.warn_cannot_disambiguate_property(property, info = nil)
-    info = (info.nil? or info.empty?) ? '' : " (#{info})"
-    warn("cannot disambiguate the CSS property `#{property}#{info}`")
-    return NULL
-  end
-
-  #
-  # output a warning if there isn't enough information to derive the value requested
-  #
-  # *Parameters*:
-  # - <tt>property</tt> {String} the property
-  #
-  def self.warn_not_enough_infomation_to_derive(property)
-    warn("there isn't enough information to derive `#{property}`, so returning `null`")
-    return NULL
-  end
-
-  #
-  # checks to see if a property is the root property or a descendent
-  #
-  # *Returns*:
-  # - {Boolean} true if the property is a root property
-  #
-  def self.is_root_property?(property)
-    special_roots = %w(list-style border-image border-radius)
-    return special_roots.push(get_property_base(property)).include?(property)
-  end
-
-  #
-  # given a set of related properties, get the set of properties that are currently available
-  #
-  # *Parameters*:
-  # - <tt>related</tt> {Hash} the hash of styles
-  # - <tt>property</tt> {String} the property to observe
-  # *Returns*:
-  # - {Hash} the available related properties and their values
-  #
-  def self.get_available_relatives(related, property)
-    set = Set.new
-    # border is a special case
-    if property =~ /^border/
-      set = get_available_relatives_for_border(related, property)
-    # everything else
-    else
-      previous = nil
-      # find all potential parents (and self)
-      property.split('-').each do |value|
-        value = previous.nil? ? value : "#{previous}-#{value}"
-        set << value
-        previous = value
-      end
-      base = /(?:^|\s)#{Regexp.escape(property)}-[^\s]+(?:$|\s)/
-      related.each do |key, value|
-        set << key if key =~ base
-      end
-    end
-    return related.select { |key, value| set.include?(key) }
-  end
-
-  def self.get_available_relatives_for_border(related, property)
-    set = Set.new
-    set << property
-    case property
-    # border-radius and border-image
-    when R_BORDER_IMG_OR_RADIUS
-      match = $1
-      if property == "border-#{match}" or match == 'radius'
-        pattern = /^border-.*#{match}/
-        ALL_CSS_PROPERTIES.each { |k,v| set << k if k =~ pattern }
-      else
-        set << "border-#{match}"
-      end
-    when R_BORDER_STD
-      pattern = R_BORDER_STD
-      if property != 'border'
-        position, type = $1, $2
-        if position
-          if type
-            # position and type
-            # e.g. for border-top-width
-            # we'll need: border, border-top, border-top-width, border-width
-            pattern = /^(border|border#{position}(#{type})?$|border#{type})$/
-          else
-            # position only
-            # e.g. for border-top
-            # we'll need: border, border-top, border-top-{type}, border-{type}
-            pattern = /^(border|border#{position}#{RS_BORDER_TYPE}?$|border#{RS_BORDER_TYPE})$/
-          end
-        else
-          # type only
-          # e.g. for border-width
-          # we'll need: border, border-width, border-{position}-width, border-{position}
-          pattern = /^(border|border#{RS_BORDER_POSITION}?#{type}$|border#{RS_BORDER_POSITION})$/
-        end
-      end
-      ALL_CSS_PROPERTIES.each { |k,v| set << k if k =~ pattern }
-    end
-    return set
-  end
-
-  # TODO - doc
-  def self.collapse_multi_value_lists(styles, separator = :space)
-    styles.each do |key, value|
-      if value.is_a?(Array)
-        # if all the values are identical, we just need to return one
-        styles[key] = value.uniq.length == 1 ? value.first : Sass::Script::Value::List.new(value, separator)
-      end
-    end
-    return styles
-  end
-
-  # TODO - doc
-  def self.normalize_property_key(property, base = nil)
-    base ||= get_property_base(property)
-    return property.gsub(/^#{Regexp.escape(base)}\-/, '').gsub('-', '_').to_sym
-  end
-
-  # TODO - doc
-  def self.get_property_base(property)
-    return (property.match(/^([a-z]+)/) || [])[0]
-  end
-
-  # TODO - doc
-  def self.get_timing_values(value)
-    return value.select do |item|
-      if item.is_a?(Sass::Script::Value::Number)
-        unit = helpers.to_str(item.unit_str)
-        ((item.unitless? and item.value == 0) or unit.include?('s'))
-      end
-    end
-  end
-
-  #
-  # helper to iterate over each available relative property
-  #
-  # *Parameters*:
-  # - <tt>related</tt> {Hash} the hash of styles
-  # - <tt>property</tt> {String} the property to observe
-  #
-  def self.with_each_available_relative(related, property)
-    get_available_relatives(related, property).each do |key, value|
-      yield(key, value) if block_given?
-    end
-  end
-
-  def self.with_each_available_relative_if_root(related, property)
-    styles = {}
-    augmented = false
-    with_each_available_relative(related, property) do |key, value|
-      styles[normalize_property_key(key)] = value
-      augmented = !is_root_property?(key)
-      # if it's the shorthand property...
-      if !augmented
-        styles = yield(value.to_a.dup, (value.is_a?(Sass::Script::Value::List) && value.separator == :comma)) if block_given?
-      end
-    end
-    return styles, (augmented && is_root_property?(property))
-  end
-
-  ####
-
-  # TODO - doc
-  def self.extrapolate_shorthand_simple(styles, base, properties)
-    styles = set_default_styles(styles, base, properties)
-    value = []
-    properties.each { |k| value << styles[normalize_property_key(k, base)] }
-    return value
-  end
-
-  # TODO - doc
-  def self.extrapolate_shorthand_animation(styles)
-    # make sure we have enough info to continue
-    return nil if styles.nil? or styles[:name].nil?
-    shorthand = []
-    shorthand << styles[:name]
-    %w(duration timing-function delay iteration-count direction fill-mode play-state).each do |k|
-      shorthand << (styles[normalize_property_key(k, 'animation')] || default("animation-#{k}")).to_a.first
-    end
-    return Sass::Script::Value::List.new(shorthand, :space)
-  end
-
-  # TODO - doc
-  def self.extrapolate_shorthand_symmetrical(styles)
-    # make sure we have enough info to continue
-    return nil if styles.nil? or styles.length < 4
-    # can we use 3 values?
-    if styles[:left] == styles[:right]
-      # can we use 2 values?
-      if styles[:bottom] == styles[:top]
-        # can we use just 1 value?
-        if styles[:top] == styles[:right]
-          styles = [styles[:top]] # 1 value
-        else
-          styles = [styles[:top], styles[:right]] # 2 values
-        end
-      else
-        styles = [styles[:top], styles[:right], styles[:bottom]] # 3 values
-      end
-    else
-      styles = [styles[:top], styles[:right], styles[:bottom], styles[:left]] # 4 values
-    end
-    return Sass::Script::Value::List.new(styles, :space)
-  end
-
-  #
-  # handle cases where property values denote [top right bottom left]
-  #
-  def self.handle_derived_properties_for_margin_padding(related, property)
-    styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
-      # blow away anything we've already discovered (because it's irrelevant)
-      # and extract the top/right/bottom/left values
-      # make the styles available to the calling context
-      extract_symmetical_values(items)
-    end
-    # if we're getting the shorthand property, reconstruct the shorthand value
-    if reconstruct
-      value = extrapolate_shorthand_symmetrical(styles)
-      # if the value came back nil, we were missing something, so throw a warning...
-      return warn_not_enough_infomation_to_derive(property) if value.nil?
-      return value
-    end
-
-    # otherwise just return the value we were asked for
-    return styles
-  end
-
-  def self.set_default_styles(styles, base, properties)
-    properties.each { |k| styles[normalize_property_key(k, base)] ||= default("#{base}-#{k}") }
-    return styles
-  end
-
-  def self.extract_symmetical_values(items)
-    return {
-      :top        => items[0],
-      :right      => items[1] || items[0],
-      :bottom     => items[2] || items[0],
-      :left       => items[3] || items[1] || items[0]
-    }
-  end
-
-  ## handlers
-
-  #
-  # handles the `animiation` properties
-  #
-  def self.handle_derived_properties_for_animation(related, property)
+  def self.get_derived_styles_router_for_animation(related, property)
     properties = %w(name duration timing-function delay iteration-count direction play-state)
     styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
@@ -640,72 +385,49 @@ private
   end
 
   #
-  # handles the `background` properties
+  # router for `margin` properties
   #
-  def self.handle_derived_properties_for_background(related, property)
+  def self.get_derived_styles_router_for_margin(related, property)
+    return get_derived_styles_router_for_margin_padding(related, property)
+  end
+
+  #
+  # router for `padding` properties
+  #
+  def self.get_derived_styles_router_for_padding(related, property)
+    return get_derived_styles_router_for_margin_padding(related, property)
+  end
+
+  #
+  # (real) router for both `margin` and `padding` properties
+  #
+  def self.get_derived_styles_router_for_margin_padding(related, property)
+    styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
+      # blow away anything we've already discovered (because it's irrelevant)
+      # and extract the top/right/bottom/left values
+      # make the styles available to the calling context
+      extract_symmetical_values(items)
+    end
+    # if we're getting the shorthand property, reconstruct the shorthand value
+    if reconstruct
+      value = extrapolate_shorthand_symmetrical(styles)
+      # if the value came back nil, we were missing something, so throw a warning...
+      return warn_not_enough_infomation_to_derive(property) if value.nil?
+      return value
+    end
+
+    # otherwise just return the value we were asked for
+    return styles
+  end
+
+  #
+  # router for `background` properties
+  #
+  def self.get_derived_styles_router_for_background(related, property)
     properties = %w(color position size repeat origin clip attachment image)
     property_order = [:color, :position, :size, :repeat, :origin, :clip, :attachment, :image]
     styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
-      i = 0
-      # blow away anything we've already discovered (because it's irrelevant)
-      styles = {}
-      properties.each { |k| styles[k.to_sym] = [] }
-
-      (comma_separated ? items.to_a : [items]).each do |items|
-        items = items.to_a.dup if items.respond_to?(:to_a)
-        items.reject! do |item|
-          if item.is_a?(Sass::Script::Value::Color)
-            styles[:color] << item
-          else
-            case helpers.to_str(item)
-            when /^(?:(?:no-)?repeat(?:-[xy])?|inherit)$/
-              styles[:repeat] << item
-            # origin or clip
-            when /^(?:border|padding|content)-box$/
-              # if we already have an `origin`, then this is `clip`, otherwise it's `origin`
-              styles[styles[:origin][iteration].nil? ? :origin : :clip] << item
-            when /^(?:url\(.*\)|none)$/
-              # record multiple images if needed
-              styles[:image] << item
-            when /^(?:scroll|fixed|local)$/
-              styles[:attachment] << item
-            when /^(?:cover|contain)$/
-              styles[:size] << item
-            when /^(?:top|right|bottom|left|center)$/
-              styles[:position][i] ||= []
-              styles[:position][i] << item
-            else
-              next
-            end
-          end
-          true
-        end
-
-        # deal with the `position` and `size`, as they're order dependent...
-        items.each do |item|
-          if item.is_a?(Sass::Script::Value::Number) or helpers.to_str(item) == 'auto'
-            styles[:position][i] ||= []
-            if styles[:position][i].length < 2
-              styles[:position][i] << item
-            else
-              styles[:size][i] ||= []
-              styles[:size][i] = styles[:size][i].to_a
-              styles[:size][i] << item
-            end
-          end
-        end
-
-        [:position, :size].each do |k|
-          styles[k][i] = Sass::Script::List.new(styles[k][i], :space) if styles[k][i].is_a?(Array)
-        end
-
-        # ...
-        properties.each { |k| styles[k.to_sym] << default("background-#{k}") if styles[k.to_sym][i].nil?}
-        i += 1
-      end
-
-      # make the styles available to the calling context
-      styles
+      deconstruct_shorthand_for_background(items, comma_separated, properties)
     end
 
     if reconstruct
@@ -731,43 +453,13 @@ private
     return styles
   end
 
-  def self.deconstruct_shorthand_border(items, types)
-    tmp = {}
-    items.reject! do |item|
-      if item.is_a?(Sass::Script::Value::Number)
-        tmp[:width] = item
-      elsif item.is_a?(Sass::Script::Value::Color)
-        tmp[:color] = item
-      else
-        case helpers.to_str(item)
-        when /^(?:thin|medium|thick)$/
-          tmp[:width] = item
-        when /^(?:none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset)$/
-          tmp[:style] = item
-        else
-          next
-        end
-      end
-      true
-    end
-    items.each do |item|
-      if helpers.to_str(item) == 'inherit'
-        if tmp[:width].nil?
-          tmp[:width] = item
-        elsif tmp[:style].nil?
-          tmp[:style] = item
-        else
-          tmp[:color] ||= item
-        end
-      end
-    end
-    return set_default_styles(tmp, 'border', types)
-  end
-
-  def self.handle_derived_properties_for_border_shorthands(property, types, related)
+  #
+  # router for `border` and `border-{position}`
+  #
+  def self.get_derived_styles_router_for_border_shorthands(property, types, related)
     styles = {}
     types.each do |type|
-      value = handle_derived_properties_for_border(related, "#{property}-#{type}")
+      value = get_derived_styles_router_for_border(related, "#{property}-#{type}")
       if value
         styles[type.to_sym] = value
         return warn_cannot_disambiguate_property(property) if value.to_a.to_a.length > 1
@@ -778,9 +470,9 @@ private
   end
 
   #
-  # handles the `border` properties
+  # router for `border` properties
   #
-  def self.handle_derived_properties_for_border(related, property)
+  def self.get_derived_styles_router_for_border(related, property)
     properties = {
       :image  => %w(image-source image-slice image-width image-outset image-repeat),
       :radius => %w(top-left-radius top-right-radius bottom-right-radius bottom-left-radius)
@@ -789,7 +481,7 @@ private
     types = %w(width style color)
 
     # shorthand for `border` and `border-{position}` will extrapolate from other shorthands
-    return handle_derived_properties_for_border_shorthands(property, types, related) if property =~ R_BORDER_SHORTHANDS
+    return get_derived_styles_router_for_border_shorthands(property, types, related) if property =~ R_BORDER_SHORTHANDS
 
     case_type = case property
     when R_BORDER_IMG_OR_RADIUS
@@ -797,9 +489,11 @@ private
     when R_BORDER_STD
       :border
     end
+
     properties = properties[case_type] || []
     styles = {}
     augmented = false
+
     with_each_available_relative(related, property) do |key, value|
       items = value.to_a.dup
 
@@ -808,63 +502,8 @@ private
         # border-image
         styles[normalize_property_key(key)] = value
         augmented = !is_root_property?(key)
-        contexts = [:image_slice, :image_width, :image_outset]
-        context = contexts.shift
-        count = 1
         if !augmented
-          styles = {}
-          items.each do |item|
-            # source slice width outset repeat
-            # <source> <slice {1,4}> / <width {1,4}> <outset> <repeat{1,2}>
-            case helpers.to_str(item)
-            when /^(?:url\(.*\)|none)$/
-              styles[:image_source] = item
-            when /^(?:stretch|repeat|round|space)$/
-              styles[:image_repeat] ||= []
-              styles[:image_repeat] << item
-            when /(.+)\/(.+)/ # delimiter to denote which context (slice, width, outset) we're observing
-              [$1, $2].each_with_index do |item, i|
-                count -= 1 if item == 'fill' # don't count `fill`
-                if count > 4 or i == 1
-                  context = contexts.shift
-                  count = 1
-                end
-                if context
-                  item = (item =~ /^(\d+(?:\.\d+)?)(.*)/) ? Sass::Script::Value::Number.new($1.to_f, [$2]) : Sass::Script::Value::String.new(item)
-                  styles[context] ||= []
-                  styles[context] << item
-                  count += 1
-                end
-              end
-            when /^\d+/
-              # if we've reached out limit for the current context, adjust
-              if count > 4
-                context = contexts.shift
-                count = 1
-              end
-              # if we have a context, stash the value onto it
-              if context
-                styles[context] ||= []
-                styles[context] << item
-                count += 1
-              end
-            when /^fill$/
-              styles[:image_slice] ||= []
-              styles[:image_slice] << item
-               # don't count `fill`
-            when /^auto$/
-              styles[:image_width] ||= []
-              styles[:image_width] << item
-              count += 1
-            when '/'
-              context = contexts.shift
-              count = 1
-            else
-              next
-            end
-            true
-          end
-          styles = set_default_styles(styles, 'border-image', properties)
+          styles = deconstruct_shorthand_for_border_image(items, properties)
         end
       when :radius
         # border-radius
@@ -914,7 +553,7 @@ private
             # e.g. `border-top` or `border-style`
             if position
               # e.g. `border-top`
-              tmp = deconstruct_shorthand_border(items, types)
+              tmp = deconstruct_shorthand_for_border(items, types)
               types.each { |k| styles[normalize_property_key("#{key}-#{k}")] = tmp[k.to_sym] }
             else
               # e.g. `border-style`
@@ -924,7 +563,7 @@ private
             end
           end
         else
-          tmp = deconstruct_shorthand_border(items, types)
+          tmp = deconstruct_shorthand_for_border(items, types)
           positions.each do |pos|
             types.each { |k| styles[normalize_property_key("border-#{pos}-#{k}")] = tmp[k.to_sym] }
           end
@@ -963,30 +602,16 @@ private
   end
 
   #
-  # handles the `margin` properties
+  # router for `overflow` properties
   #
-  def self.handle_derived_properties_for_margin(related, property)
-    return handle_derived_properties_for_margin_padding(related, property)
+  def self.get_derived_styles_router_for_overflow(related, property)
+    return is_root_property?(property) ? nil : filter_available_relatives(related, property).values.last
   end
 
   #
-  # handles the `padding` properties
+  # router for `target` properties
   #
-  def self.handle_derived_properties_for_padding(related, property)
-    return handle_derived_properties_for_margin_padding(related, property)
-  end
-
-  #
-  # handles the `overflow` properties
-  #
-  def self.handle_derived_properties_for_overflow(related, property)
-    return is_root_property?(property) ? nil : get_available_relatives(related, property).values.last
-  end
-
-  #
-  # handles the `target` properties
-  #
-  def self.handle_derived_properties_for_target(related, property)
+  def self.get_derived_styles_router_for_target(related, property)
     properties = %w(name new position)
     styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
@@ -1017,9 +642,9 @@ private
   end
 
   #
-  # handles the `transition` properties
+  # router for `transition` properties
   #
-  def self.handle_derived_properties_for_transition(related, property)
+  def self.get_derived_styles_router_for_transition(related, property)
     properties = %w(property duration timing-function delay)
     styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
@@ -1060,8 +685,10 @@ private
     return styles
   end
 
-
-  def self.handle_derived_properties_for_list(related, property)
+  #
+  # router for `list-style` properties
+  #
+  def self.get_derived_styles_router_for_list(related, property)
     properties = %w(style-type style-position style-image)
     styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       styles = {}
@@ -1117,7 +744,10 @@ private
     return styles
   end
 
-  def self.handle_derived_properties_for_outline(related, property)
+  #
+  # router for `outline` properties
+  #
+  def self.get_derived_styles_router_for_outline(related, property)
     properties = %w(color style width)
     styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
@@ -1165,4 +795,488 @@ private
     # otherwise just return the value we were asked for
     return styles
   end
+
+
+  ## ------------------- #
+  ## SHORTHAND HELPERS   #
+  ## ------------------- #
+
+  #
+  # deconstructs `background` shorthand property into it's longhand values
+  #
+  def self.deconstruct_shorthand_for_background(items, comma_separated, properties)
+    i = 0
+    # blow away anything we've already discovered (because it's irrelevant)
+    styles = {}
+    properties.each { |k| styles[k.to_sym] = [] }
+
+    (comma_separated ? items.to_a : [items]).each do |items|
+      items = items.to_a.dup if items.respond_to?(:to_a)
+      items.reject! do |item|
+        if item.is_a?(Sass::Script::Value::Color)
+          styles[:color] << item
+        else
+          case helpers.to_str(item)
+          when /^(?:(?:no-)?repeat(?:-[xy])?|inherit)$/
+            styles[:repeat] << item
+          # origin or clip
+          when /^(?:border|padding|content)-box$/
+            # if we already have an `origin`, then this is `clip`, otherwise it's `origin`
+            styles[styles[:origin][iteration].nil? ? :origin : :clip] << item
+          when /^(?:url\(.*\)|none)$/
+            # record multiple images if needed
+            styles[:image] << item
+          when /^(?:scroll|fixed|local)$/
+            styles[:attachment] << item
+          when /^(?:cover|contain)$/
+            styles[:size] << item
+          when /^(?:top|right|bottom|left|center)$/
+            styles[:position][i] ||= []
+            styles[:position][i] << item
+          else
+            next
+          end
+        end
+        true
+      end
+
+      # deal with the `position` and `size`, as they're order dependent...
+      items.each do |item|
+        if item.is_a?(Sass::Script::Value::Number) or helpers.to_str(item) == 'auto'
+          styles[:position][i] ||= []
+          if styles[:position][i].length < 2
+            styles[:position][i] << item
+          else
+            styles[:size][i] ||= []
+            styles[:size][i] = styles[:size][i].to_a
+            styles[:size][i] << item
+          end
+        end
+      end
+
+      [:position, :size].each do |k|
+        styles[k][i] = Sass::Script::List.new(styles[k][i], :space) if styles[k][i].is_a?(Array)
+      end
+
+      # ...
+      properties.each { |k| styles[k.to_sym] << default("background-#{k}") if styles[k.to_sym][i].nil?}
+      i += 1
+    end
+    return styles
+  end
+
+  #
+  # deconstructs `border` shorthand properties into it's longhand values
+  #
+  def self.deconstruct_shorthand_for_border(items, types)
+    tmp = {}
+    items.reject! do |item|
+      if item.is_a?(Sass::Script::Value::Number)
+        tmp[:width] = item
+      elsif item.is_a?(Sass::Script::Value::Color)
+        tmp[:color] = item
+      else
+        case helpers.to_str(item)
+        when /^(?:thin|medium|thick)$/
+          tmp[:width] = item
+        when /^(?:none|hidden|dotted|dashed|solid|double|groove|ridge|inset|outset)$/
+          tmp[:style] = item
+        else
+          next
+        end
+      end
+      true
+    end
+    items.each do |item|
+      if helpers.to_str(item) == 'inherit'
+        if tmp[:width].nil?
+          tmp[:width] = item
+        elsif tmp[:style].nil?
+          tmp[:style] = item
+        else
+          tmp[:color] ||= item
+        end
+      end
+    end
+    return set_default_styles(tmp, 'border', types)
+  end
+
+  #
+  # deconstructs `border-image` shorthand property into it's longhand values
+  #
+  def self.deconstruct_shorthand_for_border_image(items, properties)
+    contexts = [:image_slice, :image_width, :image_outset]
+    context = contexts.shift
+    count = 1
+    styles = {}
+    items.each do |item|
+      # source slice width outset repeat
+      # <source> <slice {1,4}> / <width {1,4}> <outset> <repeat{1,2}>
+      case helpers.to_str(item)
+      when /^(?:url\(.*\)|none)$/
+        styles[:image_source] = item
+      when /^(?:stretch|repeat|round|space)$/
+        styles[:image_repeat] ||= []
+        styles[:image_repeat] << item
+      when /(.+)\/(.+)/ # delimiter to denote which context (slice, width, outset) we're observing
+        [$1, $2].each_with_index do |item, i|
+          count -= 1 if item == 'fill' # don't count `fill`
+          if count > 4 or i == 1
+            context = contexts.shift
+            count = 1
+          end
+          if context
+            item = (item =~ /^(\d+(?:\.\d+)?)(.*)/) ? Sass::Script::Value::Number.new($1.to_f, [$2]) : Sass::Script::Value::String.new(item)
+            styles[context] ||= []
+            styles[context] << item
+            count += 1
+          end
+        end
+      when /^\d+/
+        # if we've reached out limit for the current context, adjust
+        if count > 4
+          context = contexts.shift
+          count = 1
+        end
+        # if we have a context, stash the value onto it
+        if context
+          styles[context] ||= []
+          styles[context] << item
+          count += 1
+        end
+      when /^fill$/
+        styles[:image_slice] ||= []
+        styles[:image_slice] << item
+         # don't count `fill`
+      when /^auto$/
+        styles[:image_width] ||= []
+        styles[:image_width] << item
+        count += 1
+      when '/'
+        context = contexts.shift
+        count = 1
+      else
+        next
+      end
+      true
+    end
+    styles = set_default_styles(styles, 'border-image', properties)
+  end
+
+  #
+  # extrapolates shorthand value from a simple list of ordered properties
+  #
+  def self.extrapolate_shorthand_simple(styles, base, properties)
+    styles = set_default_styles(styles, base, properties)
+    value = []
+    properties.each { |k| value << styles[normalize_property_key(k, base)] }
+    return value
+  end
+
+  #
+  # extrapolates shorthand value for `animation` property
+  #
+  def self.extrapolate_shorthand_animation(styles)
+    # make sure we have enough info to continue
+    return nil if styles.nil? or styles[:name].nil?
+    shorthand = []
+    shorthand << styles[:name]
+    %w(duration timing-function delay iteration-count direction fill-mode play-state).each do |k|
+      shorthand << (styles[normalize_property_key(k, 'animation')] || default("animation-#{k}")).to_a.first
+    end
+    return Sass::Script::Value::List.new(shorthand, :space)
+  end
+
+  #
+  # extrapolates shorthand value for symmetrical properties
+  #
+  def self.extrapolate_shorthand_symmetrical(styles)
+    # make sure we have enough info to continue
+    return nil if styles.nil? or styles.length < 4
+    # can we use 3 values?
+    if styles[:left] == styles[:right]
+      # can we use 2 values?
+      if styles[:bottom] == styles[:top]
+        # can we use just 1 value?
+        if styles[:top] == styles[:right]
+          styles = [styles[:top]] # 1 value
+        else
+          styles = [styles[:top], styles[:right]] # 2 values
+        end
+      else
+        styles = [styles[:top], styles[:right], styles[:bottom]] # 3 values
+      end
+    else
+      styles = [styles[:top], styles[:right], styles[:bottom], styles[:left]] # 4 values
+    end
+    return Sass::Script::Value::List.new(styles, :space)
+  end
+
+
+  ## ------------------- #
+  ## HELPERS             #
+  ## ------------------- #
+
+  #
+  # output a warning about a disambiguous property found that can't be fully derived
+  #
+  # *Parameters*:
+  # - <tt>property</tt> {String} the property
+  # - <tt>info</tt> {String} additional info to display
+  #
+  def self.warn_cannot_disambiguate_property(property, info = nil)
+    info = (info.nil? or info.empty?) ? '' : " (#{info})"
+    return warn("cannot disambiguate the CSS property `#{property}#{info}`")
+  end
+
+  #
+  # output a warning if there isn't enough information to derive the value requested
+  #
+  # *Parameters*:
+  # - <tt>property</tt> {String} the property
+  # *Returns*:
+  # - {Sass::Null}
+  #
+
+  #
+  def self.warn_not_enough_infomation_to_derive(property)
+    return warn("there isn't enough information to derive `#{property}`, so returning `null`")
+  end
+
+  #
+  # checks to see if a property is the root property or a descendent
+  #
+  # *Returns*:
+  # - {Boolean} true if the property is a root property
+  # *Returns*:
+  # - {Sass::Null}
+  #
+  def self.is_root_property?(property)
+    special_roots = %w(list-style border-image border-radius)
+    return special_roots.push(get_property_base(property)).include?(property)
+  end
+
+  #
+  # given a set of related properties, get the set of properties that are currently available
+  #
+  # *Parameters*:
+  # - <tt>related</tt> {Hash} the hash of styles
+  # - <tt>property</tt> {String} the property to observe
+  # *Returns*:
+  # - {Hash} the available related properties and their values
+  #
+  def self.filter_available_relatives(related, property)
+    handler = "filter_available_relatives_for_#{get_property_base(property)}"
+    # handle special cases like `border`
+    if self.respond_to?(handler)
+      set = self.method(handler).call(related, property)
+    else
+      set = Set.new
+      previous = nil
+      # find all potential parents (and self)
+      property.split('-').each do |value|
+        value = previous.nil? ? value : "#{previous}-#{value}"
+        set << value
+        previous = value
+      end
+      base = /(?:^|\s)#{Regexp.escape(property)}-[^\s]+(?:$|\s)/
+      related.each do |key, value|
+        set << key if key =~ base
+      end
+    end
+    return related.select { |key, value| set.include?(key) }
+  end
+
+  #
+  # filter relatives for `border`
+  #
+  def self.filter_available_relatives_for_border(related, property)
+    set = Set.new
+    set << property
+    case property
+    # border-radius and border-image
+    when R_BORDER_IMG_OR_RADIUS
+      match = $1
+      if property == "border-#{match}" or match == 'radius'
+        pattern = /^border-.*#{match}/
+        ALL_CSS_PROPERTIES.each { |k,v| set << k if k =~ pattern }
+      else
+        set << "border-#{match}"
+      end
+    when R_BORDER_STD
+      pattern = R_BORDER_STD
+      if property != 'border'
+        position, type = $1, $2
+        if position
+          if type
+            # position and type
+            # e.g. for border-top-width
+            # we'll need: border, border-top, border-top-width, border-width
+            pattern = /^(border|border#{position}(#{type})?$|border#{type})$/
+          else
+            # position only
+            # e.g. for border-top
+            # we'll need: border, border-top, border-top-{type}, border-{type}
+            pattern = /^(border|border#{position}#{RS_BORDER_TYPE}?$|border#{RS_BORDER_TYPE})$/
+          end
+        else
+          # type only
+          # e.g. for border-width
+          # we'll need: border, border-width, border-{position}-width, border-{position}
+          pattern = /^(border|border#{RS_BORDER_POSITION}?#{type}$|border#{RS_BORDER_POSITION})$/
+        end
+      end
+      ALL_CSS_PROPERTIES.each { |k,v| set << k if k =~ pattern }
+    end
+    return set
+  end
+
+  #
+  # for each item in a given style object, if the value is an array, convert it to a Sass::List
+  #
+  # *Parameters*:
+  # - <tt>styles</tt> {Hash} the styles
+  # - <tt>separator</tt> {Symbol} the separator to use on the generated list
+  # *Returns*:
+  # - {Hash} the styles hash with updated values
+  #
+  def self.collapse_multi_value_lists(styles, separator = :space)
+    styles.each do |key, value|
+      if value.is_a?(Array)
+        # if all the values are identical, we just need to return one
+        styles[key] = value.uniq.length == 1 ? value.first : Sass::Script::Value::List.new(value, separator)
+      end
+    end
+    return styles
+  end
+
+  #
+  # normalizes the property into a key for use on a hash
+  #
+  # *Parameters*:
+  # - <tt>property</tt> {String} the property to be used as a key
+  # - <tt>base</tt> {String} the base of the property
+  # *Returns*:
+  # - {Symbol} the property normalized as a symbol
+  #
+  def self.normalize_property_key(property, base = nil)
+    base ||= get_property_base(property)
+    return property.gsub(/^#{Regexp.escape(base)}\-/, '').gsub('-', '_').to_sym
+  end
+
+  #
+  # gets the base of a property
+  #
+  # *Parameters*:
+  # - <tt>property</tt> {String} the property
+  # *Returns*:
+  # - {String} the base of the property
+  #
+  def self.get_property_base(property)
+    return (property.match(/^([a-z]+)/) || [])[0]
+  end
+
+  #
+  # extracts potential timing values from an array of values
+  #
+  # *Parameters*:
+  # - <tt>value</tt> {Array} an array of Sass values
+  # *Returns*:
+  # - {Array} the extracted timing values
+  #
+  def self.get_timing_values(value)
+    return value.select do |item|
+      if item.is_a?(Sass::Script::Value::Number)
+        unit = helpers.to_str(item.unit_str)
+        ((item.unitless? and item.value == 0) or unit.include?('s'))
+      end
+    end
+  end
+
+  #
+  # helper to iterate over each available relative property
+  #
+  # *Parameters*:
+  # - <tt>related</tt> {Hash} the hash of styles
+  # - <tt>property</tt> {String} the property to observe
+  #
+  def self.with_each_available_relative(related, property)
+    filter_available_relatives(related, property).each do |key, value|
+      yield(key, value) if block_given?
+    end
+  end
+
+  #
+  # helper to iterate over each available relative property, and executes a block if the property is a root property
+  #
+  # *Parameters*:
+  # - <tt>related</tt> {Hash} the hash of styles
+  # - <tt>property</tt> {String} the property to observe
+  # *Returns*:
+  # - {Hash} augmented styles hash
+  #
+  def self.with_each_available_relative_if_root(related, property)
+    styles = {}
+    augmented = false
+    with_each_available_relative(related, property) do |key, value|
+      styles[normalize_property_key(key)] = value
+      augmented = !is_root_property?(key)
+      # if it's the shorthand property...
+      if !augmented
+        styles = yield(value.to_a.dup, (value.is_a?(Sass::Script::Value::List) && value.separator == :comma)) if block_given?
+      end
+    end
+    return styles, (augmented && is_root_property?(property))
+  end
+
+  #
+  # given a styles object, sets default values for each property if not already set
+  #
+  # *Parameters*:
+  # - <tt>styles</tt> {Hash} the styles
+  # - <tt>base</tt> {String} the base string
+  # - <tt>properties</tt> {Array} the properties to default if not set
+  # *Returns*:
+  # - {Hash} augmented styles hash
+  #
+  def self.set_default_styles(styles, base, properties)
+    properties.each { |k| styles[normalize_property_key(k, base)] ||= default("#{base}-#{k}") }
+    return styles
+  end
+
+  #
+  # given a list of symmetrical values, extracts the [top right bottom left] key-value pairs
+  #
+  # *Parameters*:
+  # - <tt>items</tt> {Array} the items
+  # *Returns*:
+  # - {Hash} the hash of [top right bottom left]
+  #
+  def self.extract_symmetical_values(items)
+    return {
+      :top        => items[0],
+      :right      => items[1] || items[0],
+      :bottom     => items[2] || items[0],
+      :left       => items[3] || items[1] || items[0]
+    }
+  end
+
+  #
+  # wrapper to display a warning and return Sass::Null
+  #
+  # *Parameters*:
+  # - <tt>msg</tt> {String} the message to display
+  # *Returns*:
+  # - {Sass::Null}
+  #
+  def self.warn(msg)
+    helpers.logger.record(:warning, msg)
+    return Sass::Script::Value::Null.new
+  end
+
+  def self.helpers
+    @helpers ||= Archetype::Functions::Helpers
+  end
+
+
 end
