@@ -47,14 +47,15 @@ module Archetype::Functions::Hash
   #
   def diff(other_hash)
     (self.keys + other_hash.keys).uniq.inject(Archetype::Hash.new) do |tmp, key|
+      item_1, item_2 = self[key], other_hash[key]
       # special comparison for gradients
-      are_gradients = self[key].is_a?(Compass::SassExtensions::Functions::GradientSupport::LinearGradient) and other_hash[key].is_a?(Compass::SassExtensions::Functions::GradientSupport::LinearGradient)
-      eq_gradients = are_gradients ? (self[key].to_s == other_hash[key].to_s) : true
-      unless self[key] == other_hash[key] and eq_gradients
-        if self[key].kind_of?(Hash) && other_hash[key].kind_of?(Hash)
-          tmp[key] = self[key].diff(other_hash[key])
+      are_gradients = (item_1.class == item_2.class) && (item_1.is_a?(Compass::Core::SassExtensions::Functions::GradientSupport::LinearGradient) or item_1.is_a?(Compass::Core::SassExtensions::Functions::GradientSupport::RadialGradient))
+      eq_gradients = are_gradients ? (item_1.to_s == item_2.to_s) : true
+      unless item_1 == item_2 and eq_gradients
+        if item_1.kind_of?(Hash) and item_2.kind_of?(Hash)
+          tmp[key] = item_1.diff(item_2)
         else
-          tmp[key] = other_hash[key] || Archetype::Functions::CSS.default(key)
+          tmp[key] = item_2 || Archetype::Functions::CSS.default(key)
           # if the key is `filter-gradient` and it was removed, we need to change the key to `ie-filter`
           tmp['ie-filter'] = Archetype::Functions::CSS.default('ie-filter') if key == 'filter-gradient' and tmp[key].nil?
           # if it came back as `nil` we couldn't understand it or it has no default, so axe it
