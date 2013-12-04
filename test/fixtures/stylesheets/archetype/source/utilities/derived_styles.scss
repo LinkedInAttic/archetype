@@ -1,46 +1,335 @@
-// TODO move file!
 @import "test_harness";
 
-@include test-module("tests for getting derived styles") {
-  $styles-maps: (
-    simple: (
+//@include test-module("tests for getting derived styles") {
+  //@include test("[function] derived-style()") {
+    // some simple tests...
+    $styles: (
       height: 10px,
-      line-height: 7px
-    ),
-    shortlonghand: (
+      line-height: 7px,
+      // TODO line-height should also derive from `font` shorthand
+    );
+    $empty: ();
+    /* derived-style(null, height): #{derived-style(null, height)} */
+    /* derived-style($empty, height): #{derived-style($empty, height)} */
+    /* derived-style($styles, null): #{derived-style($styles, null)} */
+    /* derived-style($styles, height): #{derived-style($styles, height)} */
+    /* derived-style($styles, overflow): #{derived-style($styles, overflow)} */
+    //@include assert-equal(derived-style(null, height), null, "a null map shouldn't throw an exception");
+    //@include assert-equal(derived-style($empty, height), null, "an empty map shouldn't throw an exception");
+    //@include assert-equal(derived-style($styles, null), null, "a null key shouldn't throw an exception");
+    // test a value that exists
+    //@include assert-equal(derived-style($styles, height), 10px, "height should be extracted from the style object");
+    // test a value that doesn't exist
+    //@include assert-equal(derived-style($styles, overflow), null, "overflow should be `null`");
+
+    $styles: (
+      border-color: white,
       border: 1px solid red,
       border-width: 3px,
       border-left: 2px solid green,
-      border-top-width: 4px
-    ),
-    overflow: (
+      border-top-width: 4px,
+      border-top-left-radius: 3px,
+      border-radius: 2px,
+      border-bottom-right-radius: 7px,
+      border-left-radius: 4px,
+      border-image: url(image.png) 25 30% 10 20 fill / 12px auto / 1 repeat stretch,
+      border-image-width: 15,
+      border-collapse: collapse,
+      border-spacing: 10px 50px,
+    );
+    /* derived-style($styles, border): #{derived-style($styles, border)} */
+    /* derived-style($styles, border-color): #{derived-style($styles, border-color)} */
+    /* derived-style($styles, border-style): #{derived-style($styles, border-style)} */
+    /* derived-style($styles, border-width): #{derived-style($styles, border-width)} */
+    /* derived-style($styles, border-bottom): #{derived-style($styles, border-bottom)} */
+    /* derived-style($styles, border-bottom-color): #{derived-style($styles, border-bottom-color)} */
+    /* derived-style($styles, border-bottom-style): #{derived-style($styles, border-bottom-style)} */
+    /* derived-style($styles, border-bottom-width): #{derived-style($styles, border-bottom-width)} */
+    /* derived-style($styles, border-left): #{derived-style($styles, border-left)} */
+    /* derived-style($styles, border-left-color): #{derived-style($styles, border-left-color)} */
+    /* derived-style($styles, border-left-style): #{derived-style($styles, border-left-style)} */
+    /* derived-style($styles, border-left-width): #{derived-style($styles, border-left-width)} */
+    /* derived-style($styles, border-right): #{derived-style($styles, border-right)} */
+    /* derived-style($styles, border-right-color): #{derived-style($styles, border-right-color)} */
+    /* derived-style($styles, border-right-style): #{derived-style($styles, border-right-style)} */
+    /* derived-style($styles, border-right-width): #{derived-style($styles, border-right-width)} */
+    /* derived-style($styles, border-top): #{derived-style($styles, border-top)} */
+    /* derived-style($styles, border-top-color): #{derived-style($styles, border-top-color)} */
+    /* derived-style($styles, border-top-style): #{derived-style($styles, border-top-style)} */
+    /* derived-style($styles, border-top-width): #{derived-style($styles, border-top-width)} */
+    /* ----------------------- */
+    /* derived-style($styles, border-spacing): #{derived-style($styles, border-spacing)} */
+    /* ----------------------- */
+    /* derived-style($styles, border-collapse): #{derived-style($styles, border-collapse)} */
+    /* ----------------------- */
+    /* derived-style($styles, border-image): #{derived-style($styles, border-image)} */
+    /* derived-style($styles, border-image-outset): #{derived-style($styles, border-image-outset)} */
+    /* derived-style($styles, border-image-repeat): #{derived-style($styles, border-image-repeat)} */
+    /* derived-style($styles, border-image-slice): #{derived-style($styles, border-image-slice)} */
+    /* derived-style($styles, border-image-source): #{derived-style($styles, border-image-source)} */
+    /* derived-style($styles, border-image-width): #{derived-style($styles, border-image-width)} */
+    /* ----------------------- */
+    /* derived-style($styles, border-radius): #{derived-style($styles, border-radius)} */
+    /* derived-style($styles, border-bottom-left-radius): #{derived-style($styles, border-bottom-left-radius)} */
+    /* derived-style($styles, border-bottom-right-radius): #{derived-style($styles, border-bottom-right-radius)} */
+    /* derived-style($styles, border-top-left-radius): #{derived-style($styles, border-top-left-radius)} */
+    /* derived-style($styles, border-top-right-radius): #{derived-style($styles, border-top-right-radius)} */
+
+    $styles: (
+      border-color: white,
+      border: 1px solid red,
+      border-width: 3px,
+    );
+    /* derived-style($styles, border): #{derived-style($styles, border)} */
+    /* derived-style($styles, border-color): #{derived-style($styles, border-color)} */
+    /* derived-style($styles, border-style): #{derived-style($styles, border-style)} */
+    /* derived-style($styles, border-width): #{derived-style($styles, border-width)} */
+    /* derived-style($styles, border-bottom): #{derived-style($styles, border-bottom)} */
+    /* derived-style($styles, border-bottom-color): #{derived-style($styles, border-bottom-color)} */
+    /* derived-style($styles, border-bottom-style): #{derived-style($styles, border-bottom-style)} */
+    /* derived-style($styles, border-bottom-width): #{derived-style($styles, border-bottom-width)} */
+    /* derived-style($styles, border-left): #{derived-style($styles, border-left)} */
+    /* derived-style($styles, border-left-color): #{derived-style($styles, border-left-color)} */
+    /* derived-style($styles, border-left-style): #{derived-style($styles, border-left-style)} */
+    /* derived-style($styles, border-left-width): #{derived-style($styles, border-left-width)} */
+    /* derived-style($styles, border-right): #{derived-style($styles, border-right)} */
+    /* derived-style($styles, border-right-color): #{derived-style($styles, border-right-color)} */
+    /* derived-style($styles, border-right-style): #{derived-style($styles, border-right-style)} */
+    /* derived-style($styles, border-right-width): #{derived-style($styles, border-right-width)} */
+    /* derived-style($styles, border-top): #{derived-style($styles, border-top)} */
+    /* derived-style($styles, border-top-color): #{derived-style($styles, border-top-color)} */
+    /* derived-style($styles, border-top-style): #{derived-style($styles, border-top-style)} */
+    /* derived-style($styles, border-top-width): #{derived-style($styles, border-top-width)} */
+
+    $styles: (
       overflow-y: visible,
       overflow: hidden,
-      overflow-x: visible
-    )
-  );
+      overflow-x: visible,
+    );
+    /* derived-style($styles, overflow): #{derived-style($styles, overflow)} */
+    /* derived-style($styles, overflow-x): #{derived-style($styles, overflow-x)} */
+    /* derived-style($styles, overflow-y): #{derived-style($styles, overflow-y)} */
+    //@include assert-equal(derived-style($styles, overflow), hidden, "overflow TODO...");
+    //@include assert-equal(derived-style($styles, overflow-x), visible, "overflow-x should TODO...");
+    //@include assert-equal(derived-style($styles, overflow-y), hidden, "overflow-y should TODO...");
 
-  // TODO
-  @include test("[function] derived-style()") {
-    // some simple tests...
-    $styles: map-get($styles-maps, simple);
-    $empty: ();
+    $styles: (
+      margin-top: 5px,
+      margin: 7px 3px,
+      margin-left: 15px,
+      color: red,
+      padding-top: 5px,
+    );
+    /* derived-style($styles, margin): #{derived-style($styles, margin)} */
+    /* derived-style($styles, margin-top): #{derived-style($styles, margin-top)} */
+    /* derived-style($styles, margin-right): #{derived-style($styles, margin-right)} */
+    /* derived-style($styles, margin-bottom): #{derived-style($styles, margin-bottom)} */
+    /* derived-style($styles, margin-left): #{derived-style($styles, margin-left)} */
+    /* derived-style($styles, margin-broken): #{derived-style($styles, margin-broken)} */
+    //@include assert-equal(derived-style($styles, margin), (7px 3px 7px 15px), "TODO...");
+    //@include assert-equal(derived-style($styles, margin-top), 7px, "TODO...");
+    //@include assert-equal(derived-style($styles, margin-right), 3px, "TODO...");
+    //@include assert-equal(derived-style($styles, margin-bottom), 7px, "TODO...");
+    //@include assert-equal(derived-style($styles, margin-left), 15px, "TODO...");
+    //@include assert-equal(derived-style($styles, margin-broken), null, "TODO...");
 
-    @include assert-equal(derived-style(null, height), null, "a null map shouldn't throw an exception");
-    @include assert-equal(derived-style($empty, height), null, "an empty map shouldn't throw an exception");
-    @include assert-equal(derived-style($styles, null), null, "a null key shouldn't throw an exception");
+    $styles: (
+      padding-top: 5px,
+      padding: 7px auto 3px 4px,
+      padding-left: auto,
+      padding-right: 2px,
+      color: red,
+      margin-top: 5px,
+    );
+    /* derived-style($styles, padding): #{derived-style($styles, padding)} */
+    /* derived-style($styles, padding-top): #{derived-style($styles, padding-top)} */
+    /* derived-style($styles, padding-right): #{derived-style($styles, padding-right)} */
+    /* derived-style($styles, padding-bottom): #{derived-style($styles, padding-bottom)} */
+    /* derived-style($styles, padding-left): #{derived-style($styles, padding-left)} */
+    /* derived-style($styles, padding-broken): #{derived-style($styles, padding-broken)} */
+    //@include assert-equal(derived-style($styles, padding), (7px 2px 3px auto), "TODO...");
+    //@include assert-equal(derived-style($styles, padding-top), 7px, "TODO...");
+    //@include assert-equal(derived-style($styles, padding-right), 2px, "TODO...");
+    //@include assert-equal(derived-style($styles, padding-bottom), 3px, "TODO...");
+    //@include assert-equal(derived-style($styles, padding-left), auto, "TODO...");
+    //@include assert-equal(derived-style($styles, padding-broken), null, "TODO...");
 
-    // test a value that exists
-    @include assert-equal(derived-style($styles, height), 10px, "height should be extracted from the style object");
-    // test a value that doesn"t exist
-    @include assert-equal(derived-style($styles, overflow), null, "overflow should be `null`");
+    // there's not enough info here to extrapolate `padding`, so it should be `null` and throw a warning
+    $styles: (
+      padding-top: 3px,
+      padding-bottom: 3px,
+      maring-left: 5px,
+      margin-right: 5px,
+    );
+    /* derived-style($styles, padding): #{derived-style($styles, padding)} */
+    /* derived-style($styles, padding-top): #{derived-style($styles, padding-top)} */
+    //@include assert-equal(derived-style($styles, padding), null, "TODO...");
+    //@include assert-equal(derived-style($styles, padding-top), 3px, "TODO...");
 
-    $styles: map-get($styles-maps, shortlonghand);
-    @include assert-equal(derived-style($styles, border), 1px solid red, "extract the border as is");
+    $styles: (
+      animation-name: bounce,
+      animation-duration: 4s,
+      animation-iteration-count: 10,
+      animation: myAnimationName 5s ease infinite 3s,
+      animation-direction: alternate,
+      animation-timing-function: ease-out,
+      animation-fill-mode: forwards,
+      animation-delay: 2s,
+    );
+    /* derived-style($styles, animation): #{derived-style($styles, animation)} */
+    /* derived-style($styles, animation-name): #{derived-style($styles, animation-name)} */
+    /* derived-style($styles, animation-duration): #{derived-style($styles, animation-duration)} */
+    /* derived-style($styles, animation-iteration-count): #{derived-style($styles, animation-iteration-count)} */
+    /* derived-style($styles, animation-direction): #{derived-style($styles, animation-direction)} */
+    /* derived-style($styles, animation-timing-function): #{derived-style($styles, animation-timing-function)} */
+    /* derived-style($styles, animation-fill-mode): #{derived-style($styles, animation-fill-mode)} */
+    /* derived-style($styles, animation-delay): #{derived-style($styles, animation-delay)} */
+    /* derived-style($styles, animation-play-state): #{derived-style($styles, animation-play-state)} */
+    //@include assert-equal(derived-style($styles, animation), (myAnimationName 5s ease-out 2s infinite alternate forwards running), "TODO...");
+    //@include assert-equal(derived-style($styles, animation-name), myAnimationName, "TODO...");
+    //@include assert-equal(derived-style($styles, animation-duration), 5s, "TODO...");
+    //@include assert-equal(derived-style($styles, animation-iteration-count), infinite, "TODO...");
+    //@include assert-equal(derived-style($styles, animation-direction), alternate, "TODO...");
+    //@include assert-equal(derived-style($styles, animation-timing-function), ease-out, "TODO...");
+    //@include assert-equal(derived-style($styles, animation-fill-mode), forwards, "TODO...");
+    //@include assert-equal(derived-style($styles, animation-delay), 2s, "TODO...");
+    //@include assert-equal(derived-style($styles, animation-play-state), running, "TODO...");
 
-    $styles: map-get($styles-maps, overflow);
-    @include assert-equal(derived-style($styles, overflow), hidden, "overflow exact match");
-    @include assert-equal(derived-style($styles, overflow-x), visible, "overflow-x should respect it's hardcoded value");
-    @include assert-equal(derived-style($styles, overflow-y), visible, "overflow-y should respect it's hardcoded value");
-  }
-}
+    $styles: (
+      animation-duration: 4s,
+      animation-iteration-count: 10,
+      animation-fill-mode: forwards,
+      animation-delay: 2s,
+    );
+    /* derived-style($styles, animation): #{derived-style($styles, animation)} */
+    /* derived-style($styles, animation-name): #{derived-style($styles, animation-name)} */
+    /* derived-style($styles, animation-duration): #{derived-style($styles, animation-duration)} */
+    //@include assert-equal(derived-style($styles, animation), null, "TODO...");
+    //@include assert-equal(derived-style($styles, animation-name), null, "TODO...");
+    //@include assert-equal(derived-style($styles, animation-duration), 4s, "TODO...");
+
+    $styles: (
+      target-name: current,
+      target: new front,
+      target-position: behind,
+    );
+    /* derived-style($styles, target): #{derived-style($styles, target)} */
+    /* derived-style($styles, target-name): #{derived-style($styles, target-name)} */
+    /* derived-style($styles, target-new): #{derived-style($styles, target-new)} */
+    /* derived-style($styles, target-position): #{derived-style($styles, target-position)} */
+    //@include assert-equal(derived-style($styles, target), (new window behind), "TODO...");
+    //@include assert-equal(derived-style($styles, target-name), new, "TODO...");
+    //@include assert-equal(derived-style($styles, target-new), window, "TODO...");
+    //@include assert-equal(derived-style($styles, target-position), behind, "TODO...");
+
+    $styles: (
+      background-color: blue,
+      background: red url(image.png) no-repeat top 7% 60px 80px,
+      background-origin: content-box,
+    );
+    /* derived-style($styles, background): #{derived-style($styles, background)} */
+    /* derived-style($styles, background-color): #{derived-style($styles, background-color)} */
+    /* derived-style($styles, background-position): #{derived-style($styles, background-position)} */
+    /* derived-style($styles, background-attachment): #{derived-style($styles, background-attachment)} */
+    /* derived-style($styles, background-image): #{derived-style($styles, background-image)} */
+    /* derived-style($styles, background-repeat): #{derived-style($styles, background-repeat)} */
+    /* derived-style($styles, background-clip): #{derived-style($styles, background-clip)} */
+    /* derived-style($styles, background-origin): #{derived-style($styles, background-origin)} */
+    /* derived-style($styles, background-size): #{derived-style($styles, background-size)} */
+    //@include assert-equal(derived-style($styles, background), (red top 7% 60px 80px no-repeat content-box border-box scroll url(image.png)), "TODO...");
+    //@include assert-equal(derived-style($styles, background-color), red, "TODO...");
+    //@include assert-equal(derived-style($styles, background-position), top 7%, "TODO...");
+    //@include assert-equal(derived-style($styles, background-attachment), scroll, "TODO...");
+    //@include assert-equal(derived-style($styles, background-image), url(image.png), "TODO...");
+    //@include assert-equal(derived-style($styles, background-repeat), no-repeat, "TODO...");
+    //@include assert-equal(derived-style($styles, background-clip), border-box, "TODO...");
+    //@include assert-equal(derived-style($styles, background-origin), content-box, "TODO...");
+    //@include assert-equal(derived-style($styles, background-size), 60px 80px, "TODO...");
+
+    $styles: (
+      background: (
+        url(image1.png) 600px 10px no-repeat,
+        url(image2.png) 10px 10px contain no-repeat,
+        url(image3.png),
+      ),
+      background-color: white,
+    );
+    /* derived-style($styles, background): #{derived-style($styles, background)} */
+    /* derived-style($styles, background-color): #{derived-style($styles, background-color)} */
+    /* derived-style($styles, background-position): #{derived-style($styles, background-position)} */
+    /* derived-style($styles, background-attachment): #{derived-style($styles, background-attachment)} */
+    /* derived-style($styles, background-image): #{derived-style($styles, background-image)} */
+    /* derived-style($styles, background-repeat): #{derived-style($styles, background-repeat)} */
+    /* derived-style($styles, background-clip): #{derived-style($styles, background-clip)} */
+    /* derived-style($styles, background-origin): #{derived-style($styles, background-origin)} */
+    /* derived-style($styles, background-size): #{derived-style($styles, background-size)} */
+    //@include assert-equal(derived-style($styles, background), (white 600px 10px auto no-repeat padding-box border-box scroll url(image1.png), white 10px 10px contain no-repeat padding-box border-box scroll url(image2.png), white left top auto repeat padding-box border-box scroll url(image3.png)), "TODO...");
+    //@include assert-equal(derived-style($styles, background-color), white, "TODO...");
+    //@include assert-equal(derived-style($styles, background-position), (600px 10px, 10px 10px, left top), "TODO...");
+    //@include assert-equal(derived-style($styles, background-attachment), scroll, "TODO...");
+    //@include assert-equal(derived-style($styles, background-image), (url(image1.png), url(image2.png), url(image3.png)), "TODO...");
+    //@include assert-equal(derived-style($styles, background-repeat), (no-repeat, no-repeat, repeat), "TODO...");
+    //@include assert-equal(derived-style($styles, background-clip), border-box, "TODO...");
+    //@include assert-equal(derived-style($styles, background-origin), padding-box, "TODO...");
+    //@include assert-equal(derived-style($styles, background-size), (auto, contain, auto), "TODO...");
+
+
+    // not augmented, so it should output the original style
+    $styles: (
+      background: (
+        url(image1.png) 600px 10px no-repeat,
+        url(image2.png) 10px 10px contain no-repeat,
+        url(image3.png),
+      ),
+    );
+    /* derived-style($styles, background): #{derived-style($styles, background)} */
+    /* derived-style($styles, background-color): #{derived-style($styles, background-color)} */
+    /* derived-style($styles, background-position): #{derived-style($styles, background-position)} */
+    /* derived-style($styles, background-attachment): #{derived-style($styles, background-attachment)} */
+    /* derived-style($styles, background-image): #{derived-style($styles, background-image)} */
+    /* derived-style($styles, background-repeat): #{derived-style($styles, background-repeat)} */
+    /* derived-style($styles, background-clip): #{derived-style($styles, background-clip)} */
+    /* derived-style($styles, background-origin): #{derived-style($styles, background-origin)} */
+    /* derived-style($styles, background-size): #{derived-style($styles, background-size)} */
+    //@include assert-equal(derived-style($styles, background), (url(image1.png) 600px 10px no-repeat, url(image2.png) 10px 10px contain no-repeat, url(image3.png)), "TODO...");
+    //@include assert-equal(derived-style($styles, background-color), transparent, "TODO...");
+    //@include assert-equal(derived-style($styles, background-position), (600px 10px, 10px 10px, left top), "TODO...");
+    //@include assert-equal(derived-style($styles, background-attachment), scroll, "TODO...");
+    //@include assert-equal(derived-style($styles, background-image), (url(image1.png), url(image2.png), url(image3.png)), "TODO...");
+    //@include assert-equal(derived-style($styles, background-repeat), (no-repeat, no-repeat, repeat), "TODO...");
+    //@include assert-equal(derived-style($styles, background-clip), border-box, "TODO...");
+    //@include assert-equal(derived-style($styles, background-origin), padding-box, "TODO...");
+    //@include assert-equal(derived-style($styles, background-size), (auto, contain, auto), "TODO...");
+
+    $styles: (
+      list-style-image: none,
+      list-style: square url(image.png),
+      list-style-position: inside,
+    );
+    /* derived-style($styles, list-style): #{derived-style($styles, list-style)} */
+    /* derived-style($styles, list-style-type): #{derived-style($styles, list-style-type)} */
+    /* derived-style($styles, list-style-position): #{derived-style($styles, list-style-position)} */
+    /* derived-style($styles, list-style-image): #{derived-style($styles, list-style-image)} */
+    //@include assert-equal(derived-style($styles, list-style), (square inside url(image.png)), "TODO...");
+    //@include assert-equal(derived-style($styles, list-style-type), square, "TODO...");
+    //@include assert-equal(derived-style($styles, list-style-position), inside, "TODO...");
+    //@include assert-equal(derived-style($styles, list-style-image), url(image.png), "TODO...");
+
+    $styles: (
+      outline-width: 2px,
+      outline: red thick dotted,
+      outline-color: green,
+      outline-offset: 4px,
+    );
+    /* derived-style($styles, outline): #{derived-style($styles, outline)} */
+    /* derived-style($styles, outline-color): #{derived-style($styles, outline-color)} */
+    /* derived-style($styles, outline-style): #{derived-style($styles, outline-style)} */
+    /* derived-style($styles, outline-width): #{derived-style($styles, outline-width)} */
+    /* derived-style($styles, outline-offset): #{derived-style($styles, outline-offset)} */
+    //@include assert-equal(derived-style($styles, outline), green dotted thick), "TODO...");
+    //@include assert-equal(derived-style($styles, outline-color), green), "TODO...");
+    //@include assert-equal(derived-style($styles, outline-style), dotted, "TODO...");
+    //@include assert-equal(derived-style($styles, outline-width), thick, "TODO...");
+    //@include assert-equal(derived-style($styles, outline-offset), 4px, "TODO...");
+  //}
+//}

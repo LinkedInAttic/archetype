@@ -29,7 +29,10 @@ $CONFIG_USE_SMART_CONTENT: true;
 }
 
 .test2c {
-  @include styleguide(small copy);
+  @include styleguide(small copy) {
+    // apply an override...
+    color: red;
+  };
 }
 
 .test2d {

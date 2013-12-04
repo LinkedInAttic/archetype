@@ -201,6 +201,7 @@
 // @param     $map {Map} a of styles
 // @param     $states {Boolean|List} if true, output all states; if false, output no states; if a list, output only the states in the list
 // @param     $exclude {List} a list of styles to exclude from output
+// @content
 @mixin to-styles($map: (), $states: true, $selectors: true, $exclude: (), $meta: ()) {
   @if $map {
     $exclude: -compass-list($exclude);
@@ -283,6 +284,9 @@
 
     $message: meta-message($map, map-merge($meta, (phase: end, origin: $archetype-origin-function or styles)));
     @if $message { /* #{$message} */ }
+
+    // any original block content passed in...
+    @content;
   }
 }
 

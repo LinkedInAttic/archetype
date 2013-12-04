@@ -161,15 +161,11 @@
 // @return    {Number} the width/height of the loading spinner
 @function _styleguideGetLoaderDimension($size: medium, $type: static, $dim: width, $context: 1) {
   $img: nth-cyclic(map-get(map-get($CONFIG_LOADERS, $size), $type), $context);
-  @debug $img;
   $sprite-file: styleguide-sprite-file($CONFIG_SPRITE_LOADERS, $img);
-  @debug $sprite-file;
   @if $dim == width {
-    @debug styleguide-image-width($sprite-file);
     @return styleguide-image-width($sprite-file);
   }
   @else {
-    @debug styleguide-image-height($sprite-file);
     @return styleguide-image-height($sprite-file);
   }
   @return 0;
