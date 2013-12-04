@@ -270,7 +270,7 @@ module Archetype::Functions::CSS
   #
   def self.get_derived_styles(map, properties = [], format = :auto, strict = false)
     # TODO how to handle multiple values?
-    computed = {}
+    computed = ::Archetype::Hash.new
     (properties || []).to_a.each do |property|
       value = Sass::Script::Value::Null.new
       if not property.value.nil?
@@ -344,10 +344,9 @@ private
       timings = get_timing_values(items)
       items = items - timings
       # name duration timing-function delay iteration-count direction
-      styles = {
-        :duration => timings.shift,
-        :delay    => timings.shift
-      }
+      styles = ::Archetype::Hash.new
+      styles[:duration] = timings.shift
+      styles[:delay]    = timings.shift
       items.reject! do |item|
         case helpers.to_str(item)
         when /^(?:normal|alternate|reverse|alternate-reverse)$/
@@ -426,6 +425,7 @@ private
   def self.get_derived_styles_router_for_background(related, property)
     properties = %w(color position size repeat origin clip attachment image)
     property_order = [:color, :position, :size, :repeat, :origin, :clip, :attachment, :image]
+
     styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       deconstruct_shorthand_for_background(items, comma_separated, properties)
     end
@@ -457,7 +457,7 @@ private
   # router for `border` and `border-{position}`
   #
   def self.get_derived_styles_router_for_border_shorthands(property, types, related)
-    styles = {}
+    styles = ::Archetype::Hash.new
     types.each do |type|
       value = get_derived_styles_router_for_border(related, "#{property}-#{type}")
       if value
@@ -491,7 +491,7 @@ private
     end
 
     properties = properties[case_type] || []
-    styles = {}
+    styles = ::Archetype::Hash.new
     augmented = false
 
     with_each_available_relative(related, property) do |key, value|
@@ -532,12 +532,11 @@ private
           augmented = false
           shorthand = items.to_a
           # TODO - doesn't support vertical radius correctly
-          styles = {
-            :top_left_radius      => shorthand[0],
-            :top_right_radius     => shorthand[1] || shorthand[0],
-            :bottom_right_radius  => shorthand[2] || shorthand[0],
-            :bottom_left_radius   => shorthand[3] || shorthand[1] || shorthand[0]
-          }
+          styles = ::Archetype::Hash.new
+          styles[:top_left_radius]      = shorthand[0],
+          styles[:top_right_radius]     = shorthand[1] || shorthand[0],
+          styles[:bottom_right_radius]  = shorthand[2] || shorthand[0],
+          styles[:bottom_left_radius]   = shorthand[3] || shorthand[1] || shorthand[0]
         end
       when :border
         key =~ R_BORDER_STD
@@ -584,7 +583,7 @@ private
       when :border
         # e.g. border-color
         type = $1
-        tmp = {}
+        tmp = ::Archetype::Hash.new
         positions.each do |pos|
           key = "border-#{pos}#{type}"
           tmp[pos.to_sym] = styles[normalize_property_key(key)] || default(key)
@@ -616,7 +615,8 @@ private
     styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
       # target-name target-new target-position
-      styles = { :name => items.shift }
+      styles = ::Archetype::Hash.new
+      styles[:name] = items.shift
 
       items.each do |item|
         case helpers.to_str(item)
@@ -651,10 +651,10 @@ private
       timings = get_timing_values(items)
       items = items - timings
       # property duration timing-function delay
-      styles = {
-        :duration         => timings.shift,
-        :delay            => timings.shift
-      }
+      styles = ::Archetype::Hash.new
+      styles[:duration] = timings.shift
+      styles[:delay]    = timings.shift
+
       items.reject! do |item|
         case helpers.to_str(item)
         when R_TIMING_FUNCTION
@@ -691,7 +691,7 @@ private
   def self.get_derived_styles_router_for_list(related, property)
     properties = %w(style-type style-position style-image)
     styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
-      styles = {}
+      styles = ::Archetype::Hash.new
       if helpers.to_str(items) == 'inherit'
         styles[:style_image] = styles[:style_type] = styles[:style_position] = items
       else
@@ -751,7 +751,7 @@ private
     properties = %w(color style width)
     styles, reconstruct = with_each_available_relative_if_root(related, property) do |items, comma_separated|
       # blow away anything we've already discovered (because it's irrelevant)
-      styles = {}
+      styles = ::Archetype::Hash.new
       items.reject! do |item|
         if item.is_a?(Sass::Script::Value::Color)
           styles[:color] = item
@@ -807,7 +807,7 @@ private
   def self.deconstruct_shorthand_for_background(items, comma_separated, properties)
     i = 0
     # blow away anything we've already discovered (because it's irrelevant)
-    styles = {}
+    styles = ::Archetype::Hash.new
     properties.each { |k| styles[k.to_sym] = [] }
 
     (comma_separated ? items.to_a : [items]).each do |items|
@@ -869,7 +869,7 @@ private
   # deconstructs `border` shorthand properties into it's longhand values
   #
   def self.deconstruct_shorthand_for_border(items, types)
-    tmp = {}
+    tmp = ::Archetype::Hash.new
     items.reject! do |item|
       if item.is_a?(Sass::Script::Value::Number)
         tmp[:width] = item
@@ -908,7 +908,7 @@ private
     contexts = [:image_slice, :image_width, :image_outset]
     context = contexts.shift
     count = 1
-    styles = {}
+    styles = ::Archetype::Hash.new
     items.each do |item|
       # source slice width outset repeat
       # <source> <slice {1,4}> / <width {1,4}> <outset> <repeat{1,2}>
@@ -1216,7 +1216,7 @@ private
   # - {Hash} augmented styles hash
   #
   def self.with_each_available_relative_if_root(related, property)
-    styles = {}
+    styles = ::Archetype::Hash.new
     augmented = false
     with_each_available_relative(related, property) do |key, value|
       styles[normalize_property_key(key)] = value
