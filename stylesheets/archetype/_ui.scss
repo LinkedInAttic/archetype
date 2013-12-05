@@ -202,7 +202,9 @@
     // otherwise, we'll look up the character code from the library mapping
     @else {
       $char-mapping: map-get(map-get($library, mappings), $icon);
-      $char-code: nth($char-mapping, 1);
+      @if $char-mapping {
+        $char-code: nth($char-mapping, 1);
+      }
     }
   }
   // if we couldn't find a valid character code (and we were asked to output an icon)...
