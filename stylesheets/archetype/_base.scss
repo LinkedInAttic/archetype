@@ -76,7 +76,7 @@ $RESET_INIT: false !default;
       $name: $name_raw;
       $subs: map-merge($subs, (grid: $grid));
 
-      $files_eot: if($files_eot_raw, quote(str-substitute($files_eot_raw, $subs)), false);
+      $files_eot: if($files_eot_raw and $files_eot_raw != '', quote(str-substitute($files_eot_raw, $subs)), false);
       $files_std: ();
       $files: ();
       @each $file in $files_std_raw {

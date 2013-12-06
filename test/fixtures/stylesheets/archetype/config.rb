@@ -17,9 +17,7 @@ locale_aliases    = {
   'cyrillic' => ['ru_RU', 'az_AZ', 'sr_SP', 'uz_UZ']
 }
 
-asset_cache_buster do |path, file|
-  "busted=true"
-end
+asset_cache_buster :none
 
 disable_warnings = true
 
