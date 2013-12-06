@@ -1,28 +1,28 @@
 @font-face {
   font-family: "MyDefaultGlyphs_16px-1.0.5";
-  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.eot');
-  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.woff') format('woff'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.ttf') format('truetype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.svg#MyDefaultGlyphs') format('svg');
+  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.eot?busted=true');
+  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.eot??busted=true#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.woff?busted=true') format('woff'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.ttf?busted=true') format('truetype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.svg?busted=true#MyDefaultGlyphs') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "MyDefaultGlyphs_12px-1.0.5";
-  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.eot');
-  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.woff') format('woff'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.ttf') format('truetype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.svg#MyDefaultGlyphs') format('svg');
+  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.eot?busted=true');
+  src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.eot??busted=true#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.woff?busted=true') format('woff'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.ttf?busted=true') format('truetype'), url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/12px/MyDefaultGlyphs.svg?busted=true#MyDefaultGlyphs') format('svg');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "MyCustomGlyphs_16px-1.0.0";
-  src: url('/assets/fonts/');
-  src: url('/assets/fonts/?#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/16px/MyCustomGlyphs.otf') format('opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/16px/MyCustomGlyphs.ttf') format('truetype');
+  src: url('/assets/fonts/?busted=true');
+  src: url('/assets/fonts/??busted=true#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/16px/MyCustomGlyphs.otf?busted=true') format('opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/16px/MyCustomGlyphs.ttf?busted=true') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "MyCustomGlyphs_12px-1.0.0";
-  src: url('/assets/fonts/');
-  src: url('/assets/fonts/?#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/12px/MyCustomGlyphs.otf') format('opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/12px/MyCustomGlyphs.ttf') format('truetype');
+  src: url('/assets/fonts/?busted=true');
+  src: url('/assets/fonts/??busted=true#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/12px/MyCustomGlyphs.otf?busted=true') format('opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/12px/MyCustomGlyphs.ttf?busted=true') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
