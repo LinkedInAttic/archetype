@@ -4,7 +4,7 @@ require 'compass/logger'
 require 'sass/plugin'
 require 'archetype'
 
-class ArchetypeTest < Test::Unit::TestCase
+class ArchetypeTest < MiniTest::Unit::TestCase
 
   def setup
     Compass.reset_configuration!
@@ -17,16 +17,14 @@ class ArchetypeTest < Test::Unit::TestCase
   end
 
   def test_archetype
-    Test::Profiler.start
-    within_project('archetype') do |proj|
-      each_css_file(proj.css_path) do |css_file|
-        assert_no_errors css_file, 'archetype'
-      end
-      each_sass_file do |sass_file|
-        assert_renders_correctly sass_file, :ignore_charset => true
-      end
+    ArchetypeTestHelpers::Profiler.start
+    project = within_project('archetype') do |proj, file|
+      assert_renders_correctly file, :ignore_charset => true
     end
-    Test::Profiler.stop
+    each_css_file(project.css_path) do |css_file|
+      assert_no_errors css_file, 'archetype'
+    end
+    ArchetypeTestHelpers::Profiler.stop
   end
 
 private
@@ -47,16 +45,20 @@ private
       expected_lines = ERB.new(File.read(expected_result_file)).result(binding)
       expected_lines.gsub!(/^@charset[^;]+;/,'') if options[:ignore_charset]
       expected_lines = expected_lines.split("\n").reject{|l| l=~/\A\Z/}
+      status = :pass
       expected_lines.zip(actual_lines).each_with_index do |pair, line|
         if pair.first == pair.last
           assert(true)
         else
+          status = :fail
           assert false, "Error in #{result_path(@current_project)}/#{name}.css:#{line + 1}\n"+diff_as_string(pair.first.inspect, pair.last.inspect)
         end
       end
       if expected_lines.size < actual_lines.size
+        status = :fail
         assert(false, "#{actual_lines.size - expected_lines.size} Trailing lines found in #{actual_result_file}.css: #{actual_lines[expected_lines.size..-1].join('\n')}")
       end
+      ArchetypeTestHelpers.report status, name
     end
   end
 
@@ -74,9 +76,15 @@ private
     if Compass.configuration.sass_path && File.exists?(Compass.configuration.sass_path)
       compiler = Compass::Compiler.new *args
       compiler.clean!
-      compiler.run
+      each_sass_file do |name, path|
+        dest = File.join(Compass.configuration.css_path, "#{name}.css")
+        FileUtils.mkdir_p(File.dirname(dest))
+        compiler.compile(path, dest)
+        yield(Compass.configuration, name) if block_given?
+      end
     end
-    yield Compass.configuration if block_given?
+
+    return Compass.configuration
   rescue
     save_output(project_name)
     raise
@@ -89,7 +97,7 @@ private
   def each_sass_file(sass_dir = nil)
     sass_dir ||= template_path(@current_project)
     Dir.glob("#{sass_dir}/**/[^_]*.s[ac]ss").each do |sass_file|
-      yield sass_file[(sass_dir.length+1)..-6]
+      yield(sass_file[(sass_dir.length+1)..-6], sass_file)
     end
   end
 
