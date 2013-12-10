@@ -9,8 +9,8 @@ gem 'compass-import-once', :require => "compass/import-once/activate"
 gem 'diff-lcs',     '~> 1.1.2'
 gem 'rake'
 gem 'true',         '0.2.0.rc.4'
-gem 'minitest'
-gem 'turn'
+gem 'minitest',     '~> 4.7.5'
+gem 'turn',         '~> 0.9.6'
 
 # these are only required for docs/development, not for running test cases
 unless ENV["CI"]
