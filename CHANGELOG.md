@@ -35,7 +35,7 @@
 - `$CORE_STATE_MAPPINGS` and `$CONFIG_STATE_MAPPINGS` are now proper Sass maps
 - `styleguide` function now has the same signature as the mixin and can take multiple definitions at once
 - `styleguide-diff` now takes two `styleguide` results as params
-- removed `testing` configuration, instead check for `defined?(Test::Unit)`
+- removed `testing` configuration, instead check for `defined?(ArchetypeTestHelpers)`
 - removed `$CONFIG_GLYPHS_NAME`, `$CONFIG_GLYPHS_VERSION`, `$CONFIG_GLYPHS_SVG_ID`, `$CONFIG_GLYPHS_BASE_PATH`, `$CONFIG_GLYPHS_EOT`, `$CONFIG_GLYPHS_FILES`, `$CONFIG_GLYPHS_THRESHOLD`, `$CORE_GLYPHS_MAPPINGS`, `$CONFIG_GLYPHS_MAPPINGS` and instead merged these configs into `$CORE_GLYPHS_LIBRARIES` and `$CONFIG_GLYPHS_LIBRARIES`
 
 ## 0.0.1.pre.3 (pre-released)

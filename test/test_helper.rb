@@ -4,8 +4,10 @@ $:.unshift(lib_dir) unless $:.include?(lib_dir)
 test_dir = File.dirname(__FILE__)
 $:.unshift(test_dir) unless $:.include?(test_dir)
 
+require 'turn/autorun'
+require 'turn/colorize'
+
 require 'compass'
-require 'test/unit'
 require 'true'
 
 class String
@@ -18,14 +20,14 @@ end
   require "helpers/#{helper}"
 end
 
-class Test::Unit::TestCase
+class MiniTest::Unit::TestCase
   include Compass::Diff
   include Compass::TestCaseHelper
   include Compass::IoHelper
   extend Compass::TestCaseHelper::ClassMethods
 end
 
-module Test
+module ArchetypeTestHelpers
   module Profiler
 
     ENABLE_GC_STATS = true
@@ -80,4 +82,24 @@ module Test
       end
     end
   end
+
+  def self.report(event, name)
+    event = self.const_get(event.to_s.upcase)
+    puts "%18s (%s) %s" % [event, ticktock, name]
+  end
+
+private
+  START_TIME = Time.now
+
+  def self.ticktock
+    t = Time.now - START_TIME
+    h, t = t.divmod(60)
+    m, t = t.divmod(60)
+    s = t.truncate
+    f = ((t - s) * 1000).to_i
+
+    "%01d:%02d:%02d.%03d" % [h,m,s,f]
+  end
+
+  include Turn::Colorize
 end

@@ -21,7 +21,7 @@ module Archetype::SassExtensions::UI
     prefix = helpers.to_str(prefix, ' ', :quotes)
     prefix = '.' if prefix == 'class'
     prefix = '#' if prefix == 'id'
-    suffix = defined?(Test::Unit) ? "RANDOM_UID" : "#{Time.now.to_i}-#{rand(36**8).to_s(36)}-#{uid}"
+    suffix = defined?(ArchetypeTestHelpers) ? "RANDOM_UID" : "#{Time.now.to_i}-#{rand(36**8).to_s(36)}-#{uid}"
     return Sass::Script::Value::String.new("#{prefix}archetype-uid-#{suffix}")
   end
 

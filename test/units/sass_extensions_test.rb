@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'archetype'
 
-class SassExtensionsTest < Test::Unit::TestCase
+class SassExtensionsTest < MiniTest::Unit::TestCase
   setup do
     Compass.reset_configuration!
   end

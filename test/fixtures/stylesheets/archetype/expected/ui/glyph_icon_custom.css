@@ -14,15 +14,13 @@
 }
 @font-face {
   font-family: "MyCustomGlyphs_16px-1.0.0";
-  src: url('/assets/fonts/');
-  src: url('/assets/fonts/?#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/16px/MyCustomGlyphs.otf') format('opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/16px/MyCustomGlyphs.ttf') format('truetype');
+  src: url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/16px/MyCustomGlyphs.otf') format('opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/16px/MyCustomGlyphs.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "MyCustomGlyphs_12px-1.0.0";
-  src: url('/assets/fonts/');
-  src: url('/assets/fonts/?#iefix') format('embedded-opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/12px/MyCustomGlyphs.otf') format('opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/12px/MyCustomGlyphs.ttf') format('truetype');
+  src: url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/12px/MyCustomGlyphs.otf') format('opentype'), url('/assets/fonts/custom/path/to/MyCustomGlyphs/1.0.0/12px/MyCustomGlyphs.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
