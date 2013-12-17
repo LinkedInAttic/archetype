@@ -128,7 +128,7 @@ module Archetype::Functions::Helpers
       hsh[key] = self.array_to_meta(hsh[key])
     end
 
-    logger.record(:warning, "one of your data structures is ambiguous, please double check near `#{previous}`") if not previous.nil?
+    logger.record(:warning, "one of your data structures is ambiguous, please double check near `#{previous}`") unless (previous.nil? or previous.empty?)
 
     return hsh
   end

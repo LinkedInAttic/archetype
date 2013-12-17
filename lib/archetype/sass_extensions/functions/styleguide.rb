@@ -27,6 +27,7 @@ module Archetype::SassExtensions::Styleguide
   # NOTE: these are no longer used/needed if you're using the map structures
   ADDITIVES   = FALLBACKS + [DROP, INHERIT, STYLEGUIDE] + MULTIMIXINS
   @@archetype_styleguide_mutex = Mutex.new
+  @@styleguide_themes ||= nil
   # :startdoc:
 
   #
@@ -481,9 +482,26 @@ private
   # - {Hash} the theme
   #
   def get_theme(theme)
-    theme_name = helpers.to_str(theme || environment.var('CONFIG_THEME') || 'archetype')
+    if @@styleguide_themes.nil?
+      # bind a callback to file save to cleanup the cache if needed
+      Compass.configuration.on_stylesheet_saved do |filename|
+        ::Archetype::SassExtensions::Styleguide.reset!(filename) unless Compass.configuration.memoize == :aggressive
+      end
+    end
     @@styleguide_themes ||= {}
-    theme = @@styleguide_themes[theme_name] ||= {}
+    theme_name = helpers.to_str(theme || environment.var('CONFIG_THEME') || 'archetype')
+    key = nil
+    begin
+      key = environment.options[:css_filename].hash
+    end
+    # if we're aggressively memoizing, store everything across the session
+    if Compass.configuration.memoize == :aggressive or not key
+      styleguide_store = @@styleguide_themes
+    #otherwise, just store it per this file instance
+    else
+      styleguide_store = @@styleguide_themes[key] ||= {}
+    end
+    theme = styleguide_store[theme_name] ||= {}
     theme[:name] ||= theme_name
     theme[:components] ||= {}
     theme[:extensions] ||= []
@@ -518,19 +536,18 @@ private
       id, modifiers, token = grammar(sentence, theme, state)
       if id
         # check memoizer
-        memoized = memoizer.fetch(theme, token)
-        if memoized
-          styles = styles.rmerge(memoized)
-        else
+        extracted = memoizer.fetch_or_create(theme, token) do
           # fetch additional styles
           extracted = extract_styles(id, modifiers, false, theme)
           # we can delete anything that had a value of `nil` as we won't be outputting those
           extracted.delete_if { |k,v| helpers.is_value(v, :nil) }
-          styles = styles.rmerge(extracted)
-          memoizer.add(theme, token, extracted)
+          # expose the result to the block
+          extracted
         end
+        styles = styles.rmerge(extracted)
       elsif not helpers.is_value(sentence, :nil)
-        helpers.logger.record(:warning, "[archetype:styleguide:missing_identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. please specify one of: #{modifiers.sort.join(', ')}")
+        msg = modifiers.length > 0 ? "please specify one of: #{modifiers.sort.join(', ')}" : "there are no registered components"
+        helpers.logger.record(:warning, "[archetype:styleguide:missing_identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. #{msg}")
       end
     end
 
@@ -601,5 +618,15 @@ private
     yield
   ensure
     $VERBOSE = verbose
+  end
+
+  def self.reset!(filename = nil)
+    @@archetype_styleguide_mutex.synchronize do
+      if filename.nil?
+        @@styleguide_themes = {}
+      else
+        (@@styleguide_themes ||= {}).delete(filename.hash)
+      end
+    end
   end
 end

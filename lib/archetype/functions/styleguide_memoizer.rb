@@ -50,6 +50,23 @@ private
   end
 
   #
+  # fetch a value from the memoizer if available, otherwise execute the block and create it
+  #
+  # *Parameters*:
+  # - <tt>theme</tt> {String} the theme name
+  # - <tt>token</tt> {Fixnum} the token to lookup
+  # *Returns*:
+  # - <tt>value</tt> {Hash} the value from the memoizer
+  #
+  def self.fetch_or_create(theme, token)
+    fetched = self.fetch(theme, token)
+    return fetched if fetched
+    fetched = yield if block_given?
+    self.add(theme, token, fetched)
+    return fetched
+  end
+
+  #
   # invalidate the memoizer for the theme
   #
   # *Parameters*:
