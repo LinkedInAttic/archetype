@@ -11,7 +11,8 @@ rvm:
   - rbx-19mode
   - ree
 env:
-  - JRUBY_OPTS="-Xcext.enabled=true -J-Xmx512m -XX:-UseGCOverheadLimit"
+  - JRUBY_OPTS="-Xcext.enabled=true -J-Xmx512m"
+  - JVM_OPTS="-XX:-UseGCOverheadLimit"
 matrix:
   fast_finish: true
   allow_failures:

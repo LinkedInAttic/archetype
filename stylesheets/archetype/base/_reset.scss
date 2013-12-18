@@ -6,6 +6,7 @@
 // @param     $exclude {List} the list of features to exclude from the reset [html5|page|lists|typography|quotes|embeds|quotes|ime]
 // @link      http://compass-style.org/reference/compass/reset/utilities/#mixin-global-reset
 @mixin base-reset($exclude: ()) {
+  $exclude: -archetype-list($exclude);
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
