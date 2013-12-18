@@ -54,7 +54,7 @@ $RESET_INIT: false !default;
     $version:   map-get($library, version);
     $path:      map-get($library, path);
     $svg-id:    map-get($library, svg-id) or $name_raw;
-    $grids:     -compass-list(map-get($library, grids));
+    $grids:     -archetype-list(map-get($library, grids));
 
     $inlined:   map-get($files, inline);
     @if $inlined == null {

@@ -38,6 +38,10 @@ module Archetype
       not (Compass.configuration.environment || :development).to_s.include?('dev')
     end
   end
+
+  def self.name
+    @archetype[:name]
+  end
 end
 
 # init

@@ -25,6 +25,7 @@
   - new methods to extract a piece of a locale: `locale-language`, `locale-territory`, `locale-modifier`
 - added `derived-style` and `styleguide-derived-style` for extracting individual style rules from maps of styles or styleguide components
 - improved memoizer scheme with option for `:aggressive` memoizing
+- added `-archetype-list` to mimic the deprecated `-compass-list`
 
 ### Major Changes:
 

@@ -213,6 +213,23 @@ module Archetype::SassExtensions::Lists
   end
   Sass::Script::Functions.declare :associative_merge, [:list, :extender]
 
+  # Returns a list object from a value that was passed.
+  # This can be used to unpack a space separated list that got turned
+  # into a string by sass before it was passed to a mixin.
+  #  this is shamelessly stolen from Compass :)
+  #
+  # *Parameters*:
+  # - <tt>$arg</tt> {*} the item to cast to a list
+  # *Returns*:
+  # - <tt>$list</tt> {List} the item as a list
+  #
+  def _archetype_list(arg)
+    # if it's already a list, just return it
+    return arg if arg.is_a?(Sass::Script::Value::List)
+    # otherwise, we'll try to cast it
+    return list(arg, :space)
+  end
+
   #
   # given a string of styles, convert it into a key-value pair list
   #

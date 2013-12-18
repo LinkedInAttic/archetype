@@ -43,7 +43,7 @@ if @description.nil?
   }
   OptionParser.new do |opts|
     opts.banner = description
-    opts.define_head "Usage: archetype migrate [path] [options]"
+    opts.define_head "Usage: #{Archetype.name} migrate [path] [options]"
     opts.separator ""
     opts.separator "Example usage:"
     opts.separator " archetype migrate /path/to/scss/ --from=0.0.1.alpha"

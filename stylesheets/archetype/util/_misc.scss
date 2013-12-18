@@ -11,7 +11,7 @@
   @if($ignore == false) {
     $ignore: (0 0px);
   }
-  @if($value != false and $value != null and not index(-compass-list($ignore), $value)) {
+  @if($value != false and $value != null and not index(-archetype-list($ignore), $value)) {
     #{$property}: $value;
   }
 }

@@ -35,7 +35,7 @@
 // @param     $value {*} the CSS value to output
 @mixin output-style($property, $value: null) {
 
-  @if( not is-null($property) and length(-compass-list($value)) > 0 and not is-null(first-value-of(-compass-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
+  @if( not is-null($property) and length(-archetype-list($value)) > 0 and not is-null(first-value-of(-archetype-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
     // check to see if we have a custom output styler (pre)
     @if check-for-custom-styler($property, $value, pre) {
@@ -113,7 +113,7 @@
     @else if($property == z-index)              { @include z-index($value...); }
     @else if($property == glyph-icon)           { @include glyph-icon($value...); }
     @else if($property == extend)               {
-      @each $v in -compass-list($value) {
+      @each $v in -archetype-list($value) {
         @extend #{$v};
       }
     }
@@ -145,7 +145,7 @@
     }
     // :before/:after
     @else if($property == ie-pseudo-before or $property == ie-pseudo-after) {
-      $value: -compass-list($value);
+      $value: -archetype-list($value);
       $content: false;
       $tag: '';
       @if length($value) > 1 {
@@ -204,7 +204,7 @@
 // @content
 @mixin to-styles($map: (), $states: true, $selectors: true, $exclude: (), $meta: ()) {
   @if $map {
-    $exclude: -compass-list($exclude);
+    $exclude: -archetype-list($exclude);
     $placeholder: (
       map:        $map,
       states:     $states,
@@ -225,7 +225,7 @@
             // deal with the states
             @if($property == states and $states != false and length($value) > 0) {
               @each $state, $val in $value {
-                @if(index(-compass-list($states), $state) or $states == true) {
+                @if(index(-archetype-list($states), $state) or $states == true) {
                   // get the state selector mappings
                   $selector-map: _getStateSelectorMap($state);
                   // output the state selectors if we're not using _only_ BEM style
@@ -257,7 +257,7 @@
             // deal with the nested selectors
             @else if($property == selectors and $selectors != false and length($value) > 0) {
               @each $selector, $val in $value {
-                @if(index(-compass-list($selectors), $selector) or $selectors == true) {
+                @if(index(-archetype-list($selectors), $selector) or $selectors == true) {
                   $sel: _getSelectorSelector($selector);
                   @if str-index($sel, '%bem ') == 1 {
                     $sel: str-replace($sel, '%bem ', '');
@@ -299,7 +299,7 @@
   $map: map-get($CONFIG_STATE_MAPPINGS, $state);
   @if $map == null or length($map) == 0 {
     $map: (
-      selector : '&.#{if(index(-compass-list($CONFIG_STATE_NO_PREFIX), $state), $prefix, "")}#{$state}',
+      selector : '&.#{if(index(-archetype-list($CONFIG_STATE_NO_PREFIX), $state), $prefix, "")}#{$state}',
       states   : ($state)
     );
   }
@@ -307,7 +307,7 @@
 }
 
 @function _getSelectorSelector($selector) {
-  $selector: first-value-of(-compass-list($selector));
+  $selector: first-value-of(-archetype-list($selector));
   @if $selector == $CORE_GLYPH_SELECTOR_VAR {
     $selector: $archetype-glyph-selector;
   }
@@ -322,7 +322,7 @@
 // @param     $value {String|List} a set of filters to output
 @mixin ie-filter($value, $use-prefix: false) {
   $out: false;
-  $value: -compass-list($value);
+  $value: -archetype-list($value);
   $ms-filter-prefix: 'progid:DXImageTransform.Microsoft.';
   @each $item in $value {
     @if($item != none and str-index($item, $ms-filter-prefix) != 1) {
@@ -383,7 +383,7 @@
                   $default: $font;
                 }
                 // if the keyword `default` is in the font-stack, substitute it with the default font-stack
-                $family: list-replace($family, index(-compass-list($family), default), $default, comma);
+                $family: list-replace($family, index(-archetype-list($family), default), $default, comma);
               }
             }
             @include target-os($os, font-family, $family);

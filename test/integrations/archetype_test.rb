@@ -18,11 +18,14 @@ class ArchetypeTest < MiniTest::Unit::TestCase
 
   def test_archetype
     ArchetypeTestHelpers::Profiler.start
-    project = within_project('archetype') do |proj, file|
+    # attach a callback to verify each file on save
+    Compass.configuration.on_stylesheet_saved do |file|
+      file = file.chomp(File.extname(file)).sub(File.join(tempfile_path(@current_project), ''), '')
       assert_renders_correctly file, :ignore_charset => true
     end
+    project = compile_project(Archetype.name)
     each_css_file(project.css_path) do |css_file|
-      assert_no_errors css_file, 'archetype'
+      assert_no_errors css_file, Archetype.name
     end
     ArchetypeTestHelpers::Profiler.stop
   end
@@ -76,12 +79,7 @@ private
     if Compass.configuration.sass_path && File.exists?(Compass.configuration.sass_path)
       compiler = Compass::Compiler.new *args
       compiler.clean!
-      each_sass_file do |name, path|
-        dest = File.join(Compass.configuration.css_path, "#{name}.css")
-        FileUtils.mkdir_p(File.dirname(dest))
-        compiler.compile(path, dest)
-        yield(Compass.configuration, name) if block_given?
-      end
+      compiler.run
     end
 
     return Compass.configuration
@@ -89,6 +87,8 @@ private
     save_output(project_name)
     raise
   end
+
+  alias_method :compile_project, :within_project
 
   def each_css_file(dir, &block)
     Dir.glob("#{dir}/**/*.css").each(&block)

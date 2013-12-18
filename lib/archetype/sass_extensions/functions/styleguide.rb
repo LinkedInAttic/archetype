@@ -17,7 +17,7 @@ module Archetype::SassExtensions::Styleguide
   SPECIAL     = %w(states selectors)
   STATES      = SPECIAL[0]
   DROPALL     = %w(all true)
-  MESSAGE_PREFIX = "[archetype:{origin}:{phase}] --- `"
+  MESSAGE_PREFIX = "[#{Archetype.name}:{origin}:{phase}] --- `"
   MESSAGE_SUFFIX = "` ---"
   # these are unique CSS keys that can be exploited to provide fallback functionality by providing a second value
   # e.g color: red; color: rgba(255,0,0, 0.8);
@@ -489,7 +489,7 @@ private
       end
     end
     @@styleguide_themes ||= {}
-    theme_name = helpers.to_str(theme || environment.var('CONFIG_THEME') || 'archetype')
+    theme_name = helpers.to_str(theme || environment.var('CONFIG_THEME') || Archetype.name)
     key = nil
     begin
       key = environment.options[:css_filename].hash
@@ -547,12 +547,12 @@ private
         styles = styles.rmerge(extracted)
       elsif not helpers.is_value(sentence, :nil)
         msg = modifiers.length > 0 ? "please specify one of: #{modifiers.sort.join(', ')}" : "there are no registered components"
-        helpers.logger.record(:warning, "[archetype:styleguide:missing_identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. #{msg}")
+        helpers.logger.record(:warning, "[#{Archetype.name}:styleguide:missing_identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. #{msg}")
       end
     end
 
     message = message.join(', ')
-    message_extras << "theme: #{theme}" if not theme.nil? and not [environment.var('CONFIG_THEME'), 'archetype'].include?(theme)
+    message_extras << "theme: #{theme}" if not theme.nil? and not [environment.var('CONFIG_THEME'), Archetype.name].include?(theme)
     message_extras << "state: #{state}" if not all_states
     if not message_extras.empty?
       message << " (#{message_extras.join(', ')})"

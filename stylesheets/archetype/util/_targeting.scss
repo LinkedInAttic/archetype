@@ -16,8 +16,8 @@
 // _getTargetedBrowsers(ie 10 lt 9) => (.ie.ie10, .ie.lte8)
 // _getTargetedBrowsers(ie 6, $using: '&') => (.ie.ie6&) // e.g. for merging with other selectors
 @function _getTargetedBrowsers($browsers, $using: '', $vendors: $CONFIG_BROWSER_VENDORS_CLASS, $threshold: $critical-usage-threshold) {
-  $browsers: -compass-list($browsers);
-  $vendors: -compass-list($vendors);
+  $browsers: -archetype-list($browsers);
+  $vendors: -archetype-list($vendors);
   $comparators: (eq lt lte);
   $comparator: false;
   $vendor: false;
@@ -35,7 +35,7 @@
       $comparator: $item;
     }
     // otherwise check if it's a browser vendor
-    @else if(index(-compass-list($vendors), $item)) {
+    @else if(index(-archetype-list($vendors), $item)) {
       $vendor: $item;
       // keep track of unversioned vendors
       $unversioned: append($unversioned, unquote('.#{$vendor}#{$using}'), comma);
@@ -162,7 +162,7 @@
 // @param     $merge {Boolean} should the class name be merged e.g. `.os-win.example` vs `.os-win .example`
 // @content
 @mixin target-os($os: (), $property: null, $value: null, $merge: false) {
-  $os: -compass-list($os);
+  $os: -archetype-list($os);
   $using: if($merge, '&', ' &');
   $classes: ();
   // if `default` is in the list of OS's, then output without a prefix

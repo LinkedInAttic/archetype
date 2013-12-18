@@ -34,7 +34,7 @@ module Archetype::SassExtensions::UI
   # - {String} a token of the string
   #
   def tokenize(item)
-    prefix = helpers.to_str(environment.var('CONFIG_GENERATED_TAG_PREFIX') || 'archetype') + '-'
+    prefix = helpers.to_str(environment.var('CONFIG_GENERATED_TAG_PREFIX') || Archetype.name) + '-'
     token = prefix + item.hash.to_s
     return Sass::Script::Value::String.new(token)
   end

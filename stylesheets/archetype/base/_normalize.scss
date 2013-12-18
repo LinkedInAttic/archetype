@@ -585,7 +585,7 @@
 // @link      http://github.com/necolas/normalize.css
 @mixin base-normalize($exclude: ()) {
 /*! normalize.css v2.1.2 | MIT License | git.io/normalize */
-  $exclude: -compass-list($exclude);
+  $exclude: -archetype-list($exclude);
   @if(not index($exclude, normalize-html5)) {
     @include base-normalize-html5();
   }
