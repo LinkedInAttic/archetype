@@ -10,6 +10,8 @@ require 'turn/colorize'
 require 'compass'
 require 'true'
 
+require 'diffy' unless ENV['CI']
+
 class String
   def name
     to_s

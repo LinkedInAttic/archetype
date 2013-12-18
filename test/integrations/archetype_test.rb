@@ -37,6 +37,11 @@ private
     assert_equal 0, open(css_file).readlines.grep(/Sass::SyntaxError/).size, msg
   end
 
+  def report_and_fail(name, msg, status = :fail)
+    ArchetypeTestHelpers.report status, name
+    assert false, msg
+  end
+
   def assert_renders_correctly(*arguments)
     options = arguments.last.is_a?(Hash) ? arguments.pop : {}
     for name in arguments
@@ -48,20 +53,28 @@ private
       expected_lines = ERB.new(File.read(expected_result_file)).result(binding)
       expected_lines.gsub!(/^@charset[^;]+;/,'') if options[:ignore_charset]
       expected_lines = expected_lines.split("\n").reject{|l| l=~/\A\Z/}
-      status = :pass
+      msg = "Error in #{result_path(@current_project)}/#{name}.css\n"
       expected_lines.zip(actual_lines).each_with_index do |pair, line|
         if pair.first == pair.last
-          assert(true)
+          assert true
         else
-          status = :fail
-          assert false, "Error in #{result_path(@current_project)}/#{name}.css:#{line + 1}\n"+diff_as_string(pair.first.inspect, pair.last.inspect)
+          msg << diff_as_string(pair.first.inspect, pair.last.inspect)
+          # output a prettified diff if we have it
+          if defined?(Diffy::Diff)
+            begin
+              full_diff = Diffy::Diff.new(expected_lines.join("\n"), actual_lines.join("\n")).to_s(:color).gsub(/\n?\\ No newline at end of file/, '')
+              msg << "\n\nFull Diff:\n#{'-'*20}\n\n\033[0m#{full_diff}\n\n#{'-'*20}"
+            rescue
+              # oh well :(
+            end
+          end
+          report_and_fail name, msg
         end
       end
       if expected_lines.size < actual_lines.size
-        status = :fail
-        assert(false, "#{actual_lines.size - expected_lines.size} Trailing lines found in #{actual_result_file}.css: #{actual_lines[expected_lines.size..-1].join('\n')}")
+        report_and_fail name, "#{actual_lines.size - expected_lines.size} Trailing lines found in #{actual_result_file}.css: #{actual_lines[expected_lines.size..-1].join('\n')}"
       end
-      ArchetypeTestHelpers.report status, name
+      ArchetypeTestHelpers.report :pass, name
     end
   end
 

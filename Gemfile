@@ -18,4 +18,5 @@ unless ENV["CI"]
   gem 'rdoc'
   gem 'colorize'
   gem 'perftools.rb'
+  gem 'diffy'
 end
