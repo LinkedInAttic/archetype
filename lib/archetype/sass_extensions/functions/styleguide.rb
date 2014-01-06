@@ -400,7 +400,7 @@ private
       value = tmp.rmerge(value)
     end
     # suppress warnings from hashery (warning: multiple values for a block parameter (2 for 1))
-    silence_warnings do
+    ::Sass::Util.silence_warnings do
       value.each do |key|
         value[key] = resolve_drops(value[key], obj[key], key, SPECIAL.include?(key)) if not value[key].nil?
       end
@@ -606,18 +606,6 @@ private
      # now convert the map to a hash if needed
     definition = helpers.data_to_hash(definition) if not definition.is_a?(Hash)
     return definition
-  end
-
-  #
-  # silence_warnings method borrowed from Rails
-  #  Sets $VERBOSE to nil for the duration of the block and back to its original value afterwards.
-  #  @link http://api.rubyonrails.org/classes/Kernel.html#method-i-silence_warnings
-  #
-  def silence_warnings
-    verbose, $VERBOSE = $VERBOSE, nil
-    yield
-  ensure
-    $VERBOSE = verbose
   end
 
   def self.reset!(filename = nil)
