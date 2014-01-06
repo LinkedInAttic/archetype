@@ -24,6 +24,8 @@
   - support for more complex formats. e.g. `sr_SP@Cyrillic`
   - new methods to extract a piece of a locale: `locale-language`, `locale-territory`, `locale-modifier`
 - added `derived-style` and `styleguide-derived-style` for extracting individual style rules from maps of styles or styleguide components
+- improved memoizer scheme with option for `:aggressive` memoizing
+- added `-archetype-list` to mimic the deprecated `-compass-list`
 
 ### Major Changes:
 
@@ -52,9 +54,9 @@
 - added `transparent-focusable` mixin for transparent background support in older IE
 - added ability to customize `output-style` with `custom-output-styler` mixin and `has-custom-output-styler` function (NEEDS DOCUMENTATION)
 - added better support for targeting IE6/7 glyphs and `ie-pseudo` generated elements (NEEDS DOCUMENTATION)
-- making `unique` generated IDs genuinely unique
-- adding support for a `testing` config flag
-- adding support for `@extend` from a styleguide component
+- made `unique` generated IDs genuinely unique
+- added support for a `testing` config flag
+- added support for `@extend` from a styleguide component
 
 ### Resolved Issues:
 

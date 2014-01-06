@@ -16,7 +16,7 @@
   }
   @if $dir == rtl {
     // if it's a left/right value, flip it (all cases)
-    $value: -compass-list($value);
+    $value: -archetype-list($value);
     @for $idx from 1 through length($value) {
       $item: nth($value, $idx);
       @if(index(left right, $item)) {

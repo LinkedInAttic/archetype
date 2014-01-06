@@ -15,7 +15,7 @@ end
 # if we got here, there was either no action, or the action was invalid
 OptionParser.new do |opts|
   opts.banner = "Archetype command line actions\n\n"
-  opts.define_head "Usage: archetype <action> [options]"
+  opts.define_head "Usage: #{Archetype.name} <action> [options]"
   opts.separator ""
   opts.separator "Available Actions:"
   Dir.glob("#{@actions_path}/*.rb") do |action|

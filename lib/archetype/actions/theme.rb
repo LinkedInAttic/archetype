@@ -2,15 +2,15 @@ description = "Generate a new Archetype theme"
 
 if @description.nil?
   options = {
-    :extends => 'archetype'
+    :extends => Archetype.name
   }
   OptionParser.new do |opts|
     opts.banner = description
-    opts.define_head "Usage: archetype theme [path] [options]"
+    opts.define_head "Usage: #{Archetype.name} theme [path] [options]"
     opts.separator ""
     opts.separator "Example usage:"
-    opts.separator " archetype theme /path/to/scss/ --name=myCustomTheme"
-    opts.separator " archetype theme --name=themes/myExtendedTheme --extends=themes/myBaseTheme"
+    opts.separator " #{Archetype.name} theme /path/to/scss/ --name=myCustomTheme"
+    opts.separator " #{Archetype.name} theme --name=themes/myExtendedTheme --extends=themes/myBaseTheme"
 
     opts.on('-n', '--name THEME', 'theme name') do |v|
       options[:theme] = v
@@ -37,7 +37,7 @@ if @description.nil?
     theme_template = File.join(File.dirname(__FILE__), '../../../templates/_theme/')
     theme_path = File.join(base, options[:theme])
     extends = "#{options[:extends]}"
-    if options[:extends] != 'archetype'
+    if options[:extends] != Archetype.name
       extends = "#{extends}/core"
     end
     theme_name = File.basename(options[:theme])
@@ -46,7 +46,7 @@ if @description.nil?
     FileUtils.cp_r(Dir["#{theme_template}/**"], tmp)
 
     puts "Creating theme '#{theme_name}' in #{File.expand_path(theme_path)}..."
-    puts "extending from #{options[:extends]}" if options[:extends] != 'archetype'
+    puts "extending from #{options[:extends]}" if options[:extends] != Archetype.name
 
     # update all placeholders in template files
     Dir.glob("#{tmp}/**/*.scss") do |filename|

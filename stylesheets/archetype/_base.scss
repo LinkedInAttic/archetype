@@ -54,7 +54,7 @@ $RESET_INIT: false !default;
     $version:   map-get($library, version);
     $path:      map-get($library, path);
     $svg-id:    map-get($library, svg-id) or $name_raw;
-    $grids:     -compass-list(map-get($library, grids));
+    $grids:     -archetype-list(map-get($library, grids));
 
     $inlined:   map-get($files, inline);
     @if $inlined == null {
@@ -87,8 +87,6 @@ $RESET_INIT: false !default;
       }
 
       // decide if we're using inline (data URI) files
-      // TODO: this won't work properly until this patch lands: https://github.com/chriseppstein/compass/pull/1444
-      // if it's not merged before release, we'll monkey patch
       $files_std: if($inlined, inline-font-files($files_std...), font-files($files_std...));
 
       @if $grid {

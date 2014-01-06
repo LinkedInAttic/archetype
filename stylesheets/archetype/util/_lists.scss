@@ -18,7 +18,7 @@
 // @param     $separator {String} the separator to use [auto|comma|space]
 // @return    $new-list {List} the list with replaced index
 @function list-replace($list: (), $idx: false, $value: nil, $separator: auto) {
-  $list: -compass-list($list);
+  $list: -archetype-list($list);
   // if no index was provided, just return the original list
   @if($idx == false) {
     @return $list;

@@ -10,6 +10,8 @@ require 'turn/colorize'
 require 'compass'
 require 'true'
 
+require 'diffy' unless ENV['CI']
+
 class String
   def name
     to_s
@@ -32,16 +34,17 @@ module ArchetypeTestHelpers
 
     ENABLE_GC_STATS = true
 
-    FILE_BASE = "/tmp/artchetype__#{RUBY_VERSION}__#{Archetype::VERSION}"
-
     if ENV['ARCHETYPE_PROFILER'] and not ENV["CI"]
 
       # include perftools if profiling
       require 'perftools'
 
+      FILE_BASE = "/tmp/#{ENV['ARCHETYPE_PROFILER']}"
+
       @allocated_objects_before
 
       def self.start
+        puts "     INFO starting profiler (#{FILE_BASE})"
         if ENABLE_GC_STATS
           if defined?(GC::Profiler) and GC::Profiler.respond_to?(:enable)
             GC::Profiler.enable
@@ -55,6 +58,7 @@ module ArchetypeTestHelpers
       end
 
       def self.stop
+        puts "     INFO stopping profiler"
         PerfTools::CpuProfiler.stop
         if ENABLE_GC_STATS
           file = File.new("#{FILE_BASE}.gc", "w")
@@ -93,7 +97,7 @@ private
 
   def self.ticktock
     t = Time.now - START_TIME
-    h, t = t.divmod(60)
+    h, t = t.divmod(3600)
     m, t = t.divmod(60)
     s = t.truncate
     f = ((t - s) * 1000).to_i

@@ -18,11 +18,14 @@ class ArchetypeTest < MiniTest::Unit::TestCase
 
   def test_archetype
     ArchetypeTestHelpers::Profiler.start
-    project = within_project('archetype') do |proj, file|
+    # attach a callback to verify each file on save
+    Compass.configuration.on_stylesheet_saved do |file|
+      file = file.chomp(File.extname(file)).sub(File.join(tempfile_path(@current_project), ''), '')
       assert_renders_correctly file, :ignore_charset => true
     end
+    project = compile_project(Archetype.name)
     each_css_file(project.css_path) do |css_file|
-      assert_no_errors css_file, 'archetype'
+      assert_no_errors css_file, Archetype.name
     end
     ArchetypeTestHelpers::Profiler.stop
   end
@@ -32,6 +35,11 @@ private
     file = css_file[(tempfile_path(project_name).size+1)..-1]
     msg = "Syntax Error found in #{file}. Results saved into #{save_path(project_name)}/#{file}"
     assert_equal 0, open(css_file).readlines.grep(/Sass::SyntaxError/).size, msg
+  end
+
+  def report_and_fail(name, msg, status = :fail)
+    ArchetypeTestHelpers.report status, name
+    assert false, msg
   end
 
   def assert_renders_correctly(*arguments)
@@ -45,20 +53,28 @@ private
       expected_lines = ERB.new(File.read(expected_result_file)).result(binding)
       expected_lines.gsub!(/^@charset[^;]+;/,'') if options[:ignore_charset]
       expected_lines = expected_lines.split("\n").reject{|l| l=~/\A\Z/}
-      status = :pass
+      msg = "Error in #{result_path(@current_project)}/#{name}.css\n"
       expected_lines.zip(actual_lines).each_with_index do |pair, line|
         if pair.first == pair.last
-          assert(true)
+          assert true
         else
-          status = :fail
-          assert false, "Error in #{result_path(@current_project)}/#{name}.css:#{line + 1}\n"+diff_as_string(pair.first.inspect, pair.last.inspect)
+          msg << diff_as_string(pair.first.inspect, pair.last.inspect)
+          # output a prettified diff if we have it
+          if defined?(Diffy::Diff)
+            begin
+              full_diff = Diffy::Diff.new(expected_lines.join("\n"), actual_lines.join("\n")).to_s(:color).gsub(/\n?\\ No newline at end of file/, '')
+              msg << "\n\nFull Diff:\n#{'-'*20}\n\n\033[0m#{full_diff}\n\n#{'-'*20}"
+            rescue
+              # oh well :(
+            end
+          end
+          report_and_fail name, msg
         end
       end
       if expected_lines.size < actual_lines.size
-        status = :fail
-        assert(false, "#{actual_lines.size - expected_lines.size} Trailing lines found in #{actual_result_file}.css: #{actual_lines[expected_lines.size..-1].join('\n')}")
+        report_and_fail name, "#{actual_lines.size - expected_lines.size} Trailing lines found in #{actual_result_file}.css: #{actual_lines[expected_lines.size..-1].join('\n')}"
       end
-      ArchetypeTestHelpers.report status, name
+      ArchetypeTestHelpers.report :pass, name
     end
   end
 
@@ -76,12 +92,7 @@ private
     if Compass.configuration.sass_path && File.exists?(Compass.configuration.sass_path)
       compiler = Compass::Compiler.new *args
       compiler.clean!
-      each_sass_file do |name, path|
-        dest = File.join(Compass.configuration.css_path, "#{name}.css")
-        FileUtils.mkdir_p(File.dirname(dest))
-        compiler.compile(path, dest)
-        yield(Compass.configuration, name) if block_given?
-      end
+      compiler.run
     end
 
     return Compass.configuration
@@ -89,6 +100,8 @@ private
     save_output(project_name)
     raise
   end
+
+  alias_method :compile_project, :within_project
 
   def each_css_file(dir, &block)
     Dir.glob("#{dir}/**/*.css").each(&block)

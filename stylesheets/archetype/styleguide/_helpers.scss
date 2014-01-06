@@ -111,7 +111,7 @@
 // @param     $texture {List|String} a list or string for a background texture
 // @return    {Color} the color in the list
 @function _styleguideGetContextColor($texture: $CONFIG_TEXTURE_CONTAINER) {
-  $texture: -compass-list(first-value-of($texture)); // cast a string into a list
+  $texture: -archetype-list(first-value-of($texture)); // cast a string into a list
   @return first-value-of($texture); // pull off the first value in the string/list
 }
 

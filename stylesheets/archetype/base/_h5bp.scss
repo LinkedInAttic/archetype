@@ -285,7 +285,7 @@
   * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
   * Kroc Camen, and the H5BP dev community and team.
   */
-  $exclude: -compass-list($exclude);
+  $exclude: -archetype-list($exclude);
   @if(not index($exclude, h5bp-base)) {
     @include base-h5bp-base();
   }

@@ -21,7 +21,7 @@ module Archetype::SassExtensions::Version
   # - {String|Boolean} if no test or test is just a lookup of a framework, it returns the version of that framework, otherwise it returns the result of the test
   #
   def archetype_version(test = nil)
-    test = test.nil? ? 'archetype' : helpers.to_str(test, ' ', :quotes).downcase
+    test = test.nil? ? Archetype.name : helpers.to_str(test, ' ', :quotes).downcase
     lib = ''
     if test.include?('compass')
       lib = Compass::VERSION

@@ -13,6 +13,9 @@ http_fonts_path   = "/assets/fonts"
 line_comments     = false
 environment       = :production
 
+# for testing purposes, make sure things work with aggressive caching turned on
+memoize           = :aggressive
+
 locale_aliases    = {
   'cyrillic' => ['ru_RU', 'az_AZ', 'sr_SP', 'uz_UZ']
 }
@@ -20,4 +23,3 @@ locale_aliases    = {
 asset_cache_buster :none
 
 disable_warnings = true
-

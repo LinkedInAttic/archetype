@@ -1,12 +1,12 @@
 ## PROFILE
 desc "profile #{@spec.name} and generate the reports"
 task :profile do
-  ENV['ARCHETYPE_PROFILER'] = '1'
+  ENV['ARCHETYPE_PROFILER'] = "artchetype__#{RUBY_VERSION}__#{@spec.version}__#{Time.now.to_i}"
   puts "running test cases with profiler..."
   Rake::Task['test'].invoke
   puts "\n\n#{'-'*20}\n\n"
   puts "analyzing profile results..."
-  file = "artchetype__#{RUBY_VERSION}__#{@spec.version}"
+  file = ENV['ARCHETYPE_PROFILER']
   input = "/tmp/#{file}.perf"
   output_base = File.join(File.dirname(__FILE__), '..')
   output = File.join(output_base, 'tmp', 'profiles')

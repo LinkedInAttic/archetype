@@ -225,9 +225,9 @@
     // choose which grid size to use
     $grids: map-get($library, grids);
     @if $grid == preferred {
-      $grid: nth(-compass-list($grids), 1);
+      $grid: nth(-archetype-list($grids), 1);
     }
-    @else if not ($grid and index(-compass-list($grids), $grid)) {
+    @else if not ($grid and index(-archetype-list($grids), $grid)) {
       $grid: choose-best-glyph-grid($grids, $size);
     }
 

@@ -21,7 +21,7 @@ module Archetype::SassExtensions::UI
     prefix = helpers.to_str(prefix, ' ', :quotes)
     prefix = '.' if prefix == 'class'
     prefix = '#' if prefix == 'id'
-    suffix = defined?(ArchetypeTestHelpers) ? "RANDOM_UID" : "#{Time.now.to_i}-#{rand(36**8).to_s(36)}-#{uid}"
+    suffix = (defined?(ArchetypeTestHelpers) || defined?(Test::Unit)) ? "RANDOM_UID" : "#{Time.now.to_i}-#{rand(36**8).to_s(36)}-#{uid}"
     return Sass::Script::Value::String.new("#{prefix}archetype-uid-#{suffix}")
   end
 
@@ -34,7 +34,7 @@ module Archetype::SassExtensions::UI
   # - {String} a token of the string
   #
   def tokenize(item)
-    prefix = helpers.to_str(environment.var('CONFIG_GENERATED_TAG_PREFIX') || 'archetype') + '-'
+    prefix = helpers.to_str(environment.var('CONFIG_GENERATED_TAG_PREFIX') || Archetype.name) + '-'
     token = prefix + item.hash.to_s
     return Sass::Script::Value::String.new(token)
   end

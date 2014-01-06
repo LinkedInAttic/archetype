@@ -7,7 +7,7 @@
 // @mixin     base-hybrid
 // @param     $exclude {List} the list of features to exclude from the reset
 @mixin base-hybrid($exclude: ()) {
-  $exclude: -compass-list($exclude);
+  $exclude: -archetype-list($exclude);
   // start with a reset
   @if not index($exclude, reset) {
     @include base-reset($exclude: $exclude);
