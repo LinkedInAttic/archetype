@@ -1,11 +1,13 @@
 ## TESTS
 require 'rake/testtask'
 
-debug = false
+@test_opts = {
+  :verbose => !ENV['CI']
+}
 
 task :test do
   # make sure the gem is buildable
-  puts "Testing the gem builds correctly..."
+  puts "testing the gem builds correctly..."
   Rake::Task['gem:build'].invoke
 end
 Rake::TestTask.new :test do |t|
@@ -14,6 +16,30 @@ Rake::TestTask.new :test do |t|
   test_files = FileList['test/**/*_test.rb']
   t.test_files = test_files
   t.verbose = true
+
+  unless ENV['CI']
+    travis_yml = '.travis.yml'
+    if File.exist?(travis_yml)
+      require 'yaml'
+      # TODO - is there a travis gem that does this stuff already?
+      begin
+        config = YAML.load(File.read(travis_yml))
+        puts "configuring test environment..."
+        (config['env'] || []).each do |env|
+          # TODO - this only works with one environment configured
+          env.scan(/(?:^|\s)(([A-Z0-9_]+)\=\"[^\"]*\")/).each do |export|
+            sh "export #{export[0]}"
+          end
+        end
+        # execut any `before_script`s
+        (config['before_script'] || []).each do |script|
+          sh script
+        end
+      rescue
+        puts "couldn't configure environment, continuing"
+      end
+    end
+  end
 end
 
 
@@ -55,7 +81,7 @@ namespace :test do
           puts "#{CHECKMARK}Cool! Looks like all the tests are up to date".colorize(:green)
         else
           puts "The following changes were found:"
-          puts "===================================="
+          puts "="*35
           # check for new or removed expectations
           diff.scan(/^Only in .*\/(#{EXPECTED}|#{TMP})\/(.*)\: (.*).css/).each do |match|
             config = (match[0] == TMP) ? [:green, '>', 'NEW TEST'] : [:red, '<', 'DELETED']
@@ -69,7 +95,7 @@ namespace :test do
           diff = diff.gsub(/^(\>.*)/, '\1'.colorize(:green))
           diff = diff.gsub(/^(\d+.*)/, '\1'.colorize(:cyan))
           puts diff
-          puts "===================================="
+          puts "="*35
           puts "Are all of these changes expected? [y/n]".colorize(:yellow)
           if (($stdin.gets.chomp)[0] == 'y')
             FileUtils.rm_rf(File.join(fixtures_path, EXPECTED, '.'))
