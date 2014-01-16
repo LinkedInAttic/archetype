@@ -17,6 +17,8 @@
   font-size: 100%;
   color: inherit;
   content: "\f0d7";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 .false {
@@ -27,6 +29,8 @@
   speak: none;
   font-size: 100%;
   color: inherit;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 .size {
@@ -41,6 +45,8 @@
   font-size: 20px;
   color: inherit;
   content: "\f0d7";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 
 .not-inline {
@@ -55,6 +61,8 @@
   font-size: 100%;
   color: inherit;
   content: "\f0d7";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .not-inline #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -77,6 +85,8 @@
   font-size: 100%;
   color: inherit;
   content: "\f0d7";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .ie-uid #my-custom-id {
   font-family: 'FontAwesome';
@@ -102,6 +112,8 @@
   font-size: 100%;
   color: inherit;
   content: "\f0d7";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .content-block #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -129,6 +141,8 @@
   font-size: 100%;
   color: inherit;
   content: "\e000";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .custom-char-code #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';

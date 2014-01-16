@@ -47,6 +47,9 @@ private
     for name in arguments
       actual_result_file = "#{tempfile_path(@current_project)}/#{name}.css"
       expected_result_file = "#{result_path(@current_project)}/#{name}.css"
+      unless File.exists?(expected_result_file)
+        report_and_fail name, "no expectation set for `#{expected_result_file}`, run `rake test:update` first"
+      end
       actual_lines = File.read(actual_result_file)
       actual_lines.gsub!(/^@charset[^;]+;/,'') if options[:ignore_charset]
       actual_lines = actual_lines.split("\n").reject{|l| l=~/\A\Z/}
