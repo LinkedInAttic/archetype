@@ -176,7 +176,7 @@
 // @param     $library {String} the glyph library to use
 // @param     $grid {Number|String} the grid to use (defaults to a smart selection, use `preferred` to use always use the first (preferred) grid option)
 // @content
-@mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: '', $ie-uid: false, $library: default, $grid: null) {
+@mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: '', $ie-uid: false, $library: default, $grid: null, $smoothing: $CONFIG_GLYPHS_SMOOTHING) {
   $archetype-glyph-selector: null !global;
   $char-mapping: null;
   $char-code: null;
@@ -253,6 +253,10 @@
       @include if-set(color, $color);
       @if $icon {
         content: $char-code;
+      }
+      @if $smoothing {
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
       }
     }
     $archetype-glyph-selector: $selector !global;

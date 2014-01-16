@@ -30,6 +30,8 @@
   font-size: 36px;
   color: inherit;
   content: "\f057";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.error:before, .alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
   position: absolute;
@@ -65,6 +67,8 @@
   font-size: 11px;
   color: inherit;
   content: "\f00d";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
@@ -111,6 +115,8 @@
   font-size: 36px;
   color: inherit;
   content: "\f058";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.success:before, .alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
   position: absolute;
@@ -146,6 +152,8 @@
   font-size: 11px;
   color: inherit;
   content: "\f00d";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
@@ -192,6 +200,8 @@
   font-size: 36px;
   color: inherit;
   content: "\f05a";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.notice:before, .alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
   position: absolute;
@@ -227,6 +237,8 @@
   font-size: 11px;
   color: inherit;
   content: "\f00d";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
@@ -273,6 +285,8 @@
   font-size: 36px;
   color: inherit;
   content: "\f071";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.yield:before, .alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
   position: absolute;
@@ -308,6 +322,8 @@
   font-size: 11px;
   color: inherit;
   content: "\f00d";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   vertical-align: top;
@@ -354,6 +370,8 @@
   font-size: 36px;
   color: inherit;
   content: "\f057";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -397,6 +415,8 @@
   font-size: 11px;
   color: inherit;
   content: "\f00d";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -451,6 +471,8 @@
   font-size: 36px;
   color: inherit;
   content: "\f058";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -494,6 +516,8 @@
   font-size: 11px;
   color: inherit;
   content: "\f00d";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -548,6 +572,8 @@
   font-size: 36px;
   color: inherit;
   content: "\f05a";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -591,6 +617,8 @@
   font-size: 11px;
   color: inherit;
   content: "\f00d";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -645,6 +673,8 @@
   font-size: 36px;
   color: inherit;
   content: "\f071";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -688,6 +718,8 @@
   font-size: 11px;
   color: inherit;
   content: "\f00d";
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
 }
 .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
