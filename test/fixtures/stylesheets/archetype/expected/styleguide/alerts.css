@@ -18,7 +18,7 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf057;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf057;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `error alert` --- */
 }
 .alert.error:before {
@@ -55,7 +55,7 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `close in a error alert` --- */
 }
 .alert.error .dismiss:before {
@@ -103,7 +103,7 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf058;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf058;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `success alert` --- */
 }
 .alert.success:before {
@@ -140,7 +140,7 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `close in a success alert` --- */
 }
 .alert.success .dismiss:before {
@@ -188,7 +188,7 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf05a;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf05a;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `notice alert` --- */
 }
 .alert.notice:before {
@@ -225,7 +225,7 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `close in a notice alert` --- */
 }
 .alert.notice .dismiss:before {
@@ -273,7 +273,7 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf071;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf071;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `yield alert` --- */
 }
 .alert.yield:before {
@@ -310,7 +310,7 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `close in a yield alert` --- */
 }
 .alert.yield .dismiss:before {
@@ -358,7 +358,7 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf057;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf057;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `error alert` --- */
 }
 .alert.error:before {
@@ -403,7 +403,7 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `close in a error alert` --- */
 }
 .alert.error .dismiss:before {
@@ -459,7 +459,7 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf058;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf058;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `success alert` --- */
 }
 .alert.success:before {
@@ -504,7 +504,7 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `close in a success alert` --- */
 }
 .alert.success .dismiss:before {
@@ -560,7 +560,7 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf05a;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf05a;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `notice alert` --- */
 }
 .alert.notice:before {
@@ -605,7 +605,7 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `close in a notice alert` --- */
 }
 .alert.notice .dismiss:before {
@@ -661,7 +661,7 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf071;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf071;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `yield alert` --- */
 }
 .alert.yield:before {
@@ -706,7 +706,7 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.id="ie-pseudo-archetype-uid-RANDOM_UID",this.el.innerHTML="&#xf00d;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.insertBefore(t.el)})}(this)));
   /* [archetype:styleguide:end] --- `close in a yield alert` --- */
 }
 .alert.yield .dismiss:before {

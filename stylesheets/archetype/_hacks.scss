@@ -72,14 +72,28 @@
   @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) {
     $uid: if($uid, $uid, unique('ie-pseudo-'));
     $archetype-pseudo-selector: '& ##{$uid}' !global;
+    $this: 't';
     $method: if($placement == before, insertBefore, appendChild);
-    $content: if($content and $content != nil, 'this.el.innerHTML="#{-ie-pseudo-content($content)}",', '');
     @if $CONFIG_GENERATED_TAG_CSS {
       $styles: if($styles and $styles != nil, #{$CONFIG_GENERATED_TAG_CSS}#{$styles}, $CONFIG_GENERATED_TAG_CSS);
     }
-    // if we're using inline styles...
-    $inline: if($styles and $styles != nil and $CONFIG_GENERATED_TAG_INLINE, 'this.el.style.cssText="#{$styles}",', '');
-    *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("#{prefixed-tag($name)}"),this.el.id="#{$uid}",#{$content}#{$inline}this.#{$method}(this.el));
+    $cmd: (unquote('#{$this}.el=document.createElement("#{prefixed-tag($name)}"),#{$this}.el.id="#{$uid}"'));
+    $method: if($placement == before, insertBefore, appendChild);
+    @if $content and $content != nil {
+      $cmd: append($cmd, unquote('#{$this}.el.innerHTML="#{-ie-pseudo-content($content)}"'), comma);
+    }
+    @if $styles and $styles != nil and $CONFIG_GENERATED_TAG_INLINE {
+      // sets the icon styles on the node if we're using inline styles...
+      $cmd: append($cmd, unquote('#{$this}.el.style.cssText="#{$styles}"'), comma);
+    }
+    $cmd: append($cmd, unquote('#{$this}.#{$method}(#{$this}.el)'), comma);
+    $runOnce: unquote('this.runtimeStyle.zoom="1"'); // this ensures the expression is only invoked once
+
+    // we execute in a setTimeout to decouple from the current UI thread
+    //  this prevents an edge case in IE crashing with an `Operation Aborted` if the node hasn't finished rendering yet
+    //  http://www.nczonline.net/blog/2008/03/17/the-dreaded-operation-aborted-error/
+    *zoom: expression(#{$runOnce},(function(#{$this}){setTimeout(function(){#{$cmd}})}(this)));
+
     // if we're NOT using inline styles...
     @if not $CONFIG_GENERATED_TAG_INLINE {
       // output it on the generated selector

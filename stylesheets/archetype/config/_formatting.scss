@@ -53,6 +53,10 @@ $CORE_STATE_MAPPINGS: (
     selector  : '&.#{$CONFIG_STATE_PREFIX}disabled, &[disabled]',
     states    : disabled
   ),
+  'checked' : (
+    selector  : '&.#{$CONFIG_STATE_PREFIX}checked, &:checked',
+    states    : checked
+  ),
   'focus-inner' : (
     selector  : '&::-moz-focus-inner',
     states    : null
