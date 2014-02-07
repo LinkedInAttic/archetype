@@ -1,14 +1,20 @@
+require 'archetype'
 require 'optparse'
 
 @actions_path = File.join(File.dirname(__FILE__), 'actions')
+@needs_help = true
 
 if not ARGV[0].nil? and not ARGV[0].empty?
   action_name = ARGV[0]
-  action = File.join(@actions_path, action_name)
-  begin
-    require action
-  rescue
-    puts "unknown action: #{action_name}"
+  if /^[a-z]/ =~ action_name
+    action = File.join(@actions_path, action_name)
+    begin
+      require action
+    rescue
+      puts "unknown action: #{action_name}"
+    end
+  elsif /^-(h|-help)$/ =~ action_name
+    @needs_help = false
   end
 end
 
@@ -23,5 +29,5 @@ OptionParser.new do |opts|
     load action
     opts.separator "  * #{File.basename(action, '.rb')}\t- #{@description}"
   end
-  puts opts
+  puts opts if @needs_help
 end.parse!
