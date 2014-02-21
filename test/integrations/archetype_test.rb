@@ -16,6 +16,8 @@ class ArchetypeTest < MiniTest::Unit::TestCase
     end
   end
 
+  SELECTIVE_TESTS = (ENV['ARCHETYPE_TESTS'] and not ENV['ARCHETYPE_TESTS'].empty?) ? ENV['ARCHETYPE_TESTS'].split(',') : nil
+
   def test_archetype
     ArchetypeTestHelpers::Profiler.start
     # attach a callback to verify each file on save
@@ -92,10 +94,21 @@ private
       config_block.call(Compass.configuration)
     end
 
+
+
     if Compass.configuration.sass_path && File.exists?(Compass.configuration.sass_path)
       compiler = Compass::Compiler.new *args
       compiler.clean!
-      compiler.run
+      if SELECTIVE_TESTS
+        each_sass_file do |name, path|
+          next unless SELECTIVE_TESTS.include?(name)
+          dest = File.join(Compass.configuration.css_path, "#{name}.css")
+          FileUtils.mkdir_p(File.dirname(dest))
+          compiler.compile(path, dest)
+        end
+      else
+        compiler.run
+      end
     end
 
     return Compass.configuration

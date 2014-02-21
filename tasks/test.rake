@@ -6,6 +6,9 @@ require 'rake/testtask'
 }
 
 task :test do
+  tests = ARGV
+  tests.shift
+  ENV['ARCHETYPE_TESTS'] = tests.join(',')
   # make sure the gem is buildable
   puts "testing the gem builds correctly..."
   Rake::Task['gem:build'].invoke
@@ -17,7 +20,7 @@ Rake::TestTask.new :test do |t|
   t.test_files = test_files
   t.verbose = true
 
-  unless ENV['CI']
+  unless true or ENV['CI']
     travis_yml = '.travis.yml'
     if File.exist?(travis_yml)
       require 'yaml'

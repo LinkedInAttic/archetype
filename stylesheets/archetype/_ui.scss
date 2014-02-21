@@ -364,17 +364,19 @@
 // @param     $modifier {String} the modifier
 // @content
 @mixin bem($element: null, $modifier: null) {
-  $selector: "#{&}";
+  $root: "#{'&'}";
+  $selector: $root;
   $msg: "the current context may produce a non-standard BEM selector for";
   @if $element {
-    @if str-index("#{&}", $CONFIG_BEM_ELEMENT_SEPARATOR) > 0 or str-index("#{&}", $CONFIG_BEM_MODIFIER_SEPARATOR) > 0 {
-      @warn "#{$msg} element `#{$element}`: #{&}";
+    @if str-index($root, $CONFIG_BEM_ELEMENT_SEPARATOR) or str-index($root, $CONFIG_BEM_MODIFIER_SEPARATOR) {
+      @warn "#{$msg} element `#{$element}`: #{$root}";
     }
     $selector: "#{$selector}#{$CONFIG_BEM_ELEMENT_SEPARATOR}#{$element}";
   }
+
   @if $modifier {
-    @if str-index("#{&}", $CONFIG_BEM_MODIFIER_SEPARATOR) > 0 {
-      @warn "#{$msg} modifier `#{$modifier}`: #{&}";
+    @if str-index($root, $CONFIG_BEM_MODIFIER_SEPARATOR) {
+      @warn "#{$msg} modifier `#{$modifier}`: #{$root}";
     }
     $selector: "#{$selector}#{$CONFIG_BEM_MODIFIER_SEPARATOR}#{$modifier}";
   }

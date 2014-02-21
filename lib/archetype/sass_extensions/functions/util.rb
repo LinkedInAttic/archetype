@@ -10,7 +10,7 @@ module Archetype::SassExtensions::Util
   # - {Boolean} whether or not the value is null
   #
   def is_null(value)
-    return Sass::Script::Bool.new(value.is_a?(Sass::Script::Value::Null) || value == Sass::Script::Value::String.new('nil'))
+    return Sass::Script::Bool.new(value.is_a?(Sass::Script::Value::Null) || (value.is_a?(Sass::Script::Value::String) && value.value == 'nil'))
   end
 
   #

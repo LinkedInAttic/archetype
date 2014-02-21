@@ -17,17 +17,18 @@ module Archetype::SassExtensions::Lists
   #
   def list_replace(list, idx = false, value = nil, separator = nil)
     # return early if the index is invalid (no operation)
-    return list if (not idx or idx == Sass::Script::Bool.new(false))
+    return list if (!idx || is_null(idx).value || idx.value == false)
     separator ||= list.separator if list.is_a?(Sass::Script::Value::List)
-    # if $value is `nil`, make sure we can use it
-    value = nil if value == Sass::Script::String.new('nil')
     # cast and zero-index $idx
     idx = (idx.value) - 1
     # cast list to a ruby array
-    list = list.to_a
+    list = list.to_a.dup
     # remove or replace the given value
-    list.delete_at(idx) if value.nil?
-    list[idx,1] = value if not value.nil?
+    if value.nil? or value.is_a?(Sass::Script::Value::Null)
+      list.delete_at(idx)
+    else
+      list[idx] = value
+    end
     return Sass::Script::Value::List.new(list, separator)
   end
   Sass::Script::Functions.declare :list_replace, [:list, :idx]

@@ -18,3 +18,4 @@ tmp/*
 /test/fixtures/stylesheets/empty
 /test/fixtures/stylesheets/*/sass/.sass-cache
 /test/fixtures/stylesheets/archetype/assets/images/**/archetype/**/*-*.png
+/.bundle/*

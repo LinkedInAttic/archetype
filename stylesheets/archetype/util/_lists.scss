@@ -1,40 +1,5 @@
 // @category  utilities/lists
 
-// remove an index from a list
-// @function  list-remove
-// @param     $list {List} the list to remove from
-// @param     $idx {Number} the index to remove
-// @param     $separator {String} the separator to use [auto|comma|space]
-// @return    $new-list {Boolean} the list with removed index
-@function list-remove($list: (), $idx: false, $separator: auto) {
-  @return list-replace($list: $list, $idx: $idx, $value: nil, $separator: $separator);
-}
-
-// replace an index in a list
-// @function  list-replace
-// @param     $list {List} the list to replace from
-// @param     $value {*} the value to replace (if nil, it's a removal)
-// @param     $idx {Number} the index to replace
-// @param     $separator {String} the separator to use [auto|comma|space]
-// @return    $new-list {List} the list with replaced index
-@function list-replace($list: (), $idx: false, $value: nil, $separator: auto) {
-  $list: -archetype-list($list);
-  // if no index was provided, just return the original list
-  @if($idx == false) {
-    @return $list;
-  }
-  $new-list: ();
-  @for $i from 1 through length($list) {
-    @if $i != $idx {
-      $new-list: append($new-list, nth($list, $i), $separator);
-    }
-    @else if($value != nil) {
-      $new-list: append($new-list, $value, $separator);
-    }
-  }
-  @return $new-list;
-}
-
 // map collection items to conform to a well defined collection
 // this is primarily used to convert shorthand notations into symmetrical longhand notations
 // @function  get-collection
