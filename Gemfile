@@ -20,3 +20,11 @@ unless ENV["CI"]
   gem 'perftools.rb'
   gem 'diffy'
 end
+
+# required for Rubinius to work
+# http://docs.travis-ci.com/user/languages/ruby/#Rubinius
+platforms :rbx do
+  gem 'racc'
+  gem 'rubysl', '~> 2.0'
+  gem 'psych'
+end
