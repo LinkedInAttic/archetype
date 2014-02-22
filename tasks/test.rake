@@ -34,7 +34,7 @@ Rake::TestTask.new :test do |t|
             sh "export #{export[0]}"
           end
         end
-        # execut any `before_script`s
+        # execute any `before_script`s
         (config['before_script'] || []).each do |script|
           sh script
         end
