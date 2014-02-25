@@ -1,4 +1,4 @@
-# this is all take from Compass because they already did the awesome testing framework
+# this is all taken from Compass because they already did the awesome testing framework
 require 'test_helper'
 require 'compass/logger'
 require 'sass/plugin'
