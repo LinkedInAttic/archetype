@@ -1,5 +1,5 @@
 .before {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.style.cssText="color: red; background: green;", t.insertBefore(t.el)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.style.cssText="color: red; background: green;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 
 .after-content {
@@ -7,5 +7,5 @@
 }
 
 .before-style-content {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="testing &#x27BD;if this works", t.el.style.cssText="color: red; background: green;", t.insertBefore(t.el)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="testing &#x27BD;if this works", t.el.style.cssText="color: red; background: green;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }

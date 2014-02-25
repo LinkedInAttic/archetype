@@ -86,7 +86,9 @@
       // sets the icon styles on the node if we're using inline styles...
       $cmd: append($cmd, unquote('#{$this}.el.style.cssText="#{$styles}"'), comma);
     }
-    $cmd: append($cmd, unquote('#{$this}.#{$method}(#{$this}.el)'), comma);
+    // if we're using the insertBefore method, we need to specify the node reference to the first childNode
+    $reference-node: if($placement == before, ',#{$this}.childNodes[0]||null', '');
+    $cmd: append($cmd, unquote('#{$this}.#{$method}(#{$this}.el#{$reference-node})'), comma);
     $runOnce: unquote('this.runtimeStyle.zoom="1"'); // this ensures the expression is only invoked once
 
     // we execute in a setTimeout to decouple from the current UI thread
