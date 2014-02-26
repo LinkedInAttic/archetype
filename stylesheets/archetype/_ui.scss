@@ -171,12 +171,12 @@
 // @param     $size {Number} the size of the icon
 // @param     $color {Color} the color of the font
 // @param     $placement {String} where to place the icon [before|after|inline]
-// @param     $ie-styles {String} styles to apply to IE6/7 (this is needed because the faux :before isn't extendable)
+// @param     $ie-styles {String} styles to apply to IE6/7
 // @param     $ie-uid {String} a custom, unique identifier for the generate IE6/7 element
 // @param     $library {String} the glyph library to use
 // @param     $grid {Number|String} the grid to use (defaults to a smart selection, use `preferred` to use always use the first (preferred) grid option)
 // @content
-@mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: '', $ie-uid: false, $library: default, $grid: null, $smoothing: $CONFIG_GLYPHS_SMOOTHING) {
+@mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: false, $ie-uid: false, $library: default, $grid: null, $smoothing: $CONFIG_GLYPHS_SMOOTHING) {
   $archetype-glyph-selector: null !global;
   $char-mapping: null;
   $char-code: null;
@@ -243,42 +243,39 @@
     $font-style: map-get($library, style) or $CONFIG_GLYPHS_STYLE;
 
     $selector: if(index(before after, $placement), '&:#{$placement}', '&');
-    #{$selector} {
-      font-family: $font-family;
-      font-weight: $font-weight;
-      font-style: $font-style;
-      text-decoration: inherit;
-      speak: none;
-      @include if-set(font-size, $size);
-      @include if-set(color, $color);
-      @if $icon {
+
+    $archetype-glyph-selector: $selector !global;
+    @if $selector != '&' {
+      #{$selector} {
         content: $char-code;
       }
-      @if $smoothing {
-        -moz-osx-font-smoothing: grayscale;
-        -webkit-font-smoothing: antialiased;
-      }
-    }
-    $archetype-glyph-selector: $selector !global;
-    @if $selector != '&' and $ie-styles {
-      // support for IE6/7
-      $styles: "font-family:#{$font-family};font-weight:#{$font-weight};font-style:#{$font-style};text-decoration:inherit;";
-      @if $size {
-        $styles: $styles + "font-size:#{$size};"
-      }
-      @if $color {
-        $styles: $styles + "color:#{$color};"
-      }
-      @if $ie-styles {
-        $styles: $styles + $ie-styles;
-      }
-      @include ie-pseudo($styles: $styles, $content: $char-code, $placement: $placement, $name: glyph, $uid: $ie-uid);
+      @include ie-pseudo($styles: $ie-styles, $content: $char-code, $placement: $placement, $name: glyph, $uid: $ie-uid);
       @if $archetype-pseudo-selector {
         $archetype-glyph-selector: '#{$selector}, #{$archetype-pseudo-selector}' !global;
       }
     }
+    // apply it to all selector contexts
     #{$archetype-glyph-selector} {
-      @content;
+      // things that are likely not to change...
+      @include to-styles((
+        font-family: $font-family,
+        font-weight: $font-weight,
+        font-style: $font-style,
+        text-decoration: none,
+        display: inline-block,
+        speak: none,
+        -moz-osx-font-smoothing: if($smoothing, grayscale, null),
+        -webkit-font-smoothing: if($smoothing, antialiased, null)
+      ));
+
+      // things that are likely to change more often...
+      @include to-styles((
+        font-size: $size,
+        color: $color
+      )) {
+        // pass the block context here
+        @content;
+      };
     }
   }
 }

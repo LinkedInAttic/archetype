@@ -75,14 +75,14 @@
     $this: 't';
     $method: if($placement == before, insertBefore, appendChild);
     @if $CONFIG_GENERATED_TAG_CSS {
-      $styles: if($styles and $styles != nil, #{$CONFIG_GENERATED_TAG_CSS}#{$styles}, $CONFIG_GENERATED_TAG_CSS);
+      $styles: if($styles and not is_null($styles), #{$CONFIG_GENERATED_TAG_CSS}#{$styles}, $CONFIG_GENERATED_TAG_CSS);
     }
     $cmd: (unquote('#{$this}.el=document.createElement("#{prefixed-tag($name)}"),#{$this}.el.id="#{$uid}"'));
     $method: if($placement == before, insertBefore, appendChild);
-    @if $content and $content != nil {
+    @if $content and not is_null($content) {
       $cmd: append($cmd, unquote('#{$this}.el.innerHTML="#{-ie-pseudo-content($content)}"'), comma);
     }
-    @if $styles and $styles != nil and $CONFIG_GENERATED_TAG_INLINE {
+    @if $styles and not is_null($styles) and $styles != '' and $CONFIG_GENERATED_TAG_INLINE {
       // sets the icon styles on the node if we're using inline styles...
       $cmd: append($cmd, unquote('#{$this}.el.style.cssText="#{$styles}"'), comma);
     }
@@ -97,7 +97,7 @@
     *zoom: expression(#{$runOnce},(function(#{$this}){setTimeout(function(){#{$cmd}})}(this)));
 
     // if we're NOT using inline styles...
-    @if not $CONFIG_GENERATED_TAG_INLINE {
+    @if not $CONFIG_GENERATED_TAG_INLINE and $styles and not is_null($styles)  {
       // output it on the generated selector
       #{$archetype-pseudo-selector} {
         @include to-styles(-style-string-to-map(unquote($styles)));
