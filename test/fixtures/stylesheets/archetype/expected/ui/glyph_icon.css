@@ -56,6 +56,25 @@
   color: inherit;
 }
 
+.multi-glyph {
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf0d7;&#xf058;&#xf003;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+}
+.multi-glyph:before {
+  content: "\f0d7 \f058 \f003";
+}
+.multi-glyph:before, .multi-glyph #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  color: inherit;
+}
+
 .not-inline {
   *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf0d7;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }

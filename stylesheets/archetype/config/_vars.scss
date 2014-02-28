@@ -2,8 +2,8 @@ $archetype-glyph-selector: null !default;
 $archetype-pseudo-selector: null !default;
 $archetype-placeholder-registry: () !default;
 
+// TODO - not sure if these should be defaulted or not, who knows?
 $archetype-current-value: null !global;
-
 $archetype-origin-function: null !global;
 
 $CORE_GLYPH_SELECTOR_VAR: '$archetype-glyph-selector';

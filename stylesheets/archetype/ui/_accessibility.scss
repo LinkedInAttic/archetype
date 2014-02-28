@@ -1,0 +1,38 @@
+// @category   ui/accessibility
+
+// hide element visibly but preserve screen-reader support
+// @mixin     hide-element
+// @credit    Jonathan Snook
+// @link      http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+@mixin hide-element() {
+  position: absolute !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  @include target-browser(ie lte 7, clip, rect(1px 1px 1px 1px));
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+// reverse hide-element and make the element visible again
+// @mixin     unhide-element
+// @see       hide-element
+// @param     $position {String} value for the position property
+// @param     $height {String} value for the height property
+// @param     $width {String} value for the width property
+// @param     $overflow {String} value for the overflow property
+@mixin unhide-element($position: static, $height: auto, $width: auto, $overflow: visible) {
+  position: $position !important;
+  height: $height;
+  width: $width;
+  overflow: $overflow;
+  clip: auto;
+}
+
+// a method for removing default styling from a button
+// @mixin     unstyled-button
+@mixin unstyled-button() {
+  background: none;
+  border: none;
+  padding: 0;
+  @include appearance(none);
+}
