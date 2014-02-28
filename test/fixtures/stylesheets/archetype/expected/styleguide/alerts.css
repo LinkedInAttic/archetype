@@ -18,366 +18,21 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf057;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-  /* [archetype:styleguide:end] --- `error alert` --- */
-}
-.alert.error:before {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 36px;
-  color: inherit;
-  content: "\f057";
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-.alert.error:before, .alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
-  position: absolute;
-  top: 6px;
-  left: 11px;
-  line-height: 1;
-}
-.alert.error .dismiss {
-  /* [archetype:styleguide:begin] --- `close in a error alert` --- */
-  color: white;
-  background: transparent none;
-  padding: 0 1px 0 0;
-  border: 0;
-  margin: 0;
-  cursor: pointer;
-  text-decoration: none;
-  position: absolute;
-  overflow: hidden;
-  top: 10px;
-  right: 10px;
-  width: 11px;
-  height: 11px;
-  text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-  /* [archetype:styleguide:end] --- `close in a error alert` --- */
-}
-.alert.error .dismiss:before {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 11px;
-  color: inherit;
-  content: "\f00d";
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-.alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
-  vertical-align: top;
-  line-height: 1;
-  position: absolute;
-  top: 0;
-  right: 0;
-  text-decoration: none;
-  cursor: pointer;
-}
-.alert.error .dismiss.hover, .alert.error .dismiss:hover, .alert.error .dismiss.focus, .alert.error .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
-
-.alert.success {
-  /* [archetype:styleguide:begin] --- `success alert` --- */
-  background-color: #5bb75b;
-  background-repeat: no-repeat;
-  background: -moz-linear-gradient(top, #62c462, #51a351);
-  background: -o-linear-gradient(top, #62c462, #51a351);
-  background: -webkit-linear-gradient(top, #62c462, #51a351);
-  background: linear-gradient(to bottom, #62c462, #51a351);
-  -moz-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  overflow: hidden;
-  display: block;
-  color: white;
-  font-size: 15px;
-  line-height: 20px;
-  position: relative;
-  padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf058;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-  /* [archetype:styleguide:end] --- `success alert` --- */
-}
-.alert.success:before {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 36px;
-  color: inherit;
-  content: "\f058";
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-.alert.success:before, .alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
-  position: absolute;
-  top: 6px;
-  left: 11px;
-  line-height: 1;
-}
-.alert.success .dismiss {
-  /* [archetype:styleguide:begin] --- `close in a success alert` --- */
-  color: white;
-  background: transparent none;
-  padding: 0 1px 0 0;
-  border: 0;
-  margin: 0;
-  cursor: pointer;
-  text-decoration: none;
-  position: absolute;
-  overflow: hidden;
-  top: 10px;
-  right: 10px;
-  width: 11px;
-  height: 11px;
-  text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-  /* [archetype:styleguide:end] --- `close in a success alert` --- */
-}
-.alert.success .dismiss:before {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 11px;
-  color: inherit;
-  content: "\f00d";
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-.alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
-  vertical-align: top;
-  line-height: 1;
-  position: absolute;
-  top: 0;
-  right: 0;
-  text-decoration: none;
-  cursor: pointer;
-}
-.alert.success .dismiss.hover, .alert.success .dismiss:hover, .alert.success .dismiss.focus, .alert.success .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
-
-.alert.notice {
-  /* [archetype:styleguide:begin] --- `notice alert` --- */
-  background-color: #49afcd;
-  background-repeat: no-repeat;
-  background: -moz-linear-gradient(top, #5bc0de, #2f96b4);
-  background: -o-linear-gradient(top, #5bc0de, #2f96b4);
-  background: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
-  background: linear-gradient(to bottom, #5bc0de, #2f96b4);
-  -moz-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  overflow: hidden;
-  display: block;
-  color: white;
-  font-size: 15px;
-  line-height: 20px;
-  position: relative;
-  padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf05a;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-  /* [archetype:styleguide:end] --- `notice alert` --- */
-}
-.alert.notice:before {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 36px;
-  color: inherit;
-  content: "\f05a";
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-.alert.notice:before, .alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
-  position: absolute;
-  top: 6px;
-  left: 11px;
-  line-height: 1;
-}
-.alert.notice .dismiss {
-  /* [archetype:styleguide:begin] --- `close in a notice alert` --- */
-  color: white;
-  background: transparent none;
-  padding: 0 1px 0 0;
-  border: 0;
-  margin: 0;
-  cursor: pointer;
-  text-decoration: none;
-  position: absolute;
-  overflow: hidden;
-  top: 10px;
-  right: 10px;
-  width: 11px;
-  height: 11px;
-  text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-  /* [archetype:styleguide:end] --- `close in a notice alert` --- */
-}
-.alert.notice .dismiss:before {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 11px;
-  color: inherit;
-  content: "\f00d";
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-.alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
-  vertical-align: top;
-  line-height: 1;
-  position: absolute;
-  top: 0;
-  right: 0;
-  text-decoration: none;
-  cursor: pointer;
-}
-.alert.notice .dismiss.hover, .alert.notice .dismiss:hover, .alert.notice .dismiss.focus, .alert.notice .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
-
-.alert.yield {
-  /* [archetype:styleguide:begin] --- `yield alert` --- */
-  background-color: #faa732;
-  background-repeat: no-repeat;
-  background: -moz-linear-gradient(top, #fbb450, #f89406);
-  background: -o-linear-gradient(top, #fbb450, #f89406);
-  background: -webkit-linear-gradient(top, #fbb450, #f89406);
-  background: linear-gradient(to bottom, #fbb450, #f89406);
-  -moz-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  overflow: hidden;
-  display: block;
-  color: white;
-  font-size: 15px;
-  line-height: 20px;
-  position: relative;
-  padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf071;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:36px;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-  /* [archetype:styleguide:end] --- `yield alert` --- */
-}
-.alert.yield:before {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 36px;
-  color: inherit;
-  content: "\f071";
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-.alert.yield:before, .alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
-  position: absolute;
-  top: 6px;
-  left: 11px;
-  line-height: 1;
-}
-.alert.yield .dismiss {
-  /* [archetype:styleguide:begin] --- `close in a yield alert` --- */
-  color: white;
-  background: transparent none;
-  padding: 0 1px 0 0;
-  border: 0;
-  margin: 0;
-  cursor: pointer;
-  text-decoration: none;
-  position: absolute;
-  overflow: hidden;
-  top: 10px;
-  right: 10px;
-  width: 11px;
-  height: 11px;
-  text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:11px;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-  /* [archetype:styleguide:end] --- `close in a yield alert` --- */
-}
-.alert.yield .dismiss:before {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 11px;
-  color: inherit;
-  content: "\f00d";
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-.alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
-  vertical-align: top;
-  line-height: 1;
-  position: absolute;
-  top: 0;
-  right: 0;
-  text-decoration: none;
-  cursor: pointer;
-}
-.alert.yield .dismiss.hover, .alert.yield .dismiss:hover, .alert.yield .dismiss.focus, .alert.yield .dismiss:focus {
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
-}
-
-.alert.error {
-  /* [archetype:styleguide:begin] --- `error alert` --- */
-  background-color: #da4f49;
-  background-repeat: no-repeat;
-  background: -moz-linear-gradient(top, #ee5f5b, #bd362f);
-  background: -o-linear-gradient(top, #ee5f5b, #bd362f);
-  background: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
-  background: linear-gradient(to bottom, #ee5f5b, #bd362f);
-  -moz-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  overflow: hidden;
-  display: block;
-  color: white;
-  font-size: 15px;
-  line-height: 20px;
-  position: relative;
-  padding: 10px 20px 10px 50px;
   *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf057;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `error alert` --- */
 }
 .alert.error:before {
+  content: "\f057";
+}
+.alert.error:before, .alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 36px;
-  color: inherit;
-  content: "\f057";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-}
-.alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
   font-size: 36px;
   color: inherit;
 }
@@ -407,22 +62,17 @@
   /* [archetype:styleguide:end] --- `close in a error alert` --- */
 }
 .alert.error .dismiss:before {
+  content: "\f00d";
+}
+.alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 11px;
-  color: inherit;
-  content: "\f00d";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-}
-.alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
   font-size: 11px;
   color: inherit;
 }
@@ -463,22 +113,17 @@
   /* [archetype:styleguide:end] --- `success alert` --- */
 }
 .alert.success:before {
+  content: "\f058";
+}
+.alert.success:before, .alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 36px;
-  color: inherit;
-  content: "\f058";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-}
-.alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
   font-size: 36px;
   color: inherit;
 }
@@ -508,22 +153,17 @@
   /* [archetype:styleguide:end] --- `close in a success alert` --- */
 }
 .alert.success .dismiss:before {
+  content: "\f00d";
+}
+.alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 11px;
-  color: inherit;
-  content: "\f00d";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-}
-.alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
   font-size: 11px;
   color: inherit;
 }
@@ -564,22 +204,17 @@
   /* [archetype:styleguide:end] --- `notice alert` --- */
 }
 .alert.notice:before {
+  content: "\f05a";
+}
+.alert.notice:before, .alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 36px;
-  color: inherit;
-  content: "\f05a";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-}
-.alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
   font-size: 36px;
   color: inherit;
 }
@@ -609,22 +244,17 @@
   /* [archetype:styleguide:end] --- `close in a notice alert` --- */
 }
 .alert.notice .dismiss:before {
+  content: "\f00d";
+}
+.alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 11px;
-  color: inherit;
-  content: "\f00d";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-}
-.alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
   font-size: 11px;
   color: inherit;
 }
@@ -665,22 +295,17 @@
   /* [archetype:styleguide:end] --- `yield alert` --- */
 }
 .alert.yield:before {
+  content: "\f071";
+}
+.alert.yield:before, .alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 36px;
-  color: inherit;
-  content: "\f071";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-}
-.alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
   font-size: 36px;
   color: inherit;
 }
@@ -710,22 +335,381 @@
   /* [archetype:styleguide:end] --- `close in a yield alert` --- */
 }
 .alert.yield .dismiss:before {
+  content: "\f00d";
+}
+.alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 11px;
-  color: inherit;
-  content: "\f00d";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  font-size: 11px;
+  color: inherit;
 }
-.alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+.alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+.alert.yield .dismiss.hover, .alert.yield .dismiss:hover, .alert.yield .dismiss.focus, .alert.yield .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.alert.error {
+  /* [archetype:styleguide:begin] --- `error alert` --- */
+  background-color: #da4f49;
+  background-repeat: no-repeat;
+  background: -moz-linear-gradient(top, #ee5f5b, #bd362f);
+  background: -o-linear-gradient(top, #ee5f5b, #bd362f);
+  background: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
+  background: linear-gradient(to bottom, #ee5f5b, #bd362f);
+  -moz-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf057;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  /* [archetype:styleguide:end] --- `error alert` --- */
+}
+.alert.error:before {
+  content: "\f057";
+}
+.alert.error:before, .alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 36px;
+  color: inherit;
+}
+.alert.error:before, .alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.error .dismiss {
+  /* [archetype:styleguide:begin] --- `close in a error alert` --- */
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  /* [archetype:styleguide:end] --- `close in a error alert` --- */
+}
+.alert.error .dismiss:before {
+  content: "\f00d";
+}
+.alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 11px;
+  color: inherit;
+}
+.alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+.alert.error .dismiss.hover, .alert.error .dismiss:hover, .alert.error .dismiss.focus, .alert.error .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.alert.success {
+  /* [archetype:styleguide:begin] --- `success alert` --- */
+  background-color: #5bb75b;
+  background-repeat: no-repeat;
+  background: -moz-linear-gradient(top, #62c462, #51a351);
+  background: -o-linear-gradient(top, #62c462, #51a351);
+  background: -webkit-linear-gradient(top, #62c462, #51a351);
+  background: linear-gradient(to bottom, #62c462, #51a351);
+  -moz-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf058;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  /* [archetype:styleguide:end] --- `success alert` --- */
+}
+.alert.success:before {
+  content: "\f058";
+}
+.alert.success:before, .alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 36px;
+  color: inherit;
+}
+.alert.success:before, .alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.success .dismiss {
+  /* [archetype:styleguide:begin] --- `close in a success alert` --- */
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  /* [archetype:styleguide:end] --- `close in a success alert` --- */
+}
+.alert.success .dismiss:before {
+  content: "\f00d";
+}
+.alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 11px;
+  color: inherit;
+}
+.alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+.alert.success .dismiss.hover, .alert.success .dismiss:hover, .alert.success .dismiss.focus, .alert.success .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.alert.notice {
+  /* [archetype:styleguide:begin] --- `notice alert` --- */
+  background-color: #49afcd;
+  background-repeat: no-repeat;
+  background: -moz-linear-gradient(top, #5bc0de, #2f96b4);
+  background: -o-linear-gradient(top, #5bc0de, #2f96b4);
+  background: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
+  background: linear-gradient(to bottom, #5bc0de, #2f96b4);
+  -moz-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf05a;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  /* [archetype:styleguide:end] --- `notice alert` --- */
+}
+.alert.notice:before {
+  content: "\f05a";
+}
+.alert.notice:before, .alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 36px;
+  color: inherit;
+}
+.alert.notice:before, .alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.notice .dismiss {
+  /* [archetype:styleguide:begin] --- `close in a notice alert` --- */
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  /* [archetype:styleguide:end] --- `close in a notice alert` --- */
+}
+.alert.notice .dismiss:before {
+  content: "\f00d";
+}
+.alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 11px;
+  color: inherit;
+}
+.alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  vertical-align: top;
+  line-height: 1;
+  position: absolute;
+  top: 0;
+  right: 0;
+  text-decoration: none;
+  cursor: pointer;
+}
+.alert.notice .dismiss.hover, .alert.notice .dismiss:hover, .alert.notice .dismiss.focus, .alert.notice .dismiss:focus {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
+}
+
+.alert.yield {
+  /* [archetype:styleguide:begin] --- `yield alert` --- */
+  background-color: #faa732;
+  background-repeat: no-repeat;
+  background: -moz-linear-gradient(top, #fbb450, #f89406);
+  background: -o-linear-gradient(top, #fbb450, #f89406);
+  background: -webkit-linear-gradient(top, #fbb450, #f89406);
+  background: linear-gradient(to bottom, #fbb450, #f89406);
+  -moz-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+  display: block;
+  color: white;
+  font-size: 15px;
+  line-height: 20px;
+  position: relative;
+  padding: 10px 20px 10px 50px;
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf071;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  /* [archetype:styleguide:end] --- `yield alert` --- */
+}
+.alert.yield:before {
+  content: "\f071";
+}
+.alert.yield:before, .alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 36px;
+  color: inherit;
+}
+.alert.yield:before, .alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
+  position: absolute;
+  top: 6px;
+  left: 11px;
+  line-height: 1;
+}
+.alert.yield .dismiss {
+  /* [archetype:styleguide:begin] --- `close in a yield alert` --- */
+  color: white;
+  background: transparent none;
+  padding: 0 1px 0 0;
+  border: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  position: absolute;
+  overflow: hidden;
+  top: 10px;
+  right: 10px;
+  width: 11px;
+  height: 11px;
+  text-indent: 12px;
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf00d;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  /* [archetype:styleguide:end] --- `close in a yield alert` --- */
+}
+.alert.yield .dismiss:before {
+  content: "\f00d";
+}
+.alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
   font-size: 11px;
   color: inherit;
 }

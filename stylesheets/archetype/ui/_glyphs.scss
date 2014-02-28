@@ -1,0 +1,164 @@
+// @category   ui/glyphs
+
+// create a stroke line around text (or font icon)
+// @mixin     stroke
+// @param     $width {Number} the width of the stroke
+// @param     $color {Color} the color of the stroke
+// @param     $shadow {List} an additional drop shadow to attach
+@mixin glyph-stroke($width: 1px, $color: black, $shadow: false) {
+  @include box-shadow(compact(0 $width 0 $color, 0 -1*$width 0 $color, $width 0 0 $color, -1*$width 0 0 $color, $shadow));
+}
+
+// computes the glyph icon info
+// @function  glyph-icon
+// @param     $icon {String} the icon name
+// @param     $size {Number} the size of the icon
+// @param     $color {Color} the color of the font
+// @param     $library {String} the glyph library to use
+// @param     $grid {Number|String} the grid to use (defaults to a smart selection, use `preferred` to always use the first (preferred) grid option)
+@function glyph-icon($icon, $size: default, $color: inherit, $library: default, $grid: null) {
+  $char-mapping: null;
+  $char-code: null;
+  // check that the library is valid, if not, throw a warning and use the default
+  @if not map-has-key($CONFIG_GLYPHS_LIBRARIES, $library) {
+    @warn "could not find a glyph library for `#{$library}`, using default";
+    $library: default;
+  }
+  // get the glyph library we'll be using...
+  @if $library != default {
+    $library: map-merge(map-get($CONFIG_GLYPHS_LIBRARIES, default), map-get($CONFIG_GLYPHS_LIBRARIES, $library));
+  }
+  @else {
+    $library: map-get($CONFIG_GLYPHS_LIBRARIES, $library);
+  }
+  // if we have an icon...
+  @if $icon {
+    // if it looks like it's a character code...
+    @if looks-like-character-code($icon) {
+      // just use it
+      $char-code: $icon;
+    }
+    // otherwise, we'll look up the character code from the library mapping
+    @else {
+      $char-mapping: map-get(map-get($library, mappings), $icon);
+      @if $char-mapping {
+        $char-code: nth($char-mapping, 1);
+      }
+    }
+  }
+  // if we couldn't find a valid character code (and we were asked to output an icon)...
+  @if $char-code == null and $icon != false {
+    // throw a warning and be done with it
+    @warn "could not find character mapping for `#{icon}`";
+  }
+  // otherwise continue on
+  @if $size == default {
+    $default-size: null;
+    @if $icon and $char-mapping {
+      $default-size: nth-cyclic($char-mapping, 2);
+    }
+    $size: if(type-of($default-size) == number, $default-size, 100%);
+  }
+
+  // choose which grid size to use
+  $grids: map-get($library, grids);
+  @if $grid == preferred {
+    $grid: nth(-archetype-list($grids), 1);
+  }
+  @else if not ($grid and index(-archetype-list($grids), $grid)) {
+    $grid: choose-best-glyph-grid($grids, $size);
+  }
+
+  $version: map-get($library, version);
+
+  $name: archetype-namespace(map-get($library, name));
+  @if $grid {
+    $name: "#{$name}_#{$grid}";
+  }
+
+  $font-family: unquote(if($version, "'#{$name}-#{$version}', ", "") + "'#{$name}'");
+  $font-weight: map-get($library, weight) or $CONFIG_GLYPHS_WEIGHT;
+  $font-style: map-get($library, style) or $CONFIG_GLYPHS_STYLE;
+
+  @return (
+    char-code:    $char-code,
+    font-family:  $font-family,
+    font-weight:  $font-weight,
+    font-style:   $font-style,
+    font-size:    $size,
+    color:        $color
+  );
+}
+
+// create a glyph icon
+// @mixin     glyph-icon
+// @param     $icon {String} the icon name
+// @param     $size {Number} the size of the icon
+// @param     $color {Color} the color of the font
+// @param     $placement {String} where to place the icon [before|after|inline]
+// @param     $ie-styles {String} styles to apply to IE6/7
+// @param     $ie-uid {String} a custom, unique identifier for the generate IE6/7 element
+// @param     $library {String} the glyph library to use
+// @param     $grid {Number|String} the grid to use (defaults to a smart selection, use `preferred` to always use the first (preferred) grid option)
+// @content
+@mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: false, $ie-uid: false, $library: default, $grid: null, $smoothing: $CONFIG_GLYPHS_SMOOTHING) {
+  $icons: -archetype-list($icon);
+  // compute the glyph info
+  $glyph-info: null;
+  $char-codes: ();
+  // allow multiple glyph character codes, but we can only use the styles for the first (primary) glyph
+  // for each icon...
+  @each $icon in $icons {
+    // compute it's info
+    $info: glyph-icon($icon: $icon, $size: $size, $color: $color, $library: $library, $grid: $grid);
+    // if the info is good...
+    @if $info {
+      $char-codes: append($char-codes, unquote(map-get($info, char-code)), space);
+      @if not $glyph-info {
+        $glyph-info: $info;
+      }
+    }
+  }
+
+  $archetype-glyph-selector: null !global;
+
+  @if $glyph-info and (length($char-codes) > 0) {
+    $char-codes: "#{$char-codes}";
+    $selector: if(index(before after, $placement), '&:#{$placement}', '&');
+    $archetype-glyph-selector: $selector !global;
+
+    @if $selector != '&' {
+      #{$selector} {
+        content: $char-codes;
+      }
+      @include ie-pseudo($styles: $ie-styles, $content: $char-codes, $placement: $placement, $name: glyph, $uid: $ie-uid);
+      @if $archetype-pseudo-selector {
+        $archetype-glyph-selector: '#{$selector}, #{$archetype-pseudo-selector}' !global;
+      }
+    }
+
+    // apply it to all selector contexts
+    #{$archetype-glyph-selector} {
+      // things that are likely not to change...
+      @include to-styles((
+        font-family:              map-get($glyph-info, font-family),
+        font-weight:              map-get($glyph-info, font-weight),
+        font-style:               map-get($glyph-info, font-style),
+        text-decoration:          none,           // prevents a double underline in firefox
+        display:                  inline-block,   // prevents the icon from being underlined in most browsers
+        speak:                    none,
+        -moz-osx-font-smoothing:  if($smoothing, grayscale, null),
+        -webkit-font-smoothing:   if($smoothing, antialiased, null)
+      ));
+
+      // things that are likely to change more often...
+      @include to-styles((
+        font-size:  map-get($glyph-info, font-size),
+        color:      map-get($glyph-info, color)
+      )) {
+        // pass the block context here
+        @content;
+      };
+    }
+  }
+}

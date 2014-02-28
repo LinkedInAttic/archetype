@@ -47,7 +47,7 @@ $RESET_INIT: false !default;
     @if $key != default {
       $library: map-merge(map-get($CONFIG_GLYPHS_LIBRARIES, default), $library);
     }
-    $name_raw:  map-get($library, name);
+    $name_raw:  archetype-namespace(map-get($library, name));
     $files:     map-get($library, files);
     $weight:    map-get($library, weight) or $CONFIG_GLYPHS_WEIGHT;
     $style:     map-get($library, style) or $CONFIG_GLYPHS_STYLE;

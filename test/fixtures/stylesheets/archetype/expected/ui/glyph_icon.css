@@ -6,69 +6,90 @@
   font-style: normal;
 }
 .simple {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf0d7;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:100%;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf0d7;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .simple:before {
+  content: "\f0d7";
+}
+.simple:before, .simple #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 100%;
-  color: inherit;
-  content: "\f0d7";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  color: inherit;
 }
 
 .false {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 100%;
-  color: inherit;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  color: inherit;
 }
 
 .size {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf0d7;", t.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:20px;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf0d7;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .size:before {
+  content: "\f0d7";
+}
+.size:before, .size #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 20px;
-  color: inherit;
-  content: "\f0d7";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
+  font-size: 20px;
+  color: inherit;
+}
+
+.multi-glyph {
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf0d7;&#xf058;&#xf003;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+}
+.multi-glyph:before {
+  content: "\f0d7 \f058 \f003";
+}
+.multi-glyph:before, .multi-glyph #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  color: inherit;
 }
 
 .not-inline {
   *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf0d7;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .not-inline:before {
+  content: "\f0d7";
+}
+.not-inline:before, .not-inline #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 100%;
-  color: inherit;
-  content: "\f0d7";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-}
-.not-inline #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
   font-size: 100%;
   color: inherit;
 }
@@ -77,22 +98,17 @@
   *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="my-custom-id", t.el.innerHTML="&#xf0d7;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .ie-uid:before {
+  content: "\f0d7";
+}
+.ie-uid:before, .ie-uid #my-custom-id {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 100%;
-  color: inherit;
-  content: "\f0d7";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-}
-.ie-uid #my-custom-id {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
   font-size: 100%;
   color: inherit;
 }
@@ -104,26 +120,19 @@
   *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xf0d7;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .content-block:before {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 100%;
-  color: inherit;
   content: "\f0d7";
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-}
-.content-block #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  font-size: 100%;
-  color: inherit;
 }
 .content-block:before, .content-block #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'FontAwesome';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  color: inherit;
   position: absolute;
   top: 10px;
   left: 10px;
@@ -133,22 +142,17 @@
   *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID", t.el.innerHTML="&#xe000;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .custom-char-code:before {
+  content: "\e000";
+}
+.custom-char-code:before, .custom-char-code #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
   font-weight: normal;
   font-style: normal;
-  text-decoration: inherit;
+  text-decoration: none;
+  display: inline-block;
   speak: none;
-  font-size: 100%;
-  color: inherit;
-  content: "\e000";
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-}
-.custom-char-code #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
   font-size: 100%;
   color: inherit;
 }

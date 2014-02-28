@@ -1,0 +1,11 @@
+$CONFIG_NAMESPACE: MyCustomNamespace !default;
+@import "test_harness";
+
+.test {
+  /* testing: #{archetype-namespace(testing)}; */
+  @include glyph-icon(caret-down);
+}
+
+@include base-glyph();
+
+@include generate-loader-keyframes();

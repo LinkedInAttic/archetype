@@ -179,7 +179,7 @@
 // @return    {String} the animation value
 @function _styleguideGetLoaderAnimation($size: medium, $context: 1) {
   $values: map-get($CONFIG_LOADERS, $size);
-  $anim: ($CONFIG_KEYFRAME_LOADERS);
+  $anim: (archetype-namespace($CONFIG_KEYFRAME_LOADERS));
   $duration:    nth-cyclic(map-get($values, duration), $context);
   $delay:       nth-cyclic(map-get($values, delay), $context);
   $steps:       nth-cyclic(map-get($values, steps), $context);
@@ -188,7 +188,7 @@
   @if not is-null($delay)       { $anim: append($anim, $delay); }
   @if not is-null($steps)       { $anim: append($anim, steps($steps, end)); }
   @if not is-null($iterations)  { $anim: append($anim, $iterations); }
-  $position-keyframe-name: #{$CONFIG_KEYFRAME_LOADERS}-position-#{$size}-#{$context};
+  $position-keyframe-name: #{archetype-namespace($CONFIG_KEYFRAME_LOADERS)}-position-#{$size}-#{$context};
   $anim: unquote("#{$anim}, #{$position-keyframe-name} 0.1ms step-end infinite");
   @return $anim;
 }

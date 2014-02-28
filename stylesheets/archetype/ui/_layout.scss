@@ -1,0 +1,33 @@
+// @category   ui/layout
+@import "compass/layout/stretching";
+
+// makes your element centered vertically and horizontally in a parent element
+// @mixin   centered-box
+@mixin centered-box() {
+  @include stretch();
+  margin: auto;
+}
+
+// mixin for generating a fade box which fades from transparent to white
+// @mixin     fade-box
+// @param     $width {String} the width of the overlay
+// @param     $height {String} the height of the overlay
+// @param     $direction {String} top=vertical left=horizontal
+// @param     $from {Color} the start color
+// @param     $to {Color} the end color
+@mixin fade-box($width: 100%, $height: 100%, $direction: top, $from: rgba(255,255,255,0.4), $to: rgba(255,255,255,1)) {
+  $direction: rtl($direction);
+  @if support-legacy-browser('ie', '8', $threshold: $critical-usage-threshold) {
+    @if $direction == left {
+      @include ie-filter(gradient(startColorstr=ie-hex-str($from), endColorstr=ie-hex-str($to), GradientType=1));
+    }
+    @else {
+      @include ie-filter(gradient(startColorstr=ie-hex-str($from), endColorstr=ie-hex-str($to)));
+    }
+  }
+  @include background-image(linear-gradient($direction, $from, $to) );
+  @include pseudo-element($width: $width, $height: $height, $position: absolute);
+  text-align: center;
+  bottom: 0;
+  #{if($direction == left, right, left)}: 0;
+}

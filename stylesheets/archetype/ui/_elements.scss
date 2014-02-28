@@ -1,0 +1,96 @@
+// @category   ui/elements
+
+// computes the border position to use
+// @function  _getTriangleBorderDirection
+// @private
+// @param     $direction {String} the direction the arrow is pointing (top, left, top left, etc)
+// @return    {List} the computed border position (e.g. top, left, bottom)
+@function _getTriangleBorderDirection($direction) {
+  @if(length($direction) == 1) {
+    @return opposite-position($direction);
+  }
+  @return if(index($direction, top), bottom, top);
+}
+
+// computes the border width for the triangle
+// @function  _getTriangleBorderWidth
+// @private
+// @param     $width {Number} the width of the arrow
+// @param     $height {Number} the height of the arrow
+// @param     $direction {String} the direction the arrow is pointing (top, left, top left, etc)
+// @return    {List} the computed border widths
+@function _getTriangleBorderWidth($width, $height, $direction) {
+  @if(length($direction) == 1) {
+    // TOP
+    @if($direction == top) {
+      @return 0 ($width/2) $height;
+    }
+    // BOTTOM
+    @else if($direction == bottom) {
+      @return $height ($width/2) 0;
+    }
+    // LEFT
+    @else if($direction == left) {
+      @return ($height/2) $width ($height/2) 0;
+    }
+    // RIGHT
+    @else if($direction == right) {
+      @return ($height/2) 0 ($height/2) $width;
+    }
+  }
+  @else if(index($direction, top)) {
+    // TOP LEFT
+    @if(index($direction, left)) {
+      @return 0 $width $height 0;
+    }
+    // TOP RIGHT
+    @else {
+      @return 0 0 $height $width;
+    }
+  }
+  @else if(index($direction, bottom)) {
+    // BOTTOM LEFT
+    @if(index($direction, left)) {
+      @return $height $width 0 0;
+    }
+    // BOTTOM RIGHT
+    @else {
+      @return $height 0 0 $width;
+    }
+  }
+  @return 0;
+}
+
+// generates a cross-browser triangle using borders
+// @mixin     triangle
+// @param     $direction {String} the direction the arrow is pointing (top, left, top left, etc)
+// @param     $width {Number} the width of the arrow
+// @param     $height {Number} the height of the arrow
+// @param     $color {Color} the color of the arrow
+@mixin triangle($direction: bottom, $width: 1em, $height: false, $color: #aaa) {
+  $direction: rtl($direction);
+  // if no height was specified, assume it's identical to width
+  @if(not $height) {
+    $height: $width;
+  }
+  // zero out it's content
+  height: 0;
+  width : 0;
+  // IE6 needs some extra love
+  @include target-browser(ie 6, font-size, 0);
+  @include target-browser(ie 6, line-height, 0);
+  border: {
+    // for IE6, transparent borders are simulated using `dashed` styles instead of a chroma filter
+    // IE won't render a `dashed` border-style unless (width * 5) >= border-width
+    // since width is always 0, dashed borders aren't rendered
+    // @link http://hedgerwow.appspot.com/demo/arrows
+    style: dashed;
+    // transparent for all other browsers
+    color: transparent;
+    width: _getTriangleBorderWidth($width, $height, $direction);
+    #{_getTriangleBorderDirection($direction)}: {
+      color: $color;
+      style: solid;
+    }
+  }
+}
