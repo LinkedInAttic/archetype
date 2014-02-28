@@ -28,7 +28,7 @@
 // @private
 @mixin -generate-loader-keyframes-360() {
   @if do-once("archetype/ui/generate-keyframe/#{$CONFIG_KEYFRAME_LOADERS}") {
-    @include keyframes($CONFIG_KEYFRAME_LOADERS) {
+    @include keyframes(archetype-namespace($CONFIG_KEYFRAME_LOADERS)) {
       from { @include rotate(0deg); }
       to { @include rotate(360deg); }
     }
@@ -43,7 +43,7 @@
 // @param     $width {Number} the width of the spinner image
 // @param     $height {Number} the height of the spinner image
 @mixin -generate-loader-keyframes-position($name, $position, $width, $height) {
-  $name: unquote('#{$CONFIG_KEYFRAME_LOADERS}-position-#{$name}');
+  $name: unquote('#{archetype-namespace($CONFIG_KEYFRAME_LOADERS)}-position-#{$name}');
   @if do-once("archetype/ui/generate-keyframe/#{$name}") {
     @include keyframes($name) {
       from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }

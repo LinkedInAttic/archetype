@@ -30,6 +30,7 @@
 - added `derived-style` and `styleguide-derived-style` for extracting individual style rules from maps of styles or styleguide components
 - improved memoizer scheme with option for `:aggressive` memoizing
 - added `-archetype-list` to mimic the deprecated `-compass-list`
+- added `$CONFIG_NAMESPACE` to allow namespacing global generated CSS (keyframes, font-face, etc)
 
 ### Major Changes:
 

@@ -71,7 +71,7 @@
 
   $version: map-get($library, version);
 
-  $name: map-get($library, name);
+  $name: archetype-namespace(map-get($library, name));
   @if $grid {
     $name: "#{$name}_#{$grid}";
   }
