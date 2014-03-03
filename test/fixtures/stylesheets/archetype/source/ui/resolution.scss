@@ -1,0 +1,40 @@
+@import "test_harness";
+
+.conversions {
+  $dpi: 144dpi;
+  $ratio: 1.5;
+  $dppx: 2.0dppx;
+  $dpcm: 200dpcm;
+
+  /* resolution-to-dpi(#{$dpi}): #{resolution-to-dpi($dpi)} */
+  /* resolution-to-dpi(#{$ratio}): #{resolution-to-dpi($ratio)} */
+  /* resolution-to-dpi(#{$dppx}): #{resolution-to-dpi($dppx)} */
+  /* resolution-to-dpi(#{$dpcm}): #{resolution-to-dpi($dpcm)} */
+  /* ------------- */
+  /* resolution-to-ratio(#{$dpi}): #{resolution-to-ratio($dpi)} */
+  /* resolution-to-ratio(#{$ratio}): #{resolution-to-ratio($ratio)} */
+  /* resolution-to-ratio(#{$dppx}): #{resolution-to-ratio($dppx)} */
+  /* resolution-to-ratio(#{$dpcm}): #{resolution-to-ratio($dpcm)} */
+  /* ------------- */
+  /* resolution-to-dppx(#{$dpi}): #{resolution-to-dppx($dpi)} */
+  /* resolution-to-dppx(#{$ratio}): #{resolution-to-dppx($ratio)} */
+  /* resolution-to-dppx(#{$dppx}): #{resolution-to-dppx($dppx)} */
+  /* resolution-to-dppx(#{$dpcm}): #{resolution-to-dppx($dpcm)} */
+  /* ------------- */
+  /* resolution-to-dpcm(#{$dpi}): #{resolution-to-dpcm($dpi)} */
+  /* resolution-to-dpcm(#{$ratio}): #{resolution-to-dpcm($ratio)} */
+  /* resolution-to-dpcm(#{$dppx}): #{resolution-to-dpcm($dppx)} */
+  /* resolution-to-dpcm(#{$dpcm}): #{resolution-to-dpcm($dpcm)} */
+}
+
+.with-high-resolution {
+  @include high-resolution(1.5) {
+    background: red;
+  }
+}
+
+.with-hidpi-resolution {
+  @include high-resolution(192dpi) {
+    background: red;
+  }
+}

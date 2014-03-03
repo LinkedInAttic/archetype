@@ -1,0 +1,58 @@
+// @category   ui/scopes
+
+// a mixin to output the current context in a BEM style selector
+// @link http://bem.info/method/
+// @mixin     BEM
+// @param     $element {String} the element name
+// @param     $modifier {String} the modifier
+// @content
+@mixin bem($element: null, $modifier: null) {
+  $root: "#{'&'}";
+  $selector: $root;
+  $msg: "the current context may produce a non-standard BEM selector for";
+  @if $element {
+    @if str-index($root, $CONFIG_BEM_ELEMENT_SEPARATOR) or str-index($root, $CONFIG_BEM_MODIFIER_SEPARATOR) {
+      @warn "#{$msg} element `#{$element}`: #{$root}";
+    }
+    $selector: "#{$selector}#{$CONFIG_BEM_ELEMENT_SEPARATOR}#{$element}";
+  }
+
+  @if $modifier {
+    @if str-index($root, $CONFIG_BEM_MODIFIER_SEPARATOR) {
+      @warn "#{$msg} modifier `#{$modifier}`: #{$root}";
+    }
+    $selector: "#{$selector}#{$CONFIG_BEM_MODIFIER_SEPARATOR}#{$modifier}";
+  }
+  @at-root #{$selector} {
+    @content;
+  }
+}
+
+// scopes content block for high resolution (HiDPI/Retina) displays
+// @mixin     high-resolution
+// @param     $resolution {Number} the resolution to use (either a ratio, dpi, dpcm, or dppx)
+// @content
+@mixin high-resolution($resolution: $CONFIG_RESOLUTION_HIGH) {
+  @if $resolution {
+    $ratio: resolution-to-ratio($resolution);
+    $query: ();
+
+    $queries: (
+      if(support-legacy-browser('firefox', '16', $threshold: $critical-usage-threshold), '(min--moz-device-pixel-ratio: #{$ratio})', null),
+      '(-webkit-min-device-pixel-ratio: #{$ratio})',
+      '(-o-min-device-pixel-ratio: #{to-fraction($ratio)})',
+      '(min-resolution: #{resolution-to-dpi($resolution)})',
+      '(min-resolution: #{resolution-to-dppx($resolution)})'
+    );
+
+    @each $q in $queries {
+      @if $q {
+        $query: append($query, unquote('only screen and #{$q}'), comma);
+      }
+    }
+
+    @media #{$query} {
+      @content;
+    }
+  }
+}

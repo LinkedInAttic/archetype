@@ -1,0 +1,33 @@
+.conversions {
+  /* resolution-to-dpi(144dpi): 144dpi */
+  /* resolution-to-dpi(1.5): 144dpi */
+  /* resolution-to-dpi(2dppx): 192dpi */
+  /* resolution-to-dpi(200dpcm): 78.74016dpi */
+  /* ------------- */
+  /* resolution-to-ratio(144dpi): 1.5 */
+  /* resolution-to-ratio(1.5): 1.5 */
+  /* resolution-to-ratio(2dppx): 2 */
+  /* resolution-to-ratio(200dpcm): 0.82021 */
+  /* ------------- */
+  /* resolution-to-dppx(144dpi): 1.5dppx */
+  /* resolution-to-dppx(1.5): 1.5dppx */
+  /* resolution-to-dppx(2dppx): 2dppx */
+  /* resolution-to-dppx(200dpcm): 0.82021dppx */
+  /* ------------- */
+  /* resolution-to-dpcm(144dpi): 365.76dpcm */
+  /* resolution-to-dpcm(1.5): 365.76dpcm */
+  /* resolution-to-dpcm(2dppx): 487.68dpcm */
+  /* resolution-to-dpcm(200dpcm): 200dpcm */
+}
+
+@media only screen and (min--moz-device-pixel-ratio: 1.5), only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (-o-min-device-pixel-ratio: 3 / 2), only screen and (min-resolution: 144dpi), only screen and (min-resolution: 1.5dppx) {
+  .with-high-resolution {
+    background: red;
+  }
+}
+
+@media only screen and (min--moz-device-pixel-ratio: 2), only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .with-hidpi-resolution {
+    background: red;
+  }
+}

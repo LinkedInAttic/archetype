@@ -4,7 +4,7 @@
 
 ### Resolved Issues:
 
-- support Sass 3.3.0 and Compass 0.13.0
+- support Sass 3.3.0 and Compass 1.0.0
 - `content` is no longer improperly quoted if not needed
 - fix for IE7 `:before` glyphs not being positioned correctly
 - fix for IE7 potentially crashing with `Operation Aborted` due to glyph injection
@@ -31,6 +31,10 @@
 - improved memoizer scheme with option for `:aggressive` memoizing
 - added `-archetype-list` to mimic the deprecated `-compass-list`
 - added `$CONFIG_NAMESPACE` to allow namespacing global generated CSS (keyframes, font-face, etc)
+- added `high-resolution` mixin for scoping high resolution (HiDPI / retina) code
+- added `resolution-to-*` functions for converting between various resolution types (ratio, dppx, dpi, dpcm)
+  - `resolution-to-ratio`, `resolution-to-dppx`, `resolution-to-dpi`, `resolution-to-dpcm`
+- added `to-fraction` function for converting a decimal number to a fractional representation (e.g. `1.5` -> `3/2`)
 
 ### Major Changes:
 
