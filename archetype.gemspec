@@ -4,7 +4,6 @@ require File.join(path, 'archetype/version')
 Gem::Specification.new do |gemspec|
   ## Release Specific Information
   gemspec.version = Archetype::VERSION
-  gemspec.date = Date.today
 
   ## Gem Details
   gemspec.name = 'archetype'
