@@ -4,7 +4,6 @@ require File.join(path, 'archetype/version')
 Gem::Specification.new do |gemspec|
   ## Release Specific Information
   gemspec.version = Archetype::VERSION
-  gemspec.date = Date.today
 
   ## Gem Details
   gemspec.name = 'archetype'
@@ -35,7 +34,7 @@ Gem::Specification.new do |gemspec|
   gemspec.rubygems_version = %q{1.3.6}
   # dependencies
   gemspec.add_dependency('compass',   '~> 1.0.0.alpha.18')
-  gemspec.add_dependency('sass',      '~> 3.3.0.rc.4')
+  gemspec.add_dependency('sass',      '~> 3.3.0.rc.6')
   # required for OrderedHash on Ruby < 1.9
   gemspec.add_dependency('hashery',   '~> 2.1')
 end
