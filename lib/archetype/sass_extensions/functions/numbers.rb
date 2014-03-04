@@ -47,13 +47,40 @@ module Archetype::SassExtensions::Numbers
     return Sass::Script::Value::String.new(numerator.to_s + '/' + denominator.to_s)
   end
 
-  def _convert_resolution(number, type)
+  #
+  # converts any valid resolution value into a given resolution
+  #
+  # *Parameters*:
+  # - <tt>$number</tt> {Number} the resolution to convert from
+  # - <tt>$unit</tt> {String} the destination unit to convert to
+  # *Returns*:
+  # - {Number} the resolution in the destination unit
+  #
+  def resolution_to_x(number, unit = 'ratio')
     assert_type number, :Number
+    ratio = 'ratio'
+
+    to = (unit.respond_to?(:value) ? unit.value : unit).to_s
+    from = number.unit_str.to_s
+    unitless = number.unitless?
+
     # nothing to do if we're already in the correct format
-    return number if (number.unit_str.to_s == type)
-    # otherwise, normalize to ratio, then convert
-    number = resolution_to_ratio(number).value
-    return Sass::Script::Value::Number.new(number * RESOLUTIONS[type], [type])
+    return number if ((from == to) || (unitless && to == ratio))
+
+    # if we don't understand the unit...
+    if RESOLUTIONS[from].nil? and not unitless
+      # warn
+      helpers.logger.record(:warning, "don't know how to convert `#{number}` to a #{to}")
+      # and return zero
+      return Sass::Script::Value::Number.new(0)
+    end
+
+    # convert it to a unitless ratio
+    number = number.value.to_f / (RESOLUTIONS[from] || 1.0)
+    # return early if we're looking for a ratio
+    return Sass::Script::Value::Number.new(number) if to == ratio
+    # otherwise convert to desination unit
+    return Sass::Script::Value::Number.new(number * RESOLUTIONS[to], [to])
   end
 
   #
@@ -65,18 +92,7 @@ module Archetype::SassExtensions::Numbers
   # - {Number} the resolution as a ratio
   #
   def resolution_to_ratio(number)
-    assert_type number, :Number
-    # just return if we've already got a unitless number
-    return number if number.unitless?
-    unit = number.unit_str.to_s
-    # if we don't understand the unit...
-    if RESOLUTIONS[unit].nil?
-      # warn
-      helpers.logger.record(:warning, "don't know how to convert `#{number}`")
-      # and return zero
-      return Sass::Script::Value::Number.new(0)
-    end
-    return Sass::Script::Value::Number.new(number.value.to_f / RESOLUTIONS[unit])
+    return resolution_to_x(number, 'ratio')
   end
 
   #
@@ -88,7 +104,7 @@ module Archetype::SassExtensions::Numbers
   # - {Number} the resolution as dppx
   #
   def resolution_to_dppx(number)
-    return _convert_resolution(number, 'dppx')
+    return resolution_to_x(number, 'dppx')
   end
 
   #
@@ -100,7 +116,7 @@ module Archetype::SassExtensions::Numbers
   # - {Number} the resolution as dpi
   #
   def resolution_to_dpi(number)
-    return _convert_resolution(number, 'dpi')
+    return resolution_to_x(number, 'dpi')
   end
 
   #
@@ -112,6 +128,6 @@ module Archetype::SassExtensions::Numbers
   # - {Number} the resolution as dpcm
   #
   def resolution_to_dpcm(number)
-    return _convert_resolution(number, 'dpcm')
+    return resolution_to_x(number, 'dpcm')
   end
 end

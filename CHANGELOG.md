@@ -33,7 +33,7 @@
 - added `$CONFIG_NAMESPACE` to allow namespacing global generated CSS (keyframes, font-face, etc)
 - added `high-resolution` mixin for scoping high resolution (HiDPI / retina) code
 - added `resolution-to-*` functions for converting between various resolution types (ratio, dppx, dpi, dpcm)
-  - `resolution-to-ratio`, `resolution-to-dppx`, `resolution-to-dpi`, `resolution-to-dpcm`
+  - `resolution_to_x`, `resolution-to-ratio`, `resolution-to-dppx`, `resolution-to-dpi`, `resolution-to-dpcm`
 - added `to-fraction` function for converting a decimal number to a fractional representation (e.g. `1.5` -> `3/2`)
 
 ### Major Changes:
