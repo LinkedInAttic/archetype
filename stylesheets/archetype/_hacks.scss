@@ -30,7 +30,7 @@
 // @param     $value {String} the value
 @mixin hacked-maximum($property, $value) {
   max-#{$property}: $value;
-  @include bang-hack($property, auto, $value);
+  @include underscore-hack($property, auto, $value);
 }
 
 // proxy for ie-pseudo
