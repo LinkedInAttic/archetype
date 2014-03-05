@@ -21,7 +21,7 @@ task :profile do
   end
   # copy over the gc file
   file = "/tmp/#{file}.gc"
-  if File.exists?(file)
+  if File.exist?(file)
     FileUtils.cp(file, "#{output}.gc")
     puts " see results in #{output.sub(output_base, '.')}.gc"
   end
