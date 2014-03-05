@@ -139,9 +139,6 @@ module Archetype::SassExtensions::UI
   end
 
 private
-  def helpers
-    @helpers ||= Archetype::Functions::Helpers
-  end
 
   def uid
     @@archetype_ui_mutex.synchronize do

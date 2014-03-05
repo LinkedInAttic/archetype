@@ -177,9 +177,6 @@ module Archetype::SassExtensions::Styleguide
   end
 
 private
-  def helpers
-    @helpers ||= Archetype::Functions::Helpers
-  end
   def memoizer
     Archetype::Functions::StyleguideMemoizer
   end

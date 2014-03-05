@@ -1,6 +1,5 @@
 module Archetype::SassExtensions::Util
 
-
   #
   # simple test for `null` or `nil` value. this is here for back-compat support with old `nil` syntax
   #
@@ -85,10 +84,4 @@ module Archetype::SassExtensions::Util
     strict = strict.value if strict.respond_to?(:value)
     return Archetype::Functions::CSS.get_derived_styles(helpers.data_to_hash(styles), properties, helpers.to_str(format).to_sym, strict)
   end
-
-private
-  def helpers
-    @helpers ||= Archetype::Functions::Helpers
-  end
-
 end

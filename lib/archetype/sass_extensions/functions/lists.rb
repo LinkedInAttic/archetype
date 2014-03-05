@@ -273,9 +273,6 @@ module Archetype::SassExtensions::Lists
   end
 
 private
-  def helpers
-    @helpers ||= Archetype::Functions::Helpers
-  end
 
   #
   # perform math operations on a list

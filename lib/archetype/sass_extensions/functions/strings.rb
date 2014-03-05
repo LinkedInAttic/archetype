@@ -49,9 +49,4 @@ module Archetype::SassExtensions::Strings
   end
   Sass::Script::Functions.declare :str_substitute, [:string]
   Sass::Script::Functions.declare :str_substitute, [:string, :subsitutions]
-
-private
-  def helpers
-    @helpers ||= Archetype::Functions::Helpers
-  end
 end

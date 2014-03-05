@@ -13,4 +13,10 @@ module Sass::Script::Functions
   include Archetype::SassExtensions::Numbers
   include Archetype::SassExtensions::Version
   include Archetype::SassExtensions::Environment
+
+  private
+    # shortcut to Archetype::Functions::Helpers
+    def helpers
+      @helpers ||= Archetype::Functions::Helpers
+    end
 end

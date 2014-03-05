@@ -38,10 +38,6 @@ module Archetype::SassExtensions::Version
   end
 
 private
-  def helpers
-    @helpers ||= Archetype::Functions::Helpers
-  end
-
   #
   # compare a version of a framework
   #
