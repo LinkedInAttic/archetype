@@ -9,7 +9,7 @@ module Archetype::SassExtensions::Environment
   # - {String} the current environment the compiler is running in
   #
   def archetype_env
-    return Sass::Script::Value::String.new((Compass.configuration.environment || :development).to_s)
+    return identifier((Compass.configuration.environment || :development).to_s)
   end
 
   #
@@ -23,6 +23,6 @@ module Archetype::SassExtensions::Environment
   def archetype_namespace(string)
     namespace = environment.var('CONFIG_NAMESPACE')
     return string if is_null(namespace).value
-    return Sass::Script::Value::String.new(namespace.value + '_' + string.value)
+    return identifier(namespace.value + '_' + string.value)
   end
 end

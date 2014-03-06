@@ -24,7 +24,7 @@ module Archetype::SassExtensions::Lists
     # cast list to a ruby array
     list = list.to_a.dup
     # remove or replace the given value
-    if value.nil? or value.is_a?(Sass::Script::Value::Null)
+    if value.nil? or value == null
       list.delete_at(idx)
     else
       list[idx] = value
@@ -149,7 +149,7 @@ module Archetype::SassExtensions::Lists
   def list_join(list, separator = ', ')
     list = list.to_a
     separator = (separator.respond_to?(:value) ? separator.value : separator).to_s
-    return Sass::Script::Value::String.new(list.join(separator))
+    return identifier(list.join(separator))
   end
 
   #
@@ -167,7 +167,7 @@ module Archetype::SassExtensions::Lists
     needle = needle.to_a
     index = haystack.index(haystack.detect { |i| needle.include?(i) })
     if index
-      return Sass::Script::Value::Number.new(index + 1)
+      return number(index + 1)
     else
       return Sass::Script::Bool.new(false)
     end
@@ -264,7 +264,7 @@ module Archetype::SassExtensions::Lists
     tmp.each do |rule|
       kvp = []
       rule.split(':').each do |str|
-        kvp.push Sass::Script::Value::String.new(str)
+        kvp.push identifier(str)
       end
       styles.push Sass::Script::Value::List.new(kvp, :comma)
     end

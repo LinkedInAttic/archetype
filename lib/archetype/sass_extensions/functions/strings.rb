@@ -21,7 +21,7 @@ module Archetype::SassExtensions::Strings
     needle = helpers.to_str(needle, ' ', :quotes)
     replacement = helpers.to_str(replacement, ' ', :quotes)
     str = str.method(method).call(needle, replacement)
-    return Sass::Script::Value::String.new(str)
+    return identifier(str)
   end
   Sass::Script::Functions.declare :str_replace, [:haystack, :needle, :replacement]
   Sass::Script::Functions.declare :str_replace, [:haystack, :needle, :replacement, :all]
@@ -36,7 +36,7 @@ module Archetype::SassExtensions::Strings
   # - {String} the string with substituted values
   #
   def str_substitute(str, subsitutions = nil)
-    return Sass::Script::Value::String.new('') if str.is_a?(Sass::Script::Value::Null)
+    return identifier('') if str == null
     return str if subsitutions.nil?
     subsitutions = subsitutions.to_h
     str = helpers.to_str(str, ' ', :quotes)
@@ -45,7 +45,7 @@ module Archetype::SassExtensions::Strings
       # replace all instances of the placeholder `{key}` with the value
       str = str.gsub("{#{key}}", helpers.to_str(value, ' ', :quotes))
     end
-    Sass::Script::Value::String.new(str)
+    identifier(str)
   end
   Sass::Script::Functions.declare :str_substitute, [:string]
   Sass::Script::Functions.declare :str_substitute, [:string, :subsitutions]

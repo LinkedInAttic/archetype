@@ -1,7 +1,7 @@
 module Archetype::SassExtensions::Util
 
   #
-  # simple test for `null` or `nil` value. this is here for back-compat support with old `nil` syntax
+  # simple test for `null` or `nil` (deprecated) value. this is here for back-compat support with old `nil` syntax
   #
   # *Parameters*:
   # - <tt>$value</tt> {*} the value to test
@@ -9,7 +9,9 @@ module Archetype::SassExtensions::Util
   # - {Boolean} whether or not the value is null
   #
   def is_null(value)
-    return Sass::Script::Bool.new(value.is_a?(Sass::Script::Value::Null) || (value.is_a?(Sass::Script::Value::String) && value.value == 'nil'))
+    is_deprecated_nil = (value.is_a?(Sass::Script::Value::String) && value.value == 'nil')
+    #helpers.logger.record(:warning, 'the usage of `nil` will be removed in a future release, please use the Sass standard `null`')
+    return Sass::Script::Bool.new(value == null || is_deprecated_nil)
   end
 
   #
@@ -34,9 +36,9 @@ module Archetype::SassExtensions::Util
   # - {String} the meta message
   #
   def meta_message(map, subsitutes = nil)
-    message = Sass::Script::Value::Null.new
+    message = null
     meta = map_get_meta(map)
-    message = str_substitute(map_get(meta, Sass::Script::Value::String.new(helpers::META[:message])), subsitutes) if not meta.value.nil?
+    message = str_substitute(map_get(meta, identifier(helpers::META[:message])), subsitutes) if not meta.value.nil?
     return message
   end
 
@@ -50,8 +52,8 @@ module Archetype::SassExtensions::Util
   #
   def has_multiple_values(map)
     meta = map_get_meta(map)
-    return map_has_key(meta, Sass::Script::Value::String.new(helpers::META[:has_multiples])) if not meta.value.nil?
-    return Sass::Script::Value::Bool.new(false)
+    return map_has_key(meta, identifier(helpers::META[:has_multiples])) if not meta.value.nil?
+    return bool(false)
   end
 
   #
@@ -63,10 +65,10 @@ module Archetype::SassExtensions::Util
   # - {Map} the data contained within the meta key
   #
   def map_get_meta(map)
-    if map.is_a?(Sass::Script::Value::Map) and map_has_key(map, Sass::Script::Value::String.new(helpers::META[:meta])).value
-      return map_get(map, Sass::Script::Value::String.new(helpers::META[:meta]))
+    if map.is_a?(Sass::Script::Value::Map) and map_has_key(map, identifier(helpers::META[:meta])).value
+      return map_get(map, identifier(helpers::META[:meta]))
     end
-    return Sass::Script::Value::Null.new
+    return null
   end
 
   #

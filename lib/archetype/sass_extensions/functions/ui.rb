@@ -22,7 +22,7 @@ module Archetype::SassExtensions::UI
     prefix = '.' if prefix == 'class'
     prefix = '#' if prefix == 'id'
     suffix = (defined?(ArchetypeTestHelpers) || defined?(Test::Unit)) ? "RANDOM_UID" : "#{Time.now.to_i}-#{rand(36**8).to_s(36)}-#{uid}"
-    return Sass::Script::Value::String.new("#{prefix}archetype-uid-#{suffix}")
+    return identifier("#{prefix}archetype-uid-#{suffix}")
   end
 
   #
@@ -36,7 +36,7 @@ module Archetype::SassExtensions::UI
   def tokenize(item)
     prefix = helpers.to_str(environment.var('CONFIG_GENERATED_TAG_PREFIX') || Archetype.name) + '-'
     token = prefix + item.hash.to_s
-    return Sass::Script::Value::String.new(token)
+    return identifier(token)
   end
 
   #
@@ -57,7 +57,7 @@ module Archetype::SassExtensions::UI
     content = content.gsub(/\</, '&lt;').gsub(/\>/, '&gt;')
     # cleanup quotes
     content = content.gsub(/\A"|"\Z/, '').gsub(/\"/, '\\"')
-    return Sass::Script::Value::String.new(content)
+    return identifier(content)
   end
 
   #
@@ -74,7 +74,7 @@ module Archetype::SassExtensions::UI
     # then split it on each rule and for each rule break it into it's key-value pairs
     styles = string.split(';').map do |rule|
       k, v = rule.split(':')
-      [Sass::Script::Value::String.new(k), Sass::Script::Value::String.new(v)]
+      [identifier(k), identifier(v)]
     end
     # then recompose the map
     return Sass::Script::Value::Map.new(Sass::Util.to_hash(styles))
@@ -90,7 +90,7 @@ module Archetype::SassExtensions::UI
   # - {Number} the closest matching grid size
   #
   def choose_best_glyph_grid(grids, size)
-    return grids if grids.is_a?(Sass::Script::Value::Null)
+    return grids if grids == null
 
     grids = grids.to_a
 
@@ -135,7 +135,7 @@ module Archetype::SassExtensions::UI
 
   def looks_like_character_code(string)
     string = helpers.to_str(string, ' ', :quotes)
-    return Sass::Script::Value::Bool.new(string =~ /^(\\([\da-fA-F]{4})\s*)+$/)
+    return bool(string =~ /^(\\([\da-fA-F]{4})\s*)+$/)
   end
 
 private

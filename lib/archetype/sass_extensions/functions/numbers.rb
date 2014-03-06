@@ -21,7 +21,7 @@ module Archetype::SassExtensions::Numbers
     value = 0
     value = number.value.to_f if number.is_a?(Sass::Script::Value::String)
     value = number.value if number.is_a?(Sass::Script::Value::Number)
-    return Sass::Script::Value::Number.new(value)
+    return number(value)
   end
 
   #
@@ -44,7 +44,7 @@ module Archetype::SassExtensions::Numbers
       break if (x == ai) || (x - ai).abs < 0.000000000001
       x = 1.0 / (x - ai)
     end
-    return Sass::Script::Value::String.new(numerator.to_s + '/' + denominator.to_s)
+    return identifier(numerator.to_s + '/' + denominator.to_s)
   end
 
   #
@@ -72,15 +72,15 @@ module Archetype::SassExtensions::Numbers
       # warn
       helpers.logger.record(:warning, "don't know how to convert `#{number}` to a #{to}")
       # and return zero
-      return Sass::Script::Value::Number.new(0)
+      return number(0)
     end
 
     # convert it to a unitless ratio
     number = number.value.to_f / (RESOLUTIONS[from] || 1.0)
     # return early if we're looking for a ratio
-    return Sass::Script::Value::Number.new(number) if to == ratio
+    return number(number) if to == ratio
     # otherwise convert to desination unit
-    return Sass::Script::Value::Number.new(number * RESOLUTIONS[to], [to])
+    return number(number * RESOLUTIONS[to], to)
   end
 
   #

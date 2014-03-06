@@ -276,7 +276,7 @@ private
     # push on the defaults first
     out = (strict ? resolve_dependents(id, context[modifiers], theme[:name], context) : context[DEFAULT]) || Archetype::Hash.new
     out = out.clone
-    return Archetype::Hash.new if out.is_a?(Sass::Script::Value::Null)
+    return Archetype::Hash.new if out == null
     # if it's not strict, find anything that matched
     if not strict
       modifiers = modifiers.split
@@ -306,7 +306,7 @@ private
       # this lets us define special states and elements
       SPECIAL.each do |special_key|
         special = out[special_key] || Archetype::Hash.new
-        if special.is_a?(Sass::Script::Value::Null)
+        if special == null
           out[special_key] = Archetype::Hash.new
         else
           tmp = Archetype::Hash.new
@@ -421,7 +421,7 @@ private
         tmp[key][DROP] = obj[key].keys
       end
     else
-      tmp[key] = Sass::Script::Value::Null.new
+      tmp[key] = null
     end
   end
 
@@ -518,7 +518,7 @@ private
   def get_styles(description, theme = nil, state = nil)
     styles = Archetype::Hash.new
 
-    all_states = state.nil? || state.is_a?(Sass::Script::Value::Null) || (state == Sass::Script::Value::Bool.new(false))
+    all_states = state.nil? || state == null || state == Sass::Script::Value::Bool::FALSE
 
     # debug message
     message = []
