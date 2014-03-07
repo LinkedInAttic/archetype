@@ -253,7 +253,7 @@ module Archetype::Functions::CSS
     else
       value = CSS_PRIMITIVES[value]
     end
-    helpers.logger.record(:warning, "cannot find a default value for `#{key}`") if value.nil?
+    helpers.logger.warn("cannot find a default value for `#{key}`") if value.nil?
     return value
   end
 
@@ -1270,7 +1270,7 @@ private
   # - {Sass::Null}
   #
   def self.warn(msg)
-    helpers.logger.record(:warning, msg)
+    helpers.logger.warn msg
     return Sass::Script::Value::Null.new
   end
 
