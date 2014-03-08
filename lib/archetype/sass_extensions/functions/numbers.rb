@@ -70,7 +70,7 @@ module Archetype::SassExtensions::Numbers
     # if we don't understand the unit...
     if RESOLUTIONS[from].nil? and not unitless
       # warn
-      helpers.logger.record(:warning, "don't know how to convert `#{number}` to a #{to}")
+      helpers.logger.warn("don't know how to convert `#{number}` to a #{to}")
       # and return zero
       return Sass::Script::Value::Number.new(0)
     end
