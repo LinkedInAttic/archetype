@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.2.alpha.1 (unreleased)
+## 1.0.0.alpha.1 (unreleased)
 
 ### Resolved Issues:
 
