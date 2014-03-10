@@ -544,7 +544,7 @@ private
         styles = styles.rmerge(extracted)
       elsif not helpers.is_value(sentence, :nil)
         msg = modifiers.length > 0 ? "please specify one of: #{modifiers.sort.join(', ')}" : "there are no registered components"
-        helpers.logger.record(:warning, "[#{Archetype.name}:styleguide:missing_identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. #{msg}")
+        helpers.logger.warn("[#{Archetype.name}:styleguide:missing_identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. #{msg}")
       end
     end
 
