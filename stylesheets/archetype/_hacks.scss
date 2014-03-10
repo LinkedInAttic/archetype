@@ -30,7 +30,7 @@
 // @param     $value {String} the value
 @mixin hacked-maximum($property, $value) {
   max-#{$property}: $value;
-  @include bang-hack($property, auto, $value);
+  @include underscore-hack($property, auto, $value);
 }
 
 // proxy for ie-pseudo
@@ -80,16 +80,19 @@
     $cmd: (unquote('#{$this}.el=document.createElement("#{prefixed-tag($name)}"),#{$this}.el.id="#{$uid}"'));
     $method: if($placement == before, insertBefore, appendChild);
     @if $content and not is_null($content) {
-      $cmd: append($cmd, unquote('#{$this}.el.innerHTML="#{-ie-pseudo-content($content)}"'), comma);
+      $cmd: append($cmd, unquote('#{$this}.el.innerHTML="#{-ie-pseudo-content($content)}"'));
     }
     @if $styles and not is_null($styles) and $styles != '' and $CONFIG_GENERATED_TAG_INLINE {
       // sets the icon styles on the node if we're using inline styles...
-      $cmd: append($cmd, unquote('#{$this}.el.style.cssText="#{$styles}"'), comma);
+      $cmd: append($cmd, unquote('#{$this}.el.style.cssText="#{$styles}"'));
     }
     // if we're using the insertBefore method, we need to specify the node reference to the first childNode
     $reference-node: if($placement == before, ',#{$this}.childNodes[0]||null', '');
-    $cmd: append($cmd, unquote('#{$this}.#{$method}(#{$this}.el#{$reference-node})'), comma);
+    $cmd: append($cmd, unquote('#{$this}.#{$method}(#{$this}.el#{$reference-node})'));
     $runOnce: unquote('this.runtimeStyle.zoom="1"'); // this ensures the expression is only invoked once
+
+    // delim with a single comma, no spaces
+    $cmd: list-join($cmd, ',');
 
     // we execute in a setTimeout to decouple from the current UI thread
     //  this prevents an edge case in IE crashing with an `Operation Aborted` if the node hasn't finished rendering yet

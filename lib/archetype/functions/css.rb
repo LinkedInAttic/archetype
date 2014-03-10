@@ -1,5 +1,6 @@
 # :stopdoc:
 module Archetype::Functions::CSS
+  include Sass::Script::Value::Helpers
 
   CSS_PRIMITIVES = {
     # common

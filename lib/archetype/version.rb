@@ -55,7 +55,7 @@ module Archetype
     end
 
     def revision_from_git
-      if File.exists?(scope('.git/HEAD'))
+      if File.exist?(scope('.git/HEAD'))
         Dir.chdir scope(".") do
           `git rev-parse HEAD`
         end

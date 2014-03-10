@@ -24,7 +24,7 @@ module Archetype::SassExtensions::Lists
     # cast list to a ruby array
     list = list.to_a.dup
     # remove or replace the given value
-    if value.nil? or value.is_a?(Sass::Script::Value::Null)
+    if value.nil? or value == null
       list.delete_at(idx)
     else
       list[idx] = value
@@ -76,7 +76,7 @@ module Archetype::SassExtensions::Lists
   # add values(s) to a list
   #
   # *Parameters*:
-  # - <tt>$list</tt> {List} the list operate on
+  # - <tt>$list</tt> {List} the list operate to on
   # - <tt>$values</tt> {List|Number|String} the value(s) to add to the list
   # *Returns*:
   # - {List} the final list
@@ -89,7 +89,7 @@ module Archetype::SassExtensions::Lists
   # subtract values(s) from a list
   #
   # *Parameters*:
-  # - <tt>$list</tt> {List} the list operate on
+  # - <tt>$list</tt> {List} the list operate to on
   # - <tt>$values</tt> {List|Number|String} the value(s) to subtract from the list
   # *Returns*:
   # - {List} the final list
@@ -102,7 +102,7 @@ module Archetype::SassExtensions::Lists
   # multiply values(s) into a list
   #
   # *Parameters*:
-  # - <tt>$list</tt> {List} the list operate on
+  # - <tt>$list</tt> {List} the list operate to on
   # - <tt>$values</tt> {List|Number|String} the value(s) to multiply into the list
   # *Returns*:
   # - {List} the final list
@@ -115,7 +115,7 @@ module Archetype::SassExtensions::Lists
   # divide values(s) into a list
   #
   # *Parameters*:
-  # - <tt>$list</tt> {List} the list operate on
+  # - <tt>$list</tt> {List} the list operate to on
   # - <tt>$values</tt> {List|Number|String} the value(s) to divide into the list
   # *Returns*:
   # - {List} the final list
@@ -128,13 +128,28 @@ module Archetype::SassExtensions::Lists
   # list modulus value(s)
   #
   # *Parameters*:
-  # - <tt>$list</tt> {List} the list operate on
+  # - <tt>$list</tt> {List} the list to operate on
   # - <tt>$values</tt> {List|Number|String} the value(s) to modulus into the list
   # *Returns*:
   # - {List} the final list
   #
   def list_mod(list, values)
     return list_math(list, values, :mod)
+  end
+
+  #
+  # joins a list into a string with the separator given
+  #
+  # *Parameters*:
+  # - <tt>$list</tt> {List} the list operate to on
+  # - <tt>$separator</tt> {String} the separator to insert between each item
+  # *Returns*:
+  # - {String} string conversions of all list item joined into one string
+  #
+  def list_join(list, separator = ', ')
+    list = list.to_a
+    separator = (separator.respond_to?(:value) ? separator.value : separator).to_s
+    return identifier(list.join(separator))
   end
 
   #
@@ -152,7 +167,7 @@ module Archetype::SassExtensions::Lists
     needle = needle.to_a
     index = haystack.index(haystack.detect { |i| needle.include?(i) })
     if index
-      return Sass::Script::Value::Number.new(index + 1)
+      return number(index + 1)
     else
       return Sass::Script::Bool.new(false)
     end
@@ -249,7 +264,7 @@ module Archetype::SassExtensions::Lists
     tmp.each do |rule|
       kvp = []
       rule.split(':').each do |str|
-        kvp.push Sass::Script::Value::String.new(str)
+        kvp.push identifier(str)
       end
       styles.push Sass::Script::Value::List.new(kvp, :comma)
     end
@@ -258,15 +273,12 @@ module Archetype::SassExtensions::Lists
   end
 
 private
-  def helpers
-    @helpers ||= Archetype::Functions::Helpers
-  end
 
   #
   # perform math operations on a list
   #
   # *Parameters*:
-  # - <tt>list</tt> {Sass::Script::Value::List} the list operate on
+  # - <tt>list</tt> {Sass::Script::Value::List} the list operate to on
   # - <tt>values</tt> {Sass::Script::Value::List|Sass::Script::Value::Number|Sass::Script::Value::String} the value(s) perform with
   # - <tt>method</tt> {Symbol} the method to perform [:plus|:minus|:times|:div|:mod]
   # *Returns*:

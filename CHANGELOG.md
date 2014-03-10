@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.0.2.alpha.1 (unreleased)
+## 1.0.0.alpha.1 (unreleased)
 
 ### Resolved Issues:
 
@@ -35,6 +35,7 @@
 - added `resolution-to-*` functions for converting between various resolution types (ratio, dppx, dpi, dpcm)
   - `resolution_to_x`, `resolution-to-ratio`, `resolution-to-dppx`, `resolution-to-dpi`, `resolution-to-dpcm`
 - added `to-fraction` function for converting a decimal number to a fractional representation (e.g. `1.5` -> `3/2`)
+- added `list-join` function for joining a list into a string
 
 ### Major Changes:
 

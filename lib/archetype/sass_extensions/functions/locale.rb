@@ -13,7 +13,7 @@ module Archetype::SassExtensions::Locale
   def locale(locales = nil)
     locale = get_locale(locale)
     # if the locales are nil, just return the current locale
-    return Sass::Script::Value::String.new(locale) if locales.nil?
+    return identifier(locale) if locales.nil?
     locales = locales.to_a.collect{|i| i.to_s}
     # normalize the pieces of the locale
     locale = normalize_locale(locale)
@@ -78,7 +78,7 @@ module Archetype::SassExtensions::Locale
   #
   def reading_direction
     direction = Compass.configuration.reading || 'ltr'
-    return Sass::Script::Value::String.new(direction == 'rtl' ? 'rtl' : 'ltr')
+    return identifier(direction == 'rtl' ? 'rtl' : 'ltr')
   end
 
 private
@@ -133,9 +133,9 @@ private
   def get_locale_piece(locale = nil, piece = :language)
     piece = normalize_locale(locale)[piece]
     if piece.nil?
-      return Sass::Script::Value::Null.new
+      return null
     else
-      return Sass::Script::Value::String.new(piece)
+      return identifier(piece)
     end
   end
 

@@ -49,7 +49,7 @@ private
     for name in arguments
       actual_result_file = "#{tempfile_path(@current_project)}/#{name}.css"
       expected_result_file = "#{result_path(@current_project)}/#{name}.css"
-      unless File.exists?(expected_result_file)
+      unless File.exist?(expected_result_file)
         report_and_fail name, "no expectation set for `#{expected_result_file}`, run `rake test:update` first"
       end
       actual_lines = File.read(actual_result_file)
@@ -85,7 +85,7 @@ private
 
   def within_project(project_name, config_block = nil)
     @current_project = project_name
-    Compass.add_configuration(configuration_file(project_name)) if File.exists?(configuration_file(project_name))
+    Compass.add_configuration(configuration_file(project_name)) if File.exist?(configuration_file(project_name))
     Compass.configuration.project_path = project_path(project_name)
     Compass.configuration.environment = :production
     args = Compass.configuration.to_compiler_arguments(:logger => Compass::NullLogger.new)
@@ -96,7 +96,7 @@ private
 
 
 
-    if Compass.configuration.sass_path && File.exists?(Compass.configuration.sass_path)
+    if Compass.configuration.sass_path && File.exist?(Compass.configuration.sass_path)
       compiler = Compass::Compiler.new *args
       compiler.clean!
       if SELECTIVE_TESTS
@@ -132,7 +132,7 @@ private
 
   def save_output(dir)
     FileUtils.rm_rf(save_path(dir))
-    FileUtils.cp_r(tempfile_path(dir), save_path(dir)) if File.exists?(tempfile_path(dir))
+    FileUtils.cp_r(tempfile_path(dir), save_path(dir)) if File.exist?(tempfile_path(dir))
   end
 
   def project_path(project_name)
