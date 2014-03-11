@@ -130,7 +130,6 @@
   }
   $a: nth($dim, 1);
   $b: nth-cyclic($dim, 2);
-  // TODO - RTL support
   @return map-get((
     north:  (-$b 0),
     south:  ((-$b) (-($a+$b))),

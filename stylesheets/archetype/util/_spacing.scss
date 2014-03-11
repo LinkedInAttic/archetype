@@ -72,7 +72,7 @@
     @include if-set(#{$method}-bottom, vertical-spacing(nth($units,2), $abuse: $abuse), $ignore: nil);
   }
   @else {
-    @include if-set(#{$method}-#{rtl(left)},   horizontal-spacing(nth($units,1), $abuse: $abuse), $ignore: nil);
-    @include if-set(#{$method}-#{rtl(right)},  horizontal-spacing(nth($units,2), $abuse: $abuse), $ignore: nil);
+    @include if-set(#{$method}-left,   horizontal-spacing(nth($units,1), $abuse: $abuse), $ignore: nil);
+    @include if-set(#{$method}-right,  horizontal-spacing(nth($units,2), $abuse: $abuse), $ignore: nil);
   }
 }

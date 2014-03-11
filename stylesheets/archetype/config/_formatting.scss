@@ -14,9 +14,6 @@ $CONFIG_Z_INDEX_BASE:             0 !default;                                   
 $CONFIG_Z_LAYERS_OFFSET:          100 !default;                                                     // the offset between z-layers
 $CONFIG_Z_LAYERS:                 (default dialog navigation) !default;                             // the orders for the z-layers
 
-// compass
-$COMPASS_RTL_SUPPORT:             false !default;                                                   // does your Compass version support RTL? set to true if Compass mixins support RTL
-
 // sprites
 $CONFIG_DISABLE_STYLEGUIDE_SPRITES: false !default;                                                 // disable all sprite generation in styleguide
 
