@@ -187,13 +187,13 @@
 // this makes it possible to undo $first: true
 // @mixin     grid-not-first
 @mixin grid-not-first() {
-  margin-#{rtl(left, $CONFIG_GRID_DIRECTION)}: $CONFIG_GRID_GUTTER;
+  margin-left: $CONFIG_GRID_GUTTER;
 }
 
 // this makes it possible to force a non first-column to behave as a first-column
 // @mixin     grid-is-first
 @mixin grid-is-first() {
-  margin-#{rtl(left, $CONFIG_GRID_DIRECTION)}: 0;
+  margin-left: 0;
 }
 
 // given a set of values, output the left and right properties
@@ -211,8 +211,8 @@
   @if(length($values) > 1) {
     $right: nth($values,2);
   }
-  @include if-set(#{$property}#{rtl(left, $CONFIG_GRID_DIRECTION)}, $left, $ignore: $ignore);
-  @include if-set(#{$property}#{rtl(right, $CONFIG_GRID_DIRECTION)}, $right, $ignore: $ignore);
+  @include if-set(#{$property}left, $left, $ignore: $ignore);
+  @include if-set(#{$property}right, $right, $ignore: $ignore);
 }
 
 // this lets rows clear the floated containers
@@ -234,17 +234,12 @@
     }
     @else {
       // make it a floater
-      float: #{rtl(left, $CONFIG_GRID_DIRECTION)};
+      float: left;
     }
   }
   // INLINE-BLOCK
   @else if($CONFIG_GRID_ALIGN_METHOD == inline-block) {
     @if($row) {
-      // if the reading direction is different from the grid direction,
-      // we have to switch the direction of the individual rows
-      @if(reading-direction() != $CONFIG_GRID_DIRECTION) {
-        direction: $CONFIG_GRID_DIRECTION;
-      }
       // fix to collapse white space between inline-block elements
       letter-spacing: -0.313em; // webkit
       @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) {
@@ -257,11 +252,6 @@
       //text-space-collapse: collapse;
     }
     @else {
-      // if reading direction is different from the grid direction,
-      // reset the reading direction of the inner container
-      @if(reading-direction() != $CONFIG_GRID_DIRECTION) {
-        direction: reading-direction();
-      }
       @include inline-block();
       vertical-align: top;
       // restore spacing @see grid-row
@@ -273,21 +263,11 @@
   @else if($CONFIG_GRID_ALIGN_METHOD == table-cell) {
     @warn "table-cell method doesn't work yet!";
     @if($row) {
-      // if the reading direction is different from the grid direction,
-      // we have to switch the direction of the individual rows
-      @if(reading-direction() != $CONFIG_GRID_DIRECTION) {
-        direction: $CONFIG_GRID_DIRECTION;
-      }
       display: table;
       // table cells don't respect margin, so we have to use border-spacing
       border-spacing: $CONFIG_GRID_GUTTER 0;
     }
     @else {
-      // if reading direction is different from the grid direction,
-      // reset the reading direction of the inner container
-      @if(reading-direction() != $CONFIG_GRID_DIRECTION) {
-        direction: reading-direction();
-      }
       @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) {
         *display:       inline;
       }

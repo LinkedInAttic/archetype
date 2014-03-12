@@ -2,20 +2,32 @@ description = "Check a set of files for migration and back-compat issues"
 if @description.nil?
   DELIMITER = "\n  "
   DATA = {
-    '0.0.2.alpha.1' => {
+    '1.0.0.alpha.1' => {
       :notice => %q{Archetype now requires Sass 3.3+ and Compass 0.13+},
       :tests => {
         :sacss => [
           {
-            :pattern => /(gradient-with-deg|_isLegacySupported)/m,
+            :pattern => /(gradient[_-]with[_-]deg|[_-]isLegacySupported)/m,
             :message => 'mixin or function `$1` has been removed'
           },
           {
-            :pattern => /(?:styleguide-(?:add|extend)-component)[^\;]*(inline-block)(?:\s+|\:)true/m,
+            :pattern => /\@include\s+(wrapper[_-]rtl|(?:padding|margin)(?:[_-](?:top|right|bottom|left))?|border(?:[_-](?:top|right|bottom|left))?[_-](?:width|color|style)|clear|float|text[_-]align|left|right|background[_-]position)\s*\(([^\)]*)/m,
+            :message => 'the RTL mixin `$1` has been deprecated, just use `$1: $2`'
+          },
+          {
+            :pattern => /\@include\s+wrapper[_-]rtl/m,
+            :message => 'the RTL mixin `wrapper-rtl` has been deprecated'
+          },
+          {
+            :pattern => /[\:\s\(\{](rtl|reading[_-]direction)\s*\(/m,
+            :message => 'the RTL function `$1()` has been deprecated'
+          },
+          {
+            :pattern => /(?:styleguide[_-](?:add|extend)[_-]component)[^\;]*(inline-block)(?:\s+|\:)true/m,
             :message => '`inline-block` has changed syntax'
           },
           {
-            :pattern => /(?:styleguide-(?:add|extend)-component)[^\;]*\s+\(?(gradient)(?:\s|\:)/m,
+            :pattern => /(?:styleguide[_-](?:add|extend)[_-]component)[^\;]*\s+\(?(gradient)(?:\s|\:)/m,
             :message => 'use `background-image` instead of `$1`'
           },
           {
@@ -30,6 +42,10 @@ if @description.nil?
             :pattern => /(\$CONFIG_GLYPHS_(?:NAME|VERSION|SVG_ID|BASE_PATH|EOT|FILES|THRESHOLD|MAPPINGS))/m,
             :message => '`$1` is deprecated, use `$CORE_GLYPHS_LIBRARIES` instead'
           },
+          {
+            :pattern => /(\$CONFIG_GRID_DIRECTION)/m,
+            :message => '`$1` is deprecated'
+          }
         ],
         :rb => [],
         :scss => [],
@@ -102,22 +118,18 @@ if @description.nil?
 
               if contents =~ test[:pattern]
                 contents.scan(test[:pattern]).each do |match|
-                  message << test[:message].gsub('$1', match[0])
+                  message << test[:message].gsub(/\$1/, match[0] || '').gsub(/\$2/, match[1] || '')
                   count += 1
                 end
               end
 
             end
 
-            if not message.empty?
-              messages << "#{file}:#{DELIMITER}#{message.join(DELIMITER)}"
-            end
+            messages << "#{file}:#{DELIMITER}#{message.join(DELIMITER)}" unless message.empty?
           end
         end
       end
-      if not messages.empty?
-        puts "#{'='*20}\nv#{version}\n#{'-'*20}\n#{messages.join("\n\n")}"
-      end
+      puts "#{'='*20}\nv#{version}\n#{'-'*20}\n#{messages.join("\n\n")}" unless messages.empty?
     end
   end
 

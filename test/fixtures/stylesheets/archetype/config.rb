@@ -23,3 +23,9 @@ locale_aliases    = {
 asset_cache_buster :none
 
 disable_warnings = true
+
+# test meta values
+meta = {
+  'featureEnabled' => Sass::Script::Value::Bool.new(true),
+  'somethingElse' => 'testing'
+}

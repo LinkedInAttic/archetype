@@ -87,28 +87,6 @@
     @else if($property == ellipsis)             { @include ellipsis($value...); }
     // scale
     @else if($property == scale)                { @include scale($value...); }
-    // bunch of RTL support
-    @else if($property == margin)               { @include margin($value); }
-    @else if($property == margin-left)          { @include margin-left($value); }
-    @else if($property == margin-right)         { @include margin-right($value); }
-    @else if($property == padding)              { @include padding($value); }
-    @else if($property == padding-left)         { @include padding-left($value); }
-    @else if($property == padding-right)        { @include padding-right($value); }
-    @else if($property == border-width)         { @include border-width($value); }
-    @else if($property == border-left-width)    { @include border-left-width($value); }
-    @else if($property == border-right-width)   { @include border-right-width($value); }
-    @else if($property == border-color)         { @include border-color($value); }
-    @else if($property == border-left-color)    { @include border-left-color($value); }
-    @else if($property == border-right-color)   { @include border-right-color($value); }
-    @else if($property == border-style)         { @include border-style($value); }
-    @else if($property == border-left-style)    { @include border-left-style($value); }
-    @else if($property == border-right-style)   { @include border-right-style($value); }
-    @else if($property == clear)                { @include clear($value); }
-    @else if($property == float)                { @include float($value); }
-    @else if($property == text-align)           { @include text-align($value); }
-    @else if($property == background-position)  { @include background-position($value); }
-    @else if($property == left)                 { @include left($value); }
-    @else if($property == right)                { @include right($value); }
     // z-index
     @else if($property == z-index)              { @include z-index($value...); }
     @else if($property == glyph-icon)           { @include glyph-icon($value...); }

@@ -68,7 +68,6 @@
 // @param     $height {Number} the height of the arrow
 // @param     $color {Color} the color of the arrow
 @mixin triangle($direction: bottom, $width: 1em, $height: false, $color: #aaa) {
-  $direction: rtl($direction);
   // if no height was specified, assume it's identical to width
   @if(not $height) {
     $height: $width;

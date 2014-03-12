@@ -132,10 +132,8 @@
         $idx: index2($support, $tmp);
         @if($idx) {
           $prefix: nth(('_', '*'), $idx);
-          $value: if(index($CORE_CSS_RTL_VALUE_SUPPORT, $property), rtl($value, $property), $value);
-          // NOTE: RTL support on properties like `border-left-width` won't fully work until Compass/Sass support string replace methods
           /* [archetype:target-browser:begin] --- #{$browsers} --- */
-          @include output-style(#{$prefix}#{rtl($property)}, $value);
+          @include output-style(#{$prefix}#{$property}, $value);
           /* [archetype:target-browser:end]   --- #{$browsers} --- */
           $value: null;
         }

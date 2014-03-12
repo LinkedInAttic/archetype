@@ -70,17 +70,6 @@ module Archetype::SassExtensions::Locale
     return get_locale_piece(locale, :modifier)
   end
 
-  #
-  # get the current reading direction
-  #
-  # *Returns*:
-  # - {String} is the current reading direction [ltr|rtl]
-  #
-  def reading_direction
-    direction = Compass.configuration.reading || 'ltr'
-    return identifier(direction == 'rtl' ? 'rtl' : 'ltr')
-  end
-
 private
 
   # pieces of the locale code
