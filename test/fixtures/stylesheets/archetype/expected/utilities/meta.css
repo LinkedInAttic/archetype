@@ -1,0 +1,11 @@
+.test {
+  /* archetype-meta(nullKey):  */
+  /* archetype-meta(featureEnabled): true */
+  /* archetype-meta(somethingElse): testing */
+}
+
+.test2 {
+  /* archetype-meta(size): 2px */
+  /* archetype-meta(enabled): false */
+  /* archetype-meta(key): value */
+}

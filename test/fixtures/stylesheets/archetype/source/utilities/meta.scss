@@ -1,0 +1,19 @@
+@import "test_harness";
+
+.test {
+  /* archetype-meta(nullKey): #{archetype-meta(nullKey)} */
+  /* archetype-meta(featureEnabled): #{archetype-meta(featureEnabled)} */
+  /* archetype-meta(somethingElse): #{archetype-meta(somethingElse)} */
+}
+
+$CONFIG_META: (
+  size: 2px,
+  enabled: false,
+  key: value
+);
+
+.test2 {
+  /* archetype-meta(size): #{archetype-meta(size)} */
+  /* archetype-meta(enabled): #{archetype-meta(enabled)} */
+  /* archetype-meta(key): #{archetype-meta(key)} */
+}
