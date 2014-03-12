@@ -168,9 +168,9 @@ TODO
 
 TODO
 
-## [archetype:target-browser]
+## [archetype:target:browser]
 
-### [archetype:target-browser] using hack for ...
+### [archetype:target:browser] using hack for ...
 
 #### What does this mean?
 

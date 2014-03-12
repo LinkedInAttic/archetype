@@ -84,42 +84,42 @@
     // target webkit, Safari3+, Chrome1+
     @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, webkit-all) )) {
       @if $CONFIG_BROWSER_WARN_ON_HACK {
-        @warn "[archetype:target-browser] using hack for webkit-all";
+        @warn "[archetype:target:browser] using hack for webkit-all";
       }
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       @media screen and (-webkit-min-device-pixel-ratio:0) {
         & {
-          /* [archetype:target-browser:begin] --- webkit --- */
+          /* [archetype:target:browser:begin] --- webkit --- */
           @include output-style($property, $value);
           @content;
-          /* [archetype:target-browser:end]   --- webkit --- */
+          /* [archetype:target:browser:end]   --- webkit --- */
         }
       }
     }
     // target gecko
     @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, gecko-all) )) {
       @if $CONFIG_BROWSER_WARN_ON_HACK {
-        @warn "[archetype:target-browser] using hack for gecko-all";
+        @warn "[archetype:target:browser] using hack for gecko-all";
       }
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       &, x:-moz-any-link {
-        /* [archetype:target-browser:begin] --- gecko --- */
+        /* [archetype:target:browser:begin] --- gecko --- */
         @include output-style($property, $value);
         @content;
-        /* [archetype:target-browser:end]   --- gecko --- */
+        /* [archetype:target:browser:end]   --- gecko --- */
       }
     }
     // target opera
     @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, opera-all) )) {
       @if $CONFIG_BROWSER_WARN_ON_HACK {
-        @warn "[archetype:target-browser] using hack for opera-all";
+        @warn "[archetype:target:browser] using hack for opera-all";
       }
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       &, x:-o-prefocus {
-        /* [archetype:target-browser:begin] --- opera --- */
+        /* [archetype:target:browser:begin] --- opera --- */
         @include output-style($property, $value);
         @content;
-        /* [archetype:target-browser:end]   --- opera --- */
+        /* [archetype:target:browser:end]   --- opera --- */
       }
     }
     // if there's only one target browser and it's IE6 or IE lte 7, we can use an inline hack
@@ -132,9 +132,9 @@
         $idx: index2($support, $tmp);
         @if($idx) {
           $prefix: nth(('_', '*'), $idx);
-          /* [archetype:target-browser:begin] --- #{$browsers} --- */
+          /* [archetype:target:browser:begin] --- #{$browsers} --- */
           @include output-style(#{$prefix}#{$property}, $value);
-          /* [archetype:target-browser:end]   --- #{$browsers} --- */
+          /* [archetype:target:browser:end]   --- #{$browsers} --- */
           $value: null;
         }
       }
@@ -144,10 +144,10 @@
   $classes: _getTargetedBrowsers($browsers, $using: if($merge, '&', ' &'), $threshold: $threshold);
   @if(length($classes) > 0) {
     #{$classes} {
-      /* [archetype:target-browser:begin] --- #{$browsers} --- */
+      /* [archetype:target:browser:begin] --- #{$browsers} --- */
       @include output-style($property, $value);
       @content;
-      /* [archetype:target-browser:end]   --- #{$browsers} --- */
+      /* [archetype:target:browser:end]   --- #{$browsers} --- */
     }
   }
 }
