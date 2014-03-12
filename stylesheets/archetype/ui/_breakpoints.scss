@@ -1,0 +1,19 @@
+// @category   ui/breakpoints
+
+// wraps the content block in a breakpoint media query
+// @mixin     breakpoint
+// @param     $key {String} the breakpoint to use
+// @content
+@mixin breakpoint($key) {
+  $breakpoint: get-breakpoint($key);
+  @if $breakpoint {
+    @media #{$breakpoint} {
+      /* [archetype:breakpoint:begin] --- #{$key} --- */
+      @content;
+      /* [archetype:breakpoint:end] --- #{$key} --- */
+    }
+  }
+  @else {
+    @warn "could not find a breakpoint for `#{$key}`";
+  }
+}

@@ -133,9 +133,55 @@ module Archetype::SassExtensions::UI
     return best[:grid]
   end
 
+  #
+  # checks if a string looks like it's just a composition of character codes
+  #
+  # *Parameters*:
+  # - <tt>$string</tt> {String} the string to check
+  # *Returns*:
+  # - {Boolean} whether or not the string looks like a sequence of character codes
+  #
   def looks_like_character_code(string)
     string = helpers.to_str(string, ' ', :quotes)
     return bool(string =~ /^(\\([\da-fA-F]{4})\s*)+$/)
+  end
+
+  #
+  # registers a breakpoint
+  #
+  # *Parameters*:
+  # - <tt>$key</tt> {String} the key to register it under
+  # - <tt>$value</tt> {*} the value to register
+  # *Returns*:
+  # - {Boolean} whether or not the value was registered
+  #
+  def register_breakpoint(key, value)
+    # we need a dup as the Hash is frozen
+    breakpoints = registered_breakpoints.dup
+    # if there's no key registered...
+    if breakpoints[key].nil? || is_null(breakpoints[key]).value
+      # just register the value
+      breakpoints[key] = value
+    # otherwise, if the current value is different...
+    elsif breakpoints[key] != value
+      # throw a warning
+      helpers.logger.warn("a breakpoint for `#{key}` is already set to `#{breakpoints[key]}`, ignoring `#{value}`")
+      return bool(false)
+    end
+    environment.global_env.set_var('CONFIG_BREAKPOINTS', Sass::Script::Value::Map.new(breakpoints))
+    return bool(true)
+  end
+
+  #
+  # retrieves a breakpoint
+  #
+  # *Parameters*:
+  # - <tt>$key</tt> {String} the key to lookup
+  # *Returns*:
+  # - {*} the registered breakpoint
+  #
+  def get_breakpoint(key)
+    return registered_breakpoints[key] || null
   end
 
 private
@@ -145,5 +191,9 @@ private
       @@uid ||= 0
       @@uid += 1
     end
+  end
+
+  def registered_breakpoints
+    (environment.var('CONFIG_BREAKPOINTS') || {}).to_h
   end
 end
