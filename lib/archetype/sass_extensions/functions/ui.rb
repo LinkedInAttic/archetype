@@ -194,6 +194,7 @@ private
   end
 
   def registered_breakpoints
-    (environment.var('CONFIG_BREAKPOINTS') || {}).to_h
+    breakpoints = environment.var('CONFIG_BREAKPOINTS')
+    breakpoints.respond_to?(:to_h) ? breakpoints.to_h : {}
   end
 end
