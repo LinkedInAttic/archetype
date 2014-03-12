@@ -58,7 +58,7 @@ TODO
 
 Make sure each of your keys has a value assigned to it.
 
-## [archetype:css:derive]
+## [archetype:css]
 
 ### [archetype:css:derive] cannot disambiguate the CSS property \`$1\`
 
@@ -80,7 +80,7 @@ TODO
 
 TODO
 
-## [archetype:styleguide:missing_identifier]
+## [archetype:styleguide]
 
 ### [archetype:styleguide:missing_identifier] \`$1\` does not contain an identifier. please specify one of: $2
 
@@ -168,7 +168,7 @@ TODO
 
 TODO
 
-## [archetype:target:browser]
+## [archetype:target]
 
 ### [archetype:target:browser] using hack for ...
 
