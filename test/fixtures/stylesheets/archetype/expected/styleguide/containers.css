@@ -9,9 +9,9 @@
   /* [archetype:styleguide:end] --- `container with a shadow` --- */
 }
 .ie.lte8 .container {
-  /* [archetype:target-browser:begin] --- ie lte 8 --- */
+  /* [archetype:target:browser:begin] --- ie lte 8 --- */
   border-bottom: 2px solid #cccccc;
-  /* [archetype:target-browser:end]   --- ie lte 8 --- */
+  /* [archetype:target:browser:end]   --- ie lte 8 --- */
 }
 
 .without-shadow {

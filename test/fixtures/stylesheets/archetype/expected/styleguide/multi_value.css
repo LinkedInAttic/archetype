@@ -4,22 +4,22 @@
   color: rgba(0, 0, 0, 0.7);
   background: white;
   background: transparent;
-  /* [archetype:target-browser:begin] --- ie lte 7 --- */
+  /* [archetype:target:browser:begin] --- ie lte 7 --- */
   *color: blue;
-  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+  /* [archetype:target:browser:end]   --- ie lte 7 --- */
   /* [archetype:styleguide:end] --- `multi-value-styleguide-test` --- */
 }
 .ie.lte7 .multi-value-styleguide-test {
-  /* [archetype:target-browser:begin] --- ie lte 7 --- */
-  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+  /* [archetype:target:browser:begin] --- ie lte 7 --- */
+  /* [archetype:target:browser:end]   --- ie lte 7 --- */
 }
 .ie.ie8 .multi-value-styleguide-test {
-  /* [archetype:target-browser:begin] --- ie 8 --- */
+  /* [archetype:target:browser:begin] --- ie 8 --- */
   color: red;
-  /* [archetype:target-browser:end]   --- ie 8 --- */
+  /* [archetype:target:browser:end]   --- ie 8 --- */
 }
 .multi-value-styleguide-test, .multi-value-styleguide-test x:-moz-any-link {
-  /* [archetype:target-browser:begin] --- gecko --- */
+  /* [archetype:target:browser:begin] --- gecko --- */
   color: pink;
-  /* [archetype:target-browser:end]   --- gecko --- */
+  /* [archetype:target:browser:end]   --- gecko --- */
 }
