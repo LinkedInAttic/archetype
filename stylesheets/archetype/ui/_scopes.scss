@@ -9,7 +9,7 @@
 @mixin bem($element: null, $modifier: null) {
   $root: "#{'&'}";
   $selector: $root;
-  $msg: "the current context may produce a non-standard BEM selector for";
+  $msg: "[archetype:bem] the current context may produce a non-standard BEM selector for";
   @if $element {
     @if str-index($root, $CONFIG_BEM_ELEMENT_SEPARATOR) or str-index($root, $CONFIG_BEM_MODIFIER_SEPARATOR) {
       @warn "#{$msg} element `#{$element}`: #{$root}";

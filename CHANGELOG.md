@@ -37,6 +37,8 @@
 - added `to-fraction` function for converting a decimal number to a fractional representation (e.g. `1.5` -> `3/2`)
 - added `list-join` function for joining a list into a string
 - added `archetype-meta` function to retrieve values set on `$CONFIG_META` or `Compass.configuration.meta`
+- added `register-breakpoint` and `get-breakpoint` functions for registering / retrieving breakpoint definitions
+- added `breakpoint` mixin for creating breakpoint media queries
 
 ### Major Changes:
 

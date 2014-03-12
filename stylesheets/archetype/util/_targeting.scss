@@ -84,7 +84,7 @@
     // target webkit, Safari3+, Chrome1+
     @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, webkit-all) )) {
       @if $CONFIG_BROWSER_WARN_ON_HACK {
-        @warn "using hack for webkit-all";
+        @warn "[archetype:target-browser] using hack for webkit-all";
       }
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       @media screen and (-webkit-min-device-pixel-ratio:0) {
@@ -99,7 +99,7 @@
     // target gecko
     @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, gecko-all) )) {
       @if $CONFIG_BROWSER_WARN_ON_HACK {
-        @warn "using hack for gecko-all";
+        @warn "[archetype:target-browser] using hack for gecko-all";
       }
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       &, x:-moz-any-link {
@@ -112,7 +112,7 @@
     // target opera
     @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, opera-all) )) {
       @if $CONFIG_BROWSER_WARN_ON_HACK {
-        @warn "using hack for opera-all";
+        @warn "[archetype:target-browser] using hack for opera-all";
       }
       // @link http://paulirish.com/2009/browser-specific-css-hacks/
       &, x:-o-prefocus {

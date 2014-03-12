@@ -21,7 +21,7 @@
   $char-code: null;
   // check that the library is valid, if not, throw a warning and use the default
   @if not map-has-key($CONFIG_GLYPHS_LIBRARIES, $library) {
-    @warn "could not find a glyph library for `#{$library}`, using default";
+    @warn "[archetype:glyph] could not find a glyph library for `#{$library}`, using default";
     $library: default;
   }
   // get the glyph library we'll be using...
@@ -49,7 +49,7 @@
   // if we couldn't find a valid character code (and we were asked to output an icon)...
   @if $char-code == null and $icon != false {
     // throw a warning and be done with it
-    @warn "could not find character mapping for `#{icon}`";
+    @warn "[archetype:glyph] could not find character mapping for `#{icon}`";
   }
   // otherwise continue on
   @if $size == default {

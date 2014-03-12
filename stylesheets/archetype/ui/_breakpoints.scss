@@ -14,6 +14,6 @@
     }
   }
   @else {
-    @warn "could not find a breakpoint for `#{$key}`";
+    @warn "[archetype:breakpoint] could not find a breakpoint for `#{$key}`";
   }
 }

@@ -34,21 +34,21 @@
         }
       }
       @if(not index($allowed-column-factors, $columns)) {
-        @warn "you can't divide a block into #{columns}";
+        @warn "[archetype:grid] you can't divide a block into #{columns}";
         $columns: 1;
       }
     }
     // check if the specified columns are valid
     @if($CONFIG_GRID_ALLOWED_DIVISABLE) {
       @if(not index($CONFIG_GRID_ALLOWED_DIVISABLE, $of)) {
-        @warn "you can't divide #{of} columns";
+        @warn "[archetype:grid] you can't divide #{of} columns";
         $of: $CONFIG_GRID_MAX_COLUMNS;
       }
     }
 
     $columns: ($columns * $of);
     @if($columns < $CONFIG_GRID_MIN_THRESHOLD and $columns > 0) {
-      @warn "#{$columns} of #{$of} columns is too small. Use a larger column size";
+      @warn "[archetype:grid] #{$columns} of #{$of} columns is too small. Use a larger column size";
       $columns: $CONFIG_GRID_MIN_THRESHOLD;
     }
   }
@@ -261,7 +261,7 @@
   }
   // TABLE-CELL (doesn't work well)
   @else if($CONFIG_GRID_ALIGN_METHOD == table-cell) {
-    @warn "table-cell method doesn't work yet!";
+    @warn "[archetype:grid] table-cell method doesn't work yet!";
     @if($row) {
       display: table;
       // table cells don't respect margin, so we have to use border-spacing

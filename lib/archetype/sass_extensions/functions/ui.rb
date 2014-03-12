@@ -165,7 +165,7 @@ module Archetype::SassExtensions::UI
     # otherwise, if the current value is different...
     elsif breakpoints[key] != value
       # throw a warning
-      helpers.logger.warn("a breakpoint for `#{key}` is already set to `#{breakpoints[key]}`, ignoring `#{value}`")
+      helpers.warn("[#{Archetype.name}:breakpoint] a breakpoint for `#{key}` is already set to `#{breakpoints[key]}`, ignoring `#{value}`")
       return bool(false)
     end
     environment.global_env.set_var('CONFIG_BREAKPOINTS', Sass::Script::Value::Map.new(breakpoints))

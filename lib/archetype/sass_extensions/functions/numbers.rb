@@ -70,7 +70,7 @@ module Archetype::SassExtensions::Numbers
     # if we don't understand the unit...
     if RESOLUTIONS[from].nil? and not unitless
       # warn
-      helpers.logger.warn("don't know how to convert `#{number}` to a #{to}")
+      helpers.warn("[#{Archetype.name}:resolution] don't know how to convert `#{number}` to a #{to}")
       # and return zero
       return number(0)
     end
