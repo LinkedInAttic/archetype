@@ -254,7 +254,7 @@ module Archetype::Functions::CSS
     else
       value = CSS_PRIMITIVES[value]
     end
-    helpers.logger.warn("cannot find a default value for `#{key}`") if value.nil?
+    helpers.warn("[#{Archetype.name}:css:default] cannot find a default value for `#{key}`") if value.nil?
     return value
   end
 
@@ -1027,7 +1027,7 @@ private
   #
   def self.warn_cannot_disambiguate_property(property, info = nil)
     info = (info.nil? or info.empty?) ? '' : " (#{info})"
-    return warn("cannot disambiguate the CSS property `#{property}#{info}`")
+    return warn("[#{Archetype.name}:css:derive] cannot disambiguate the CSS property `#{property}#{info}`")
   end
 
   #
@@ -1041,7 +1041,7 @@ private
 
   #
   def self.warn_not_enough_infomation_to_derive(property)
-    return warn("there isn't enough information to derive `#{property}`, so returning `null`")
+    return warn("[#{Archetype.name}:css:derive] there isn't enough information to derive `#{property}`, so returning `null`")
   end
 
   #
@@ -1271,7 +1271,7 @@ private
   # - {Sass::Null}
   #
   def self.warn(msg)
-    helpers.logger.warn msg
+    helpers.warn msg
     return Sass::Script::Value::Null.new
   end
 

@@ -15,7 +15,14 @@ module Archetype::Functions::Helpers
   # provides a convenience interface to the Compass::Logger
   #
   def self.logger
-    Sass.logger
+    @logger ||= Compass::Logger.new
+  end
+
+  #
+  # provides a convenience interface for logging warnings
+  #
+  def self.warn(msg)
+    logger.record(:warning, msg)
   end
 
   #
@@ -71,11 +78,11 @@ module Archetype::Functions::Helpers
 
       # if a 3rd item exists, we probably forgot a comma or parens somewhere
       if previous.nil? and not item[2].nil?
-        msg = "you're likely missing a comma or parens in your data structure"
+        msg = "[#{Archetype.name}:hash] you're likely missing a comma or parens in your data structure"
         begin
-          logger.warn("#{msg}: #{item}")
+          warn("#{msg}: #{item}")
         rescue
-          logger.warn(msg)
+          warn(msg)
         end
       end
 
@@ -128,7 +135,7 @@ module Archetype::Functions::Helpers
       hsh[key] = self.array_to_meta(hsh[key])
     end
 
-    logger.warn("one of your data structures is ambiguous, please double check near `#{previous}`") unless (previous.nil? or previous.empty?)
+    warn("[#{Archetype.name}:hash] one of your data structures is ambiguous, please double check near `#{previous}`") unless (previous.nil? or previous.empty?)
 
     return hsh
   end

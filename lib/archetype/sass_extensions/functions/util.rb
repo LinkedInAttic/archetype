@@ -10,7 +10,7 @@ module Archetype::SassExtensions::Util
   #
   def is_null(value)
     is_deprecated_nil = (value.is_a?(Sass::Script::Value::String) && value.value == 'nil')
-    #helpers.logger.record(:warning, 'the usage of `nil` will be removed in a future release, please use the Sass standard `null`')
+    #helpers.warn("[#{Archetype.name}:nil] the usage of `nil` will be removed in a future release, please use the Sass standard `null`")
     return Sass::Script::Bool.new(value == null || is_deprecated_nil)
   end
 

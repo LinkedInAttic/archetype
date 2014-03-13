@@ -1,0 +1,18 @@
+@import "test_harness";
+
+.null_test {
+  @include breakpoint(not-set) {
+    /* you should NOT see this comment */
+  }
+}
+
+$trash: register-breakpoint(smartphone, 'only screen and (min-device-width : 320px) and (max-device-width : 480px)');
+$trash: register-breakpoint(smartphone, 'only screen and (min-device-width : 320px) and (max-device-width : 480px)'); // should be ignored since it's identical
+$trash: register-breakpoint(smartphone-landscape, 'only screen and (min-width : 321px)');
+$trash: register-breakpoint(smartphone-landscape, 'only screen and (min-device-width : 320px) and (max-device-width : 480px) and (orientation : landscape)'); // should throw a warning since it's different
+
+.test {
+  @include breakpoint(smartphone) {
+    /* you should see this comment */
+  }
+}

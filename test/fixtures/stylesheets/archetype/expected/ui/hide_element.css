@@ -3,12 +3,12 @@
   height: 1px;
   width: 1px;
   overflow: hidden;
-  /* [archetype:target-browser:begin] --- ie lte 7 --- */
+  /* [archetype:target:browser:begin] --- ie lte 7 --- */
   *clip: rect(1px 1px 1px 1px);
-  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+  /* [archetype:target:browser:end]   --- ie lte 7 --- */
   clip: rect(1px, 1px, 1px, 1px);
 }
 .ie.lte7 .hide-element {
-  /* [archetype:target-browser:begin] --- ie lte 7 --- */
-  /* [archetype:target-browser:end]   --- ie lte 7 --- */
+  /* [archetype:target:browser:begin] --- ie lte 7 --- */
+  /* [archetype:target:browser:end]   --- ie lte 7 --- */
 }
