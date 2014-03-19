@@ -1,4 +1,3 @@
-require 'archetype/functions/helpers'
 require 'archetype/functions/styleguide_memoizer'
 require 'thread'
 

@@ -1,22 +1,3 @@
 // @category  utilities/lists
 
-// map collection items to conform to a well defined collection
-// this is primarily used to convert shorthand notations into symmetrical longhand notations
-// @function  get-collection
-// @private
-// @param     $list {List} input list
-// @param     $components {List} list of components
-// @param     $min {Number} the minimum length of the collection
-// @return    $list {List} formatted collection
-// @usage:
-// $padding: get-collection(10px, $min: 2) => 10px 10px
-// $offset:  get-collection($components: (1 2), $min: 4) => 1 2 1 2
-@function get-collection($list: false, $components: false, $min: 1) {
-  @if($list == false) {
-    $list: $components;
-  }
-  @while(length($list) < $min) {
-    $list: $list $list;
-  }
-  @return $list;
-}
+
