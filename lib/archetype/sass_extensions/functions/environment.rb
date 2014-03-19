@@ -108,7 +108,7 @@ private
       missing << name unless archetype_modules_registry.include?(name)
     end
     if missing.count > 0 and warn
-      helpers.logger.record(:error, "[archetype:module:missing] the require module#{missing.count > 1 ? 's are' : ' is'} missing: #{helpers.to_str(missing)}")
+      helpers.logger.record(:error, "[archetype:module:missing] the required module#{missing.count > 1 ? 's are' : ' is'} missing: #{helpers.to_str(missing)}")
     end
     return bool(missing.count == 0)
   end
