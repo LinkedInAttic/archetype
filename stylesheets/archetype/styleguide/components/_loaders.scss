@@ -21,7 +21,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_LOADERS_ID, $STYLEGUIDE_LOADE
         top:                    50%,
         left:                   50%,
         content:                $CONTENT_PLACEHOLDER,
-        background-image:       styleguide-sprite-url($CONFIG_SPRITE_LOADERS),
+        background-image:       -archetype-sprite-url($CONFIG_SPRITE_LOADERS),
         background-repeat:      no-repeat,
         background-position:    _styleguideGetLoaderPosition(medium, static),
         width:                  _styleguideGetLoaderDimension(medium, static, width),

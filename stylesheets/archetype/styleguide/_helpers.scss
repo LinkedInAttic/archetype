@@ -147,7 +147,7 @@
 // @return    {List} background position of the image or null
 @function _styleguideGetLoaderPosition($size: medium, $type: static, $context: 1) {
   $img: nth-cyclic(map-get(map-get($CONFIG_LOADERS, $size), $type), $context);
-  @return styleguide-sprite-position($CONFIG_SPRITE_LOADERS, $img);
+  @return -archetype-sprite-position($CONFIG_SPRITE_LOADERS, $img);
 }
 
 // helper function to get the dimensions of the loading spinner
@@ -160,14 +160,13 @@
 // @return    {Number} the width/height of the loading spinner
 @function _styleguideGetLoaderDimension($size: medium, $type: static, $dim: width, $context: 1) {
   $img: nth-cyclic(map-get(map-get($CONFIG_LOADERS, $size), $type), $context);
-  $sprite-file: styleguide-sprite-file($CONFIG_SPRITE_LOADERS, $img);
+  $sprite-file: -archetype-sprite-file($CONFIG_SPRITE_LOADERS, $img);
   @if $dim == width {
-    @return styleguide-image-width($sprite-file);
+    @return -archetype-image-width($sprite-file);
   }
   @else {
-    @return styleguide-image-height($sprite-file);
+    @return -archetype-image-height($sprite-file);
   }
-  @return 0;
 }
 
 // helper function to get the animation routine of the loading spinner
@@ -200,7 +199,7 @@
 // @return    {String} the CSS expression styles
 @function _styleguideGetLoaderExpression($size: medium, $context: 1) {
   $img: nth-cyclic(map-get(map-get($CONFIG_LOADERS, $size), static), $context);
-  $bg: styleguide-sprite($CONFIG_SPRITE_LOADERS, $img) no-repeat;
+  $bg: -archetype-sprite($CONFIG_SPRITE_LOADERS, $img) no-repeat;
   $bg: if(is-null($bg), none, $bg);
   $width: _styleguideGetLoaderDimension($size, static, width, $context);
   $height: _styleguideGetLoaderDimension($size, static, height, $context);

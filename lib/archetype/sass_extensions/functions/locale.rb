@@ -70,6 +70,20 @@ module Archetype::SassExtensions::Locale
     return get_locale_piece(locale, :modifier)
   end
 
+  #
+  # temporarily switch the interface locale
+  #
+  # *Parameters*:
+  # - <tt>$code</tt> {String} the locale code to switch to
+  # *Returns*:
+  # - {String} the previously set locale code
+  #
+  def switch_locale(locale)
+    previous = identifier(get_locale())
+    environment.global_env.set_var('CONFIG_LOCALE', locale)
+    return previous
+  end
+
 private
 
   # pieces of the locale code

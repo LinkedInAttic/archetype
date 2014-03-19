@@ -428,15 +428,3 @@
   }
   z-index: ($value + $layer);
 }
-
-// generate a tag name with a prefix
-// @function  prefixed-tag
-// @param     $tag {String} the tag to prefix
-// @param     $prefix {String} the prefix to prepend to the tag
-// @return    {String} the prefix joined with the tag
-@function prefixed-tag($tag: '', $prefix: $CONFIG_GENERATED_TAG_PREFIX) {
-  @if $tag != '' {
-    $tag: '-#{$tag}';
-  }
-  @return '#{$prefix}#{$tag}';
-}

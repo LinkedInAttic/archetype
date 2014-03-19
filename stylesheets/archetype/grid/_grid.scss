@@ -68,7 +68,7 @@
 // @param     $left {Number} the number of units to dent left
 // @param     $right {Number} the number of units to dent right
 // @param     $direction {String} [in|out] the direction to dent
-// @param     $abuse {Boolean} @see _getUnit
+// @param     $abuse {Boolean} @see _archetype_integerize
 // @return    $dent {List} list of dents
 @function _gridDent($list: false, $left: 0, $right: 0, $direction: in, $abuse: false) {
   $factor: if($direction == out, -1, 1) * $CONFIG_GRID_SPACING_FACTOR;
@@ -92,7 +92,7 @@
 // @param     $list {List} list of indents
 // @param     $left {Number} the number of units to indent left
 // @param     $right {Number} the number of units to indent right
-// @param     $abuse {Boolean} @see _getUnit
+// @param     $abuse {Boolean} @see _archetype_integerize
 // @return    {List} list of indents
 @function grid-indent($list: false, $left: 0, $right: 0, $abuse: false) {
   @return _gridDent($list, $left, $right, $direction: in, $abuse: $abuse);
@@ -103,7 +103,7 @@
 // @param     $list {List} list of outdents
 // @param     $left {Number} the number of units to outdent left
 // @param     $right {Number} the number of units to outdent right
-// @param     $abuse {Boolean} @see _getUnit
+// @param     $abuse {Boolean} @see _archetype_integerize
 // @return    {List} list of outdents
 @function grid-outdent($list: false, $left: 0, $right: 0, $abuse: false) {
   @return _gridDent($list, $left, $right, $direction: out, $abuse: $abuse);

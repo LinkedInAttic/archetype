@@ -12,10 +12,10 @@
         @each $context in (1 2) {
           $name: unquote('#{$size}-#{$context}');
           $icon: nth-cyclic(map-get($values, default), $context);
-          $position: styleguide-sprite-position($CONFIG_SPRITE_LOADERS, $icon);
-          $sprite-file: styleguide-sprite-file($CONFIG_SPRITE_LOADERS, $icon);
-          $width: styleguide-image-width($sprite-file);
-          $height: styleguide-image-height($sprite-file);
+          $position: -archetype-sprite-position($CONFIG_SPRITE_LOADERS, $icon);
+          $sprite-file: -archetype-sprite-file($CONFIG_SPRITE_LOADERS, $icon);
+          $width: -archetype-image-width($sprite-file);
+          $height: -archetype-image-height($sprite-file);
           @include -generate-loader-keyframes-position($name, $position, $width, $height);
         }
       }

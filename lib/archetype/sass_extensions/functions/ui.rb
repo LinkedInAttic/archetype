@@ -38,6 +38,7 @@ module Archetype::SassExtensions::UI
     token = prefix + item.hash.to_s
     return identifier(token)
   end
+  Sass::Script::Functions.declare :tokenize, [:item]
 
   #
   # parse a CSS content string and format it for injection into innerHTML
@@ -132,6 +133,7 @@ module Archetype::SassExtensions::UI
     # return the best match we found
     return best[:grid]
   end
+  Sass::Script::Functions.declare :choose_best_glyph_grid, [:grids, :size]
 
   #
   # checks if a string looks like it's just a composition of character codes
@@ -145,6 +147,7 @@ module Archetype::SassExtensions::UI
     string = helpers.to_str(string, ' ', :quotes)
     return bool(string =~ /^(\\([\da-fA-F]{4})\s*)+$/)
   end
+  Sass::Script::Functions.declare :looks_like_character_code, [:string]
 
   #
   # registers a breakpoint
@@ -152,14 +155,17 @@ module Archetype::SassExtensions::UI
   # *Parameters*:
   # - <tt>$key</tt> {String} the key to register it under
   # - <tt>$value</tt> {*} the value to register
+  # - <tt>$force</tt> {Boolean} if true, forces any new value into the registry
   # *Returns*:
   # - {Boolean} whether or not the value was registered
   #
-  def register_breakpoint(key, value)
+  def register_breakpoint(key, value, force = nil)
     # we need a dup as the Hash is frozen
     breakpoints = registered_breakpoints.dup
+    force = force.nil? ? false : force.value
+    not_registered = breakpoints[key].nil? || is_null(breakpoints[key]).value
     # if there's no key registered...
-    if breakpoints[key].nil? || is_null(breakpoints[key]).value
+    if force || not_registered
       # just register the value
       breakpoints[key] = value
     # otherwise, if the current value is different...
@@ -171,6 +177,8 @@ module Archetype::SassExtensions::UI
     environment.global_env.set_var('CONFIG_BREAKPOINTS', Sass::Script::Value::Map.new(breakpoints))
     return bool(true)
   end
+  Sass::Script::Functions.declare :register_breakpoint, [:key, :value]
+  Sass::Script::Functions.declare :register_breakpoint, [:key, :value, :force]
 
   #
   # retrieves a breakpoint
@@ -183,6 +191,7 @@ module Archetype::SassExtensions::UI
   def get_breakpoint(key)
     return registered_breakpoints[key] || null
   end
+  Sass::Script::Functions.declare :get_breakpoint, [:key]
 
 private
 

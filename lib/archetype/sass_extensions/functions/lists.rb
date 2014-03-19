@@ -84,6 +84,7 @@ module Archetype::SassExtensions::Lists
   def list_add(list, values)
     return list_math(list, values, :plus)
   end
+  Sass::Script::Functions.declare :list_add, [:list, :values]
 
   #
   # subtract values(s) from a list
@@ -97,6 +98,7 @@ module Archetype::SassExtensions::Lists
   def list_subtract(list, values)
     return list_math(list, values, :minus)
   end
+  Sass::Script::Functions.declare :list_subtract, [:list, :values]
 
   #
   # multiply values(s) into a list
@@ -110,6 +112,7 @@ module Archetype::SassExtensions::Lists
   def list_multiply(list, values)
     return list_math(list, values, :times)
   end
+  Sass::Script::Functions.declare :list_multiply, [:list, :values]
 
   #
   # divide values(s) into a list
@@ -123,6 +126,7 @@ module Archetype::SassExtensions::Lists
   def list_divide(list, values)
     return list_math(list, values, :div)
   end
+  Sass::Script::Functions.declare :list_divide, [:list, :values]
 
   #
   # list modulus value(s)
@@ -136,6 +140,7 @@ module Archetype::SassExtensions::Lists
   def list_mod(list, values)
     return list_math(list, values, :mod)
   end
+  Sass::Script::Functions.declare :list_mod, [:list, :values]
 
   #
   # joins a list into a string with the separator given
@@ -151,6 +156,7 @@ module Archetype::SassExtensions::Lists
     separator = (separator.respond_to?(:value) ? separator.value : separator).to_s
     return identifier(list.join(separator))
   end
+  Sass::Script::Functions.declare :list_join, [:list, :separator]
 
   #
   # find if any set of values is in a list
@@ -172,6 +178,7 @@ module Archetype::SassExtensions::Lists
       return Sass::Script::Bool.new(false)
     end
   end
+  Sass::Script::Functions.declare :index2, [:haystack, :needle]
 
   #
   # treats a list cyclically (never out of bounds, just wraps around)
@@ -187,6 +194,8 @@ module Archetype::SassExtensions::Lists
     list = list.to_a
     return list[(n - 1) % list.size]
   end
+  Sass::Script::Functions.declare :nth_cyclic, [:list]
+  Sass::Script::Functions.declare :nth_cyclic, [:list, :n]
 
   #
   # find a key within a nested list of ordered pairs
@@ -229,6 +238,30 @@ module Archetype::SassExtensions::Lists
   end
   Sass::Script::Functions.declare :associative_merge, [:list, :extender]
 
+  #
+  # map collection items to conform to a well defined collection
+  # this is primarily used to convert shorthand notations into symmetrical longhand notations
+  #
+  # *Parameters*:
+  # - <tt>$list</tt> {List} input list
+  # - <tt>$components</tt> {List} list of components
+  # - <tt>$min</tt> {List} the minimum length of the collection
+  # *Returns*:
+  # - {List} formatted collection
+  #
+  def get_collection(list = bool(false), components = [], min = number(1))
+    list = list.value ? list.to_a : components.to_a
+    while(list.length < min.value)
+      list = list.concat(list)
+    end
+    return list(list, :space)
+  end
+  Sass::Script::Functions.declare :get_collection, [:list]
+  Sass::Script::Functions.declare :get_collection, [:components]
+  Sass::Script::Functions.declare :get_collection, [:list, :min]
+  Sass::Script::Functions.declare :get_collection, [:components, :min]
+  Sass::Script::Functions.declare :get_collection, [:list, :components, :min]
+
   # Returns a list object from a value that was passed.
   # This can be used to unpack a space separated list that got turned
   # into a string by sass before it was passed to a mixin.
@@ -268,7 +301,7 @@ module Archetype::SassExtensions::Lists
       end
       styles.push Sass::Script::Value::List.new(kvp, :comma)
     end
-    # the recompose the list
+    # then recompose the list
     return Sass::Script::Value::List.new(styles, :comma)
   end
 
@@ -290,18 +323,7 @@ private
     list = list.to_a
     values.fill(values[0], 0..(list.size - 1)) if values.size < list.size
     list = [list, values].transpose.map do |x|
-      case method
-      when :plus
-        x[0].plus(x[1])
-      when :minus
-        x[0].minus(x[1])
-      when :times
-        x[0].times(x[1])
-      when :div
-        x[0].div(x[1])
-      when :mod
-        x[0].mod(x[1])
-      end
+      x[0].method(method).call(x[1])
     end
     return Sass::Script::Value::List.new(list, separator)
   end
