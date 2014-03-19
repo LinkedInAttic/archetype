@@ -1,0 +1,14 @@
+// register module
+$a-blackhole: register-archetype-module(archetype/config);
+
+@import "theme";
+@import "environment";
+@import "units";
+@import "spacing";
+@import "resets";
+@import "formatting";
+@import "glyphs";
+@import "typography";
+@import "targeting";
+@import "vars";
+@import "resolution";

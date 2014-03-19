@@ -1,6 +1,8 @@
 require 'test/unit'
 require 'true'
 require 'archetype'
+# only use import-once locally, travis should reflect the non-deal state where a user is not using compass-import-once
+require 'compass/import-once/activate' unless ENV['CI']
 
 project_type      = :stand_alone
 css_dir           = "tmp"

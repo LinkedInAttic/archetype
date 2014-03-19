@@ -1,23 +1,13 @@
-// include configs
-@import "archetype/config";
+// Archetype core
+@import "core";
 
-// include Compass mixins
-@import "compass";
+// TODO - split the following into projects
 
-// utility mixins and helper functions
-@import "archetype/util";
-
-// custom hacks
-@import "archetype/hacks";
-
-// ui
-@import "archetype/ui";
+// theme
+@import "archetype/theme/all";
 
 // grids
-@import "archetype/grid";
-
-// styleguide
-@import "archetype/styleguide";
+@import "archetype/grid/all";
 
 // base
-@import "archetype/base";
+@import "archetype/base/all";

@@ -1,0 +1,124 @@
+// @category  hacks
+// register module
+$a-blackhole: register-archetype-module(archetype/hacks);
+
+// hack to support negative margins in legacy IE
+// @mixin     hack-negative-margin
+@mixin hack-negative-margin() {
+  @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) {
+    @include has-layout();
+    position: relative;
+  }
+}
+
+// max-height hack
+// @mixin     max-height
+// @param     $value {String} the height
+@mixin max-height($value) {
+  @include hacked-maximum(height, $value);
+}
+
+// max-width hack
+// @mixin     max-width
+// @param     $value {String} the width
+@mixin max-width($value) {
+  @include hacked-maximum(width, $value);
+}
+
+// generic max-* hack wrapper
+// @mixin     hacked-maximum
+// @param     $property {String} property [height|width]
+// @param     $value {String} the value
+@mixin hacked-maximum($property, $value) {
+  max-#{$property}: $value;
+  @include underscore-hack($property, auto, $value);
+}
+
+// proxy for ie-pseudo
+// @mixin     ie-pseudo-before
+// @param     $styles {String} the styles to apply to the pseudo-element
+// @param     $content {String} the content to insert into the element (similar to css `content` attribute)
+// @param     $name {String} the name of the element
+// @content
+@mixin ie-pseudo-before($styles: false, $content: false, $name: '') {
+  @include ie-pseudo($styles, $content, before, $name) {
+    @content;
+  }
+}
+
+// proxy for ie-pseudo
+// @mixin     ie-pseudo-after
+// @param     $styles {String} the styles to apply to the pseudo-element
+// @param     $content {String} the content to insert into the element (similar to css `content` attribute)
+// @param     $name {String} the name of the element
+// @content
+@mixin ie-pseudo-after($styles: false, $content: false, $name: '') {
+  @include ie-pseudo($styles, $content, after, $name) {
+    @content;
+  }
+}
+
+// this creates a one-time executing expression that inserts an element relative to `this` element.
+// this allows some level of support for :before/:after in IE6/7
+// inspired by http://nicolasgallagher.com/better-float-containment-in-ie/
+// @mixin     ie-pseudo
+// @param     $styles {String} the styles to apply to the pseudo-element
+// @param     $content {String} the content to insert into the element (similar to css `content` attribute)
+// @param     $placement {String} [before|after] simulate :before or :after behavior
+// @param     $name {String} the name of the element
+// @param     $uid {String} a custom, unique identifier for the generate element
+// @content
+@mixin ie-pseudo($styles: false, $content: false, $placement: before, $name: '', $uid: false) {
+  $archetype-pseudo-selector: null !global;
+  @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) {
+    $uid: if($uid, $uid, unique('ie-pseudo-'));
+    $archetype-pseudo-selector: '& ##{$uid}' !global;
+    $this: 't';
+    $method: if($placement == before, insertBefore, appendChild);
+    @if $CONFIG_GENERATED_TAG_CSS {
+      $styles: if($styles and not is_null($styles), #{$CONFIG_GENERATED_TAG_CSS}#{$styles}, $CONFIG_GENERATED_TAG_CSS);
+    }
+    $cmd: (unquote('#{$this}.el=document.createElement("#{prefixed-tag($name)}"),#{$this}.el.id="#{$uid}"'));
+    $method: if($placement == before, insertBefore, appendChild);
+    @if $content and not is_null($content) {
+      $cmd: append($cmd, unquote('#{$this}.el.innerHTML="#{-ie-pseudo-content($content)}"'));
+    }
+    @if $styles and not is_null($styles) and $styles != '' and $CONFIG_GENERATED_TAG_INLINE {
+      // sets the icon styles on the node if we're using inline styles...
+      $cmd: append($cmd, unquote('#{$this}.el.style.cssText="#{$styles}"'));
+    }
+    // if we're using the insertBefore method, we need to specify the node reference to the first childNode
+    $reference-node: if($placement == before, ',#{$this}.childNodes[0]||null', '');
+    $cmd: append($cmd, unquote('#{$this}.#{$method}(#{$this}.el#{$reference-node})'));
+    $runOnce: unquote('this.runtimeStyle.zoom="1"'); // this ensures the expression is only invoked once
+
+    // delim with a single comma, no spaces
+    $cmd: list-join($cmd, ',');
+
+    // we execute in a setTimeout to decouple from the current UI thread
+    //  this prevents an edge case in IE crashing with an `Operation Aborted` if the node hasn't finished rendering yet
+    //  http://www.nczonline.net/blog/2008/03/17/the-dreaded-operation-aborted-error/
+    *zoom: expression(#{$runOnce},(function(#{$this}){setTimeout(function(){#{$cmd}})}(this)));
+
+    // if we're NOT using inline styles...
+    @if not $CONFIG_GENERATED_TAG_INLINE and $styles and not is_null($styles)  {
+      // output it on the generated selector
+      #{$archetype-pseudo-selector} {
+        @include to-styles(-style-string-to-map(unquote($styles)));
+        @content;
+      }
+    }
+  }
+}
+
+// a hack that allows elements with transparent backgrounds to be focusable in IE
+// @mixin     transparent-focusable
+// @param     $url {String} an optional URL to point to an image (not required)
+// @param     $data {String} an optional data URI for a transparent image (not required)
+@mixin transparent-focusable($url: url(https://), $data: 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7') {
+  $bg: (transparent);
+  background: append($bg, $data);
+  @if $url {
+    @include target-browser(ie lte 7, background, append($bg, $url));
+  }
+}

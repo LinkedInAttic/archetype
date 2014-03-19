@@ -1,5 +1,8 @@
 // @category  utilities/spacing
 
+// throw an error if archetype/util has not been registered
+$a-blackhole: require-archetype-module(archetype/util);
+
 // generate the vertical spacing offset
 // @mixin     vertical-spacing
 // @param     $list {List} the list of units e.g. (1) => $top:1 $bottom:1; (1 0) => $top:1 $bottom:0;

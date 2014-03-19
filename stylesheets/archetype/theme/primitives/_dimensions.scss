@@ -32,7 +32,7 @@ $CONFIG_DIM_MENU_ITEM_SPACING:                  (vertical-spacing(1.2) horizonta
 
 // flyouts
 $CONFIG_DIM_FLYOUT_SPACING:                     (0 0 vertical-spacing(1.4, $abuse: true)) !default;
-$CONFIG_DIM_FLYOUT_MIN_WIDTH:                   _getGridWidth(4) !default;
+$CONFIG_DIM_FLYOUT_MIN_WIDTH:                   150px !default;
 $CONFIG_DIM_FLYOUT_RADIUS:                      1px !default;
 
 // headings

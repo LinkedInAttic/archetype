@@ -1,4 +1,9 @@
 // @category   ui/layout
+
+// throw an error if archetype/ui has not been registered
+$a-blackhole: require-archetype-module(archetype/ui);
+
+// additional non-standard compass features required in this module
 @import "compass/layout/stretching";
 
 // makes your element centered vertically and horizontally in a parent element
