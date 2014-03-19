@@ -96,7 +96,7 @@ module Archetype::SassExtensions::Environment
   # *Returns*:
   # - {Boolean} whether or not all the modules are registered
   #
-  def check_archetype_module(*names)
+  def check_archetype_modules(*names)
     return check_archetype_modules_registered(names, false)
   end
 

@@ -1,7 +1,7 @@
 // @category  utilities/spacing
 
 // throw an error if archetype/util has not been registered
-$a-blackhole: require-archetype-module(archetype/util);
+$a-blackhole: require-archetype-modules(archetype/util);
 
 // generate the vertical spacing offset
 // @mixin     vertical-spacing

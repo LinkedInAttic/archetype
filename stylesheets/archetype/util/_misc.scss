@@ -1,7 +1,7 @@
 // @category  utilities
 
 // throw an error if archetype/util has not been registered
-$a-blackhole: require-archetype-module(archetype/util);
+$a-blackhole: require-archetype-modules(archetype/util);
 
 // simplify checking if a value is defined before outputting it to a property
 // @mixin     if-set
