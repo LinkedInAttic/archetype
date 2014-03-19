@@ -1,6 +1,10 @@
-@import "compass/layout/stretching";
-
 // @category  utilities/styles
+
+// throw an error if archetype/util has not been registered
+$a-blackhole: require-archetype-modules(archetype/util);
+
+// additional non-standard compass features required in this module
+@import "compass/layout/stretching";
 
 // this is a proxy for output-style
 // we need this to prevent Sass from throwing an error as you currently can't use recursive mixins :/

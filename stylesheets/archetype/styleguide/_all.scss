@@ -1,0 +1,4 @@
+// register module
+$a-blackhole: register-archetype-module(archetype/styleguide);
+
+@import "styleguide";

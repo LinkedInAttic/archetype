@@ -1,5 +1,8 @@
 // @category  utilities/targeting
 
+// throw an error if archetype/util has not been registered
+$a-blackhole: require-archetype-modules(archetype/util);
+
 // given a list of browsers and versions, this will consolidate them into a
 // normalized list of targeted browsers
 // @function  _getTargetedBrowsers

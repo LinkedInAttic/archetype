@@ -1,9 +1,4 @@
 // @category   ui
-@import "ui/accessibility";
-@import "ui/breakpoints";
-@import "ui/elements";
-@import "ui/glyphs";
-@import "ui/keyframes";
-@import "ui/layout";
-@import "ui/locale";
-@import "ui/scopes";
+@import "required";
+
+@import "ui/all";

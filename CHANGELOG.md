@@ -41,6 +41,7 @@
 - added `register-breakpoint` and `get-breakpoint` functions for registering / retrieving breakpoint definitions
 - added `breakpoint` mixin for creating breakpoint media queries
 - added `switch-locale` function to assist switching locale states
+- added helper functions for working with Archetype modules: `register-archetype-module`, `has-archetype-modules`, `require-archetype-modules`
 
 ### Major Changes:
 

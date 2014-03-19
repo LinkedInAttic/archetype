@@ -1,5 +1,8 @@
 // @category   ui/glyphs
 
+// throw an error if archetype/ui has not been registered
+$a-blackhole: require-archetype-modules(archetype/ui);
+
 // create a stroke line around text (or font icon)
 // @mixin     stroke
 // @param     $width {Number} the width of the stroke

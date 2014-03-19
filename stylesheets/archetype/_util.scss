@@ -1,10 +1,5 @@
 // utility functions and convenience methods
 // @category   utilities
-@import "config";
-// import dependencies
-@import "util/lists";
-@import "util/misc";
-@import "util/spacing";
-@import "util/debug";
-@import "util/styles";
-@import "util/targeting";
+@import "required";
+
+@import "util/all";

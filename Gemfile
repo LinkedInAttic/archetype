@@ -2,9 +2,8 @@ source 'https://rubygems.org'
 
 gemspec
 
-
 # leverage compass-import-once for improved performance
-gem 'compass-import-once', :require => "compass/import-once/activate"
+gem 'compass-import-once'
 
 gem 'diff-lcs',     '~> 1.2.5'
 gem 'rake'

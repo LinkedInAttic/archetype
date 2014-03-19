@@ -1,0 +1,110 @@
+// protect against multiple resets
+$RESET_INIT: false !default;
+
+// @category  base
+
+// sets the base styles for the page (e.g. reset or normalize)
+// @mixin     base
+// @param     $exclude {List} the list of styles to exclude @see _normalize.scss and _reset.scss
+// @param     $method {String} reset method [reset|normalize|h5bp|hybrid]
+// @param     $force {Boolean} force reset to invoke; by default base() can only be invoked once, to re-invoke must pass in $force: true
+@mixin base($exclude: $CONFIG_RESET_EXCLUDES, $method: $CONFIG_RESET_METHOD, $force: false) {
+  @if not $RESET_INIT or $force {
+    $RESET_INIT: true;
+    // normalize
+    @if $method == normalize {
+      @include base-normalize($exclude: $exclude);
+    }
+    // html5 boiler plate
+    @else if $method == h5bp {
+      @include base-h5bp($exclude: $exclude);
+    }
+    // hyrbid reset (reset + some normalize)
+    @else if $method == hybrid {
+      @include base-hybrid($exclude: $exclude);
+    }
+    // default to reset
+    @else {
+      @include base-reset($exclude: $exclude);
+    }
+  }
+  @if $CONFIG_GLYPHS_AUTO and do-once("archetype/base#glyph") {
+    @include base-glyph();
+  }
+}
+
+@mixin base-glyph() {
+  // the font-face mixin will likely change in a future version, keep an eye on this
+  // https://github.com/chriseppstein/compass/issues/867
+
+  @each $key, $library in $CONFIG_GLYPHS_LIBRARIES {
+    @if $key != default {
+      $library: map-merge(map-get($CONFIG_GLYPHS_LIBRARIES, default), $library);
+    }
+    $name_raw:  archetype-namespace(map-get($library, name));
+    $files:     map-get($library, files);
+    $weight:    map-get($library, weight) or $CONFIG_GLYPHS_WEIGHT;
+    $style:     map-get($library, style) or $CONFIG_GLYPHS_STYLE;
+    $version:   map-get($library, version);
+    $path:      map-get($library, path);
+    $svg-id:    map-get($library, svg-id) or $name_raw;
+    $grids:     -archetype-list(map-get($library, grids));
+
+    $inlined:   map-get($files, inline);
+    @if $inlined == null {
+      $inlined: $CONFIG_GLYPHS_INLINE_FONTS;
+    }
+
+    $output-fallback: $CONFIG_GLYPHS_OUTPUT_FALLBACK;
+
+    $subs: map-merge($library, (
+      path: str-substitute($path, (version: $version)),
+      svg-id: $svg-id
+    ));
+
+    // files
+    $files_eot_raw: str-substitute(map-get($files, eot), $library);
+    $files_std_raw: map-get($files, std);
+
+    @each $grid in $grids {
+      $name: $name_raw;
+      $subs: map-merge($subs, (grid: $grid));
+
+      $files_eot: if($files_eot_raw and $files_eot_raw != '', quote(str-substitute($files_eot_raw, $subs)), false);
+      $files_std: ();
+      $files: ();
+      @each $file in $files_std_raw {
+        $file: quote(str-substitute($file, $subs));
+        $files_std: append($files_std, $file);
+        // keep track of the file for later...
+        $files: append($files, $file);
+      }
+
+      // decide if we're using inline (data URI) files
+      $files_std: if($inlined, inline-font-files($files_std...), font-files($files_std...));
+
+      @if $grid {
+        $name: "#{$name}_#{$grid}";
+        // output the fallback @font-face
+        @if $output-fallback {
+          @include font-face($name_raw, $files_std, $files_eot, $weight, $style);
+          @include font-face('#{$name_raw}-#{$version}', $files_std, $files_eot, $weight, $style);
+        }
+      }
+      @if $output-fallback or not $version {
+        @include font-face($name, $files_std, $files_eot, $weight, $style);
+      }
+      @if $version {
+        // output the @font-face set with a versioned family name
+        // this will help avoid collisions when multi-app CSS is loaded on a single page
+        @include font-face('#{$name}-#{$version}', $files_std, $files_eot, $weight, $style);
+      }
+      $output-fallback: false;
+    }
+  }
+}
+
+// auto invoke base reset
+@if $CONFIG_RESET_AUTO and do-once('archetype/base') {
+  @include base($CONFIG_RESET_EXCLUDES);
+}

@@ -55,4 +55,66 @@ module Archetype::SassExtensions::Environment
       return identifier(helpers.to_str(value))
     end
   end
+
+  #
+  # registers an Archetype module as active
+  #
+  # *Parameters*:
+  # - <tt>$name</tt> {String} the module name
+  # *Returns*:
+  # - {List} the list of current registered modules
+  #
+  def register_archetype_module(name)
+    registry = archetype_modules_registry
+    # if it's already in the registry, just return the current list
+    return list(registry, :comma) if archetype_modules_registry.include?(name)
+    # update the registry with the module name
+    registry = list(registry.dup.push(name), :comma)
+    environment.global_env.set_var('ARCHETYPE_MODULES_REGISTRY', registry)
+    # return the registry
+    return registry
+  end
+
+  #
+  # checks to see if a required module is loaded or not
+  #  if not, throws an error
+  #
+  # *Parameters*:
+  # - <tt>$name</tt> {String} the module name
+  # *Returns*:
+  # - {Boolean} whether or not all the modules are registered
+  #
+  def require_archetype_modules(*names)
+    return check_archetype_modules(names, true)
+  end
+
+  #
+  # checks whether or not a module has been registered
+  #
+  # *Parameters*:
+  # - <tt>$name</tt> {String} the module name
+  # *Returns*:
+  # - {Boolean} whether or not all the modules are registered
+  #
+  def has_archetype_modules(*names)
+    return check_archetype_modules(names, false)
+  end
+
+private
+
+  def check_archetype_modules(names, warn = false)
+    missing = []
+    names.each do |name|
+      missing << name unless archetype_modules_registry.include?(name)
+    end
+    if missing.count > 0 and warn
+      helpers.logger.record(:error, "[archetype:module:missing] the require module#{missing.count > 1 ? 's are' : ' is'} missing: #{helpers.to_str(missing)}")
+    end
+    return bool(missing.count == 0)
+  end
+
+  def archetype_modules_registry
+    (environment.var('ARCHETYPE_MODULES_REGISTRY') || []).to_a
+  end
+
 end

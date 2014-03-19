@@ -1,0 +1,10 @@
+// this is the harness file for Archetype's core functionality
+
+// register pre-maturely so the dependencies know the context has been set
+$a-blackhole: register-archetype-module(archetype/core);
+
+@import "required";       // any required dependencies
+@import "util/all";       // utility mixins and helper functions
+@import "hacks/all";      // browser hacks
+@import "ui/all";         // UI mixins
+@import "styleguide/all"; // styleguide framework

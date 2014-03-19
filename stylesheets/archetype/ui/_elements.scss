@@ -1,5 +1,8 @@
 // @category   ui/elements
 
+// throw an error if archetype/ui has not been registered
+$a-blackhole: require-archetype-modules(archetype/ui);
+
 // computes the border position to use
 // @function  _getTriangleBorderDirection
 // @private

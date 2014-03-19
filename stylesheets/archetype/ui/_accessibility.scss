@@ -1,5 +1,8 @@
 // @category   ui/accessibility
 
+// throw an error if archetype/ui has not been registered
+$a-blackhole: require-archetype-modules(archetype/ui);
+
 // hide element visibly but preserve screen-reader support
 // @mixin     hide-element
 // @credit    Jonathan Snook

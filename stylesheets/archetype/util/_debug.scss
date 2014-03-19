@@ -1,5 +1,8 @@
 // @category  utilities/debug
 
+// throw an error if archetype/core has not been registered
+$a-blackhole: require-archetype-modules(archetype/util);
+
 // a debug helper, print out a message
 // @mixin     debug-message
 // @param     $message {String} the message to output

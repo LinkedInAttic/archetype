@@ -1,6 +1,6 @@
-require 'archetype/version'
-require 'compass/version'
-require 'sass/version'
+%w(archetype compass sass).each do |framework|
+  require "#{framework}/version"
+end
 
 #
 # This module provides an interface for testing against various framework version
@@ -21,13 +21,13 @@ module Archetype::SassExtensions::Version
   #
   def archetype_version(test = nil)
     test = test.nil? ? Archetype.name : helpers.to_str(test, ' ', :quotes).downcase
-    lib = ''
-    if test.include?('compass')
-      lib = Compass::VERSION
-    elsif test.include?('sass')
-      lib = Sass::VERSION
+    lib = case test
+    when /compass/
+      Compass::VERSION
+    when /sass/
+      Sass::VERSION
     else
-      lib = Archetype::VERSION
+      Archetype::VERSION
     end
     # strip off any non-official versioning (e.g. pre/alpha/rc)
     lib = lib.match(VERSION_PATTERN)[0]
@@ -77,7 +77,7 @@ private
   # *Parameters*:
   # - <tt>$version</tt> {String} the version string
   # *Returns*:
-  # - {Number} a weighted number representing the the version
+  # - {Number} a weighted number representing the version
   #
   def version_value(version)
     sum = 0
