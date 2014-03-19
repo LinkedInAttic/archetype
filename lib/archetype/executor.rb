@@ -10,7 +10,7 @@ if not ARGV[0].nil? and not ARGV[0].empty?
     action = File.join(@actions_path, action_name)
     begin
       require action
-    rescue
+    rescue LoadError
       puts "unknown action: #{action_name}"
     end
   elsif /^-(h|-help)$/ =~ action_name
