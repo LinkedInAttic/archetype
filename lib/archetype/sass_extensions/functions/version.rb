@@ -21,7 +21,6 @@ module Archetype::SassExtensions::Version
   #
   def archetype_version(test = nil)
     test = test.nil? ? Archetype.name : helpers.to_str(test, ' ', :quotes).downcase
-    lib = ''
     lib = case test
     when /compass/
       Compass::VERSION
