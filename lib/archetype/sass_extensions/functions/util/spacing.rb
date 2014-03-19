@@ -12,7 +12,7 @@ module Archetype::SassExtensions::Util::Spacing
   #
   def _archetype_integerize(number, abuse = bool(false))
     unless unitless(number)
-      helpers.warn("[archetype:units] #{number} is not unitless, stripping units")
+      helpers.warn("[#{Archetype.name}:units] #{number} is not unitless, stripping units")
       number = strip_units(number)
     end
     config = (environment.var('CONFIG_UNIT_FORCE_INT') || bool(false)).value
@@ -42,7 +42,7 @@ module Archetype::SassExtensions::Util::Spacing
     spacing = environment.var(config)
     if spacing.nil?
       spacing = number(1, 'px')
-      helpers.warn("[archetype:spacing] `#{config}` has not been set")
+      helpers.warn("[#{Archetype.name}:spacing] `#{config}` has not been set")
     end
     return unit.times(spacing)
   end

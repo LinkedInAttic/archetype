@@ -23,5 +23,6 @@ module Sass::Script::Functions
       Archetype::Functions::Helpers
     end
 
+    # include the Sass::Script::Value::Helpers in the context for all included modules
     include Sass::Script::Value::Helpers
 end

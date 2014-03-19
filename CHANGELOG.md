@@ -13,6 +13,7 @@
 
 - added `$CONFIG_STATE_BEM` and `$CONFIG_BEM_MODIFIER_SEPARATOR` to generate [BEM style state selectors](http://bem.info/method/)
 - added `$CONFIG_BEM_ELEMENT_SEPARATOR` and `bem` mixin
+- added `bem-selector` function to help compute the BEM style selector for a context
 - added `str-replace` function for simple Sass::Script::Value::String replacements
 - added `$CONFIG_THEME_EXCLUDE` takes a list of components that will be excluded (not registered)
 - added `switch-locale` mixin to switch the interface locale
@@ -39,6 +40,7 @@
 - added `archetype-meta` function to retrieve values set on `$CONFIG_META` or `Compass.configuration.meta`
 - added `register-breakpoint` and `get-breakpoint` functions for registering / retrieving breakpoint definitions
 - added `breakpoint` mixin for creating breakpoint media queries
+- added `switch-locale` function to assist switching locale states
 
 ### Major Changes:
 
@@ -53,6 +55,8 @@
 - removed `testing` configuration, instead check for `defined?(ArchetypeTestHelpers)`
 - removed `$CONFIG_GLYPHS_NAME`, `$CONFIG_GLYPHS_VERSION`, `$CONFIG_GLYPHS_SVG_ID`, `$CONFIG_GLYPHS_BASE_PATH`, `$CONFIG_GLYPHS_EOT`, `$CONFIG_GLYPHS_FILES`, `$CONFIG_GLYPHS_THRESHOLD`, `$CORE_GLYPHS_MAPPINGS`, `$CONFIG_GLYPHS_MAPPINGS` and instead merged these configs into `$CORE_GLYPHS_LIBRARIES` and `$CONFIG_GLYPHS_LIBRARIES`
 - removed all RTL functions
+- `styleguide-sprite*` and `styleguide-image*` functions have been replaced with private methods (`-archetype-sprite*`, `-archetype-image*`)
+- ported many functions to ruby instead of defined as Sass user functions
 
 ## 0.0.1.pre.3 (pre-released)
 

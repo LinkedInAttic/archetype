@@ -1,3 +1,5 @@
+require 'thread'
+
 module Archetype::SassExtensions::Util::Misc
 
   #
@@ -9,9 +11,10 @@ module Archetype::SassExtensions::Util::Misc
   # - {Boolean} whether or not the value is null
   #
   def is_null(value)
+    return bool(true) if value.nil?
     is_deprecated_nil = (value.is_a?(Sass::Script::Value::String) && value.value == 'nil')
     #helpers.warn("[#{Archetype.name}:nil] the usage of `nil` will be removed in a future release, please use the Sass standard `null`")
-    return Sass::Script::Bool.new(value == null || is_deprecated_nil)
+    return bool(value == null || is_deprecated_nil)
   end
 
   #
@@ -124,8 +127,50 @@ module Archetype::SassExtensions::Util::Misc
   Sass::Script::Functions.declare :prefixed_tag, [:tag]
   Sass::Script::Functions.declare :prefixed_tag, [:tag, :prefix]
 
+  #
+  # generate a unique token
+  #
+  # *Parameters*:
+  # - <tt>$prefix</tt> {String} a string to prefix the UID with, `class` and `id` will generate a unique selector
+  # *Returns*:
+  # - {String} the unique string
+  #
+  def unique(prefix = '')
+    prefix = helpers.to_str(prefix, ' ', :quotes)
+    prefix = '.' if prefix == 'class'
+    prefix = '#' if prefix == 'id'
+    suffix = (defined?(ArchetypeTestHelpers) || defined?(Test::Unit)) ? "RANDOM_UID" : "#{Time.now.to_i}-#{rand(36**8).to_s(36)}-#{uid}"
+    return identifier("#{prefix}archetype-uid-#{suffix}")
+  end
+
+  #
+  # tokenize a given value
+  #
+  # *Parameters*:
+  # - <tt>$item</tt> {*} the item to generate a unique hash from
+  # *Returns*:
+  # - {String} a token of the string
+  #
+  def tokenize(item)
+    prefix = helpers.to_str(environment.var('CONFIG_GENERATED_TAG_PREFIX') || Archetype.name) + '-'
+    token = prefix + item.hash.to_s
+    return identifier(token)
+  end
+  Sass::Script::Functions.declare :tokenize, [:item]
+
 private
+
+  @@archetype_ui_mutex = Mutex.new
+
+  def uid
+    @@archetype_ui_mutex.synchronize do
+      @@uid ||= 0
+      @@uid += 1
+    end
+  end
+
   def do_once_registry
     (environment.var('REGISTRY_DO_ONCE') || []).to_a
   end
+
 end

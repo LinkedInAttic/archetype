@@ -182,7 +182,7 @@ TODO
 
 ## [archetype:units]
 
-### [archetype:units] $1 is not unitless
+### [archetype:units] $1 is not unitless, stripping units
 
 #### What does this mean?
 

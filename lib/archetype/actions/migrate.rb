@@ -11,11 +11,11 @@ if @description.nil?
             :message => 'mixin or function `$1` has been removed'
           },
           {
-            :pattern => /\@include\s+(wrapper[_-]rtl|(?:padding|margin)(?:[_-](?:top|right|bottom|left))?|border(?:[_-](?:top|right|bottom|left))?[_-](?:width|color|style)|clear|float|text[_-]align|left|right|background[_-]position)\s*\(([^\)]*)/m,
+            :pattern => /(?:\@include\s+|\+)(wrapper[_-]rtl|(?:padding|margin)(?:[_-](?:top|right|bottom|left))?|border(?:[_-](?:top|right|bottom|left))?[_-](?:width|color|style)|clear|float|text[_-]align|left|right|background[_-]position)\s*\(([^\)]*)/m,
             :message => 'the RTL mixin `$1` has been deprecated, just use `$1: $2`'
           },
           {
-            :pattern => /\@include\s+wrapper[_-]rtl/m,
+            :pattern => /(?:\@include\s+|\+)wrapper[_-]rtl/m,
             :message => 'the RTL mixin `wrapper-rtl` has been deprecated'
           },
           {
@@ -24,11 +24,11 @@ if @description.nil?
           },
           {
             :pattern => /(?:styleguide[_-](?:add|extend)[_-]component)[^\;]*(inline-block)(?:\s+|\:)true/m,
-            :message => '`inline-block` has changed syntax'
+            :message => '`inline-block` has changed syntax within a styleguide component'
           },
           {
             :pattern => /(?:styleguide[_-](?:add|extend)[_-]component)[^\;]*\s+\(?(gradient)(?:\s|\:)/m,
-            :message => 'use `background-image` instead of `$1`'
+            :message => 'use `background-image` instead of `$1` within your styleguide component'
           },
           {
             :pattern => /(\$CONFIG_(?:STATE_MAPPINGS|BROWSER_VENDORS_HACK|OS_VENDORS_CLASS|SAFE_FONTS|LOADERS))\s*\:\s*\(\s*[^\:]+\s*\)(?: \!default)?\;/m,
@@ -45,6 +45,10 @@ if @description.nil?
           {
             :pattern => /(\$CONFIG_GRID_DIRECTION)/m,
             :message => '`$1` is deprecated'
+          },
+          {
+            :pattern => /(styleguide[_-]((?:sprite|image)(?:[_-][a-z]+)?))/m,
+            :message => '`$1` has been replaced with `-archetype-$2`'
           }
         ],
         :rb => [],
@@ -134,7 +138,7 @@ if @description.nil?
   end
 
   if count > 0
-    puts "\n#{count} backward compatibility issues found!"
+    puts "\n#{count} backward compatibility issue#{count > 1 ? 's' : ''} found!"
   else
     puts "\neverything else looks good!"
   end

@@ -1,7 +1,7 @@
 # :stopdoc:
 module Archetype::SassExtensions::Util; end
 
-%w(debug misc images spacing).each do |func|
+%w(debug misc images spacing hacks).each do |func|
   require "archetype/sass_extensions/functions/util/#{func}"
 end
 
@@ -10,4 +10,5 @@ module Archetype::SassExtensions::Util
   include Archetype::SassExtensions::Util::Images
   include Archetype::SassExtensions::Util::Debug
   include Archetype::SassExtensions::Util::Spacing
+  include Archetype::SassExtensions::Util::Hacks
 end

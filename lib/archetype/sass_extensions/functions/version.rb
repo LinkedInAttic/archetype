@@ -1,4 +1,3 @@
-require 'archetype/functions/helpers'
 require 'archetype/version'
 require 'compass/version'
 require 'sass/version'

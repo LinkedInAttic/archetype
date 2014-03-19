@@ -1,5 +1,3 @@
-require 'archetype/functions/helpers'
-
 #
 # This module provides a set of Sass functions for working with Sass::Script::Value::String
 #
