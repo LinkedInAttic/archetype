@@ -8,7 +8,7 @@ module Archetype::SassExtensions::Util::Debug
   # *Returns*:
   # - {Boolean} whether or not debug is enabled
   #
-  def is_debug_enabled(iff: null)
+  def is_debug_enabled(iff = null)
     # debug is only available in DEBUG environments, so check that first
     return bool(false) unless (environment.var('CONFIG_DEBUG_ENVS') || []).to_a.include?(archetype_env)
     # then check if the debug flag/override is truthy
