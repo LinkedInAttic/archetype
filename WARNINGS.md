@@ -192,3 +192,27 @@ TODO
 
 TODO
 
+## [archetype:base]
+
+### [archetype:base:unknown] the base method \`$1\` does not exist or is not recognized
+
+#### What does this mean?
+
+TODO
+
+#### Resolution:
+
+TODO
+
+## [archetype:module]
+
+### [archetype:module:missing] the required module is missing: $1
+
+#### What does this mean?
+
+TODO
+
+#### Resolution:
+
+TODO
+
