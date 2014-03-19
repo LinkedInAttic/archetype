@@ -85,7 +85,7 @@ module Archetype::SassExtensions::Environment
   # - {Boolean} whether or not all the modules are registered
   #
   def require_archetype_modules(*names)
-    return check_archetype_modules_registered(names, true)
+    return check_archetype_modules(names, true)
   end
 
   #
@@ -96,13 +96,13 @@ module Archetype::SassExtensions::Environment
   # *Returns*:
   # - {Boolean} whether or not all the modules are registered
   #
-  def check_archetype_modules(*names)
-    return check_archetype_modules_registered(names, false)
+  def has_archetype_modules(*names)
+    return check_archetype_modules(names, false)
   end
 
 private
 
-  def check_archetype_modules_registered(names, warn = false)
+  def check_archetype_modules(names, warn = false)
     missing = []
     names.each do |name|
       missing << name unless archetype_modules_registry.include?(name)
