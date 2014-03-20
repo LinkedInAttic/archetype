@@ -43,6 +43,26 @@
   color: inherit;
 }
 
+.music {
+  /* should be 31px */
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf001;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+}
+.music:before {
+  content: "\f001";
+}
+.music:before, .music #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 31px;
+  color: inherit;
+}
+
 .false {
   font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
   font-weight: normal;
@@ -310,5 +330,96 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   font-size: 20px;
+  color: inherit;
+}
+
+.runtime-locale-glyphs {
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d7;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+}
+.runtime-locale-glyphs:before {
+  content: "\f0d7";
+}
+.runtime-locale-glyphs:before, .runtime-locale-glyphs #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  color: inherit;
+}
+.runtime-locale-glyphs.ja_JP {
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d8;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+}
+.runtime-locale-glyphs.ja_JP:before {
+  content: "\f0d8";
+}
+.runtime-locale-glyphs.ja_JP:before, .runtime-locale-glyphs.ja_JP #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  color: inherit;
+}
+.runtime-locale-glyphs.de_DE {
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d9;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+}
+.runtime-locale-glyphs.de_DE:before {
+  content: "\f0d9";
+}
+.runtime-locale-glyphs.de_DE:before, .runtime-locale-glyphs.de_DE #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  color: inherit;
+}
+.runtime-locale-glyphs.ru_RU {
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0da;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+}
+.runtime-locale-glyphs.ru_RU:before {
+  content: "\f0da";
+}
+.runtime-locale-glyphs.ru_RU:before, .runtime-locale-glyphs.ru_RU #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
+  color: inherit;
+}
+.runtime-locale-glyphs.fr_FR {
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d8;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+}
+.runtime-locale-glyphs.fr_FR:before {
+  content: "\f0d8";
+}
+.runtime-locale-glyphs.fr_FR:before, .runtime-locale-glyphs.fr_FR #ie-pseudo-archetype-uid-RANDOM_UID {
+  font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
+  font-weight: normal;
+  font-style: normal;
+  text-decoration: none;
+  display: inline-block;
+  speak: none;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  font-size: 100%;
   color: inherit;
 }

@@ -8,7 +8,11 @@ module Archetype::Functions::Helpers
     :meta => '-archetype-meta',
     :has_multiples => 'has-multiple-values',
     :values => 'values',
-    :message => 'message'
+    :message => 'message',
+    :original => 'original',
+    :decorators => {
+      :runtime_locales => 'has-runtime-locales'
+    }
   }
 
   #
@@ -243,6 +247,24 @@ module Archetype::Functions::Helpers
   end
 
   #
+  # decorates a value into a meta object
+  #
+  # *Parameters*:
+  # - <tt>value</tt> {*} the value to decorate
+  # *Returns*:
+  # - {Sass::Script::Value::Map} the decorated map
+  #
+  def self.meta_decorate(value, decorator)
+    return Sass::Script::Value::Null.new if is_null(value)
+    return Sass::Script::Value::Map.new({
+      Sass::Script::Value::String.new(META[:meta]) => Sass::Script::Value::Map.new({
+        Sass::Script::Value::String.new(META[:decorators][decorator] || decorator) => Sass::Script::Value::Bool.new(true)
+      }),
+      Sass::Script::Value::String.new(META[:original]) => value
+    })
+  end
+
+  #
   # adds a meta message to the hash
   #
   # *Parameters*:
@@ -291,6 +313,21 @@ module Archetype::Functions::Helpers
     end
     strip = /\A"|"\Z/ if strip == :quotes
     return strip.nil? ? value : value.gsub(strip, '')
+  end
+
+  #
+  # simple test for `null` or `nil` (deprecated) value. this is here for back-compat support with old `nil` syntax
+  #
+  # *Parameters*:
+  # - <tt>$value</tt> {*} the value to test
+  # *Returns*:
+  # - {Boolean} whether or not the value is null
+  #
+  def self.is_null(value)
+    return true if value.nil?
+    is_deprecated_nil = (value.is_a?(Sass::Script::Value::String) && value.value == 'nil')
+    #helpers.warn("[#{Archetype.name}:nil] the usage of `nil` will be removed in a future release, please use the Sass standard `null`")
+    return value.is_a?(Sass::Script::Value::Null) || is_deprecated_nil
   end
 
   #

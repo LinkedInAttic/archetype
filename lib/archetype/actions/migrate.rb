@@ -40,7 +40,7 @@ if @description.nil?
           },
           {
             :pattern => /(\$CONFIG_GLYPHS_(?:NAME|VERSION|SVG_ID|BASE_PATH|EOT|FILES|THRESHOLD|MAPPINGS))/m,
-            :message => '`$1` is deprecated, use `$CORE_GLYPHS_LIBRARIES` instead'
+            :message => '`$1` is deprecated, use `register-glyph-library()` instead'
           },
           {
             :pattern => /(\$CONFIG_GRID_DIRECTION)/m,

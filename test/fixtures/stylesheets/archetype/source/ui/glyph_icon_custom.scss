@@ -1,37 +1,45 @@
-$CONFIG_GLYPHS_LIBRARIES: (
-  default: (
-    name:     MyDefaultGlyphs,
-    version:  '1.0.5',
-    grids:    16px 12px,
-    path:     'custom/path/to/MyDefaultGlyphs/{version}/{grid}/MyDefaultGlyphs',
-    files: (
-      //inline: true,
-      eot:    '{path}.eot',
-      std:    ('{path}.woff', '{path}.ttf', '{path}.svg##{"{svg-id}"}')
-    ),
-    mappings: (
-      glass:                  '\f000',
-      music:                  '\f001',
-      search:                 '\f002',
-      caret-down:             '\f0d7'
-    )
+$a-blackhole: register-glyph-library(default, (
+  name:     MyDefaultGlyphs,
+  version:  '1.0.5',
+  grids:    16px 12px,
+  path:     'custom/path/to/MyDefaultGlyphs/{version}/{grid}/MyDefaultGlyphs',
+  files: (
+    //inline: true,
+    eot:    '{path}.eot',
+    std:    ('{path}.woff', '{path}.ttf', '{path}.svg##{"{svg-id}"}')
   ),
-  custom: (
-    name:     MyCustomGlyphs,
-    version:  '1.0.0',
-    svg-id:   MyCustomGlyphs-SVG,
-    path:     'custom/path/to/MyCustomGlyphs/{version}/{grid}/MyCustomGlyphs',
-    files: (
-      std: ('{path}.otf', '{path}.ttf')
+  mappings: (
+    glass:                  '\f000',
+    music:                  (
+      char:                 '\f001',
+      size:                 31px
     ),
-    mappings: (
-      glass:                  '\f000',
-      music:                  '\f001',
-      search:                 '\f002',
-      caret-down:             '\f0d7'
-    )
+    // test that we can do runtime locale values in glpyh maps
+    search:                 runtime-locale-value((
+      default:              '\f0d8',
+      en_US:                '\f0d7',
+      de_DE:                '\f0d9',
+      cyrillic:             '\f0da'
+    )),
+    caret-down:             '\f0d7'
   )
-);
+));
+
+$a-blackhole: register-glyph-library(custom, (
+  name:     MyCustomGlyphs,
+  version:  '1.0.0',
+  svg-id:   MyCustomGlyphs-SVG,
+  path:     'custom/path/to/MyCustomGlyphs/{version}/{grid}/MyCustomGlyphs',
+  files: (
+    std: ('{path}.otf', '{path}.ttf')
+  ),
+  mappings: (
+    glass:                  '\f000',
+    music:                  '\f001',
+    search:                 '\f002',
+    caret-down:             '\f0d7'
+  )
+));
 
 //$CONFIG_GLYPHS_INLINE_FONTS: true;
 
@@ -41,6 +49,11 @@ $CONFIG_GLYPHS_LIBRARIES: (
 
 .simple {
   @include glyph-icon(caret-down);
+}
+
+.music {
+  /* should be 31px */
+  @include glyph-icon(music);
 }
 
 .false {
@@ -120,5 +133,35 @@ $CONFIG_GENERATED_TAG_INLINE: false;
 
   .size {
     @include glyph-icon(caret-down, $size: 20px, $library: custom);
+  }
+}
+
+
+// runtime locale values
+.runtime-locale-glyphs {
+  @include glyph-icon(search);
+
+  &.ja_JP {
+    @include switch-locale(ja_JP) {
+      @include glyph-icon(search);
+    }
+  }
+
+  &.de_DE {
+    @include switch-locale(de_DE) {
+      @include glyph-icon(search);
+    }
+  }
+
+  &.ru_RU {
+    @include switch-locale(ru_RU) {
+      @include glyph-icon(search);
+    }
+  }
+
+  &.fr_FR {
+    @include switch-locale(fr_FR) {
+      @include glyph-icon(search);
+    }
   }
 }

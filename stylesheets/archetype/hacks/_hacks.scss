@@ -1,6 +1,6 @@
 // @category  hacks
-// register module
-$a-blackhole: register-archetype-module(archetype/hacks);
+
+$a-blackhole: require-archetype-modules(archetype/config);
 
 // hack to support negative margins in legacy IE
 // @mixin     hack-negative-margin

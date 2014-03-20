@@ -1,0 +1,30 @@
+.runtime-locale-styleguide-test {
+  /* [archetype:styleguide:begin] --- `runtime-locale-styleguide-test` --- */
+  background: white;
+  color: red;
+  /* [archetype:styleguide:end] --- `runtime-locale-styleguide-test` --- */
+}
+.runtime-locale-styleguide-test.ja_JP {
+  /* [archetype:styleguide:begin] --- `runtime-locale-styleguide-test` --- */
+  background: white;
+  color: purple;
+  /* [archetype:styleguide:end] --- `runtime-locale-styleguide-test` --- */
+}
+.runtime-locale-styleguide-test.de_DE {
+  /* [archetype:styleguide:begin] --- `runtime-locale-styleguide-test` --- */
+  background: white;
+  color: black;
+  /* [archetype:styleguide:end] --- `runtime-locale-styleguide-test` --- */
+}
+.runtime-locale-styleguide-test.ru_RU {
+  /* [archetype:styleguide:begin] --- `runtime-locale-styleguide-test` --- */
+  background: white;
+  color: green;
+  /* [archetype:styleguide:end] --- `runtime-locale-styleguide-test` --- */
+}
+.runtime-locale-styleguide-test.fr_FR {
+  /* [archetype:styleguide:begin] --- `runtime-locale-styleguide-test` --- */
+  background: white;
+  color: purple;
+  /* [archetype:styleguide:end] --- `runtime-locale-styleguide-test` --- */
+}

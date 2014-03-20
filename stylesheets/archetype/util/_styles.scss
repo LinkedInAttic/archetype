@@ -7,7 +7,7 @@ $a-blackhole: require-archetype-modules(archetype/util);
 @import "compass/layout/stretching";
 
 // this is a proxy for output-style
-// we need this to prevent Sass from throwing an error as you currently can't use recursive mixins :/
+// this contains mixins that will eventually call output-style in one form or another
 // @mixin     _outputStyle
 // @private
 // @param     $property {String} the CSS property to output
@@ -202,7 +202,8 @@ $a-blackhole: require-archetype-modules(archetype/util);
     @include archetype-smart-content($placeholder) {
       @each $property, $value in $map {
         @include with-each-value($value) {
-          $value: $archetype-current-value;
+          // get the expected value given any runtime locale context
+          $value: get-runtime-locale-value($archetype-current-value);
           @if not (index($exclude, $property) or $property == '-archetype-meta') {
             // deal with the states
             @if($property == states and $states != false and length($value) > 0) {
