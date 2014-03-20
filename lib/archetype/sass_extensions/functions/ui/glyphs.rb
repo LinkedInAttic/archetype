@@ -68,4 +68,51 @@ module Archetype::SassExtensions::UI::Glyphs
   end
   Sass::Script::Functions.declare :looks_like_character_code, [:string]
 
+
+  #
+  # registers a glyph library under a given key
+  #
+  def register_glyph_library(key, library)
+    registry = archetype_glyphs_registry
+    # if it's already in the registry, just return the current list
+    if is_null(registry[key])
+      registry = registry.dup
+      registry[key] = library
+      registry = Sass::Script::Value::Map.new(registry)
+      environment.global_env.set_var('CONFIG_GLYPHS_LIBRARIES', registry)
+    end
+    return key
+  end
+
+  #
+  # gets a glyph library as registered under the given key
+  #
+  def get_glyph_library(key)
+    default_key = identifier('default')
+    default = archetype_glyphs_registry[default_key] || null
+    return default if key == default_key
+
+    library = archetype_glyphs_registry[key]
+    # if the library doesn't exist...
+    if helpers.is_null(library)
+      # notify the user
+      helpers.warn("[archetype:glyph] could not find a glyph library for `#{library}`, using default")
+      # and return the default
+      return default
+    end
+    # merge the library with the default
+    return map_merge(default, library)
+  end
+
+
+  def get_all_glyph_libraries
+    return environment.var('CONFIG_GLYPHS_LIBRARIES') || Sass::Script::Value::Map.new
+  end
+
+  private
+
+  def archetype_glyphs_registry
+    registry = environment.var('CONFIG_GLYPHS_LIBRARIES')
+    return registry.respond_to?(:to_h) ? registry.to_h : {}
+  end
 end

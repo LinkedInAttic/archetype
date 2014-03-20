@@ -23,17 +23,7 @@ $a-blackhole: require-archetype-modules(archetype/ui);
   $char-mapping: null;
   $char-code: null;
   // check that the library is valid, if not, throw a warning and use the default
-  @if not map-has-key($CONFIG_GLYPHS_LIBRARIES, $library) {
-    @warn "[archetype:glyph] could not find a glyph library for `#{$library}`, using default";
-    $library: default;
-  }
-  // get the glyph library we'll be using...
-  @if $library != default {
-    $library: map-merge(map-get($CONFIG_GLYPHS_LIBRARIES, default), map-get($CONFIG_GLYPHS_LIBRARIES, $library));
-  }
-  @else {
-    $library: map-get($CONFIG_GLYPHS_LIBRARIES, $library);
-  }
+  $library: get-glyph-library($library);
   // if we have an icon...
   @if $icon {
     // if it looks like it's a character code...
@@ -45,7 +35,13 @@ $a-blackhole: require-archetype-modules(archetype/ui);
     @else {
       $char-mapping: map-get(map-get($library, mappings), $icon);
       @if $char-mapping {
-        $char-code: nth($char-mapping, 1);
+        @if type-of($char-mapping) == map {
+          $char-code: map-get($char-mapping, char) or $char-mapping;
+          $char-code: get-runtime-locale-value($char-code);
+        }
+        @else {
+          $char-code: $char-mapping;
+        }
       }
     }
   }
@@ -57,10 +53,10 @@ $a-blackhole: require-archetype-modules(archetype/ui);
   // otherwise continue on
   @if $size == default {
     $default-size: null;
-    @if $icon and $char-mapping {
-      $default-size: nth-cyclic($char-mapping, 2);
+    @if $icon and type-of($char-mapping) == map {
+      $default-size: map-get($char-mapping, size);
     }
-    $size: if(type-of($default-size) == number, $default-size, 100%);
+    $size: $default-size or 100%;
   }
 
   // choose which grid size to use
@@ -174,11 +170,9 @@ $a-blackhole: require-archetype-modules(archetype/ui);
   // the font-face mixin will likely change in a future version, keep an eye on this
   // https://github.com/chriseppstein/compass/issues/867
 
-  @each $key, $library in $CONFIG_GLYPHS_LIBRARIES {
+  @each $key, $library in get-all-glyph-libraries() {
     @if not $only or list($only, $key) {
-      @if $key != default {
-        $library: map-merge(map-get($CONFIG_GLYPHS_LIBRARIES, default), $library);
-      }
+      $library: get-glyph-library($key);
       $name_raw:  archetype-namespace(map-get($library, name));
       $files:     map-get($library, files);
       $weight:    map-get($library, weight) or $CONFIG_GLYPHS_WEIGHT;

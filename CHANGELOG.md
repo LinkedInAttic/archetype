@@ -42,6 +42,10 @@
 - added `breakpoint` mixin for creating breakpoint media queries
 - added `switch-locale` function to assist switching locale states
 - added helper functions for working with Archetype modules: `register-archetype-module`, `has-archetype-modules`, `require-archetype-modules`
+- added `runtime-locale-value` for decorating a map so we can compute it's value respective to the locale at runtime (better support for `switch-locale`)
+  - e.g. `runtime-locale-value((default: a, en_US: b, ru_RU: c, ...))`
+- added `get-runtime-locale-value` for selecting the value based on the current locale. this should be in conjunction with `runtime-locale-value`
+- added `register-glyph-library`, `get-glyph-library`, and `get-all-glyph-libraries` functions for registering / retrieving glyph icon libraries
 
 ### Major Changes:
 
@@ -58,6 +62,7 @@
 - removed all RTL functions
 - `styleguide-sprite*` and `styleguide-image*` functions have been replaced with private methods (`-archetype-sprite*`, `-archetype-image*`)
 - ported many functions to ruby instead of defined as Sass user functions
+- glyph icon mappings now take a map (optionally) of format `(char: characterCode, size: defaultSize)` (note that the previous list support is now deprecated)
 
 ## 0.0.1.pre.3 (pre-released)
 

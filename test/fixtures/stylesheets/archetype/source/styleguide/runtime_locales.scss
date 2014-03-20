@@ -1,0 +1,44 @@
+// ensures that we can compute locale specific properties at invocation time rather than on instantiation
+@import "test_harness";
+
+@if should-register-component(runtime-locale-styleguide-test) {
+$a-blackhole: styleguide-add-component(runtime-locale-styleguide-test, (), (
+  default: (
+    background:     white,
+    color: runtime-locale-value((
+      default:  purple,
+      en_US:    red,
+      de_DE:    black,
+      cyrillic: green
+    ))
+  )
+)) !global;
+}
+
+.runtime-locale-styleguide-test {
+  @include styleguide(runtime-locale-styleguide-test);
+
+  &.ja_JP {
+    @include switch-locale(ja_JP) {
+      @include styleguide(runtime-locale-styleguide-test);
+    }
+  }
+
+  &.de_DE {
+    @include switch-locale(de_DE) {
+      @include styleguide(runtime-locale-styleguide-test);
+    }
+  }
+
+  &.ru_RU {
+    @include switch-locale(ru_RU) {
+      @include styleguide(runtime-locale-styleguide-test);
+    }
+  }
+
+  &.fr_FR {
+    @include switch-locale(fr_FR) {
+      @include styleguide(runtime-locale-styleguide-test);
+    }
+  }
+}

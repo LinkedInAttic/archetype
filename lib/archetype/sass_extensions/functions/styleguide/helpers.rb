@@ -19,6 +19,7 @@ module Archetype::SassExtensions::Styleguide
     definition = get_styles([definition], nil, nil) if not definition.is_a?(Sass::Script::Value::Map)
      # now convert the map to a hash if needed
     definition = helpers.data_to_hash(definition) if not definition.is_a?(Hash)
+    definition = resolve_runtime_locale_values(definition)
     return definition
   end
 

@@ -11,10 +11,7 @@ module Archetype::SassExtensions::Util::Misc
   # - {Boolean} whether or not the value is null
   #
   def is_null(value)
-    return bool(true) if value.nil?
-    is_deprecated_nil = (value.is_a?(Sass::Script::Value::String) && value.value == 'nil')
-    #helpers.warn("[#{Archetype.name}:nil] the usage of `nil` will be removed in a future release, please use the Sass standard `null`")
-    return bool(value == null || is_deprecated_nil)
+    return bool(helpers.is_null(value))
   end
 
   #
@@ -27,6 +24,18 @@ module Archetype::SassExtensions::Util::Misc
   #
   def multiple_values(*args)
     return helpers.array_to_meta(args)
+  end
+
+  #
+  # decorates a map so that the actual value can be resolved at runtime with the current locale
+  #
+  # *Parameters*:
+  # - <tt>$map</tt> {*} the map to decorate
+  # *Returns*:
+  # - {Map} the decorated meta object
+  #
+  def runtime_locale_value(map)
+    return helpers.meta_decorate(map, :runtime_locales)
   end
 
   #
@@ -56,6 +65,20 @@ module Archetype::SassExtensions::Util::Misc
   def has_multiple_values(map)
     meta = map_get_meta(map)
     return map_has_key(meta, identifier(helpers::META[:has_multiples])) if not meta.value.nil?
+    return bool(false)
+  end
+
+  #
+  # check to see if a value is decorated with runtime locale values
+  #
+  # *Parameters*:
+  # - <tt>$value</tt> {*} the value to observe
+  # *Returns*:
+  # - {Boolean} whether or not the map is decorated with runtime locale values
+  #
+  def has_runtime_locale_value(value)
+    meta = map_get_meta(value)
+    return map_has_key(meta, identifier(helpers::META[:decorators][:runtime_locales])) if not meta.value.nil?
     return bool(false)
   end
 
@@ -157,6 +180,27 @@ module Archetype::SassExtensions::Util::Misc
     return identifier(token)
   end
   Sass::Script::Functions.declare :tokenize, [:item]
+
+  #
+  # extracts the value associated with the current locale from the given decorated object
+  #
+  # *Parameters*:
+  # - <tt>$item</tt> {*} the item check against
+  # *Returns*:
+  # - {*} the value given the current locale
+  #
+  def get_runtime_locale_value(item)
+    item = helpers.hash_to_map(item) if item.is_a?(Hash)
+    return item unless has_runtime_locale_value(item).value
+    item = map_get(item, identifier('original')).to_h
+    best_match = null
+    item.each do |lang, value|
+      if lang.value == 'default' or locale(lang).value
+        best_match = value
+      end
+    end
+    return best_match
+  end
 
 private
 

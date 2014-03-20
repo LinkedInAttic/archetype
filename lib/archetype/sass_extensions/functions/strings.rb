@@ -41,7 +41,10 @@ module Archetype::SassExtensions::Strings
     # for each key-value pair...
     subsitutions.each do |key, value|
       # replace all instances of the placeholder `{key}` with the value
-      str = str.gsub("{#{key}}", helpers.to_str(value, ' ', :quotes))
+      begin
+        str = str.gsub("{#{key}}", helpers.to_str(value, ' ', :quotes))
+      rescue
+      end
     end
     identifier(str)
   end
