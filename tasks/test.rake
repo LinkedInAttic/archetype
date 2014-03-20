@@ -6,13 +6,11 @@ require 'rake/testtask'
 }
 
 task :test do
-  tests = ARGV
-  tests.shift
-  ENV['ARCHETYPE_TESTS'] = tests.join(',')
   # make sure the gem is buildable
   puts "testing the gem builds correctly..."
   Rake::Task['gem:build'].invoke
 end
+
 Rake::TestTask.new :test do |t|
   t.libs << 'lib'
   t.libs << 'test'
@@ -48,14 +46,25 @@ end
 
 namespace :test do
   debug = false
+
+  desc "only run the specified tests"
+  task :only do
+    tests = ARGV
+    ENV['ARCHETYPE_TESTS'] = tests.join(',')
+    Rake::Task['test'].invoke
+    exit 0
+  end
+
   desc "update test expectations if needed"
   task :update do
     Rake::Task['test:update:fixtures'].invoke
   end
+
   task :debug do
     debug = true
     Rake::Task['test:update:fixtures'].invoke
   end
+
   namespace :update do
     # paths
     EXPECTED  = 'expected'
