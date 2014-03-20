@@ -65,4 +65,10 @@ module Archetype::Functions::Hash
       tmp
     end
   end
+
+  unless self.respond_to?(:to_h)
+    def to_h
+      return self
+    end
+  end
 end
