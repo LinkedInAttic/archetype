@@ -190,6 +190,7 @@ module Archetype::SassExtensions::Util::Misc
   # - {*} the value given the current locale
   #
   def get_runtime_locale_value(item)
+    item = helpers.hash_to_map(item) if item.is_a?(Hash)
     return item unless has_runtime_locale_value(item).value
     item = map_get(item, identifier('original')).to_h
     best_match = null

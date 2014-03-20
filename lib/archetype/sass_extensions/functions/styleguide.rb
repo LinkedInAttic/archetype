@@ -100,15 +100,17 @@ module Archetype::SassExtensions::Styleguide
   # given a description of the component, convert it into CSS
   #
   # *Parameters*:
-  # - <tt>$description</tt> {String|List} the description of the component
+  # - <tt>$description</tt> {String|List|Map} the description of the component
   # - <tt>$theme</tt> {String} the theme to use
   # *Returns*:
-  # - {List} a key-value paired list of styles
+  # - {Map} a map of styles
   #
   def _styleguide(description, state = nil, theme = nil)
     @@archetype_styleguide_mutex.synchronize do
-      # convert it back to a Sass:List and carry on
-      return helpers.hash_to_map(get_styles(description, theme, state))
+      styles = get_styles(description, theme, state)
+      styles = resolve_runtime_locale_values(styles)
+      # convert it back to a Sass:Map and carry on
+      return helpers.hash_to_map(styles)
     end
   end
 

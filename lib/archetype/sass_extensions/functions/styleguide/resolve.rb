@@ -139,4 +139,21 @@ module Archetype::SassExtensions::Styleguide
     return value
   end
 
+  #
+  # this helps to resolve any runtime locale values
+  #
+  def resolve_runtime_locale_values(hsh)
+    hsh.each do |key, value|
+      if value.is_a?(Hash)
+        meta = value[helpers::META[:meta]]
+        if meta && (meta.to_h)[helpers::META[:decorators][:runtime_locales]]
+          hsh[key] = get_runtime_locale_value(value)
+        else
+          hsh[key] = resolve_runtime_locale_values(value)
+        end
+      end
+    end
+    return hsh
+  end
+
 end
