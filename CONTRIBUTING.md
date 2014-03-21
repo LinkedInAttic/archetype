@@ -22,7 +22,7 @@ If you're adding new functionality, you must also add test cases to cover it's b
 To run the test cases, simply run:
 
 ```sh
-rake test
+bundle exec rake test
 ```
 
 ### Testing SCSS changes, mixins, or module methods
@@ -73,7 +73,7 @@ Ruby tests are currently limited to unit tests. These test cases live in `test/u
 - Return `true` or `false` for the success/failure status of _procedural methods_
 - Internal methods should be `protected` or `private`
 - Exposed methods intended for internal use only should be prefixed with an underscore (e.g. `_my_secret_method`)
-  - changes to these exposed _psuedo-private_ methods don't require a major/minor version bump
+  - changes to these exposed _faux-private_ methods don't require a major/minor version bump
 - Use RDoc syntax for documenting all methods
 
 ### SCSS

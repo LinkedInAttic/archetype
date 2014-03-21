@@ -21,8 +21,7 @@ task :release do
     puts git_status
   end
   # strip off the revision if it's set
-  version = @version_without_revision
-  puts "You are about to release #{"v#{version}".colorize(:green)}".colorize(:cyan)
+  puts "#{'You are about to release'.colorize(:cyan)} #{"v#{version}".colorize(:green)}"
   proceed_on_input "Is this correct? [y/n]".colorize(:cyan) do
     Rake::Task['git:revert'].invoke if not clean
     Rake::Task['gem:build'].invoke

@@ -3,9 +3,6 @@
 // throw an error if archetype/util has not been registered
 $a-blackhole: require-archetype-modules(archetype/util);
 
-// additional non-standard compass features required in this module
-@import "compass/layout/stretching";
-
 // this is a proxy for output-style
 // this contains mixins that will eventually call output-style in one form or another
 // @mixin     _outputStyle
@@ -45,6 +42,8 @@ $a-blackhole: require-archetype-modules(archetype/util);
     @if check-for-custom-styler($property, $value, pre) {
       @include custom-output-styler($property, $value, $method: pre);
     }
+    // we're going to assume that any mixins that get invoked here have been properly imported
+    //  if not, they will simply throw a compilation error
     // border-radius
     @else if($property == border-radius)        { @include border-radius($value...); }
     // box-sizing
