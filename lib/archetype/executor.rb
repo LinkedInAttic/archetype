@@ -29,5 +29,13 @@ OptionParser.new do |opts|
     load action
     opts.separator "  * #{File.basename(action, '.rb')}\t- #{@description}"
   end
-  puts opts if @needs_help
+  opts.separator ""
+  opts.separator "Available Options:"
+  opts.on("-v", "--version", "reports the current version") do
+    puts Archetype::VERSION
+    exit
+  end
+  @options = opts
 end.parse!
+
+puts @options if @needs_help

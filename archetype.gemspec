@@ -19,7 +19,7 @@ Gem::Specification.new do |gemspec|
 
   # Gem Files
   gemspec.executables = %w(archetype)
-  gemspec.files = %w(LICENSE README.md CHANGELOG.md VERSION.yml)
+  gemspec.files = %w(LICENSE README.md CHANGELOG.md VERSION)
   gemspec.files += Dir.glob("bin/*")
   gemspec.files += Dir.glob("lib/**/*")
   gemspec.files += Dir.glob("stylesheets/**/*")
