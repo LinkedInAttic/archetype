@@ -1,7 +1,9 @@
 ## PROFILE
+# NOTE: this requires `ghostscript` and `graphviz` installed to see the visual report (pdf)
+#  brew install ghostscript && brew install graphviz
 desc "profile #{@spec.name} and generate the reports"
 task :profile do
-  ENV['ARCHETYPE_PROFILER'] = "artchetype__#{RUBY_VERSION}__#{@spec.version}__#{Time.now.to_i}"
+  ENV['ARCHETYPE_PROFILER'] = "archetype__#{RUBY_VERSION}__#{@spec.version}__#{Time.now.to_i}"
   puts "running test cases with profiler..."
   Rake::Task['test'].invoke
   puts "\n\n#{'-'*20}\n\n"
