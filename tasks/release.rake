@@ -22,7 +22,7 @@ task :release do
   end
   puts "#{'You are about to release'.colorize(:cyan)} #{"v#{version}".colorize(:green)}"
   proceed_on_input "Is this correct? [y/n]".colorize(:cyan) do
-    #Rake::Task['git:revert'].invoke if not clean
+    Rake::Task['git:revert'].invoke if not clean
     Rake::Task['gem:build'].invoke
     begin
       puts "checking previously released versions..."
@@ -34,8 +34,10 @@ task :release do
       proceed_on_input "couldn't verify release versions, proceed with caution".colorize(:yellow)
     end
 
+    # add `upstream` remote (all release tags should go upstream)
+    sh "git remote add upstream git@github.com:linkedin/archetype.git #{@devnull}"
     # tag the git repo
-    sh "git tag -a v#{version} -m \"version #{version}\" && git push --tags origin master"
+    sh "git tag -a v#{version} -m \"version #{version}\" && git push --tags upstream master"
 
     # push the gems
     apply_action_to_built_gems('gem push')

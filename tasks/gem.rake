@@ -20,12 +20,9 @@ namespace :gem do
 
   desc "uninstall Archetype gems locally"
   task :uninstall do
-    # swallow errors
-    to_devnull = " 2> #{@devnull}" if File.exist? @devnull
-
     # uninstalls each known gem
     with_each_gemspec do |file, spec|
-      sh "#{ENV['SUDO']} gem uninstall #{spec.name} -x -a#{to_devnull}"
+      sh "#{ENV['SUDO']} gem uninstall #{spec.name} -x -a#{@devnull}"
     end
   end
 

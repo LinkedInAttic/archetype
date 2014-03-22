@@ -7,7 +7,10 @@ unless ENV['CI']
   require 'colorize'
 end
 
+# swallow errors
 @devnull = File.new('/dev/null').path
+@devnull = File.exist?(@devnull) ? " 2> #{@devnull}" : ''
+
 @docs = './docs'
 
 Dir.glob('tasks/*.rake').each { |r| import r }

@@ -54,7 +54,7 @@ module Archetype
 
   private
 
-  ## register the extension
+  ## register as a Compass extension
   def self.register
     Compass::Frameworks.register(NAME, :path => @archetype[:path]);
   end
