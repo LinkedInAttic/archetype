@@ -41,7 +41,7 @@ module Archetype
 
       def version_const
         # converts the hyphenated name to a module
-        name = @extension[:name].gsub(/(?<=_|\-|^)(\w)/){$1.upcase}.gsub(/(?:_|-)(\w)/,'\1')
+        name = @extension[:name].gsub(/(?:_|\-|^)(\w)/){$1.upcase}
         begin
           return Module.const_get("#{name}::VERSION")
         rescue NameError

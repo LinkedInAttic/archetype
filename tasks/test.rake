@@ -6,7 +6,9 @@ require 'rake/testtask'
 }
 
 task :test do
-  unless ENV['UPDATING_TESTS']
+  # only try to build the gems in Ruby 1.9+
+  # also, don't build the gems we're updating test cases
+  unless RUBY_VERSION < '1.9' or ENV['UPDATING_TESTS']
     # make sure the gem is buildable
     puts "testing the gems build correctly..."
     Rake::Task['gem:build'].invoke

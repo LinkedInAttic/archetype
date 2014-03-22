@@ -5,6 +5,13 @@ namespace :gem do
 
   desc "build Archetype gems"
   task :build do
+    if RUBY_VERSION < '1.9'
+      puts "Archetype requires Ruby 1.9 or higher to build the gems"
+      puts "Please upgrade your version of Ruby (#{RUBY_VERSION})"
+      puts "Check out #{'https://rvm.io/'.colorize(:cyan)} for details"
+      puts "Aborting...".colorize(:red)
+      exit 1
+    end
     FileUtils.rm_rf('pkg')
     with_each_gemspec do |file, spec|
       puts "build gem: #{file}"

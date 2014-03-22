@@ -30,7 +30,7 @@ class ArchetypeTest < MiniTest::Unit::TestCase
     # attach a callback to verify each file on save
     Compass.configuration.on_stylesheet_saved do |file|
       file = get_relative_file_name(file, tempfile_path(@current_project))
-      assert_renders_correctly file, :ignore_charset => true
+      assert_renders_correctly file
     end
     project = compile_project(Archetype.name)
     each_css_file(project.css_path) do |file|
@@ -84,11 +84,9 @@ private
       unless UPDATING_TESTS || results_exist
         report_and_fail name, "no expectation set for `#{expected_result_file}`, run `rake test:update` first"
       end
-      actual_result = File.read(actual_result_file)
-      actual_result.gsub!(/^@charset[^;]+;/,'') if options[:ignore_charset]
 
+      actual_result = File.read(actual_result_file)
       expected_result = results_exist ? File.read(expected_result_file) : ''
-      expected_result.gsub!(/^@charset[^;]+;/,'') if options[:ignore_charset]
 
       @current_file_update = results_exist ? :updated : :added
 
@@ -171,7 +169,7 @@ private
   end
 
   def assert_no_css_diff(expected, actual, name, msg = nil)
-    diff = Diffy::Diff.new(expected, actual)
+    diff = Diffy::Diff.new(expected.strip, actual.strip)
     # if there are any lines that were additions or deletions...
     if diff.select { |line| line =~ /^[\+\-]/ }.any?
       # get the full diff, colorize it, and strip out newline warnings
