@@ -1,4 +1,5 @@
-$:.push File.expand_path("../lib", __FILE__)
+lib = File.expand_path("../lib", __FILE__)
+$:.unshift lib unless $:.include?(lib)
 
 require 'archetype/version'
 
@@ -19,17 +20,10 @@ Gem::Specification.new do |gemspec|
   gemspec.require_paths = %w(lib)
 
   # Gem Files
-  gemspec.executables = %w(archetype)
-  gemspec.files = %w(LICENSE README.md CHANGELOG.md VERSION)
-  gemspec.files += Dir.glob("bin/*")
-  gemspec.files += Dir.glob("lib/**/*")
-  gemspec.files += Dir.glob("stylesheets/**/*")
-  gemspec.files += Dir.glob("templates/**/*")
-  # test files
-  gemspec.files += Dir.glob("test/**/*.*")
-  gemspec.files -= Dir.glob("test/fixtures/stylesheets/*/expected/**/*.*")
-  gemspec.test_files = Dir.glob("test/**/*.*")
-  gemspec.test_files -= Dir.glob("test/fixtures/stylesheets/*/expected/**/*.*")
+  gemspec.files = `git ls-files`.split($/).select {|f| File.exist?(f) && f =~ %r{^(lib|stylesheets|templates)/} }
+  gemspec.files += %w(LICENSE README.md CHANGELOG.md VERSION)
+
+  gemspec.executables = gemspec.files.grep(%r{^bin/}) { |f| File.basename(f) }
 
   ## Gem Bookkeeping
   gemspec.rubygems_version = %q{1.3.6}

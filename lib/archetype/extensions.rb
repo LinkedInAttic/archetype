@@ -7,13 +7,16 @@ module Archetype
     end
 
     class GemspecHelper
+
+      ROOT_PATH = File.expand_path("../../../", __FILE__)
+
       def initialize(name)
 
         e = @extension = {}
         # we only care about the name, so strip off anything if we were given a file/path
         e[:name] = File.basename(name, '.gemspec').strip
         # the path to the extension
-        e[:path] = File.expand_path("../#{e[:name]}/", __FILE__)
+        e[:path] = File.join(ROOT_PATH, 'extensions', e[:name])
         # the lib directory within the extension
         e[:lib]  = File.join(e[:path], 'lib')
 
@@ -28,8 +31,9 @@ module Archetype
 
       def resolve_version
         # if a version.rb file exists within the extension, we'll get the version from that
-        version_rb = "#{@extension[:lib]}/#{@extension[:name]}/version.rb"
+        version_rb = File.join(@extension[:lib], @extension[:name], 'version.rb')
         require version_rb if File.exist?(version_rb)
+        # if the ::VERSION constant was set on the extension module, use it...
         @extension[:version] = version_const if defined?(version_const)
         # if the version isn't set, use Archetype's core version
         @extension[:version] = core.version if @extension[:version].nil? or @extension[:version].empty?
@@ -46,7 +50,7 @@ module Archetype
       end
 
       def core
-        @default ||= Gem::Specification.load('archetype.gemspec')
+        @core ||= Gem::Specification.load(File.join(ROOT_PATH, 'archetype.gemspec'))
       end
     end
   end

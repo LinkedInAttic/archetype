@@ -21,7 +21,7 @@ module Compass
       if before == after
         assert(true)
       else
-        assert false, diff_as_string(before.inspect, after.inspect)
+        assert false, diff_as_string(after.inspect, before.inspect)
       end
     end
 

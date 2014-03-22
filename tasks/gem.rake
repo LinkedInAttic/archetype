@@ -7,6 +7,7 @@ namespace :gem do
   task :build do
     FileUtils.rm_rf('pkg')
     with_each_gemspec do |file, spec|
+      puts "build gem: #{file}"
       sh "gem build #{file}"
     end
     FileUtils.mkdir_p('pkg')
@@ -32,7 +33,7 @@ end
 
 # executes a block with each discoverable gemspec
 def with_each_gemspec
-  Dir.glob('*.gemspec').each do |file|
+  Dir.glob("{,*,*/*}.gemspec").each do |file|
     yield(file, Gem::Specification.load(file)) if block_given?
   end
 end

@@ -1,4 +1,7 @@
-require File.expand_path("../lib/archetype/extensions", __FILE__)
+lib = File.expand_path("../../lib", __FILE__)
+$:.unshift lib unless $:.include?(lib)
+
+require "archetype/extensions"
 
 Gem::Specification.new do |gemspec|
 

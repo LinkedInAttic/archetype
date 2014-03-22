@@ -4,6 +4,11 @@ require 'compass/logger'
 require 'sass/plugin'
 require 'archetype'
 
+unless ENV['CI']
+  require 'colorize'
+  require 'fileutils'
+end
+
 class ArchetypeTest < MiniTest::Unit::TestCase
 
   def setup
@@ -16,19 +21,31 @@ class ArchetypeTest < MiniTest::Unit::TestCase
     end
   end
 
-  SELECTIVE_TESTS = (ENV['ARCHETYPE_TESTS'] and not ENV['ARCHETYPE_TESTS'].empty?) ? ENV['ARCHETYPE_TESTS'].split(',') : nil
+  UPDATING_TESTS = ENV['UPDATING_TESTS'] and not ENV['UPDATING_TESTS'].empty? and not ENV['CI']
+  FAIL_STATUS = UPDATING_TESTS ? :skip : :fail
+  SELECTIVE_TESTS = (ENV['ARCHETYPE_TESTS'] and not ENV['ARCHETYPE_TESTS'].empty? and not ENV['CI']) ? ENV['ARCHETYPE_TESTS'].split(',') : nil
 
   def test_archetype
     ArchetypeTestHelpers::Profiler.start
     # attach a callback to verify each file on save
     Compass.configuration.on_stylesheet_saved do |file|
-      file = file.chomp(File.extname(file)).sub(File.join(tempfile_path(@current_project), ''), '')
+      file = get_relative_file_name(file, tempfile_path(@current_project))
       assert_renders_correctly file, :ignore_charset => true
     end
     project = compile_project(Archetype.name)
-    each_css_file(project.css_path) do |css_file|
-      assert_no_errors css_file, Archetype.name
+    each_css_file(project.css_path) do |file|
+      assert_no_errors file, Archetype.name
     end
+    each_css_file(result_path(@current_project)) do |file|
+      name = get_relative_file_name(file, result_path(@current_project))
+      unless File.exist?(File.join(tempfile_path(@current_project), "#{name}.css"))
+        @current_file_update = :removed
+        assert_no_css_diff(File.read(file), '', name)
+      end
+    end
+
+    # after it's all done...
+    update_expectations if UPDATING_TESTS
     ArchetypeTestHelpers::Profiler.stop
   end
 
@@ -39,46 +56,44 @@ private
     assert_equal 0, open(css_file).readlines.grep(/Sass::SyntaxError/).size, msg
   end
 
-  def report_and_fail(name, msg, status = :fail)
+  def report_and_fail(name, msg, status = FAIL_STATUS)
     ArchetypeTestHelpers.report status, name
-    assert false, msg
+    if UPDATING_TESTS
+      record_updated_test name, msg
+    else
+      assert false, msg
+    end
+  end
+
+  def record_updated_test(name, msg)
+    (@updated_tests ||= []) << {
+      :name => name,
+      :type => @current_file_update
+    }
+    puts msg
   end
 
   def assert_renders_correctly(*arguments)
     options = arguments.last.is_a?(Hash) ? arguments.pop : {}
     for name in arguments
-      actual_result_file = "#{tempfile_path(@current_project)}/#{name}.css"
-      expected_result_file = "#{result_path(@current_project)}/#{name}.css"
-      unless File.exist?(expected_result_file)
+      actual_result_file = File.join(tempfile_path(@current_project), "#{name}.css")
+      expected_result_file = File.join(result_path(@current_project), "#{name}.css")
+
+      results_exist = File.exist?(expected_result_file)
+
+      unless UPDATING_TESTS || results_exist
         report_and_fail name, "no expectation set for `#{expected_result_file}`, run `rake test:update` first"
       end
-      actual_lines = File.read(actual_result_file)
-      actual_lines.gsub!(/^@charset[^;]+;/,'') if options[:ignore_charset]
-      actual_lines = actual_lines.split("\n").reject{|l| l=~/\A\Z/}
-      expected_lines = ERB.new(File.read(expected_result_file)).result(binding)
-      expected_lines.gsub!(/^@charset[^;]+;/,'') if options[:ignore_charset]
-      expected_lines = expected_lines.split("\n").reject{|l| l=~/\A\Z/}
-      msg = "Error in #{result_path(@current_project)}/#{name}.css\n"
-      expected_lines.zip(actual_lines).each_with_index do |pair, line|
-        if pair.first == pair.last
-          assert true
-        else
-          msg << diff_as_string(pair.first.inspect, pair.last.inspect)
-          # output a prettified diff if we have it
-          if defined?(Diffy::Diff)
-            begin
-              full_diff = Diffy::Diff.new(expected_lines.join("\n"), actual_lines.join("\n")).to_s(:color).gsub(/\n?\\ No newline at end of file/, '')
-              msg << "\n\nFull Diff:\n#{'-'*20}\n\n\033[0m#{full_diff}\n\n#{'-'*20}"
-            rescue
-              # oh well :(
-            end
-          end
-          report_and_fail name, msg
-        end
-      end
-      if expected_lines.size < actual_lines.size
-        report_and_fail name, "#{actual_lines.size - expected_lines.size} Trailing lines found in #{actual_result_file}.css: #{actual_lines[expected_lines.size..-1].join('\n')}"
-      end
+      actual_result = File.read(actual_result_file)
+      actual_result.gsub!(/^@charset[^;]+;/,'') if options[:ignore_charset]
+
+      expected_result = results_exist ? File.read(expected_result_file) : ''
+      expected_result.gsub!(/^@charset[^;]+;/,'') if options[:ignore_charset]
+
+      @current_file_update = results_exist ? :updated : :added
+
+      assert_no_css_diff(expected_result, actual_result, name, "Error in #{result_path(@current_project)}/#{name}.css\n")
+
       ArchetypeTestHelpers.report :pass, name
     end
   end
@@ -90,11 +105,7 @@ private
     Compass.configuration.environment = :production
     args = Compass.configuration.to_compiler_arguments(:logger => Compass::NullLogger.new)
 
-    if config_block
-      config_block.call(Compass.configuration)
-    end
-
-
+    config_block.call(Compass.configuration) if config_block
 
     if Compass.configuration.sass_path && File.exist?(Compass.configuration.sass_path)
       compiler = Compass::Compiler.new *args
@@ -157,6 +168,50 @@ private
 
   def save_path(project_name)
     File.join(project_path(project_name), "saved")
+  end
+
+  def assert_no_css_diff(expected, actual, name, msg = nil)
+    diff = Diffy::Diff.new(expected, actual)
+    # if there are any lines that were additions or deletions...
+    if diff.select { |line| line =~ /^[\+\-]/ }.any?
+      # get the full diff, colorize it, and strip out newline warnings
+      diff = diff.to_s(:color).gsub(/\n?\\ No newline at end of file/, '').strip
+      msg = UPDATING_TESTS ? "#{name}.css has been #{colorize_expection_update}" : msg || ''
+      report_and_fail name, "\n#{msg}\n#{'-'*20}\n#{diff}\n#{'-'*20}"
+    end
+  end
+
+  def colorize_expection_update(type = @current_file_update)
+    colors = {
+      :added    => :green,
+      :removed  => :red,
+      :updated  => :cyan
+    }
+    return type.to_s.colorize(colors[type])
+  end
+
+  def get_relative_file_name(file, path)
+    return file.chomp(File.extname(file)).sub(File.join(path, ''), '')
+  end
+
+  def update_expectations
+    checkmark = "\u2713 "
+    if @updated_tests.nil? or @updated_tests.empty?
+      puts "\n#{checkmark}Cool! Looks like all the tests are up to date".colorize(:green)
+    else
+      puts "\n\nThe following tests have been updated:".colorize(:yellow)
+      @updated_tests.each do |test|
+        puts " - #{test[:name]} (#{colorize_expection_update(test[:type])})"
+      end
+      puts "Are all of these changes expected? [y/n]".colorize(:yellow)
+      if (($stdin.gets.chomp)[0] == 'y')
+        FileUtils.rm_rf(File.join(result_path(@current_project), '.'))
+        FileUtils.cp_r(File.join(tempfile_path(@current_project), '.'), File.join(result_path(@current_project)))
+        puts "#{checkmark}Thanks! The test expectations have been updated".colorize(:green)
+      else
+        puts "Please manually update the test cases and expectations".colorize(:red)
+      end
+    end
   end
 
 end

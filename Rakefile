@@ -1,11 +1,10 @@
-$:.push File.expand_path("../lib", __FILE__)
+lib = File.expand_path("../lib", __FILE__)
+$:.unshift lib unless $:.include?(lib)
 
 require 'rake'
 require 'archetype/version'
 
-unless ENV['CI']
-  require 'colorize'
-end
+require 'colorize' unless ENV['CI']
 
 # swallow errors
 @devnull = File.new('/dev/null').path
