@@ -7,7 +7,7 @@ require 'rake/testtask'
 
 task :test do
   # make sure the gem is buildable
-  puts "testing the gem builds correctly..."
+  puts "testing the gems build correctly..."
   Rake::Task['gem:build'].invoke
 end
 

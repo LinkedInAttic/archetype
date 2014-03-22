@@ -7,3 +7,12 @@ $graceful-usage-threshold: -1;
 
 // import Archetype
 @import "archetype";
+
+// import ArchetypeGrid
+@import "archetype/grid/all";
+
+// import ArchetypeTheme
+@import "archetype/theme/all";
+
+// import ArchetypeBase
+@import "archetype/base/all";

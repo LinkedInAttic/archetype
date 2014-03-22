@@ -1,7 +1,14 @@
 require 'test/unit'
 require 'true'
 require 'archetype'
-# only use import-once locally, travis should reflect the non-deal state where a user is not using compass-import-once
+
+# include official extensions
+#  these may eventually be split into independent test cases
+require 'archetype-grid'
+require 'archetype-theme'
+require 'archetype-base'
+
+# only use import-once locally, travis should reflect the non-ideal state where a user is not using compass-import-once
 require 'compass/import-once/activate' unless ENV['CI']
 
 project_type      = :stand_alone

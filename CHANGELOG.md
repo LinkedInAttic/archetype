@@ -63,6 +63,13 @@
 - `styleguide-sprite*` and `styleguide-image*` functions have been replaced with private methods (`-archetype-sprite*`, `-archetype-image*`)
 - ported many functions to ruby instead of defined as Sass user functions
 - glyph icon mappings now take a map (optionally) of format `(char: characterCode, size: defaultSize)` (note that the previous list support is now deprecated)
+- Archetype has now been split into smaller projects
+  - the core will provide the most widely used functions/mixins with much opinion on your generated CSS
+  - things that are more specialized, opinionated, or heavy-handed have been moved to extensions, these extensions currently include:
+    - `archetype-base` - this will likely be split into multiple extensions
+    - `archetype-grid`
+    - `archetype-theme`
+  - the goal of this split is to provide consumers with the most useful and non-intrusive features upfront while still offering (via extension) the robustness we've already built
 
 ## 0.0.1.pre.3 (pre-released)
 

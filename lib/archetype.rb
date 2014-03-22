@@ -4,10 +4,12 @@ require 'compass'
 # Initialize Archetype and register it as a Compass extension
 #
 module Archetype
+  NAME = 'archetype'
   # extension info
-  @archetype = {}
-  @archetype[:name] = 'archetype'
-  @archetype[:path] = File.expand_path(File.join(File.dirname(__FILE__), ".."))
+  @archetype = {
+    :name => NAME,
+    :path => File.expand_path(File.join(File.dirname(__FILE__), ".."))
+  }
   # register the extension
   def self.register
     Compass::Frameworks.register(@archetype[:name], :path => @archetype[:path])
@@ -40,7 +42,7 @@ module Archetype
   end
 
   def self.name
-    @archetype[:name]
+    NAME
   end
 end
 

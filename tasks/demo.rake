@@ -1,5 +1,5 @@
 ## DEMO
-desc "build #{@spec.name} and create a Compass demo"
+desc "build Archetype and create a Compass demo"
 task :demo do
   Rake::Task['gem:install'].invoke
   sh "compass clean && compass create ./demo/ -r archetype --quiet --force --using archetype/example -x scss"

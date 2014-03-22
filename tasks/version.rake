@@ -1,6 +1,5 @@
 ## VERSIONING
-desc "get the current working version of #{@spec.name}"
+desc "get the current working version of Archetype"
 task :version do
-  puts "local version v#{@spec.version}"
+  puts "local version v#{Archetype::VERSION}"
 end
-

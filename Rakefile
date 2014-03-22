@@ -1,11 +1,12 @@
+$:.push File.expand_path("../lib", __FILE__)
+
 require 'rake'
+require 'archetype/version'
 
 unless ENV['CI']
   require 'colorize'
 end
 
-@gemspec = 'archetype.gemspec'
-@spec = Gem::Specification.load(@gemspec)
 @devnull = File.new('/dev/null').path
 @docs = './docs'
 

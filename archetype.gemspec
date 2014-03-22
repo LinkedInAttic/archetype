@@ -1,5 +1,6 @@
-path = "#{File.dirname(__FILE__)}/lib"
-require File.join(path, 'archetype/version')
+$:.push File.expand_path("../lib", __FILE__)
+
+require 'archetype/version'
 
 Gem::Specification.new do |gemspec|
   ## Release Specific Information
