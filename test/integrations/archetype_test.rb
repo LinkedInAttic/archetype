@@ -169,7 +169,7 @@ private
   end
 
   def assert_no_css_diff(expected, actual, name, msg = nil)
-    diff = Diffy::Diff.new(expected.strip, actual.strip)
+    diff = Diffy::Diff.new(cleanup_css(expected), cleanup_css(actual))
     # if there are any lines that were additions or deletions...
     if diff.select { |line| line =~ /^[\+\-]/ }.any?
       # get the full diff, colorize it, and strip out newline warnings
@@ -177,6 +177,10 @@ private
       msg = UPDATING_TESTS ? "#{name}.css has been #{colorize_expection_update}" : msg || ''
       report_and_fail name, "\n#{msg}\n#{'-'*20}\n#{diff}\n#{'-'*20}"
     end
+  end
+
+  def cleanup_css(css)
+    return css.strip.gsub!(/^@charset[^;]+;/,'').strip
   end
 
   def colorize_expection_update(type = @current_file_update)
