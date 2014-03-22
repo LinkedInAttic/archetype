@@ -5,20 +5,27 @@ require 'compass'
 #
 module Archetype
   NAME = 'archetype'
-  # extension info
+
+  module Extensions
+    def self.register(name, *arguments)
+      # make sure the name is properly formatted
+      name = "#{NAME}-#{name.gsub(/^#{NAME}-/, '')}"
+      Compass::Frameworks.register(name, *arguments)
+    end
+  end
+
+  # info
   @archetype = {
     :name => NAME,
     :path => File.expand_path(File.join(File.dirname(__FILE__), ".."))
   }
-  # register the extension
-  def self.register
-    Compass::Frameworks.register(@archetype[:name], :path => @archetype[:path])
-  end
+
   # initialize Archetype
   def self.init
-    # register it
-    self.register
-    # setup configs
+    ## register it
+    register
+
+    ## setup configs
     # locale
     Compass::Configuration.add_configuration_property(:locale, "the user locale") do
       'en_US'
@@ -44,12 +51,19 @@ module Archetype
   def self.name
     NAME
   end
+
+  private
+
+  ## register the extension
+  def self.register
+    Compass::Frameworks.register(NAME, :path => @archetype[:path]);
+  end
 end
 
 # init
 Archetype.init
 
 # load dependencies
-%w(functions sass_extensions).each do |lib|
+%w(extensions functions sass_extensions).each do |lib|
   require "archetype/#{lib}"
 end

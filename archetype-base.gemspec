@@ -1,9 +1,9 @@
-require File.expand_path("../extensions/extension", __FILE__)
+require File.expand_path("../lib/archetype/extensions", __FILE__)
 
 Gem::Specification.new do |gemspec|
 
-  # leverage the ArchetypeExtension helper to create a new instance of an extension
-  extension = ArchetypeExtension.new(__FILE__)
+  # leverage the Archetype::Extensions::GemspecHelper to create a new instance of an extension
+  extension = Archetype::Extensions::GemspecHelper.new(__FILE__)
 
   ## Release Specific Information
   gemspec.version     = extension.info(:version)

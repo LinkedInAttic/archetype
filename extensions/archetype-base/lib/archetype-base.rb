@@ -1,7 +1,7 @@
 require 'archetype'
 
 #
-# Initialize ArchetypeBase and register it as a Compass extension
+# Initialize ArchetypeBase and register it as an Archetype extension
 #
 module ArchetypeBase
   NAME = 'archetype-base'
@@ -9,7 +9,7 @@ module ArchetypeBase
   # initialize ArchetypeBase
   def self.init
     # register the extension
-    Compass::Frameworks.register(NAME, :path => File.expand_path(File.join(File.dirname(__FILE__), "..")))
+    Archetype::Extensions.register(NAME, :path => File.expand_path(File.join(File.dirname(__FILE__), "..")))
   end
 end
 

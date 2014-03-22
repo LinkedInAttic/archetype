@@ -1,7 +1,7 @@
 require 'archetype'
 
 #
-# Initialize ArchetypeGrid and register it as a Compass extension
+# Initialize ArchetypeGrid and register it as an Archetype extension
 #
 module ArchetypeGrid
   NAME = 'archetype-grid'
@@ -9,7 +9,7 @@ module ArchetypeGrid
   # initialize ArchetypeGrid
   def self.init
     # register the extension
-    Compass::Frameworks.register(NAME, :path => File.expand_path(File.join(File.dirname(__FILE__), "..")))
+    Archetype::Extensions.register(NAME, :path => File.expand_path(File.join(File.dirname(__FILE__), "..")))
   end
 end
 
