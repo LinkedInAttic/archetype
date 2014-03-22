@@ -169,13 +169,18 @@ private
   end
 
   def assert_no_css_diff(expected, actual, name, msg = nil)
-    diff = Diffy::Diff.new(cleanup_css(expected), cleanup_css(actual))
-    # if there are any lines that were additions or deletions...
-    if diff.select { |line| line =~ /^[\+\-]/ }.any?
-      # get the full diff, colorize it, and strip out newline warnings
-      diff = diff.to_s(:color).gsub(/\n?\\ No newline at end of file/, '').strip
-      msg = UPDATING_TESTS ? "#{name}.css has been #{colorize_expection_update}" : msg || ''
-      report_and_fail name, "\n#{msg}\n#{'-'*20}\n#{diff}\n#{'-'*20}"
+    begin
+      diff = Diffy::Diff.new(cleanup_css(expected), cleanup_css(actual))
+      # if there are any lines that were additions or deletions...
+      if diff.select { |line| line =~ /^[\+\-]/ }.any?
+        # get the full diff, colorize it, and strip out newline warnings
+        diff = diff.to_s(:color).gsub(/\n?\\ No newline at end of file/, '').strip
+        msg = UPDATING_TESTS ? "#{name}.css has been #{colorize_expection_update}" : msg || ''
+        report_and_fail name, "\n#{msg}\n#{'-'*20}\n#{diff}\n#{'-'*20}"
+      end
+    rescue Errno::EBADF => e # rescue from JRuby's `Bad file descriptor` (see https://github.com/samg/diffy/issues/36)
+      sleep(0.05) # sleep for 50ms
+      assert_no_css_diff(expected, actual, name, msg) # and try again
     end
   end
 
