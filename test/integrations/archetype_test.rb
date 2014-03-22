@@ -180,7 +180,7 @@ private
   end
 
   def cleanup_css(css)
-    return css.strip.gsub!(/^@charset[^;]+;/,'').strip
+    return css.strip.gsub(/^@charset[^;]+;/,'').strip
   end
 
   def colorize_expection_update(type = @current_file_update)
