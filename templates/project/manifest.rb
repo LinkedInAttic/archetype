@@ -1,9 +1,6 @@
-discover :all
+description "TODO ..."
 
-help %q{
-Learn more about the Archetype CSS framework at http://www.archetypecss.com
-}
 
-welcome_message %q{
-Learn more about the Archetype CSS framework at http://www.archetypecss.com
-}
+
+no_configuration_file!
+skip_compilation!

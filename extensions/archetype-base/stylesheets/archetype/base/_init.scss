@@ -1,0 +1,6 @@
+$a-blackhole: require-archetype-modules(archetype/base);
+
+@include unless-archetype-module-initalized(archetype/base) {
+  /* intializing base/init */
+  @include base($CONFIG_RESET_EXCLUDES);
+}

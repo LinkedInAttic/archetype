@@ -1,6 +1,11 @@
 require 'test/unit'
-require 'true'
-require 'archetype'
+
+
+require File.expand_path(File.join(
+  File.dirname(__FILE__), '..', '..', '..', '..',
+  'extensions', File.basename(File.dirname(__FILE__)),
+  'lib', File.basename(File.dirname(__FILE__)))
+)
 
 # only use import-once locally, travis should reflect the non-ideal state where a user is not using compass-import-once
 require 'compass/import-once/activate' unless ENV['CI']

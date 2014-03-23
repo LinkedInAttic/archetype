@@ -49,6 +49,10 @@ if @description.nil?
           {
             :pattern => /(styleguide[_-]((?:sprite|image)(?:[_-][a-z]+)?))/m,
             :message => '`$1` has been replaced with `-archetype-$2`'
+          },
+          {
+            :pattern => /(\$CONFIG_(?:KEYFRAMES|GLYPHS)_AUTO)/m,
+            :message => '`$1` has been deprecated, use `$CONFIG_RESET_AUTO` instead'
           }
         ],
         :rb => [],

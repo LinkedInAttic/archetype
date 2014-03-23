@@ -4,8 +4,9 @@ require 'compass/logger'
 require 'sass/plugin'
 require 'archetype'
 
+require 'colorize'
+
 unless ENV['CI']
-  require 'colorize'
   require 'fileutils'
 end
 
@@ -32,20 +33,25 @@ class ArchetypeTest < MiniTest::Unit::TestCase
       file = get_relative_file_name(file, tempfile_path(@current_project))
       assert_renders_correctly file
     end
-    project = compile_project(Archetype.name)
-    each_css_file(project.css_path) do |file|
-      assert_no_errors file, Archetype.name
-    end
-    each_css_file(result_path(@current_project)) do |file|
-      name = get_relative_file_name(file, result_path(@current_project))
-      unless File.exist?(File.join(tempfile_path(@current_project), "#{name}.css"))
-        @current_file_update = :removed
-        assert_no_css_diff(File.read(file), '', name)
-      end
-    end
 
-    # after it's all done...
-    update_expectations if UPDATING_TESTS
+    # for each project in the fixtures directory
+    Dir.glob(File.join(all_projects_path, '*')).each do |name|
+
+      project = compile_project(File.basename(name))
+      each_css_file(project.css_path) do |file|
+        assert_no_errors file, Archetype.name
+      end
+      each_css_file(result_path(@current_project)) do |file|
+        name = get_relative_file_name(file, result_path(@current_project))
+        unless File.exist?(File.join(tempfile_path(@current_project), "#{name}.css"))
+          @current_file_update = :removed
+          assert_no_css_diff(File.read(file), '', name)
+        end
+      end
+
+      # after it's all done...
+      update_expectations if UPDATING_TESTS
+    end
     ArchetypeTestHelpers::Profiler.stop
   end
 
@@ -98,10 +104,27 @@ private
 
   def within_project(project_name, config_block = nil)
     @current_project = project_name
-    Compass.add_configuration(configuration_file(project_name)) if File.exist?(configuration_file(project_name))
+    config = configuration_file(project_name)
+    msg = ["\nCompiling project #{project_name.colorize(:cyan)}"]
+    if File.exist?(config)
+      Compass.add_configuration(config)
+      msg << "with configuration file: #{config.split('/').slice(-2..-1).join('/')}"
+    end
+
+    puts "#{msg.join(' ')}..."
+
     Compass.configuration.project_path = project_path(project_name)
     Compass.configuration.environment = :production
     args = Compass.configuration.to_compiler_arguments(:logger => Compass::NullLogger.new)
+
+    require File.expand_path(File.join(
+      File.dirname(__FILE__), '..', '..',
+      'extensions', project_name,
+      'lib', project_name
+    )) if project_name.include?('-')
+
+    system "cd #{project_path(project_name)} && compass install #{project_name} -c #{config}"
+
 
     config_block.call(Compass.configuration) if config_block
 
@@ -116,9 +139,12 @@ private
           compiler.compile(path, dest)
         end
       else
+
         compiler.run
+
       end
     end
+
 
     return Compass.configuration
   rescue
@@ -144,8 +170,12 @@ private
     FileUtils.cp_r(tempfile_path(dir), save_path(dir)) if File.exist?(tempfile_path(dir))
   end
 
+  def all_projects_path
+    absolutize("fixtures/stylesheets")
+  end
+
   def project_path(project_name)
-    absolutize("fixtures/stylesheets/#{project_name}")
+    File.join(all_projects_path, project_name.to_s)
   end
 
   def configuration_file(project_name)
@@ -204,9 +234,9 @@ private
   def update_expectations
     checkmark = "\u2713 "
     if @updated_tests.nil? or @updated_tests.empty?
-      puts "\n#{checkmark}Cool! Looks like all the tests are up to date".colorize(:green)
+      puts "\n#{checkmark}Cool! Looks like all the tests are up to date for #{@current_project}".colorize(:green)
     else
-      puts "\n\nThe following tests have been updated:".colorize(:yellow)
+      puts "\n\nThe following tests have been updated for #{@current_project}:".colorize(:yellow)
       @updated_tests.each do |test|
         puts " - #{test[:name]} (#{colorize_expection_update(test[:type])})"
       end
@@ -214,9 +244,9 @@ private
       if (($stdin.gets.chomp)[0] == 'y')
         FileUtils.rm_rf(File.join(result_path(@current_project), '.'))
         FileUtils.cp_r(File.join(tempfile_path(@current_project), '.'), File.join(result_path(@current_project)))
-        puts "#{checkmark}Thanks! The test expectations have been updated".colorize(:green)
+        puts "#{checkmark}Thanks! The test expectations for #{@current_project} have been updated".colorize(:green)
       else
-        puts "Please manually update the test cases and expectations".colorize(:red)
+        puts "Please manually update the test cases and expectations for #{@current_project}".colorize(:red)
       end
     end
   end

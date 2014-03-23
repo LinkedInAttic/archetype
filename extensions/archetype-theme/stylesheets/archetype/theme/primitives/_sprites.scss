@@ -39,6 +39,3 @@ $CONFIG_LOADERS: (
     duration:       $CONFIG_ANIM_LOADERS_LARGE_DURATION
   )
 ) !default;
-@if $CONFIG_KEYFRAMES_AUTO {
-  @include generate-loader-keyframes();
-}

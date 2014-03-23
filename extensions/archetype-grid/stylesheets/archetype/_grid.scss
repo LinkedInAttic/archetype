@@ -2,4 +2,7 @@
 @import "archetype/core";
 
 // load the grid
-@import "grid/all";
+@import "grid/core";
+
+// intialize
+@import "grid/init";

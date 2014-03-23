@@ -2,11 +2,6 @@
 lib_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
 $:.unshift(lib_dir) unless $:.include?(lib_dir)
 
-extensions_dirs = File.expand_path(File.join(File.dirname(__FILE__), '..', 'extensions', 'archetype-*', 'lib'))
-Dir.glob(extensions_dirs).each do |dir|
-  $:.unshift(dir) unless $:.include?(dir)
-end
-
 test_dir = File.dirname(__FILE__)
 $:.unshift(test_dir) unless $:.include?(test_dir)
 

@@ -87,6 +87,7 @@ module Archetype::SassExtensions::Environment
   def require_archetype_modules(*names)
     return check_archetype_modules(names, true)
   end
+  alias_method :require_archetype_module, :require_archetype_modules
 
   #
   # checks whether or not a module has been registered
@@ -98,6 +99,24 @@ module Archetype::SassExtensions::Environment
   #
   def has_archetype_modules(*names)
     return check_archetype_modules(names, false)
+  end
+  alias_method :has_archetype_module, :has_archetype_modules
+
+  def init_archetype(state = identifier('done'))
+    environment.global_env.set_var('ARCHETYPE_INIT', state)
+    return state
+  end
+
+  def skip_archetype_init
+    init_archetype(identifier('skip'))
+  end
+
+  def force_archetype_init
+    init_archetype(null)
+  end
+
+  def archetype_init_state
+    return environment.var('ARCHETYPE_INIT') || null
   end
 
 private

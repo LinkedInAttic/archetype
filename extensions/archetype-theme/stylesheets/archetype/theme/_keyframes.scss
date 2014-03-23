@@ -1,8 +1,3 @@
-// @category   ui/keyframes
-
-// throw an error if archetype/ui has not been registered
-$a-blackhole: require-archetype-modules(archetype/ui);
-
 // generate rotational and position keyframes for loading spinners
 // @mixin     generate-loader-keyframes
 @mixin generate-loader-keyframes() {
@@ -30,7 +25,7 @@ $a-blackhole: require-archetype-modules(archetype/ui);
 // @mixin     -generate-loader-keyframes-360
 // @private
 @mixin -generate-loader-keyframes-360() {
-  @if do-once("archetype/ui/generate-keyframe/#{$CONFIG_KEYFRAME_LOADERS}") {
+  @include do-once("archetype/ui/generate-keyframe/#{$CONFIG_KEYFRAME_LOADERS}") {
     @include keyframes(archetype-namespace($CONFIG_KEYFRAME_LOADERS)) {
       from { @include rotate(0deg); }
       to { @include rotate(360deg); }
@@ -47,7 +42,7 @@ $a-blackhole: require-archetype-modules(archetype/ui);
 // @param     $height {Number} the height of the spinner image
 @mixin -generate-loader-keyframes-position($name, $position, $width, $height) {
   $name: unquote('#{archetype-namespace($CONFIG_KEYFRAME_LOADERS)}-position-#{$name}');
-  @if do-once("archetype/ui/generate-keyframe/#{$name}") {
+  @include do-once("archetype/ui/generate-keyframe/#{$name}") {
     @include keyframes($name) {
       from, to { @include -generate-loader-keyframes-position-css($position, $width, $height); }
     }

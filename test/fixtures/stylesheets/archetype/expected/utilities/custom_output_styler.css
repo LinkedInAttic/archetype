@@ -1,10 +1,4 @@
 .test {
   /* [archetype:styleguide:begin] --- `copy` --- */
-  font-size: 13px;
-  line-height: 17px;
-  /* post override */
-  color: #222222;
-  /* pre override */
-  font-weight: normal;
   /* [archetype:styleguide:end] --- `copy` --- */
 }

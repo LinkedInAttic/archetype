@@ -6,14 +6,6 @@ require 'compass'
 module Archetype
   NAME = 'archetype'
 
-  module Extensions
-    def self.register(name, *arguments)
-      # make sure the name is properly formatted
-      name = "#{NAME}-#{name.gsub(/^#{NAME}-/, '')}"
-      Compass::Frameworks.register(name, *arguments)
-    end
-  end
-
   # info
   @archetype = {
     :name => NAME,

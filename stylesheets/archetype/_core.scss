@@ -3,8 +3,13 @@
 // register pre-maturely so the dependencies know the context has been set
 $a-blackhole: register-archetype-module(archetype/core);
 
-@import "required";       // any required dependencies
-@import "util/all";       // utility mixins and helper functions
-@import "hacks/all";      // browser hacks
-@import "ui/all";         // UI mixins
-@import "styleguide/all"; // styleguide framework
+@import "required";         // any required dependencies
+@import "util/core";        // utility mixins and helper functions
+@import "hacks/core";       // browser hacks
+@import "ui/core";          // UI mixins
+@import "styleguide/core";  // styleguide framework
+
+// decide whether or not we are going to auto-reset
+@if not $CONFIG_RESET_AUTO {
+  $a-blackhole: skip-archetype-init() !global;
+}

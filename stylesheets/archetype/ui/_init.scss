@@ -1,0 +1,5 @@
+$a-blackhole: require-archetype-modules(archetype/ui);
+
+@include unless-archetype-module-initalized(archetype/ui/glyph-libraries) {
+  @include glyph-libraries;
+}
