@@ -28,14 +28,14 @@ class ArchetypeTest < MiniTest::Unit::TestCase
 
   def test_archetype
     ArchetypeTestHelpers::Profiler.start
-    # attach a callback to verify each file on save
-    Compass.configuration.on_stylesheet_saved do |file|
-      file = get_relative_file_name(file, tempfile_path(@current_project))
-      assert_renders_correctly file
-    end
-
     # for each project in the fixtures directory
     Dir.glob(File.join(all_projects_path, '*')).each do |name|
+
+      # attach a callback to verify each file on save
+      Compass.configuration.on_stylesheet_saved do |file|
+        file = get_relative_file_name(file, tempfile_path(@current_project))
+        assert_renders_correctly file
+      end
 
       project = compile_project(File.basename(name))
       each_css_file(project.css_path) do |file|
@@ -51,6 +51,10 @@ class ArchetypeTest < MiniTest::Unit::TestCase
 
       # after it's all done...
       update_expectations if UPDATING_TESTS
+
+      ::Archetype::SassExtensions::Styleguide.reset!
+      ::Archetype::Functions::StyleguideMemoizer.reset!
+      Compass.reset_configuration!
     end
     ArchetypeTestHelpers::Profiler.stop
   end
@@ -139,12 +143,9 @@ private
           compiler.compile(path, dest)
         end
       else
-
         compiler.run
-
       end
     end
-
 
     return Compass.configuration
   rescue
@@ -240,6 +241,7 @@ private
       @updated_tests.each do |test|
         puts " - #{test[:name]} (#{colorize_expection_update(test[:type])})"
       end
+      @updated_tests = nil
       puts "Are all of these changes expected? [y/n]".colorize(:yellow)
       if (($stdin.gets.chomp)[0] == 'y')
         FileUtils.rm_rf(File.join(result_path(@current_project), '.'))
