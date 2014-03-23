@@ -29,7 +29,8 @@ namespace :test do
   desc "only run the specified tests"
   task :only do
     tests = ARGV
-    ENV['ARCHETYPE_TESTS'] = tests.join(',')
+    tests.shift
+    ENV['ARCHETYPE_TESTS'] = tests.join(',') if tests.any?
     Rake::Task['test'].invoke
     exit 0
   end
@@ -48,7 +49,7 @@ namespace :test do
     #desc "update fixture expectations for test cases if needed"
     task :fixtures do
       puts "checking test cases...\n"
-      Rake::Task['test'].invoke
+      Rake::Task['test:only'].invoke
     end
   end
 end
