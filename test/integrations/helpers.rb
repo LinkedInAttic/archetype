@@ -6,7 +6,7 @@ class ArchetypeTest < MiniTest::Unit::TestCase
   SELECTIVE_TESTS = (ENV['ARCHETYPE_TESTS'] and not ENV['ARCHETYPE_TESTS'].empty? and not ENV['CI']) ? ENV['ARCHETYPE_TESTS'].split(',') : nil
 
   def assert_no_errors(css_file, project_name)
-    file = css_file[(tempfile_path(project_name).size+1)..-1]
+    file = css_file[(css_path(project_name).size+1)..-1]
     msg = "Syntax Error found in #{file}. Results saved into #{save_path(project_name)}/#{file}"
     assert_equal 0, open(css_file).readlines.grep(/Sass::SyntaxError/).size, msg
   end
@@ -31,7 +31,7 @@ class ArchetypeTest < MiniTest::Unit::TestCase
   def assert_renders_correctly(*arguments)
     options = arguments.last.is_a?(Hash) ? arguments.pop : {}
     for name in arguments
-      actual_result_file = File.join(tempfile_path, "#{name}.css")
+      actual_result_file = File.join(css_path, "#{name}.css")
       expected_result_file = File.join(expectation_path, "#{name}.css")
 
       results_exist = File.exist?(expected_result_file)
@@ -56,6 +56,8 @@ class ArchetypeTest < MiniTest::Unit::TestCase
     with_each_configuration_file do |config|
 
       cleanup_project_space!
+
+      add_config_default(:expected_dir, 'expected')
 
       msg = ["\nCompiling project #{project_name.colorize(:cyan)}"]
       if File.exist?(config)
@@ -113,7 +115,7 @@ class ArchetypeTest < MiniTest::Unit::TestCase
 
   def save_output(dir)
     FileUtils.rm_rf(save_path(dir))
-    FileUtils.cp_r(tempfile_path(dir), save_path(dir)) if File.exist?(tempfile_path(dir))
+    FileUtils.cp_r(css_path(dir), save_path(dir)) if File.exist?(css_path(dir))
   end
 
   def with_each_project
@@ -139,8 +141,8 @@ class ArchetypeTest < MiniTest::Unit::TestCase
     File.join(all_projects_path, project_name.to_s)
   end
 
-  def tempfile_path(project_name = @current_project)
-    File.join(project_path(project_name), "tmp")
+  def css_path(project_name = @current_project)
+    File.join(project_path(project_name), Compass.configuration.css_dir)
   end
 
   def assets_path(project_name = @current_project)
@@ -148,11 +150,11 @@ class ArchetypeTest < MiniTest::Unit::TestCase
   end
 
   def template_path(project_name = @current_project)
-    File.join(project_path(project_name), "source")
+    File.join(project_path(project_name), Compass.configuration.sass_dir)
   end
 
   def expectation_path(project_name = @current_project)
-    File.join(project_path(project_name), "expected")
+    File.join(project_path(project_name), Compass.configuration.expected_dir)
   end
 
   def save_path(project_name = @current_project)
@@ -166,8 +168,7 @@ class ArchetypeTest < MiniTest::Unit::TestCase
   end
 
   def assert_no_css_diff(expected, actual, name, msg = nil)
-    begin
-      diff = Diffy::Diff.new(cleanup_css(expected), cleanup_css(actual))
+    with_new_diff(cleanup_css(expected), cleanup_css(actual)) do |diff|
       # if there are any lines that were additions or deletions...
       if diff.select { |line| line =~ /^[\+\-]/ }.any?
         # get the full diff, colorize it, and strip out newline warnings
@@ -175,9 +176,6 @@ class ArchetypeTest < MiniTest::Unit::TestCase
         msg = UPDATING_TESTS ? "#{name}.css has been #{colorize_expection_update}" : msg || ''
         report_and_fail name, "\n#{msg}\n#{'-'*20}\n#{diff}\n#{'-'*20}"
       end
-    rescue Errno::EBADF => e # rescue from JRuby's `Bad file descriptor` (see https://github.com/samg/diffy/issues/36)
-      sleep(0.05) # sleep for 50ms
-      assert_no_css_diff(expected, actual, name, msg) # and try again
     end
   end
 
@@ -223,7 +221,7 @@ class ArchetypeTest < MiniTest::Unit::TestCase
       puts "Are all of these changes expected? [y/n]".colorize(:yellow)
       if (($stdin.gets.chomp)[0] == 'y')
         FileUtils.rm_rf(File.join(expectation_path, '.'))
-        FileUtils.cp_r(File.join(tempfile_path, '.'), File.join(expectation_path))
+        FileUtils.cp_r(File.join(css_path, '.'), File.join(expectation_path))
         puts "#{checkmark}Thanks! The test expectations for #{@current_project} have been updated".colorize(:green)
       else
         puts "Please manually update the test cases and expectations for #{@current_project}".colorize(:red)
@@ -232,7 +230,7 @@ class ArchetypeTest < MiniTest::Unit::TestCase
   end
 
   def cleanup_project_space!
-    ::FileUtils.rm_rf tempfile_path
+    ::FileUtils.rm_rf css_path
     ::FileUtils.rm_rf assets_path
   end
 
@@ -240,5 +238,20 @@ class ArchetypeTest < MiniTest::Unit::TestCase
     ::Archetype::SassExtensions::Styleguide.reset!
     ::Archetype::Functions::StyleguideMemoizer.reset!
     Compass.reset_configuration!
+  end
+
+  def with_new_diff(*arguments)
+    begin
+      yield Diffy::Diff.new(*arguments) if block_given?
+    rescue Errno::EBADF => e # rescue from JRuby's `Bad file descriptor` (see https://github.com/samg/diffy/issues/36)
+      sleep(0.05) # sleep for 50ms
+      send(__method__, *arguments) # and try again
+    end
+  end
+
+  def add_config_default(property, default)
+    Compass::Configuration.add_configuration_property(:expected_dir, "config for #{property.to_s}") do
+      default
+    end
   end
 end
