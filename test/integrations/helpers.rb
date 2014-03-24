@@ -218,16 +218,25 @@ class ArchetypeTest < MiniTest::Unit::TestCase
       @updated_tests.each do |test|
         puts " - #{test[:name]} (#{colorize_expection_update(test[:type])})"
       end
-      @updated_tests = nil
       puts "Are all of these changes expected? [y/n]".colorize(:yellow)
       if (($stdin.gets.chomp)[0] == 'y')
-        FileUtils.rm_rf(File.join(expectation_path, '.'))
-        FileUtils.cp_r(File.join(css_path, '.'), expectation_path)
+        if SELECTIVE_TESTS
+          @updated_tests.each do |test|
+            file = "#{test[:name]}.css"
+            FileUtils.rm_rf(File.join(expectation_path, file))
+            FileUtils.mkdir_p(File.dirname(File.join(expectation_path, file)))
+            FileUtils.cp_r(File.join(css_path, file), File.join(expectation_path, file)) unless test[:type] == :removed
+          end
+        else
+          FileUtils.rm_rf(File.join(expectation_path, '.'))
+          FileUtils.cp_r(File.join(css_path, '.'), expectation_path)
+        end
         puts "#{checkmark}Thanks! The test expectations for #{@current_project} have been updated".colorize(:green)
       else
         puts "Please manually update the test cases and expectations for #{@current_project}".colorize(:red)
       end
     end
+    @updated_tests = nil
   end
 
   def cleanup_project_space!

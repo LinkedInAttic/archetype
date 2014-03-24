@@ -126,7 +126,7 @@ $a-blackhole: require-archetype-modules(archetype/util);
       }
     }
     // if there's only one target browser and it's IE6 or IE lte 7, we can use an inline hack
-    @if($inline) {
+    @if $inline and type-of($property) != map {
       $tmp: _getTargetedBrowsers($browsers, $threshold: $threshold);
       @if(length($tmp) == 1) {
         $support: ();

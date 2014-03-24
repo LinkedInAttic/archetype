@@ -197,3 +197,10 @@
   color: red;
   /* [archetype:target:browser:end]   --- ie lte 8 --- */
 }
+
+.ie .target-ie-with-map {
+  /* [archetype:target:browser:begin] --- ie --- */
+  color: blue;
+  background: none;
+  /* [archetype:target:browser:end]   --- ie --- */
+}

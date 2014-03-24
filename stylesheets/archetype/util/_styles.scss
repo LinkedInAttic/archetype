@@ -35,8 +35,10 @@ $a-blackhole: require-archetype-modules(archetype/util);
 // @param     $property {String} the CSS property to output
 // @param     $value {*} the CSS value to output
 @mixin output-style($property, $value: null) {
-
-  @if( not is-null($property) and length(-archetype-list($value)) > 0 and not is-null(first-value-of(-archetype-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
+  @if type-of($property) == map {
+    @include to-styles($property);
+  }
+  @elseif( not is-null($property) and length(-archetype-list($value)) > 0 and not is-null(first-value-of(-archetype-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
     // check to see if we have a custom output styler (pre)
     @if check-for-custom-styler($property, $value, pre) {

@@ -75,3 +75,10 @@
     color: red;
   };
 }
+
+.target-ie-with-map {
+  @include target-browser(ie, (
+    color: blue,
+    background: none
+  ));
+}

@@ -102,19 +102,45 @@ module Archetype::SassExtensions::Environment
   end
   alias_method :has_archetype_module, :has_archetype_modules
 
+  #
+  # sets the intialization state of Archetype
+  #
+  # *Parameters*
+  # - <tt>$state</tt> {*} the state to set
+  # *Returns*:
+  # - {*} the state that was just set
+  #
   def init_archetype(state = identifier('done'))
     environment.global_env.set_var('ARCHETYPE_INIT', state)
     return state
   end
 
+  #
+  # sets the intialization state of Archetype to `skip`
+  #
+  # *Returns*:
+  # - {String} the state `skip` that was just set
+  #
   def skip_archetype_init
     init_archetype(identifier('skip'))
   end
 
+  #
+  # sets the intialization state of Archetype to `null`
+  #
+  # *Returns*:
+  # - {Null} the state `null` that was just set
+  #
   def force_archetype_init
     init_archetype(null)
   end
 
+  #
+  # gets Archetype's current initialization state
+  #
+  # *Returns*:
+  # - {*} Archetype's current initialization state
+  #
   def archetype_init_state
     return environment.var('ARCHETYPE_INIT') || null
   end

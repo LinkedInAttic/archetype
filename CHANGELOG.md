@@ -47,6 +47,7 @@
 - added `get-runtime-locale-value` for selecting the value based on the current locale. this should be in conjunction with `runtime-locale-value`
 - added `register-glyph-library`, `get-glyph-library`, and `get-all-glyph-libraries` functions for registering / retrieving glyph icon libraries
 - added `before` and `after` mixins to ease the pain in styling `:before` and `:after` elements cross-browser
+- allow `target-browser` and `target-os` to accept a map of property-value pairs
 
 ### Major Changes:
 
