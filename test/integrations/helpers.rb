@@ -55,9 +55,10 @@ class ArchetypeTest < MiniTest::Unit::TestCase
     @current_project = project_name
     with_each_configuration_file do |config|
 
-      cleanup_project_space!
-
       add_config_default(:expected_dir, 'expected')
+      add_config_default(:assets_dir, 'assets')
+
+      cleanup_project_space!
 
       msg = ["\nCompiling project #{project_name.colorize(:cyan)}"]
       if File.exist?(config)
@@ -146,7 +147,7 @@ class ArchetypeTest < MiniTest::Unit::TestCase
   end
 
   def assets_path(project_name = @current_project)
-    File.join(project_path(project_name), "assets")
+    File.join(project_path(project_name), Compass.configuration.assets_dir)
   end
 
   def template_path(project_name = @current_project)
@@ -249,9 +250,9 @@ class ArchetypeTest < MiniTest::Unit::TestCase
     end
   end
 
-  def add_config_default(property, default)
-    Compass::Configuration.add_configuration_property(:expected_dir, "config for #{property.to_s}") do
-      default
+  def add_config_default(property, value)
+    Compass::Configuration.add_configuration_property(property, "config for #{property.to_s}") do
+      value
     end
   end
 end
