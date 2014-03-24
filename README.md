@@ -3,7 +3,8 @@
 [![Build Status](https://api.travis-ci.org/linkedin/archetype.svg)](https://travis-ci.org/linkedin/archetype) [![Gem Version](https://badge.fury.io/rb/archetype.svg)](http://badge.fury.io/rb/archetype)
 [![Dependency Status](https://gemnasium.com/eoneill/archetype.svg)](https://gemnasium.com/eoneill/archetype)
 
-Archetype is a UI pattern and component library for quickly iterating on and maintaining scalable web interfaces.
+Archetype is a Compass/Sass based framework for authoring configurable, composable UI components and patterns.
+The natural language syntax that Archetype provides allows your designers and developers to discuss UI compositions using the same vocabulary.
 
 ## Resources
 

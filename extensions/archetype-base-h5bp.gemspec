@@ -12,8 +12,8 @@ Gem::Specification.new do |gemspec|
   gemspec.version     = extension.info(:version)
 
   ## Gem Details
-  gemspec.summary     = %q{a UI pattern and component library for Compass}
-  gemspec.description = %q{UI Pattern and component library for quickly iterating on and maintaining scalable web interfaces}
+  gemspec.summary     = %q{Archetype H5BP Reset Extension}
+  gemspec.description = %q{An Archetype extension that provides hooks into using HTML5 Boilerplate's CSS reset}
 
   ## most of these are just inheriting from the main archetype.gemspec
   gemspec.name        = extension.info(:name)

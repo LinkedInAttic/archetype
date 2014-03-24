@@ -10,8 +10,13 @@ Gem::Specification.new do |gemspec|
   ## Gem Details
   gemspec.name = 'archetype'
   gemspec.authors = ["Eugene ONeill", "LinkedIn"]
-  gemspec.summary = %q{a UI pattern and component library for Compass}
-  gemspec.description = %q{UI Pattern and component library for quickly iterating on and maintaining scalable web interfaces}
+  gemspec.summary = %q{A CSS UI Component Authoring Framework}
+  gemspec.description = %q{
+    Archetype is a Compass/Sass based framework for authoring configurable,
+    composable UI components and patterns. The natural language syntax that
+    Archetype provides allows your designers and developers to discuss UI
+    compositions using the same vocabulary.
+  }
   gemspec.email = "oneill.eugene@gmail.com"
   gemspec.homepage = "http://www.archetypecss.com/"
   gemspec.license = "Apache License (2.0)"

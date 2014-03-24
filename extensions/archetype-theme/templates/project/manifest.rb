@@ -1,4 +1,4 @@
-description "TODO..."
+description "An Archetype extension that provides several off-the-shelf UI components"
 
 discover :images
 
