@@ -21,7 +21,10 @@ $CONFIG_USE_SMART_CONTENT: true;
 //
 
 .test2a {
-  @include styleguide(small copy);
+  @include styleguide(small copy) {
+    // apply an override...
+    color: red;
+  };
 }
 
 .test2b {
@@ -35,6 +38,10 @@ $CONFIG_USE_SMART_CONTENT: true;
   };
 }
 
-.test2d {
+.test3a {
   @include styleguide(small muted copy);
+}
+
+.test3b {
+  @include styleguide(small muted copy, $here: true);
 }

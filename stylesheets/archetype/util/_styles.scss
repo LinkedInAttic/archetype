@@ -272,7 +272,18 @@ $a-blackhole: require-archetype-modules(archetype/util);
     @if $message { /* #{$message} */ }
 
     // any original block content passed in...
-    @content;
+    // if we're using smart content...
+    @if $CONFIG_USE_SMART_CONTENT and not $here {
+      // intentionally break out of the context
+      & {
+        @content;
+      }
+    }
+    // otherwise...
+    @else {
+      // just put it here
+      @content;
+    }
   }
 }
 
