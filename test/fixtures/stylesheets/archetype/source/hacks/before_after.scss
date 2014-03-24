@@ -1,0 +1,13 @@
+@import "test_harness";
+
+.before {
+  @include before {
+    color: red;
+  };
+}
+
+.after {
+  @include after($content: 'testing') {
+    background: green;
+  }
+}

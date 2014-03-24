@@ -1,0 +1,14 @@
+.before {
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+}
+.before:before, .before #ie-pseudo-archetype-uid-RANDOM_UID {
+  color: red;
+}
+
+.after {
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="testing",t.appendChild(t.el)})}(this)));
+}
+.after:after, .after #ie-pseudo-archetype-uid-RANDOM_UID {
+  content: "testing";
+  background: green;
+}
