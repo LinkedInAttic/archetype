@@ -24,18 +24,14 @@ task :release do
   proceed_on_input "Is this correct? [y/n]".colorize(:cyan) do
     Rake::Task['git:revert'].invoke if not clean
     Rake::Task['gem:build'].invoke
-    begin
-      puts "checking previously released versions..."
-      versions = `gem list \^archetype\$ --remote --all --pre`
-      if (/archetype.*(\(|\s)#{version.gsub(/\./, '\.')}(\,|\))/ =~ versions)
-        proceed_on_input "It appears that v#{version} was already released. Are you sure you want to proceed? [y/n]".colorize(:yellow)
-      end
-    rescue
-      proceed_on_input "couldn't verify release versions, proceed with caution".colorize(:yellow)
-    end
 
     # add `upstream` remote (all release tags should go upstream)
-    sh "git remote add upstream git@github.com:linkedin/archetype.git #{@devnull}"
+    begin
+      %x[git ls-remote upstream #{@devnull}]
+    rescue
+      %x[git remote add upstream git@github.com:linkedin/archetype.git #{@devnull}]
+    end
+
     # tag the git repo
     sh "git tag -a v#{version} -m \"version #{version}\" && git push --tags upstream master"
 
