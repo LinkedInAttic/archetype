@@ -33,7 +33,12 @@ task :release do
     end
 
     # tag the git repo
-    sh "git tag -a v#{version} -m \"version #{version}\" && git push --tags upstream master"
+    begin
+      sh "git tag -a v#{version} -m \"version #{version}\""
+      sh "git push --tags upstream master"
+    rescue
+      puts "manually verify the release was tagged properly on GitHub".colorize(:yellow)
+    end
 
     # push the gems
     apply_action_to_built_gems('gem push')

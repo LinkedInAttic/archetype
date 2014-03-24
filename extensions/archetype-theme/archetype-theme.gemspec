@@ -1,4 +1,4 @@
-lib = File.expand_path("../../lib", __FILE__)
+lib = File.expand_path("../../../lib", __FILE__)
 $:.unshift lib unless $:.include?(lib)
 
 require "archetype/extensions"
@@ -12,8 +12,8 @@ Gem::Specification.new do |gemspec|
   gemspec.version     = extension.info(:version)
 
   ## Gem Details
-  gemspec.summary     = %q{Archetype CSS Reset Extension}
-  gemspec.description = %q{An Archetype extension that provides hooks into Eric Meyer's CSS reset}
+  gemspec.summary     = %q{Archetype Theme Extension}
+  gemspec.description = %q{An Archetype extension that provides several off-the-shelf UI components}
 
   ## most of these are just inheriting from the main archetype.gemspec
   gemspec.name        = extension.info(:name)
@@ -26,8 +26,8 @@ Gem::Specification.new do |gemspec|
   gemspec.require_paths = %w(lib)
 
   # Gem Files
-  gemspec.files = %w(LICENSE)
-  gemspec.files += Dir.glob("#{extension.info(:path)}/**/*")
+  # by default, include everything but the gemspec
+  gemspec.files = Dir.glob("**/*") - Dir.glob("**/*.gemspec")
 
   # dependencies
   gemspec.add_dependency('archetype', "~> #{Archetype::VERSION}") # assume a dependency on the latest current version of Archetype

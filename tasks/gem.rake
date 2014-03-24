@@ -12,13 +12,31 @@ namespace :gem do
       puts "Aborting...".colorize(:red)
       exit 1
     end
-    FileUtils.rm_rf('pkg')
+    root_dir = File.expand_path('.')
+    pkg_dir = File.expand_path('pkg')
+    defaults = %w(LICENSE VERSION)
+    # cleanup the pkg/ directory
+    FileUtils.rm_rf(pkg_dir)
+    FileUtils.mkdir_p(pkg_dir)
     with_each_gemspec do |file, spec|
-      puts "build gem: #{file}"
-      sh "gem build #{file}"
+      remove_after = []
+      build_path = File.dirname(file)
+      # copy over any missing files
+      defaults.each do |file|
+        unless File.exist?(File.join(build_path, file))
+          remove_after << file
+          FileUtils.cp(File.join(root_dir, file), build_path)
+        end
+      end
+      # cd into the build directory and build the gem
+      sh "cd #{build_path} && gem build #{File.basename(file)}"
+      # remove any files that were copied over
+      remove_after.each do |file|
+        FileUtils.rm_f(File.join(build_path, file))
+      end
+      # move the build gem into the /pkg directory
+      FileUtils.mv(Dir["#{build_path}/*.gem"], pkg_dir)
     end
-    FileUtils.mkdir_p('pkg')
-    FileUtils.mv(Dir['*.gem'], 'pkg')
   end
 
   desc "install Archetype gems locally"
@@ -40,7 +58,7 @@ end
 
 # executes a block with each discoverable gemspec
 def with_each_gemspec
-  Dir.glob("{,*,*/*}.gemspec").each do |file|
+  Dir.glob("**/*.gemspec").each do |file|
     yield(file, Gem::Specification.load(file)) if block_given?
   end
 end
