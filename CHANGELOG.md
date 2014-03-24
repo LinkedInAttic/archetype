@@ -1,6 +1,12 @@
 # Changelog
 
-## 1.0.0.alpha.1 (unreleased)
+## 1.0.0.alpha.2 (3/24/2014)
+
+### Resolved Issues:
+
+- fixed broken gems
+
+## 1.0.0.alpha.1 (3/24/2014)
 
 ### Resolved Issues:
 
