@@ -35,7 +35,7 @@ module Archetype
       not (Compass.configuration.environment || :development).to_s.include?('dev')
     end
     # meta
-    Compass::Configuration.add_configuration_property(:meta, "any meta data you want made available to the environment") do
+    Compass::Configuration.add_configuration_property(:archetype_meta, "any meta data you want made available to the environment") do
       {}
     end
   end

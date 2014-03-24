@@ -36,7 +36,7 @@ module Archetype::SassExtensions::Environment
   #
   def archetype_meta(key)
     # if `$CONFIG_META` is set, use it, otherwise, use the one set on the configuration object
-    meta = environment.var('CONFIG_META') || Compass.configuration.meta || {}
+    meta = environment.var('CONFIG_META') || Compass.configuration.archetype_meta || {}
     # convert it to a hash
     meta = helpers.map_to_hash(meta)
     # fetch the value for the key

@@ -35,7 +35,7 @@ locale_aliases    = {
 
 
 # test meta values
-meta = {
+archetype_meta = {
   'featureEnabled' => Sass::Script::Value::Bool.new(true),
   'somethingElse' => 'testing'
 }
