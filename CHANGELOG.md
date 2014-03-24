@@ -37,7 +37,7 @@
   - `resolution_to_x`, `resolution-to-ratio`, `resolution-to-dppx`, `resolution-to-dpi`, `resolution-to-dpcm`
 - added `to-fraction` function for converting a decimal number to a fractional representation (e.g. `1.5` -> `3/2`)
 - added `list-join` function for joining a list into a string
-- added `archetype-meta` function to retrieve values set on `$CONFIG_META` or `Compass.configuration.meta`
+- added `archetype-meta` function to retrieve values set on `$CONFIG_META` or `Compass.configuration.archetype_meta`
 - added `register-breakpoint` and `get-breakpoint` functions for registering / retrieving breakpoint definitions
 - added `breakpoint` mixin for creating breakpoint media queries
 - added `switch-locale` function to assist switching locale states
@@ -46,6 +46,8 @@
   - e.g. `runtime-locale-value((default: a, en_US: b, ru_RU: c, ...))`
 - added `get-runtime-locale-value` for selecting the value based on the current locale. this should be in conjunction with `runtime-locale-value`
 - added `register-glyph-library`, `get-glyph-library`, and `get-all-glyph-libraries` functions for registering / retrieving glyph icon libraries
+- added `before` and `after` mixins to ease the pain in styling `:before` and `:after` elements cross-browser
+- allow `target-browser` and `target-os` to accept a map of property-value pairs
 
 ### Major Changes:
 
@@ -63,6 +65,17 @@
 - `styleguide-sprite*` and `styleguide-image*` functions have been replaced with private methods (`-archetype-sprite*`, `-archetype-image*`)
 - ported many functions to ruby instead of defined as Sass user functions
 - glyph icon mappings now take a map (optionally) of format `(char: characterCode, size: defaultSize)` (note that the previous list support is now deprecated)
+- Archetype has now been split into smaller projects
+  - the core will provide the most widely used functions/mixins with much opinion on your generated CSS
+  - things that are more specialized, opinionated, or heavy-handed have been moved to extensions, these extensions currently include:
+    - `archetype-grid`
+    - `archetype-theme`
+    - `archetype-base`
+      - `archetype-base-h5bp`
+      - `archetype-base-normalize`
+      - `archetype-base-reset`
+      - `archetype-base-hybrid`
+  - the goal of this split is to provide consumers with the most useful and non-intrusive features upfront while still offering (via extension) the robustness we've already built
 
 ## 0.0.1.pre.3 (pre-released)
 

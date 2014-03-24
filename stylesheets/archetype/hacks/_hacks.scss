@@ -34,6 +34,42 @@ $a-blackhole: require-archetype-modules(archetype/config);
   @include underscore-hack($property, auto, $value);
 }
 
+// helper to create a :before pseudo element
+// @mixin     before
+// @param     $content {String} the content to set on the element
+// @content
+@mixin before($content: false) {
+  @include -archetype-pseudo($placement: before, $content: $content) {
+    @content;
+  };
+}
+
+// helper to create a :after pseudo element
+// @mixin     after
+// @param     $content {String} the content to set on the element
+// @content
+@mixin after($content: false) {
+  @include -archetype-pseudo($placement: after, $content: $content) {
+    @content;
+  };
+}
+
+// creates a cross-browser pseudo before/after element
+// @mixin     after
+// @param     $content {String} the content to set on the element
+// @content
+@mixin -archetype-pseudo($placement: before, $content: false) {
+  $selector: '&:#{$placement}';
+  @include ie-pseudo($placement: $placement, $content: $content);
+  $archetype-pseudo-selector: if($archetype-pseudo-selector, '#{$selector}, #{$archetype-pseudo-selector}', $selector) !global;
+  #{$archetype-pseudo-selector} {
+    @if $content {
+      content: $content;
+    }
+    @content;
+  }
+}
+
 // proxy for ie-pseudo
 // @mixin     ie-pseudo-before
 // @param     $styles {String} the styles to apply to the pseudo-element

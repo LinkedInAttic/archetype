@@ -1,0 +1,5 @@
+@import "core";
+
+@include unless-archetype-module-initalized(archetype/theme) {
+  @include generate-loader-keyframes;
+}

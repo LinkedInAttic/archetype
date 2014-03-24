@@ -1,6 +1,4 @@
-// for testing purposes, lets ensure all browser compat is enabled
-$critical-usage-threshold: -1;
-$graceful-usage-threshold: -1;
+@import "test_configs";
 
 // import the True testing framework
 @import "true";

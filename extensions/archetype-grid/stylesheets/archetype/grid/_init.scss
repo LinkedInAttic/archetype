@@ -1,0 +1,5 @@
+$a-blackhole: require-archetype-modules(archetype/grid);
+
+@include unless-archetype-module-initalized(archetype/grid) {
+  /* intializing grid/init */
+}

@@ -5,3 +5,15 @@ $CONFIG_DEBUG:        (index($CONFIG_DEBUG_ENVS, archetype-env()) != false) !def
 $CONFIG_LOCALE:       locale() !default;                                                // the default locale
 
 $CONFIG_NAMESPACE:    null !default;                                                    // the namespace to generate CSS within
+
+@mixin unless-archetype-module-initalized($module: null) {
+  @if not archetype-init-state() and (not $module or do-once("archetype/init+#{$module}")) {
+    @content;
+  }
+}
+
+@mixin unless-archetype-initalized {
+  @if not archetype-init-state() {
+    @content;
+  }
+}

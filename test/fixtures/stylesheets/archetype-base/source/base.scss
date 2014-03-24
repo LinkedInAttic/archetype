@@ -1,0 +1,25 @@
+@import "archetype/core";
+@import "archetype/base";
+@import "archetype/base/h5bp";
+@import "archetype/base/hybrid";
+@import "archetype/base/normalize";
+@import "archetype/base/reset";
+
+/* $method: default */
+@include base();
+
+
+/* $method: h5bp */
+@include base($method: h5bp);
+
+
+/* $method: hybrid */
+@include base($method: hybrid);
+
+
+/* $method: normalize */
+@include base($method: normalize);
+
+
+/* $method: reset */
+@include base($method: reset);

@@ -9,7 +9,7 @@ unless ENV["CI"]
   require 'rdoc/task'
   RDoc::Task.new do |rdoc|
     rdoc.rdoc_dir = "#{@docs}/rdoc"
-    rdoc.title = "Archetype v#{@spec.version} Documentation"
+    rdoc.title = "Archetype v#{Archetype::VERSION} Documentation"
     rdoc.rdoc_files.include('lib/README.rdoc', 'lib/**/*.rb')
     rdoc.rdoc_files.exclude('lib/**/functions.rb', 'lib/**/sass_extensions.rb') # exclude harness files
     rdoc.options << "--quiet"

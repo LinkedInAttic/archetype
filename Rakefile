@@ -1,12 +1,15 @@
+lib = File.expand_path("../lib", __FILE__)
+$:.unshift lib unless $:.include?(lib)
+
 require 'rake'
+require 'archetype/version'
 
-unless ENV['CI']
-  require 'colorize'
-end
+require 'colorize' unless ENV['CI']
 
-@gemspec = 'archetype.gemspec'
-@spec = Gem::Specification.load(@gemspec)
+# swallow errors
 @devnull = File.new('/dev/null').path
+@devnull = File.exist?(@devnull) ? " 2> #{@devnull}" : ''
+
 @docs = './docs'
 
 Dir.glob('tasks/*.rake').each { |r| import r }

@@ -163,9 +163,9 @@ $a-blackhole: require-archetype-modules(archetype/ui);
 }
 
 // generates all `@font-face` definitions for all the potential glyph libraries
-// @mixin     base-glyph
+// @mixin     glyph-libraries
 // @param     $only {List} if set, only use the libraries defined in this list
-@mixin base-glyph($only: null) {
+@mixin glyph-libraries($only: null) {
   $only: if($only == null, $only, -archetype-list($only));
   // the font-face mixin will likely change in a future version, keep an eye on this
   // https://github.com/chriseppstein/compass/issues/867
@@ -235,4 +235,10 @@ $a-blackhole: require-archetype-modules(archetype/ui);
       }
     }
   }
+}
+
+// here for back-compat only
+@mixin base-glyph {
+  @warn "the `base-glyph` mixin will be deprecated soon. instead use the `glyph-libraries` mixin";
+  @include glyph-libraries;
 }

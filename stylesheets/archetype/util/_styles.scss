@@ -35,8 +35,10 @@ $a-blackhole: require-archetype-modules(archetype/util);
 // @param     $property {String} the CSS property to output
 // @param     $value {*} the CSS value to output
 @mixin output-style($property, $value: null) {
-
-  @if( not is-null($property) and length(-archetype-list($value)) > 0 and not is-null(first-value-of(-archetype-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
+  @if type-of($property) == map {
+    @include to-styles($property);
+  }
+  @elseif( not is-null($property) and length(-archetype-list($value)) > 0 and not is-null(first-value-of(-archetype-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
     // check to see if we have a custom output styler (pre)
     @if check-for-custom-styler($property, $value, pre) {
@@ -156,9 +158,10 @@ $a-blackhole: require-archetype-modules(archetype/util);
 // @mixin     archetype-smart-content
 // @param     $placeholder {String} the placeholder
 // @param     $extend {Boolean} if false, will only create the placeholder, but not extend it
+// @param     $here {Boolean} if true, will force the content to be output in the current context, and not extended
 // @content
-@mixin archetype-smart-content($placeholder, $extend: true) {
-  @if $CONFIG_USE_SMART_CONTENT {
+@mixin archetype-smart-content($placeholder, $extend: true, $here: null) {
+  @if $CONFIG_USE_SMART_CONTENT and not $here {
     // if we haven't already registered this placeholder...
     @if not index($archetype-placeholder-registry, $placeholder) {
       // create it...
@@ -182,8 +185,9 @@ $a-blackhole: require-archetype-modules(archetype/util);
 // @param     $map {Map} a of styles
 // @param     $states {Boolean|List} if true, output all states; if false, output no states; if a list, output only the states in the list
 // @param     $exclude {List} a list of styles to exclude from output
+// @param     $here {Boolean} if true, will force the content to be output in the current context, and not extended
 // @content
-@mixin to-styles($map: (), $states: true, $selectors: true, $exclude: (), $meta: ()) {
+@mixin to-styles($map: (), $states: true, $selectors: true, $exclude: (), $meta: (), $here: null) {
   @if $map {
     $exclude: -archetype-list($exclude);
     $placeholder: (
@@ -198,7 +202,7 @@ $a-blackhole: require-archetype-modules(archetype/util);
 
     $placeholder: unquote("%#{tokenize($placeholder)}");
     // register a placeholder if needed
-    @include archetype-smart-content($placeholder) {
+    @include archetype-smart-content($placeholder, $here: $here) {
       @each $property, $value in $map {
         @include with-each-value($value) {
           // get the expected value given any runtime locale context

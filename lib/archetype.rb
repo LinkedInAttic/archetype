@@ -4,19 +4,20 @@ require 'compass'
 # Initialize Archetype and register it as a Compass extension
 #
 module Archetype
-  # extension info
-  @archetype = {}
-  @archetype[:name] = 'archetype'
-  @archetype[:path] = File.expand_path(File.join(File.dirname(__FILE__), ".."))
-  # register the extension
-  def self.register
-    Compass::Frameworks.register(@archetype[:name], :path => @archetype[:path])
-  end
+  NAME = 'archetype'
+
+  # info
+  @archetype = {
+    :name => NAME,
+    :path => File.expand_path(File.join(File.dirname(__FILE__), ".."))
+  }
+
   # initialize Archetype
   def self.init
-    # register it
-    self.register
-    # setup configs
+    ## register it
+    register
+
+    ## setup configs
     # locale
     Compass::Configuration.add_configuration_property(:locale, "the user locale") do
       'en_US'
@@ -34,13 +35,20 @@ module Archetype
       not (Compass.configuration.environment || :development).to_s.include?('dev')
     end
     # meta
-    Compass::Configuration.add_configuration_property(:meta, "any meta data you want made available to the environment") do
+    Compass::Configuration.add_configuration_property(:archetype_meta, "any meta data you want made available to the environment") do
       {}
     end
   end
 
   def self.name
-    @archetype[:name]
+    NAME
+  end
+
+  private
+
+  ## register as a Compass extension
+  def self.register
+    Compass::Frameworks.register(NAME, :path => @archetype[:path]);
   end
 end
 
@@ -48,6 +56,6 @@ end
 Archetype.init
 
 # load dependencies
-%w(functions sass_extensions).each do |lib|
+%w(extensions functions sass_extensions).each do |lib|
   require "archetype/#{lib}"
 end

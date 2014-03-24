@@ -85,3 +85,10 @@
   width: 300px;
   /* [archetype:target-os:end]   --- win7 --- */
 }
+
+.os-mac .target-osx-with-map {
+  /* [archetype:target-os:begin] --- osx --- */
+  color: blue;
+  background: pink;
+  /* [archetype:target-os:end]   --- osx --- */
+}

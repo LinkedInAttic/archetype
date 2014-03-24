@@ -17,7 +17,7 @@ namespace :git do
       puts "you must specify a tag. e.g. `rake #{t}[\"this is my tag\"]`".colorize(:red)
     else
       msg = " -m \"#{args[:msg]}\"" if args[:msg]
-      sh "git tag -a \"#{tag}\"#{msg} && git push --tags"
+      sh "git tag -a \"#{tag}\"#{msg} && git push --tags origin master"
     end
   end
 end

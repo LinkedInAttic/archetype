@@ -1,13 +1,5 @@
-// Archetype core
 @import "core";
 
-// TODO - split the following into projects
-
-// theme
-@import "archetype/theme/all";
-
-// grids
-@import "archetype/grid/all";
-
-// base
-@import "archetype/base/all";
+@import "ui/init";
+@import "hacks/init";
+@import "styleguide/init";

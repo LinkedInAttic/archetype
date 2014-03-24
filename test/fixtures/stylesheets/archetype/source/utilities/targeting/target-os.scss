@@ -40,3 +40,9 @@
   @include target-os(win7, width, 300px);
 }
 
+.target-osx-with-map {
+  @include target-os(osx, (
+    color: blue,
+    background: pink
+  ));
+}

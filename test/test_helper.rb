@@ -1,6 +1,7 @@
 # borrowed from Compass
 lib_dir = File.expand_path(File.join(File.dirname(__FILE__), '..', 'lib'))
 $:.unshift(lib_dir) unless $:.include?(lib_dir)
+
 test_dir = File.dirname(__FILE__)
 $:.unshift(test_dir) unless $:.include?(test_dir)
 
@@ -10,7 +11,7 @@ require 'turn/colorize'
 require 'compass'
 require 'true'
 
-require 'diffy' unless ENV['CI']
+require 'diffy'
 
 class String
   def name
@@ -18,12 +19,11 @@ class String
   end
 end
 
-%w(diff io test_case).each do |helper|
+%w(io test_case).each do |helper|
   require "helpers/#{helper}"
 end
 
 class MiniTest::Unit::TestCase
-  include Compass::Diff
   include Compass::TestCaseHelper
   include Compass::IoHelper
   extend Compass::TestCaseHelper::ClassMethods

@@ -1,5 +1,5 @@
 // TODO - verify this works standalone via `@import 'archetype/hacks'`
 // @category  hacks
 @import "required";
-@import "util/all"; // required for `to-style` mixin
-@import "hacks/all";
+@import "util/core"; // required for `to-style` mixin
+@import "hacks/core";

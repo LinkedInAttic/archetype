@@ -1,0 +1,10 @@
+$a-blackhole: require-archetype-module(archetype/core);
+
+// register module
+$a-blackhole: register-archetype-module(archetype/theme);
+
+// theme components
+@import "primitives";
+@import "helpers";
+@import "components";
+@import "keyframes";
