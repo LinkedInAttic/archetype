@@ -25,7 +25,7 @@ Gem::Specification.new do |gemspec|
   gemspec.require_paths = %w(lib)
 
   # Gem Files
-  gemspec.files = `git ls-files`.split($/).select {|f| File.exist?(f) && f =~ %r{^(lib|stylesheets|templates)/} }
+  gemspec.files = `git ls-files`.split($/).select {|f| File.exist?(f) && f =~ %r{^(bin|lib|stylesheets|templates)/} }
   gemspec.files += %w(LICENSE README.md CHANGELOG.md VERSION)
 
   gemspec.executables = gemspec.files.grep(%r{^bin/}) { |f| File.basename(f) }
