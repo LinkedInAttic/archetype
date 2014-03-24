@@ -66,9 +66,13 @@
 - Archetype has now been split into smaller projects
   - the core will provide the most widely used functions/mixins with much opinion on your generated CSS
   - things that are more specialized, opinionated, or heavy-handed have been moved to extensions, these extensions currently include:
-    - `archetype-base` - this will likely be split into multiple extensions
     - `archetype-grid`
     - `archetype-theme`
+    - `archetype-base`
+      - `archetype-base-h5bp`
+      - `archetype-base-normalize`
+      - `archetype-base-reset`
+      - `archetype-base-hybrid`
   - the goal of this split is to provide consumers with the most useful and non-intrusive features upfront while still offering (via extension) the robustness we've already built
 
 ## 0.0.1.pre.3 (pre-released)

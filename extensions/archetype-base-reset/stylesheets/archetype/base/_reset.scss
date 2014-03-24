@@ -66,8 +66,4 @@
   @if(not index($exclude, reset-html5)) {
     @include reset-html5();
   }
-  // IME
-  @if(not index($exclude, reset-ime)) {
-    @include base-normalize-ime();
-  }
 }

@@ -1,7 +1,7 @@
 // @category  base
-@import "normalize";
-@import "reset";
-@import "h5bp";
+@import "archetype/base/normalize";
+@import "archetype/base/reset";
+@import "archetype/base/h5bp";
 
 // hybrid method for reset using both a global reset as well as some normalize features
 // @mixin     base-hybrid

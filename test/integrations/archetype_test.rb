@@ -36,10 +36,11 @@ class ArchetypeTest < MiniTest::Unit::TestCase
             assert_no_css_diff(File.read(file), '', name, "#{name}.css was not created!")
           end
         end
+
+        # after it's all done...
+        update_expectations if UPDATING_TESTS
       end
 
-      # after it's all done...
-      update_expectations if UPDATING_TESTS
     end
     ArchetypeTestHelpers::Profiler.stop
   end

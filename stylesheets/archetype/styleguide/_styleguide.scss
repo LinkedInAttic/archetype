@@ -7,14 +7,15 @@
 // @param     $exclude {List} a list of styles to exclude from output
 // @param     $state {String} a specific state to output
 // @param     $theme {String} the theme name
+// @param     $here {Boolean} if true, will force the content to be output in the current context, and not extended
 // @content
-@mixin styleguide($is: (), $is-2: false, $is-3: false, $is-4: false, $is-5: false, $is-6: false, $is-7: false, $is-8: false, $is-9: false, $is-10: false, $exclude: (), $state: null, $theme: $CONFIG_THEME) {
+@mixin styleguide($is: (), $is-2: false, $is-3: false, $is-4: false, $is-5: false, $is-6: false, $is-7: false, $is-8: false, $is-9: false, $is-10: false, $exclude: (), $state: null, $theme: $CONFIG_THEME, $here: null) {
   $definition: compact($is, $is-2, $is-3, $is-4, $is-5, $is-6, $is-7, $is-8, $is-9, $is-10);
   @if length($definition) > 0 {
     $styles: _styleguide($definition, $state, $theme);
     // output the styles
     $archetype-origin-function: styleguide !global;
-    @include to-styles($styles, $exclude: $exclude) {
+    @include to-styles($styles, $exclude: $exclude, $here: $here) {
       @content;
     };
     $archetype-origin-function: null !global;

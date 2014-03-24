@@ -19,7 +19,7 @@ Gem::Specification.new do |gemspec|
   gemspec.name        = extension.info(:name)
   gemspec.authors     = extension.info(:authors)
   gemspec.email       = extension.info(:email)
-  gemspec.homepage    = extension.info(:homepage)
+  gemspec.homepage    = File.join(extension.info(:homepage), 'extensions', extension.info(:name))
   gemspec.license     = extension.info(:license)
 
   ## Paths

@@ -222,7 +222,7 @@ class ArchetypeTest < MiniTest::Unit::TestCase
       puts "Are all of these changes expected? [y/n]".colorize(:yellow)
       if (($stdin.gets.chomp)[0] == 'y')
         FileUtils.rm_rf(File.join(expectation_path, '.'))
-        FileUtils.cp_r(File.join(css_path, '.'), File.join(expectation_path))
+        FileUtils.cp_r(File.join(css_path, '.'), expectation_path)
         puts "#{checkmark}Thanks! The test expectations for #{@current_project} have been updated".colorize(:green)
       else
         puts "Please manually update the test cases and expectations for #{@current_project}".colorize(:red)
