@@ -25,11 +25,13 @@ namespace :gem do
       defaults.each do |file|
         unless File.exist?(File.join(build_path, file))
           remove_after << file
-          FileUtils.cp(File.join(root_dir, file), build_path)
+          FileUtils.cp(File.join(root_dir, file), File.join(build_path, file))
         end
       end
       # cd into the build directory and build the gem
+      puts "\nbuilding #{File.basename(file, '.gemspec').colorize(:cyan)} gem..."
       sh "cd #{build_path} && gem build #{File.basename(file)}"
+
       # remove any files that were copied over
       remove_after.each do |file|
         FileUtils.rm_f(File.join(build_path, file))
@@ -48,7 +50,11 @@ namespace :gem do
   task :uninstall do
     # uninstalls each known gem
     with_each_gemspec do |file, spec|
-      sh "#{ENV['SUDO']} gem uninstall #{spec.name} -x -a#{@devnull}"
+      begin
+        sh "#{ENV['SUDO']} gem uninstall #{spec.name} -x -a#{@devnull}"
+      rescue
+        puts "could not uninstall #{spec.name}".colorize(:yellow)
+      end
     end
   end
 
