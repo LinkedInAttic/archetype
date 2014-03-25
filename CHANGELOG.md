@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0.alpha.2 (3/24/2014)
+
+### Resolved Issues:
+
+- fixed broken gems
+- fix the `to-styles` to correctly apply overrides passed in via a content block when using smart content
+
 ## 1.0.0.alpha.1 (3/24/2014)
 
 ### Resolved Issues:

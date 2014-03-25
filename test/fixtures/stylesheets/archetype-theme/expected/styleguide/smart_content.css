@@ -13,6 +13,9 @@
   color: #222222;
   font-weight: normal;
 }
+.test2a {
+  color: red;
+}
 
 .test2b {
   /* [archetype:styleguide:begin] --- `small copy` --- */
@@ -22,16 +25,27 @@
 .test2c {
   /* [archetype:styleguide:begin] --- `small copy` --- */
   /* [archetype:styleguide:end] --- `small copy` --- */
+}
+.test2c {
   color: red;
 }
 
-.test2d {
+.test3a {
   /* [archetype:styleguide:begin] --- `small muted copy` --- */
   /* [archetype:styleguide:end] --- `small muted copy` --- */
 }
-.test2d {
+.test3a {
   font-size: 12px;
   line-height: 14px;
   color: #555555;
   font-weight: normal;
+}
+
+.test3b {
+  /* [archetype:styleguide:begin] --- `small muted copy` --- */
+  font-size: 12px;
+  line-height: 14px;
+  color: #555555;
+  font-weight: normal;
+  /* [archetype:styleguide:end] --- `small muted copy` --- */
 }
