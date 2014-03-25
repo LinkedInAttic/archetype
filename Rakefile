@@ -4,7 +4,7 @@ $:.unshift lib unless $:.include?(lib)
 require 'rake'
 require 'archetype/version'
 
-require 'colorize' unless ENV['CI']
+require 'colorize'
 
 # swallow errors
 @devnull = File.new('/dev/null').path
