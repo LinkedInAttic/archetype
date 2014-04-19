@@ -124,7 +124,7 @@ module Archetype::SassExtensions::Util::Misc
   def do_once(name)
     registry = do_once_registry
     # if it's already in the registry, just return `false`
-    return bool(false) if do_once_registry.include?(name)
+    return bool(false) if registry.include?(name)
     # update the registry with the identifier
     registry = list(registry.dup.push(name), :comma)
     environment.global_env.set_var('REGISTRY_DO_ONCE', registry)
@@ -202,6 +202,21 @@ module Archetype::SassExtensions::Util::Misc
     return best_match
   end
 
+  def _archetype_within_mixin(contexts)
+    stack = archetype_mixin_stack
+    contexts = contexts.is_a?(Sass::Script::Value::List) ? contexts.to_a : [contexts]
+    contexts.each do |context|
+      return bool(true) if stack.include?(context.to_s.gsub(/_/, '-').downcase )
+    end
+    return bool(false)
+  end
+
+  def _archetype_mixin_called_recursively()
+    stack = archetype_mixin_stack
+    current = stack.shift
+    return bool(stack.include?(current))
+  end
+
 private
 
   @@archetype_ui_mutex = Mutex.new
@@ -211,6 +226,10 @@ private
       @@uid ||= 0
       @@uid += 1
     end
+  end
+
+  def archetype_mixin_stack
+    @environment.stack.frames.select {|f| f.is_mixin?}.reverse!.map! {|f| f.name.gsub(/_/, '-').downcase }
   end
 
   def do_once_registry

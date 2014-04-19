@@ -1,0 +1,25 @@
+@import "test_harness";
+
+$key: do-once-test;
+
+@include do-once($key) {
+  /* should see this comment */
+}
+
+@include do-once($key) {
+  /* should not see this comment */
+}
+
+
+// test that maps can be used as a valid key
+$map-key: (
+  map: true
+);
+
+@include do-once($map-key) {
+  /* should see this comment for a map */
+}
+
+@include do-once($map-key) {
+  /* should not see this comment for a map */
+}
