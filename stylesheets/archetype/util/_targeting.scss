@@ -3,12 +3,15 @@
 // throw an error if archetype/util has not been registered
 $a-blackhole: require-archetype-modules(archetype/util);
 
+@function _getTargetedSelectorScope($selector, $merge: false) {
+  @return unquote(if($merge, '&.#{$selector}', '.#{$selector} &'));
+}
+
 // given a list of browsers and versions, this will consolidate them into a
 // normalized list of targeted browsers
 // @function  _getTargetedBrowsers
 // @private
 // @param     $browsers {List} the browsers/versions to target
-// @param     $using {String} an optional string to append to the end of each item
 // @param     $vendors {List} the list of supported vendors for class targeting
 // @param     $threshold {Number} the minimum browser usage threshold to support
 // @return    $list {List} the normalized list of targeted browsers
@@ -17,8 +20,7 @@ $a-blackhole: require-archetype-modules(archetype/util);
 // _getTargetedBrowsers(ie lte 7) => (.ie.lte7)
 // _getTargetedBrowsers(ie 6 7) => (.ie.ie6, .ie.ie7)
 // _getTargetedBrowsers(ie 10 lt 9) => (.ie.ie10, .ie.lte8)
-// _getTargetedBrowsers(ie 6, $using: '&') => (.ie.ie6&) // e.g. for merging with other selectors
-@function _getTargetedBrowsers($browsers, $using: '', $vendors: $CONFIG_BROWSER_VENDORS_CLASS, $threshold: $critical-usage-threshold) {
+@function _getTargetedBrowsers($browsers, $merge: false, $vendors: $CONFIG_BROWSER_VENDORS_CLASS, $threshold: $critical-usage-threshold) {
   $browsers: -archetype-list($browsers);
   $vendors: -archetype-list($vendors);
   $comparators: (eq lt lte);
@@ -41,7 +43,8 @@ $a-blackhole: require-archetype-modules(archetype/util);
     @else if(index(-archetype-list($vendors), $item)) {
       $vendor: $item;
       // keep track of unversioned vendors
-      $unversioned: append($unversioned, unquote('.#{$vendor}#{$using}'), comma);
+
+      $unversioned: append($unversioned, _getTargetedSelectorScope($vendor, $merge), comma);
     }
     // otherwise assume it's a version
     @else if(type-of($item) == number) {
@@ -55,9 +58,9 @@ $a-blackhole: require-archetype-modules(archetype/util);
         $item: #{$comparator}#{($item + $version-adjust)};
       }
       @if($vendor and support-legacy-browser($vendor, "#{$tmp}", $threshold: $critical-usage-threshold)) {
-        $item: '.#{$vendor}.#{$item}#{$using}';
-        $list: append($list, unquote($item), comma);
-        $unversioned: list-remove($unversioned, index($unversioned, '.#{$vendor}#{$using}'));
+        $item: _getTargetedSelectorScope('#{$vendor}.#{$item}', $merge);
+        $list: append($list, $item, comma);
+        $unversioned: list-remove($unversioned, index($unversioned, _getTargetedSelectorScope($vendor, $merge)));
       }
       // restore temps
       $version-adjust: 0;
@@ -83,55 +86,59 @@ $a-blackhole: require-archetype-modules(archetype/util);
 // =target-browser(ie 8, border, 10px);
 // =target-browser(ie lte 7, padding, 0);
 @mixin target-browser($browsers, $property: null, $value: null, $merge: false, $inline: true, $threshold: $critical-usage-threshold) {
+  // if the previous context was target-browser or target-os, we can only use inline methods
+  $only-inline: $inline and (-archetype-mixin-called-recursively() or -archetype-within-mixin(target-os));
   @if($CONFIG_BROWSER_ALLOW_HACKS) {
-    // target webkit, Safari3+, Chrome1+
-    @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, webkit-all) )) {
-      @if $CONFIG_BROWSER_WARN_ON_HACK {
-        @warn "[archetype:target:browser] using hack for webkit-all";
-      }
-      // @link http://paulirish.com/2009/browser-specific-css-hacks/
-      @media screen and (-webkit-min-device-pixel-ratio:0) {
-        & {
-          /* [archetype:target:browser:begin] --- webkit --- */
-          @include output-style($property, $value);
-          @content;
-          /* [archetype:target:browser:end]   --- webkit --- */
+    @if not $only-inline {
+      // target webkit, Safari3+, Chrome1+
+      @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, webkit-all) )) {
+        @if $CONFIG_BROWSER_WARN_ON_HACK {
+          @warn "[archetype:target:browser] using hack for webkit-all";
+        }
+        // @link http://paulirish.com/2009/browser-specific-css-hacks/
+        @media screen and (-webkit-min-device-pixel-ratio:0) {
+          & {
+            /* [archetype:target:browser:begin] --- webkit --- */
+            @include output-style($property, $value);
+            @content;
+            /* [archetype:target:browser:end]   --- webkit --- */
+          }
         }
       }
-    }
-    // target gecko
-    @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, gecko-all) )) {
-      @if $CONFIG_BROWSER_WARN_ON_HACK {
-        @warn "[archetype:target:browser] using hack for gecko-all";
+      // target gecko
+      @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, gecko-all) )) {
+        @if $CONFIG_BROWSER_WARN_ON_HACK {
+          @warn "[archetype:target:browser] using hack for gecko-all";
+        }
+        // @link http://paulirish.com/2009/browser-specific-css-hacks/
+        &, x:-moz-any-link {
+          /* [archetype:target:browser:begin] --- gecko --- */
+          @include output-style($property, $value);
+          @content;
+          /* [archetype:target:browser:end]   --- gecko --- */
+        }
       }
-      // @link http://paulirish.com/2009/browser-specific-css-hacks/
-      &, x:-moz-any-link {
-        /* [archetype:target:browser:begin] --- gecko --- */
-        @include output-style($property, $value);
-        @content;
-        /* [archetype:target:browser:end]   --- gecko --- */
-      }
-    }
-    // target opera
-    @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, opera-all) )) {
-      @if $CONFIG_BROWSER_WARN_ON_HACK {
-        @warn "[archetype:target:browser] using hack for opera-all";
-      }
-      // @link http://paulirish.com/2009/browser-specific-css-hacks/
-      &, x:-o-prefocus {
-        /* [archetype:target:browser:begin] --- opera --- */
-        @include output-style($property, $value);
-        @content;
-        /* [archetype:target:browser:end]   --- opera --- */
+      // target opera
+      @if(index2($browsers, map-get($CONFIG_BROWSER_VENDORS_HACK, opera-all) )) {
+        @if $CONFIG_BROWSER_WARN_ON_HACK {
+          @warn "[archetype:target:browser] using hack for opera-all";
+        }
+        // @link http://paulirish.com/2009/browser-specific-css-hacks/
+        &, x:-o-prefocus {
+          /* [archetype:target:browser:begin] --- opera --- */
+          @include output-style($property, $value);
+          @content;
+          /* [archetype:target:browser:end]   --- opera --- */
+        }
       }
     }
     // if there's only one target browser and it's IE6 or IE lte 7, we can use an inline hack
     @if $inline and type-of($property) != map {
-      $tmp: _getTargetedBrowsers($browsers, $threshold: $threshold);
+      $tmp: _getTargetedBrowsers($browsers, $merge: false, $threshold: $threshold);
       @if(length($tmp) == 1) {
         $support: ();
-        @if(support-legacy-browser('ie', '6', $threshold: $critical-usage-threshold)) { $support: append($support, '.ie.ie6'); }
-        @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) { $support: append($support, '.ie.lte7'); }
+        @if(support-legacy-browser('ie', '6', $threshold: $critical-usage-threshold)) { $support: append($support, '.ie.ie6 &'); }
+        @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) { $support: append($support, '.ie.lte7 &'); }
         $idx: index2($support, $tmp);
         @if($idx) {
           $prefix: nth(('_', '*'), $idx);
@@ -143,14 +150,16 @@ $a-blackhole: require-archetype-modules(archetype/util);
       }
     }
   }
-  // target via class names
-  $classes: _getTargetedBrowsers($browsers, $using: if($merge, '&', ' &'), $threshold: $threshold);
-  @if(length($classes) > 0) {
-    #{$classes} {
-      /* [archetype:target:browser:begin] --- #{$browsers} --- */
-      @include output-style($property, $value);
-      @content;
-      /* [archetype:target:browser:end]   --- #{$browsers} --- */
+  @if not $only-inline {
+    // target via class names
+    $classes: _getTargetedBrowsers($browsers, $merge: $merge, $threshold: $threshold);
+    @if(length($classes) > 0) {
+      #{$classes} {
+        /* [archetype:target:browser:begin] --- #{$browsers} --- */
+        @include output-style($property, $value);
+        @content;
+        /* [archetype:target:browser:end]   --- #{$browsers} --- */
+      }
     }
   }
 }
@@ -164,7 +173,6 @@ $a-blackhole: require-archetype-modules(archetype/util);
 // @content
 @mixin target-os($os: (), $property: null, $value: null, $merge: false) {
   $os: -archetype-list($os);
-  $using: if($merge, '&', ' &');
   $classes: ();
   // if `default` is in the list of OS's, then output without a prefix
   @if(index($os, default)) {
@@ -174,7 +182,7 @@ $a-blackhole: require-archetype-modules(archetype/util);
   @each $vendor, $aliases in $CONFIG_OS_VENDORS_CLASS {
     // if it matches the requested os
     @if index2($aliases, $os) {
-      $item: unquote('.#{$vendor}#{$using}');
+      $item: _getTargetedSelectorScope($vendor, $merge);
       // if it's not already on the stack, push it
       @if(not index($classes, $item)) {
         $classes: append($classes, $item, comma);

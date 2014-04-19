@@ -6,20 +6,6 @@ class SassExtensionsTest < MiniTest::Unit::TestCase
     Compass.reset_configuration!
   end
 
-  ## VERSION
-  # test that archetype-version() is working correctly
-  def test_version
-    version_pattern = /\d+(\.\d+)*(\.[x|\*])?/
-    assert_equal Archetype::VERSION.match(version_pattern)[0], evaluate("archetype-version()")
-    assert_equal Compass::VERSION.match(version_pattern)[0], evaluate("archetype-version(compass)")
-    assert_equal Sass::VERSION.match(version_pattern)[0], evaluate("archetype-version(sass)")
-    assert_equal "true", evaluate("archetype-version('Compass >= 0.13')")
-    assert_equal "false", evaluate("archetype-version('Sass >= 99.0.0')")
-    assert_equal "true", evaluate("archetype-version('Sass gt 3.0')")
-    assert_equal "true", evaluate("archetype-version(Archetype ne 99)")
-  end
-
-
   ## ENVIRONMENT
   # test that archetype-env() is working correctly
   def test_env

@@ -1,6 +1,5 @@
 @import "test_harness";
 
-$a-blackhole: component-registration-setup();
 @if should-register-component(map-structure-test) {
 $a-blackhole: styleguide-add-component(map-structure-test, (), (
   default: (
@@ -22,7 +21,6 @@ $a-blackhole: styleguide-add-component(map-structure-test, (), (
   )
 )) !global;
 }
-$a-blackhole: component-registration-setup(teardown);
 
 .test {
   @include styleguide(map-structure-test);

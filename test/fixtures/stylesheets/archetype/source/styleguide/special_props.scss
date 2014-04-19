@@ -1,0 +1,48 @@
+@import "test_harness";
+
+$trash: register-breakpoint(smartphone, 'only screen and (min-device-width : 320px) and (max-device-width : 480px)');
+
+$CONFIG_RESOLUTION_HIGH: 2;
+
+%test {
+  test: true;
+}
+
+@if should-register-component(special-prop-test) {
+$a-blackhole: styleguide-add-component(special-prop-test, (), (
+  default: (
+    inline-block:         (middle, top),
+    hide-text:            -archetype-no-value,
+    hide-element:         -archetype-no-value,
+    target-browser:       (ie lte 8, target-browser, (ie lte 7, color, red)),
+    '@extend':            '%test',
+    '{raw}target-browser': raw-value,
+    '@media':             (
+      'only screen and (min-device-width: 320px)' : (
+        color: red,
+        background: green
+      )
+    ),
+    '@keyframes':         (
+      test-frames:        (
+        'from, to': (
+          color: green,
+          height: 100px
+        )
+      )
+    ),
+    breakpoint:           (
+      'smartphone':       (
+        color: pink
+      )
+    ),
+    high-resolution:      (
+      color: purple
+    )
+  )
+)) !global;
+}
+
+.test {
+  @include styleguide(special-prop-test);
+}

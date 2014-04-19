@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.0.alpha.3 (unreleased)
+
+### Resolved Issues:
+
+- allow `target-browser` to be called recursively
+
+### Major Changes:
+
+- removed `archetype-version` in favor of `feature-exists`, `variable-exists`, `function-exists`, and `mixin-exists`
+
 ## 1.0.0.alpha.2 (3/24/2014)
 
 ### Resolved Issues:

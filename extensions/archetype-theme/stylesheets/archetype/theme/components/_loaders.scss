@@ -12,7 +12,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_LOADERS_ID, $STYLEGUIDE_LOADE
     stretch:              true,
     opacity:              0.7,
     overflow:             hidden,
-    hide-text:            true,
+    hide-text:            -archetype-no-value,
     background-color:     _styleguideGetContextColor(nth($CONFIG_TEXTURE_CONTAINER, 1)),
     ie-pseudo-after:      _styleguideGetLoaderExpression(medium),
     selectors: (

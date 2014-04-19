@@ -2,6 +2,16 @@ description = "Check a set of files for migration and back-compat issues"
 if @description.nil?
   DELIMITER = "\n  "
   DATA = {
+    '1.0.0.alpha.3' => {
+      :tests => {
+        :sacss => [
+          {
+            :pattern => /(archetype[_-]version)/m,
+            :message => 'function `$1` has been removed'
+          }
+        ]
+      }
+    },
     '1.0.0.alpha.1' => {
       :notice => %q{Archetype now requires Sass 3.3+ and Compass 0.13+},
       :tests => {

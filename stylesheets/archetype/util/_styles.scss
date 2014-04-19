@@ -3,29 +3,6 @@
 // throw an error if archetype/util has not been registered
 $a-blackhole: require-archetype-modules(archetype/util);
 
-// this is a proxy for output-style
-// this contains mixins that will eventually call output-style in one form or another
-// @mixin     _outputStyle
-// @private
-// @param     $property {String} the CSS property to output
-// @param     $value {*} the CSS value to output
-@mixin _outputStyle($property, $value: null) {
-  @if not is-null($value) {
-    @if($property == target-browser) {
-      @include target-browser(nth($value,1), nth($value,2), nth($value,3));
-    }
-    @else if($property == font-family) {
-      @include font-family($value);
-    }
-    @else if($property == font-style) {
-      @include font-style($value);
-    }
-    @else {
-      @include output-style($property, $value);
-    }
-  }
-}
-
 @function check-for-custom-styler($property, $value, $method: pre) {
   @return mixin-exists('custom-output-styler') and function-exits('has-custom-output-styler') and has-custom-output-styler($property, $value, $method);
 }
@@ -38,14 +15,27 @@ $a-blackhole: require-archetype-modules(archetype/util);
   @if type-of($property) == map {
     @include to-styles($property);
   }
-  @elseif( not is-null($property) and length(-archetype-list($value)) > 0 and not is-null(first-value-of(-archetype-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
+  @else if( not is-null($property) and length(-archetype-list($value)) > 0 and not is-null(first-value-of(-archetype-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
+    // if the value is the special `-archetype-no-value`, pass along an empty value
+    @if $value == -archetype-no-value {
+      $value: ();
+    }
+
     // for mixins, we need to do some custom work
     // check to see if we have a custom output styler (pre)
     @if check-for-custom-styler($property, $value, pre) {
       @include custom-output-styler($property, $value, $method: pre);
     }
+
     // we're going to assume that any mixins that get invoked here have been properly imported
     //  if not, they will simply throw a compilation error
+
+    // check that we aren't already inside of these mixins before calling them
+    @else if($property == font-family and not -archetype-within-mixin(font-family)) { @include font-family($value); }
+    @else if($property == font-style and not -archetype-within-mixin(font-style)) { @include font-style($value); }
+
+    // target-browser
+    @else if($property == target-browser)       { @include target-browser($value...); }
     // border-radius
     @else if($property == border-radius)        { @include border-radius($value...); }
     // box-sizing
@@ -69,7 +59,7 @@ $a-blackhole: require-archetype-modules(archetype/util);
     // IE filters
     @else if($property == ie-filter)            { @include ie-filter($value...); }
     // hide-text
-    @else if($property == hide-text)            { @include hide-text($direction: if($value == true, $hide-text-direction, $value...)); }
+    @else if($property == hide-text)            { @include hide-text($value...); }
     // inline-block
     @else if($property == inline-block)         { @include inline-block($value...); }
     // opacity
@@ -86,34 +76,35 @@ $a-blackhole: require-archetype-modules(archetype/util);
     @else if($property == stretch)              { @include stretch($value...); }
     // appearance
     @else if($property == appearance)           { @include appearance($value...); }
+    // hide-element
+    @else if($property == hide-element)         { @include hide-element($value...); }
     // unhide-element
     @else if($property == unhide-element)       { @include unhide-element($value...); }
+    // unstyled-button
+    @else if($property == unstyled-button)      { @include unstyled-button($value...); }
     // ellipsis
     @else if($property == ellipsis)             { @include ellipsis($value...); }
     // scale
     @else if($property == scale)                { @include scale($value...); }
     // z-index
     @else if($property == z-index)              { @include z-index($value...); }
+    // glyphs
     @else if($property == glyph-icon)           { @include glyph-icon($value...); }
-    @else if($property == extend)               {
-      @each $v in -archetype-list($value) {
-        @extend #{$v};
-      }
-    }
+    @else if($property == glyph-stroke)         { @include glyph-stroke($value...); }
     // animations
-    @else if($property == animation) {
-      @include animation($value...);
-    }
+    @else if($property == animation)            { @include animation($value...); }
     // hasLayout
-    @else if($property == has-layout) {
-      // if value is true, don't pass it along
-      @if($value == true) {
-        @include has-layout();
-      }
-      @else {
-        @include has-layout($value...);
-      }
-    }
+    @else if($property == has-layout)           { @include has-layout($value...); }
+    // IE :before/:after
+    @else if($property == ie-pseudo)            { @include ie-pseudo($value...); }
+    @else if($property == ie-pseudo-before)     { @include ie-pseudo-before($value...); }
+    @else if($property == ie-pseudo-after)      { @include ie-pseudo-after($value...); }
+    // transparent-focusable
+    @else if($property == transparent-focusable)  { @include transparent-focusable($value); }
+    // triangle
+    @else if($property == triangle)             { @include triangle($value...); }
+    // styleguide-diff
+    @else if($property == styleguide-diff)      { @include styleguide-diff($value...); }
     // clearfix
     @else if($property == clearfix) {
       @if($value == legacy-pie-clearfix) {
@@ -123,33 +114,67 @@ $a-blackhole: require-archetype-modules(archetype/util);
         @include pie-clearfix();
       }
       @else {
-        @include clearfix();
+        @include clearfix($value...);
       }
     }
-    // :before/:after
-    @else if($property == ie-pseudo-before or $property == ie-pseudo-after) {
-      $value: -archetype-list($value);
-      $content: false;
-      $tag: '';
-      @if length($value) > 1 {
-        $content: nth($value, 2);
-        @if length($value) > 2 {
-          $tag: nth($value, 3);
+    // special case for @extend
+    @else if($property == extend or $property == '@extend') {
+      @each $v in -archetype-list($value) {
+        @extend #{$v};
+      }
+    }
+    // special case for @media
+    @else if($property == media or $property == '@media') {
+      @each $query, $styles in $value {
+        @media #{$query} {
+          @include to-styles($styles);
         }
       }
-      @if $property == ie-pseudo-before {
-        @include ie-pseudo-before(nth($value, 1), $content, $tag);
-      }
-      @else {
-        @include ie-pseudo-after(nth($value, 1), $content, $tag);
+    }
+    // special case for @keyframes
+    @else if($property == keyframes or $property == '@keyframes') {
+      @each $name, $def in $value {
+        @each $frame, $styles in $def {
+          @include keyframes($name) {
+            @at-root #{$frame} {
+              @include to-styles($styles);
+            }
+          }
+        }
       }
     }
+    // breakpoint
+    @else if($property == breakpoint) {
+      @each $key, $styles in $value {
+        @include breakpoint($key) {
+          @include to-styles($styles);
+        }
+      }
+    }
+    // high-resolution
+    @else if($property == high-resolution) {
+      @include high-resolution {
+        @include to-styles($value);
+      }
+    }
+    // switch-locale
+    @else if($property == switch-locale) {
+      @each $locale, $styles in $value {
+        @include switch-locale($locale) {
+          @include to-styles($styles);
+        }
+      }
+    }
+
     // check to see if we have a custom output styler (post)
     @else if check-for-custom-styler($property, $value, post) {
       @include custom-output-styler($property, $value, $method: post);
     }
     // otherwise just use a key-value pair
-    @else { #{$property}: $value; }
+    @else {
+      // strip off the special `{raw}` keyword
+      #{str-replace($property, '{raw}', '')}: $value;
+    }
   }
 }
 
@@ -261,7 +286,7 @@ $a-blackhole: require-archetype-modules(archetype/util);
             }
             // otherwise, just output it
             @else if($selectors == true and $states == true ) {
-              @include _outputStyle($property, $value);
+              @include output-style($property, $value);
             }
           }
         }
@@ -414,7 +439,7 @@ $a-blackhole: require-archetype-modules(archetype/util);
 // @mixin     font-family
 // @param     $family {String} the font stack to output
 @mixin font-family($family: null) {
-  @include safe(font-family, $family);
+ @include safe(font-family, $family);
 }
 
 // safely use text-transform:uppercase without localization issues

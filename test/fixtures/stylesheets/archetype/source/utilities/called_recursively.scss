@@ -1,0 +1,17 @@
+@import "test_harness";
+
+@mixin top {
+  @include test;
+}
+$limit: 1;
+@mixin test {
+  /* called recursively: #{-archetype-mixin-called-recursively()} */
+  @if $limit > 0 {
+    $limit: $limit - 1;
+    @include test;
+  }
+}
+
+.test {
+  @include top;
+}

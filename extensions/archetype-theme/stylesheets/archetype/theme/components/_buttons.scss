@@ -259,7 +259,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID,  $STYLEGUIDE_BUTT
     padding:                  _styleguideGetButtonPadding(small, narrow)
   ),
   indicator: (
-    hide-text:                true,
+    hide-text:                -archetype-no-value,
     border:                   0,
     color:                    $CONFIG_COLOR_BUTTON_INDICATOR, // Added so IE 6/7 hide the text
     width:                    nth($CONFIG_DIM_BUTTON_INDICATOR_SMALL, 1),
