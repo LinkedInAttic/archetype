@@ -1,0 +1,19 @@
+@import "test_harness";
+
+@if should-register-component(removed-component) {
+$a-blackhole: styleguide-add-component(removed-component, (), (
+  default: (
+    color: red
+  )
+)) !global;
+}
+
+.test {
+  @include styleguide(removed-component);
+}
+
+$a-blackhole: styleguide-remove-component(removed-component);
+
+.removed {
+  @include styleguide(removed-component);
+}

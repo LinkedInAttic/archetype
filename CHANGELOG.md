@@ -4,7 +4,14 @@
 
 ### Resolved Issues:
 
-- allow `target-browser` to be called recursively
+- allow `target-browser` to be called recursively, kinda
+
+### New Features:
+
+- added some additional helper methods for working with styleguide components:
+  - `styleguide-remove-component`
+  - `styleguide-freeze-component` / `styleguide-thaw-component`
+  - `styleguide-freeze-all-components` / `styleguide-thaw-all-components`
 
 ### Major Changes:
 
@@ -15,7 +22,7 @@
 ### Resolved Issues:
 
 - fixed broken gems
-- fix the `to-styles` to correctly apply overrides passed in via a content block when using smart content
+- fixed `to-styles` to correctly apply overrides passed in via a content block when using smart content
 
 ## 1.0.0.alpha.1 (3/24/2014)
 
@@ -23,8 +30,8 @@
 
 - support Sass 3.3.0 and Compass 1.0.0
 - `content` is no longer improperly quoted if not needed
-- fix for IE7 `:before` glyphs not being positioned correctly
-- fix for IE7 potentially crashing with `Operation Aborted` due to glyph injection
+- fixed IE7 `:before` glyphs not being positioned correctly
+- fixed IE7 potentially crashing with `Operation Aborted` due to glyph injection
 
 ### New Features:
 

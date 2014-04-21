@@ -48,6 +48,7 @@ $a-blackhole: require-archetype-modules(archetype/util);
     }
     // otherwise assume it's a version
     @else if(type-of($item) == number) {
+      $unversioned: list-remove($unversioned, index($unversioned, _getTargetedSelectorScope($vendor, $merge)));
       $tmp: if($vendor == ie, $item, 9999); // we only support versions for IE, otherwise, set an obsurdly high version
       // if it's equalitative, prefix the vendor onto the version
       @if(not $comparator or $comparator == eq) {
@@ -60,7 +61,6 @@ $a-blackhole: require-archetype-modules(archetype/util);
       @if($vendor and support-legacy-browser($vendor, "#{$tmp}", $threshold: $critical-usage-threshold)) {
         $item: _getTargetedSelectorScope('#{$vendor}.#{$item}', $merge);
         $list: append($list, $item, comma);
-        $unversioned: list-remove($unversioned, index($unversioned, _getTargetedSelectorScope($vendor, $merge)));
       }
       // restore temps
       $version-adjust: 0;

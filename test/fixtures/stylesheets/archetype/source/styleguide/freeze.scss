@@ -1,0 +1,59 @@
+@import "test_harness";
+
+@function modify-with($data) {
+  @return styleguide-extend-component(frozen-component, (
+    default: $data
+  ));
+}
+
+// create a component
+$a-blackhole: styleguide-add-component(frozen-component, (
+  default: (
+    color: red
+  )
+)) !global;
+
+// then freeze it...
+$a-blackhole: styleguide-freeze-component(frozen-component);
+// and try to modify it
+$a-blackhole: modify-with((
+  background: green
+));
+
+.frozen {
+  @include styleguide(frozen-component);
+}
+
+// now thaw it...
+$a-blackhole: styleguide-thaw-component(frozen-component);
+// and try to modify it
+$a-blackhole: modify-with((
+  background: blue
+));
+
+.thawed {
+  @include styleguide(frozen-component);
+}
+
+
+// now freeze ALL components
+$a-blackhole: styleguide-freeze-all-components();
+// and try to extend it
+$a-blackhole: modify-with((
+  height: 100px
+));
+
+.all-frozen {
+  @include styleguide(frozen-component);
+}
+
+// then thaw ALL components
+$a-blackhole: styleguide-thaw-all-components();
+// and try to extend it
+$a-blackhole: modify-with((
+  height: 50px
+));
+
+.all-thawed {
+  @include styleguide(frozen-component);
+}

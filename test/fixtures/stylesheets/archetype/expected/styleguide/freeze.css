@@ -1,0 +1,27 @@
+.frozen {
+  /* [archetype:styleguide:begin] --- `frozen-component` --- */
+  color: red;
+  /* [archetype:styleguide:end] --- `frozen-component` --- */
+}
+
+.thawed {
+  /* [archetype:styleguide:begin] --- `frozen-component` --- */
+  color: red;
+  background: blue;
+  /* [archetype:styleguide:end] --- `frozen-component` --- */
+}
+
+.all-frozen {
+  /* [archetype:styleguide:begin] --- `frozen-component` --- */
+  color: red;
+  background: blue;
+  /* [archetype:styleguide:end] --- `frozen-component` --- */
+}
+
+.all-thawed {
+  /* [archetype:styleguide:begin] --- `frozen-component` --- */
+  color: red;
+  background: blue;
+  height: 50px;
+  /* [archetype:styleguide:end] --- `frozen-component` --- */
+}

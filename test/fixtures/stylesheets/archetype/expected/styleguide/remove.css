@@ -1,0 +1,10 @@
+.test {
+  /* [archetype:styleguide:begin] --- `removed-component` --- */
+  color: red;
+  /* [archetype:styleguide:end] --- `removed-component` --- */
+}
+
+.removed {
+  /* [archetype:styleguide:begin] --- `removed-component` --- */
+  /* [archetype:styleguide:end] --- `removed-component` --- */
+}
