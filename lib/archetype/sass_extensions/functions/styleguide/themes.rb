@@ -34,6 +34,7 @@ module Archetype::SassExtensions::Styleguide
     theme[:name] ||= theme_name
     theme[:components] ||= {}
     theme[:extensions] ||= []
+    theme[:frozen] ||= Set.new
     return theme
   end
 
