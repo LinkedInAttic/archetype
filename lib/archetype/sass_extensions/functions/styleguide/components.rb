@@ -168,21 +168,9 @@ module Archetype::SassExtensions::Styleguide
     return rand(36**8).to_s(36) + str
   end
 
-  def _styleguide_mutex_helper(id = nil, theme = nil)
-    @@archetype_styleguide_mutex.synchronize do
-      if block_given?
-        if id.nil?
-          yield
-        else
-          yield(helpers.to_str(id), get_theme(theme))
-        end
-      end
-    end
-  end
-
   def component_is_frozen?(id, theme, warn = true)
     if theme[:frozen].include?(id)
-      helpers.warn "[#{Archetype.name}:styleguide:frozen] the component `#{id}` has been frozen and cannot be modified." if warn
+      helpers.warn "[#{Archetype.name}:styleguide:frozen] the component `#{id}` has been frozen and cannot be modified" if warn
       return true
     end
     return false

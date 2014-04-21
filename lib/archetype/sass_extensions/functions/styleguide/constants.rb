@@ -20,7 +20,6 @@ module Archetype::SassExtensions::Styleguide
   MULTIMIXINS = %w(target-browser)
   # NOTE: these are no longer used/needed if you're using the map structures
   ADDITIVES   = FALLBACKS + [DROP, INHERIT, STYLEGUIDE] + MULTIMIXINS
-  @@archetype_styleguide_mutex = Mutex.new
   @@styleguide_themes ||= nil
   # :startdoc:
 

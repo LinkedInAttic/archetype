@@ -82,7 +82,18 @@ TODO
 
 ## [archetype:styleguide]
 
-### [archetype:styleguide:missing_identifier] \`$1\` does not contain an identifier. please specify one of: $2
+### [archetype:styleguide:identifier] \`$1\` does not contain an identifier. there are no registered components
+### [archetype:styleguide:identifier] \`$1\` does not contain an identifier. please specify one of: $2
+
+#### What does this mean?
+
+TODO
+
+#### Resolution:
+
+TODO
+
+### [archetype:styleguide:frozen] the component \`$1\` has been frozen and cannot be modified
 
 #### What does this mean?
 

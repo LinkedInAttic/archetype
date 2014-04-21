@@ -118,7 +118,7 @@ module Archetype::SassExtensions::Styleguide
         styles = styles.rmerge(extracted)
       elsif not helpers.is_value(sentence, :nil)
         msg = modifiers.length > 0 ? "please specify one of: #{modifiers.sort.join(', ')}" : "there are no registered components"
-        helpers.warn("[#{Archetype.name}:styleguide:missing_identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. #{msg}")
+        helpers.warn("[#{Archetype.name}:styleguide:identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. #{msg}")
       end
     end
 

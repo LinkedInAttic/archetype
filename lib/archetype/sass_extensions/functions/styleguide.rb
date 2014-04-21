@@ -21,7 +21,7 @@ module Archetype::SassExtensions::Styleguide
   # - {Map} a map of styles
   #
   def _styleguide(description, state = nil, theme = nil)
-    @@archetype_styleguide_mutex.synchronize do
+    _styleguide_mutex_helper do
       styles = get_styles(description, theme, state)
       styles = resolve_runtime_locale_values(styles)
       # convert it back to a Sass:Map and carry on
@@ -39,7 +39,7 @@ module Archetype::SassExtensions::Styleguide
   # - {List} a key-value paired list of styles
   #
   def styleguide_diff(original, other)
-    @@archetype_styleguide_mutex.synchronize do
+    _styleguide_mutex_helper do
       # normalize our input (for back-compat)
       original = normalize_styleguide_definition(original)
       other = normalize_styleguide_definition(other)
@@ -66,7 +66,7 @@ module Archetype::SassExtensions::Styleguide
   # - {List|Map|*} either a list/map of the values or the individual value itself
   #
   def styleguide_derived_style(definition, properties = [], format = 'auto', strict = false)
-    @@archetype_styleguide_mutex.synchronize do
+    _styleguide_mutex_helper do
       # normalize our input
       definition = normalize_styleguide_definition(definition)
       # get the computed styles

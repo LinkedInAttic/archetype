@@ -7,6 +7,17 @@ module Archetype::SassExtensions::Styleguide
   end
 
   #
+  # helper for operations that need to happen within a mutex
+  #
+  def _styleguide_mutex_helper(id = nil, theme = nil)
+    (@@archetype_styleguide_mutex ||= Mutex.new).synchronize do
+      if block_given?
+        id.nil? ? yield : yield(helpers.to_str(id), get_theme(theme))
+      end
+    end
+  end
+
+  #
   # normalize the styleguide definition into a hash representative of the definition
   #
   # *Parameters*:
@@ -24,7 +35,7 @@ module Archetype::SassExtensions::Styleguide
   end
 
   def self.reset!(filename = nil)
-    @@archetype_styleguide_mutex.synchronize do
+    (@@archetype_styleguide_mutex ||= Mutex.new).synchronize do
       if filename.nil?
         @@styleguide_themes = {}
       else

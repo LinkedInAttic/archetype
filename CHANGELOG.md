@@ -4,7 +4,7 @@
 
 ### Resolved Issues:
 
-- allow `target-browser` to be called recursively
+- allow `target-browser` to be called recursively, kinda
 
 ### New Features:
 
