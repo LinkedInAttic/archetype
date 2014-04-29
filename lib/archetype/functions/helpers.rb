@@ -60,16 +60,6 @@ private
     list.each do |item|
       item = item.to_a
 
-      # if a 3rd item exists, we probably forgot a comma or parens somewhere
-      if previous.nil? and not item[2].nil?
-        msg = "you're likely missing a comma or parens in your data structure"
-        begin
-          logger.record(:warning, "#{msg}: #{item}")
-        rescue
-          logger.record(:warning, msg)
-        end
-      end
-
       # convert the key to a string and strip off quotes
       key = to_str(item[0], ' ' , :quotes)
       # capture the value

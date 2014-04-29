@@ -10,7 +10,10 @@
 // @param     $value {*} the CSS value to output
 @mixin _outputStyle($property, $value: nil) {
   @if($value != nil) {
-    @if($property == target-browser) {
+    @if($property == round-button-ie-support) {
+      @include round-button-ie-support($value)
+    }
+    @else if($property == target-browser) {
       @include target-browser(nth($value,1), nth($value,2), nth($value,3));
     }
     @else if($property == font-family) {
@@ -19,10 +22,19 @@
     @else if($property == font-style) {
       @include font-style($value);
     }
+    @else if($property == hide-element) {
+      @include hide-element();
+    }
     @else {
       @include output-style($property, $value);
     }
   }
+}
+
+// Themes can override this function & custom-output-styler to add their own
+// custom style includes.
+@function has-custom-output-styler($property, $value, $method:pre){
+  @return false;
 }
 
 // output a property or augment it to use a mixin
@@ -38,7 +50,7 @@
       @include custom-output-styler($property, $value, $method: pre);
     }
     // border-radius
-    @else if($property == border-radius)        { @include border-radius(rtl($value, border-radius)); }
+    @else if($property == border-radius)             { @include border-radius(rtl($value, border-radius)); }
     // box-sizing
     @else if($property == box-sizing)           { @include box-sizing($value); }
     // box-shadow
@@ -56,7 +68,7 @@
     // background-size
     @else if($property == background-size)      { @include background-size($value); }
     // background-origin
-    @else if($property == background-origin)    { @include background-origin($value); }
+    @else if($property == background-origin)      { @include background-origin($value); }
     // IE filters
     @else if($property == ie-filter)            { @include ie-filter($value); }
     // hide-text
@@ -83,28 +95,6 @@
     @else if($property == ellipsis)             { @include ellipsis(); }
     // scale
     @else if($property == scale)                { @include scale($value); }
-    // bunch of RTL support
-    @else if($property == margin)               { @include margin($value); }
-    @else if($property == margin-left)          { @include margin-left($value); }
-    @else if($property == margin-right)         { @include margin-right($value); }
-    @else if($property == padding)              { @include padding($value); }
-    @else if($property == padding-left)         { @include padding-left($value); }
-    @else if($property == padding-right)        { @include padding-right($value); }
-    @else if($property == border-width)         { @include border-width($value); }
-    @else if($property == border-left-width)    { @include border-left-width($value); }
-    @else if($property == border-right-width)   { @include border-right-width($value); }
-    @else if($property == border-color)         { @include border-color($value); }
-    @else if($property == border-left-color)    { @include border-left-color($value); }
-    @else if($property == border-right-color)   { @include border-right-color($value); }
-    @else if($property == border-style)         { @include border-style($value); }
-    @else if($property == border-left-style)    { @include border-left-style($value); }
-    @else if($property == border-right-style)   { @include border-right-style($value); }
-    @else if($property == clear)                { @include clear($value); }
-    @else if($property == float)                { @include float($value); }
-    @else if($property == text-align)           { @include text-align($value); }
-    @else if($property == background-position)  { @include background-position($value); }
-    @else if($property == left)                 { @include left($value); }
-    @else if($property == right)                { @include right($value); }
     @else if($property == glyph-icon)           { @include glyph-icon(nth($value, 1), nth($value, 2), nth($value, 3), nth($value, 4), nth($value, 5)); }
     @else if($property == extend)               { @extend #{$value}; }
     // animations
@@ -113,10 +103,18 @@
         @include animation($value);
       }
       @else {
-        -webkit-animation: $value;
-        -moz-animation: $value;
-        -ms-animation: $value;
-        -o-animation: $value;
+        @if $experimental-support-for-webkit {
+          -webkit-animation: $value;
+        }
+        @if $experimental-support-for-mozilla {
+          -moz-animation: $value;
+        }
+        @if $experimental-support-for-microsoft {
+          -ms-animation: $value;
+        }
+        @if $experimental-support-for-opera {
+          -o-animation: $value;
+        }
         animation: $value;
       }
     }
@@ -148,8 +146,6 @@
       @if(length($value) > 1) { @include z-index(nth($value, 1), nth($value, 2)); }
       @else { @include z-index($value); }
     }
-    // make sure content is always quoted
-    @else if($property == content) { #{$property}: quote($value); }
     // :before/:after
     @else if($property == ie-pseudo-before or $property == ie-pseudo-after) {
       $value: -compass-list($value);
@@ -168,6 +164,8 @@
         @include ie-pseudo-after(nth($value, 1), $content, $tag);
       }
     }
+    //ellipsis
+    @else if($property == ellipsis)   { @include ellipsis(); }
     // check to see if we have a custom output styler (post)
     @else if has-custom-output-styler($property, $value, post) == true {
       @include custom-output-styler($property, $value, $method: post);
@@ -216,6 +214,7 @@
         // otherwise, just output it
         @else if($selectors == true and $states == true ) {
           @include _outputStyle($property, unquote($value));
+
         }
       }
     }

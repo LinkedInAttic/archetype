@@ -40,13 +40,8 @@
 // @param     $name {String} the name of the element
 // @content
 @mixin ie-pseudo-before($styles: false, $content: false, $name: '') {
-  @if archetype-version('Sass >= 3.2') {
-    @include ie-pseudo($styles, $content, before, $name) {
-      @content;
-    }
-  }
-  @else {
-    @include ie-pseudo($styles, $content, before, $name);
+  @include ie-pseudo($styles, $content, before, $name) {
+    @content;
   }
 }
 
@@ -57,17 +52,12 @@
 // @param     $name {String} the name of the element
 // @content
 @mixin ie-pseudo-after($styles: false, $content: false, $name: '') {
-  @if archetype-version('Sass >= 3.2') {
-    @include ie-pseudo($styles, $content, after, $name) {
-      @content;
-    }
-  }
-  @else {
-    @include ie-pseudo($styles, $content, after, $name);
+  @include ie-pseudo($styles, $content, after, $name) {
+    @content;
   }
 }
 
-// this creates a one-time executing expression that inserts an element relative to `this` element.
+// this creates a one-type executing expression that inserts an element relative to `this` element.
 // this allows some level of support for :before/:after in IE6/7
 // inspired by http://nicolasgallagher.com/better-float-containment-in-ie/
 // @mixin     ie-pseudo
@@ -82,14 +72,29 @@
   @if $legacy-support-for-ie6 or $legacy-support-for-ie7 {
     $uid: if($uid, $uid, unique('ie-pseudo-'));
     $archetype-pseudo-selector: '& ##{$uid}';
+    $this: 't';
+    $cmd: (unquote('#{$this}.el=document.createElement("#{prefixed-tag($name)}")'));
     $method: if($placement == before, insertBefore, appendChild);
-    $content: if($content and $content != nil, 'this.el.innerHTML="#{-ie-pseudo-content($content)}",', '');
+    @if $content and $content != nil {
+      $cmd: append($cmd, unquote('#{$this}.el.innerHTML="#{-ie-pseudo-content($content)}"'), comma);
+    }
     @if $CONFIG_GENERATED_TAG_CSS {
       $styles: if($styles and $styles != nil, #{$CONFIG_GENERATED_TAG_CSS}#{$styles}, $CONFIG_GENERATED_TAG_CSS);
     }
-    // if we're using inline styles...
-    $inline: if($styles and $styles != nil and $CONFIG_GENERATED_TAG_INLINE, 'this.el.style.cssText="#{$styles}",', '');
-    *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("#{prefixed-tag($name)}"),this.el.id="#{$uid}",#{$content}#{$inline}this.#{$method}(this.el));
+    @if $styles and $styles != nil and $styles != '' and $CONFIG_GENERATED_TAG_INLINE {
+      // sets the icon styles on the node
+      $cmd: append($cmd, unquote('#{$this}.el.style.cssText="#{$styles}"'), comma);
+    }
+    // if we're using the insertBefore method, we need to specify the node reference to the first childNode
+    $reference-node: if($placement == before, ',#{$this}.childNodes[0]||null', '');
+    $cmd: append($cmd, unquote('#{$this}.#{$method}(#{$this}.el#{$reference-node})'), comma);
+    $runOnce: unquote('this.runtimeStyle.zoom="1"'); // this ensures the expression is only invoked once
+
+    // we execute in a setTimeout to decouple from the current UI thread
+    //  this prevents an edge case in IE crashing with an `Operation Aborted` if the node hasn't finished rendering yet
+    //  http://www.nczonline.net/blog/2008/03/17/the-dreaded-operation-aborted-error/
+    *zoom: expression(#{$runOnce},(function(#{$this}){setTimeout(function(){#{$cmd}})}(this)));
+
     // if we're NOT using inline styles...
     @if not $CONFIG_GENERATED_TAG_INLINE {
       // output it on the generated selector

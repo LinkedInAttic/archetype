@@ -23,7 +23,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_ALERTS_ID, $STYLEGUIDE_ALERTS
     padding               $CONFIG_DIM_ALERTS_SPACING,
     glyph-icon            _styleguideGetAlertGlyph($CONFIG_GLYPH_ALERT_NOTIFY),
     (selectors, (
-      ($CORE_GLYPH_SELECTOR_VAR, (
+      ('&:before', (
         position          absolute,
         top               nth(_styleguideGetAlertGlyphOffset($CONFIG_GLYPH_ALERT_NOTIFY), 1),
         left              nth(_styleguideGetAlertGlyphOffset($CONFIG_GLYPH_ALERT_NOTIFY), 2),

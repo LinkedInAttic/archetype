@@ -5,11 +5,10 @@
   @if $vendor != ie { @return true; }
   $compass-not-legacy-ie-version: 9;  // the version if IE that Compass starts considering `legacy`
   $min-ie-legacy-support: 999;
-  $supported-legacy-ie: ();
-  @if($legacy-support-for-ie8) { $min-ie-legacy-support: 8; $supported-legacy-ie: append($supported-legacy-ie, 8); }
-  @if($legacy-support-for-ie7) { $min-ie-legacy-support: 7; $supported-legacy-ie: append($supported-legacy-ie, 7); }
-  @if($legacy-support-for-ie6) { $min-ie-legacy-support: 6; $supported-legacy-ie: append($supported-legacy-ie, 6); }
-  @return if($comparator == lte, $version >= $min-ie-legacy-support, index($supported-legacy-ie, $version));
+  @if($legacy-support-for-ie8) { $min-ie-legacy-support: 8; }
+  @if($legacy-support-for-ie7) { $min-ie-legacy-support: 7; }
+  @if($legacy-support-for-ie6) { $min-ie-legacy-support: 6; }
+  @return ($version >= $min-ie-legacy-support);
 }
 
 // given a list of browsers and versions, this will consolidate them into a
@@ -53,6 +52,7 @@
     }
     // otherwise assume it's a version
     @else if(type-of($item) == number) {
+      $unversioned: list-remove($unversioned, index($unversioned, '.#{$vendor}#{$using}'));
       $tmp: $item;
       // if it's equalitative, prefix the vendor onto the version
       @if(not $comparator or $comparator == eq) {
@@ -65,7 +65,6 @@
       @if($vendor and _isLegacySupported($vendor, $comparator, $tmp)) {
         $item: '.#{$vendor}.#{$item}#{$using}';
         $list: append($list, unquote($item), comma);
-        $unversioned: list-remove($unversioned, index($unversioned, '.#{$vendor}#{$using}'));
       }
       // restore temps
       $version-adjust: 0;
@@ -84,9 +83,8 @@
 // @param     $browsers {List} the List of browsers to target
 // @param     $property {String} the CSS property
 // @param     $value {*} the CSS value
-// @param     $merge {Boolean} should the class name be merged e.g. `.ie8.example` vs `.ie8 .example`
-// @param     $inline {Boolean} if set to false, don't use inline hacks even if available
-// @content
+// @param     $merge {Bool} should the class name be merged e.g. `.ie8.example` vs `.ie8 .example`
+// @param     $inline {Bool} if set to false, don't use inline hacks even if available
 // @usage:
 // =target-browser(ie 8, border, 10px);
 // =target-browser(ie lte 7, padding, 0);
@@ -151,7 +149,7 @@
           $prefix: nth(('_', '*'), $idx);
           $value: if(index($CORE_CSS_RTL_VALUE_SUPPORT, $property), rtl($value, $property), $value);
           // NOTE: RTL support on properties like `border-left-width` won't fully work until Compass/Sass support string replace methods
-          @include debug-message("[archetype:target-browser:being] --- #{$browsers} ---");
+          @include debug-message("[archetype:target-browser:begin] --- #{$browsers} ---");
           @include output-style(#{$prefix}#{rtl($property)}, $value);
           @include debug-message("[archetype:target-browser:end]   --- #{$browsers} ---");
           $value: nil;
@@ -178,8 +176,7 @@
 // @param     $os {List} the List of operating systems to target
 // @param     $property {String} the CSS property
 // @param     $value {*} the CSS value
-// @param     $merge {Boolean} should the class name be merged e.g. `.os-win.example` vs `.os-win .example`
-// @content
+// @param     $merge {Bool} should the class name be merged e.g. `.os-win.example` vs `.os-win .example`
 @mixin target-os($os: (), $property: nil, $value: nil, $merge: false) {
   $os: -compass-list($os);
   $using: if($merge, '&', ' &');

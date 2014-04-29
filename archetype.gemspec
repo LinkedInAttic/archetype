@@ -20,7 +20,7 @@ Gem::Specification.new do |gemspec|
 
   # Gem Files
   gemspec.executables = %w(archetype)
-  gemspec.files = %w(LICENSE README.md CHANGELOG.md VERSION.yml)
+  gemspec.files = %w(LICENSE README.md CHANGELOG.md)
   gemspec.files += Dir.glob("bin/*")
   gemspec.files += Dir.glob("lib/**/*")
   gemspec.files += Dir.glob("stylesheets/**/*")
@@ -34,8 +34,8 @@ Gem::Specification.new do |gemspec|
   ## Gem Bookkeeping
   gemspec.rubygems_version = %q{1.3.6}
   # dependencies
-  gemspec.add_dependency('compass')
-  gemspec.add_dependency('sass')
+  gemspec.add_dependency('sass',    '>= 3.2', '< 3.3')
+  gemspec.add_dependency('compass', '>= 0.12', '< 1.0')
   # required for OrderedHash on Ruby < 1.9
   gemspec.add_dependency('hashery')
 end

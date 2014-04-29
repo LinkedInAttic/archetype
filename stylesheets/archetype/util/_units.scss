@@ -4,7 +4,7 @@
 // @function  _getUnit
 // @private
 // @param     $number {Number} unit of measurement
-// @param     $abuse {Boolean} if `false`, $number cannot be a fraction
+// @param     $abuse {Bool} if `false`, $number cannot be a fraction
 // @return    $number {Number} normalized number of measurement
 @function _getUnit($number, $abuse: false) {
   @if(not unitless($number)) {

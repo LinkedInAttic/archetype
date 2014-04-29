@@ -326,13 +326,15 @@ $CORE_SAFE_FONTS: (
       (ko_KR            ('Malgun Gothic', default)),
       (zh_TW            (SimSun, default)),
       (zh_CN            (SimSun, default)),
+      (th_TH            (Tahoma, default)),
       (ar_AE            (Tahoma, Arial, 'Times New Roman', default))
     )),
     (win, (
       (default          (Arial, sans-serif)),
       (ja_JP            (メイリオ, Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', default)),
       (zh_TW            (default, '微軟正黑體', 'Microsoft JhengHei', PMingLiu, '宋体', SimSun)),
-      (zh_CN            (default, '华文细黑', 'STHeiti Light', '微软雅黑体', 'Microsoft Yahei', '新宋体', NSimSun, '宋体', SimSun)),
+      (zh_CN            (Arial, '华文细黑', 'STHeiti Light', '微软雅黑体', 'Microsoft Yahei', '新宋体', NSimSun, '宋体', SimSun)), // Heiti/Yahei not showing up in Chrome and FF in windows. Removal of sans-serif fixes it.
+      (th_TH            nil),
       (ko_KR            nil),
       (ar_AE            nil)
     )),
@@ -341,6 +343,7 @@ $CORE_SAFE_FONTS: (
       (zh_TW            (default, '黑體-繁', 'Heiti TC', '儷黑Pro', 'LiHei Pro', PMingLiu, '宋体', SimSun)),
       (zh_CN            (default, '黑体-简', 'Heiti SC', '华文细黑', 'STHeiti Light', '华文黑体', STHeiti)),
       (ja_JP            ('Hiragino Kaku Gothic Pro', 'ヒラギノ角ゴ Pro W3', 'ＭＳ Ｐゴシック', 'MS PGothic', default)),
+      (th_TH            nil),
       (ko_KR            nil),
       (ar_AE            nil)
     )),
@@ -349,6 +352,7 @@ $CORE_SAFE_FONTS: (
       (zh_TW            (default, PMingLiu, '宋体', SimSun)),
       (zh_CN            (default, '新宋体', NSimSun, '宋体', SimSun)),
       (ja_JP            nil),
+      (th_TH            nil),
       (ko_KR            nil),
       (ar_AE            nil)
     ))
