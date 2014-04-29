@@ -12,7 +12,8 @@
 $a-blackhole: styleguide-add-component(extend-styleguide-test, (), (
   (default, (
     extend    '.some-extend-class',
-    extend    '%some-extend-placeholder'
+    extend    '%some-extend-placeholder',
+    content   $CONTENT_PLACEHOLDER
   )),
   nil
 ), $CONFIG_THEME);

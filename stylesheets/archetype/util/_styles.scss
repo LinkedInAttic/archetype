@@ -213,7 +213,7 @@
         }
         // otherwise, just output it
         @else if($selectors == true and $states == true ) {
-          @include _outputStyle($property, unquote($value));
+          @include _outputStyle($property, $value);
 
         }
       }
