@@ -32,12 +32,6 @@
   }
 }
 
-// Themes can override this function & custom-output-styler to add their own
-// custom style includes.
-@function has-custom-output-styler($property, $value, $method:pre){
-  @return false;
-}
-
 // output a property or augment it to use a mixin
 // @mixin     output-style
 // @param     $property {String} the CSS property to output

@@ -6,4 +6,5 @@
   white-space: -pre-wrap;
   white-space: -o-pre-wrap;
   something: valid;
+  content: "\0020";
 }
