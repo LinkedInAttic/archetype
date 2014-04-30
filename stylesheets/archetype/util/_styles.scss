@@ -90,27 +90,6 @@
     @else if($property == stretch)              { @include stretch(); }
     // appearance
     @else if($property == appearance)           { @include appearance($value); }
-    // bunch of RTL support
-    @else if($property == margin)               { @include margin($value); }
-    @else if($property == margin-left)          { @include margin-left($value); }
-    @else if($property == margin-right)         { @include margin-right($value); }
-    @else if($property == padding)              { @include padding($value); }
-    @else if($property == padding-left)         { @include padding-left($value); }
-    @else if($property == padding-right)        { @include padding-right($value); }
-    @else if($property == border-width)         { @include border-width($value); }
-    @else if($property == border-left-width)    { @include border-left-width($value); }
-    @else if($property == border-right-width)   { @include border-right-width($value); }
-    @else if($property == border-color)         { @include border-color($value); }
-    @else if($property == border-left-color)    { @include border-left-color($value); }
-    @else if($property == border-right-color)   { @include border-right-color($value); }
-    @else if($property == border-style)         { @include border-style($value); }
-    @else if($property == border-left-style)    { @include border-left-style($value); }
-    @else if($property == border-right-style)   { @include border-right-style($value); }
-    @else if($property == clear)                { @include clear($value); }
-    @else if($property == text-align)           { @include text-align($value); }
-    @else if($property == background-position)  { @include background-position($value); }
-    @else if($property == left)                 { @include left($value); }
-    @else if($property == right)                { @include right($value); }
     @else if($property == glyph-icon)           { @include glyph-icon(nth($value, 1), nth($value, 2), nth($value, 3), nth($value, 4), nth($value, 5)); }
     @else if($property == scale)                { @include scale($value); }
     // animations
@@ -193,10 +172,10 @@
 }
 
 // convert a list of key-value pairs into CSS rules
-// @mixin     to-styles
-// @param     $list {List} a key-value paired list of ($property $value)
-// @param     $states {Bool|List} if true, output all states; if false, output no states; if a list, output only the states in the list
-// @param     $exclude {List} a list of styles to exclude from output
+// @mixin to-styles
+// @param $list {List} a key-value paired list of ($property $value)
+// @param $states {Boolean|List} if true, output all states; if false, output no states; if a list, output only the states in the list
+// @param $exclude {List} a list of styles to exclude from output
 @mixin to-styles($list: (), $states: true, $selectors: true, $exclude: ()) {
   $exclude: -compass-list($exclude);
   $states-data: ();
@@ -206,96 +185,33 @@
       $property: nth($item, 1);
       $value: nth($item, 2);
       @if(not index($exclude, $property)) {
-        @if($property == states and $states != false) {
-          $states-data: $value;
+        // deal with the states
+        @if($property == states and $states != false and length($value) > 0) {
+          @each $state in $value {
+            $val: nth($state, 2);
+            $state: first-value-of($state);
+            @if(index(-compass-list($states), $state) or $states == true) {
+              #{_getStateSelector($state)} {
+                @include to-styles($val, true, true, $exclude);
+              }
+            }
+          }
         }
-        @else if($property == selectors and $selectors != false) {
-          $selectors-data: $value;
+        // deal with the nested selectors
+        @else if($property == selectors and $selectors != false and length($value) > 0) {
+          @each $selector in $value {
+            @if(index(-compass-list($selectors), $selector) or $selectors == true) {
+              #{_getSelectorSelector($selector)} {
+                @include to-styles(nth($selector, 2), true, true, $exclude);
+              }
+            }
+          }
         }
-        @else if($selectors == true and $states == true) {
+        // otherwise, just output it
+        @else if($selectors == true and $states == true ) {
           @include _outputStyle($property, $value);
-        }
-      }
-    }
-  }
-  // deal with the states
-  @if length($states-data) > 0 {
-    @each $state in $states-data {
-      $value: nth($state, 2);
-      $state: first-value-of($state);
-      @if(index(-compass-list($states), $state) or $states == true) {
-        #{_getStateSelector($state)} {
-          @include _toStyles2($value, true, true, $exclude);
-        }
-      }
-    }
-  }
-  // deal with the nested selectors
-  @if length($selectors-data) > 0 {
-    @each $selector in $selectors-data {
-      @if(index(-compass-list($selectors), $selector) or $selectors == true) {
-        #{first-value-of($selector)} {
-          @include _toStyles2(nth($selector, 2), true, true, $exclude);
-        }
-      }
-    }
-  }
-}
 
-// this is identical to to-styles, but we need to avoid Sass' recursion check :(
-@mixin _toStyles2($list: (), $states: true, $selectors: true, $exclude: ()) {
-  $exclude: -compass-list($exclude);
-  $states-data: ();
-  $selectors-data: ();
-  @each $item in $list {
-    @if(length($item) > 1) {
-      $property: nth($item, 1);
-      $value: nth($item, 2);
-      @if(not index($exclude, $property)) {
-        @if($property == states and $states != false) {
-          $states-data: $value;
         }
-        @else if($property == selectors and $selectors != false) {
-          $selectors-data: $value;
-        }
-        @else if($selectors == true and $states == true) {
-          @include _outputStyle($property, $value);
-        }
-      }
-    }
-  }
-  // deal with the states
-  @if length($states-data) > 0 {
-    @each $state in $states-data {
-      $value: nth($state, 2);
-      $state: first-value-of($state);
-      @if(index(-compass-list($states), $state) or $states == true) {
-        #{_getStateSelector($state)} {
-          @include _toStyles_final($value, $exclude);
-        }
-      }
-    }
-  }
-  // deal with the nested selectors
-  @if length($selectors-data) > 0 {
-    @each $selector in $selectors-data {
-      @if(index(-compass-list($selectors), $selector) or $selectors == true) {
-        #{first-value-of($selector)} {
-          @include _toStyles_final(nth($selector, 2), $exclude);
-        }
-      }
-    }
-  }
-}
-// this is a dumbed down version of to-styles. this is the final step and won't go any deeper
-@mixin _toStyles_final($list: (), $exclude: ()) {
-  $exclude: -compass-list($exclude);
-  @each $item in $list {
-    @if(length($item) > 1) {
-      $property: nth($item, 1);
-      $value: nth($item, 2);
-      @if(not index($exclude, $property)) {
-        @include _outputStyle($property, $value);
       }
     }
   }
@@ -312,6 +228,10 @@
     $selector: '&.#{if(index(-compass-list($CONFIG_STATE_NO_PREFIX), $state), $prefix, "")}#{$state}';
   }
   @return $selector;
+}
+
+@function _getSelectorSelector($selector) {
+  @return first-value-of(-compass-list($selector));
 }
 
 // mixin for outputting filters in legacy IE
