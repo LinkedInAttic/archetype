@@ -15,13 +15,10 @@ module Archetype::SassExtensions::Styleguide
   DEFAULT     = 'default'
   REGEX       = 'regex'
   SPECIAL     = %w(states selectors)
-  DROPALL     = %w(all true)
   # these are unique CSS keys that can be exploited to provide fallback functionality by providing a second value
   # e.g color: red; color: rgba(255,0,0, 0.8);
-  FALLBACKS   = %w(background background-image background-color border border-bottom border-bottom-color border-color border-left border-left-color border-right border-right-color border-top border-top-color clip color layer-background-color outline outline-color white-space extend)
-  # these are mixins that make sense to run multiple times within a block
-  MULTIMIXINS = %w(target-browser)
-  ADDITIVES   = FALLBACKS + [DROP, INHERIT, STYLEGUIDE] + MULTIMIXINS
+  FALLBACKS   = %w(background background-image background-color border border-bottom border-bottom-color border-color border-left border-left-color border-right border-right-color border-top border-top-color clip color layer-background-color outline outline-color white-space)
+  ADDITIVES   = FALLBACKS + [DROP, INHERIT, STYLEGUIDE]
   @@archetype_styleguide_mutex = Mutex.new
   # :startdoc:
 
@@ -79,7 +76,7 @@ module Archetype::SassExtensions::Styleguide
       extensions = theme[:extensions]
       return Sass::Script::Bool.new(false) if component_exists(id, theme, extension, force)
       extensions.push(extension)
-      components[id] = (components[id] ||= Archetype::Hash.new).rmerge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
+      components[id] = (components[id] ||= {}).rmerge(helpers.list_to_hash(data, 1, SPECIAL, ADDITIVES))
       return Sass::Script::Bool.new(true)
     end
   end
@@ -101,7 +98,7 @@ module Archetype::SassExtensions::Styleguide
   #
   def styleguide_component_exists(id, theme = nil, extension = nil, force = false)
     @@archetype_styleguide_mutex.synchronize do
-      extension = helpers.to_str(extension).hash if not extension.nil?
+      extension = helpers.to_str(extension) if not extension.nil?
       return Sass::Script::Bool.new( component_exists(id, theme, extension, force) )
     end
   end
@@ -226,34 +223,29 @@ private
   #
   def extract_styles(id, modifiers, strict = false, theme = nil, context = nil)
     theme = get_theme(theme)
-    context ||= theme[:components][id] || Archetype::Hash.new
+    context ||= theme[:components][id] || {}
     modifiers = helpers.to_str(modifiers)
-    return Archetype::Hash.new if context.nil? or context.empty?
+    return {} if context.nil? or context.empty?
     # push on the defaults first
-    out = (strict ? resolve_dependents(id, context[modifiers], theme[:name], context) : context[DEFAULT]) || Archetype::Hash.new
+    out = (strict ? resolve_dependents(id, context[modifiers], theme[:name], context) : context[DEFAULT]) || {}
     out = out.clone
     # if it's not strict, find anything that matched
     if not strict
       modifiers = modifiers.split
-      context.each do |key, definition|
-        definition = [key, definition]
+      context.each do |definition|
         modifier = definition[0]
         if modifier != DEFAULT
           match = true
           modifier = modifier.split
           if modifier[0] == REGEX
             # if it's a regex pattern, test if it matches
-            match = modifiers.join(' ') =~ /#{modifier[1].gsub(/\A"|"\Z/, '')}/i
+            match = modifiers.join(' ') =~ /#{modifiers[1].gsub(/\A"|"\Z/, '')}/i
           else
             # otherwise, if the modifier isn't in our list of modifiers, it's not valid and just move on
             modifier.each { |i| match = false if not modifiers.include?(i) }
           end
           # if it matched, process it
-          if match
-            tmp = resolve_dependents(id, definition[1], theme[:name], nil, out)
-            out, tmp = post_resolve_drops(out, tmp)
-            out = out.rmerge(tmp)
-          end
+          out = out.rmerge(resolve_dependents(id, definition[1], theme[:name], nil, out.keys)) if match
         end
       end
     end
@@ -261,105 +253,20 @@ private
     # this lets us define special states and elements
     SPECIAL.each do |special_key|
       if out.is_a? Hash
-        special = out[special_key] || Archetype::Hash.new
-        if special == 'nil'
-          out[special_key] = Archetype::Hash.new
-        else
-          tmp = Archetype::Hash.new
-          special.each { |key, value| tmp[key] = extract_styles(key, key, true, theme[:name], special) }
-          out[special_key] = tmp if not tmp.empty?
-        end
+        special = out[special_key]
+        tmp = {}
+        (special || {}).each { |key, value| tmp[key] = extract_styles(key, key, true, theme[:name], special) }
+        out[special_key] = tmp if not tmp.empty?
       end
     end
     # check for nested styleguides
     styleguide = out[STYLEGUIDE]
-    if not (styleguide.nil? or styleguide.empty?)
+    if styleguide and not styleguide.empty?
       styles = get_styles(styleguide, theme[:name])
       out.delete(STYLEGUIDE)
       out = styles.rmerge(out)
     end
     return out
-  end
-
-  #
-  # given two objects, resolve the chain of dropped styles
-  #  this runs after having already resolved the dropped styles and merged
-  #
-  # *Parameters*:
-  # - <tt>obj</tt> {Hash} the source object
-  # - <tt>merger</tt> {Hash} the object to be merged in
-  # *Returns*:
-  # - {Array.<Hash>} the resulting `obj` and `merger` objects
-  #
-  def post_resolve_drops(obj, merger)
-    return [obj, merger] if obj.nil? or merger.nil?
-    drop = merger[DROP]
-    keys = obj.keys
-    if not drop.nil?
-      drop.to_a.each do |key|
-        key = helpers.to_str(key)
-        obj.delete(key) if not SPECIAL.include?(key)
-      end
-      merger.delete(DROP)
-    else
-    end
-    SPECIAL.each do |special|
-      if obj[special].is_a?(Hash) and merger[special].is_a?(Hash)
-        obj[special], merger[special] = post_resolve_drops(obj[special], merger[special])
-      end
-    end
-    return [obj, merger]
-  end
-
-  #
-  # given two objects, resolve the chain of dropped styles
-  #
-  # *Parameters*:
-  # - <tt>value</tt> {Hash} the source object
-  # - <tt>obj</tt> {Hash} the object to be merged in
-  # - <tt>is_special</tt> {Boolean} whether this is from a SPECIAL branch of a Hash
-  # *Returns*:
-  # - {Array.<Hash>} the resulting value
-  #
-  def resolve_drops(value, obj, is_special = false)
-    return value if not (value.is_a?(Hash) and obj.is_a?(Hash))
-    keys = obj.keys
-    drop = value[DROP]
-    if not drop.nil?
-      tmp = Archetype::Hash.new
-      if DROPALL.include?(helpers.to_str(drop))
-        if not keys.nil?
-          keys.each do |key|
-            if SPECIAL.include?(key)
-              if not (obj[key].nil? or obj[key].empty?)
-                tmp[key] = Archetype::Hash.new
-                tmp[key][DROP] = obj[key].keys
-              end
-            else
-              tmp[key] = 'nil'
-            end
-          end
-        end
-      else
-        drop.to_a.each do |key|
-          key = helpers.to_str(key)
-          if SPECIAL.include?(key)
-            if not (obj[key].nil? or obj[key].empty?)
-              tmp[key] = Archetype::Hash.new
-              tmp[key][DROP] = obj[key].keys
-            end
-          else
-            tmp[key] = 'nil'
-          end
-        end
-      end
-      value.delete(DROP) if not is_special
-      value = tmp.rmerge(value)
-    end
-    value.each do |key|
-      value[key] = resolve_drops(value[key], obj[key], key, SPECIAL.include?(key)) if not value[key].nil?
-    end
-    return value
   end
 
   #
@@ -374,19 +281,33 @@ private
   # *Returns*:
   # - {Hash} a hash of the resolved styles
   #
-  def resolve_dependents(id, value, theme = nil, context = nil, obj = nil)
+  def resolve_dependents(id, value, theme = nil, context = nil, keys = nil)
     # we have to create a clone here as the passed in value is volatile and we're performing destructive changes
     value = value.clone
     # check that we're dealing with a hash
     if value.is_a?(Hash)
       # check for dropped styles
-      value = resolve_drops(value, obj)
-
+      drop = value[DROP]
+      if not drop.nil?
+        tmp = {}
+        if %w(all true).include?(helpers.to_str(drop)) and not keys.nil? and not keys.empty?
+          keys.each do |key|
+            tmp[key] = 'nil'
+          end
+        else
+          drop = drop.to_a
+          drop.each do |key|
+            tmp[helpers.to_str(key)] = 'nil'
+          end
+        end
+        value.delete(DROP)
+        value = tmp.rmerge(value)
+      end
       # check for inheritance
       inherit = value[INHERIT]
-      if not (inherit.nil? or inherit.empty?)
+      if inherit and not inherit.empty?
         # create a temporary object and extract the nested styles
-        tmp = Archetype::Hash.new
+        tmp = {}
         inherit.each { |related| tmp = tmp.rmerge(extract_styles(id, related, true, theme, context)) }
         # remove the inheritance key and update the styles
         value.delete(INHERIT)
@@ -427,8 +348,9 @@ private
   #
   def get_styles(description, theme = nil, state = 'false')
     state = helpers.to_str(state)
-    styles = Archetype::Hash.new
-    description.to_a.each do |sentence|
+    description = description.to_a
+    styles = {}
+    description.each do |sentence|
       # get the grammar from the sentence
       id, modifiers, token = grammar(sentence, theme, state)
       if id

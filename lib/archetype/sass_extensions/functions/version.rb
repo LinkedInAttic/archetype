@@ -8,7 +8,7 @@ require 'sass/version'
 #
 module Archetype::SassExtensions::Version
   # :stopdoc:
-  COMPARATOR_PATTERN  = /(\s[neqglt]+\s|[><=!]+)/
+  COMPARATOR_PATTERN  = /([neglt]+|[><=!]+)/
   VERSION_PATTERN     = /\d+(\.\d+)*(\.[x|\*])?/
   # :startdoc:
 
@@ -21,15 +21,10 @@ module Archetype::SassExtensions::Version
   # - {String|Boolean} if no test or test is just a lookup of a framework, it returns the version of that framework, otherwise it returns the result of the test
   #
   def archetype_version(test = nil)
-    test = test.nil? ? 'archetype' : helpers.to_str(test, ' ', :quotes).downcase
-    lib = ''
-    if test.include?('compass')
-      lib = Compass::VERSION
-    elsif test.include?('sass')
-      lib = Sass::VERSION
-    else
-      lib = Archetype::VERSION
-    end
+    test = test.nil? ? 'archetype' : helpers.to_str(test).gsub(/\A"|"\Z/, '').downcase
+    lib = Archetype::VERSION
+    lib = Compass::VERSION if test.include?('compass')
+    lib = Sass::VERSION if test.include?('sass')
     # strip off any non-official versioning (e.g. pre/alpha/rc)
     lib = lib.match(VERSION_PATTERN)[0]
     result = compare_version(lib, test.match(VERSION_PATTERN), test.match(COMPARATOR_PATTERN))
@@ -60,7 +55,7 @@ private
     # check for wild cards
     wild = version.index('x')
     # check the comparison
-    comparator = ((comparator || [])[0] || 'eq').strip
+    comparator = (comparator || [])[0] || 'eq'
     eq = comparator =~ /(e|=)/
     lt = comparator =~ /(l|<)/
     gt = comparator =~ /(g|>)/

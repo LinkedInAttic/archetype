@@ -20,7 +20,7 @@ $REGISTRY_DO_ONCE: () !default;
 // a function to prevent routines from executing multiple times
 // @function  do-once
 // @param     $name {String} name of the identifier
-// @return    {Boolean} true if the first time invoked, false otherwise
+// @return    {Bool} true if the first time invoked, false otherwise
 @function do-once($name) {
   @if index($REGISTRY_DO_ONCE, $name) {
     @return false;

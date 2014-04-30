@@ -64,14 +64,14 @@
   background: #2c2c2b;
 }
 
-.ie.ie7 .target-ie-7-8-9, .ie.ie8 .target-ie-7-8-9, .ie.ie9 .target-ie-7-8-9 {
+.ie.ie7 .target-ie-7-8-9, .ie.ie8 .target-ie-7-8-9 {
   width: 250px;
 }
 
-.ie.ie9 .target-ie-9 {
+.ie .target-ie-9 {
   right: -83px;
 }
-.ie.ie9 .target-ie-9 {
+.ie .target-ie-9 {
   top: 17px;
 }
 
@@ -97,9 +97,4 @@
 
 .target-opera, .target-opera x:-o-prefocus {
   width: 82%;
-}
-
-.ie.lte8 .target-with-content-block {
-  /* testing content block */
-  color: red;
 }

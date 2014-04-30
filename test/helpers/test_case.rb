@@ -24,7 +24,7 @@ module Compass
         assert false, diff_as_string(before.inspect, after.inspect)
       end
     end
-
+    
     module ClassMethods
 
       def let(method, &block)
@@ -51,7 +51,7 @@ module Compass
         end
       end
 
-      private
+      private 
 
       def underscore(string)
         string.gsub(' ', '_')

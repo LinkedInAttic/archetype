@@ -117,9 +117,9 @@
   clip: rect(1px, 1px, 1px, 1px);
 }
 
-// reverse hide-element and make the element visible again
+// revert hide element with config
 // @mixin     unhide-element
-// @see       hide-element
+// @link      http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
 // @param     $position {String} value for the position property
 // @param     $height {String} value for the height property
 // @param     $width {String} value for the width property
@@ -168,11 +168,8 @@
 // @param     $size {Number} the size of the icon
 // @param     $color {Color} the color of the font
 // @param     $placement {String} where to place the icon [before|after|inline]
-// @param     $ie-styles {String} styles to apply to IE6/7 (this is needed because the faux :before isn't extendable)
-// @param     $ie-uid {String} a custom, unique identifier for the generate IE6/7 element
-// @content
-@mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: false, $ie-uid: false) {
-  $archetype-glyph-selector: false;
+// @param     $ie-styles {String} styles to apply to IE6/7 (this is needed because the faux :before isn't extensible)
+@mixin glyph-icon($icon, $size: default, $color: inherit, $placement: before, $ie-styles: false) {
   $char-mapping: nil;
   $char-code: nil;
   @if $icon {
@@ -207,7 +204,6 @@
         content: $char-code;
       }
     }
-    $archetype-glyph-selector: $selector;
     @if($selector != '&' and $ie-styles != nil) {
       // support for IE6/7
       $styles: "font-family:'#{$CONFIG_GLYPHS_NAME}-#{$CONFIG_GLYPHS_VERSION}', '#{$CONFIG_GLYPHS_NAME}';font-weight:#{$CONFIG_GLYPHS_WEIGHT};font-style:#{$CONFIG_GLYPHS_STYLE};text-decoration:inherit;";
@@ -220,14 +216,7 @@
       @if($ie-styles) {
         $styles: $styles + $ie-styles;
       }
-
-      @include ie-pseudo($styles: $styles, $content: $char-code, $placement: $placement, $name: glyph, $uid: $ie-uid);
-      @if $archetype-pseudo-selector {
-        $archetype-glyph-selector: '#{$selector}, #{$archetype-pseudo-selector}';
-      }
-    }
-    #{$archetype-glyph-selector} {
-      @content;
+      @include ie-pseudo($styles: $styles, $content: $char-code, $placement: $placement, $name: glyph);
     }
   }
 }

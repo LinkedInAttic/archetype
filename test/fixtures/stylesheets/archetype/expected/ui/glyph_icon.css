@@ -1,24 +1,8 @@
-@font-face {
-  font-family: "FontAwesome";
-  src: url('/assets/fonts/vendor/archetype/fontawesome-webfont.eot');
-  src: url('/assets/fonts/vendor/archetype/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.woff') format('woff'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.ttf') format('truetype'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.svg#FontAwesome') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: "FontAwesome-0.0.1";
-  src: url('/assets/fonts/vendor/archetype/fontawesome-webfont.eot');
-  src: url('/assets/fonts/vendor/archetype/fontawesome-webfont.eot?#iefix') format('embedded-opentype'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.woff') format('woff'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.ttf') format('truetype'), url('/assets/fonts/vendor/archetype/fontawesome-webfont.svg#FontAwesome') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}
-
 .simple {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"), t.el.innerHTML="&#xf0d7;", t.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:100%;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.innerHTML="&#xf0d7;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:100%;color:inherit;",this.insertBefore(this.el));
 }
 .simple:before {
-  font-family: "FontAwesome-0.0.1", "FontAwesome";
+  font-family: FontAwesome;
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;
@@ -26,102 +10,4 @@
   font-size: 100%;
   color: inherit;
   content: "\f0d7";
-}
-
-.false {
-  font-family: "FontAwesome-0.0.1", "FontAwesome";
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 100%;
-  color: inherit;
-}
-
-.size {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"), t.el.innerHTML="&#xf0d7;", t.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:20px;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-}
-.size:before {
-  font-family: "FontAwesome-0.0.1", "FontAwesome";
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 20px;
-  color: inherit;
-  content: "\f0d7";
-}
-
-.not-inline {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"), t.el.innerHTML="&#xf0d7;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-}
-.not-inline:before {
-  font-family: "FontAwesome-0.0.1", "FontAwesome";
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 100%;
-  color: inherit;
-  content: "\f0d7";
-}
-.not-inline #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome-0.0.1', 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  font-size: 100%;
-  color: inherit;
-}
-
-.ie-uid {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"), t.el.innerHTML="&#xf0d7;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-}
-.ie-uid:before {
-  font-family: "FontAwesome-0.0.1", "FontAwesome";
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 100%;
-  color: inherit;
-  content: "\f0d7";
-}
-.ie-uid #my-custom-id {
-  font-family: 'FontAwesome-0.0.1', 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  font-size: 100%;
-  color: inherit;
-}
-.ie-uid:before, .ie-uid #my-custom-id {
-  color: pink;
-}
-
-.content-block {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"), t.el.innerHTML="&#xf0d7;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
-}
-.content-block:before {
-  font-family: "FontAwesome-0.0.1", "FontAwesome";
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  speak: none;
-  font-size: 100%;
-  color: inherit;
-  content: "\f0d7";
-}
-.content-block #ie-pseudo-archetype-uid-RANDOM_UID {
-  font-family: 'FontAwesome-0.0.1', 'FontAwesome';
-  font-weight: normal;
-  font-style: normal;
-  text-decoration: inherit;
-  font-size: 100%;
-  color: inherit;
-}
-.content-block:before, .content-block #ie-pseudo-archetype-uid-RANDOM_UID {
-  position: absolute;
-  top: 10px;
-  left: 10px;
 }

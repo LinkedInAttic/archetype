@@ -3,7 +3,7 @@
 @function _isLegacySupported($vendor, $comparator, $version) {
   // we currently only check for legacy IE support
   @if $vendor != ie { @return true; }
-  $compass-not-legacy-ie-version: 9;  // the version if IE that Compass starts considering `legacy`
+  $compass-not-legacy-ie-version: 9; // the version if IE that Compass starts considering `legacy`
   $min-ie-legacy-support: 999;
   @if($legacy-support-for-ie8) { $min-ie-legacy-support: 8; }
   @if($legacy-support-for-ie7) { $min-ie-legacy-support: 7; }

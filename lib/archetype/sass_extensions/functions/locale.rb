@@ -3,36 +3,17 @@
 #
 module Archetype::SassExtensions::Locale
   #
-  # get the current locale specified in config or test a list of locales against the current locale
+  # get the current locale specified in config
   #
-  # *Parameters*:
-  # - <tt>$locales</tt> {List} the list of locales to test
   # *Returns*:
-  # - {String|Boolean} the current locale or whether or not the current locale is in the test set
+  # - {String} the current locale
   #
-  def locale(locales = nil)
-    locale = (Compass.configuration.locale || 'en_US').to_s
-    # if the locales are nil, just return the current locale
-    return Sass::Script::String.new(locale) if locales.nil?
-    locales = locales.to_a.collect{|i| i.to_s}
-    # add wild card support for language or territory
-    match = locale.match(LOCALE_PATTERN)
-    # language with wildcard territory
-    language = match[1] + '_'
-    # territory with wildcard language
-    territory = '_' + match[2]
-    # for each item, look it up in the alias list
-    locales.each do |key|
-      if a = locale_aliases[key]
-        locales.delete(key)
-        locales.concat(a)
-      end
-    end
-    return Sass::Script::Bool.new(locales.include?(locale) || locales.include?(language) || locales.include?(territory))
+  def locale
+    return Sass::Script::String.new(Compass.configuration.locale || 'en_US')
   end
 
   #
-  # test a list of locales against the current locale (this is now just an alias for locales(), for back-compat)
+  # test a list of locales against the current locale (supports an alias map)
   #
   # *Parameters*:
   # - <tt>$locales</tt> {List} the list of locales to test
@@ -40,9 +21,16 @@ module Archetype::SassExtensions::Locale
   # - {Boolean} is the current locale in the list or not
   #
   def lang(locales)
-    return locale(locales)
+    locales = locales.to_a.collect{|i| i.to_s}
+    locales.each do |key|
+      if a = locale_aliases[key]
+        locales.delete(key)
+        locales.concat(a)
+      end
+    end
+    return Sass::Script::Bool.new(locales.include?(locale.to_s))
   end
-
+  
   #
   # get the current reading direction
   #
@@ -55,9 +43,6 @@ module Archetype::SassExtensions::Locale
   end
 
 private
-
-  LOCALE_PATTERN = /([a-z]{2})[-_]?([a-z]{2}?)/i
-
   #
   # provides an alias mapping for locale names
   #
@@ -67,9 +52,8 @@ private
   # TODO - make this easily extensible
   def locale_aliases
     if @locale_aliases.nil?
-      a = {
-        'CJK' => ['ja_JP', 'ko_KR', 'zh_TW', 'zh_CN']
-      }
+      a = {}
+      a['CJK'] = ['ja_JP', 'ko_KR', 'zh_TW', 'zh_CN']
       @locale_aliases = a
     end
     return @locale_aliases

@@ -11,11 +11,9 @@ http_images_path  = "/assets/images"
 http_fonts_path   = "/assets/fonts"
 line_comments     = false
 environment       = :production
-testing           = true
 
 asset_cache_buster do |path, file|
   "busted=true"
 end
 
 disable_warnings = true
-
