@@ -1,0 +1,21 @@
+// define the test function
+@function has-custom-output-styler($property, $value, $method: pre) {
+  @if $property == color {
+    @return true;
+  }
+  // only if it's a post processing all values
+  @else if $property == line-height and $method == post {
+    @return true;
+  }
+  @return false;
+}
+// define the custom styler
+@mixin custom-output-styler($property, $value, $method: pre) {
+  #{$property}: $value; /* #{$method} override */
+}
+
+@import "archetype";
+
+.test {
+  @include styleguide(copy);
+}
