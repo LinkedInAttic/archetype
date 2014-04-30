@@ -1,8 +1,8 @@
 .simple {
-  *zoom: expression(this.runtimeStyle.zoom="1", this.el=document.createElement("x-archetype-glyph"),this.el.innerHTML="&#xf0d7;",this.el.style.cssText="font-family:'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:100%;color:inherit;",this.insertBefore(this.el));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"), t.el.innerHTML="&#xf0d7;", t.el.style.cssText="font-family:'FontAwesome-0.0.1', 'FontAwesome';font-weight:normal;font-style:normal;text-decoration:inherit;font-size:100%;color:inherit;", t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .simple:before {
-  font-family: FontAwesome;
+  font-family: "FontAwesome-0.0.1", "FontAwesome";
   font-weight: normal;
   font-style: normal;
   text-decoration: inherit;

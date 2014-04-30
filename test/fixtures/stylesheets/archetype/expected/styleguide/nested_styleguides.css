@@ -7,7 +7,11 @@
 .nested-styleguide-test.hover, .nested-styleguide-test:hover, .nested-styleguide-test.focus, .nested-styleguide-test:focus {
   text-decoration: none;
   color: #0088cc;
+  cursor: pointer;
   background: #eeeeee;
+}
+.ie .nested-styleguide-test.hover, .ie .nested-styleguide-test:hover, .ie .nested-styleguide-test.focus, .ie .nested-styleguide-test:focus {
+  cursor: hand;
 }
 .nested-styleguide-test h3 {
   font-size: 18px;
