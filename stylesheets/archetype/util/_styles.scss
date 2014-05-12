@@ -26,6 +26,9 @@
     @else if($property == hide-element) {
       @include hide-element();
     }
+    @else if($property == unstyled-button) {
+      @include unstyled-button();
+    }
     @else {
       @include output-style($property, $value);
     }
