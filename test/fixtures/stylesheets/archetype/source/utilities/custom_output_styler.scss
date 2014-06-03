@@ -1,3 +1,5 @@
+@import "archetype";
+
 // define the test function
 @function has-custom-output-styler($property, $value, $method: pre) {
   @if $property == color {
@@ -9,12 +11,11 @@
   }
   @return false;
 }
+
 // define the custom styler
 @mixin custom-output-styler($property, $value, $method: pre) {
   #{$property}: $value; /* #{$method} override */
 }
-
-@import "archetype";
 
 .test {
   @include styleguide(copy);

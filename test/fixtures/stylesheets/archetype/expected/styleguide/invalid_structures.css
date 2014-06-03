@@ -1,0 +1,21 @@
+.test-missing-nil {
+  color: red;
+}
+
+.test-missing-nil-2 {
+  color: yellow;
+}
+
+.test-missing-nil-3 {
+  color: blue;
+}
+.test-missing-nil-3.hover, .test-missing-nil-3:hover, .test-missing-nil-3.focus, .test-missing-nil-3:focus {
+  color: black;
+  background: green;
+  font-weight: bold;
+}
+
+.test-missing-comma {
+  color: white;
+  background: green;
+}

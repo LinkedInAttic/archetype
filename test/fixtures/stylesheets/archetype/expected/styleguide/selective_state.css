@@ -6,6 +6,7 @@
   margin: 0;
   overflow: visible;
   text-decoration: none !important;
+  text-align: center;
   width: auto;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   -webkit-border-radius: 3px;
@@ -52,6 +53,7 @@
   margin: 0;
   overflow: visible;
   text-decoration: none !important;
+  text-align: center;
   width: auto;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   -webkit-border-radius: 3px;
@@ -96,6 +98,7 @@
   margin: 0;
   overflow: visible;
   text-decoration: none !important;
+  text-align: center;
   width: auto;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   -webkit-border-radius: 3px;

@@ -6,7 +6,7 @@ require 'archetype/functions/helpers'
 module Archetype::SassExtensions::Lists
   #
   # replace an index in a list
-  # 
+  #
   # *Parameters*:
   # - <tt>$list</tt> {List} the list to replace from
   # - <tt>$value</tt> {\*} the value to replace (if nil, it's a removal)
@@ -47,8 +47,8 @@ module Archetype::SassExtensions::Lists
   def list_remove(list, idx = false, separator = nil)
     return list_replace(list, idx, nil, separator)
   end
-  Sass::Script::Functions.declare :list_replace, [:list, :idx]
-  Sass::Script::Functions.declare :list_replace, [:list, :idx, :separator]
+  Sass::Script::Functions.declare :list_remove, [:list, :idx]
+  Sass::Script::Functions.declare :list_remove, [:list, :idx, :separator]
 
   #
   # insert an item into a list
@@ -67,41 +67,9 @@ module Archetype::SassExtensions::Lists
     return list if (not idx or idx == Sass::Script::Bool.new(false)) or value.nil?
     return list_replace(list, idx, value, separator, -1)
   end
-  Sass::Script::Functions.declare :list_replace, [:list, :idx]
-  Sass::Script::Functions.declare :list_replace, [:list, :idx, :value]
-  Sass::Script::Functions.declare :list_replace, [:list, :idx, :value, :separator]
-
-  #
-  # sort a list
-  #
-  # *Parameters*:
-  # - <tt>$list</tt> {List} the list to sort
-  # - <tt>$reverse</tt> {Boolean} sort the list in reverse order
-  # *Returns*:
-  # - {List} the sorted list
-  #
-  # TODO - this is failing, fix this
-  #def list_sort(list, reverse = false)
-  #  separator = list.separator if list.is_a?(Sass::Script::List)
-  #  list = list.to_a.sort
-  #  list = list.reverse if (reverse == Sass::Script::Bool.new(true))
-  #  return Sass::Script::List.new(list, separator)
-  #end
-
-  #
-  # reverse order a list
-  #
-  # *Parameters*:
-  # - <tt>$list</tt> {List} the list to reverse
-  # *Returns*:
-  # - {List} the reversed list
-  #
-  # TODO - this is failing, fix this
-  #def list_reverse(list)
-  #  separator = list.separator if list.is_a?(Sass::Script::List)
-  #  list = list.to_a.reverse
-  #  return Sass::Script::List.new(list, separator)
-  #end
+  Sass::Script::Functions.declare :list_insert, [:list, :idx]
+  Sass::Script::Functions.declare :list_insert, [:list, :idx, :value]
+  Sass::Script::Functions.declare :list_insert, [:list, :idx, :value, :separator]
 
   #
   # add values(s) to a list
@@ -176,7 +144,7 @@ module Archetype::SassExtensions::Lists
   # - <tt>$haystack</tt> {List} input list
   # - <tt>$needle</tt> {List} the value(s) to search for
   # *Returns*:
-  # - {Number|Bool} if an item is found, returns the index, otherwise returns false
+  # - {Number|Boolean} if an item is found, returns the index, otherwise returns false
   #
   def index2(haystack, needle)
     haystack = haystack.to_a
@@ -210,14 +178,14 @@ module Archetype::SassExtensions::Lists
   # *Parameters*:
   # - <tt>$list</tt> {List} the list to search in
   # - <tt>$key</tt> {String} the key identifier (name)
-  # - <tt>$strict</tt> {Bool} if true, does a strict match against the key
+  # - <tt>$strict</tt> {Boolean} if true, does a strict match against the key
   # *Returns*:
   # - {*} the data associated with $key
   #
   def associative(list, key, strict = false)
     separator = list.separator if list.is_a?(Sass::Script::List)
     list = helpers.list_to_hash(list)
-    item = list[helpers.to_str(key)]
+    item = list[helpers.to_str(key, ' ' , :quotes)]
     item ||= list.first[1] if not strict
     return Sass::Script::List.new([], separator) if item.nil?
     return helpers.hash_to_list(item, 0, separator) if item.is_a?(Array) or item.is_a?(Hash)
@@ -243,7 +211,33 @@ module Archetype::SassExtensions::Lists
     list = list.rmerge(extender)
     return helpers.hash_to_list(list, 0, separator)
   end
-  Sass::Script::Functions.declare :list_extend, [:list, :extender]
+  Sass::Script::Functions.declare :associative_merge, [:list, :extender]
+
+  #
+  # given a string of styles, convert it into a key-value pair list
+  #
+  # *Parameters*:
+  # - <tt>$string</tt> {String} the string to convert
+  # *Returns*:
+  # - <tt>$list</tt> {List} the converted list of styles
+  #
+  def _style_string_to_list(string = '')
+    # convert to string and strip all comments
+    string = helpers.to_str(string, ' ').gsub(/\/\*[^\*\/]*\*\//, '')
+    # then split it on each rule
+    tmp = string.split(';')
+    styles = []
+    # and for each rule break it into it's key-value pairs
+    tmp.each do |rule|
+      kvp = []
+      rule.split(':').each do |str|
+        kvp.push Sass::Script::String.new(str)
+      end
+      styles.push Sass::Script::List.new(kvp, :comma)
+    end
+    # the recompose the list
+    return Sass::Script::List.new(styles, :comma)
+  end
 
 private
   def helpers

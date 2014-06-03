@@ -10,7 +10,6 @@
 // @param     $value {*} the CSS value to output
 @mixin _outputStyle($property, $value: nil) {
   @if($value != nil) {
-    // !!DO NOT COPY TO ARCHETYPE - this mixin is specific to _round_button.scss
     @if($property == round-button-ie-support) {
       @include round-button-ie-support($value)
     }
@@ -26,13 +25,16 @@
     @else if($property == hide-element) {
       @include hide-element();
     }
-    @else if($property == unstyled-button) {
-      @include unstyled-button();
-    }
     @else {
       @include output-style($property, $value);
     }
   }
+}
+
+// Themes can override this function & custom-output-styler to add their own
+// custom style includes.
+@function has-custom-output-styler($property, $value, $method:pre){
+  @return false;
 }
 
 // output a property or augment it to use a mixin
@@ -40,9 +42,9 @@
 // @param     $property {String} the CSS property to output
 // @param     $value {*} the CSS value to output
 @mixin output-style($property, $value: nil) {
-  @if($property != nil and nth(-compass-list($value), 1) != nil and not index($CONFIG_DISABLED_CSS, $property)) {
+
+  @if($property != nil and length(-compass-list($value)) > 0 and first-value-of(-compass-list($value)) != nil and not index($CONFIG_DISABLED_CSS, $property)) {
     // for mixins, we need to do some custom work
-    // has-custom-output-styler: copy & pasted from latest github repo 10/3/2013
     // check to see if we have a custom output styler (pre)
     @if has-custom-output-styler($property, $value, pre) == true {
       @include custom-output-styler($property, $value, $method: pre);
@@ -87,8 +89,14 @@
     @else if($property == stretch)              { @include stretch(); }
     // appearance
     @else if($property == appearance)           { @include appearance($value); }
-    @else if($property == glyph-icon)           { @include glyph-icon(nth($value, 1), nth($value, 2), nth($value, 3), nth($value, 4), nth($value, 5)); }
+    // unhide-element
+    @else if($property == unhide-element)       { @include unhide-element(); }
+    // ellipsis
+    @else if($property == ellipsis)             { @include ellipsis(); }
+    // scale
     @else if($property == scale)                { @include scale($value); }
+    @else if($property == glyph-icon)           { @include glyph-icon(nth($value, 1), nth($value, 2), nth($value, 3), nth($value, 4), nth($value, 5)); }
+    @else if($property == extend)               { @extend #{$value}; }
     // animations
     @else if($property == animation) {
       @if archetype-version('compass >= 0.13') {
@@ -158,7 +166,6 @@
     }
     //ellipsis
     @else if($property == ellipsis)   { @include ellipsis(); }
-    // has-custom-output-styler: copy & pasted from latest github repo 10/3/2013
     // check to see if we have a custom output styler (post)
     @else if has-custom-output-styler($property, $value, post) == true {
       @include custom-output-styler($property, $value, $method: post);
@@ -169,10 +176,10 @@
 }
 
 // convert a list of key-value pairs into CSS rules
-// @mixin to-styles
-// @param $list {List} a key-value paired list of ($property $value)
-// @param $states {Boolean|List} if true, output all states; if false, output no states; if a list, output only the states in the list
-// @param $exclude {List} a list of styles to exclude from output
+// @mixin     to-styles
+// @param     $list {List} a key-value paired list of ($property $value)
+// @param     $states {Boolean|List} if true, output all states; if false, output no states; if a list, output only the states in the list
+// @param     $exclude {List} a list of styles to exclude from output
 @mixin to-styles($list: (), $states: true, $selectors: true, $exclude: ()) {
   $exclude: -compass-list($exclude);
   $states-data: ();
@@ -228,7 +235,14 @@
 }
 
 @function _getSelectorSelector($selector) {
-  @return first-value-of(-compass-list($selector));
+  $selector: first-value-of(-compass-list($selector));
+  @if $selector == $CORE_GLYPH_SELECTOR_VAR {
+    $selector: $archetype-glyph-selector;
+  }
+  @elseif $selector == $CORE_GLYPH_SELECTOR_VAR {
+    $selector: $archetype-pseudo-selector;
+  }
+  @return $selector;
 }
 
 // mixin for outputting filters in legacy IE

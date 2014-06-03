@@ -12,8 +12,7 @@ $a-blackhole: styleguide-add-component(fallback-styleguide-test, (), (
     white-space     -pre-wrap,
     white-space     -o-pre-wrap,
     something       invalid,
-    something       valid,
-    content         $CONTENT_PLACEHOLDER
+    something       valid
   )),
   nil
 ), $CONFIG_THEME);
