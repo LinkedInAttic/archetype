@@ -1,0 +1,24 @@
+@import "archetype";
+
+.some-extend-class {
+  color: red;
+}
+
+%some-extend-placeholder {
+  background: green;
+}
+
+@if not styleguide-component-exists(extend-styleguide-test, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component(extend-styleguide-test, (), (
+  (default, (
+    extend    '.some-extend-class',
+    extend    '%some-extend-placeholder',
+    content   $CONTENT_PLACEHOLDER
+  )),
+  nil
+), $CONFIG_THEME);
+}
+
+.extend-styleguide-test {
+  @include styleguide(extend-styleguide-test);
+}

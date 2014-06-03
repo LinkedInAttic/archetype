@@ -1,0 +1,18 @@
+@import "archetype";
+
+@if not styleguide-component-exists(multi-value-styleguide-test, $CONFIG_THEME) {
+$a-blackhole: styleguide-add-component(multi-value-styleguide-test, (), (
+  (default, (
+    color           gray,
+    color           rgba(0,0,0, 0.7),
+    background      white,
+    background      transparent,
+    target-browser  (ie lte 7, color, blue),
+    target-browser  (ie 8, color, red),
+    target-browser  (firefox, color, pink)
+  ))
+), $CONFIG_THEME);
+}
+.multi-value-styleguide-test {
+  @include styleguide(multi-value-styleguide-test);
+}

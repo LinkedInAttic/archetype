@@ -1,0 +1,11 @@
+.some-extend-class, .extend-styleguide-test {
+  color: red;
+}
+
+.extend-styleguide-test {
+  background: green;
+}
+
+.extend-styleguide-test {
+  content: "\0020";
+}

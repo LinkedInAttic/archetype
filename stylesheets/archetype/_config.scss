@@ -40,6 +40,7 @@ $CONTENT_PLACEHOLDER:             '\0020' !default;                             
 $CONFIG_DISABLED_CSS:             () !default;                                                      // a list of CSS3 features to always disable when using output-style()
 $CONFIG_GENERATED_TAG_PREFIX:     x-archetype !default;                                             // the prefix for the tag name to create when using ie-pseudo method
 $CONFIG_GENERATED_TAG_CSS:        false !default;                                                   // styles to apply to the generated tag when using ie-pseudo method (use this as a way to reset styles on these tags)
+$CONFIG_GENERATED_TAG_INLINE:     true !default;                                                    // if `true` insert the styles inline on the generated tag, otherwise insert the styles in a unique css rule
 
 // z-layers
 $CONFIG_Z_INDEX_BASE:             0 !default;                                                       // the default starting layer for z-index calculations
@@ -60,7 +61,7 @@ $CONFIG_KEYFRAME_LOADERS:         archetype-loader !default;                    
 $CONFIG_GLYPHS_NAME:              FontAwesome !default;                                             // name for the font-face
 $CONFIG_GLYPHS_VERSION:           '0.0.1' !default;                                                 // the glyph library version number
 $CONFIG_GLYPHS_SVG_ID:            $CONFIG_GLYPHS_NAME !default;
-$CONFIG_GLYPHS_BASE_PATH:         'vendor/archetype/fontawesome-webfont' !default;                  // generic path to all glpyh fonts (sans extensions)
+$CONFIG_GLYPHS_BASE_PATH:         'vendor/archetype/fontawesome-webfont' !default;                  // generic path to all glyph fonts (sans extensions)
 $CONFIG_GLYPHS_EOT:               '#{$CONFIG_GLYPHS_BASE_PATH}.eot' !default;
 $CONFIG_GLYPHS_FILES:             font-files('#{$CONFIG_GLYPHS_BASE_PATH}.woff', '#{$CONFIG_GLYPHS_BASE_PATH}.ttf', '#{$CONFIG_GLYPHS_BASE_PATH}.svg##{$CONFIG_GLYPHS_SVG_ID}') !default;
 $CONFIG_GLYPHS_WEIGHT:            normal !default;                                                  // font-weight for glyphs
@@ -380,3 +381,9 @@ $CORE_SAFE_FONTS: (
 ); // note that this declaration isn't a `default`, but rather is enforced everytime. this can be modified (via extending $CONFIG_SAFE_FONTS)
 $CONFIG_SAFE_FONTS: () !default;
 $CONFIG_SAFE_FONTS: associative-merge($CORE_SAFE_FONTS, $CONFIG_SAFE_FONTS);
+
+$archetype-glyph-selector: false !default;
+$archetype-pseudo-selector: false !default;
+
+$CORE_GLYPH_SELECTOR_VAR: '$archetype-glyph-selector';
+$CORE_GLYPH_SELECTOR_VAR: '$archetype-pseudo-selector';

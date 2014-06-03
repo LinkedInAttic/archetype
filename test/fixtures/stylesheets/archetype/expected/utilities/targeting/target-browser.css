@@ -98,3 +98,8 @@
 .target-opera, .target-opera x:-o-prefocus {
   width: 82%;
 }
+
+.ie.lte8 .target-with-content-block {
+  /* testing content block */
+  color: red;
+}
