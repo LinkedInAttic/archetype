@@ -408,11 +408,22 @@ private
   def get_theme(theme)
     theme_name = helpers.to_str(theme || 'archetype')
     @@styleguide_themes ||= {}
-    theme = @@styleguide_themes[theme_name] ||= {}
+    themes = @@styleguide_themes[theme_name] ||= {}
+    cleanup_old_themes!(themes, options[:css_filename]) if rand < 0.333  # cleanup 1/3 of the time.
+    theme = themes[options[:css_filename]] ||= {}
     theme[:name] ||= theme_name
     theme[:components] ||= {}
     theme[:extensions] ||= []
     return theme
+  end
+
+  def cleanup_old_themes!(themes, css_filename)
+    themes.keys.each do |key|
+      if key != css_filename
+        themes.delete(key)
+      end
+    end
+    nil
   end
 
   #
