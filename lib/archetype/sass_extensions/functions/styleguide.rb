@@ -75,7 +75,7 @@ module Archetype::SassExtensions::Styleguide
       # if force was set, we'll create a random token for the name
       extension = rand(36**8).to_s(36) if force
       # convert the extension into a hash (if we don't have an extension, compose one out of its data)
-      extension = helpers.to_str(extension || data).hash
+      extension = helpers.to_str(extension || data)
       extensions = theme[:extensions]
       return Sass::Script::Bool.new(false) if component_exists(id, theme, extension, force)
       extensions.push(extension)
@@ -101,7 +101,7 @@ module Archetype::SassExtensions::Styleguide
   #
   def styleguide_component_exists(id, theme = nil, extension = nil, force = false)
     @@archetype_styleguide_mutex.synchronize do
-      extension = helpers.to_str(extension).hash if not extension.nil?
+      extension = helpers.to_str(extension) if not extension.nil?
       return Sass::Script::Bool.new( component_exists(id, theme, extension, force) )
     end
   end
