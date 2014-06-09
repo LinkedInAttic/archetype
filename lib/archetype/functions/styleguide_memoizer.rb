@@ -20,7 +20,7 @@ private
   #
   def self.tokenize(theme, extensions, id, modifiers, state)
     return nil if extensions.nil? or id.nil?
-    return "#{id}::#{(modifiers.to_a.sort + extensions).join('$')}::#{state}".hash
+    return "#{id}::#{(modifiers.to_a.sort + extensions).join('$')}::#{state}"
   end
 
   #

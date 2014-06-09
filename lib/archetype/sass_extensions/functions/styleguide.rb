@@ -75,7 +75,7 @@ module Archetype::SassExtensions::Styleguide
       # if force was set, we'll create a random token for the name
       extension = rand(36**8).to_s(36) if force
       # convert the extension into a hash (if we don't have an extension, compose one out of its data)
-      extension = helpers.to_str(extension || data).hash
+      extension = helpers.to_str(extension || data)
       extensions = theme[:extensions]
       return Sass::Script::Bool.new(false) if component_exists(id, theme, extension, force)
       extensions.push(extension)
@@ -101,7 +101,7 @@ module Archetype::SassExtensions::Styleguide
   #
   def styleguide_component_exists(id, theme = nil, extension = nil, force = false)
     @@archetype_styleguide_mutex.synchronize do
-      extension = helpers.to_str(extension).hash if not extension.nil?
+      extension = helpers.to_str(extension) if not extension.nil?
       return Sass::Script::Bool.new( component_exists(id, theme, extension, force) )
     end
   end
@@ -408,11 +408,22 @@ private
   def get_theme(theme)
     theme_name = helpers.to_str(theme || 'archetype')
     @@styleguide_themes ||= {}
-    theme = @@styleguide_themes[theme_name] ||= {}
+    themes = @@styleguide_themes[theme_name] ||= {}
+    cleanup_old_themes!(themes, options[:css_filename]) if rand < 0.333  # cleanup 1/3 of the time.
+    theme = themes[options[:css_filename]] ||= {}
     theme[:name] ||= theme_name
     theme[:components] ||= {}
     theme[:extensions] ||= []
     return theme
+  end
+
+  def cleanup_old_themes!(themes, css_filename)
+    themes.keys.each do |key|
+      if key != css_filename
+        themes.delete(key)
+      end
+    end
+    nil
   end
 
   #
