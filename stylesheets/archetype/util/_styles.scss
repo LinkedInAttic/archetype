@@ -25,16 +25,13 @@
     @else if($property == hide-element) {
       @include hide-element();
     }
+    @else if($property == unstyled-button) {
+      @include unstyled-button();
+    }
     @else {
       @include output-style($property, $value);
     }
   }
-}
-
-// Themes can override this function & custom-output-styler to add their own
-// custom style includes.
-@function has-custom-output-styler($property, $value, $method:pre){
-  @return false;
 }
 
 // output a property or augment it to use a mixin
