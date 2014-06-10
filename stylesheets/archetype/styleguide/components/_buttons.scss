@@ -36,7 +36,7 @@ $a-blackhole: styleguide-add-component($STYLEGUIDE_BUTTONS_ID,  $STYLEGUIDE_BUTT
     white-space             nowrap,
     // alignment
     inline-block            true, // this will use the inline-block() mixin
-    vertical-align          middle,
+    vertical-align          if($legacy-support-for-ie, middle, nil), //prevent rendering vertical-align twice if legacy support is disabled
     // states
     (states, (
       (hover, (
