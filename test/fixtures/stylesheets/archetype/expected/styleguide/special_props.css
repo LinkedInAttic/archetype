@@ -84,3 +84,35 @@
     color: purple;
   }
 }
+
+.test2 {
+  /* [archetype:styleguide:begin] --- `special-prop-test-2` --- */
+  color: red;
+  color: green;
+  color: blue;
+  color: #abc123;
+  /* [archetype:styleguide:end] --- `special-prop-test-2` --- */
+}
+.ie.lte8 .test2 {
+  /* [archetype:target:browser:begin] --- ie lte 8 --- */
+  color: red;
+  /* [archetype:target:browser:end]   --- ie lte 8 --- */
+}
+.ie.lte9 .test2 {
+  /* [archetype:target:browser:begin] --- ie lte 9 --- */
+  width: 120px;
+  /* [archetype:target:browser:end]   --- ie lte 9 --- */
+}
+.test2.variant {
+  /* [archetype:styleguide:begin] --- `variant special-prop-test-2` --- */
+  color: pink;
+  color: green;
+  color: blue;
+  color: #987fed;
+  /* [archetype:styleguide:end] --- `variant special-prop-test-2` --- */
+}
+.ie.lte8 .test2.variant {
+  /* [archetype:target:browser:begin] --- ie lte 8 --- */
+  color: red;
+  /* [archetype:target:browser:end]   --- ie lte 8 --- */
+}
