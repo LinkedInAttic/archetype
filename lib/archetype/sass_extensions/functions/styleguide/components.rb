@@ -44,8 +44,8 @@ module Archetype::SassExtensions::Styleguide
       components = theme[:components]
       # if force was set, we'll create a random token for the name
       extension = random_uid('extension') if force
-      # convert the extension into a hash (if we don't have an extension, compose one out of its data)
-      extension = (extension || data).hash
+      # use the extension name or a snapshot of the extension
+      extension = helpers.to_str(extension || data.to_sass)
       extensions = theme[:extensions]
       return bool(false) if component_exists?(id, theme, extension, force) || component_is_frozen?(id, theme)
       extensions.push(extension)
@@ -55,6 +55,7 @@ module Archetype::SassExtensions::Styleguide
   end
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data]
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data, :theme]
+  Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data, :extension]
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data, :theme, :extension]
 
   #
@@ -71,14 +72,14 @@ module Archetype::SassExtensions::Styleguide
   #
   def styleguide_component_exists(id, theme = nil, extension = nil, force = false)
     _styleguide_mutex_helper do
-      extension = extension.hash if not extension.nil?
+      extension = helpers.to_str(extension) if not extension.nil?
       return bool( component_exists?(id, theme, extension, force) )
     end
   end
-  Sass::Script::Functions.declare :styleguide_extend_component, [:id]
-  Sass::Script::Functions.declare :styleguide_extend_component, [:id, :theme]
-  Sass::Script::Functions.declare :styleguide_extend_component, [:id, :theme, :extension]
-  Sass::Script::Functions.declare :styleguide_extend_component, [:id, :theme, :extension, :force]
+  Sass::Script::Functions.declare :styleguide_component_exists, [:id]
+  Sass::Script::Functions.declare :styleguide_component_exists, [:id, :theme]
+  Sass::Script::Functions.declare :styleguide_component_exists, [:id, :theme, :extension]
+  Sass::Script::Functions.declare :styleguide_component_exists, [:id, :theme, :extension, :force]
 
   #
   # removes a component definition

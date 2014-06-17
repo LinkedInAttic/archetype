@@ -21,7 +21,7 @@ module Archetype::SassExtensions::Styleguide
     theme_name = helpers.to_str(theme || environment.var('CONFIG_THEME') || Archetype.name)
     key = nil
     begin
-      key = environment.options[:css_filename].hash
+      key = environment.options[:css_filename]
     end
     # if we're aggressively memoizing, store everything across the session
     if Compass.configuration.memoize == :aggressive or not key
