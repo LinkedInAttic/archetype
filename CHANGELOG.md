@@ -12,6 +12,7 @@
   - `styleguide-remove-component`
   - `styleguide-freeze-component` / `styleguide-thaw-component`
   - `styleguide-freeze-all-components` / `styleguide-thaw-all-components`
+- added `styleguide-known-components` to retrieve a list of currently registered components
 
 ### Major Changes:
 

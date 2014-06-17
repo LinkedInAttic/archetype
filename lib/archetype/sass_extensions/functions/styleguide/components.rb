@@ -160,6 +160,20 @@ module Archetype::SassExtensions::Styleguide
   end
   Sass::Script::Functions.declare :styleguide_thaw_all_components, [:theme]
 
+  #
+  # gets a list of all known components
+  #
+  # *Parameters*:
+  # - <tt>$theme</tt> {String} the theme to look within
+  # *Returns*:
+  # - {List} list of component identifiers
+  #
+  def styleguide_known_components(theme = nil)
+    theme = get_theme(theme)
+    keys = theme[:components].keys.map { |k| identifier(k) }
+    return list(keys, :comma)
+  end
+
   private
 
   #
