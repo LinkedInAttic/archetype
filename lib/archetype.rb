@@ -38,6 +38,10 @@ module Archetype
     Compass::Configuration.add_configuration_property(:archetype_meta, "any meta data you want made available to the environment") do
       {}
     end
+    # meta
+    Compass::Configuration.add_configuration_property(:styleguide_debug, "if true, detailed debugging is turned on for styleguide components") do
+      false
+    end
   end
 
   def self.name

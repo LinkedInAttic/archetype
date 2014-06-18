@@ -32,6 +32,7 @@
   )
 )
 ```
+- added `styleguide_debug` config option. when `true`, `styleguide*` methods will log debug information
 
 ### Major Changes:
 

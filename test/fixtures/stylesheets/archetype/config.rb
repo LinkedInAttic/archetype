@@ -35,3 +35,5 @@ archetype_meta = {
   'featureEnabled' => Sass::Script::Value::Bool.new(true),
   'somethingElse' => 'testing'
 }
+
+styleguide_debug = true
