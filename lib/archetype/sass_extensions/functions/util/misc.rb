@@ -217,6 +217,20 @@ module Archetype::SassExtensions::Util::Misc
     return bool(stack.include?(current))
   end
 
+  #
+  # normalizes a property
+  #
+  # *Parameters*:
+  # - <tt>$property</tt> {String} the property
+  # *Returns*:
+  # - {String} the normalized property
+  #
+  def _archetype_normalize_property(property)
+    return null if helpers.is_null(property)
+    property = helpers.to_str(property)
+    return identifier(property.gsub(/\:.*/, ''))
+  end
+
 private
 
   @@archetype_ui_mutex = Mutex.new

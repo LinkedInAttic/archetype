@@ -12,6 +12,27 @@
   - `styleguide-remove-component`
   - `styleguide-freeze-component` / `styleguide-thaw-component`
   - `styleguide-freeze-all-components` / `styleguide-thaw-all-components`
+- added `styleguide-componets` to retrieve a list of currently registered components
+- allow special properties (with a `:`) in component definitions
+  - this allows multiple values per property, but also allows us to modify specific keys within variants / extensions without clobbering
+```
+(
+  default: (
+    'target-browser:color': (ie lte 8, color, red),
+    'target-browser:width': (ie lte 9, width, 120px),
+    color:                red,
+    'color:1':            green,
+    'color:2':            blue,
+    'color:custom':       #abc123
+  ),
+  variant: (
+    color: pink,
+    'color:custom':         #987fed,
+    'target-browser:width': nil  // we only want to modify the target-browser that's dealing with `width`, not the one for `color`
+  )
+)
+```
+- added `styleguide_debug` config option. when `true`, `styleguide*` methods will log debug information
 
 ### Major Changes:
 

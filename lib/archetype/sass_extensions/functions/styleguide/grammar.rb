@@ -13,6 +13,8 @@ module Archetype::SassExtensions::Styleguide
   # - {Array} an array containing the identifer, modifiers, and a token
   #
   def grammar(sentence, theme = nil, state = nil)
+    debug = Compass.configuration.styleguide_debug
+    helpers.debug "[archetype:styleguide] converting `#{sentence}` to grammar" if debug
     theme = get_theme(theme)
     components = theme[:components]
     # get a list of valid ids
@@ -30,6 +32,11 @@ module Archetype::SassExtensions::Styleguide
     # maybe in the case where we're looking for strict keys on the lookup?
     modifiers = modifiers.uniq
     token = memoizer.tokenize(theme[:name], extensions, id, modifiers, state)
+    if debug
+      helpers.debug "[archetype:styleguide] the computed grammar is..."
+      helpers.debug "  identifier: #{id}"
+      helpers.debug "  modifiers: #{modifiers}"
+    end
     return id, modifiers, token
   end
 

@@ -35,6 +35,7 @@ module Archetype::SassExtensions::Styleguide
   end
 
   def self.reset!(filename = nil)
+    debug = Compass.configuration.styleguide_debug
     (@@archetype_styleguide_mutex ||= Mutex.new).synchronize do
       if filename.nil?
         @@styleguide_themes = {}

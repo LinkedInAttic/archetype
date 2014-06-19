@@ -15,165 +15,168 @@ $a-blackhole: require-archetype-modules(archetype/util);
   @if type-of($property) == map {
     @include to-styles($property);
   }
-  @else if( not is-null($property) and length(-archetype-list($value)) > 0 and not is-null(first-value-of(-archetype-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
-    // if the value is the special `-archetype-no-value`, pass along an empty value
-    @if $value == -archetype-no-value {
-      $value: ();
-    }
-
-    // for mixins, we need to do some custom work
-    // check to see if we have a custom output styler (pre)
-    @if check-for-custom-styler($property, $value, pre) {
-      @include custom-output-styler($property, $value, $method: pre);
-    }
-
-    // we're going to assume that any mixins that get invoked here have been properly imported
-    //  if not, they will simply throw a compilation error
-
-    // check that we aren't already inside of these mixins before calling them
-    @else if($property == font-family and not -archetype-within-mixin(font-family)) { @include font-family($value); }
-    @else if($property == font-style and not -archetype-within-mixin(font-style)) { @include font-style($value); }
-
-    // target-browser
-    @else if($property == target-browser)       { @include target-browser($value...); }
-    // border-radius
-    @else if($property == border-radius)        { @include border-radius($value...); }
-    // box-sizing
-    @else if($property == box-sizing)           { @include box-sizing($value...); }
-    // box-shadow
-    @else if($property == box-shadow)           { @include box-shadow($value...); }
-    // text-shadow
-    @else if($property == text-shadow)          { @include text-shadow($value); }
-    // filter-gradient
-    @else if($property == filter-gradient)      { @include filter-gradient($value...); }
-    // background
-    @else if($property == background)           { @include background($value...); }
-    // background-image
-    @else if($property == background-image)     { @include background-image($value...); }
-    // background-clip
-    @else if($property == background-clip)      { @include background-clip($value...); }
-    // background-size
-    @else if($property == background-size)      { @include background-size($value...); }
-    // background-origin
-    @else if($property == background-origin)    { @include background-origin($value...); }
-    // IE filters
-    @else if($property == ie-filter)            { @include ie-filter($value...); }
-    // hide-text
-    @else if($property == hide-text)            { @include hide-text($value...); }
-    // inline-block
-    @else if($property == inline-block)         { @include inline-block($value...); }
-    // opacity
-    @else if($property == opacity)              { @include opacity($value...); }
-    // min-width
-    @else if($property == min-width)            { @include min-width($value...); }
-    // min-height
-    @else if($property == min-height)           { @include min-height($value...); }
-    // max-width
-    @else if($property == max-width)            { @include max-width($value...); }
-    // max-height
-    @else if($property == max-height)           { @include max-height($value...); }
-    // stretch
-    @else if($property == stretch)              { @include stretch($value...); }
-    // appearance
-    @else if($property == appearance)           { @include appearance($value...); }
-    // hide-element
-    @else if($property == hide-element)         { @include hide-element($value...); }
-    // unhide-element
-    @else if($property == unhide-element)       { @include unhide-element($value...); }
-    // unstyled-button
-    @else if($property == unstyled-button)      { @include unstyled-button($value...); }
-    // ellipsis
-    @else if($property == ellipsis)             { @include ellipsis($value...); }
-    // scale
-    @else if($property == scale)                { @include scale($value...); }
-    // z-index
-    @else if($property == z-index)              { @include z-index($value...); }
-    // glyphs
-    @else if($property == glyph-icon)           { @include glyph-icon($value...); }
-    @else if($property == glyph-stroke)         { @include glyph-stroke($value...); }
-    // animations
-    @else if($property == animation)            { @include animation($value...); }
-    // hasLayout
-    @else if($property == has-layout)           { @include has-layout($value...); }
-    // IE :before/:after
-    @else if($property == ie-pseudo)            { @include ie-pseudo($value...); }
-    @else if($property == ie-pseudo-before)     { @include ie-pseudo-before($value...); }
-    @else if($property == ie-pseudo-after)      { @include ie-pseudo-after($value...); }
-    // transparent-focusable
-    @else if($property == transparent-focusable)  { @include transparent-focusable($value); }
-    // triangle
-    @else if($property == triangle)             { @include triangle($value...); }
-    // styleguide-diff
-    @else if($property == styleguide-diff)      { @include styleguide-diff($value...); }
-    // clearfix
-    @else if($property == clearfix) {
-      @if($value == legacy-pie-clearfix) {
-        @include legacy-pie-clearfix();
+  @else {
+    $property: -archetype-normalize-property($property);
+    @if( not is-null($property) and length(-archetype-list($value)) > 0 and not is-null(first-value-of(-archetype-list($value))) and not index($CONFIG_DISABLED_CSS, $property)) {
+      // if the value is the special `-archetype-no-value`, pass along an empty value
+      @if $value == -archetype-no-value {
+        $value: ();
       }
-      @else if($value == pie-clearfix) {
-        @include pie-clearfix();
+
+      // for mixins, we need to do some custom work
+      // check to see if we have a custom output styler (pre)
+      @if check-for-custom-styler($property, $value, pre) {
+        @include custom-output-styler($property, $value, $method: pre);
       }
-      @else {
-        @include clearfix($value...);
-      }
-    }
-    // special case for @extend
-    @else if($property == extend or $property == '@extend') {
-      @each $v in -archetype-list($value) {
-        @extend #{$v};
-      }
-    }
-    // special case for @media
-    @else if($property == media or $property == '@media') {
-      @each $query, $styles in $value {
-        @media #{$query} {
-          @include to-styles($styles);
+
+      // we're going to assume that any mixins that get invoked here have been properly imported
+      //  if not, they will simply throw a compilation error
+
+      // check that we aren't already inside of these mixins before calling them
+      @else if($property == font-family and not -archetype-within-mixin(font-family)) { @include font-family($value); }
+      @else if($property == font-style and not -archetype-within-mixin(font-style)) { @include font-style($value); }
+
+      // target-browser
+      @else if($property == target-browser)       { @include target-browser($value...); }
+      // border-radius
+      @else if($property == border-radius)        { @include border-radius($value...); }
+      // box-sizing
+      @else if($property == box-sizing)           { @include box-sizing($value...); }
+      // box-shadow
+      @else if($property == box-shadow)           { @include box-shadow($value...); }
+      // text-shadow
+      @else if($property == text-shadow)          { @include text-shadow($value); }
+      // filter-gradient
+      @else if($property == filter-gradient)      { @include filter-gradient($value...); }
+      // background
+      @else if($property == background)           { @include background($value...); }
+      // background-image
+      @else if($property == background-image)     { @include background-image($value...); }
+      // background-clip
+      @else if($property == background-clip)      { @include background-clip($value...); }
+      // background-size
+      @else if($property == background-size)      { @include background-size($value...); }
+      // background-origin
+      @else if($property == background-origin)    { @include background-origin($value...); }
+      // IE filters
+      @else if($property == ie-filter)            { @include ie-filter($value...); }
+      // hide-text
+      @else if($property == hide-text)            { @include hide-text($value...); }
+      // inline-block
+      @else if($property == inline-block)         { @include inline-block($value...); }
+      // opacity
+      @else if($property == opacity)              { @include opacity($value...); }
+      // min-width
+      @else if($property == min-width)            { @include min-width($value...); }
+      // min-height
+      @else if($property == min-height)           { @include min-height($value...); }
+      // max-width
+      @else if($property == max-width)            { @include max-width($value...); }
+      // max-height
+      @else if($property == max-height)           { @include max-height($value...); }
+      // stretch
+      @else if($property == stretch)              { @include stretch($value...); }
+      // appearance
+      @else if($property == appearance)           { @include appearance($value...); }
+      // hide-element
+      @else if($property == hide-element)         { @include hide-element($value...); }
+      // unhide-element
+      @else if($property == unhide-element)       { @include unhide-element($value...); }
+      // unstyled-button
+      @else if($property == unstyled-button)      { @include unstyled-button($value...); }
+      // ellipsis
+      @else if($property == ellipsis)             { @include ellipsis($value...); }
+      // scale
+      @else if($property == scale)                { @include scale($value...); }
+      // z-index
+      @else if($property == z-index)              { @include z-index($value...); }
+      // glyphs
+      @else if($property == glyph-icon)           { @include glyph-icon($value...); }
+      @else if($property == glyph-stroke)         { @include glyph-stroke($value...); }
+      // animations
+      @else if($property == animation)            { @include animation($value...); }
+      // hasLayout
+      @else if($property == has-layout)           { @include has-layout($value...); }
+      // IE :before/:after
+      @else if($property == ie-pseudo)            { @include ie-pseudo($value...); }
+      @else if($property == ie-pseudo-before)     { @include ie-pseudo-before($value...); }
+      @else if($property == ie-pseudo-after)      { @include ie-pseudo-after($value...); }
+      // transparent-focusable
+      @else if($property == transparent-focusable)  { @include transparent-focusable($value); }
+      // triangle
+      @else if($property == triangle)             { @include triangle($value...); }
+      // styleguide-diff
+      @else if($property == styleguide-diff)      { @include styleguide-diff($value...); }
+      // clearfix
+      @else if($property == clearfix) {
+        @if($value == legacy-pie-clearfix) {
+          @include legacy-pie-clearfix();
+        }
+        @else if($value == pie-clearfix) {
+          @include pie-clearfix();
+        }
+        @else {
+          @include clearfix($value...);
         }
       }
-    }
-    // special case for @keyframes
-    @else if($property == keyframes or $property == '@keyframes') {
-      @each $name, $def in $value {
-        @each $frame, $styles in $def {
-          @include keyframes($name) {
-            @at-root #{$frame} {
-              @include to-styles($styles);
+      // special case for @extend
+      @else if($property == extend or $property == '@extend') {
+        @each $v in -archetype-list($value) {
+          @extend #{$v};
+        }
+      }
+      // special case for @media
+      @else if($property == media or $property == '@media') {
+        @each $query, $styles in $value {
+          @media #{$query} {
+            @include to-styles($styles);
+          }
+        }
+      }
+      // special case for @keyframes
+      @else if($property == keyframes or $property == '@keyframes') {
+        @each $name, $def in $value {
+          @each $frame, $styles in $def {
+            @include keyframes($name) {
+              @at-root #{$frame} {
+                @include to-styles($styles);
+              }
             }
           }
         }
       }
-    }
-    // breakpoint
-    @else if($property == breakpoint) {
-      @each $key, $styles in $value {
-        @include breakpoint($key) {
-          @include to-styles($styles);
+      // breakpoint
+      @else if($property == breakpoint) {
+        @each $key, $styles in $value {
+          @include breakpoint($key) {
+            @include to-styles($styles);
+          }
         }
       }
-    }
-    // high-resolution
-    @else if($property == high-resolution) {
-      @include high-resolution {
-        @include to-styles($value);
-      }
-    }
-    // switch-locale
-    @else if($property == switch-locale) {
-      @each $locale, $styles in $value {
-        @include switch-locale($locale) {
-          @include to-styles($styles);
+      // high-resolution
+      @else if($property == high-resolution) {
+        @include high-resolution {
+          @include to-styles($value);
         }
       }
-    }
+      // switch-locale
+      @else if($property == switch-locale) {
+        @each $locale, $styles in $value {
+          @include switch-locale($locale) {
+            @include to-styles($styles);
+          }
+        }
+      }
 
-    // check to see if we have a custom output styler (post)
-    @else if check-for-custom-styler($property, $value, post) {
-      @include custom-output-styler($property, $value, $method: post);
-    }
-    // otherwise just use a key-value pair
-    @else {
-      // strip off the special `{raw}` keyword
-      #{str-replace($property, '{raw}', '')}: $value;
+      // check to see if we have a custom output styler (post)
+      @else if check-for-custom-styler($property, $value, post) {
+        @include custom-output-styler($property, $value, $method: post);
+      }
+      // otherwise just use a key-value pair
+      @else {
+        // strip off the special `{raw}` keyword
+        #{str-replace($property, '{raw}', '')}: $value;
+      }
     }
   }
 }

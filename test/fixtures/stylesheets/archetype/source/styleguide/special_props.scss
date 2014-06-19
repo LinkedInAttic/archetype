@@ -43,6 +43,33 @@ $a-blackhole: styleguide-add-component(special-prop-test, (), (
 )) !global;
 }
 
+@if should-register-component(special-prop-test-2) {
+$a-blackhole: styleguide-add-component(special-prop-test-2, (), (
+  default: (
+    // you can use a property with `property:...` (everything from the `:` on is ignored)
+    // this allows multiple values per property, but also allows us to modify specific keys within variants
+    'target-browser:color': (ie lte 8, color, red),
+    'target-browser:width': (ie lte 9, width, 120px),
+    color:                  red,
+    'color:1':              green,
+    'color:2':              blue,
+    'color:custom':         #abc123
+  ),
+  variant: (
+    color:                  pink,
+    'color:custom':         #987fed,
+    'target-browser:width': nil  // we only want to modify the target-browser that's dealing with `width`, not the one for `color`
+  )
+)) !global;
+}
+
 .test {
   @include styleguide(special-prop-test);
+}
+
+.test2 {
+  @include styleguide(special-prop-test-2);
+  &.variant {
+    @include styleguide(variant special-prop-test-2);
+  }
 }

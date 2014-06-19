@@ -1,0 +1,31 @@
+@import "test_harness";
+
+@mixin test {
+  /* styleguide-component-exists(exists-component): #{styleguide-component-exists(exists-component)} */
+  /* styleguide-component-exists(exists-component, $theme: $CONFIG_THEME, $extension: ext1): #{styleguide-component-exists(exists-component, $theme: $CONFIG_THEME, $extension: ext1)} */
+  /* styleguide-component-exists(exists-component, $theme: $CONFIG_THEME, $extension: ext2): #{styleguide-component-exists(exists-component, $theme: $CONFIG_THEME, $extension: ext2)} */
+}
+
+// create a component
+$a-blackhole: styleguide-add-component(exists-component, (
+  default: (
+    color: red
+  )
+)) !global;
+@include test;
+
+// then extend it...
+$a-blackhole: styleguide-extend-component(exists-component, (
+  default: (
+    color: green
+  )
+), $theme: $CONFIG_THEME, $extension: ext1);
+@include test;
+
+// then extend it...
+$a-blackhole: styleguide-extend-component(exists-component, (
+  default: (
+    color: black
+  )
+), $theme: $CONFIG_THEME, $extension: ext2);
+@include test;

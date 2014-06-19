@@ -12,14 +12,23 @@ module Archetype::SassExtensions::Styleguide
   # - {Boolean} whether or not the component was added
   #
   def styleguide_add_component(id, data, default = nil, theme = nil, force = false)
+    debug = Compass.configuration.styleguide_debug
+    helpers.debug "[archetype:styleguide] attempting to register component for `#{id}`" if debug
     _styleguide_mutex_helper(id, theme) do |id, theme|
       components = theme[:components]
       # if force was true, we have to invalidate the memoizer
       memoizer.clear(theme[:name]) if force
       # if we already have the component, don't create it again
-      return bool(false) if component_exists?(id, theme, nil, force) || component_is_frozen?(id, theme)
+      if component_exists?(id, theme, nil, force) || component_is_frozen?(id, theme)
+        helpers.debug "[archetype:styleguide] skipping component registration for `#{id}`. the component is already registered or frozen" if debug
+        return bool(false)
+      end
       # otherwise add it
       components[id] = helpers.data_to_hash(default, 1, SPECIAL, ADDITIVES).merge(helpers.data_to_hash(data, 1, SPECIAL, ADDITIVES))
+      if debug
+        helpers.debug "[archetype:styleguide] successfully registered component `#{id}`"
+        helpers.debug components[id].inspect
+      end
       return bool(true)
     end
   end
@@ -40,21 +49,35 @@ module Archetype::SassExtensions::Styleguide
   # - {Boolean} whether or not the component was extended
   #
   def styleguide_extend_component(id, data, theme = nil, extension = nil, force = false)
+    debug = Compass.configuration.styleguide_debug
+    helpers.debug "[archetype:styleguide] attempting to extend component for `#{id}`" if debug
+    helpers.debug "[archetype:styleguide] extension name is `#{extension.to_sass}`" if (debug && !extension.nil?)
     _styleguide_mutex_helper(id, theme) do |id, theme|
       components = theme[:components]
       # if force was set, we'll create a random token for the name
-      extension = random_uid('extension') if force
-      # convert the extension into a hash (if we don't have an extension, compose one out of its data)
-      extension = (extension || data).hash
+      if force
+        extension = random_uid('extension')
+        helpers.debug "[archetype:styleguide] forcibly extending..." if debug
+      end
+      # use the extension name or a snapshot of the extension
+      extension = helpers.to_str(extension || data.to_sass)
       extensions = theme[:extensions]
-      return bool(false) if component_exists?(id, theme, extension, force) || component_is_frozen?(id, theme)
+      if component_exists?(id, theme, extension, force) || component_is_frozen?(id, theme)
+        helpers.debug "[archetype:styleguide] skipping component extension for `#{id}`. the extension is already registered or frozen" if debug
+        return bool(false)
+      end
       extensions.push(extension)
       components[id] = (components[id] ||= Archetype::Hash.new).rmerge(helpers.data_to_hash(data, 1, SPECIAL, ADDITIVES))
+        if debug
+          helpers.debug "[archetype:styleguide] successfully extended component `#{id}`"
+          helpers.debug components[id].inspect
+        end
       return bool(true)
     end
   end
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data]
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data, :theme]
+  Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data, :extension]
   Sass::Script::Functions.declare :styleguide_extend_component, [:id, :data, :theme, :extension]
 
   #
@@ -71,14 +94,14 @@ module Archetype::SassExtensions::Styleguide
   #
   def styleguide_component_exists(id, theme = nil, extension = nil, force = false)
     _styleguide_mutex_helper do
-      extension = extension.hash if not extension.nil?
+      extension = helpers.to_str(extension) if not extension.nil?
       return bool( component_exists?(id, theme, extension, force) )
     end
   end
-  Sass::Script::Functions.declare :styleguide_extend_component, [:id]
-  Sass::Script::Functions.declare :styleguide_extend_component, [:id, :theme]
-  Sass::Script::Functions.declare :styleguide_extend_component, [:id, :theme, :extension]
-  Sass::Script::Functions.declare :styleguide_extend_component, [:id, :theme, :extension, :force]
+  Sass::Script::Functions.declare :styleguide_component_exists, [:id]
+  Sass::Script::Functions.declare :styleguide_component_exists, [:id, :theme]
+  Sass::Script::Functions.declare :styleguide_component_exists, [:id, :theme, :extension]
+  Sass::Script::Functions.declare :styleguide_component_exists, [:id, :theme, :extension, :force]
 
   #
   # removes a component definition
@@ -88,6 +111,7 @@ module Archetype::SassExtensions::Styleguide
   # - <tt>$theme</tt> {String} the theme to insert the component into
   #
   def styleguide_remove_component(id, theme = nil)
+    helpers.debug "[archetype:styleguide] removing component `#{id}`" if Compass.configuration.styleguide_debug
     _styleguide_mutex_helper(id, theme) do |id, theme|
       theme[:components].delete(id)
       theme[:extensions].push(random_uid('remove'))
@@ -105,6 +129,7 @@ module Archetype::SassExtensions::Styleguide
   # - <tt>$theme</tt> {String} the theme to insert the component into
   #
   def styleguide_freeze_component(id, theme = nil)
+    helpers.debug "[archetype:styleguide] freezing component `#{id}`" if Compass.configuration.styleguide_debug
     _styleguide_mutex_helper(id, theme) do |id, theme|
       theme[:frozen] << id
       return bool(true)
@@ -120,6 +145,7 @@ module Archetype::SassExtensions::Styleguide
   # - <tt>$theme</tt> {String} the theme to insert the component into
   #
   def styleguide_freeze_all_components(theme = nil)
+    helpers.debug "[archetype:styleguide] freezing ALL components" if Compass.configuration.styleguide_debug
     _styleguide_mutex_helper do
       theme = get_theme(theme)
       theme[:frozen] = Set.new(theme[:components].keys)
@@ -136,6 +162,7 @@ module Archetype::SassExtensions::Styleguide
   # - <tt>$theme</tt> {String} the theme to insert the component into
   #
   def styleguide_thaw_component(id, theme = nil)
+    helpers.debug "[archetype:styleguide] thawing component `#{id}`" if Compass.configuration.styleguide_debug
     _styleguide_mutex_helper(id, theme) do |id, theme|
       theme[:frozen].delete(id)
       return bool(true)
@@ -151,6 +178,7 @@ module Archetype::SassExtensions::Styleguide
   # - <tt>$theme</tt> {String} the theme to insert the component into
   #
   def styleguide_thaw_all_components(theme = nil)
+    helpers.debug "[archetype:styleguide] thawing ALL components" if Compass.configuration.styleguide_debug
     _styleguide_mutex_helper do
       theme = get_theme(theme)
       theme[:frozen].clear
@@ -158,6 +186,20 @@ module Archetype::SassExtensions::Styleguide
     end
   end
   Sass::Script::Functions.declare :styleguide_thaw_all_components, [:theme]
+
+  #
+  # gets a list of all known components
+  #
+  # *Parameters*:
+  # - <tt>$theme</tt> {String} the theme to look within
+  # *Returns*:
+  # - {List} list of component identifiers
+  #
+  def styleguide_componets(theme = nil)
+    theme = get_theme(theme)
+    keys = theme[:components].keys.map { |k| identifier(k) }
+    return list(keys, :comma)
+  end
 
   private
 

@@ -30,6 +30,17 @@ module Archetype::Functions::Helpers
   end
 
   #
+  # provides a convenience interface for logging debug messages
+  # silently captures failures
+  #
+  def self.debug(msg)
+    begin
+      logger.record(:debug, msg)
+    rescue
+    end
+  end
+
+  #
   # convert an Archetype::Hash to a Sass::Script::Value::List
   #
   # *Parameters*:
