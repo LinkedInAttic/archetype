@@ -6,5 +6,5 @@ $a-blackhole: styleguide-add-component($id, (
     color: red
   )
 )) !global;
-$known: styleguide-known-components();
-/* styleguide-known-components() contains `#{$id}`: #{index($known, $id) != null} */
+$known: styleguide-componets();
+/* styleguide-componets() contains `#{$id}`: #{index($known, $id) != null} */

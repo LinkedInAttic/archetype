@@ -195,7 +195,7 @@ module Archetype::SassExtensions::Styleguide
   # *Returns*:
   # - {List} list of component identifiers
   #
-  def styleguide_known_components(theme = nil)
+  def styleguide_componets(theme = nil)
     theme = get_theme(theme)
     keys = theme[:components].keys.map { |k| identifier(k) }
     return list(keys, :comma)
