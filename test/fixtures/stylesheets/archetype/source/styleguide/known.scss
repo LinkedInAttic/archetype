@@ -1,3 +1,10 @@
 @import "test_harness";
 
-/* styleguide-known-components: #{styleguide-known-components()} */
+$id: known-component;
+$a-blackhole: styleguide-add-component($id, (
+  default: (
+    color: red
+  )
+)) !global;
+$known: styleguide-known-components();
+/* styleguide-known-components() contains `#{$id}`: #{index($known, $id) != null} */
