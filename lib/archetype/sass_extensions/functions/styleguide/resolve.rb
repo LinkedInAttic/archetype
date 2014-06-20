@@ -132,7 +132,7 @@ module Archetype::SassExtensions::Styleguide
           # create a temporary object and extract the nested styles
           tmp = Archetype::Hash.new
           inherit.each do |related|
-            _styleguide_debug "inheriting from `#{related}`", :inherit
+            _styleguide_debug "inheriting from `#{helpers.to_str(related)}`", :inherit
             tmp = tmp.rmerge(extract_styles(id, related, true, theme, context))
           end
           # remove the inheritance key and update the styles
