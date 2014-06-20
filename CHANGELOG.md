@@ -33,6 +33,9 @@
 )
 ```
 - added `styleguide_debug` config option. when `true`, `styleguide*` methods will log debug information
+  - granular options include:
+    - `:get`, `:get_granular`, `:diff`, `:add`, `:extend`, `:remove`, `:freeze`, `:grammar`, `:drop`, `:inherit`, `:resolve`, `:extract`
+    - e.g. `styleguide_debug = [:add, :get, :grammar]`
 
 ### Major Changes:
 

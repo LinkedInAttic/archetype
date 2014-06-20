@@ -36,4 +36,4 @@ archetype_meta = {
   'somethingElse' => 'testing'
 }
 
-styleguide_debug = true
+#styleguide_debug = true

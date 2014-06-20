@@ -21,9 +21,18 @@ module Archetype::SassExtensions::Styleguide
   # - {Map} a map of styles
   #
   def _styleguide(description, state = nil, theme = nil)
+    extras = []
+    extras << "state: #{state}" unless (state.nil? or is_null(state))
+    extras << "theme: #{theme}" unless (theme.nil? or is_null(theme))
+    extras = extras.join(', ')
+    msg = "`#{description}`"
+    msg << " (#{extras})" unless extras.empty?
+    _styleguide_debug "fetching styles for #{msg}", :get
     _styleguide_mutex_helper do
       styles = get_styles(description, theme, state)
       styles = resolve_runtime_locale_values(styles)
+      _styleguide_debug "got styles for #{msg}", :get
+      _styleguide_debug styles, :get
       # convert it back to a Sass:Map and carry on
       return helpers.hash_to_map(styles)
     end
@@ -49,6 +58,8 @@ module Archetype::SassExtensions::Styleguide
       original_message = helpers.get_meta_message(original).sub(MESSAGE_PREFIX, '').sub(MESSAGE_SUFFIX, '')
       other_message = helpers.get_meta_message(other).sub(MESSAGE_PREFIX, '').sub(MESSAGE_SUFFIX, '')
       diff = helpers.add_meta_message(diff, "#{MESSAGE_PREFIX}#{original_message}` vs `#{other_message}#{MESSAGE_SUFFIX}")
+      _styleguide_debug "styleguide-diff", :diff
+      _styleguide_debug diff, :diff
       # and return it as a map
       return helpers.hash_to_map(diff)
     end

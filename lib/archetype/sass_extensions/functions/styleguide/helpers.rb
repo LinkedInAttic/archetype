@@ -7,6 +7,30 @@ module Archetype::SassExtensions::Styleguide
   end
 
   #
+  # ouputs a debug message for styleguide / component methods
+  #
+  # valid types...
+  #  :get, :get_granular, :diff, :add, :extend, :remove, :freeze, :grammar, :drop, :inherit, :resolve, :extract
+  #
+  def _styleguide_debug(msg, type = :all)
+    debug = Compass.configuration.styleguide_debug
+    debug = :all if debug == true
+    debug = [debug] unless debug.is_a? Array
+    if debug.include?(type) || debug.include?(:all)
+      begin
+        if msg.is_a? String
+          helpers.debug("[archetype:styleguide] #{msg}")
+        else
+          puts ">" * 50
+          pp msg
+          puts "<" * 50
+        end
+      rescue
+      end
+    end
+  end
+
+  #
   # helper for operations that need to happen within a mutex
   #
   def _styleguide_mutex_helper(id = nil, theme = nil)
@@ -35,7 +59,6 @@ module Archetype::SassExtensions::Styleguide
   end
 
   def self.reset!(filename = nil)
-    debug = Compass.configuration.styleguide_debug
     (@@archetype_styleguide_mutex ||= Mutex.new).synchronize do
       if filename.nil?
         @@styleguide_themes = {}

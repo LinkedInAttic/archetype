@@ -34,10 +34,7 @@ module Archetype::Functions::Helpers
   # silently captures failures
   #
   def self.debug(msg)
-    begin
-      logger.record(:debug, msg)
-    rescue
-    end
+    logger.record(:debug, msg)
   end
 
   #

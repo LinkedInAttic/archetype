@@ -22,7 +22,10 @@ module Archetype::SassExtensions::Styleguide
     if not drop.nil?
       drop.to_a.each do |key|
         key = helpers.to_str(key)
-        obj.delete(key) if not SPECIAL.include?(key)
+        if not SPECIAL.include?(key)
+          _styleguide_debug "dropping styles for `#{key}`", :drop
+          obj.delete(key)
+        end
       end
       merger.delete(DROP)
     end
@@ -84,6 +87,7 @@ module Archetype::SassExtensions::Styleguide
   # - <tt>key</tt> {String} the key we care about
   #
   def special_drop_key(obj, tmp, key)
+    _styleguide_debug "dropping styles for `#{key}`", :drop
     if SPECIAL.include?(key)
       if not (obj[key].nil? or obj[key].empty?)
         tmp[key] = Archetype::Hash.new
@@ -108,6 +112,7 @@ module Archetype::SassExtensions::Styleguide
   #
   def resolve_dependents(id, value, theme = nil, context = nil, obj = nil)
     return value if value.nil?
+    debug = Compass.configuration.styleguide_debug
     # we have to create a clone here as the passed in value is volatile and we're performing destructive changes
     value = value.clone
     # check that we're dealing with a hash
@@ -126,7 +131,10 @@ module Archetype::SassExtensions::Styleguide
         if not inherit.empty?
           # create a temporary object and extract the nested styles
           tmp = Archetype::Hash.new
-          inherit.each { |related| tmp = tmp.rmerge(extract_styles(id, related, true, theme, context)) }
+          inherit.each do |related|
+            _styleguide_debug "inheriting from `#{related}`", :inherit
+            tmp = tmp.rmerge(extract_styles(id, related, true, theme, context))
+          end
           # remove the inheritance key and update the styles
           value.delete(INHERIT)
           inherit = extract_styles(id, inherit, true, theme, context)
@@ -136,6 +144,8 @@ module Archetype::SassExtensions::Styleguide
       end
     end
     # return whatever we got
+    _styleguide_debug "after resolving dependents...", :resolve
+    _styleguide_debug value, :resolve
     return value
   end
 
