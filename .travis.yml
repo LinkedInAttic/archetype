@@ -8,7 +8,7 @@ rvm:
   - jruby-18mode
   - jruby-19mode
   - jruby-head
-  - rbx
+  - rbx-2
   - ree
 env:
   - JRUBY_OPTS="-Xcext.enabled=true -J-Xmx1024m" JVM_OPTS="-XX:-UseGCOverheadLimit"
