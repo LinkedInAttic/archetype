@@ -4,7 +4,7 @@
 [![Dependency Status](https://gemnasium.com/eoneill/archetype.svg)](https://gemnasium.com/eoneill/archetype)
 
 Archetype is a Compass/Sass based framework for authoring configurable, composable UI components and patterns.
-The natural language syntax that Archetype provides allows your designers and developers to discuss UI compositions using the same vocabulary.
+The natural language syntax that Archetype provides allows designers and developer to discuss UI compositions using the same vocabulary.
 
 ## Resources
 
