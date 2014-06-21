@@ -18,7 +18,10 @@ module Archetype::SassExtensions::Styleguide
     components = theme[:components]
     # get a list of valid ids
     styleguideIds = components.keys
-    sentence = sentence.split if sentence.is_a? String
+
+    # convert the sentence to a string and then split into an array
+    # this ensures that all the pieces are treated as strings and not other primitive types (e.g. a list of strings in the middle of a sentence)
+    sentence = helpers.to_str(sentence).split
 
     id, modifiers = grammarize(sentence, styleguideIds)
 

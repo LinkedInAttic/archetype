@@ -195,6 +195,25 @@ module Archetype::SassExtensions::Styleguide
     return list(keys, :comma)
   end
 
+  #
+  # gets a list of all the current variants of a given component
+  #
+  # *Parameters*:
+  # - <tt>$id</tt> {String} the component identifier
+  # - <tt>$theme</tt> {String} the theme to look within
+  # *Returns*:
+  # - {List} list of component variants
+  #
+  def styleguide_component_variants(id, theme = nil)
+    id = helpers.to_str(id)
+    theme = get_theme(theme)
+    component = theme[:components][id]
+    return null if component.nil?
+    variants = component.keys
+    variants = variants.map { |k| identifier(k) }
+    return list(variants, :comma)
+  end
+
   private
 
   #
