@@ -10,9 +10,13 @@ module Archetype
 
       ROOT_PATH = File.expand_path("../../../", __FILE__)
 
-      def initialize(name)
+      def initialize(name, gemspec = nil, add_dependency = true)
+
+        @gemspec = gemspec
+        @add_dependency = add_dependency
 
         e = @extension = {}
+
         # we only care about the name, so strip off anything if we were given a file/path
         e[:name] = File.basename(name, '.gemspec').strip
         # the path to the extension
@@ -21,6 +25,10 @@ module Archetype
         e[:lib]  = File.join(e[:path], 'lib')
 
         resolve_version
+
+        extend_gemspec
+
+        return @gemspec
       end
 
       def info(prop)
@@ -28,6 +36,32 @@ module Archetype
       end
 
       private
+
+      def extend_gemspec()
+        unless @gemspec.nil?
+          ## Release Specific Information
+          @gemspec.version     = info(:version)
+
+          ## most of these are just inheriting from the main archetype.gemspec
+          @gemspec.name        = info(:name)
+          @gemspec.authors     = info(:authors)
+          @gemspec.email       = info(:email)
+          @gemspec.homepage    = File.join(info(:homepage), 'extensions', info(:name))
+          @gemspec.license     = info(:license)
+
+          ## Paths
+          @gemspec.require_paths = %w(lib)
+
+          # Gem Files
+          # by default, include everything but the gemspec
+          @gemspec.files = Dir.glob("**/*") - Dir.glob("**/*.gemspec")
+
+          if @add_dependency
+            # dependencies
+            @gemspec.add_dependency('archetype', "~> #{Archetype::VERSION}") # assume a dependency on the latest current version of Archetype
+          end
+        end
+      end
 
       def resolve_version
         # if a version.rb file exists within the extension, we'll get the version from that
