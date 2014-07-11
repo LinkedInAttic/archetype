@@ -14,7 +14,7 @@ Gem::Specification.new do |gemspec|
   gemspec.description = %q{
     Archetype is a Compass/Sass based framework for authoring configurable,
     composable UI components and patterns. The natural language syntax that
-    Archetype provides allows your designers and developers to discuss UI
+    Archetype provides allows designers and developer to discuss UI
     compositions using the same vocabulary.
   }
   gemspec.email = "oneill.eugene@gmail.com"
@@ -33,7 +33,7 @@ Gem::Specification.new do |gemspec|
   ## Gem Bookkeeping
   gemspec.rubygems_version = %q{1.3.6}
   # dependencies
-  gemspec.add_dependency('compass',   '~> 1.0.0.alpha.19')
+  gemspec.add_dependency('compass',   '~> 1.0.0.alpha.20')
   gemspec.add_dependency('sass',      '~> 3.3')
   # required for OrderedHash on Ruby < 1.9
   gemspec.add_dependency('hashery',   '~> 2.1')

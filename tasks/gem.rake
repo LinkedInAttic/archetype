@@ -1,6 +1,6 @@
 require 'fileutils'
 
-## BUIDLING and INSTALLING
+## BUILDING and INSTALLING
 namespace :gem do
 
   desc "build Archetype gems"
@@ -15,7 +15,7 @@ namespace :gem do
     root_dir = File.expand_path('.')
     pkg_dir = File.expand_path('pkg')
     defaults = %w(LICENSE VERSION)
-    # cleanup the pkg/ directory
+    # cleanup the pkg directory
     FileUtils.rm_rf(pkg_dir)
     FileUtils.mkdir_p(pkg_dir)
     with_each_gemspec do |file, spec|
@@ -36,7 +36,7 @@ namespace :gem do
       remove_after.each do |file|
         FileUtils.rm_f(File.join(build_path, file))
       end
-      # move the build gem into the /pkg directory
+      # move the build gem into the pkg directory
       FileUtils.mv(Dir["#{build_path}/*.gem"], pkg_dir)
     end
   end
@@ -71,7 +71,7 @@ end
 
 # applies an action to each built gem
 def apply_action_to_built_gems(*actions)
-  gems = Dir.glob('pkg/*.gem')
+  gems = Dir.glob(File.join(pkg_dir, '*.gem'))
   actions.each do |action|
     gems.each do |name|
       sh "#{action} #{name}"

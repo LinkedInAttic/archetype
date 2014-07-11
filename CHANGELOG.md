@@ -13,6 +13,7 @@
   - `styleguide-freeze-component` / `styleguide-thaw-component`
   - `styleguide-freeze-all-components` / `styleguide-thaw-all-components`
 - added `styleguide-components` to retrieve a list of currently registered components
+- added `styleguide-component-variants` to retrieve a list of variants on a given component
 - allow special properties (with a `:`) in component definitions
   - this allows multiple values per property, but also allows us to modify specific keys within variants / extensions without clobbering
 ```
@@ -33,6 +34,9 @@
 )
 ```
 - added `styleguide_debug` config option. when `true`, `styleguide*` methods will log debug information
+  - granular options include:
+    - `:get`, `:get_granular`, `:diff`, `:add`, `:extend`, `:remove`, `:freeze`, `:grammar`, `:drop`, `:inherit`, `:resolve`, `:extract`
+    - e.g. `styleguide_debug = [:add, :get, :grammar]`
 
 ### Major Changes:
 

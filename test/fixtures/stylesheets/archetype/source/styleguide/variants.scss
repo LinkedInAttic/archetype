@@ -1,0 +1,29 @@
+@import "test_harness";
+
+$id: variants-component;
+// create a component
+$a-blackhole: styleguide-add-component($id, (
+  default: (
+    color: red
+  ),
+  variant1: (
+    color: green
+  ),
+  variant2: (
+    color: blue
+  ),
+  variant3: (
+    color: black
+  ),
+  in something: (
+    color: white,
+    font-weight: bold
+  )
+)) !global;
+
+.test {
+  @each $variant in styleguide-component-variants($id) {
+    /* variant: #{$variant} */
+    @include styleguide($id $variant);
+  }
+}

@@ -24,14 +24,15 @@ module Archetype::SassExtensions::Styleguide
     out = out.clone
     return Archetype::Hash.new if out == null
     # if it's not strict, find anything that matched
-    if not strict
+    unless strict
       modifiers = modifiers.split
       context.each do |key, definition|
         modifier = grammarize(key.split(' '))[1].join(' ')
-        if modifier != DEFAULT
+        unless modifier == DEFAULT
           match = true
           modifier = modifier.split
           if modifier[0] == REGEX
+            _styleguide_debug "finding regex matches", :extract
             # if it's a regex pattern, test if it matches
             match = modifiers.join(' ') =~ /#{modifier[1].gsub(/\A"|"\Z/, '')}/i
           else
@@ -40,6 +41,7 @@ module Archetype::SassExtensions::Styleguide
           end
           # if it matched, process it
           if match
+            _styleguide_debug "`#{key}` is a matching variant", :extract
             tmp = resolve_dependents(id, definition, theme[:name], nil, out)
             out, tmp = post_resolve_drops(out, tmp)
             out = out.rmerge(tmp) if not helpers.is_value(tmp, :nil)
@@ -112,6 +114,7 @@ module Archetype::SassExtensions::Styleguide
           extracted = extract_styles(id, modifiers, false, theme)
           # we can delete anything that had a value of `nil` as we won't be outputting those
           extracted.delete_if { |k,v| helpers.is_value(v, :nil) }
+          _styleguide_debug extracted, :get_granular
           # expose the result to the block
           extracted
         end

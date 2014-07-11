@@ -1,0 +1,23 @@
+.test {
+  /* variant: default */
+  /* [archetype:styleguide:begin] --- `variants-component default` --- */
+  color: red;
+  /* [archetype:styleguide:end] --- `variants-component default` --- */
+  /* variant: variant1 */
+  /* [archetype:styleguide:begin] --- `variants-component variant1` --- */
+  color: green;
+  /* [archetype:styleguide:end] --- `variants-component variant1` --- */
+  /* variant: variant2 */
+  /* [archetype:styleguide:begin] --- `variants-component variant2` --- */
+  color: blue;
+  /* [archetype:styleguide:end] --- `variants-component variant2` --- */
+  /* variant: variant3 */
+  /* [archetype:styleguide:begin] --- `variants-component variant3` --- */
+  color: black;
+  /* [archetype:styleguide:end] --- `variants-component variant3` --- */
+  /* variant: in something */
+  /* [archetype:styleguide:begin] --- `variants-component in something` --- */
+  color: white;
+  font-weight: bold;
+  /* [archetype:styleguide:end] --- `variants-component in something` --- */
+}
