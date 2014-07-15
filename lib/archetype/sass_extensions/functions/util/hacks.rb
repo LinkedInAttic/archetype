@@ -1,7 +1,7 @@
 module Archetype::SassExtensions::Util::Hacks
 
   #
-  # parse a CSS content string and format it for injection into innerHTML
+  # parse a CSS content string and format it for injection into innerText
   #
   # *Parameters*:
   # - <tt>$content</tt> {String} the CSS content string
@@ -10,12 +10,8 @@ module Archetype::SassExtensions::Util::Hacks
   #
   def _ie_pseudo_content(content)
     content = helpers.to_str(content)
-    # escape &
-    content = content.gsub(/\&/, '&amp;')
-    # convert char codes (and remove single trailing whitespace if present) (e.g. \2079 -> &#x2079;)
-    content = content.gsub(/\\([\da-fA-F]{4})\s?/, '&#x\1;')
-    # escape tags and cleanup quotes
-    content = content.gsub(/\</, '&lt;').gsub(/\>/, '&gt;')
+    # convert char codes (e.g. `\2079` -> `\u2079`)
+    content = content.gsub(/\\([\da-fA-F]{4})\s?/, '\\u\1')
     # cleanup quotes
     content = content.gsub(/\A"|"\Z/, '').gsub(/\"/, '\\"')
     return identifier(content)

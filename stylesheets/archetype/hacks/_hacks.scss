@@ -117,7 +117,7 @@ $a-blackhole: require-archetype-modules(archetype/config);
     $cmd: (unquote('#{$this}.el=document.createElement("#{prefixed-tag($name)}"),#{$this}.el.id="#{$uid}"'));
     $method: if($placement == before, insertBefore, appendChild);
     @if $content and not is_null($content) {
-      $cmd: append($cmd, unquote('#{$this}.el.innerHTML="#{-ie-pseudo-content($content)}"'));
+      $cmd: append($cmd, unquote('#{$this}.el.innerText="#{-ie-pseudo-content($content)}"'));
     }
     @if $styles and not is_null($styles) and $styles != '' and $CONFIG_GENERATED_TAG_INLINE {
       // sets the icon styles on the node if we're using inline styles...
