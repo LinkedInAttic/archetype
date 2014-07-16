@@ -3,11 +3,11 @@
 @mixin top {
   @include test;
 }
-$limit: 1;
+$count: 0;
 @mixin test {
-  /* called recursively: #{-archetype-mixin-called-recursively()} */
-  @if $limit > 0 {
-    $limit: $limit - 1;
+  $count: $count + 1 !global;
+  /* (#{$count}) called recursively? #{-archetype-mixin-called-recursively()} */
+  @if not -archetype-mixin-called-recursively(){
     @include test;
   }
 }
