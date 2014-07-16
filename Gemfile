@@ -6,7 +6,7 @@ gemspec
 gem 'compass-import-once'
 
 gem 'rake',         (RUBY_VERSION < '1.9' ? '~> 10.1.1' : '>= 0')
-gem 'true',         '~> 0.2.0'
+gem 'true',         '~> 0.2.1'
 gem 'minitest',     '~> 4.7.5'
 gem 'turn',         '~> 0.9.6'
 gem 'diffy',        '~> 3.0.3'
