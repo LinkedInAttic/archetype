@@ -25,7 +25,7 @@
   font-style: normal;
 }
 .simple {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d7;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .simple:before {
   content: "\f0d7";
@@ -45,7 +45,7 @@
 
 .music {
   /* should be 31px */
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf001;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf001",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .music:before {
   content: "\f001";
@@ -77,7 +77,7 @@
 }
 
 .not-inline {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d7;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .not-inline:before {
   content: "\f0d7";
@@ -96,7 +96,7 @@
 }
 
 .ie-uid {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="my-custom-id",t.el.innerHTML="&#xf0d7;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="my-custom-id",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .ie-uid:before {
   content: "\f0d7";
@@ -118,7 +118,7 @@
 }
 
 .content-block {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d7;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .content-block:before {
   content: "\f0d7";
@@ -285,7 +285,7 @@
 }
 
 .custom .simple {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d7;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .custom .simple:before {
   content: "\f0d7";
@@ -315,7 +315,7 @@
   color: inherit;
 }
 .custom .size {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d7;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .custom .size:before {
   content: "\f0d7";
@@ -334,7 +334,7 @@
 }
 
 .runtime-locale-glyphs {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d7;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .runtime-locale-glyphs:before {
   content: "\f0d7";
@@ -352,7 +352,7 @@
   color: inherit;
 }
 .runtime-locale-glyphs.ja_JP {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d8;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d8",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .runtime-locale-glyphs.ja_JP:before {
   content: "\f0d8";
@@ -370,7 +370,7 @@
   color: inherit;
 }
 .runtime-locale-glyphs.de_DE {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d9;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d9",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .runtime-locale-glyphs.de_DE:before {
   content: "\f0d9";
@@ -388,7 +388,7 @@
   color: inherit;
 }
 .runtime-locale-glyphs.ru_RU {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0da;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0da",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .runtime-locale-glyphs.ru_RU:before {
   content: "\f0da";
@@ -406,7 +406,7 @@
   color: inherit;
 }
 .runtime-locale-glyphs.fr_FR {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerHTML="&#xf0d8;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d8",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .runtime-locale-glyphs.fr_FR:before {
   content: "\f0d8";

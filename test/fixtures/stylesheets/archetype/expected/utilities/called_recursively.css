@@ -1,4 +1,4 @@
 .test {
-  /* called recursively: false */
-  /* called recursively: true */
+  /* (1) called recursively? false */
+  /* (2) called recursively? true */
 }
