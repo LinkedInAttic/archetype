@@ -18,11 +18,3 @@ unless ENV["CI"]
   gem 'rdoc'
   gem 'perftools.rb'
 end
-
-# required for Rubinius to work
-# http://docs.travis-ci.com/user/languages/ruby/#Rubinius
-platforms :rbx do
-  gem 'racc'
-  gem 'rubysl', '~> 2.0'
-  gem 'psych'
-end
