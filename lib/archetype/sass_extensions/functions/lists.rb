@@ -15,7 +15,7 @@ module Archetype::SassExtensions::Lists
   #
   def list_replace(list, idx = false, value = nil, separator = nil)
     # return early if the index is invalid (no operation)
-    return list if (!idx || is_null(idx).value || idx.value == false)
+    return list if (!idx || helpers.is_null(idx) || idx.value == false)
     separator ||= list.separator if list.is_a?(Sass::Script::Value::List)
     # cast and zero-index $idx
     idx = (idx.value) - 1
@@ -188,6 +188,7 @@ module Archetype::SassExtensions::Lists
   # - {*} the nth item in the List
   #
   def nth_cyclic(list, n = 1)
+    n = 1 if helpers.is_null(n)
     n = n.to_i if n.is_a?(Sass::Script::Value::Number)
     list = list.to_a
     return list[(n - 1) % list.size]

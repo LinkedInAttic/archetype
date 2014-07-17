@@ -75,7 +75,7 @@ module Archetype::SassExtensions::UI::Glyphs
   def register_glyph_library(key, library)
     registry = archetype_glyphs_registry
     # if it's already in the registry, just return the current list
-    if is_null(registry[key])
+    if helpers.is_null(registry[key])
       registry = registry.dup
       registry[key] = library
       registry = Sass::Script::Value::Map.new(registry)

@@ -22,8 +22,8 @@ module Archetype::SassExtensions::Styleguide
   #
   def _styleguide(description, state = nil, theme = nil)
     extras = []
-    extras << "state: #{state}" unless (state.nil? or is_null(state))
-    extras << "theme: #{theme}" unless (theme.nil? or is_null(theme))
+    extras << "state: #{state}" unless (state.nil? or helpers.is_null(state))
+    extras << "theme: #{theme}" unless (theme.nil? or helpers.is_null(theme))
     extras = extras.join(', ')
     msg = "`#{description}`"
     msg << " (#{extras})" unless extras.empty?

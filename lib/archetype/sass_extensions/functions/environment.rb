@@ -22,7 +22,7 @@ module Archetype::SassExtensions::Environment
   #
   def archetype_namespace(string)
     namespace = environment.var('CONFIG_NAMESPACE')
-    return string if is_null(namespace).value
+    return string if helpers.is_null(namespace)
     return identifier(namespace.value + '_' + string.value)
   end
 
