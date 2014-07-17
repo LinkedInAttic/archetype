@@ -24,8 +24,7 @@ module Archetype::SassExtensions::Util::Images
   # - {Boolean} is the sprite set
   #
   def _archetype_check_sprite(map)
-    status = !(global_sprites_disabled? && (is_null(map) || !map.value))
-    return bool(status)
+    return bool(_is_sprite_valid(map))
   end
   Sass::Script::Functions.declare :_archetype_check_sprite, [:map]
 
@@ -41,7 +40,7 @@ module Archetype::SassExtensions::Util::Images
   # - {Sprite} the sprite object or `null`
   #
   def _archetype_sprite(map, sprite, offset_x = number(0), offset_y = number(0))
-    return null unless _archetype_check_sprite(map)
+    return null unless _is_sprite_valid(map)
     return sprite(map, sprite, offset_x, offset_y)
   end
   Sass::Script::Functions.declare :_archetype_sprite, [:map, :sprite, :offset_x, :offset_y]
@@ -58,7 +57,7 @@ module Archetype::SassExtensions::Util::Images
   # - {List} the sprite position or `null`
   #
   def _archetype_sprite_position(map, sprite, offset_x = number(0), offset_y = number(0))
-    return null unless _archetype_check_sprite(map)
+    return null unless _is_sprite_valid(map)
     return sprite_position(map, sprite, offset_x, offset_y)
   end
   Sass::Script::Functions.declare :_archetype_sprite_position, [:map, :sprite, :offset_x, :offset_y]
@@ -72,7 +71,7 @@ module Archetype::SassExtensions::Util::Images
   # - {String} the sprite URL or `null`
   #
   def _archetype_sprite_url(map)
-    return null unless _archetype_check_sprite(map)
+    return null unless _is_sprite_valid(map)
     return sprite_url(map)
   end
   Sass::Script::Functions.declare :_archetype_sprite_url, [:map]
@@ -87,7 +86,7 @@ module Archetype::SassExtensions::Util::Images
   # - {ImageFile} the image or `null`
   #
   def _archetype_sprite_file(map, sprite)
-    return null unless _archetype_check_sprite(map)
+    return null unless _is_sprite_valid(map)
     return sprite_file(map, sprite)
   end
   Sass::Script::Functions.declare :_archetype_sprite_file, [:map, :sprite]
@@ -102,7 +101,7 @@ module Archetype::SassExtensions::Util::Images
   # - {Number} the width of the image or `null`
   #
   def _archetype_image_width(image)
-    return null if is_null(image).value
+    return null if helpers.is_null(image)
     return image_width(image)
   end
   Sass::Script::Functions.declare :_archetype_image_width, [:image]
@@ -117,12 +116,16 @@ module Archetype::SassExtensions::Util::Images
   # - {Number} the height of the image or `null`
   #
   def _archetype_image_height(image)
-    return null if is_null(image).value
+    return null if helpers.is_null(image)
     return image_height(image)
   end
   Sass::Script::Functions.declare :_archetype_image_height, [:image]
 
 private
+
+  def _is_sprite_valid(map)
+    return !global_sprites_disabled? && !(helpers.is_null(map) || !map.value)
+  end
 
   def global_sprites_disabled?
     sprites_disabled = environment.var('CONFIG_DISABLE_STYLEGUIDE_SPRITES')

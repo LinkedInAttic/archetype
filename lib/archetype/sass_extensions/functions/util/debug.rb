@@ -13,7 +13,7 @@ module Archetype::SassExtensions::Util::Debug
     return bool(false) unless (environment.var('CONFIG_DEBUG_ENVS') || []).to_a.include?(archetype_env)
     # then check if the debug flag/override is truthy
     # if the param is non-null, then use it
-    return iff unless is_null(iff).value
+    return iff unless helpers.is_null(iff)
     # otherwise, use `CONFIG_DEBUG`
     return environment.var('CONFIG_DEBUG') || bool(false)
   end

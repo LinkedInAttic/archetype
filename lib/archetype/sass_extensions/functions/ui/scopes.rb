@@ -14,7 +14,7 @@ module Archetype::SassExtensions::UI::Scopes
     # we need a dup as the Hash is frozen
     breakpoints = registered_breakpoints.dup
     force = force.nil? ? false : force.value
-    not_registered = breakpoints[key].nil? || is_null(breakpoints[key]).value
+    not_registered = breakpoints[key].nil? || helpers.is_null(breakpoints[key])
     # if there's no key registered...
     if force || not_registered
       # just register the value
@@ -61,9 +61,9 @@ module Archetype::SassExtensions::UI::Scopes
     modifier_separator = environment.var('CONFIG_BEM_MODIFIER_SEPARATOR')
     modifier_separator = modifier_separator.nil? ? '--' : modifier_separator.value
 
-    context  = is_null(context).value  ? ''  : context.value
-    element  = is_null(element).value  ? nil : element.value
-    modifier = is_null(modifier).value ? nil : modifier.value
+    context  = helpers.is_null(context) ? ''  : context.value
+    element  = helpers.is_null(element) ? nil : element.value
+    modifier = helpers.is_null(modifier) ? nil : modifier.value
 
     selector = context
 

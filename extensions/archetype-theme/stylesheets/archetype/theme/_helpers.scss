@@ -157,16 +157,14 @@
 // @param     $type {String} the type of the loading spinner e.g. [static|dynamic]
 // @param     $dim {String} the dimension to return [width|height]
 // @param     $context {Number} the index for the context type
+// @param     $divisor {Number} an optional value to divide the dimension by
 // @return    {Number} the width/height of the loading spinner
-@function _styleguideGetLoaderDimension($size: medium, $type: static, $dim: width, $context: 1) {
+@function _styleguideGetLoaderDimension($size: medium, $type: static, $dim: width, $context: 1, $divisor: 1) {
+  $context: if(is-null($context), 1, $context);
   $img: nth-cyclic(map-get(map-get($CONFIG_LOADERS, $size), $type), $context);
   $sprite-file: -archetype-sprite-file($CONFIG_SPRITE_LOADERS, $img);
-  @if $dim == width {
-    @return -archetype-image-width($sprite-file);
-  }
-  @else {
-    @return -archetype-image-height($sprite-file);
-  }
+  $dim: if($dim == width, -archetype-image-width($sprite-file), -archetype-image-height($sprite-file));
+  @return if(is-null($dim), $dim, $dim / ($divisor * units($dim)));
 }
 
 // helper function to get the animation routine of the loading spinner
@@ -199,11 +197,14 @@
 // @return    {String} the CSS expression styles
 @function _styleguideGetLoaderExpression($size: medium, $context: 1) {
   $img: nth-cyclic(map-get(map-get($CONFIG_LOADERS, $size), static), $context);
-  $bg: -archetype-sprite($CONFIG_SPRITE_LOADERS, $img) no-repeat;
-  $bg: if(is-null($bg), none, $bg);
-  $width: _styleguideGetLoaderDimension($size, static, width, $context);
-  $height: _styleguideGetLoaderDimension($size, static, height, $context);
-  $margin-top: $height / -2;
-  $margin-left: $width / -2;
-  @return ("position:absolute;top:50%;left:50%;background:#{$bg};width:#{$width};height:#{$height};margin-left:#{$margin-left};margin-top:#{$margin-top};", false, loader);
+  $bg: -archetype-sprite($CONFIG_SPRITE_LOADERS, $img);
+  @if is-null($bg) {
+    $bg: $bg no-repeat;
+    $width: _styleguideGetLoaderDimension($size, static, width, $context) or 0;
+    $height: _styleguideGetLoaderDimension($size, static, height, $context) or 0;
+    $margin-top: $height or / -2;
+    $margin-left: $width / -2;
+    @return ("position:absolute;top:50%;left:50%;background:#{$bg};width:#{$width};height:#{$height};margin-left:#{$margin-left};margin-top:#{$margin-top};", false, loader);
+  }
+  @return "";
 }
