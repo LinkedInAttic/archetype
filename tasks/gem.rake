@@ -2,8 +2,6 @@ require 'fileutils'
 
 @pkg_dir = File.expand_path('pkg')
 
-puts "@pkg_dir: #{@pkg_dir}"
-
 ## BUILDING and INSTALLING
 namespace :gem do
 
