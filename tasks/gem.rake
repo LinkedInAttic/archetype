@@ -1,5 +1,7 @@
 require 'fileutils'
 
+@pkg_dir = File.expand_path('pkg')
+
 ## BUILDING and INSTALLING
 namespace :gem do
 
@@ -13,11 +15,10 @@ namespace :gem do
       exit 1
     end
     root_dir = File.expand_path('.')
-    pkg_dir = File.expand_path('pkg')
     defaults = %w(LICENSE VERSION)
     # cleanup the pkg directory
-    FileUtils.rm_rf(pkg_dir)
-    FileUtils.mkdir_p(pkg_dir)
+    FileUtils.rm_rf(@pkg_dir)
+    FileUtils.mkdir_p(@pkg_dir)
     with_each_gemspec do |file, spec|
       remove_after = []
       build_path = File.dirname(file)
@@ -37,7 +38,7 @@ namespace :gem do
         FileUtils.rm_f(File.join(build_path, file))
       end
       # move the build gem into the pkg directory
-      FileUtils.mv(Dir["#{build_path}/*.gem"], pkg_dir)
+      FileUtils.mv(Dir[File.join(build_path, '*.gem')], @pkg_dir)
     end
   end
 
@@ -64,14 +65,14 @@ end
 
 # executes a block with each discoverable gemspec
 def with_each_gemspec
-  Dir.glob("**/*.gemspec").each do |file|
+  Dir["**/*.gemspec"].each do |file|
     yield(file, Gem::Specification.load(file)) if block_given?
   end
 end
 
 # applies an action to each built gem
 def apply_action_to_built_gems(*actions)
-  gems = Dir.glob(File.join(pkg_dir, '*.gem'))
+  gems = Dir[File.join(@pkg_dir, '*.gem')]
   actions.each do |action|
     gems.each do |name|
       sh "#{action} #{name}"

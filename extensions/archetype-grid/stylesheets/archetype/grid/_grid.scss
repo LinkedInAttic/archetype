@@ -217,7 +217,7 @@
 // @param     $debug {Boolean} use debug stylings
 @mixin grid-row($debug: false) {
   @include grid-block(true);
-  @include debug-hover-box(rgb(255, 0, 255), $if: ($debug or $CONFIG_GRID_DEBUG));
+  @include debug-hover-box(rgb(255, 0, 255), $iff: ($debug or $CONFIG_GRID_DEBUG));
 }
 
 // output the block methods
@@ -331,7 +331,7 @@
       // align the block
       @include grid-block();
       // debug
-      @include debug-hover-box($if: ($debug or $CONFIG_GRID_DEBUG));
+      @include debug-hover-box($iff: ($debug or $CONFIG_GRID_DEBUG));
     }
 
     // offset (push, pull)
