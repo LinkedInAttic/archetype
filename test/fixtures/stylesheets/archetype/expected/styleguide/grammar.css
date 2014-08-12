@@ -1,0 +1,20 @@
+/*
+  -styleguide-grammar(grammar-component):
+    identifier: grammar-component
+    modifiers: 
+*/
+/*
+  -styleguide-grammar(this is a test for grammar-component with some modifiers):
+    identifier: grammar-component
+    modifiers: test for with-some with-modifiers
+*/
+/*
+  -styleguide-grammar(something that doesnt exist):
+    identifier: 
+    modifiers: 
+*/
+/*
+  -styleguide-grammar(another test for grammar-component in something-else):
+    identifier: grammar-component
+    modifiers: another test for in-something-else
+*/

@@ -1,5 +1,35 @@
 module Archetype::SassExtensions::Styleguide
 
+  #
+  # exposes the grammar used when interpreting styleguide calls
+  #
+  # *Parameters*:
+  # - <tt>sentence</tt> {String|List} the sentence describing the component
+  # - <tt>theme</tt> {String} the theme to use
+  # - <tt>state</tt> {String} the name of a state to return
+  # *Returns*:
+  # - {Map} a map including the `identifier` and `modifiers`
+  def _styleguide_grammar(sentence, theme = nil, state = nil)
+    keys = ['identifier', 'modifiers', 'token']
+    id, modifiers, token = grammar(sentence, theme, state)
+
+    # if the id is empty, then it means that the sentence didn't contain a valid component id
+    # so we set everything to `null`
+    unless id
+      id = null
+      modifiers = null
+    # otherwise we ensure that we're sending back appropriate values
+    else
+      id = identifier(id)
+      modifiers = modifiers.empty? ? null : list(modifiers.map{|m| identifier(m)}, :space)
+    end
+
+    return Sass::Script::Value::Map.new({
+      identifier('identifier') => id,
+      identifier('modifiers') => modifiers
+    });
+  end
+
   private
 
   #

@@ -5,6 +5,7 @@
 ### Resolved Issues:
 
 - allow `target-browser` to be called recursively, kinda
+- Sass 3.4 compatibility
 
 ### New Features:
 
@@ -14,6 +15,7 @@
   - `styleguide-freeze-all-components` / `styleguide-thaw-all-components`
 - added `styleguide-components` to retrieve a list of currently registered components
 - added `styleguide-component-variants` to retrieve a list of variants on a given component
+- added `-styleguide-grammar` method for accessing the grammar used by styleguide
 - allow special properties (with a `:`) in component definitions
   - this allows multiple values per property, but also allows us to modify specific keys within variants / extensions without clobbering
 ```
