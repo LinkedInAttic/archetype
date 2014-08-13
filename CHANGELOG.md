@@ -39,10 +39,28 @@
   - granular options include:
     - `:get`, `:get_granular`, `:diff`, `:add`, `:extend`, `:remove`, `:freeze`, `:grammar`, `:drop`, `:inherit`, `:resolve`, `:extract`
     - e.g. `styleguide_debug = [:add, :get, :grammar]`
+- the `styleguide` mixin can now be called recursively, preserving the context correctly
+```
+// e.g. instead of doing this...
+.container {
+  @include styleguide(container);
+  h1 {
+    @include styleguide(headline in a container);
+  }
+}
+// you can simply do...
+.container {
+  @include styleguide(container) {
+    h1 {
+      @include styleguide(headline);
+    }
+  }
+}
 
 ### Major Changes:
 
 - removed `archetype-version` in favor of `feature-exists`, `variable-exists`, `function-exists`, and `mixin-exists`
+- the `within` context keyword now matches all parent contexts (use `within` for global scope contexts, use `in` for local scope contexts -- direct parent)
 
 ## 1.0.0.alpha.2 (3/24/2014)
 

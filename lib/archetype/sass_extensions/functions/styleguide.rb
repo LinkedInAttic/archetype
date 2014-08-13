@@ -85,4 +85,29 @@ module Archetype::SassExtensions::Styleguide
     end
   end
 
+  def _styleguide_shift_context(definition = nil)
+    # get the current stack...
+    stack = styleguide_stack()
+    # if we have a definition to push onto it, do so...
+    if definition
+      stack << definition
+    # otherwise pop the last item off
+    else
+      stack.pop
+    end
+    # and update the stack
+    styleguide_stack(stack)
+    return bool(true)
+  end
+
+  private
+
+  def styleguide_stack(stack = nil)
+    if stack.nil?
+      return (environment.var('ARCHETYPE_STYLEGUIDE_STACK') || []).to_a.dup
+    else
+      environment.global_env.set_var('ARCHETYPE_STYLEGUIDE_STACK', list(stack, :comma))
+    end
+  end
+
 end

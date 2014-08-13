@@ -1,0 +1,65 @@
+@import "test_harness";
+
+$a-blackhole: styleguide-add-component(nested-styleguide1, (
+  default: (
+    nested: false
+  )
+)) !global;
+
+$a-blackhole: styleguide-add-component(nested-styleguide2, (
+  default: (
+    nested: false
+  ),
+  in a nested-styleguide1: (
+    nested: true,
+    'nested:2in1': in-styleguide1
+  )
+)) !global;
+
+$a-blackhole: styleguide-add-component(nested-styleguide3, (
+  default: (
+    nested: false
+  ),
+  within a nested-styleguide1: (
+    nested: true,
+    'nested:3within1': within-styleguide1
+  ),
+  in a nested-styleguide1: (
+    nested: true,
+    'nested:3in1': in-styleguide1
+  ),
+  within a nested-styleguide2: (
+    nested: true,
+    'nested:3within2': within-styleguide2
+  ),
+  in a nested-styleguide2: (
+    nested: true,
+    'nested:3in2': in-styleguide2
+  )
+)) !global;
+
+.nested {
+  &.test1 {
+    @include styleguide(nested-styleguide1) {
+      .test2 {
+        @include styleguide(nested-styleguide2) {
+          .test3 {
+            @include styleguide(nested-styleguide3);
+          }
+        }
+      }
+    }
+  }
+}
+
+.unnested {
+  &.test1 {
+    @include styleguide(nested-styleguide1);
+    .test2 {
+      @include styleguide(nested-styleguide2);
+      .test3 {
+        @include styleguide(nested-styleguide3);
+      }
+    }
+  }
+}
