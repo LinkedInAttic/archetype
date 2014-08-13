@@ -85,6 +85,12 @@ module Archetype::SassExtensions::Styleguide
     end
   end
 
+  #
+  # updates the global styleguide context stack
+  #
+  # *Parameters*:
+  # - <tt>$definition</tt> {List} the description of the component, if not passed, removes the last item from the stack
+  #
   def _styleguide_shift_context(definition = nil)
     # get the current stack...
     stack = styleguide_stack()
