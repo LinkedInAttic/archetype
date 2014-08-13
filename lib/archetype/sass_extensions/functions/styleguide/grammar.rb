@@ -1,5 +1,35 @@
 module Archetype::SassExtensions::Styleguide
 
+  #
+  # exposes the grammar used when interpreting styleguide calls
+  #
+  # *Parameters*:
+  # - <tt>sentence</tt> {String|List} the sentence describing the component
+  # - <tt>theme</tt> {String} the theme to use
+  # - <tt>state</tt> {String} the name of a state to return
+  # *Returns*:
+  # - {Map} a map including the `identifier` and `modifiers`
+  def _styleguide_grammar(sentence, theme = nil, state = nil)
+    keys = ['identifier', 'modifiers', 'token']
+    id, modifiers, token = grammar(sentence, theme, state)
+
+    # if the id is empty, then it means that the sentence didn't contain a valid component id
+    # so we set everything to `null`
+    unless id
+      id = null
+      modifiers = null
+    # otherwise we ensure that we're sending back appropriate values
+    else
+      id = identifier(id)
+      modifiers = modifiers.empty? ? null : list(modifiers.map{|m| identifier(m)}, :space)
+    end
+
+    return Sass::Script::Value::Map.new({
+      identifier('identifier') => id,
+      identifier('modifiers') => modifiers
+    });
+  end
+
   private
 
   #
@@ -22,6 +52,19 @@ module Archetype::SassExtensions::Styleguide
     # convert the sentence to a string and then split into an array
     # this ensures that all the pieces are treated as strings and not other primitive types (e.g. a list of strings in the middle of a sentence)
     sentence = helpers.to_str(sentence).split
+
+    # update the sentence to be aware of it's current styleguide context
+    withins = []
+    styleguide_stack.reverse_each do |context|
+      sentence << 'in'
+      context = context.to_a
+      sentence.concat(context)
+      withins.concat(context)
+    end
+    unless withins.empty?
+      sentence << 'within'
+      sentence.concat(withins)
+    end
 
     id, modifiers = grammarize(sentence, styleguideIds)
 
@@ -57,7 +100,7 @@ module Archetype::SassExtensions::Styleguide
     sentence = sentence.to_a
     id = nil
     modifiers = []
-    if not sentence.empty?
+    unless sentence.empty?
       prefix = ''
       order = ''
       # these define various attributes for modifiers (e.g. `button with a shadow`)
@@ -65,16 +108,23 @@ module Archetype::SassExtensions::Styleguide
       # these are things that are useless to us, so we just leave them out
       ignore = %w(a an also the this that is was it)
       # these are our context switches (e.g. `headline in a button`)
-      contexts = %w(in within)
+      local_contexts = %w(in)
+      # these are the contexts that match all surrounding items
+      global_contexts = %w(within)
+
       sentence.each do |item|
         item = item.value if not item.is_a?(String)
         # find the ID
         if id.nil? and ids.include?(item) and prefix.empty? and order.empty?
           id = item
-        # if it's a `context`, we need to increase the depth and reset the prefix
-        elsif contexts.include?(item)
+        # if it's a `local context`, we need to increase the depth and reset the prefix
+        elsif local_contexts.include?(item)
           order = "#{item}-#{order}"
           prefix = ''
+        # if it's a `global context`, we need to reset the order, but also update the prefix
+        elsif global_contexts.include?(item)
+          order = ''#"#{item}-"
+          prefix = "#{item}-"
         # if it's an `extra`, we update the prefix
         elsif extras.include?(item)
           prefix = "#{item}-"

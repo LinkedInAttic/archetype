@@ -5,6 +5,7 @@
 ### Resolved Issues:
 
 - allow `target-browser` to be called recursively, kinda
+- Sass 3.4 compatibility
 
 ### New Features:
 
@@ -14,6 +15,7 @@
   - `styleguide-freeze-all-components` / `styleguide-thaw-all-components`
 - added `styleguide-components` to retrieve a list of currently registered components
 - added `styleguide-component-variants` to retrieve a list of variants on a given component
+- added `-styleguide-grammar` method for accessing the grammar used by styleguide
 - allow special properties (with a `:`) in component definitions
   - this allows multiple values per property, but also allows us to modify specific keys within variants / extensions without clobbering
 ```
@@ -37,10 +39,29 @@
   - granular options include:
     - `:get`, `:get_granular`, `:diff`, `:add`, `:extend`, `:remove`, `:freeze`, `:grammar`, `:drop`, `:inherit`, `:resolve`, `:extract`
     - e.g. `styleguide_debug = [:add, :get, :grammar]`
+- the `styleguide` mixin can now be called recursively, preserving the context correctly
+```
+// e.g. instead of doing this...
+.container {
+  @include styleguide(container);
+  h1 {
+    @include styleguide(headline in a container);
+  }
+}
+// you can simply do...
+.container {
+  @include styleguide(container) {
+    h1 {
+      @include styleguide(headline);
+    }
+  }
+}
+```
 
 ### Major Changes:
 
 - removed `archetype-version` in favor of `feature-exists`, `variable-exists`, `function-exists`, and `mixin-exists`
+- the `within` context keyword now matches all parent contexts (use `within` for global scope contexts, use `in` for local scope contexts -- direct parent)
 
 ## 1.0.0.alpha.2 (3/24/2014)
 

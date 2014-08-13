@@ -1,0 +1,26 @@
+@import "test_harness";
+
+@mixin test-grammar($sentences...) {
+  @each $sentence in $sentences {
+    $grammar: -styleguide-grammar($sentence);
+    /*
+      -styleguide-grammar(#{$sentence}):
+        identifier: #{map-get($grammar, identifier)}
+        modifiers: #{map-get($grammar, modifiers)}
+    */
+  }
+}
+
+// create a component
+$a-blackhole: styleguide-add-component(grammar-component, (
+  default: (
+    color: red
+  )
+)) !global;
+
+@include test-grammar(
+  grammar-component,
+  this is a test for grammar-component with some modifiers,
+  something that doesnt exist,
+  another test for grammar-component in something-else
+);

@@ -1,0 +1,35 @@
+.nested.test1 {
+  /* [archetype:styleguide:begin] --- `nested-styleguide1` --- */
+  nested: false;
+  /* [archetype:styleguide:end] --- `nested-styleguide1` --- */
+}
+.nested.test1 .test2 {
+  /* [archetype:styleguide:begin] --- `nested-styleguide2` --- */
+  nested: true;
+  nested: in-styleguide1;
+  /* [archetype:styleguide:end] --- `nested-styleguide2` --- */
+}
+.nested.test1 .test2 .test3 {
+  /* [archetype:styleguide:begin] --- `nested-styleguide3` --- */
+  nested: true;
+  nested: within-styleguide1;
+  nested: within-styleguide2;
+  nested: in-styleguide2;
+  /* [archetype:styleguide:end] --- `nested-styleguide3` --- */
+}
+
+.unnested.test1 {
+  /* [archetype:styleguide:begin] --- `nested-styleguide1` --- */
+  nested: false;
+  /* [archetype:styleguide:end] --- `nested-styleguide1` --- */
+}
+.unnested.test1 .test2 {
+  /* [archetype:styleguide:begin] --- `nested-styleguide2` --- */
+  nested: false;
+  /* [archetype:styleguide:end] --- `nested-styleguide2` --- */
+}
+.unnested.test1 .test2 .test3 {
+  /* [archetype:styleguide:begin] --- `nested-styleguide3` --- */
+  nested: false;
+  /* [archetype:styleguide:end] --- `nested-styleguide3` --- */
+}

@@ -13,11 +13,13 @@
   $definition: compact($is, $is-2, $is-3, $is-4, $is-5, $is-6, $is-7, $is-8, $is-9, $is-10);
   @if length($definition) > 0 {
     $styles: _styleguide($definition, $state, $theme);
+    $tmp: -styleguide-shift-context($definition);
     // output the styles
     $archetype-origin-function: styleguide !global;
     @include to-styles($styles, $exclude: $exclude, $here: $here) {
       @content;
     };
+    $tmp: -styleguide-shift-context();
     $archetype-origin-function: null !global;
   }
 }
