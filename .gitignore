@@ -1,5 +1,5 @@
 archetype-*.gem
-/pkg/*
+/dist/*
 /demo/*
 /themes/*
 doc/*

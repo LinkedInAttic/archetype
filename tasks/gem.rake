@@ -1,6 +1,6 @@
 require 'fileutils'
 
-@pkg_dir = File.expand_path('pkg')
+@dist_dir = File.expand_path('dist')
 
 ## BUILDING and INSTALLING
 namespace :gem do
@@ -16,9 +16,9 @@ namespace :gem do
     end
     root_dir = File.expand_path('.')
     defaults = %w(LICENSE VERSION)
-    # cleanup the pkg directory
-    FileUtils.rm_rf(@pkg_dir)
-    FileUtils.mkdir_p(@pkg_dir)
+    # cleanup the dist directory
+    FileUtils.rm_rf(@dist_dir)
+    FileUtils.mkdir_p(@dist_dir)
     with_each_gemspec do |file, spec|
       remove_after = []
       build_path = File.dirname(file)
@@ -37,8 +37,8 @@ namespace :gem do
       remove_after.each do |file|
         FileUtils.rm_f(File.join(build_path, file))
       end
-      # move the build gem into the pkg directory
-      FileUtils.mv(Dir[File.join(build_path, '*.gem')], @pkg_dir)
+      # move the build gem into the dist directory
+      FileUtils.mv(Dir[File.join(build_path, '*.gem')], @dist_dir)
     end
   end
 
@@ -72,7 +72,7 @@ end
 
 # applies an action to each built gem
 def apply_action_to_built_gems(*actions)
-  gems = Dir[File.join(@pkg_dir, '*.gem')]
+  gems = Dir[File.join(@dist_dir, '*.gem')]
   actions.each do |action|
     gems.each do |name|
       sh "#{action} #{name}"
