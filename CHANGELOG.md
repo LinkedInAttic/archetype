@@ -57,6 +57,7 @@
   }
 }
 ```
+- added support for custom dynamic function calls from within styleguide component (the function should return a map)
 
 ### Major Changes:
 

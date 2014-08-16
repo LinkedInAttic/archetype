@@ -29,6 +29,18 @@ $a-blackhole: require-archetype-modules(archetype/util);
         @include custom-output-styler($property, $value, $method: pre);
       }
 
+      // make a dynamic function call
+      @else if($property == function) {
+        @if type-of($value) == string {
+          $value: -archetype-list($value);
+        }
+        @if function-exists(nth($value, 1)) {
+          $fn: nth($value, 1);
+          $args: if(length($value) < 2, (), nth($value, 2));
+          @include to-styles( call($fn, $args...) );
+        }
+      }
+
       // we're going to assume that any mixins that get invoked here have been properly imported
       //  if not, they will simply throw a compilation error
 

@@ -1,0 +1,39 @@
+@import "test_harness";
+
+$color: black;
+
+@function my-custom-function() {
+  @return (
+    color: $color,
+    height: 100px,
+    lang: locale()
+  );
+}
+
+$id: function-calls-component;
+// create a component
+$a-blackhole: styleguide-add-component($id, (
+  default: (
+    function: my-custom-function
+  )
+)) !global;
+
+.test {
+  @include styleguide($id);
+
+  &.red {
+    $color: red !global;
+    @include styleguide($id);
+  }
+
+  &.green {
+    $color: green !global;
+    @include styleguide($id);
+  }
+
+  &.de_DE {
+    @include switch-locale(de_DE) {
+      @include styleguide($id);
+    }
+  }
+}
