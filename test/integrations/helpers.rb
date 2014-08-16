@@ -79,7 +79,7 @@ class ArchetypeTest < MiniTest::Unit::TestCase
       config_block.call(Compass.configuration) if config_block
 
       if Compass.configuration.sass_path && File.exist?(Compass.configuration.sass_path)
-        compiler = (Compass::SassCompiler || Compass::Compiler).new *args
+        compiler = Compass::Compiler.new *args
         compiler.clean!
         if SELECTIVE_TESTS
           each_sass_file do |name, path|
