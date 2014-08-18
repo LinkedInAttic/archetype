@@ -1,6 +1,5 @@
 .test {
   /* [archetype:styleguide:begin] --- `function-calls-component` --- */
-  /* function: my-custom-function */
   color: black;
   height: 100px;
   lang: en_US;
@@ -8,7 +7,6 @@
 }
 .test.red {
   /* [archetype:styleguide:begin] --- `function-calls-component` --- */
-  /* function: my-custom-function */
   color: red;
   height: 100px;
   lang: en_US;
@@ -16,7 +14,6 @@
 }
 .test.green {
   /* [archetype:styleguide:begin] --- `function-calls-component` --- */
-  /* function: my-custom-function */
   color: green;
   height: 100px;
   lang: en_US;
@@ -24,7 +21,6 @@
 }
 .test.de_DE {
   /* [archetype:styleguide:begin] --- `function-calls-component` --- */
-  /* function: my-custom-function */
   color: green;
   height: 100px;
   lang: de_DE;
