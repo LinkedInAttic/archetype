@@ -33,7 +33,7 @@ Gem::Specification.new do |gemspec|
   ## Gem Bookkeeping
   gemspec.rubygems_version = %q{1.3.6}
   # dependencies
-  gemspec.add_dependency('compass',   '~> 1.0.0')
+  gemspec.add_dependency('compass',   '>= 1.0.0', '< 1.2')
   gemspec.add_dependency('sass',      '>= 3.3.0', '< 3.5')
   # required for OrderedHash on Ruby < 1.9
   gemspec.add_dependency('hashery',   '~> 2.1')

@@ -181,7 +181,16 @@ class ArchetypeTest < MiniTest::Unit::TestCase
   end
 
   def cleanup_css(css)
-    return css.strip.gsub(/^@charset[^;]+;/,'').strip
+    # strip extra whitespace
+    css.strip!
+    # remove charset rules...
+    css.gsub!(/^@charset[^;]+;/, '')
+    # remove sourceMappingURL comments (added in Sass 3.4)
+    css.gsub!(/\s*\/\*\#\s*sourceMappingURL=.+\*\//, '')
+    # escape unicode sequences for Sass 3.4 compat
+    # TODO
+    # strip once more and return
+    return css.strip
   end
 
   def colorize_expection_update(type = @current_file_update)
