@@ -185,10 +185,17 @@ class ArchetypeTest < MiniTest::Unit::TestCase
     css.strip!
     # remove charset rules...
     css.gsub!(/^@charset[^;]+;/, '')
-    # remove sourceMappingURL comments (added in Sass 3.4)
+    # remove sourceMappingURL comments (for Sass 3.4 compat)
     css.gsub!(/\s*\/\*\#\s*sourceMappingURL=.+\*\//, '')
-    # escape unicode sequences for Sass 3.4 compat
-    # TODO
+    # encode unicode sequences (for Sass 3.4 compat)
+    css.gsub!(/\\u?([\da-fA-F]{4})/, ['\1'.hex].pack('U*'))
+    # expand colors if needed (for Sass 3.4 compat)
+    css.gsub!(/(\:[^;\}]*\#)([\da-fA-F]{3})([^\da-fA-F])/) do |m|
+      pieces = [$1, $2, $3]
+      pieces[0] + pieces[1].split('').map{|c| c*2}.join('') + pieces[2]
+    end
+    # make all hex colors lowercase
+    css.gsub!(/(\:[^;\}]*\#)([\da-fA-F]{6})([^\da-fA-F])/){|m| $1 + $2.downcase + $3}
     # strip once more and return
     return css.strip
   end

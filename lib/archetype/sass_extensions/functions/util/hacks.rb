@@ -11,9 +11,9 @@ module Archetype::SassExtensions::Util::Hacks
   def _ie_pseudo_content(content)
     content = helpers.to_str(content)
     # convert char codes (e.g. `\2079` -> `\u2079`)
-    content = content.gsub(/\\([\da-fA-F]{4})\s?/, '\\u\1')
+    content.gsub!(/\\([\da-fA-F]{4})\s?/, ['\1'.hex].pack('U*'))
     # cleanup quotes
-    content = content.gsub(/\A"|"\Z/, '').gsub(/\"/, '\\"')
+    content.gsub!(/\A"|"\Z/, '').gsub!(/\"/, '\\"')
     return identifier(content)
   end
 

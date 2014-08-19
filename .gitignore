@@ -15,6 +15,7 @@ Icon
 .rbx
 /test/fixtures/stylesheets/*/saved
 /test/fixtures/stylesheets/*/assets
+/test/fixtures/stylesheets/*/expected/**/*.css.map
 /test/fixtures/stylesheets/*/sass/.sass-cache
 /test/fixtures/stylesheets/empty
 /.bundle/*

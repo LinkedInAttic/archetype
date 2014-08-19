@@ -8,7 +8,7 @@
 }
 .dropping-styles-test.hover, .dropping-styles-test:hover, .dropping-styles-test.focus, .dropping-styles-test:focus {
   /* [archetype:styleguide:begin] --- `module` --- */
-  background: #eeeeee;
+  background: #EEEEEE;
   border: 2px solid red;
   /* [archetype:styleguide:end] --- `module` --- */
 }
@@ -26,7 +26,7 @@
 }
 .dropping-styles-test.parent.hover, .dropping-styles-test.parent:hover, .dropping-styles-test.parent.focus, .dropping-styles-test.parent:focus {
   /* [archetype:styleguide:begin] --- `module` --- */
-  background: #eeeeee;
+  background: #EEEEEE;
   border: 2px solid red;
   /* [archetype:styleguide:end] --- `module` --- */
 }
@@ -44,7 +44,7 @@
 }
 .dropping-styles-test.heir.hover, .dropping-styles-test.heir:hover, .dropping-styles-test.heir.focus, .dropping-styles-test.heir:focus {
   /* [archetype:styleguide:begin] --- `module` --- */
-  background: #eeeeee;
+  background: #EEEEEE;
   border: 2px solid red;
   /* [archetype:styleguide:end] --- `module` --- */
 }
@@ -79,3 +79,5 @@
   background: green;
   /* [archetype:styleguide:end] --- `dropped3 dropping-styles-test` --- */
 }
+
+/*# sourceMappingURL=drop.css.map */

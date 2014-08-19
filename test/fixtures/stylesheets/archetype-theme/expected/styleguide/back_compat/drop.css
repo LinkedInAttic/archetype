@@ -8,7 +8,7 @@
 }
 .dropping-styles-test-back-compat.hover, .dropping-styles-test-back-compat:hover, .dropping-styles-test-back-compat.focus, .dropping-styles-test-back-compat:focus {
   /* [archetype:styleguide:begin] --- `module` --- */
-  background: #eeeeee;
+  background: #EEEEEE;
   border: 2px solid red;
   /* [archetype:styleguide:end] --- `module` --- */
 }
@@ -26,7 +26,7 @@
 }
 .dropping-styles-test-back-compat.parent.hover, .dropping-styles-test-back-compat.parent:hover, .dropping-styles-test-back-compat.parent.focus, .dropping-styles-test-back-compat.parent:focus {
   /* [archetype:styleguide:begin] --- `module` --- */
-  background: #eeeeee;
+  background: #EEEEEE;
   border: 2px solid red;
   /* [archetype:styleguide:end] --- `module` --- */
 }
@@ -44,7 +44,7 @@
 }
 .dropping-styles-test-back-compat.heir.hover, .dropping-styles-test-back-compat.heir:hover, .dropping-styles-test-back-compat.heir.focus, .dropping-styles-test-back-compat.heir:focus {
   /* [archetype:styleguide:begin] --- `module` --- */
-  background: #eeeeee;
+  background: #EEEEEE;
   border: 2px solid red;
   /* [archetype:styleguide:end] --- `module` --- */
 }
@@ -79,3 +79,5 @@
   background: green;
   /* [archetype:styleguide:end] --- `dropped3 dropping-styles-test-back-compat` --- */
 }
+
+/*# sourceMappingURL=drop.css.map */

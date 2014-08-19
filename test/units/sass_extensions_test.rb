@@ -111,12 +111,6 @@ class SassExtensionsTest < MiniTest::Unit::TestCase
     assert_equal ".testing-archetype-uid-RANDOM_UID", evaluate("unique('.testing-')")
   end
 
-  # test pseudo content escaping and formatting for innerText
-  def test_ie_pseudo_content
-    assert_equal "testing unicode \\u2079", evaluate("-ie-pseudo-content('testing unicode \\2079')")
-    assert_equal "a character \\u2079 mid-sentence", evaluate("-ie-pseudo-content('a character \\2079  mid-sentence')")
-  end
-
 protected
   def evaluate(value)
     Sass::Script::Parser.parse(value, 0, 0).perform(Sass::Environment.new).to_s

@@ -9,8 +9,8 @@
 .nested-styleguide-test.hover, .nested-styleguide-test:hover, .nested-styleguide-test.focus, .nested-styleguide-test:focus {
   /* [archetype:styleguide:begin] --- `module` --- */
   text-decoration: none;
-  color: #0088cc;
-  background: #eeeeee;
+  color: #0088CC;
+  background: #EEEEEE;
   /* [archetype:styleguide:end] --- `module` --- */
 }
 .nested-styleguide-test h3 {
@@ -18,7 +18,7 @@
   font-size: 18px;
   font-weight: bold;
   line-height: 22px;
-  color: #0088cc;
+  color: #0088CC;
   text-decoration: none;
   /* [archetype:styleguide:end] --- `large headline, link without an underline` --- */
 }
@@ -32,3 +32,5 @@
 .nested-styleguide-test:after {
   color: red;
 }
+
+/*# sourceMappingURL=nested_styleguides.css.map */

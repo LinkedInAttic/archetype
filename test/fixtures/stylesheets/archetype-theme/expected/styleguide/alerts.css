@@ -1,6 +1,7 @@
+@charset "UTF-8";
 .alert.error {
   /* [archetype:styleguide:begin] --- `error alert` --- */
-  background-color: #da4f49;
+  background-color: #DA4F49;
   background-repeat: no-repeat;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlNWY1YiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2JkMzYyZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ee5f5b), color-stop(100%, #bd362f));
@@ -8,11 +9,11 @@
   background: -o-linear-gradient(top, #ee5f5b, #bd362f);
   background: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
   background: linear-gradient(to bottom, #ee5f5b, #bd362f);
-  -moz-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #BD362F, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #BD362F, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #BD362F, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #BD362F, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #BD362F, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
   color: white;
@@ -20,11 +21,11 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf057",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `error alert` --- */
 }
 .alert.error:before {
-  content: "\f057";
+  content: "";
 }
 .alert.error:before, .alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -60,11 +61,11 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf00d",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `close in a error alert` --- */
 }
 .alert.error .dismiss:before {
-  content: "\f00d";
+  content: "";
 }
 .alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -93,7 +94,7 @@
 
 .alert.success {
   /* [archetype:styleguide:begin] --- `success alert` --- */
-  background-color: #5bb75b;
+  background-color: #5BB75B;
   background-repeat: no-repeat;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzYyYzQ2MiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzUxYTM1MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #62c462), color-stop(100%, #51a351));
@@ -101,11 +102,11 @@
   background: -o-linear-gradient(top, #62c462, #51a351);
   background: -webkit-linear-gradient(top, #62c462, #51a351);
   background: linear-gradient(to bottom, #62c462, #51a351);
-  -moz-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #51A351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #51A351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #51A351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #51A351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #51A351, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
   color: white;
@@ -113,11 +114,11 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf058",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `success alert` --- */
 }
 .alert.success:before {
-  content: "\f058";
+  content: "";
 }
 .alert.success:before, .alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -153,11 +154,11 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf00d",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `close in a success alert` --- */
 }
 .alert.success .dismiss:before {
-  content: "\f00d";
+  content: "";
 }
 .alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -186,7 +187,7 @@
 
 .alert.notice {
   /* [archetype:styleguide:begin] --- `notice alert` --- */
-  background-color: #49afcd;
+  background-color: #49AFCD;
   background-repeat: no-repeat;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzViYzBkZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJmOTZiNCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5bc0de), color-stop(100%, #2f96b4));
@@ -194,11 +195,11 @@
   background: -o-linear-gradient(top, #5bc0de, #2f96b4);
   background: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
   background: linear-gradient(to bottom, #5bc0de, #2f96b4);
-  -moz-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #2F96B4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #2F96B4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #2F96B4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #2F96B4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #2F96B4, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
   color: white;
@@ -206,11 +207,11 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf05a",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `notice alert` --- */
 }
 .alert.notice:before {
-  content: "\f05a";
+  content: "";
 }
 .alert.notice:before, .alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -246,11 +247,11 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf00d",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `close in a notice alert` --- */
 }
 .alert.notice .dismiss:before {
-  content: "\f00d";
+  content: "";
 }
 .alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -279,7 +280,7 @@
 
 .alert.yield {
   /* [archetype:styleguide:begin] --- `yield alert` --- */
-  background-color: #faa732;
+  background-color: #FAA732;
   background-repeat: no-repeat;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZiYjQ1MCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2Y4OTQwNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fbb450), color-stop(100%, #f89406));
@@ -287,11 +288,11 @@
   background: -o-linear-gradient(top, #fbb450, #f89406);
   background: -webkit-linear-gradient(top, #fbb450, #f89406);
   background: linear-gradient(to bottom, #fbb450, #f89406);
-  -moz-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #F89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #F89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #F89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #F89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #F89406, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
   color: white;
@@ -299,11 +300,11 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf071",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `yield alert` --- */
 }
 .alert.yield:before {
-  content: "\f071";
+  content: "";
 }
 .alert.yield:before, .alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -339,11 +340,11 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf00d",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `close in a yield alert` --- */
 }
 .alert.yield .dismiss:before {
-  content: "\f00d";
+  content: "";
 }
 .alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -372,7 +373,7 @@
 
 .alert.error {
   /* [archetype:styleguide:begin] --- `error alert` --- */
-  background-color: #da4f49;
+  background-color: #DA4F49;
   background-repeat: no-repeat;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2VlNWY1YiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2JkMzYyZiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #ee5f5b), color-stop(100%, #bd362f));
@@ -380,11 +381,11 @@
   background: -o-linear-gradient(top, #ee5f5b, #bd362f);
   background: -webkit-linear-gradient(top, #ee5f5b, #bd362f);
   background: linear-gradient(to bottom, #ee5f5b, #bd362f);
-  -moz-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #bd362f, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #BD362F, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #BD362F, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #BD362F, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #BD362F, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #BD362F, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
   color: white;
@@ -392,11 +393,11 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf057",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `error alert` --- */
 }
 .alert.error:before {
-  content: "\f057";
+  content: "";
 }
 .alert.error:before, .alert.error #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -432,11 +433,11 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf00d",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `close in a error alert` --- */
 }
 .alert.error .dismiss:before {
-  content: "\f00d";
+  content: "";
 }
 .alert.error .dismiss:before, .alert.error .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -465,7 +466,7 @@
 
 .alert.success {
   /* [archetype:styleguide:begin] --- `success alert` --- */
-  background-color: #5bb75b;
+  background-color: #5BB75B;
   background-repeat: no-repeat;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzYyYzQ2MiIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzUxYTM1MSIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #62c462), color-stop(100%, #51a351));
@@ -473,11 +474,11 @@
   background: -o-linear-gradient(top, #62c462, #51a351);
   background: -webkit-linear-gradient(top, #62c462, #51a351);
   background: linear-gradient(to bottom, #62c462, #51a351);
-  -moz-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #51a351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #51A351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #51A351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #51A351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #51A351, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #51A351, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
   color: white;
@@ -485,11 +486,11 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf058",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `success alert` --- */
 }
 .alert.success:before {
-  content: "\f058";
+  content: "";
 }
 .alert.success:before, .alert.success #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -525,11 +526,11 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf00d",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `close in a success alert` --- */
 }
 .alert.success .dismiss:before {
-  content: "\f00d";
+  content: "";
 }
 .alert.success .dismiss:before, .alert.success .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -558,7 +559,7 @@
 
 .alert.notice {
   /* [archetype:styleguide:begin] --- `notice alert` --- */
-  background-color: #49afcd;
+  background-color: #49AFCD;
   background-repeat: no-repeat;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzViYzBkZSIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzJmOTZiNCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #5bc0de), color-stop(100%, #2f96b4));
@@ -566,11 +567,11 @@
   background: -o-linear-gradient(top, #5bc0de, #2f96b4);
   background: -webkit-linear-gradient(top, #5bc0de, #2f96b4);
   background: linear-gradient(to bottom, #5bc0de, #2f96b4);
-  -moz-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #2f96b4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #2F96B4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #2F96B4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #2F96B4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #2F96B4, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #2F96B4, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
   color: white;
@@ -578,11 +579,11 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf05a",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `notice alert` --- */
 }
 .alert.notice:before {
-  content: "\f05a";
+  content: "";
 }
 .alert.notice:before, .alert.notice #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -618,11 +619,11 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf00d",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `close in a notice alert` --- */
 }
 .alert.notice .dismiss:before {
-  content: "\f00d";
+  content: "";
 }
 .alert.notice .dismiss:before, .alert.notice .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -651,7 +652,7 @@
 
 .alert.yield {
   /* [archetype:styleguide:begin] --- `yield alert` --- */
-  background-color: #faa732;
+  background-color: #FAA732;
   background-repeat: no-repeat;
   background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4gPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJncmFkIiBncmFkaWVudFVuaXRzPSJvYmplY3RCb3VuZGluZ0JveCIgeDE9IjAuNSIgeTE9IjAuMCIgeDI9IjAuNSIgeTI9IjEuMCI+PHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZiYjQ1MCIvPjxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iI2Y4OTQwNiIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxMDAlIiBoZWlnaHQ9IjEwMCUiIGZpbGw9InVybCgjZ3JhZCkiIC8+PC9zdmc+IA==');
   background: -webkit-gradient(linear, 50% 0%, 50% 100%, color-stop(0%, #fbb450), color-stop(100%, #f89406));
@@ -659,11 +660,11 @@
   background: -o-linear-gradient(top, #fbb450, #f89406);
   background: -webkit-linear-gradient(top, #fbb450, #f89406);
   background: linear-gradient(to bottom, #fbb450, #f89406);
-  -moz-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -ms-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -o-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  -webkit-box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
-  box-shadow: 0 0 0 1px #f89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -moz-box-shadow: 0 0 0 1px #F89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -ms-box-shadow: 0 0 0 1px #F89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -o-box-shadow: 0 0 0 1px #F89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  -webkit-box-shadow: 0 0 0 1px #F89406, 0 1px 2px rgba(0, 0, 0, 0.45);
+  box-shadow: 0 0 0 1px #F89406, 0 1px 2px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   display: block;
   color: white;
@@ -671,11 +672,11 @@
   line-height: 20px;
   position: relative;
   padding: 10px 20px 10px 50px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf071",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `yield alert` --- */
 }
 .alert.yield:before {
-  content: "\f071";
+  content: "";
 }
 .alert.yield:before, .alert.yield #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -711,11 +712,11 @@
   width: 11px;
   height: 11px;
   text-indent: 12px;
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf00d",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
   /* [archetype:styleguide:end] --- `close in a yield alert` --- */
 }
 .alert.yield .dismiss:before {
-  content: "\f00d";
+  content: "";
 }
 .alert.yield .dismiss:before, .alert.yield .dismiss #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'FontAwesome';
@@ -741,3 +742,5 @@
 .alert.yield .dismiss.hover, .alert.yield .dismiss:hover, .alert.yield .dismiss.focus, .alert.yield .dismiss:focus {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.35);
 }
+
+/*# sourceMappingURL=alerts.css.map */
