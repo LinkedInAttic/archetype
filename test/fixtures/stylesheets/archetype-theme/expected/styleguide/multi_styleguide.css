@@ -4,10 +4,12 @@
   font-weight: normal;
   line-height: 14px;
   color: #222222;
-  background: #cccccc;
+  background: #CCCCCC;
   /* [archetype:styleguide:end] --- `multi-styleguide-styleguide-test` --- */
 }
 .multi-value-styleguide-test {
   /* [archetype:target-os:begin] --- default --- */
   /* [archetype:target-os:end]   --- default --- */
 }
+
+/*# sourceMappingURL=multi_styleguide.css.map */

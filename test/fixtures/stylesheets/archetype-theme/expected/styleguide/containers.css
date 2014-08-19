@@ -10,7 +10,7 @@
 }
 .ie.lte8 .container {
   /* [archetype:target:browser:begin] --- ie lte 8 --- */
-  border-bottom: 2px solid #cccccc;
+  border-bottom: 2px solid #CCCCCC;
   /* [archetype:target:browser:end]   --- ie lte 8 --- */
 }
 
@@ -19,3 +19,5 @@
   background: white;
   /* [archetype:styleguide:end] --- `container without a shadow` --- */
 }
+
+/*# sourceMappingURL=containers.css.map */

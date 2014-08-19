@@ -5,15 +5,15 @@
 // fonts
 // defined as tuples (pairs) for light/dark background contexts
 $CONFIG_COLOR_BRAND:                                    (#0088CC  #34C1ED) !default;
-$CONFIG_COLOR_COPY:                                     (#222222  #FFFFFF) !default;
+$CONFIG_COLOR_COPY:                                     (#222222  white) !default;
 $CONFIG_COLOR_COPY_MUTED:                               (#555555  #AAAAAA) !default;
-$CONFIG_COLOR_STRONG:                                   (#000000  #FFFFFF) !default;
+$CONFIG_COLOR_STRONG:                                   (black  white) !default;
 $CONFIG_COLOR_ANNOTATION:                               (#888888  #999999) !default;
 $CONFIG_COLOR_BREADCRUMB:                               (#666666         ) !default;
 $CONFIG_COLOR_BREADCRUMB_ACTIVE:                        (#999999         ) !default;
 
 // buttons
-$CONFIG_COLOR_BUTTON_PRIMARY:                           #FFFFFF !default;
+$CONFIG_COLOR_BUTTON_PRIMARY:                           white !default;
 $CONFIG_COLOR_BG_BUTTON_PRIMARY:                        #0074CC !default;
 $CONFIG_COLOR_BORDER_BUTTON_PRIMARY:                    #1B5480 !default;
 $CONFIG_GRADIENT_BUTTON_PRIMARY:                        linear-gradient(top, #0088CC, #0055CC) !default;
@@ -23,15 +23,15 @@ $CONFIG_GRADIENT_BUTTON_PRIMARY_HOVER:                  linear-gradient(top, #00
 $CONFIG_GRADIENT_BUTTON_PRIMARY_HOVER_IE:               (#0066CC, #0033CC, vertical) !default;
 
 $CONFIG_COLOR_BUTTON_SECONDARY:                         #333333 !default;
-$CONFIG_COLOR_BG_BUTTON_SECONDARY:                      #F5F5F5 !default;
+$CONFIG_COLOR_BG_BUTTON_SECONDARY:                      #F4F4F4 !default;
 $CONFIG_COLOR_BORDER_BUTTON_SECONDARY:                  #AAAAAA !default;
-$CONFIG_GRADIENT_BUTTON_SECONDARY:                      linear-gradient(top, #FFFFFF, #E6E6E6) !default;
-$CONFIG_GRADIENT_BUTTON_SECONDARY_IE:                   (#FFFFFF, #E6E6E6, vertical) !default;
+$CONFIG_GRADIENT_BUTTON_SECONDARY:                      linear-gradient(top, white, #E6E6E6) !default;
+$CONFIG_GRADIENT_BUTTON_SECONDARY_IE:                   (white, #E6E6E6, vertical) !default;
 $CONFIG_COLOR_BG_BUTTON_SECONDARY_HOVER:                #E6E6E6 !default;
-$CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER:                linear-gradient(top, #F5F5F5, #E4E4E4) !default;
-$CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER_IE:             (#F5F5F5, #E4E4E4, vertical) !default;
+$CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER:                linear-gradient(top, #F4F4F4, #E4E4E4) !default;
+$CONFIG_GRADIENT_BUTTON_SECONDARY_HOVER_IE:             (#F4F4F4, #E4E4E4, vertical) !default;
 
-$CONFIG_COLOR_BUTTON_SPOTLIGHT:                         #FFFFFF !default;
+$CONFIG_COLOR_BUTTON_SPOTLIGHT:                         white !default;
 $CONFIG_COLOR_BG_BUTTON_SPOTLIGHT:                      #414141 !default;
 $CONFIG_COLOR_BORDER_BUTTON_SPOTLIGHT:                  #111111 !default;
 $CONFIG_GRADIENT_BUTTON_SPOTLIGHT:                      linear-gradient(top, #555555, #222222) !default;
@@ -64,7 +64,7 @@ $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_DARK_HOVER:           $CONFIG_GRADIENT_BUTTON_
 $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_DARK_HOVER_IE:        $CONFIG_GRADIENT_BUTTON_SPOTLIGHT_HOVER_IE !default;
 
 $CONFIG_COLOR_BUTTON_INDICATOR:                         #BBBBBB !default;
-$CONFIG_COLOR_BUTTON_INDICATOR_INVERSE:                 #FFFFFF !default;
+$CONFIG_COLOR_BUTTON_INDICATOR_INVERSE:                 white !default;
 
 // alerts
 $CONFIG_COLOR_BG_ALERT_NOTIFY:                          #49AFCD !default;

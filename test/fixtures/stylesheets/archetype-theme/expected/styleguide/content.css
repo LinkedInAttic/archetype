@@ -1,6 +1,7 @@
+@charset "UTF-8";
 .content {
   /* [archetype:styleguide:begin] --- `one content-styleguide-test` --- */
-  content: "\2193";
+  content: "↓";
   /* [archetype:styleguide:end] --- `one content-styleguide-test` --- */
   /* [archetype:styleguide:begin] --- `two content-styleguide-test` --- */
   content: test;
@@ -12,3 +13,5 @@
   content: attr(data-icon);
   /* [archetype:styleguide:end] --- `four content-styleguide-test` --- */
 }
+
+/*# sourceMappingURL=content.css.map */
