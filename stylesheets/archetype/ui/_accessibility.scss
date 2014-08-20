@@ -7,7 +7,7 @@ $a-blackhole: require-archetype-modules(archetype/ui);
 // @mixin     hide-element
 // @credit    Jonathan Snook
 // @link      http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
-@mixin hide-element() {
+@mixin hide-element {
   position: absolute !important;
   height: 1px;
   width: 1px;
@@ -33,7 +33,7 @@ $a-blackhole: require-archetype-modules(archetype/ui);
 
 // a method for removing default styling from a button
 // @mixin     unstyled-button
-@mixin unstyled-button() {
+@mixin unstyled-button {
   background: none;
   border: none;
   padding: 0;

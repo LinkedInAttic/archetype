@@ -1,6 +1,6 @@
 @import "test_harness";
 
-@include base-glyph();
+@include base-glyph;
 
 .simple {
   @include glyph-icon(caret-down);

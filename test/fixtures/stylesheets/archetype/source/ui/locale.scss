@@ -1,6 +1,6 @@
 @import "test_harness";
 
-@mixin test-locale() {
+@mixin test-locale {
   /* current locale is: `#{locale()}` */
   @if locale(en_US de_DE fr_FR) {
     /* one of: en_US de_DE fr_FR */
@@ -21,14 +21,14 @@
 }
 
 .default {
-  @include test-locale();
+  @include test-locale;
 }
 
 // test switch-locale
 @each $locale in (en_US de_DE fr_FR zh_TW ko_KR ja_JP pt_BR ro_RU) {
   .#{$locale} {
     @include switch-locale($locale) {
-      @include test-locale();
+      @include test-locale;
     }
     /* global locale: #{locale()} */
   }

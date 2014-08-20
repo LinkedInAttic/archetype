@@ -122,10 +122,10 @@ $a-blackhole: require-archetype-modules(archetype/util);
       // clearfix
       @else if($property == clearfix) {
         @if($value == legacy-pie-clearfix) {
-          @include legacy-pie-clearfix();
+          @include legacy-pie-clearfix;
         }
         @else if($value == pie-clearfix) {
-          @include pie-clearfix();
+          @include pie-clearfix;
         }
         @else {
           @include clearfix($value...);
@@ -459,13 +459,13 @@ $a-blackhole: require-archetype-modules(archetype/util);
 
 // safely use text-transform:uppercase without localization issues
 // @mixin     uppercase
-@mixin uppercase() {
+@mixin uppercase {
   @include safe(text-transform, uppercase);
 }
 
 // safely use font-variant:small-caps without localization issues
 // @mixin     small-caps
-@mixin small-caps() {
+@mixin small-caps {
   @include safe(font-variant, small-caps);
 }
 

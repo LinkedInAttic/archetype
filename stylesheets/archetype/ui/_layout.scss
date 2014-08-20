@@ -8,8 +8,8 @@ $a-blackhole: require-archetype-modules(archetype/ui);
 
 // makes your element centered vertically and horizontally in a parent element
 // @mixin   centered-box
-@mixin centered-box() {
-  @include stretch();
+@mixin centered-box {
+  @include stretch;
   margin: auto;
 }
 

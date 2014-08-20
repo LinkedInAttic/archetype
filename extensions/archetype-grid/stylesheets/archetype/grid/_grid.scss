@@ -114,7 +114,7 @@
 @mixin grid-outdent($list: false, $left: 0, $right: 0) {
   $outdent: grid-outdent($list, $left, $right);
   @include grid-output-left-right(margin, $outdent);
-  @include hack-negative-margin();
+  @include hack-negative-margin;
 }
 
 // calculate offsets for a grid block
@@ -152,7 +152,7 @@
   $outdent: get-collection($outdent, 0, $min: 2);
   $gutter: if($first, 0, $CONFIG_GRID_GUTTER);
   @include grid-output-left-right(margin, list-add($outdent, list-add($offset, ($gutter $gutter))), $ignore: ($gutter));
-  @include hack-negative-margin();
+  @include hack-negative-margin;
 }
 
 // calculate push (offset) for a grid block
@@ -183,13 +183,13 @@
 
 // this makes it possible to undo $first: true
 // @mixin     grid-not-first
-@mixin grid-not-first() {
+@mixin grid-not-first {
   margin-left: $CONFIG_GRID_GUTTER;
 }
 
 // this makes it possible to force a non first-column to behave as a first-column
 // @mixin     grid-is-first
-@mixin grid-is-first() {
+@mixin grid-is-first {
   margin-left: 0;
 }
 
@@ -227,7 +227,7 @@
   // FLOAT
   @if($CONFIG_GRID_ALIGN_METHOD == float){
     @if($row) {
-      @include legacy-pie-clearfix();
+      @include legacy-pie-clearfix;
     }
     @else {
       // make it a floater
@@ -249,7 +249,7 @@
       //text-space-collapse: collapse;
     }
     @else {
-      @include inline-block();
+      @include inline-block;
       vertical-align: top;
       // restore spacing @see grid-row
       letter-spacing: normal;
@@ -270,7 +270,7 @@
       }
       display:        table-cell;
       vertical-align: top;
-      @include has-layout();
+      @include has-layout;
     }
   }
 }
@@ -309,7 +309,7 @@
 
     // margin
     @if(not ($first or $canvas or $center)) {
-      @include grid-not-first();
+      @include grid-not-first;
     }
 
     @if($canvas or $center) {
@@ -329,7 +329,7 @@
     }
     @else {
       // align the block
-      @include grid-block();
+      @include grid-block;
       // debug
       @include debug-hover-box($iff: ($debug or $CONFIG_GRID_DEBUG));
     }
@@ -359,7 +359,7 @@
     // outdent
     @if($outdent) {
       @include grid-output-left-right(margin, $outdent);
-      @include hack-negative-margin();
+      @include hack-negative-margin;
     }
 
     // width

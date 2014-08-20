@@ -4,7 +4,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
 
 // normalize.css v3.0.0 | MIT License | git.io/normalize
 
-@mixin base-normalize-text-adjust() {
+@mixin base-normalize-text-adjust {
   /**
    * 0. Corrects text resizing oddly in IE6/7 when body font-size is set using em units
    * http://clagnut.com/blog/348/#c790
@@ -24,7 +24,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
 
 }
 
-@mixin base-normalize-page() {
+@mixin base-normalize-page {
   /**
    * Removes default margin.
    */
@@ -35,7 +35,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
 }
 
 // @category  base
-@mixin base-normalize-html5() {
+@mixin base-normalize-html5 {
   /* HTML5 display definitions
   ========================================================================== */
 
@@ -92,7 +92,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
   }
 }
 
-@mixin base-normalize-links() {
+@mixin base-normalize-links {
   /* Links
   ========================================================================== */
 
@@ -101,7 +101,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
    */
 
   a {
-    @include transparent-focusable();
+    @include transparent-focusable;
   }
 
   /**
@@ -122,7 +122,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
   }
 }
 
-@mixin base-normalize-typogrpahy-core() {
+@mixin base-normalize-typogrpahy-core {
   /**
    * Address odd `em`-unit font size rendering in all browsers.
    */
@@ -177,7 +177,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
   }
 }
 
-@mixin base-normalize-typography() {
+@mixin base-normalize-typography {
   /* =============================================================================
   Typography
   ========================================================================== */
@@ -276,7 +276,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
   }
 }
 
-@mixin base-normalize-lists() {
+@mixin base-normalize-lists {
   // legacy
   @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) {
     /* =============================================================================
@@ -320,7 +320,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
   }
 }
 
-@mixin base-normalize-image() {
+@mixin base-normalize-image {
   /**
    * 1. Remove border when inside 'a' element in IE6/7/8/9, FF3
    * 2. (legacy) Improve image quality when scaled in IE7
@@ -336,11 +336,11 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
   }
 }
 
-@mixin base-normalize-embed() {
+@mixin base-normalize-embed {
   /* =============================================================================
   Embedded content
   ========================================================================== */
-  @include base-normalize-image();
+  @include base-normalize-image;
 
   /**
    * Correct overflow not hidden in IE 9/10/11.
@@ -351,7 +351,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
   }
 }
 
-@mixin base-normalize-figures() {
+@mixin base-normalize-figures {
   /* =============================================================================
   Figures
   ========================================================================== */
@@ -365,7 +365,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
   }
 }
 
-@mixin base-normalize-fieldset() {
+@mixin base-normalize-fieldset {
   /**
    * Define consistent border, margin, and padding.
    */
@@ -377,7 +377,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
   }
 }
 
-@mixin base-normalize-forms() {
+@mixin base-normalize-forms {
   /* =============================================================================
   Forms
   ========================================================================== */
@@ -576,7 +576,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
 
 }
 
-@mixin base-normalize-ime() {
+@mixin base-normalize-ime {
   /* =============================================================================
   IME mode
   ========================================================================== */
@@ -586,7 +586,7 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
   }
 }
 
-@mixin base-normalize-table() {
+@mixin base-normalize-table {
   /* ==========================================================================
   Tables
   ========================================================================== */
@@ -615,45 +615,45 @@ $a-blackhole: register-archetype-module(archetype/base/normalize);
   /*! normalize.css v3.0.0 | MIT License | git.io/normalize */
   $exclude: -archetype-list($exclude);
   @if(not index($exclude, normalize-html5)) {
-    @include base-normalize-html5();
+    @include base-normalize-html5;
   }
   @if(not index($exclude, normalize-text-adjust)) {
-    @include base-normalize-text-adjust();
+    @include base-normalize-text-adjust;
   }
   @if(not index($exclude, normalize-page)) {
-    @include base-normalize-page();
+    @include base-normalize-page;
   }
   @if(not index($exclude, normalize-links)) {
-    @include base-normalize-links();
+    @include base-normalize-links;
   }
   @if(not index($exclude, normalize-typography)) {
-    @include base-normalize-typography();
+    @include base-normalize-typography;
   }
   @if(not index($exclude, normalize-typography-core)) {
-    @include base-normalize-typogrpahy-core();
+    @include base-normalize-typogrpahy-core;
   }
   @if(not index($exclude, normalize-lists)) {
-    @include base-normalize-lists();
+    @include base-normalize-lists;
   }
   @if(not index($exclude, normalize-image)) {
-    @include base-normalize-image();
+    @include base-normalize-image;
   }
   @if(not index($exclude, normalize-embeds)) {
-    @include base-normalize-embed();
+    @include base-normalize-embed;
   }
   @if(not index($exclude, normalize-figures)) {
-    @include base-normalize-figures();
+    @include base-normalize-figures;
   }
   @if(not index($exclude, normalize-forms)) {
-    @include base-normalize-forms();
+    @include base-normalize-forms;
   }
   @if(not index($exclude, normalize-fieldset)) {
-    @include base-normalize-fieldset();
+    @include base-normalize-fieldset;
   }
   @if(not index($exclude, normalize-tables)) {
-    @include base-normalize-table();
+    @include base-normalize-table;
   }
   @if(not index($exclude, normalize-ime)) {
-    @include base-normalize-ime();
+    @include base-normalize-ime;
   }
 }

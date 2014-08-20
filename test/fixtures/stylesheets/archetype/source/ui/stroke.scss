@@ -1,7 +1,7 @@
 @import "test_harness";
 
 .stroke {
-  @include glyph-stroke();
+  @include glyph-stroke;
 }
 
 .stroke-fat {

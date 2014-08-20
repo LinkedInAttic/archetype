@@ -6,4 +6,4 @@ $CONFIG_NAMESPACE: MyCustomNamespace !default;
   @include glyph-icon(caret-down);
 }
 
-@include glyph-libraries();
+@include glyph-libraries;

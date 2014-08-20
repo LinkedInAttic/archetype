@@ -2,5 +2,5 @@
 
 @include unless-archetype-module-initalized(archetype/base) {
   /* intializing base/init */
-  @include base();
+  @include base;
 }

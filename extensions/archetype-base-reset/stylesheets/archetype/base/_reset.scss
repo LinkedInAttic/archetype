@@ -22,48 +22,48 @@
   time, mark, audio, video {
     // PAGE
     @if(not index($exclude, reset-page)) {
-      @include reset-box-model();
+      @include reset-box-model;
     }
     // TYPOGRAPHY
     @if(not index($exclude, reset-typography)) {
-      @include reset-font();
+      @include reset-font;
     }
   }
   // PAGE
   @if(not index($exclude, reset-page)) {
     body {
-      @include reset-body();
+      @include reset-body;
     }
   }
   // LISTS
   @if(not index($exclude, reset-lists)) {
     ol, ul {
-      @include reset-list-style();
+      @include reset-list-style;
     }
   }
   // TABLES
   @if(not index($exclude, reset-tables)) {
     table {
-      @include reset-table();
+      @include reset-table;
     }
     caption, th, td {
-      @include reset-table-cell();
+      @include reset-table-cell;
     }
   }
   // QUOTES
   @if(not index($exclude, reset-quotes)) {
     q, blockquote {
-      @include reset-quotation();
+      @include reset-quotation;
     }
   }
   // EMBEDS
   @if(not index($exclude, reset-embeds)) {
     a img {
-      @include reset-image-anchor-border();
+      @include reset-image-anchor-border;
     }
   }
   // HTML5
   @if(not index($exclude, reset-html5)) {
-    @include reset-html5();
+    @include reset-html5;
   }
 }

@@ -1,9 +1,9 @@
 // generate rotational and position keyframes for loading spinners
 // @mixin     generate-loader-keyframes
-@mixin generate-loader-keyframes() {
+@mixin generate-loader-keyframes {
   @if not $CONFIG_DISABLE_STYLEGUIDE_SPRITES {
     // generate rotating keyframes
-    @include -generate-loader-keyframes-360();
+    @include -generate-loader-keyframes-360;
     // generate specific keyframes
     @each $size, $values in $CONFIG_LOADERS {
       @if $size and $values {
@@ -24,7 +24,7 @@
 // generate rotational keyframes for loading spinners
 // @mixin     -generate-loader-keyframes-360
 // @private
-@mixin -generate-loader-keyframes-360() {
+@mixin -generate-loader-keyframes-360 {
   @include do-once("archetype/ui/generate-keyframe/#{$CONFIG_KEYFRAME_LOADERS}") {
     @include keyframes(archetype-namespace($CONFIG_KEYFRAME_LOADERS)) {
       from { @include rotate(0deg); }
