@@ -129,7 +129,7 @@ private
 
   def global_sprites_disabled?
     sprites_disabled = environment.var('CONFIG_DISABLE_STYLEGUIDE_SPRITES')
-    return sprites_disabled.respond_to?(:value) ? sprites_disabled.value : false
+    return sprites_disabled.respond_to?(:to_bool) ? sprites_disabled.to_bool : false
   end
 
 end

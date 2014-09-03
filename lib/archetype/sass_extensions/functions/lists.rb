@@ -15,7 +15,7 @@ module Archetype::SassExtensions::Lists
   #
   def list_replace(list, idx = false, value = nil, separator = nil)
     # return early if the index is invalid (no operation)
-    return list if (!idx || helpers.is_null(idx) || idx.value == false)
+    return list if (!idx || helpers.is_null(idx) || !idx.to_bool)
     separator ||= list.separator if list.is_a?(Sass::Script::Value::List)
     # cast and zero-index $idx
     idx = (idx.value) - 1
@@ -249,7 +249,7 @@ module Archetype::SassExtensions::Lists
   # - {List} formatted collection
   #
   def get_collection(list = bool(false), components = [], min = number(1))
-    list = list.value ? list.to_a : components.to_a
+    list = list.to_bool ? list.to_a : components.to_a
     while(list.length < min.value)
       list = list.concat(list)
     end
