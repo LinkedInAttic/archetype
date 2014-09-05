@@ -25,6 +25,19 @@ module Archetype::SassExtensions::Numbers
   end
 
   #
+  # Return 1 of the same dimensions of the number passed in.
+  #
+  # *Parameters*:
+  # - <tt>$number</tt> {Number} the number with dimensions to use.
+  # *Returns*:
+  # - {Number} 1 with the same dimensions as the number passed in.
+  #
+  def units(n)
+    assert_type n, :Number
+    return number(1, n.unit_str)
+  end
+
+  #
   # converts a decimal number into a fraction
   #  credit goes to Christopher Lord (https://github.com/clord/fraction)
   #
