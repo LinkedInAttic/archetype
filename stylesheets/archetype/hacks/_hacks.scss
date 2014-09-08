@@ -4,9 +4,9 @@ $a-blackhole: require-archetype-modules(archetype/config);
 
 // hack to support negative margins in legacy IE
 // @mixin     hack-negative-margin
-@mixin hack-negative-margin() {
+@mixin hack-negative-margin {
   @if(support-legacy-browser('ie', '7', $threshold: $critical-usage-threshold)) {
-    @include has-layout();
+    @include has-layout;
     position: relative;
   }
 }

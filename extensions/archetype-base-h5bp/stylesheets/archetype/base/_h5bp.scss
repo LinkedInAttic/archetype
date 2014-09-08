@@ -2,7 +2,7 @@
 
 // @category  base
 
-@mixin base-h5bp-base() {
+@mixin base-h5bp-base {
   /* ==========================================================================
   Base styles: opinionated defaults
   ========================================================================== */
@@ -50,7 +50,7 @@
   }
 }
 
-@mixin base-h5bp-images() {
+@mixin base-h5bp-images {
   /*
   * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
   */
@@ -61,7 +61,7 @@
 }
 
 
-@mixin base-h5bp-fieldset() {
+@mixin base-h5bp-fieldset {
   /*
   * Remove default fieldset styles.
   */
@@ -73,7 +73,7 @@
   }
 }
 
-@mixin base-h5bp-forms() {
+@mixin base-h5bp-forms {
   /*
   * Allow only vertical resizing of textareas.
   */
@@ -83,7 +83,7 @@
   }
 }
 
-@mixin base-h5bp-chromeframe() {
+@mixin base-h5bp-chromeframe {
   /* ==========================================================================
   Chrome Frame prompt
   ========================================================================== */
@@ -96,7 +96,7 @@
   }
 }
 
-@mixin base-h5bp-helpers() {
+@mixin base-h5bp-helpers {
   /* ==========================================================================
   Helper classes
   ========================================================================== */
@@ -199,7 +199,7 @@
   }
 }
 
-@mixin base-h5bp-print() {
+@mixin base-h5bp-print {
   /* ==========================================================================
   Print styles.
   Inlined to avoid required HTTP connection: h5bp.com/r
@@ -287,21 +287,21 @@
   */
   $exclude: -archetype-list($exclude);
   @if(not index($exclude, h5bp-base)) {
-    @include base-h5bp-base();
+    @include base-h5bp-base;
   }
   @if(not index($exclude, h5bp-images)) {
-    @include base-h5bp-images();
+    @include base-h5bp-images;
   }
   @if(not index($exclude, h5bp-forms)) {
-    @include base-h5bp-forms();
+    @include base-h5bp-forms;
   }
   @if(not index($exclude, h5bp-chromeframe)) {
-    @include base-h5bp-chromeframe();
+    @include base-h5bp-chromeframe;
   }
   @if(not index($exclude, h5bp-helpers)) {
-    @include base-h5bp-helpers();
+    @include base-h5bp-helpers;
   }
   @if(not index($exclude, h5bp-print)) {
-    @include base-h5bp-print();
+    @include base-h5bp-print;
   }
 }

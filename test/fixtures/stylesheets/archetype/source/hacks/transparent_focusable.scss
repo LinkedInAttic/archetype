@@ -1,5 +1,5 @@
 @import "test_harness";
 
 .test {
-  @include transparent-focusable();
+  @include transparent-focusable;
 }

@@ -13,7 +13,7 @@ module Archetype::SassExtensions::UI::Scopes
   def register_breakpoint(key, value, force = nil)
     # we need a dup as the Hash is frozen
     breakpoints = registered_breakpoints.dup
-    force = force.nil? ? false : force.value
+    force = force.nil? ? false : force.to_bool
     not_registered = breakpoints[key].nil? || helpers.is_null(breakpoints[key])
     # if there's no key registered...
     if force || not_registered

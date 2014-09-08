@@ -10,11 +10,11 @@ body {
 }
 
 .row {
-  @include grid-row();
+  @include grid-row;
 }
 
 #canvas {
-  @include grid-canvas();
+  @include grid-canvas;
 }
 
 #main {
