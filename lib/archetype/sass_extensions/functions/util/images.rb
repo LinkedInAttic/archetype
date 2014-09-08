@@ -124,7 +124,7 @@ module Archetype::SassExtensions::Util::Images
 private
 
   def _is_sprite_valid(map)
-    return !global_sprites_disabled? && !(helpers.is_null(map) || !map.value)
+    return !global_sprites_disabled? && !(helpers.is_null(map) || !map.to_bool)
   end
 
   def global_sprites_disabled?
