@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.0.alpha.4
+
+### Resolved Issues:
+
+- fix some boolean operations
+
 ## 1.0.0.alpha.3
 
 ### Resolved Issues:
