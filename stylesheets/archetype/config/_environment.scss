@@ -1,6 +1,6 @@
 // environment
 $CONFIG_DEBUG_ENVS:   (dev development) !default;                                       // environments to allow debug in
-$CONFIG_DEBUG:        (index($CONFIG_DEBUG_ENVS, archetype-env()) != false) !default;   // global debugging mode (enabled by default in $CONFIG_DEBUG_ENVS)
+$CONFIG_DEBUG:        (not not index($CONFIG_DEBUG_ENVS, archetype-env())) !default;   // global debugging mode (enabled by default in $CONFIG_DEBUG_ENVS)
 
 $CONFIG_LOCALE:       locale() !default;                                                // the default locale
 
