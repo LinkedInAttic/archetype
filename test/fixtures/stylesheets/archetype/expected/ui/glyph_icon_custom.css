@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "MyDefaultGlyphs_16px-1.0.5";
   src: url('/assets/fonts/custom/path/to/MyDefaultGlyphs/1.0.5/16px/MyDefaultGlyphs.eot');
@@ -25,10 +26,10 @@
   font-style: normal;
 }
 .simple {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .simple:before {
-  content: "\f0d7";
+  content: "";
 }
 .simple:before, .simple #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
@@ -45,10 +46,10 @@
 
 .music {
   /* should be 31px */
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf001",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .music:before {
-  content: "\f001";
+  content: "";
 }
 .music:before, .music #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
@@ -77,10 +78,10 @@
 }
 
 .not-inline {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .not-inline:before {
-  content: "\f0d7";
+  content: "";
 }
 .not-inline:before, .not-inline #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
@@ -96,10 +97,10 @@
 }
 
 .ie-uid {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="my-custom-id",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="my-custom-id",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .ie-uid:before {
-  content: "\f0d7";
+  content: "";
 }
 .ie-uid:before, .ie-uid #my-custom-id {
   font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
@@ -118,10 +119,10 @@
 }
 
 .content-block {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .content-block:before {
-  content: "\f0d7";
+  content: "";
 }
 .content-block:before, .content-block #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
@@ -285,10 +286,10 @@
 }
 
 .custom .simple {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .custom .simple:before {
-  content: "\f0d7";
+  content: "";
 }
 .custom .simple:before, .custom .simple #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyCustomGlyphs_16px-1.0.0', 'MyCustomGlyphs_16px';
@@ -315,10 +316,10 @@
   color: inherit;
 }
 .custom .size {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .custom .size:before {
-  content: "\f0d7";
+  content: "";
 }
 .custom .size:before, .custom .size #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyCustomGlyphs_16px-1.0.0', 'MyCustomGlyphs_16px';
@@ -334,10 +335,10 @@
 }
 
 .runtime-locale-glyphs {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .runtime-locale-glyphs:before {
-  content: "\f0d7";
+  content: "";
 }
 .runtime-locale-glyphs:before, .runtime-locale-glyphs #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
@@ -352,10 +353,10 @@
   color: inherit;
 }
 .runtime-locale-glyphs.ja_JP {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d8",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .runtime-locale-glyphs.ja_JP:before {
-  content: "\f0d8";
+  content: "";
 }
 .runtime-locale-glyphs.ja_JP:before, .runtime-locale-glyphs.ja_JP #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
@@ -370,10 +371,10 @@
   color: inherit;
 }
 .runtime-locale-glyphs.de_DE {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d9",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .runtime-locale-glyphs.de_DE:before {
-  content: "\f0d9";
+  content: "";
 }
 .runtime-locale-glyphs.de_DE:before, .runtime-locale-glyphs.de_DE #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
@@ -388,10 +389,10 @@
   color: inherit;
 }
 .runtime-locale-glyphs.ru_RU {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0da",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .runtime-locale-glyphs.ru_RU:before {
-  content: "\f0da";
+  content: "";
 }
 .runtime-locale-glyphs.ru_RU:before, .runtime-locale-glyphs.ru_RU #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
@@ -406,10 +407,10 @@
   color: inherit;
 }
 .runtime-locale-glyphs.fr_FR {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d8",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .runtime-locale-glyphs.fr_FR:before {
-  content: "\f0d8";
+  content: "";
 }
 .runtime-locale-glyphs.fr_FR:before, .runtime-locale-glyphs.fr_FR #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyDefaultGlyphs_16px-1.0.5', 'MyDefaultGlyphs_16px';
@@ -423,3 +424,5 @@
   font-size: 100%;
   color: inherit;
 }
+
+/*# sourceMappingURL=glyph_icon_custom.css.map */

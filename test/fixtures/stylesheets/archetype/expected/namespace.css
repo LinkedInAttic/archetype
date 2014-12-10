@@ -1,9 +1,10 @@
+@charset "UTF-8";
 .test {
   /* testing: MyCustomNamespace_testing; */
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\uf0d7",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype-glyph"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 .test:before {
-  content: "\f0d7";
+  content: "";
 }
 .test:before, .test #ie-pseudo-archetype-uid-RANDOM_UID {
   font-family: 'MyCustomNamespace_FontAwesome';
@@ -25,3 +26,5 @@
   font-weight: normal;
   font-style: normal;
 }
+
+/*# sourceMappingURL=namespace.css.map */

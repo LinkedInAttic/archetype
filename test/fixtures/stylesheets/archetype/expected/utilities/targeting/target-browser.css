@@ -131,7 +131,7 @@
 
 .ie.lte9 .target-ie-lte-9 {
   /* [archetype:target:browser:begin] --- ie lte 9 --- */
-  border-color: #111111;
+  border-color: #111;
   /* [archetype:target:browser:end]   --- ie lte 9 --- */
 }
 .ie.lte9 .target-ie-lte-9 {
@@ -204,3 +204,5 @@
   background: none;
   /* [archetype:target:browser:end]   --- ie --- */
 }
+
+/*# sourceMappingURL=target-browser.css.map */
