@@ -40,57 +40,34 @@ module Archetype::SassExtensions::UI::Scopes
   # - {*} the registered breakpoint
   #
   def get_breakpoint(key)
-    if disabled_breakpoints.key?(key)
-      return null
-    end
+    return null if disabled_breakpoints.include?(key)
     return registered_breakpoints[key] || null
   end
   Sass::Script::Functions.declare :get_breakpoint, [:key]
 
   #
-  # enables a breakpoint (if disabled)
+  # Enable a breakpoint.
   #
   # *Parameters*:
-  # - <tt>$key</tt> {String} the key to lookup
+  # - <tt>$key</tt> {String} the key to look up
   # *Returns*:
-  # - {Boolean} true, if the key is enabled
+  # - {Boolean} true, if the key is enabled successfully
   #
   def enable_breakpoint(key)
-    if registered_breakpoints[key].nil? || helpers.is_null(registered_breakpoints[key])
-      helpers.warn("[#{Archetype.name}:enable-breakpoint] a breakpoint for `#{key}` was not found.")
-      return bool(false)
-    end
-
-    # if the key exists in the hash, then delete it.
-    if disabled_breakpoints.key?(key)
-      breakpoints = disabled_breakpoints.dup
-      breakpoints.delete(key)
-      environment.global_env.set_var('CONFIG_BREAKPOINTS_DISABLED', Sass::Script::Value::Map.new(breakpoints))
-    end
-
-    return bool(true)
+    return toggle_breakpoint(key, true)
   end
   Sass::Script::Functions.declare :enable_breakpoint, [:key]
 
   #
-  # disables a breakpoint (if enabled)
+  # Disable a breakpoint.
   #
   # *Parameters*:
-  # - <tt>$key</tt> {String} the key to lookup
+  # - <tt>$key</tt> {String} the key to look up
   # *Returns*:
-  # - {Boolean} true, if the key is disabled
+  # - {Boolean} true, if the key disabled successfully
   #
   def disable_breakpoint(key)
-    if registered_breakpoints[key].nil? || helpers.is_null(registered_breakpoints[key])
-      helpers.warn("[#{Archetype.name}:disable-breakpoint] a breakpoint for `#{key}` was not found.")
-      return bool(false)
-    end
-
-    breakpoints = disabled_breakpoints.dup
-    breakpoints[key] = true
-    environment.global_env.set_var('CONFIG_BREAKPOINTS_DISABLED', Sass::Script::Value::Map.new(breakpoints))
-
-    return bool(true)
+    return toggle_breakpoint(key, false)
   end
   Sass::Script::Functions.declare :disable_breakpoint, [:key]
 
@@ -145,7 +122,34 @@ private
 
   def disabled_breakpoints
     breakpoints = environment.var('CONFIG_BREAKPOINTS_DISABLED')
-    breakpoints.respond_to?(:to_h) ? breakpoints.to_h : {}
+    breakpoints.respond_to?(:to_a) ? breakpoints.to_a : {}
+  end
+
+  # Enable or disable a breakpoint.
+  #
+  # *Parameters*:
+  # - <tt>$key</tt> {String} the key to lookup
+  # - <tt>$toggle</tt> {Boolean} Set to true to enable the breakpoint. false to disable it.
+  # *Returns*:
+  # - {Boolean} true, if the disable or enable operation was successful.
+  #
+  def toggle_breakpoint(key, toggle)
+    friendly_method = toggle ? 'enable' : 'disable'
+    if registered_breakpoints[key].nil? || helpers.is_null(registered_breakpoints[key])
+      helpers.warn("[#{Archetype.name}:#{friendly_method}-breakpoint] a breakpoint for `#{key}` was not found.")
+      return bool(false)
+    end
+
+    method = toggle ? 'delete' : 'add'
+
+    # this will ensure that there aren't any duplicate keys
+    breakpoints = Set.new(disabled_breakpoints)
+    breakpoints.method(method).call(key)
+
+    breakpoints = Sass::Script::Value::List.new(breakpoints, :space)
+    environment.global_env.set_var('CONFIG_BREAKPOINTS_DISABLED', breakpoints)
+
+    return bool(true)
   end
 
 end

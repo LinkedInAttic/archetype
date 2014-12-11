@@ -31,3 +31,6 @@ $trash: enable-breakpoint(smartphone);
     /* you should see this comment after being enabled */
   }
 }
+
+// Should output a warning, since breakpoint is not registered.
+$trash: enable-breakpoint(not-set);
