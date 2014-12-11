@@ -10,7 +10,7 @@
   border-style: dashed;
   border-color: transparent;
   border-width: 1em 0.5em 0;
-  border-top-color: #aaa;
+  border-top-color: #aaaaaa;
   border-top-style: solid;
 }
 .ie.ie6 .a {
@@ -69,5 +69,3 @@
   /* [archetype:target:browser:begin] --- ie 6 --- */
   /* [archetype:target:browser:end]   --- ie 6 --- */
 }
-
-/*# sourceMappingURL=triangle.css.map */

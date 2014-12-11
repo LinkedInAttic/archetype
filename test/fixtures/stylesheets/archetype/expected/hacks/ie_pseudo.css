@@ -1,14 +1,11 @@
-@charset "UTF-8";
 .before {
   *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.style.cssText="color: red; background: green;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
 
 .after-content {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="➽",t.appendChild(t.el)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="\u27BD",t.appendChild(t.el)})}(this)));
 }
 
 .before-style-content {
-  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="testing ➽if this works",t.el.style.cssText="color: red; background: green;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
+  *zoom: expression(this.runtimeStyle.zoom="1",(function(t){setTimeout(function(){t.el=document.createElement("x-archetype"),t.el.id="ie-pseudo-archetype-uid-RANDOM_UID",t.el.innerText="testing \u27BDif this works",t.el.style.cssText="color: red; background: green;",t.insertBefore(t.el,t.childNodes[0]||null)})}(this)));
 }
-
-/*# sourceMappingURL=ie_pseudo.css.map */
