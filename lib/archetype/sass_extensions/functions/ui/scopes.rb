@@ -49,7 +49,7 @@ module Archetype::SassExtensions::UI::Scopes
   # Enable a breakpoint.
   #
   # *Parameters*:
-  # - <tt>$key</tt> {String} the key to look up
+  # - <tt>$key</tt> {String} the key to enable.
   # *Returns*:
   # - {Boolean} true, if the key is enabled successfully
   #
@@ -62,7 +62,7 @@ module Archetype::SassExtensions::UI::Scopes
   # Disable a breakpoint.
   #
   # *Parameters*:
-  # - <tt>$key</tt> {String} the key to look up
+  # - <tt>$key</tt> {String} the key to disable.
   # *Returns*:
   # - {Boolean} true, if the key disabled successfully
   #
@@ -128,7 +128,7 @@ private
   # Enable or disable a breakpoint.
   #
   # *Parameters*:
-  # - <tt>$key</tt> {String} the key to lookup
+  # - <tt>$key</tt> {String} the key to enable or disable.
   # - <tt>$toggle</tt> {Boolean} Set to true to enable the breakpoint. false to disable it.
   # *Returns*:
   # - {Boolean} true, if the disable or enable operation was successful.
