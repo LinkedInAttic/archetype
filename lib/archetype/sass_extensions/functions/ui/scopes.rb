@@ -136,7 +136,7 @@ private
   def toggle_breakpoint(key, toggle)
     friendly_method = toggle ? 'enable' : 'disable'
     if registered_breakpoints[key].nil? || helpers.is_null(registered_breakpoints[key])
-      helpers.warn("[#{Archetype.name}:#{friendly_method}-breakpoint] a breakpoint for `#{key}` was not found.")
+      helpers.warn("[#{Archetype.name}:breakpoint:#{friendly_method}] a breakpoint for `#{key}` was not found.")
       return bool(false)
     end
 
