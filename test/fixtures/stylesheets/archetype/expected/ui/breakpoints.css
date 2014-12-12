@@ -5,3 +5,11 @@
     /* [archetype:breakpoint:end] --- smartphone --- */
   }
 }
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) {
+  .test-2 {
+    /* [archetype:breakpoint:begin] --- smartphone --- */
+    /* you should see this comment after being enabled */
+    /* [archetype:breakpoint:end] --- smartphone --- */
+  }
+}

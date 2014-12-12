@@ -30,6 +30,17 @@ Here's an example that will cause this to happen:
 
 Make sure you're using the correct breakpoint name and that it has been properly registered via `register-breakpoint($name, $value)`.
 
+### [archetype:breakpoint:enable] a breakpoint for \`$1\` was not found.
+### [archetype:breakpoint:disable] a breakpoint for \`$1\` was not found.
+
+#### What does this mean?
+
+You tried calling enable-breakpoint or disable-breakpoint on a breakpoint that does not exist.
+
+#### Resolution:
+
+Make sure you're using the correct breakpoint name and that it has been properly registered via `register-breakpoint($name, $value)`. Or, remove the calls to these methods if they are not needed.
+
 ## [archetype:hash]
 
 ### [archetype:hash] you're likely missing a comma or parens in your data structure: $1

@@ -16,3 +16,21 @@ $trash: register-breakpoint(smartphone-landscape, 'only screen and (min-device-w
     /* you should see this comment */
   }
 }
+
+// disable the smartphone breakpoint
+$trash: disable-breakpoint(smartphone);
+.test-1 {
+  @include breakpoint(smartphone) {
+    /* you should NOT see this comment after being disabled */
+  }
+}
+
+$trash: enable-breakpoint(smartphone);
+.test-2{
+  @include breakpoint(smartphone) {
+    /* you should see this comment after being enabled */
+  }
+}
+
+// Should output a warning, since breakpoint is not registered.
+$trash: enable-breakpoint(not-set);
