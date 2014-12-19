@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.0.alpha.5 (unreleased)
+
+### New Features:
+
+- added `enable-breakpoint` and `disable-breakpoint` functions for toggling breakpoint output on/off
+- added `archetype-bundled` extension which is a "kitchen sink" bundle of Archetype core and all official extensions
+
 ## 1.0.0.alpha.4
 
 ### Resolved Issues:
@@ -227,7 +234,7 @@
 
 - `styleguide-add-component`, `styleguide-extend-component`, and `styleguide` now take a `$theme` parameter
 - `$CONFIG_THEME` can change the global theme
-- `$CONFIG_STYLEGUIDE_DISABLE_SPRITES` will prevent styleguide sprites from being generated if set to `true`
+- `$CONFIG_DISABLE_STYLEGUIDE_SPRITES` will prevent styleguide sprites from being generated if set to `true`
 - theme components are cached
 - `styleguide` calls are memoized
 
