@@ -1,6 +1,6 @@
 // TODO - fix archetype-bundle so it can correctly install the various extension templates
 // until then, this is a workaround for the missing sprites in testing
-$CONFIG_STYLEGUIDE_DISABLE_SPRITES: true;
+$CONFIG_DISABLE_STYLEGUIDE_SPRITES: true;
 
 @import "test_harness";
 
