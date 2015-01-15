@@ -1,4 +1,4 @@
-module ArchetypeTheme
+module ArchetypeBundled
 
   private
 
