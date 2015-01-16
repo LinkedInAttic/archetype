@@ -120,8 +120,10 @@ module Archetype::SassExtensions::Styleguide
         end
         styles = styles.rmerge(extracted)
       elsif not helpers.is_value(sentence, :nil)
+        severity = Compass.configuration.styleguide_allow_missing ? :warn : :error
         msg = modifiers.length > 0 ? "please specify one of: #{modifiers.sort.join(', ')}" : "there are no registered components"
-        helpers.warn("[#{Archetype.name}:styleguide:identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. #{msg}")
+        msg = "[#{Archetype.name}:styleguide:identifier] `#{helpers.to_str(sentence)}` does not contain an identifier. #{msg}"
+        helpers.method(severity).call(msg)
       end
     end
 

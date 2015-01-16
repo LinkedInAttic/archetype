@@ -6,6 +6,7 @@
 
 - added `enable-breakpoint` and `disable-breakpoint` functions for toggling breakpoint output on/off
 - added `archetype-bundled` extension which is a "kitchen sink" bundle of Archetype core and all official extensions
+- added `styleguide_allow_missing` compiler option to force errors on missing styleguide identifiers
 
 ## 1.0.0.alpha.4
 

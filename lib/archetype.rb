@@ -34,13 +34,17 @@ module Archetype
     Compass::Configuration.add_configuration_property(:memoize, "should the memoizer be used to improve compilation speed") do
       not (Compass.configuration.environment || :development).to_s.include?('dev')
     end
-    # meta
+    # archetype_meta
     Compass::Configuration.add_configuration_property(:archetype_meta, "any meta data you want made available to the environment") do
       {}
     end
-    # meta
-    Compass::Configuration.add_configuration_property(:styleguide_debug, "if true, detailed debugging is turned on for styleguide components") do
+    # styleguide_debug
+    Compass::Configuration.add_configuration_property(:styleguide_debug, "if `true`, detailed debugging is turned on for styleguide components") do
       false
+    end
+    # styleguide_allow_missing
+    Compass::Configuration.add_configuration_property(:styleguide_allow_missing, "if `false`, will hard error on missing styleguide components, otherwise will throw a warning") do
+      true
     end
   end
 
