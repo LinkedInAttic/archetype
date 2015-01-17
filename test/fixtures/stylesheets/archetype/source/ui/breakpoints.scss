@@ -4,6 +4,9 @@
   @include breakpoint(not-set) {
     /* you should NOT see this comment */
   }
+  @include breakpoint(){
+    /* you should NOT see this comment, and should output a warning  */
+  }
 }
 
 $trash: register-breakpoint(smartphone, 'only screen and (min-device-width : 320px) and (max-device-width : 480px)');
@@ -34,3 +37,20 @@ $trash: enable-breakpoint(smartphone);
 
 // Should output a warning, since breakpoint is not registered.
 $trash: enable-breakpoint(not-set);
+
+$trash: register-breakpoint(tablet, '(max-width: 974px) and (min-width: 769px)');
+$trash: register-breakpoint(desktop, '(min-width: 974px)');
+
+.test-3{
+  @include breakpoint((tablet, desktop)) {
+    /* you should see this comment, and there should be one media query with two conditions */
+  }
+
+  @include breakpoint((smartphone, tablet, desktop)){
+    /* you should see this comment, and there should be one media query with three conditions */
+  }
+
+  @include breakpoint((tablet, not-set)){
+    /* you should see this comment, and there should be one media query with one condition, and should output a warning */
+  }
+}

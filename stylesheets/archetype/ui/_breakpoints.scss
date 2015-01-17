@@ -2,18 +2,33 @@
 
 // wraps the content block in a breakpoint media query
 // @mixin     breakpoint
-// @param     $key {String} the breakpoint to use
+// @param     $key {String|List} the breakpoint(s) to use
 // @content
 @mixin breakpoint($key) {
-  $breakpoint: get-breakpoint($key);
-  @if $breakpoint {
-    @media #{$breakpoint} {
+  $media_query: nil;
+  $key_length: length($key);
+
+  @if $key_length > 0 {
+    @for $i from 1 through $key_length{
+      $breakpoint_key: nth($key, $i);
+      $breakpoint: get-breakpoint($breakpoint_key);
+      @if $breakpoint {
+        $media_query: if($i > 1, $media_query + ", " + $breakpoint, $breakpoint);
+      }
+      @else{
+        @warn "[archetype:breakpoint] could not find a breakpoint for `#{$breakpoint_key}`";
+      }
+    }
+  }
+  @else{
+    @warn "[archetype:breakpoint] no breakpoint key passed in as an argument.";
+  }
+
+  @if $media_query != nil {
+    @media #{$media_query} {
       /* [archetype:breakpoint:begin] --- #{$key} --- */
       @content;
       /* [archetype:breakpoint:end] --- #{$key} --- */
     }
-  }
-  @else {
-    @warn "[archetype:breakpoint] could not find a breakpoint for `#{$key}`";
   }
 }
