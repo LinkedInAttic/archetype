@@ -5,27 +5,22 @@
 // @param     $key {String|List} the breakpoint(s) to use
 // @content
 @mixin breakpoint($key) {
-  $media_query: nil;
-  $key_length: length($key);
+  $media-query: nil;
+  $key-length: length($key);
 
-  @if $key_length > 0 {
-    @for $i from 1 through $key_length{
-      $breakpoint_key: nth($key, $i);
-      $breakpoint: get-breakpoint($breakpoint_key);
-      @if $breakpoint {
-        $media_query: if($i > 1, $media_query + ", " + $breakpoint, $breakpoint);
-      }
-      @else{
-        @warn "[archetype:breakpoint] could not find a breakpoint for `#{$breakpoint_key}`";
-      }
+  @for $i from 1 through $key-length{
+    $breakpoint-key: nth($key, $i);
+    $breakpoint: get-breakpoint($breakpoint-key);
+    @if $breakpoint {
+      $media-query: if($i > 1, $media-query + ", " + $breakpoint, $breakpoint);
+    }
+    @else{
+      @warn "[archetype:breakpoint] could not find a breakpoint for `#{$breakpoint-key}`";
     }
   }
-  @else{
-    @warn "[archetype:breakpoint] no breakpoint key passed in as an argument.";
-  }
 
-  @if $media_query != nil {
-    @media #{$media_query} {
+  @if $media-query != nil {
+    @media #{$media-query} {
       /* [archetype:breakpoint:begin] --- #{$key} --- */
       @content;
       /* [archetype:breakpoint:end] --- #{$key} --- */

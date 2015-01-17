@@ -14,32 +14,22 @@
   }
 }
 
-@media (max-width: 974px) and (min-width: 769px), (min-width: 974px){
-  .test-3{
+@media (max-width: 974px) and (min-width: 769px), (min-width: 974px) {
+  .test-3 {
     /* [archetype:breakpoint:begin] --- tablet, desktop --- */
     /* you should see this comment, and there should be one media query with two conditions */
     /* [archetype:breakpoint:end] --- tablet, desktop --- */
   }
 }
-
-@media (max-width: 974px) and (min-width: 769px), (min-width: 974px){
-  .test-3{
-    /* [archetype:breakpoint:begin] --- tablet, desktop --- */
-    /* you should see this comment, and there should be one media query with two conditions */
-    /* [archetype:breakpoint:end] --- tablet, desktop --- */
-  }
-}
-
-@media only screen and (min-device-width : 320px) and (max-device-width : 480px), (max-width: 974px) and (min-width: 769px), (min-width: 974px){
-  .test-3{
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px), (max-width: 974px) and (min-width: 769px), (min-width: 974px) {
+  .test-3 {
     /* [archetype:breakpoint:begin] --- smartphone, tablet, desktop --- */
     /* you should see this comment, and there should be one media query with three conditions */
     /* [archetype:breakpoint:end] --- smartphone, tablet, desktop --- */
   }
 }
-
-@media (max-width: 974px) and (min-width: 769px){
-  .test-3{
+@media (max-width: 974px) and (min-width: 769px) {
+  .test-3 {
     /* [archetype:breakpoint:begin] --- tablet, not-set --- */
     /* you should see this comment, and there should be one media query with one condition, and should output a warning */
     /* [archetype:breakpoint:end] --- tablet, not-set --- */
