@@ -1,0 +1,14 @@
+.archetype-theme {
+  /* [archetype:styleguide:begin] --- `copy` --- */
+  font-size: 13px;
+  line-height: 17px;
+  color: #222222;
+  font-weight: normal;
+  /* [archetype:styleguide:end] --- `copy` --- */
+}
+
+.archetype-grid {
+  margin-left: 10px;
+  float: left;
+  width: 195px;
+}

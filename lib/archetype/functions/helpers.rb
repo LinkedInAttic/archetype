@@ -19,7 +19,7 @@ module Archetype::Functions::Helpers
   # provides a convenience interface to the Compass::Logger
   #
   def self.logger
-    @logger ||= Compass::Logger.new
+    @logger ||= ::Compass::Logger.new
   end
 
   #
@@ -27,6 +27,14 @@ module Archetype::Functions::Helpers
   #
   def self.warn(msg)
     logger.record(:warning, msg)
+  end
+
+  #
+  # provides a convenience interface for logging errors
+  #
+  def self.error(msg)
+    logger.record(:error, msg)
+    raise RuntimeError.new
   end
 
   #

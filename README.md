@@ -1,6 +1,6 @@
 # Archetype
 
-[![Build Status](https://api.travis-ci.org/linkedin/archetype.svg)](https://travis-ci.org/linkedin/archetype) [![Gem Version](https://badge.fury.io/rb/archetype.svg)](http://badge.fury.io/rb/archetype)
+[![Build Status](https://api.travis-ci.org/linkedin/archetype.svg)](https://travis-ci.org/linkedin/archetype) [![Gem Version](https://badge.fury.io/rb/archetype.svg)](http://badge.fury.io/rb/archetype) [![Documentation Status](https://inch-ci.org/github/linkedin/archetype.svg?branch=master)](https://inch-ci.org/github/linkedin/archetype/)
 [![Dependency Status](https://gemnasium.com/eoneill/archetype.svg)](https://gemnasium.com/eoneill/archetype)
 
 Archetype is a Compass/Sass based framework for authoring configurable, composable UI components and patterns.
