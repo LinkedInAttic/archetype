@@ -22,7 +22,7 @@ module Archetype::SassExtensions::UI::Scopes
     # otherwise, if the current value is different...
     elsif breakpoints[key] != value
       # throw a warning
-      helpers.warn("[#{Archetype.name}:breakpoint] a breakpoint for `#{key}` is already set to `#{breakpoints[key]}`, ignoring `#{value}`")
+      helpers.warn("[#{Archetype.name}:breakpoint:register] a breakpoint for `#{key}` is already set to `#{breakpoints[key]}`, ignoring `#{value}`")
       return bool(false)
     end
     environment.global_env.set_var('CONFIG_BREAKPOINTS', Sass::Script::Value::Map.new(breakpoints))
@@ -40,8 +40,15 @@ module Archetype::SassExtensions::UI::Scopes
   # - {*} the registered breakpoint
   #
   def get_breakpoint(key)
-    return null if disabled_breakpoints.include?(key)
-    return registered_breakpoints[key] || null
+    if disabled_breakpoints.include?(key)
+      helpers.debug("[#{Archetype.name}:breakpoint:get] a breakpoint for `#{key}` was found, but is currently disabled (most likely with `toggle-breakpoint` or `disable-breakpoint`).")
+      return null
+    end
+    breakpoint = registered_breakpoints[key] || null
+    if breakpoint.nil? || helpers.is_null(breakpoint)
+      helpers.warn("[#{Archetype.name}:breakpoint:get] a breakpoint for `#{key}` was not found.")
+    end
+    return breakpoint
   end
   Sass::Script::Functions.declare :get_breakpoint, [:key]
 

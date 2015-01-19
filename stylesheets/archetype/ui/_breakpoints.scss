@@ -2,18 +2,26 @@
 
 // wraps the content block in a breakpoint media query
 // @mixin     breakpoint
-// @param     $key {String} the breakpoint to use
+// @param     $key... {String} the breakpoint(s) to use
 // @content
-@mixin breakpoint($key) {
-  $breakpoint: get-breakpoint($key);
-  @if $breakpoint {
-    @media #{$breakpoint} {
+@mixin breakpoint($key...) {
+  $breakpoints: ();
+
+  @each $name in $key {
+    $breakpoint: get-breakpoint($name);
+
+    // if we got a valid breakpoint, keep it...
+    @if $breakpoint {
+      $breakpoints: append($breakpoints, $breakpoint, comma);
+    }
+  }
+
+  // output all of our collected breakpoints
+  @if length($breakpoints) > 0 {
+    @media #{$breakpoints} {
       /* [archetype:breakpoint:begin] --- #{$key} --- */
       @content;
       /* [archetype:breakpoint:end] --- #{$key} --- */
     }
-  }
-  @else {
-    @warn "[archetype:breakpoint] could not find a breakpoint for `#{$key}`";
   }
 }
