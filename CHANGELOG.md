@@ -8,6 +8,10 @@
 - added `archetype-bundled` extension which is a "kitchen sink" bundle of Archetype core and all official extensions
 - added `styleguide_allow_missing` compiler option to force errors on missing styleguide identifiers
 
+### Resolved Issues:
+
+- allow non-multiplier values in `*-spacing` methods
+
 ## 1.0.0.alpha.4
 
 ### Resolved Issues:

@@ -36,6 +36,9 @@ module Archetype::SassExtensions::Util::Spacing
   #
   def _spacing(unit = null, direction = identifier(horizontal), abuse = bool(false))
     return null if helpers.is_null(unit)
+
+    return unit unless (unit.is_a?(Sass::Script::Value::Number) && unitless(unit).to_bool)
+
     unit = _archetype_integerize(unit, abuse)
     direction = helpers.to_str(direction) == 'vertical' ? 'VERTICAL' : 'HORIZONTAL'
     config = "CONFIG_#{direction}_SPACING"

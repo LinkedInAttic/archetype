@@ -25,3 +25,8 @@ e {
   @include horizontal-spacing($left: 0, $right: 0);
   @include horizontal-spacing($left: 0, $right: 0, $method: margin);
 }
+
+f {
+  @include horizontal-spacing(auto 5);
+  @include horizontal-spacing(3 5px);
+}
