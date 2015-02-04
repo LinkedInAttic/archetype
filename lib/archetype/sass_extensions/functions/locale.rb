@@ -25,7 +25,6 @@ module Archetype::SassExtensions::Locale
       end
     end
     return Sass::Script::Bool.new(
-      locales.include?(locale) ||
       locales.include?("#{locale[:language]}_#{locale[:territory]}") ||
       locales.include?(locale[:language] + '_') ||
       locales.include?('_' + locale[:territory])

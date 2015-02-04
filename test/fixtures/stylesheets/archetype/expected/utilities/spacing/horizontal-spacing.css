@@ -27,3 +27,10 @@ e {
   margin-left: 0px;
   margin-right: 0px;
 }
+
+f {
+  padding-left: auto;
+  padding-right: 25px;
+  padding-left: 15px;
+  padding-right: 5px;
+}
