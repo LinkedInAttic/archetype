@@ -18,9 +18,15 @@ module Archetype::SassExtensions::Numbers
   # - {Number} the number without units
   #
   def strip_units(number)
-    value = 0
-    value = number.value.to_f if number.is_a?(Sass::Script::Value::String)
-    value = number.value if number.is_a?(Sass::Script::Value::Number)
+    case number
+    when Sass::Script::Value::String
+      value = number.value.to_f
+    when Sass::Script::Value::Number
+      value = number.value
+    else
+      value = 0
+    end
+
     return number(value)
   end
 
