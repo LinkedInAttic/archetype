@@ -17,6 +17,8 @@ matrix:
   allow_failures:
     - rvm: ruby-head
     - rvm: jruby-head
+before_install:
+  - gem update bundler
 before_script:
   - ulimit -S -s unlimited
   - ulimit -a
